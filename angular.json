@@ -7,7 +7,13 @@
       "projectType": "library",
       "root": "projects/lib",
       "sourceRoot": "projects/lib/src",
-      "prefix": "lib",
+      "prefix": "",
+      "schematics": {
+        "@schematics/angular:component": { "skipTests": true },
+        "@schematics/angular:module": { "skipTests": true },
+        "@schematics/angular:directive": { "skipTests": true },
+        "@schematics/angular:servide": { "skipTests": true },
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

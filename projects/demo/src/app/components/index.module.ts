@@ -40,6 +40,24 @@ const routes: Routes = [
   ];
 
 @NgModule({
+  declarations: [
+    ButtonComponent,
+    CalendarComponent,
+    CarouselComponent,
+    CheckboxComponent,
+    ClockComponent,
+    CurrencyComponent,
+    DialogComponent,
+    InputComponent,
+    ListComponent,
+    MenuComponent,
+    RadioComponent,
+    SwitchComponent,
+    TabsComponent,
+    TextFieldComponent,
+    TooltipComponent,
+    PageNotFoundComponent
+  ],
   imports: [
     CommonModule,
     AngularExtendedModule,

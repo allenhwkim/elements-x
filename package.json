@@ -31,6 +31,7 @@
     "@types/jest": "^26.0.10",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "http-server": "^0.12.3",
     "jest": "^26.4.0",
     "jest-preset-angular": "^8.2.1",
     "ng-packagr": "^10.0.0",

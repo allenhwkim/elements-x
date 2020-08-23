@@ -1,20 +1,38 @@
-{{version | json}}
+<header class="header">
+  <section class="logo">
+    <div class="title">
+      Angular Extended
+    </div>
+  </section>
+  <nav class="header-nav">
+    <div class="hamburger centered" (click)="collapsed = !collapsed">
+      <i class="fa fa-bars"></i>
+    </div>
+    <div class="links container">
+      <a routerLink="/components" routerLinkActive="active">Components</a>
+      <a routerLink="/articles" routerLinkActive="active">Aritcles</a>
+      <a routerLink="/tools" routerLinkActive="active">Tools</a>
+    </div>
+    <div class="icons container">
+      <a href="{{CONFIG.githubRepo}}">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </nav>
+</header>
 
-<div>
-  <a [routerLink]="['/components/button']"> Button </a>
-  <a [routerLink]="['/components/calendar']"> Calendar </a>
-  <a [routerLink]="['/components/carousel']"> Carousel </a>
-  <a [routerLink]="['/components/checkbox']"> Checkbox </a>
-  <a [routerLink]="['/components/clock']"> Clock </a>
-  <a [routerLink]="['/components/currency']"> Currency </a>
-  <a [routerLink]="['/components/dialog']"> Dialog </a>  
-  <a [routerLink]="['/components/input']"> Input </a>
-  <a [routerLink]="['/components/list']"> List </a>
-  <a [routerLink]="['/components/menu']"> Menu </a>
-  <a [routerLink]="['/components/radio']"> Radio </a>
-  <a [routerLink]="['/components/switch']"> Switch </a>
-  <a [routerLink]="['/components/tabs']"> Tabs </a>
-  <a [routerLink]="['/components/text-field']"> TextField </a>
-  <a [routerLink]="['/components/tooltip']"> Tooltip </a>
+<div class="main">
+  <aside class="aside">
+    <ul>
+      <li *ngFor="let comp of components" routerLink="/components/{{comp[0]}}" routerLinkActive="active"> 
+        <i class="{{comp[1].icon}}"></i> <b>{{comp[1].text}}</b>
+      </li> 
+    </ul>
+  </aside>
+  <article class="article">
+    <section>
+      <router-outlet></router-outlet>
+    </section>
+  </article>
 </div>
-<router-outlet></router-outlet>
+

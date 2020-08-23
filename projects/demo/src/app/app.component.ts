@@ -1,10 +1,12 @@
-import { Component, VERSION } from '@angular/core';
-
+import { Component, VERSION, HostBinding } from '@angular/core';
+import { CONFIG } from './config';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  version = VERSION;
+  @HostBinding('class.collapsed') collapsed;
+  CONFIG = CONFIG;
+  components = Object.entries(CONFIG.components);
 }

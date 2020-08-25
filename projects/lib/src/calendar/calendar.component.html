@@ -13,14 +13,14 @@
       <button arial-label="previous month"
         [disabled]="lastDayOfPrevMonth < minDate"
         (click)="setMonth(-1)">
-        &#9668;
+        &#9664;
       </button>
       <button arial-label="today"
         (click)="setToday()">&#9679;</button>
       <button  arial-label="next month"
         [disabled]="firstDayOfNextMonth > maxDate"
         (click)="setMonth(+1)">
-        &#9658;
+        &#9654;
       </button>
     </div>
   </div>

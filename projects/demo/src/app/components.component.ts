@@ -4,10 +4,10 @@ import { CONFIG } from './config';
 
 @Component({
   template: `
-    <div class="header vcentered ripple" tabindex="0">
+    <div class="header vcentered" ripple>
       <h2>{{component.text}}</h2>
     </div>
-    <div class="contents">
+    <div class="contents" ripple>
       <ng-container #dynContainer></ng-container>
     </div>
   `,

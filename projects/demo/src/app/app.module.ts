@@ -8,10 +8,6 @@ import { AngularExtendedModule } from '../../../lib/src';
 import { ComponentsComponent } from './components.component';
 
 const routes : Routes = [
-  // {
-  //   path: 'components', 
-  //   loadChildren: () => import('./components/index.module').then(m => m.IndexModule)
-  // },
   { path: 'components/:name', component: ComponentsComponent },
   { path: '', redirectTo: 'components', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
@@ -24,9 +20,10 @@ const routes : Routes = [
     RouterModule.forRoot(routes)
   ],
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: []
 })
 export class AppModule { }

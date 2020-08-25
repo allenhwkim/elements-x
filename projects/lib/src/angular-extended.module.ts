@@ -10,6 +10,7 @@ import { InputModule } from './input';
 import { ListModule } from './list';
 import { MenuModule } from './menu';
 import { RadioModule } from './radio';
+import { RippleModule } from './ripple';
 import { SwitchModule } from './switch';
 import { TabsModule } from './tabs';
 import { TextFieldModule } from './text-field';
@@ -28,6 +29,7 @@ import { TooltipModule } from './tooltip';
     ListModule,
     MenuModule,
     RadioModule,
+    RippleModule,
     SwitchModule,
     TabsModule,
     TextFieldModule,
@@ -47,6 +49,7 @@ import { TooltipModule } from './tooltip';
     ListModule,
     MenuModule,
     RadioModule,
+    RippleModule,
     SwitchModule,
     TabsModule,
     TextFieldModule,

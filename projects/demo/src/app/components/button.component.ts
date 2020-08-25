@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AngularExtendedModule } from '../../../../lib/src';
+import { ButtonModule } from '../../../../lib/src';
 
 @Component({
   template: `
-<h3>Features</h3>
+<h3 ripple>Features</h3>
 <li> When clicked, button become automatically disabled for a second to prevent double click </li>
 <li> Able to show loading sign with 'loadingBy' property </li>
 <li> Customizable color and button size(height) </li>
@@ -23,7 +23,11 @@ import { AngularExtendedModule } from '../../../../lib/src';
 
 <h3>Default</h3>
 <p>
-  <ax-button class="ripple"> Default </ax-button>
+  <ax-button ripple class="ripple"> Default 
+  <!--
+  <span class="ripple" style="position: absolute; background-color: rgba(0, 0, 0, 0.16); border-radius: 100%; height: 86.1562px; width: 86.1562px; pointer-events: none; left: 10.9219px; top: 265.047px; transform: scale(1.06029); opacity: 0.469853;"></span>
+  -->
+  </ax-button>
   <ax-button class="ripple primary"> Primary </ax-button>
   <ax-button class="ripple accent"> Accent </ax-button>
   <ax-button disabled> Disabled </ax-button>
@@ -186,5 +190,5 @@ export class ButtonComponent {
 
 @NgModule({
   declarations: [ButtonComponent],
-  imports: [ AngularExtendedModule, FormsModule, CommonModule ]
+  imports: [ ButtonModule, FormsModule, CommonModule ]
 }) class DynModule {}

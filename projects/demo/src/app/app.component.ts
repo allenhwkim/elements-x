@@ -1,5 +1,6 @@
 import { Component, VERSION, HostBinding } from '@angular/core';
 import { CONFIG } from './config';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -10,6 +10,7 @@ export * from './input';
 export * from './list';
 export * from './menu';
 export * from './radio';
+export * from './ripple';
 export * from './switch';
 export * from './tabs';
 export * from './text-field';

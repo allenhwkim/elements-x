@@ -20,11 +20,11 @@ import { Component, Input, ViewEncapsulation, HostBinding, HostListener, Element
     user-select: none;
     cursor: pointer;
     white-space: nowrap;
-    vertical-align: baseline;
+    vertical-align: bottom;
     text-align: center;
     min-width: 60px;
     line-height: var(--size);
-    overflow: visible;
+    /* overflow: visible; */
     border: 1px solid rgba(0,0,0,.12);
     box-shadow: 2px 2px 4px #CCC;
   }

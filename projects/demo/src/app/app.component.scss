@@ -24,15 +24,6 @@
   }
 }
 
-.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.container {
-  padding: 24px;
-}
-
 .header {
   height: 60px;
   display: flex;
@@ -71,11 +62,13 @@
     }
     .links {
       flex: 1;
+      padding: 24px;
       a {
         margin-right: 12px;
       }
     }
     .icons {
+      padding: 24px;
       font-size: 26px;
     }
   }
@@ -111,11 +104,22 @@
       overflow: hidden;
     }
   }
+
   .article {
     min-height: calc(100vh - 60px);
     width: calc(100% - 250px);
     padding: 20px;
     flex: 1;
     background: #F5F5F5;
+  }
+
+  ::ng-deep .example {
+    border: 1px solid #ccc;
+    padding: 8px 8px 8px 16px;
+    margin: 24px 0;
+  }
+
+  ::ng-deep .usage pre {
+    padding: 16px;
   }
 }

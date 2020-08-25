@@ -19,8 +19,8 @@ export class RippleDirective {
   click(event, element) {
     const ripple = this.addRipple(event, element);
     animate(pct => {
-      ripple.style.transform = `scale(${pct * 2})`;
-      ripple.style.opacity = `${1 - pct}`;
+      ripple.style.transform = `scale(${pct * 3})`;
+      ripple.style.opacity = `${1.5 - pct}`;
     }).then(_ => {
       ripple.remove();
       if (!element.querySelector('.ripple')) { // if no ripple found

@@ -82,7 +82,7 @@ export class TabsComponent implements AfterViewInit {
     tabEl.setAttribute('aria-selected', 'true'); // new way
     tabEl.setAttribute('tabindex', '0');
 
-    const inkBar = el.querySelector('.ink-bar');
+    const inkBar = el.querySelector('.underline-bar');
     if (inkBar) {
       Object.assign(inkBar.style, {
         width: tabEl.offsetWidth +'px', 
@@ -96,15 +96,17 @@ export class TabsComponent implements AfterViewInit {
     const el = this.el.nativeElement;
     const contentsEl = el.querySelector(`[contents-for="${tabId}"]`);
 
-    this.contentsEls
-      .filter(el => !el.isEqualNode(contentsEl))
-      .forEach(el => {
-        el.classList.remove('selected');   // old way
-        el.removeAttribute('aria-selected'); // new way
-      });
+    if (contentsEl) {
+      this.contentsEls
+        .filter(el => !el.isEqualNode(contentsEl))
+        .forEach(el => {
+          el.classList.remove('selected');   // old way
+          el.removeAttribute('aria-selected'); // new way
+        });
 
-    contentsEl.classList.add('selected'); // old way
-    contentsEl.setAttribute('aria-selected', 'true'); // new way
+      contentsEl.classList.add('selected'); // old way
+      contentsEl.setAttribute('aria-selected', 'true'); // new way
+    }
   }
 
   keydownHandler(e: KeyboardEvent) {
@@ -120,7 +122,7 @@ export class TabsComponent implements AfterViewInit {
   }
 
   clickHandler(e: MouseEvent) {
-    const tabEl = (<any>e.target).closest('kx-tabs [tab-for]');
+    const tabEl = (<any>e.target).closest('ax-tabs [tab-for]');
     tabEl && this.selectTabAndContents(tabEl.getAttribute('tab-for'));
   }
 }

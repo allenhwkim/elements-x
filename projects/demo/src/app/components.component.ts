@@ -4,15 +4,39 @@ import { CONFIG } from './config';
 
 @Component({
   template: `
-    <div class="header vcentered" ripple>
-      <h2>{{component.text}}</h2>
+    <div class="header vcentered">
+      <h2 class="name">{{component.text}}</h2>
+      <div class="links">
+        <ax-button class="no-border no-shadow icon" title="code">
+          <i class="fab fa-js-square"></i>
+        </ax-button>
+        <ax-button class="no-border no-shadow icon" title="issues">
+          <i class="fas fa-comments"></i>
+        </ax-button>
+      </div>
     </div>
-    <div class="contents" ripple>
-      <ng-container #dynContainer></ng-container>
+
+    <div class="contents">
+      <ax-tabs>
+        <div class="tabs">
+          <div ripple tab-for="overview">OVERVIEW</div>
+          <div ripple tab-for="usage">USAGE</div>
+          <div class="underline-bar"></div>
+        </div>
+        <div class="tab-contents">
+          <div contents-for="overview">
+            <ng-container #dynContainer></ng-container>
+          </div>
+          <div class="usage" contents-for="usage">
+            <pre>{{usageText}}</pre>
+          </div>
+        </div>  
+      </ax-tabs>
     </div>
   `,
   styles: [`
     .header {
+      display: flex;
       margin: -20px -20px 0 -20px;
       height: 56px;
       padding: 0 20px;
@@ -20,6 +44,12 @@ import { CONFIG } from './config';
       background: #FFF;
     }
     .header h2 { margin: 0; }
+    .header .links {
+      flex: 1;
+      text-align: right;
+      font-size: 1.5em;
+      color: #666;
+    }
     .contents {
       margin-top: 20px;
       padding: 20px;
@@ -29,7 +59,9 @@ import { CONFIG } from './config';
   `]
 })
 export class ComponentsComponent {
+  componentName: string;
   component: any;
+  usageText: string;
   @ViewChild('dynContainer', {read: ViewContainerRef}) dynContainer: ViewContainerRef;
 
   constructor(
@@ -38,15 +70,20 @@ export class ComponentsComponent {
     private route: ActivatedRoute
   ) {
     this.route.params.subscribe(params => {
-      this.component = CONFIG.components[params.name];
-      this.component && this.loadComponent(params.name, `${this.component.text}Component`);
+      this.componentName = params.name;
+      this.loadComponent();
     });
   }
 
-  async loadComponent(name, klassName) {
+  async loadComponent() {
+    this.component = CONFIG.components[this.componentName];
+    const klassName = `${this.component.text}Component`;
     this.dynContainer && this.dynContainer.clear();
-    const imported: any = await import(`./components/${name}.component`);
+    const imported: any = await import(`./components/${this.componentName}.component`);
     const btnCompFactory = this.cfr.resolveComponentFactory(imported[klassName]);
     const {instance} = this.dynContainer.createComponent(btnCompFactory, null, this.injector);
+  
+    const usageText = await import(`raw-loader!./components/${this.componentName}-usage.txt`);
+    this.usageText = usageText.default;
   }
 }

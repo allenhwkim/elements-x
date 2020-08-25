@@ -5,7 +5,7 @@ import { RippleModule } from '../ripple';
 
 @NgModule({
   declarations: [ButtonComponent],
-  imports: [CommonModule, RippleModule],
+  imports: [CommonModule],
   exports: [ButtonComponent, RippleModule]
 })
 export class ButtonModule { }

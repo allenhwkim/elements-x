@@ -1,4 +1,4 @@
-kx-tabs .tabs {
+ax-tabs .tabs {
   border-bottom: 1px solid #999;
   display: flex;
   position: relative;
@@ -11,7 +11,8 @@ kx-tabs .tabs {
     justify-content: center;
     align-items: center;
     white-space: nowrap;
-    min-width: 60px;
+    min-width: 160px;
+    outline: 0;
   }
   [tab-for][aria-selected] {
     background: #FFF;
@@ -21,7 +22,7 @@ kx-tabs .tabs {
     opacity: .5;
     pointer-events: none;
   }
-  .ink-bar {
+  .underline-bar {
     position: absolute;
     bottom: -1px;
     height: 2px;
@@ -31,9 +32,10 @@ kx-tabs .tabs {
   }
 }
 
-kx-tabs .tab-contents {
-  min-height: 100px;
+ax-tabs .tab-contents {
   [contents-for] {
+    min-height: 100px;
+    padding: 8px 16px;
     display: none;
   }
   [contents-for][aria-selected] {

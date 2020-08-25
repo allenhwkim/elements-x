@@ -20,10 +20,9 @@ const routes : Routes = [
     RouterModule.forRoot(routes)
   ],
   declarations: [
-    AppComponent,
+    AppComponent, ComponentsComponent
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: []
 })
 export class AppModule { }

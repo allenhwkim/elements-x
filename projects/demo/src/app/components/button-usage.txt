@@ -1,0 +1,32 @@
+import { NgModule, Component } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+
+import { ButtonModule } from 'elements-extended';
+
+@NgModule({
+  imports: [BrowserModule, ButtonModule, FormsModule ],
+  declarations: [ AppComponent ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+
+@Component({
+  selector: 'my-app',
+  template: `
+    <div class="custom">
+      <ax-button class="ripple primary"> Primary </ax-button>
+      <ax-button class="ripple accent"> Accent </ax-button>
+      <ax-button disabled> Disabled </ax-button>
+    </div>
+  `,
+  styles: [`
+    .custom ax-button {
+      --primary: green;
+      --accent: orange;L:
+      --disabled: grey;
+      --size: 32px;
+    }
+  `]
+})
+export class AppComponent {}

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ax-tooltip',
-  template: ` <p> ax-tooltip works! </p> `,
+  selector: 'ee-tooltip',
+  template: ` <p> ee-tooltip works! </p> `,
   styles: [``]
 })
 export class TooltipComponent implements OnInit {

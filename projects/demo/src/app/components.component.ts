@@ -7,17 +7,17 @@ import { CONFIG } from './config';
     <div class="header vcentered">
       <h2 class="name">{{component.text}}</h2>
       <div class="links">
-        <ax-button class="no-border no-shadow icon" title="code">
-          <i class="fab fa-js-square"></i>
-        </ax-button>
-        <ax-button class="no-border no-shadow icon" title="issues">
+        <ee-button class="no-border no-shadow icon" title="code">
+          <i class="fab fa-angular"></i>
+        </ee-button>
+        <ee-button class="no-border no-shadow icon" title="issues">
           <i class="fas fa-comments"></i>
-        </ax-button>
+        </ee-button>
       </div>
     </div>
 
     <div class="contents">
-      <ax-tabs>
+      <ee-tabs>
         <div class="tabs">
           <div ripple tab-for="overview">OVERVIEW</div>
           <div ripple tab-for="usage">USAGE</div>
@@ -28,10 +28,10 @@ import { CONFIG } from './config';
             <ng-container #dynContainer></ng-container>
           </div>
           <div class="usage" contents-for="usage">
-            <pre>{{usageText}}</pre>
+            <pre ee-prism class="dark" [code]="usageText"></pre>
           </div>
         </div>  
-      </ax-tabs>
+      </ee-tabs>
     </div>
   `,
   styles: [`

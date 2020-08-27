@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AngularExtendedModule } from '../../../../lib/src';
 
 @Component({
-  template: `<h2>list</h2><ax-list></ax-list>`,
-  styles: [`<ax-list></ax-list> `]
+  template: `<h2>list</h2><ee-list></ee-list>`,
+  styles: [`<ee-list></ee-list> `]
 })
 export class ListComponent {}
 

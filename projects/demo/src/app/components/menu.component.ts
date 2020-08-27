@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AngularExtendedModule } from '../../../../lib/src';
 
 @Component({
-  template: `<h2>menu</h2> <ax-menu></ax-menu>`,
-  styles: [`<ax-menu></ax-menu>`]
+  template: `<h2>menu</h2> <ee-menu></ee-menu>`,
+  styles: [`<ee-menu></ee-menu>`]
 })
 export class MenuComponent {}
 

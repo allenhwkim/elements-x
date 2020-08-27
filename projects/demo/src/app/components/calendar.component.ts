@@ -7,58 +7,58 @@ import { AngularExtendedModule } from '../../../../lib/src';
 @Component({
   template: `
 
-  <h2>ax-calendar</h2>
+  <h2>ee-calendar</h2>
   <h3>with start-by attribute</h3>
   <pre>
   &lt;input id="my-date" [ngModel]="selected">
-  &lt;ax-calendar
+  &lt;ee-calendar
     start-by="my-date"
     date="2020-08-21"
     min-date='2020-08-01'
-    max-date='2020-08-15'
+    mee-date='2020-08-15'
     first-day-of-week="1"
     week-format="abbr"
-    (date-selected)="dateSelected($event)">&lt;/ax-calendar>
+    (date-selected)="dateSelected($event)">&lt;/ee-calendar>
   </pre>
   
   <input id="my-date" [ngModel]="selected">
-  <ax-calendar
+  <ee-calendar
     start-by="my-date"
     date="2020-08-21"
     min-date='2020-08-01'
-    max-date='2020-08-15'
+    mee-date='2020-08-15'
     first-day-of-week="1"
     week-format="abbr"
-    (date-selected)="dateSelected($event)"></ax-calendar>
+    (date-selected)="dateSelected($event)"></ee-calendar>
   <br/>
   selected: {{selected | date}}
   
   <hr/>
   
   <h3>in-page calendar</h3>
-  <pre>&lt;ax-calendar>&lt;/ax-calendar></pre>
-  <ax-calendar></ax-calendar>
+  <pre>&lt;ee-calendar>&lt;/ee-calendar></pre>
+  <ee-calendar></ee-calendar>
   <hr/>
   
-  <h3>date/ min-date / max-date</h3>
-  <pre>&lt;ax-calendar 
+  <h3>date/ min-date / mee-date</h3>
+  <pre>&lt;ee-calendar 
     date='2020-08-06' 
     min-date='2020-08-05' 
-    max-date='2020-08-25'>&lt;/ax-calendar></pre>
-  <ax-calendar 
+    mee-date='2020-08-25'>&lt;/ee-calendar></pre>
+  <ee-calendar 
     date='2020-08-06' 
     min-date='2020-08-05' 
-    max-date='2020-08-25'></ax-calendar>
+    mee-date='2020-08-25'></ee-calendar>
   <hr/>
   
   <h3>week-format</h3>
-  <pre>&lt;ax-calendar week-format="min">&lt;/ax-calendar></pre>
-  <ax-calendar week-format="min"></ax-calendar>
+  <pre>&lt;ee-calendar week-format="min">&lt;/ee-calendar></pre>
+  <ee-calendar week-format="min"></ee-calendar>
   <hr/>
   
   <h3>Multiple Language</h3>
-  <pre>&lt;ax-calendar locale="ko-KR">&lt;/ax-calendar></pre>
-  <ax-calendar locale="ko-KR"></ax-calendar>
+  <pre>&lt;ee-calendar locale="ko-KR">&lt;/ee-calendar></pre>
+  <ee-calendar locale="ko-KR"></ee-calendar>
   <hr/>
   `,
   styles: [`

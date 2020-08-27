@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ax-list',
-  template: ` <p> ax-list works! </p> `,
+  selector: 'ee-list',
+  template: ` <p> ee-list works! </p> `,
   styles: [``]
 })
 export class ListComponent implements OnInit {

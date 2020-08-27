@@ -1,7 +1,7 @@
 import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
 
 @Component({
-  selector: 'ax-tabs',
+  selector: 'ee-tabs',
   template: `<ng-content></ng-content>`,
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -122,7 +122,7 @@ export class TabsComponent implements AfterViewInit {
   }
 
   clickHandler(e: MouseEvent) {
-    const tabEl = (<any>e.target).closest('ax-tabs [tab-for]');
+    const tabEl = (<any>e.target).closest('ee-tabs [tab-for]');
     tabEl && this.selectTabAndContents(tabEl.getAttribute('tab-for'));
   }
 }

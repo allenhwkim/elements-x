@@ -8,7 +8,7 @@ import { AngularExtendedModule } from '../../../../lib/src';
   template: `
   <h2>carousel</h2>
 
-  <ax-carousel [selected]="2">
+  <ee-carousel [selected]="2">
     <img class="img1" src="//picsum.photos/300/200?1">
     <img class="img2" src="//picsum.photos/300/200?2">
     <img class="img3" src="//picsum.photos/300/200?3">
@@ -18,10 +18,10 @@ import { AngularExtendedModule } from '../../../../lib/src';
     <img class="img7" src="//picsum.photos/300/200?7">
     <img class="img8" src="//picsum.photos/300/200?8">
     <img class="img9" src="//picsum.photos/300/200?9">
-  </ax-carousel>
+  </ee-carousel>
 
   <pre>
-  &lt;ax-carousel [selected]="2">
+  &lt;ee-carousel [selected]="2">
     &lt;img class="img1" src="//picsum.photos/300/200?1">
     &lt;img class="img2" src="//picsum.photos/300/200?2">
     &lt;img class="img3" src="//picsum.photos/300/200?3">
@@ -31,11 +31,11 @@ import { AngularExtendedModule } from '../../../../lib/src';
     &lt;img class="img7" src="//picsum.photos/300/200?7">
     &lt;img class="img8" src="//picsum.photos/300/200?8">
     &lt;img class="img9" src="//picsum.photos/300/200?9">
-  &lt;/ax-carousel>
+  &lt;/ee-carousel>
   </pre>
   `,
   styles: [`
-  ax-carousel {
+  ee-carousel {
     width: 100%;
     overflow: auto;
   }`]

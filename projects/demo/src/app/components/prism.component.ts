@@ -5,13 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { AngularExtendedModule } from '../../../../lib/src';
 
 @Component({
-  template: `<h2>input</h2> <ee-input></ee-input>`,
-  styles: [`<ee-input></ee-input>`]
+  template: `<h2>prism</h2>`,
+  styles: [`<pre ee-prism></pre>`]
 })
-export class InputComponent {}
-
+export class MenuComponent {}
 
 @NgModule({
-  declarations: [InputComponent],
+  declarations: [MenuComponent],
   imports: [ AngularExtendedModule, FormsModule, CommonModule ]})
 class DynModule {}

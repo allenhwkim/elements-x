@@ -6,7 +6,7 @@ import { AngularExtendedModule } from '../../../../lib/src';
 
 @Component({
   template: `
-  <h2>ax-clock</h2>
+  <h2>ee-clock</h2>
 
   <h3>Inputs</h3>
   <li><b>hour</b>: 0 to 24</li>
@@ -23,13 +23,13 @@ import { AngularExtendedModule } from '../../../../lib/src';
     Or, drag hour or minute hand to adjust time.
   </p>
   
-  <ax-clock></ax-clock>
-  <pre> &lt;ax-clock>&lt;/ax-clock> </pre>
+  <ee-clock></ee-clock>
+  <pre> &lt;ee-clock>&lt;/ee-clock> </pre>
   
   <h3>Used with input</h3>
   <input id="time" [ngModel]="time"/>
-  <ax-clock hour="10" minute="9" start-by="time"
-    (time-selected)="timeSelected($event)"></ax-clock>
+  <ee-clock hour="10" minute="9" start-by="time"
+    (time-selected)="timeSelected($event)"></ee-clock>
   <div>Time: {{time | date:'HH:mm a'}}</div>
   
   

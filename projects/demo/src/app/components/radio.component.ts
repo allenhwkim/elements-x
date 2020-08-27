@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AngularExtendedModule } from '../../../../lib/src';
 
 @Component({
-  template: `<h2>radio</h2> <ax-radio></ax-radio>`,
-  styles: [`<ax-radio></ax-radio> `]
+  template: `<h2>radio</h2> <ee-radio></ee-radio>`,
+  styles: [`<ee-radio></ee-radio> `]
 })
 export class RadioComponent {}
 

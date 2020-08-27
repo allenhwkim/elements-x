@@ -1,11 +1,11 @@
 import { Component, Input, ViewEncapsulation, HostBinding, HostListener, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'ax-button',
+  selector: 'ee-button',
   template: `<ng-content></ng-content>`,
   encapsulation: ViewEncapsulation.None,
   styles: [`
-  ax-button {
+  ee-button {
     --primary: #3751B5;
     --accent: #FF4081;
     --disabled: rgba(0,0,0,.26);
@@ -29,27 +29,27 @@ import { Component, Input, ViewEncapsulation, HostBinding, HostListener, Element
     box-shadow: 2px 2px 4px #CCC;
   }
 
-  ax-button:active { box-shadow: none; transform: translate(2px, 2px); }
-  ax-button.no-shadow { box-shadow: none; }
-  ax-button.no-border { border: none; }
-  ax-button.icon { border-radius: 50%; min-width: var(--size); padding: 0; }
+  ee-button:active { box-shadow: none; transform: translate(2px, 2px); }
+  ee-button.no-shadow { box-shadow: none; }
+  ee-button.no-border { border: none; }
+  ee-button.icon { border-radius: 50%; min-width: var(--size); padding: 0; }
 
-  ax-button.primary { background: var(--primary); color: #FFF; }
-  ax-button.accent { background: var(--accent); color: #FFF;}
+  ee-button.primary { background: var(--primary); color: #FFF; }
+  ee-button.accent { background: var(--accent); color: #FFF;}
 
-  ax-button.no-bg { background: #FFF; }
-  ax-button.no-bg.primary { background: none; color: var(--primary);}
-  ax-button.no-bg.accent { background: none; color: var(--accent); }
-  ax-button.no-bg:hover { background-color: #F0F0F0; }
-  ax-button.no-bg.primary:hover { background-color: #F0F0F0; }
-  ax-button.no-bg.accent:hover { background-color: #F0F0F0; }
+  ee-button.no-bg { background: #FFF; }
+  ee-button.no-bg.primary { background: none; color: var(--primary);}
+  ee-button.no-bg.accent { background: none; color: var(--accent); }
+  ee-button.no-bg:hover { background-color: #F0F0F0; }
+  ee-button.no-bg.primary:hover { background-color: #F0F0F0; }
+  ee-button.no-bg.accent:hover { background-color: #F0F0F0; }
 
-  ax-button[disabled] { color: var(--disabled); pointer-events: none; }
-  ax-button.no-bg[disabled] { background: none; color: #BBB;}
+  ee-button[disabled] { color: var(--disabled); pointer-events: none; }
+  ee-button.no-bg[disabled] { background: none; color: #BBB;}
 
-  ax-button.clicked { pointer-events: none; }
-  ax-button:not(.clicked) .loading { display: none; }
-  ax-button:.clicked .loading { display: initial; }
+  ee-button.clicked { pointer-events: none; }
+  ee-button:not(.clicked) .loading { display: none; }
+  ee-button:.clicked .loading { display: initial; }
   `]
 })
 export class ButtonComponent  {

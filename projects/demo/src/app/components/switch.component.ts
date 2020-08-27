@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AngularExtendedModule } from '../../../../lib/src';
 
 @Component({
-  template: `<h2>switch</h2> <ax-switch></ax-switch>`,
-  styles: [`<ax-switch></ax-switch>`]
+  template: `<h2>switch</h2> <ee-switch></ee-switch>`,
+  styles: [`<ee-switch></ee-switch>`]
 })
 export class SwitchComponent {}
 

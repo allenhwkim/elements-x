@@ -15,13 +15,13 @@ export class AppModule {}
   selector: 'my-app',
   template: `
     <div class="custom">
-      <ax-button class="ripple primary"> Primary </ax-button>
-      <ax-button class="ripple accent"> Accent </ax-button>
-      <ax-button disabled> Disabled </ax-button>
+      <ee-button class="ripple primary"> Primary </ee-button>
+      <ee-button class="ripple accent"> Accent </ee-button>
+      <ee-button disabled> Disabled </ee-button>
     </div>
   `,
   styles: [`
-    .custom ax-button {
+    .custom ee-button {
       --primary: green;
       --accent: orange;L:
       --disabled: grey;

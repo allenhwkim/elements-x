@@ -1,7 +1,7 @@
 import { Component, Input, AfterContentInit, ViewChild, AfterViewInit, ElementRef, ChangeDetectorRef, HostListener, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  selector: 'ax-carousel',
+  selector: 'ee-carousel',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <!-- carousel items -->

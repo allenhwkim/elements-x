@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ax-input',
-  template: ` <p> ax-input works! </p> `,
+  selector: 'ee-input',
+  template: ` <p> ee-input works! </p> `,
   styles: [``]
 })
 export class InputComponent implements OnInit {

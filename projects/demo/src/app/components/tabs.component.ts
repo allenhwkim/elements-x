@@ -29,7 +29,7 @@ Use the selected structure as described in css selector to make tabs work.
 </p>
 
 <div class="example">
-  <ax-tabs>
+  <ee-tabs>
     <div class="tabs" selected="tab2">
       <div tab-for="tab1" ripple> TAB1 </div>
       <div tab-for="tab2" ripple> TAB2 </div>
@@ -41,9 +41,9 @@ Use the selected structure as described in css selector to make tabs work.
       <div contents-for="tab2">Contents for TAB2</div>
       <div contents-for="tab3">Contents for DISABLED</div>
     </div>
-  </ax-tabs>
+  </ee-tabs>
   <pre>
-  &lt;ax-tabs>
+  &lt;ee-tabs>
     &lt;div class="tabs" selected="tab2">
       &lt;div tab-for="tab1" ripple> TAB1 &lt;/div>
       &lt;div tab-for="tab2" ripple> TAB2 &lt;/div>
@@ -55,7 +55,7 @@ Use the selected structure as described in css selector to make tabs work.
       &lt;div contents-for="tab2">Contents for TAB2&lt;/div>
       &lt;div contents-for="tab3">Contents for DISABLED&lt;/div>
     &lt;/div>
-  &lt;/ax-tabs>
+  &lt;/ee-tabs>
   </pre>
 </div>
 

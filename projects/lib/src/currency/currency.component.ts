@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ax-currency',
-  template: ` <p> ax-currency works! </p> `,
+  selector: 'ee-currency',
+  template: ` <p> ee-currency works! </p> `,
   styles: [``]
 })
 export class CurrencyComponent implements OnInit {

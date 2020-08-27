@@ -1,4 +1,4 @@
-ax-tabs .tabs {
+ee-tabs .tabs {
   border-bottom: 1px solid #999;
   display: flex;
   position: relative;
@@ -32,7 +32,7 @@ ax-tabs .tabs {
   }
 }
 
-ax-tabs .tab-contents {
+ee-tabs .tab-contents {
   [contents-for] {
     min-height: 100px;
     padding: 8px 16px;

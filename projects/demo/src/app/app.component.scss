@@ -113,13 +113,11 @@
     background: #F5F5F5;
   }
 
-  ::ng-deep .example {
-    border: 1px solid #ccc;
-    padding: 8px 8px 8px 16px;
-    margin: 24px 0;
-  }
-
-  ::ng-deep .usage pre {
-    padding: 16px;
+  ::ng-deep {
+    pre[ee-prism] {
+      padding: 8px 8px 8px 16px;
+      background: #3D474B;
+      color: #FFF;
+    }
   }
 }

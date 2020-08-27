@@ -9,6 +9,7 @@ export * from './example';
 export * from './input';
 export * from './list';
 export * from './menu';
+export * from './prism';
 export * from './radio';
 export * from './ripple';
 export * from './switch';

@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AngularExtendedModule } from '../../../../lib/src';
 
 @Component({
-  template: `<h2>dialog</h2><ax-dialog></ax-dialog>`,
-  styles: [`<ax-dialog></ax-dialog> `]
+  template: `<h2>dialog</h2><ee-dialog></ee-dialog>`,
+  styles: [`<ee-dialog></ee-dialog> `]
 })
 export class DialogComponent {}
 

@@ -3,7 +3,7 @@ import { fireCustomEvent } from '../fire-custom-event';
 import { OverlayComponent } from '../overlay.component';
 
 @Component({
-  selector: 'ax-clock',
+  selector: 'ee-clock',
   templateUrl: './clock.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [`

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ax-menu',
-  template: ` <p> ax-menu works! </p> `,
+  selector: 'ee-menu',
+  template: ` <p> ee-menu works! </p> `,
   styles: [``]
 })
 export class MenuComponent implements OnInit {

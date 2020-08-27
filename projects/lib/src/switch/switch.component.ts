@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ax-switch',
-  template: ` <p> ax-switch works! </p> `,
+  selector: 'ee-switch',
+  template: ` <p> ee-switch works! </p> `,
   styles: [``]
 })
 export class SwitchComponent implements OnInit {

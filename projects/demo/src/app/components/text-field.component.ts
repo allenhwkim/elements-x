@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AngularExtendedModule } from '../../../../lib/src';
 
 @Component({
-  template: `<h2>Text Field</h2>  <ax-text-field></ax-text-field>`,
+  template: `<h2>Text Field</h2>  <ee-text-field></ee-text-field>`,
   styles: [``]
 })
 export class TextFieldComponent {}

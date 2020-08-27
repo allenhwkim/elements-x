@@ -9,6 +9,7 @@ import { DialogModule } from './dialog';
 import { InputModule } from './input';
 import { ListModule } from './list';
 import { MenuModule } from './menu';
+import { PrismModule } from './prism';
 import { RadioModule } from './radio';
 import { RippleModule } from './ripple';
 import { SwitchModule } from './switch';
@@ -28,6 +29,7 @@ import { TooltipModule } from './tooltip';
     InputModule,
     ListModule,
     MenuModule,
+    PrismModule,
     RadioModule,
     RippleModule,
     SwitchModule,
@@ -48,6 +50,7 @@ import { TooltipModule } from './tooltip';
     InputModule,
     ListModule,
     MenuModule,
+    PrismModule,
     RadioModule,
     RippleModule,
     SwitchModule,

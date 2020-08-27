@@ -6,7 +6,7 @@ import { AngularExtendedModule } from '../../../../lib/src';
 
 @Component({
   template: `
-  <h2>ax-checkbox</h2>
+  <h2>ee-checkbox</h2>
 
   <h3>Inputs</h3>
     <li>icon </li>
@@ -19,13 +19,13 @@ import { AngularExtendedModule } from '../../../../lib/src';
     <div class="demo">
       <h3>Default</h3>
       <label>
-        <input type="checkbox" checked ax-checkbox />
+        <input type="checkbox" checked ee-checkbox />
         Check here 
       </label>
     </div>
     <pre>
 &lt;label>
-  &lt;input type="checkbox" checked ax-checkbox />
+  &lt;input type="checkbox" checked ee-checkbox />
   Check here 
 &lt;/label>
     </pre>
@@ -34,16 +34,16 @@ import { AngularExtendedModule } from '../../../../lib/src';
   <div>
     <h3>Styled</h3>
     <label>
-      <ax-checkbox fill="blue" icon="✖" size="24px">
+      <ee-checkbox fill="blue" icon="✖" size="24px">
         <input checked type="checkbox" />
-      </ax-checkbox>
+      </ee-checkbox>
       Check here 
     </label>
     <pre>
 &lt;label>
-  &lt;ax-checkbox fill="blue" icon="✖" size="24px">
+  &lt;ee-checkbox fill="blue" icon="✖" size="24px">
     &lt;input checked type="checkbox"/>
-  &lt;/ax-checkbox>
+  &lt;/ee-checkbox>
   Check here 
 &lt;/label>
     </pre>
@@ -53,13 +53,13 @@ import { AngularExtendedModule } from '../../../../lib/src';
     <div class="demo">
       <h3>Disabled</h3>
       <label>
-        <input disabled type="checkbox" ax-checkbox checked />
+        <input disabled type="checkbox" ee-checkbox checked />
         Check here 
       </label>
     </div>
     <pre>
 &lt;label>
-  &lt;input disabled type="checkbox" ax-checkbox />
+  &lt;input disabled type="checkbox" ee-checkbox />
   Check here 
 &lt;/label>
     </pre>

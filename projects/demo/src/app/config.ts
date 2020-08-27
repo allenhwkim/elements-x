@@ -11,6 +11,7 @@ export const CONFIG = {
     input: { icon: 'fas fa-keyboard', text: 'Input'},
     list: {  icon: 'fas fa-list', text: 'List'},
     menu: { icon: 'fas fa-sitemap', text: 'Menu'},
+    prism: { icon: 'fas fa-highlighter', text: 'Prism'},
     radio: { icon: 'far fa-dot-circle', text: 'Radio'},
     switch: { icon: 'fas fa-toggle-on', text: 'Switch'},
     tabs: { icon: 'fas fa-box', text: 'Tabs'},

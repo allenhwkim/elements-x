@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { AngularExtendedModule } from '../../../../lib/src';
 
 @Component({
-  template: `<h2>currency</h2> <ax-currency></ax-currency>`,
-  styles: [`<ax-currency></ax-currency>`]
+  template: `<h2>currency</h2> <ee-currency></ee-currency>`,
+  styles: [`<ee-currency></ee-currency>`]
 })
 export class CurrencyComponent {}
 

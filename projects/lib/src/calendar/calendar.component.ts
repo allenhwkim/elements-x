@@ -8,7 +8,7 @@ import { fireCustomEvent} from '../fire-custom-event';
 import { OverlayComponent } from '../overlay.component';
 
 @Component({
-  selector: 'ax-calendar',
+  selector: 'ee-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: [ './calendar.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -17,7 +17,7 @@ export class CalendarComponent extends OverlayComponent implements OnInit {
   @Input() locale: string;
   @Input('date') selectedDate: any;
   @Input('min-date') minDate: any = '1969-01-01';
-  @Input('max-date') maxDate: any = '2100-12-31';
+  @Input('mee-date') maxDate: any = '2100-12-31';
   @Input('first-day-of-week') firstDayOfWeek: any = '0';
   @Input('week-format') weekFormat = 'abbr';
 

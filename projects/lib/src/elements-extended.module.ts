@@ -59,4 +59,4 @@ import { TooltipModule } from './tooltip';
     TooltipModule
   ]
 })
-export class AngularExtendedModule { }
+export class ElementsExtendedModule { }

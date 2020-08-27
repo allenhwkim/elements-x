@@ -17,4 +17,4 @@ export * from './tabs';
 export * from './text-field';
 export * from './tooltip';
 
-export { AngularExtendedModule } from './angular-extended.module';
+export { ElementsExtendedModule } from './elements-extended.module';

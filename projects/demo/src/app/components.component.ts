@@ -1,18 +1,22 @@
-import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CONFIG } from './config';
 
 @Component({
   template: `
     <div class="header vcentered">
-      <h2 class="name">{{component.text}}</h2>
+      <h2 class="name">{{component?.text}}</h2>
       <div class="links">
-        <ee-button class="no-border no-shadow icon" title="code">
-          <i class="fab fa-angular"></i>
-        </ee-button>
-        <ee-button class="no-border no-shadow icon" title="issues">
-          <i class="fas fa-comments"></i>
-        </ee-button>
+        <a target="_blank" href="${CONFIG.githubRepo}/blob/master/projects/lib/src/{{componentName}}/{{componentName}}.component.ts">
+          <ee-button class="no-border no-shadow icon" title="code">
+            <i class="fab fa-angular"></i>
+          </ee-button>
+        </a>
+        <a target="_blank" href="${CONFIG.githubRepo}/issues?q={{componentName}}+in%3Atitle">
+          <ee-button class="no-border no-shadow icon" title="issues">
+            <i class="fas fa-comments"></i>
+          </ee-button>
+        </a>
       </div>
     </div>
 
@@ -58,7 +62,7 @@ import { CONFIG } from './config';
     }
   `]
 })
-export class ComponentsComponent {
+export class ComponentsComponent implements AfterViewInit {
   componentName: string;
   component: any;
   usageText: string;
@@ -68,7 +72,9 @@ export class ComponentsComponent {
     private cfr: ComponentFactoryResolver, 
     private injector: Injector,
     private route: ActivatedRoute
-  ) {
+  ) {}
+
+  ngAfterViewInit() {
     this.route.params.subscribe(params => {
       this.componentName = params.name;
       this.loadComponent();
@@ -83,7 +89,11 @@ export class ComponentsComponent {
     const btnCompFactory = this.cfr.resolveComponentFactory(imported[klassName]);
     const {instance} = this.dynContainer.createComponent(btnCompFactory, null, this.injector);
   
-    const usageText = await import(`raw-loader!./components/${this.componentName}-usage.txt`);
-    this.usageText = usageText.default;
+    try {
+      const usageText = await import(`raw-loader!./components/${this.componentName}-usage.txt`);
+      this.usageText = usageText.default;
+    } catch(e) {
+      this.usageText = ' ';
+    }
   }
 }

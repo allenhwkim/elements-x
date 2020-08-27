@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AngularExtendedModule } from '../../../../lib/src';
+import { ElementsExtendedModule } from '../../../../lib/src';
 
 @Component({
   template: `
@@ -44,6 +44,6 @@ export class CarouselComponent {}
 
 @NgModule({
   declarations: [CarouselComponent],
-  imports: [ AngularExtendedModule, FormsModule, CommonModule ]})
+  imports: [ ElementsExtendedModule, FormsModule, CommonModule ]})
 class DynModule {}
 

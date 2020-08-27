@@ -1,5 +1,5 @@
 export const CONFIG = {
-  githubRepo: 'https://github.com/angular-extended/angular-extended', 
+  githubRepo: 'https://github.com/elements-extended/elements-extended', 
   components: {
     button: {  icon: 'fas fa-square', text: 'Button' },
     calendar: { icon: 'fas fa-calendar', text: 'Calendar'},

@@ -9,12 +9,17 @@ import { ElementsExtendedModule } from '../../../../lib/src';
   Elements-Extended offers a wide variety of UI elementds based on the following principle.
 
   <ul>
-    <li>Max 3 properties per element</li>
-    <li>Max 2 events per element</li>
-    <li>Overridable style.</li>
-    <li>Small code. max 200 lines.</li>
-    <li>Developed with Angular, exported as custom element</li>
+    <li>Minimal property settings to element</li>
+    <li>Minimal event dispatch from element</li>
+    <li>Allow imports by component-level</li>
+    <li>Allow custom style</li>
+    <li>Small code, very small.</li>
+    <li>Custom elements friendly</li>
   </ul>
+  To do
+  <li>pagination</li>
+  <li>masked input</li>
+  <li>markdown</li>
   `,
   styles: [``]
 })

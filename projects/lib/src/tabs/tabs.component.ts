@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, AfterViewInit, ElementRef, ChangeDetectorRef, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'ee-tabs',
@@ -7,7 +7,7 @@ import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy, AfterView
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: [`./tabs.component.scss`]
 })
-export class TabsComponent implements AfterViewInit {
+export class TabsComponent implements AfterViewInit, OnChanges {
   @Input('selected') selected;
   tabsEls: Array<Element>;
   contentsEls: Array<Element>;
@@ -16,6 +16,10 @@ export class TabsComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.initializeData();
+  }
+
+  ngOnChanges(changes) {
+    console.log('!!!!!!!!!!!!!!!!!!!!!', changes)
   }
 
   initializeData() {

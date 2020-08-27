@@ -1,6 +1,8 @@
-import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TabsComponent } from '../../../lib/src';
 import { CONFIG } from './config';
+import { usageTemplate } from './components/usage';
 
 @Component({
   template: `
@@ -21,7 +23,7 @@ import { CONFIG } from './config';
     </div>
 
     <div class="contents">
-      <ee-tabs>
+      <ee-tabs #tabs>
         <div class="tabs">
           <div ripple tab-for="overview">OVERVIEW</div>
           <div ripple tab-for="usage">USAGE</div>
@@ -66,12 +68,15 @@ export class ComponentsComponent implements AfterViewInit {
   componentName: string;
   component: any;
   usageText: string;
+  tabSelected;
   @ViewChild('dynContainer', {read: ViewContainerRef}) dynContainer: ViewContainerRef;
+  @ViewChild('tabs', {read: TabsComponent}) tabs: TabsComponent;
 
   constructor(
     private cfr: ComponentFactoryResolver, 
     private injector: Injector,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, 
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngAfterViewInit() {
@@ -83,17 +88,31 @@ export class ComponentsComponent implements AfterViewInit {
 
   async loadComponent() {
     this.component = CONFIG.components[this.componentName];
+    this.cdr.detectChanges();
     const klassName = `${this.component.text}Component`;
     this.dynContainer && this.dynContainer.clear();
-    const imported: any = await import(`./components/${this.componentName}.component`);
-    const btnCompFactory = this.cfr.resolveComponentFactory(imported[klassName]);
-    const {instance} = this.dynContainer.createComponent(btnCompFactory, null, this.injector);
-  
+    this.tabs.selectTabAndContents('overview');
+
     try {
-      const usageText = await import(`raw-loader!./components/${this.componentName}-usage.txt`);
-      this.usageText = usageText.default;
+      const imported: any = await import(`./components/${this.componentName}.component`);
+      const btnCompFactory = this.cfr.resolveComponentFactory(imported[klassName]);
+      const {instance} = this.dynContainer.createComponent(btnCompFactory, null, this.injector);
+      try {
+        if (imported.usage) {
+          this.usageText = usageTemplate
+            .replace(/<<MODULE>>/g, `${this.component.text}Module`)
+            .replace(/<<TEMPLATE>>/g, imported.usage.template)
+            .replace(/<<STYLE>>/g, imported.usage.style ||'')
+        } else {
+          const usageText = await import(`./components/${this.componentName}-usage`);
+          this.usageText = usageText.usage;
+        }
+      } catch(e) {
+        this.usageText = '';
+        console.error(`Cannot find usage for ${this.componentName}`);
+      }
     } catch(e) {
-      this.usageText = ' ';
+      console.error(`Cannot find ./components/${this.componentName}.component`);
     }
   }
 }

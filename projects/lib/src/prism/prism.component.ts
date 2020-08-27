@@ -14,7 +14,7 @@ import Prism from 'prismjs';
 })
 export class PrismComponent implements AfterViewInit {
   @Input() set code(str) {
-    if (str) {
+    if (str !== undefined) {
       const code = this.fixIndent(str);
       const grammar = Prism.languages[this.language];
       const html = Prism.highlight(code, grammar, this.language);

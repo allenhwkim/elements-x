@@ -1,38 +1,39 @@
-<header class="header">
-  <section class="logo">
-    <div class="title">
-      Elements Extended
-    </div>
-  </section>
-  <nav class="header-nav" ripple>
-    <div class="hamburger vcentered hcentered" (click)="collapsed = !collapsed">
-      <i class="fa fa-bars"></i>
-    </div>
-    <div class="links">
-      <a routerLink="/components" routerLinkActive="active">Components</a>
-      <a routerLink="/articles" routerLinkActive="active">Aritcles</a>
-      <a routerLink="/tools" routerLinkActive="active">Tools</a>
-    </div>
-    <div class="icons">
-      <a href="{{CONFIG.githubRepo}}">
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-  </nav>
-</header>
-
-<div class="main">
-  <aside class="aside">
-    <ul>
-      <li *ngFor="let comp of components" routerLink="/components/{{comp[0]}}" routerLinkActive="active"> 
-        <i class="{{comp[1].icon}}"></i> <b>{{comp[1].text}}</b>
-      </li> 
-    </ul>
-  </aside>
-  <article class="article">
-    <section>
-      <router-outlet></router-outlet>
+<div class="app" ee-a11y-outline>
+  <header class="header">
+    <section class="logo">
+      <div class="title">
+        Elements Extended
+      </div>
     </section>
-  </article>
-</div>
+    <nav class="header-nav" ripple>
+      <div class="hamburger vcentered hcentered" (click)="collapsed = !collapsed">
+        <i class="fa fa-bars"></i>
+      </div>
+      <div class="links">
+        <a routerLink="/components" routerLinkActive="active">Components</a>
+        <a routerLink="/articles" routerLinkActive="active">Aritcles</a>
+        <a routerLink="/tools" routerLinkActive="active">Tools</a>
+      </div>
+      <div class="icons">
+        <a href="{{CONFIG.githubRepo}}">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </nav>
+  </header>
 
+  <div class="main">
+    <aside class="aside">
+      <ul>
+        <li *ngFor="let comp of components" routerLink="/components/{{comp[0]}}" routerLinkActive="active"> 
+          <i class="{{comp[1].icon}}"></i> <b>{{comp[1].text}}</b>
+        </li> 
+      </ul>
+    </aside>
+    <article class="article">
+      <section>
+        <router-outlet></router-outlet>
+      </section>
+    </article>
+  </div>
+</div>

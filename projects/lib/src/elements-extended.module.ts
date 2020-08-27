@@ -16,9 +16,11 @@ import { SwitchModule } from './switch';
 import { TabsModule } from './tabs';
 import { TextFieldModule } from './text-field';
 import { TooltipModule } from './tooltip';
+import { A11yOutlineModule } from './a11y-outline';
 
 @NgModule({
   imports: [
+    A11yOutlineModule,
     ButtonModule,
     CalendarModule,
     CarouselModule,
@@ -40,6 +42,7 @@ import { TooltipModule } from './tooltip';
   declarations: [
   ],
   exports: [
+    A11yOutlineModule,
     ButtonModule,
     CalendarModule,
     CarouselModule,

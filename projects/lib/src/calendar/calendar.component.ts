@@ -17,7 +17,7 @@ export class CalendarComponent extends OverlayComponent implements OnInit {
   @Input() locale: string;
   @Input('date') selectedDate: any;
   @Input('min-date') minDate: any = '1969-01-01';
-  @Input('mee-date') maxDate: any = '2100-12-31';
+  @Input('max-date') maxDate: any = '2100-12-31';
   @Input('first-day-of-week') firstDayOfWeek: any = '0';
   @Input('week-format') weekFormat = 'abbr';
 

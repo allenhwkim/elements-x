@@ -31,6 +31,11 @@ import { Component, Input, AfterContentInit, ViewChild, AfterViewInit, ElementRe
     background: transparent;
     display: inline-block;
     color: #FFF;
+    opacity: .3;
+  }
+  :host /deep/ .button:hover,
+  :host /deep/ .button:focus {
+    opacity: 1;
   }
   :host /deep/ .button.prev { 
     position: absolute; left: 0; top: 50%; transform: translateY(-50%);
@@ -38,21 +43,26 @@ import { Component, Input, AfterContentInit, ViewChild, AfterViewInit, ElementRe
   :host /deep/ .button.next {
     position: absolute; right: 0; top: 50%; transform: translateY(-50%);
   }
-  :host /deep/ .next.button::before { font-size: 2em; content: '\\25BA'; }
-  :host /deep/ .prev.button::before { font-size: 2em; content: '\\25C4'; }
+  :host /deep/ .next.button::before { font-size: 2em; content: '\\25B6'; }
+  :host /deep/ .prev.button::before { font-size: 2em; content: '\\25C0'; }
   :host /deep/ .shortcuts {
     position: absolute;
-    bottom: 0;
+    bottom: 4px;
     width: 100%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
   }
   :host /deep/ .shortcuts .button {
-    width: 16px; height: 16px;
+    width: 1em; 
+    height: 1em;
     border-radius: 50%;
     background: #FFF;
     opacity: .3;
+    color: transparent;
   }
-  :host /deep/ .shortcuts .button.active { opacity: .7 }
+  :host /deep/ .shortcuts .button:hover,
+  :host /deep/ .shortcuts .button:focus { opacity: .7 }
+  :host /deep/ .shortcuts .button.active { opacity: 1 }
   `]
 })
 export class CarouselComponent implements AfterViewInit {
@@ -77,7 +87,8 @@ export class CarouselComponent implements AfterViewInit {
     this.items[this.selected]
       .scrollIntoView({
         behavior: 'smooth', 
-        inline: 'center'
+        inline: 'center',
+        block: 'nearest'
       });
     this.items[this.selected].classList.add('active');
     this.cd.detectChanges();

@@ -1,4 +1,4 @@
-import { Directive, HostListener } from '@angular/core';
+import { Directive, Component, HostListener } from '@angular/core';
 
 function animate(drawFn, duration=500) {
   const timing = function(t) { return t };
@@ -58,3 +58,9 @@ export class RippleDirective {
     return ripple;
   }
 }
+
+@Component({
+  selector: 'ee-ripple',
+  template: '<ng-content></ng-content>'
+})
+export class RippleComponent extends RippleDirective {}

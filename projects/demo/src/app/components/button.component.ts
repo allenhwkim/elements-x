@@ -4,6 +4,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule, PrismModule } from '../../../../lib/src';
 
+export const usage = {
+  template: `
+    <div class="custom">
+      <ee-button class="ripple primary"> Primary </ee-button>
+      <ee-button class="ripple accent"> Accent </ee-button>
+      <ee-button disabled> Disabled </ee-button>
+    </div>`,
+  style: `
+    .custom ee-button {
+      --primary: green;
+      --accent: orange;L:
+      --disabled: grey;
+      --size: 32px;
+    }`
+};
+
 @Component({
   template: `
 <h3>Features</h3>
@@ -33,7 +49,7 @@ import { ButtonModule, PrismModule } from '../../../../lib/src';
     <ee-button class="ripple accent"> Accent </ee-button>
     <ee-button disabled> Disabled </ee-button>
   </p>
-  <pre ee-prism>
+  <pre language="html" ee-prism>
     &lt;ee-button> Default &lt;/ee-button>
     &lt;ee-button class="<b>primary</b>"> Primary &lt;/ee-button>
     &lt;ee-button class="<b>accent</b>"> Accent &lt;/ee-button>
@@ -62,7 +78,7 @@ Click the below buttons to see loading sign.
     <i class="loading"></i>
     Accent
   </ee-button>
-  <pre ee-prism>
+  <pre language="html" ee-prism>
   &lt;ee-button (click)="onSubmit(1)" 
     [<b>loadingBy</b>]="<b>!apiResp1</b>">
     &lt;i class="<b>loading</b>">&lt;/i> 
@@ -90,7 +106,7 @@ Button with "no-class" attribute won't have background color, switching to text 
   <ee-button class="primary no-bg"> Primary </ee-button>
   <ee-button class="accent no-bg"> Accent </ee-button>
   <ee-button disabled class="no-bg"> Disabled </ee-button>
-  <pre ee-prism>
+  <pre language="html" ee-prism>
   &lt;ee-button class="<b>no-bg</b>"> Default &lt;/ee-button>
   &lt;ee-button class="primary <b>no-bg</b>"> Primary &lt;/ee-button>
   &lt;ee-button class="accent <b>no-bg</b>"> Accent &lt;/ee-button>
@@ -104,7 +120,7 @@ Button with "no-class" attribute won't have background color, switching to text 
   <ee-button class="primary no-bg no-border"> Primary </ee-button>
   <ee-button class="accent no-bg no-border"> Accent </ee-button>
   <ee-button disabled class="no-bg no-border"> Disabled </ee-button>
-  <pre ee-prism>
+  <pre language="html" ee-prism>
   &lt;ee-button class="no-bg no-border"> Default &lt;/ee-button>
   &lt;ee-button class="primary no-bg no-border"> Primary &lt;/ee-button>
   &lt;ee-button class="accent no-bg no-border"> Accent &lt;/ee-button>
@@ -119,7 +135,7 @@ Button with "no-shadow" class wont' have raised effect.
   <ee-button class="primary no-bg no-border no-shadow"> Primary </ee-button>
   <ee-button class="accent no-bg no-border no-shadow"> Accent </ee-button>
   <ee-button disabled class="no-bg no-border no-shadow"> Disabled </ee-button>
-  <pre ee-prism>
+  <pre language="html" ee-prism>
   &lt;ee-button class="no-bg no-border <b>no-shadow</b>"> Default &lt;/ee-button>
   &lt;ee-button class="primary no-bg no-border <b>no-shadow</b>"> Primary &lt;/ee-button>
   &lt;ee-button class="accent no-bg no-border <b>no-shadow</b>"> Accent &lt;/ee-button>
@@ -144,7 +160,7 @@ Button with "icon" class will have rounded shape instead of rectanble shape.
   <ee-button class="icon primary no-bg no-border no-shadow">&#9829;</ee-button>
   <ee-button class="icon accent no-bg no-border no-shadow">&#9829;</ee-button>
   <ee-button class="icon no-bg no-border no-shadow" disabled>&#9829;</ee-button> no-border
-  <pre ee-prism>
+  <pre language="html" ee-prism>
   &lt;ee-button class="<b>icon</b>">&#9829;&lt;/ee-button>
   &lt;ee-button class="<b>icon</b> primary">&#9829;&lt;/ee-button>
   &lt;ee-button class="<b>icon</b> accent">&#9829;&lt;/ee-button>

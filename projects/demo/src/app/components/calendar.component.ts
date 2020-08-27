@@ -4,6 +4,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ElementsExtendedModule } from '../../../../lib/src';
 
+export const usage = {
+  template: `<ee-calendar></ee-calendar>`
+};
+
 @Component({
   template: `
 

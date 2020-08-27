@@ -4,6 +4,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ElementsExtendedModule } from '../../../../lib/src';
 
+export const usage = {
+  template: `
+    <ee-carousel [selected]="2">
+      <img class="img1" src="//picsum.photos/300/200?1">
+      <img class="img2" src="//picsum.photos/300/200?2">
+      <img class="img3" src="//picsum.photos/300/200?3">
+    </ee-carousel>`
+};
+
 @Component({
   template: `
   <h2>carousel</h2>

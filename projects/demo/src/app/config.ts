@@ -13,6 +13,7 @@ export const CONFIG = {
     menu: { icon: 'fas fa-sitemap', text: 'Menu'},
     prism: { icon: 'fas fa-highlighter', text: 'Prism'},
     radio: { icon: 'far fa-dot-circle', text: 'Radio'},
+    ripple: { icon: 'fas fa-circle', text: 'Ripple'},
     switch: { icon: 'fas fa-toggle-on', text: 'Switch'},
     tabs: { icon: 'fas fa-box', text: 'Tabs'},
     'text-field': { icon: 'fas fa-i-cursor', text: 'TextField'},

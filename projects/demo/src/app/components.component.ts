@@ -113,6 +113,7 @@ export class ComponentsComponent implements AfterViewInit {
       }
     } catch(e) {
       console.error(`Cannot find ./components/${this.componentName}.component`);
+      throw e;
     }
   }
 }

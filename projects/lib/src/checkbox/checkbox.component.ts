@@ -1,5 +1,4 @@
-import { Component, Input, ViewEncapsulation, ElementRef,
-  ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ViewEncapsulation, ElementRef, ChangeDetectorRef } from '@angular/core';
   
 @Component({
   selector: 'ee-checkbox, [ee-checkbox]',

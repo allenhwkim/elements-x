@@ -1,0 +1,71 @@
+<h1 id="mobile-friendly-table">Mobile-Friendly Table</h1>
+<p>There are several ways to display table on mobile devices. <a href="https://www.liquidlight.co.uk/blog/tables-in-responsive-design/">https://www.liquidlight.co.uk/blog/tables-in-responsive-design/</a></p>
+<p>I found css-responsive table is the simplest approach to show table on mobile and here I want to share how it is done.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2172/1*EAJIu8rCRdsC5AhiWogZ7g.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*i3-Y9HRUORvJlZCw24v_Qg.png" alt=""></p>
+<p>To make a long story short, these things what I do when it is mobile device.</p>
+<ol>
+<li><p><strong>hide <code>&lt;thead&gt;</code></strong></p>
+</li>
+<li><p><strong>change <code>&lt;td&gt;</code> from <code>table-cell</code> to <code>flex</code></strong></p>
+</li>
+<li><p><strong>Add a pseudo element <code>td::before</code> with the contents of <code>label</code> attribute value.</strong></p>
+</li>
+</ol>
+<p>Simple, eh? The following is CSS representation of the above #1, #2, and #3</p>
+<pre><code>[@media](http://twitter.com/media) screen and (max-width: 600px) {
+  table thead {
+    display: none;
+  }
+
+  table td {
+    display: flex;
+  }
+
+  table td::before {
+    content: attr(label);
+    font-weight: bold;
+    width: 120px;
+    min-width: 120px;
+  }
+}</code></pre>
+<p>To make all to work, your table must be well structured with <code>thead</code> and <code>tbody</code> , and each <code>td</code> must have attribute <code>label</code> attribute.</p>
+<p>You may think having <code>label</code> attribute on all <code>td</code> tags are too much coding, and I also think so. If you want to set <code>label</code> attribute with Javascript run the following small function.</p>
+<pre><code>window.setMobileTable = function(selector) {
+  // if (window.innerWidth &gt; 600) return false;
+  const tableEl = document.querySelector(selector);
+  const thEls = tableEl.querySelectorAll(&#39;thead th&#39;);
+  const tdLabels = Array.from(thEls).map(el =&gt; el.innerText);
+  tableEl.querySelectorAll(&#39;tbody tr&#39;).forEach( tr =&gt; {
+    Array.from(tr.children).forEach( 
+      (td, ndx) =&gt;  td.setAttribute(&#39;label&#39;, tdLabels[ndx])
+    );
+  });
+}</code></pre>
+<p>The above function does;</p>
+<ol>
+<li><p>Find header texts from <code>thead</code></p>
+</li>
+<li><p>Iterate through all <code>td </code>and set attribute with value found from #1</p>
+</li>
+</ol>
+<p>Simple, isn’t it?</p>
+<p>You can see the full demo here.</p>
+<p>Using the above technique, you can build an Angular component, which initialize the mobile table in <code>ngAfterViewInit</code> with attribute of <code>mobileTable</code> .</p>
+<pre><code>ngAfterViewInit() {
+  const tableEl = this.elRef.nativeElement;
+  const thEls = tableEl.querySelectorAll(&#39;thead th&#39;);
+  const tdLabels = Array.from(thEls).map( (el:any) =&gt; el.innerText);
+  tableEl.querySelectorAll(&#39;tbody tr&#39;).forEach( tr =&gt; {
+    Array.from(tr.children).forEach(
+      (td: any, ndx) =&gt;  td.setAttribute(&#39;label&#39;, tdLabels[ndx])
+    );
+  });
+}</code></pre>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

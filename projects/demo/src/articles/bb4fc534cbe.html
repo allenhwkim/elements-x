@@ -1,0 +1,80 @@
+<h1 id="angular-create-my-own-ngif">Angular: Create my own *ngIf</h1>
+<p>Let’s call it as *myIf</p>
+<p><img src="https://cdn-images-1.medium.com/max/7814/0*iIFuUZ5oAvwc7yvD" alt="[https://github.com/angular/angular/blob/10.0.2/packages/common/src/directives/ng_if.ts#L10-L238](https://github.com/angular/angular/blob/10.0.2/packages/common/src/directives/ng_if.ts#L10-L238)Photo by [Adi Goldstein](https://unsplash.com/@adigold1?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em><a href="https://github.com/angular/angular/blob/10.0.2/packages/common/src/directives/ng_if.ts#L10-L238">https://github.com/angular/angular/blob/10.0.2/packages/common/src/directives/ng_if.ts#L10-L238</a>Photo by <a href="https://unsplash.com/@adigold1?utm_source=medium&amp;utm_medium=referral">Adi Goldstein</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<p>Have you ever thought of making your own <code>*ngIf</code>?</p>
+<p>It seems not easy to create something like an Angular-core built-in-like directive. First, it seems not easy to make a directive to work, which starts with with <code>*</code>. Second, it seems there are some complicated feature inside the weird looking directive.</p>
+<p>Let’s look at the actual source code. This is the actual code of <code>*ngIf</code> at <a href="https://github.com/angular/angular/blob/10.0.2/packages/common/src/directives/ng_if.ts">github</a>.</p>
+<p>To create <code>*myIf</code>, a simpler version of <code>*ngIf</code>, it seems necessary to understand <code>ViewContainerRef</code> and <code>TemplateRef</code>. The more detail about these are at the end.</p>
+<h3 id="html">HTML</h3>
+<pre><code>&lt;div *myIf=&quot;show&quot;&gt;
+  This is controlled by *myIf=&quot;show&quot;, not *ngIf
+&lt;/div&gt;</code></pre>
+<p>The above Angular-style html is the same as the following.</p>
+<pre><code>&lt;ng-template [myIf]=&quot;show&quot;&gt;
+  &lt;div&gt;
+    This is controlled by *myIf=&quot;show&quot;, not *ngIf
+    &lt;br/&gt; Date: {{myDate}}
+  &lt;/div&gt;
+&lt;/ng-template&gt;</code></pre>
+<h3 id="javascript">Javascript</h3>
+<ul>
+<li><p>NOT to show any, execute <code>viewContainer.clear()</code></p>
+</li>
+<li><p>To show all, execute <code>viewContainer.createEmbeddedBiew(templateRef)</code></p>
+<p>  <a href="http://twitter.com/Directive">@Directive</a>({selector: &#39;[myIf]&#39;})
+  export class MyIf {</p>
+<p>  <a href="http://twitter.com/Input">@Input</a>()</p>
+<pre><code>set myIf(condition) {
+  this.viewContainer.clear();
+  if (condition) {
+    this.viewContainer.createEmbeddedView(this.templateRef);
+  }
+}</code></pre>
+<p>  constructor(</p>
+<pre><code>  private viewContainer: ViewContainerRef,
+  private templateRef: TemplateRef&lt;any&gt;
+) {}</code></pre>
+<p>  }</p>
+</li>
+</ul>
+<p>This is the result when it’s implemented</p>
+<p>The below section is about understanding of <code>ElementRef</code>, <code>ViewContainerRef</code>, and <code>TemplateRef</code>. The following code may help you little better. The running <a href="https://stackblitz.com/edit/angular-refs?file=src%2Fapp%2Fapp.component.html">demo</a> is at stackblitz.</p>
+<pre><code>*&lt;!-- Component **ViewContainerRef** in constructor --&gt;*
+&lt;**my-component**&gt; *&lt;!-- **ElementRef** in constructor --&gt;*
+  &lt;!-- 
+  [@Component](http://twitter.com/Component)({
+    selector: &#39;my-component&#39;,
+    template: `
+      &lt;div **#el**&gt;div&lt;/div&gt;                *&lt;-- **ElementRef** el*
+      &lt;**ng-container #vc**&gt;&lt;/ng-container&gt; *&lt;-- **ViewContainerRef** vc*
+      &lt;**ng-template** **#tpl**&gt;                *&lt;-- **TemplateRef** tpl*
+        &lt;div&gt;in ng-template&lt;/div&gt;
+      &lt;/**ng-template**&gt;`
+  })
+  --&gt;
+&lt;**my-component**&gt;
+
+*&lt;!-- Directive **ViewContainerRef** in constructor --&gt;*
+&lt;**ng-template** [my-directive]&gt; *&lt;!-- **TemplateRef** in constructor*
+  &lt;div&gt;Within ng-template [my-directive]&lt;/div&gt;
+&lt;/**ng-template**&gt;</code></pre>
+<ul>
+<li><p><code>[ViewContainerRef</code>](<a href="https://angular.io/api/core/ViewContainerRef">https://angular.io/api/core/ViewContainerRef</a>) : Reference for view container, it represents a container where one or more views can be attached..</p>
+</li>
+<li><p><code>[TemplateRef</code>](<a href="https://angular.io/api/core/TemplateRef">https://angular.io/api/core/TemplateRef</a>): It holds a reference to its host element, which is <code>&lt;ng-template&gt;</code></p>
+</li>
+<li><p><code>ElementRef</code>: A wrapper around a native element inside of a View.</p>
+</li>
+</ul>
+<p>Hope this make your job.</p>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>
+<h3 id="references">References:</h3>
+<ul>
+<li><a href="https://medium.com/@kevinwkds/angular-views-and-references-element-template-viewcontainer-5cdcf6b21bdb">https://medium.com/@kevinwkds/angular-views-and-references-element-template-viewcontainer-5cdcf6b21bdb</a></li>
+</ul>

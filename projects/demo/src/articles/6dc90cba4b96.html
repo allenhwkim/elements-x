@@ -1,0 +1,235 @@
+<h1 id="routing-with-nuxt-vuejs">Routing With Nuxt— VueJS</h1>
+<p>For experienced developers who knows NodeJS and a framework</p>
+<p>This is one of many articles that I have covered VueJS</p>
+<ul>
+<li><p><a href="https://medium.com/p/6bb1481c6844/edit">React Vs Vue</a></p>
+</li>
+<li><p><a href="https://medium.com/p/6dc90cba4b96/edit">**Routing With Nuxt: VueJS</a>(This Article)**</p>
+</li>
+<li><p><a href="https://medium.com/p/efc3dad45eac/edit">Multi-Language With Nuxt: VueJS</a></p>
+</li>
+<li><p>Resolving Before Route: VueJS</p>
+</li>
+<li><p>Form Valiadation: VueJS</p>
+</li>
+<li><p>Generating Documentation: VueJS</p>
+</li>
+<li><p>Multiple Modules: VueJS</p>
+</li>
+</ul>
+<p>In the previous article, <a href="https://medium.com/allenhwkim/react-vs-vue-6bb1481c6844">https://medium.com/allenhwkim/react-vs-vue-6bb1481c6844</a>, I have take a brief look at VueJS and I have made a comparison chart with React in detail.</p>
+<p>In this article, I am going to actually implement some items in comparison chart with VueJS, Nuxt and more.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li><p>You have installed NodeJS LTS (or nvm)</p>
+</li>
+<li><p>You have experience with other front end framework, e.g. Angular</p>
+</li>
+<li><p>You have heard of <a href="https://medium.com/allenhwkim/react-vs-vue">VueJS</a></p>
+</li>
+</ul>
+<h2 id="objects">Objects</h2>
+<ul>
+<li><p>State management using Vuex, a VueJS core plugin</p>
+</li>
+<li><p>Server-Side Rendering using Nuxt, a VueJS core plugin</p>
+</li>
+<li><p>Routing using vie-router, core plugin, including</p>
+</li>
+<li><p>Basic routing</p>
+</li>
+<li><p>Lazy loading</p>
+</li>
+<li><p>Building a package for production</p>
+</li>
+</ul>
+<h2 id="install-and-setup">Install and Setup</h2>
+<pre><code>$ nvm ls-remote
+$ nvm install --lts
+$ nvm use --lts</code></pre>
+<h3 id="install-a-nuxt-starter-package">Install A nuxt starter package</h3>
+<pre><code>$ nvm use --lts
+$ npm install -g vue-cli
+$ vue init nuxt/starter portfolio
+$ cd portfolio
+$ npm install
+$ npm run dev $ or, nuxt</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2694/1*xmBRopa1fMDWVGSi_WW7WA.png" alt=""></p>
+<p>Here is the directory structure that you currently have.</p>
+<pre><code>├── README.md
+├── assets
+│   └── README.md
+├── components
+│   ├── AppLogo.vue
+│   └── README.md
+├── layouts
+│   ├── README.md
+│   └── default.vue
+├── middleware
+│   └── README.md
+├── nuxt.config.js
+├── package-lock.json
+├── package.json
+├── pages
+│   ├── README.md
+│   └── index.vue
+├── plugins
+│   └── README.md
+├── static
+│   ├── README.md
+│   └── favicon.ico
+└── store
+    └── README.md</code></pre>
+<p>You want a good looking page, but no time to style it all? Then, add two css file into <code>nuxt.config.js</code></p>
+<pre><code>`{ rel: &#39;stylesheet&#39;, href: &#39;`[https://unpkg.com/bulma@0.6.2/css/bulma.css`](https://unpkg.com/bulma@0.6.2/css/bulma.css)&#39; }`</code></pre>
+<p>In addition to the existing structure, you are going to add or update the following.</p>
+<ul>
+<li><p>navigation bar, <code>components/navbar.vue</code></p>
+</li>
+<li><p>layout page, <code>layouts/default.vue</code></p>
+</li>
+<li><p>home page, <code>pages/index.vue</code></p>
+</li>
+<li><p>about page, <code>pages/about.vue</code></p>
+</li>
+<li><p>projects page, <code>pages/projects.vue</code></p>
+</li>
+<li><p>contact page, <code>pages/contact.vue</code></p>
+</li>
+</ul>
+<h3 id="create-a-navigation-component-componentsnavbarvue">Create a navigation component <code>components/navbar.vue</code></h3>
+<pre><code>`&lt;template&gt;
+  &lt;div class=&quot;container&quot;&gt;
+    &lt;nav class=&quot;navbar&quot; role=&quot;navigation&quot; aria-label=&quot;main navigation&quot;&gt;
+      &lt;div class=&quot;navbar-brand&quot;&gt;
+        &lt;a class=&quot;navbar-item&quot; href=&quot;/&quot;&gt;Portfolio&lt;/a&gt;
+        &lt;button class=&quot;button navbar-burger&quot;&gt;
+          &lt;span&gt;&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;
+          &lt;span&gt;&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;navbar-menu&quot;&gt;
+        &lt;div class=&quot;navbar-end&quot;&gt;
+          &lt;nuxt-link class=&quot;navbar-item&quot; to=&quot;/&quot;&gt;Home&lt;/nuxt-link&gt;
+          &lt;nuxt-link class=&quot;navbar-item&quot; to=&quot;/about&quot;&gt;About&lt;/nuxt-link&gt;
+          &lt;nuxt-link class=&quot;navbar-item&quot; to=&quot;/projects&quot;&gt;Projects&lt;/nuxt-link&gt;
+          &lt;nuxt-link class=&quot;navbar-item&quot; to=&quot;/contact&quot;&gt;Contact&lt;/nuxt-link&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+&lt;/template&gt;`</code></pre>
+<h3 id="update-a-layout-page-layoutsdefaultvue">Update a layout page, <code>layouts/default.vue</code></h3>
+<pre><code>`&lt;template&gt;
+  &lt;div&gt;
+    &lt;navbar&gt;&lt;/navbar&gt;
+    &lt;nuxt/&gt;
+  &lt;/div&gt;
+&lt;/template&gt;`
+
+`&lt;script&gt;
+  import Navbar from &#39;../components/Navbar&#39;`
+
+`  export default {
+    components: {
+      Navbar
+    }
+  }
+&lt;/script&gt;`
+
+`&lt;style&gt;
+  html { font-family: Arial, sans-serif;}
+&lt;/style&gt;`</code></pre>
+<h3 id="update-index-page-pagesindexvue">Update index page, <code>pages/index.vue</code></h3>
+<pre><code>&lt;template&gt;
+  &lt;section class=&quot;section is-large&quot;&gt;
+    &lt;div class=&quot;container has-text-centered&quot;&gt;
+      &lt;h1 class=&quot;title&quot;&gt;Hi, I&#39;m Allen Kim&lt;/h1&gt;
+      &lt;h2 class=&quot;subtitle&quot;&gt;A software engineer in Canada.&lt;/h2&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/template&gt;</code></pre>
+<h3 id="create-about-page-pagesaboutvue">Create about page, <code>pages/about.vue</code></h3>
+<pre><code>&lt;template&gt;
+  &lt;section class=&quot;section is-medium&quot;&gt;
+    &lt;div class=&quot;container has-text-centered&quot;&gt;
+      &lt;h1 class=&quot;title&quot;&gt;About Me&lt;/h1&gt;
+      &lt;p&gt;
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/template&gt;</code></pre>
+<h2 id="create-projects-page-pagesprojectsvue">Create projects page, <code>pages/projects.vue</code></h2>
+<pre><code>&lt;template&gt;
+  &lt;section class=&quot;section is-medium&quot;&gt;
+    &lt;div class=&quot;container has-text-centered&quot;&gt;
+      &lt;h1 class=&quot;title&quot;&gt;My Projects&lt;/h1&gt;
+      &lt;p&gt;
+        Some of my projects can be found on &lt;a href=&quot;[https://github.com/allenhwkim](https://github.com/allenhwkim)&quot; target=&quot;_blank&quot;&gt;GitHub&lt;/a&gt;.
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/template&gt;</code></pre>
+<h3 id="create-a-contact-page-pagescontactvue">Create a contact page <code>pages/contact.vue</code></h3>
+<pre><code>&lt;template&gt;
+  &lt;section class=&quot;section is-medium&quot;&gt;
+    &lt;div class=&quot;container has-text-centered&quot;&gt;
+      &lt;h1 class=&quot;title&quot;&gt;Contact Me&lt;/h1&gt;
+      &lt;p&gt;
+        You can follow me on Twitter: 
+        &lt;a href=&quot;[https://twitter.com/allenhwkim](https://twitter.com/allenhwkim)&quot;&gt;[@allenhwkim](http://twitter.com/allenhwkim)&lt;/a&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/template&gt;</code></pre>
+<h2 id="review">Review</h2>
+<p>We have covered the following items in this article</p>
+<ul>
+<li><p>State management using Vuex, a VueJS core plugin</p>
+</li>
+<li><p>Server-Side Rendering using Nuxt, a VueJS core plugin</p>
+</li>
+<li><p>Routing using vie-router, core plugin, including</p>
+</li>
+<li><p>Basic routing</p>
+</li>
+<li><p>Lazy loading</p>
+</li>
+<li><p>Building a package for production</p>
+</li>
+</ul>
+<p>Next and future articles will cover the following.</p>
+<ul>
+<li><p>Multi-language translation using vue-i18n, 3rd party tool</p>
+</li>
+<li><p>Resolving before route</p>
+</li>
+<li><p>Form validation</p>
+</li>
+<li><p>Documentation using docsify, 3rd party tool</p>
+</li>
+<li><p>Separate modules / namespace</p>
+</li>
+</ul>
+<p><img src="https://cdn-images-1.medium.com/max/2058/1*HqczJETv_R-svB_LDTK2Hg.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2092/1*2vPHq3huAl8_iofMnjW7yA.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2086/1*K3UQDHkZoa1rsgOlcgkxJw.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2070/1*Pu-ANjIANNIG6B1-Jo7p0g.png" alt=""></p>
+<h3 id="where-is-router-defined">Where is router defined?</h3>
+<p><em>Nuxt.js automatically generates the <a href="https://github.com/vuejs/vue-router">vue-router</a> configuration based on your file tree of Vue files inside the <code>pages</code>directory.</em></p>
+<h2 id="build-for-production">Build For Production</h2>
+<pre><code>$ nuxt generate
+$ npm install -g http-server
+$ nuxt generate # to generate `dist` directory
+$ cd dist
+$ http-server # to see how it works</code></pre>
+<p>Your our <code>dist</code> directory is to be used in your production environment.</p>
+<p>You can find all code used here at <a href="https://github.com/allenhwkim/vue-nuxt-practice/tree/1.0">https://github.com/allenhwkim/vue-nuxt-practice/tree/1.0</a></p>
+<p>As a demo, this application has been deployed to <a href="https://vue-nuxt-practice.firebaseapp.com/">https://vue-nuxt-practice.firebaseapp.com/</a>. Do you want to deploy your front-end application to Firebase? Then, you need to create an account for firebase and <a href="https://console.firebase.google.com/">create a project</a> then run the following.</p>
+<pre><code>$ npm install -g firebase-tools --save-dev
+$ firebase login --reauth
+$ firebase init
+$ firebase deploy</code></pre>
+<p>Happy Coding.</p>

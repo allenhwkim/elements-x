@@ -1,0 +1,168 @@
+<h1 id="building-a-carousel-in-angular-way">Building A Carousel In Angular Way</h1>
+<p>Recently, I wanted to mimic the layout of Google Drive. It seems like a trend to build a site like that these days, and I wanted to…</p>
+<p>Then, I wanted to add a carousel on a section of a page, and started looking for a carousel coding in Angular way.</p>
+<p>I found <a href="http://ngmodules.org/modules/angular-carousel">angular-carousel</a> used by many places. Close enough, but I did not feel coding a carousel like the following is the Angualr Way.</p>
+<pre><code>`&lt;ul rn-carousel class=&quot;image&quot;&gt;
+  &lt;li&gt;slide #1&lt;/li&gt;
+  &lt;li&gt;slide #2&lt;/li&gt;
+  &lt;li&gt;slide #3&lt;/li&gt;
+&lt;/ul&gt;`</code></pre>
+<p>Where is navigation buttons? What does it do when navigation button is clicked? In my opinion, the way to build a directive like the above is JQuery plugin way, not a Angular way.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*43awKcYXvZL26mc8.png" alt=""></p>
+<p>What is “Angular Way” anyway? The answer is there is no answer for that. The answer for that is different from each person.</p>
+<p>Here is my definition of “Angular Way”.</p>
+<ol>
+<li><p>Requirements in HTML</p>
+</li>
+<li><p>Less Javascript(By building re-usable directives)</p>
+</li>
+</ol>
+<p>Am I saying AngualrJS with “Less Javascript”? Yes, “Less Javascript”. In this article, I would like to build carousel from scratch, so the outcome of the HTML is descriptive and reusable.</p>
+<p>First thing I need to do is gathering requirements.</p>
+<p>The following is the requirement I gathered to make a carousel. For TL;DR;, who wants to see the result first, this is <a href="http://embed.plnkr.co/NukxpGel8I53ZSCwCWob/preview">the final result</a>.</p>
+<h2 id="requirements">Requirements</h2>
+<ol>
+<li>Must be navigable through slides.</li>
+</ol>
+<ol>
+<li><p>Hide previous button when it is the first slide</p>
+</li>
+<li><p>Hide next button when it is the last slide</p>
+</li>
+<li><p>Must work with mobile devices</p>
+</li>
+<li><p>swipe left goes to the previous slide</p>
+</li>
+<li><p>swipe right goes to the next slide</p>
+</li>
+<li><p>Must show only a single slide any time</p>
+</li>
+</ol>
+<p>I am going to start the coding the requirements with empty template with my preferred framework and font; AngualrJS and FontAwsome;</p>
+<p>If you are updating an existing project, you don’t need to this step.</p>
+<pre><code>`&lt;link href=&quot;http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;script src=&quot;https://code.angularjs.org/1.3.5/angular.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://code.angularjs.org/1.3.5/angular-touch.js&quot;&lt;/script&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;`</code></pre>
+<p>I am ready now, let me start the coding.</p>
+<h2 id="first-step-complete-html-with-requirements">First Step. Complete HTML with Requirements</h2>
+<p>At this time, I do not think of Javascript nor css. Those will be completed by the next steps.</p>
+<pre><code>`&lt;section ng-carousel&gt;`
+
+`&lt;nav ng-swipe-left=&quot;showNext()&quot; ng-swipe-right=&quot;showPrev()&quot;&gt;
+    &lt;div ng-hide=&quot;firstSlide&quot; ng-click=&quot;showPrev()&quot;&gt;
+      &lt;i class=&quot;fa fa-4x fa-caret-left&quot;&gt;&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;div ng-hide=&quot;lastSlide&quot; ng-click=&quot;showNext()&quot;&gt;
+      &lt;i class=&quot;fa fa-4x fa-caret-right&quot;&gt;&lt;/i&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;`
+
+`&lt;div&gt;
+    &lt;img src=&quot;http://lorempixel.com/800/600&quot; /&gt;
+    &lt;img src=&quot;http://lorempixel.com/801/600&quot; /&gt;
+    &lt;img src=&quot;http://lorempixel.com/802/600&quot; /&gt;
+  &lt;/div&gt;`
+
+`&lt;/section&gt;`</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*PpLFuGTajsDaxk9e.png" alt=""></p>
+<p>The html above will look like the picture above. The look-and-feel is not even close, but the requirements are all in there. By only reading html, it is a carousel that I want to build.</p>
+<p>Let me check it again that the above HTML satisfies all the requirements.</p>
+<ol>
+<li>Must be navigable through slides. (It works with ng-click=”showPrev” / ng-click=”showNext”)</li>
+</ol>
+<ol>
+<li><p>Hide previous button when it is the first slide (It works with ng-hide=”firstSlide”)</p>
+</li>
+<li><p>Hide next button when it is the last slide (It works with ng-hide=”lastSlide”)</p>
+</li>
+<li><p>Must work with mobile devices</p>
+</li>
+<li><p>swipe left goes to the previous slide (It works with ng-swipe-left=”showPrev()”)</p>
+</li>
+<li><p>swipe right goes to the next slide (It works with <strong>ng-swipe-right=”showNext()”</strong></p>
+</li>
+<li><p>Must show only a single slide any time (Not working yet, but I want to handle this not with javascript nor AngularJS but with css)</p>
+</li>
+</ol>
+<h2 id="second-step-complete-css-styling">Second Step, Complete CSS styling</h2>
+<p>I prefer using class names and inline style attribute for css styling. You may say inline style attributes are not recommended. However, at this step, I want to see how it looks like. Later, inline style attribute will be removed and converted into AngularJS directives.</p>
+<pre><code>`&lt;section ng-carousel class=&quot;pos-relative auto-overflow&quot;&gt;`
+
+`&lt;nav class=&quot;top-stacked full-width full-height text-white&quot;
+    ng-swipe-left=&quot;showNext()&quot; ng-swipe-right=&quot;showPrev()&quot;&gt;
+    &lt;div class=&quot;pull-left ngd-v-center margin-1em&quot; 
+      ng-hide=&quot;firstSlide()&quot; ng-click=&quot;showPrev()&quot;&gt;
+      &lt;i class=&quot;fa fa-4x fa-caret-left&quot;&gt;&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;pull-right ngd-v-center margin-1em&quot; 
+      ng-hide=&quot;lastSlide()&quot; ng-click=&quot;showNext()&quot;&gt;
+      &lt;i class=&quot;fa fa-4x fa-caret-right&quot;&gt;&lt;/i&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;`
+
+`&lt;div ngd-carousel-slides slide=&quot;2&quot; style=&quot;width:300%&quot; class=&quot;bottom-stacked&quot;&gt;
+    &lt;img style=&quot;width:33.333333333%&quot; class=&quot;pull-left full-width&quot; src=&quot;http://lorempixel.com/800/600&quot; /&gt;
+    &lt;img style=&quot;width:33.333333333%&quot; class=&quot;pull-left full-width&quot; src=&quot;http://lorempixel.com/801/600&quot; /&gt;
+    &lt;img style=&quot;width:33.333333333%&quot; class=&quot;pull-left full-width&quot; src=&quot;http://lorempixel.com/802/600&quot; /&gt;
+  &lt;/div&gt;`
+
+`&lt;/section&gt;`</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*u-50TMHmfbzmpXLv.png" alt=""></p>
+<p>With the code above, it looks like the picture on the left side. I have used several class names, which are general and also not to DOM-specific. The reason I prefer to use general class name is that I can reuse it any time when I want. I also found that using common class name also saves me from coding the same css attributes again and again.</p>
+<p>This is the <code>[styles.css</code> file](<a href="http://embed.plnkr.co/NukxpGel8I53ZSCwCWob/style.css">http://embed.plnkr.co/NukxpGel8I53ZSCwCWob/style.css</a>) that I end up with.</p>
+<p>It’s ready. HTML is fully descriptive, and look-and-feel is the same as required.</p>
+<p>However, it is not fully functional. We need to nail the requirements with Javascript.</p>
+<h2 id="the-final-step-javascript">The final step, Javascript</h2>
+<p>The above html is somewhat invasive because of the inline styles. We can remove all inline css and build into AngularJS directives.</p>
+<p>The following is the list that Javascript coding is necessary.</p>
+<ul>
+<li><p><code>ng-carousel</code> directive
+This will be the center of all carousel features and scoping.</p>
+</li>
+<li><p><code>showNext()</code> function for ng-swipe-left and ng-click</p>
+</li>
+<li><p><code>showPrev()</code> function for ng-swipt-right and ng-click</p>
+</li>
+<li><p><code>ngd-v-center</code> directive to align vertically</p>
+</li>
+<li><p><code>firstSlide()</code> and <code>lastSlide()</code> function</p>
+</li>
+<li><p>inline style attribute of container of slides, <code>style=&quot;width:300%&quot;</code></p>
+</li>
+<li><p>inline style attribute of slide, <code>style=&quot;width:33.333333333%&quot;</code></p>
+</li>
+</ul>
+<p>The javascript coding did not take long, and I was able to finish all JS coding in less than 70 lines.</p>
+<p>This is the final <a href="http://embed.plnkr.co/NukxpGel8I53ZSCwCWob/index.html">HTML</a></p>
+<pre><code>`&lt;section ng-carousel class=&quot;pos-relative no-overflow&quot;&gt;`
+
+`&lt;nav class=&quot;top-stacked full-width full-height text-white&quot;
+    ng-swipe-right=&quot;showPrev()&quot; ng-swipe-left=&quot;showNext()&quot;&gt;
+    &lt;div class=&quot;pull-left ngd-v-center margin-1em&quot; 
+      ng-hide=&quot;is1stSlide()&quot;
+      ng-click=&quot;showPrev()&quot;&gt;
+      &lt;i class=&quot;fa fa-4x fa-caret-left&quot;&gt;&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;pull-right ngd-v-center margin-1em&quot; 
+      ng-hide=&quot;isLastSlide()&quot;
+      ng-click=&quot;showNext()&quot;&gt;
+      &lt;i class=&quot;fa fa-4x fa-caret-right&quot;&gt;&lt;/i&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;`
+
+`&lt;div ng-carousel-slides slide=&quot;2&quot; class=&quot;clearfix bottom-stacked&quot;&gt;
+    &lt;img class=&quot;pull-left full-width&quot; src=&quot;http://lorempixel.com/800/600&quot; /&gt;
+    &lt;img class=&quot;pull-left full-width&quot; src=&quot;http://lorempixel.com/801/600&quot; /&gt;
+    &lt;img class=&quot;pull-left full-width&quot; src=&quot;http://lorempixel.com/802/600&quot; /&gt;
+  &lt;/div&gt;`
+
+`&lt;/section&gt;`</code></pre>
+<p>You can check the final Javascript <a href="http://embed.plnkr.co/NukxpGel8I53ZSCwCWob/script.js">here</a>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Someone may say HTML is too long and has too many classes, and someone may say HTML has too many details for functionalities.</p>
+<p>However, in my opinion, I would like to have longer HTML than longer Javascript. The reason is simple. HTML is visible, readable, and fault-tolerant, but Javascript is not visible nor readable, and not fault-tolerant.</p>
+<p>CSS is not visible and readable, but it is very fault-talerant. By making common classes and putting those into HTML, we can make it is as visible and readable.</p>
+<p><strong>HTML First</strong>, That’s my Angular way.</p>
+<p>Allen Kim</p>

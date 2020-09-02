@@ -1,0 +1,66 @@
+<h1 id="angular-make-div-tag-editable">Angular: Make div tag editable</h1>
+<p>Transform div tag to input box using contenteditable attribute and ControlValueAccessor</p>
+<p><img src="https://cdn-images-1.medium.com/max/12032/0*mQIDg5r_i7S6yZ7D" alt="Photo by [Joanna Kosinska](https://unsplash.com/@joannakosinska?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@joannakosinska?utm_source=medium&amp;utm_medium=referral">Joanna Kosinska</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<h3 id="how-does-it-work">How does it work?</h3>
+<ul>
+<li><p>Make text editable using <code>contenteditable</code> attribute</p>
+</li>
+<li><p>When text updated, bind the text value with ngModel using <a href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a></p>
+</li>
+<li><p>It works like normal <code>&lt;input type=”text”&gt;</code> including error validation as well as disabled status</p>
+  <div text-editable required
+    [disabled]="disabled"
+    placeholder="Enter name min. 2, max 5"
+    maxlength="5"
+    minlength="2"
+    pattern="[a-zA-z]+"
+    #nameDiv="ngModel"
+    [(ngModel)]="name">{{name}}></div>
+
+</li>
+</ul>
+<p><a href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a> is an interface that acts as a bridge between the Angular forms API and a native element in the DOM. As usual with other interface, you need to declare the required methods</p>
+<ul>
+<li><p>writeValue</p>
+</li>
+<li><p>registerOnChange</p>
+</li>
+<li><p>registerOnTouched</p>
+</li>
+<li><p>setDisabledState</p>
+</li>
+</ul>
+<p>To explain more,</p>
+<p><code>**writeValue</code>**: Executed when initialized. It sets the ngModel value to the element.</p>
+<pre><code>writeValue(value) {
+  this.el.textContent = value || &#39;&#39;;
+}</code></pre>
+<p><code>**registerOnChange</code>**(fn): Executed when initialized. You can call this function with the text value when text is updated</p>
+<pre><code>@HostListener(&#39;input&#39;) callOnChange(){
+  this.onChange(this.el.textContent);
+}
+registerOnChange(fn) { this.onChange = fn; }</code></pre>
+<p>When the function is called, it updates ngModel value and also sets the following</p>
+<ul>
+<li><p>Error status, which is accessible by ngModel.errors</p>
+</li>
+<li><p>Error classes; ng-prinstine, ng-dirty, ng-touched, ng-valid, ng-invalid</p>
+</li>
+</ul>
+<p><code>**registerOnTouched</code>**: Executed when initialized. You can call this function inside blur event listener</p>
+<pre><code>@HostListener(&#39;blur&#39;) callOnTouched() { this.onTouched(); }
+registerOnTouched(fn) { this.onTouched = fn; }</code></pre>
+<p>When the function is called, it updates ngModel value and also sets error classes; ng-prinstine, ng-dirty, ng-touched</p>
+<p><code>**setDisabledState</code>**: This function is called when element property disabled is changed. You can use this to set attribute or style.</p>
+<pre><code>setDisabledState(val: boolean): void {
+  this.el.setAttribute(&#39;disabled&#39;, String(val));
+  this.el.setAttribute(&#39;contenteditable&#39;, String(!val));
+}</code></pre>
+<p>Here is demo which compares <code>&lt;input&gt;</code> and normal <code>&lt;div&gt;</code> tag with <code>text-editable </code>directive.</p>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

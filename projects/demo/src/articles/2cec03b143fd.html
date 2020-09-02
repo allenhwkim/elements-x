@@ -1,0 +1,62 @@
+<h1 id="angular-build-code-editor-with-ace">Angular: Build Code Editor With ACE</h1>
+<p>What you see is what you get</p>
+<p><img src="https://cdn-images-1.medium.com/max/9002/0*W6DaQXB-8-BEnljG" alt="Photo by [Callie Gibson](https://unsplash.com/@calliebec95?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@calliebec95?utm_source=medium&amp;utm_medium=referral">Callie Gibson</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<h3 id="steps">Steps</h3>
+<ol>
+<li><p>Install and import <code>ngx-ace-wrapper</code></p>
+</li>
+<li><p>Write HTML</p>
+</li>
+<li><p>Handle Events</p>
+</li>
+</ol>
+<h3 id="1-install-and-import-ngx-ace-wrapper">1. Install and import <code>ngx-ace-wrapper</code></h3>
+<pre><code>$ npm install ngx-ace-wrapper --save-dev</code></pre>
+<p>app.module.ts</p>
+<pre><code>import &#39;brace&#39;;
+import &#39;brace/mode/text&#39;;
+import &#39;brace/mode/html&#39;;
+import &#39;brace/mode/javascript&#39;;
+import &#39;brace/mode/css&#39;;
+import &#39;brace/theme/github&#39;;
+import &#39;brace/theme/clouds&#39;;
+import { **AceModule** } from &#39;**ngx-ace-wrapper**&#39;;
+
+[@NgModule](http://twitter.com/NgModule)({
+  bootstrap: [ AppComponent ],
+  declarations: [AppComponent ],
+  imports: [**AceModule**, BrowserModule],
+  exports: []
+})
+export class AppModule {}</code></pre>
+<h3 id="2-write-html">2. Write HTML</h3>
+<pre><code>&lt;ace style=&quot;height:200px&quot;
+  [disabled]=&quot;false&quot; 
+  [mode]=&quot;&#39;html&#39;&quot;
+  [theme]=&quot;&#39;clouds&#39;&quot;
+  [config]=&quot;{}&quot;
+  [(value)]=&quot;content&quot;
+  (blur)=&quot;log($event, &#39;blur&#39;)&quot; 
+  (focus)=&quot;log($event, &#39;focus&#39;)&quot; 
+  (copy)=&quot;log($event, &#39;copy&#39;)&quot; 
+  (paste)=&quot;log($event, &#39;paste&#39;)&quot; 
+  (change)=&quot;log($event, &#39;change&#39;)&quot;
+  (changeSession)=&quot;log($event, &#39;changeSession&#39;)&quot;
+  (changeCursor)=&quot;log($event, &#39;changeCursor&#39;)&quot;
+  (changeSelection)=&quot;log($event, &#39;changeSelection&#39;)&quot;&gt;
+&lt;/ace&gt;</code></pre>
+<p><a href="https://github.com/ajaxorg/ace/wiki/Configuring-Ace">https://github.com/ajaxorg/ace/wiki/Configuring-Ace</a></p>
+<h3 id="3-handle-events">3. Handle Events</h3>
+<pre><code>export class AppComponent{
+  log(event, txt) {
+    console.log(&#39;ace event&#39;, event);
+    document.querySelector(&#39;#log&#39;).value += `${txt}\n`;
+  }
+}</code></pre>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

@@ -1,0 +1,89 @@
+<h1 id="how-to-build-tabs-only-with-css">How To Build Tabs only with CSS</h1>
+<p>There are several ways to provide navigation on a web site. Tabbed navigation is one of them; menu, sidebar, etc.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2100/0*3b2HjB7CUbQ7mNDZ.jpg" alt=""></p>
+<p>The key of implementing tabs without Javascript is to use radio buttons.</p>
+<ol>
+<li><p>We connect radio buttons with labels.</p>
+</li>
+<li><p>When label is clicked, only one radio button is checked as selected.</p>
+</li>
+<li><p>Only matching contents of selected radio button is visible.</p>
+</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*1oWFlVSTp300RY0gdkEbYw.png" alt=""></p>
+<p>Let’s code.</p>
+<h3 id="1-code-html-for-tab-buttons">1. Code HTML for tab buttons</h3>
+<p>We will have input tags with type <code>radio</code> and with the same name as <code>tabs</code> by only making id differently, followed by <code>label</code> tags with attribute <code>for</code> matching to the radio input tag id.</p>
+<pre><code>&lt;input type=&quot;radio&quot; name=&quot;**tabs**&quot; id=&quot;**tab1**&quot; checked /&gt;
+&lt;label for=&quot;**tab1**&quot;&gt;Tab1&lt;/label&gt;
+
+&lt;input type=&quot;radio&quot; name=&quot;**tabs**&quot; id=&quot;**tab2**&quot; /&gt;
+&lt;label for=&quot;**tab2**&quot;&gt;Tab2&lt;/label&gt;
+
+&lt;input type=&quot;radio&quot; name=&quot;**tabs**&quot; id=&quot;**tab3**&quot; /&gt;
+&lt;label for=&quot;**tab3**&quot;&gt;Tab3&lt;/label&gt;
+
+&lt;input type=&quot;radio&quot; name=&quot;**tabs**&quot; id=&quot;**tab4**&quot; /&gt;
+&lt;label for=&quot;**tab4**&quot;&gt;tab4&lt;/label&gt;
+
+&lt;input type=&quot;radio&quot; name=&quot;**tabs**&quot; id=&quot;**tab5**&quot; /&gt;
+&lt;label for=&quot;**tab5**&quot;&gt;tab5&lt;/label&gt;</code></pre>
+<p>The above are the index parts. Now we need contents section.</p>
+<h3 id="2-code-htlm-for-tab-contents">2. Code HTLM for tab contents</h3>
+<pre><code>&lt;div class=&quot;tab content1&quot;&gt;Tab1 Contents&lt;/div&gt;
+&lt;div class=&quot;tab content2&quot;&gt;Tab2 Contents&lt;/div&gt;
+&lt;div class=&quot;tab content3&quot;&gt;Tab3 Contents&lt;/div&gt;
+&lt;div class=&quot;tab content4&quot;&gt;Tab4 Contents&lt;/div&gt;
+&lt;div class=&quot;tab content5&quot;&gt;Tab5 Contents&lt;/div&gt;</code></pre>
+<p>Without any stlying, tab indexes and contents will look like this.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2992/1*dmDI27IAbF899nG7qhz_lw.png" alt=""></p>
+<p>Now, it’s time to make it look like a tab.</p>
+<h3 id="3-style-tabs-for-tab-features">3. Style Tabs for Tab Features</h3>
+<pre><code>input { display: none; }                /* hide radio buttons */
+input + label { display: inline-block } /* show labels in line */
+input ~ .tab { display: none }          /* hide contents */
+
+/* show contents only for selected tab */
+#tab1:checked ~ .tab.content1,
+#tab2:checked ~ .tab.content2,
+#tab3:checked ~ .tab.content3,
+#tab4:checked ~ .tab.content4,
+#tab5:checked ~ .tab.content5 { display: block; }</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2988/1*yKJEXYmUg_bfjrjA5kBbWg.png" alt=""></p>
+<p>Now it looks like tabs and their contents. We want better look-and-feel.</p>
+<h3 id="4-lastly-style-for-look-and-feel">4. Lastly, Style for Look-and-Feel</h3>
+<pre><code>input + label {             /* box with rounded corner */
+  border: 1px solid #999;
+  background: #EEE;
+  padding: 4px 12px;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  top: 1px;
+}
+input:checked + label {     /* white background for selected tab */
+  background: #FFF;
+  border-bottom: 1px solid transparent;
+}
+input ~ .tab {          /* grey line between tab and contents */
+  border-top: 1px solid #999;
+  padding: 12px;
+}</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2992/1*Pl1eN9CQA61jVHL7yeYepQ.png" alt=""></p>
+<p>Here is the working <a href="https://stackblitz.com/edit/medium-tabs">demo</a>.</p>
+<p>I believe that the above technique satisfy your very basic tab requirements. However if you want more than the above, you will need Javascript for customized requirements like the following;</p>
+<ul>
+<li><p>Keyboard navigation between tabs</p>
+</li>
+<li><p>Accessibility requirements to navigate between tabs and its contents</p>
+</li>
+<li><p>Having disabled status</p>
+</li>
+<li><p>Pre-selected tab status</p>
+</li>
+</ul>
+<p>If you want a fully functioning Javascript tabs, take a look at custom elements made for tabs, <a href="https://allenhwkim.github.io/html-custom-elements/#tabs">https://allenhwkim.github.io/html-custom-elements/#tabs</a>.</p>
+<p><img src="https://cdn-images-1.medium.com/max/5468/1*vzpJv1kLFQvWnWFi7ZTTTA.png" alt=""></p>
+<p>Code of above custom element tabs is available at <a href="https://github.com/allenhwkim/html-custom-elements/tree/master/src/tabs">here</a> .</p>
+<p>Do you like VanillaJS coding without a framework? If so, you may also like <a href="https://allenhwkim.github.io/html-custom-elements/#tabs">html custom elements</a>.</p>
+<p><a href="https://allenhwkim.github.io/html-custom-elements/#tabs">**html-custom-elements</a>** is a collection of simple and useful custom elements. It is a lightweight, framework-independent, and works on all modern browsers including IE11.</p>
+<p>Happy coding :)</p>

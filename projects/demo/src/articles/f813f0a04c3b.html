@@ -1,0 +1,69 @@
+<h1 id="angular-build-a-calendar-in-50-lines">Angular: Build A Calendar In 50 lines</h1>
+<p>Minimal Calendar Widget Development</p>
+<p><img src="https://cdn-images-1.medium.com/max/12000/0*lwZedkxyKn2TMNhT" alt="Photo by [Mille Sanders](https://unsplash.com/@millesanders?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@millesanders?utm_source=medium&amp;utm_medium=referral">Mille Sanders</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<p>Building a calendar seems not easy and complicated. This is the instruction how to make it simple.</p>
+<h2 id="steps-to-make-it">Steps to make it.</h2>
+<ol>
+<li><p>Get the first start day of calendar, not day “1”, but the starting Sunday.</p>
+</li>
+<li><p>Gather all 42 days, 6 week days, starting from the starting Sunday</p>
+</li>
+<li><p>Then show these by 7 days a row</p>
+</li>
+<li><p>Extras; style it, add buttons, fire events</p>
+</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*drI5Hfge_BpJnVj49ff2Bg.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*d2WObwOIPuoTW9HBiCiTHg.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*Oo6-pZ03jyZqrjmy4C5_Vg.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*xqLmjDjn8BNBmYc9eI_7_w.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*OgkLtA40BE2k9Y7oMIMTWw.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*g9bRXd0XHAPUgoHn49hs8A.png" alt=""></p>
+<h3 id="1-get-the-first-start-day-of-calendar-not-day-1-but-the-starting-sunday">1. Get the first start day of calendar, not day “1”, but the starting Sunday.</h3>
+<pre><code>getCalendarStartDay(date = new Date) {
+  const [year, month] = [date.getFullYear(), date.getMonth()];
+  const firstDayOfMonth = new Date(year, month, 1).getTime();
+  return this.range(1,7)
+    .map(num =&gt; new Date(firstDayOfMonth - DAY_MS * num))
+    .find(dt =&gt; dt.getDay() === 0)
+}</code></pre>
+<h3 id="2-gather-all-42-days-6-week-days-starting-from-the-starting-sunday">2. Gather all 42 days, 6 week days, starting from the starting Sunday</h3>
+<p><img src="https://cdn-images-1.medium.com/max/4068/1*aQdbya6WR2HqV4XI9BzTMw.png" alt=""></p>
+<pre><code>getAllDays(date = new Date) {
+  const calStartTime =  this.**getCalendarStartDay**(date).getTime();
+  return this.range(0, 41)
+    .map(num =&gt; new Date(calStartTime + DAY_MS * num));
+}</code></pre>
+<h3 id="3-then-show-these-by-7-days-a-row">3. Then show these by 7 days a row</h3>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*d2WObwOIPuoTW9HBiCiTHg.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*Oo6-pZ03jyZqrjmy4C5_Vg.png" alt=""></p>
+<pre><code>&lt;li class=&quot;days&quot; *ngFor=&quot;let day of **days**&quot;&gt; {{day}} &lt;/li&gt;&lt;li *ngFor=&quot;let date of **getAllDays**&quot; (click)=&quot;selected.emit(date)&quot;&gt;
+  {{date | date:&#39;d&#39;}}
+&lt;/li&gt;
+&lt;style&gt;
+  ul { margin: 0; padding: 0; list-style: none;}
+  li {
+    display: inline-block;
+    border: 1px solid #ccc;
+    width: calc(100%/7 - 2px);
+    text-align: center;
+    cursor: pointer;
+  }
+&lt;/style&gt;</code></pre>
+<h3 id="4-extras-style-it-add-buttons-fire-events">4. Extras; style it, add buttons, fire events</h3>
+<p>When a date is clicked, fire <code>selected</code> event</p>
+<pre><code>@Output() selected = new EventEmitter();</code></pre>
+<p>When user want to see different months, provide a feature for it.</p>
+<pre><code>setMonth(inc) {
+  const [year, month] = [this.date.getFullYear(), this.date.getMonth()];
+  this.date = new Date(year, month + inc, 1);
+  this.dates = this.getCalendarDays(this.date);
+}</code></pre>
+<p>Here is the working demo. Please feel free to steal the code.</p>
+<p>Happy Coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

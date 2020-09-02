@@ -6,6 +6,7 @@ import { CheckboxModule } from './checkbox';
 import { ClockModule } from './clock';
 import { CurrencyModule } from './currency';
 import { DialogModule } from './dialog';
+import { FileModule } from './file';
 import { InputModule } from './input';
 import { ListModule } from './list';
 import { MenuModule } from './menu';
@@ -50,6 +51,7 @@ import { A11yOutlineModule } from './a11y-outline';
     ClockModule, 
     CurrencyModule,
     DialogModule,
+    FileModule,
     InputModule,
     ListModule,
     MenuModule,

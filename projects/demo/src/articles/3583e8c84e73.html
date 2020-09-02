@@ -1,0 +1,40 @@
+<h1 id="angular-encrypt--decrypt">Angular: Encrypt | Decrypt</h1>
+<p>Using CryptoJS</p>
+<p><img src="https://cdn-images-1.medium.com/max/11520/0*GeO-t3bQpebArDJR" alt="Photo by [Markus Spiske](https://unsplash.com/@markusspiske?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@markusspiske?utm_source=medium&amp;utm_medium=referral">Markus Spiske</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<pre><code>Tell me {{ &#39;U2F...3yeKpfg=`&#39; | decrypted }} // `I♥U</code></pre>
+<h2 id="steps">Steps:</h2>
+<ol>
+<li><p>Create <code>encrypted</code> /<code>decrypted</code> pipes</p>
+</li>
+<li><p>Declare the pipes in your module</p>
+</li>
+<li><p>Use it</p>
+</li>
+</ol>
+<h3 id="1-create-encrypted-decrypted-pipes">1. Create encrypted /decrypted pipes</h3>
+<h3 id="2-declare-the-pipes-in-your-module">2. Declare the pipes in your module</h3>
+<pre><code>import { **EncryptPipe**, **DecryptPipe**} from &#39;./encrypt-decrypt.pipe&#39;;
+
+@NgModule({
+  imports:      [ BrowserModule, FormsModule ],
+  declarations: [ AppComponent, **EncryptPipe**, **DecryptPipe** ],
+  providers:    [ **EncryptPipe**, **DecryptPipe** ],
+  bootstrap:    [ AppComponent ]
+})
+
+export class AppModule { }</code></pre>
+<h3 id="3-use-it">3. Use it</h3>
+<p>In html</p>
+<pre><code>&lt;div&gt;Encrypted : {{ secret | **encrypted** }}&lt;/div&gt;</code></pre>
+<p>In component</p>
+<pre><code>constructor(**encryptPipe: EncryptPipe**) {
+  console.log(&#39;encrypted&#39;, **encryptPipe.transform**(this.secret))
+}</code></pre>
+<p>Here is the demo</p>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

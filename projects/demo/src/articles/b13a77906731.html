@@ -1,0 +1,33 @@
+<h1 id="getting-started--intersectionobserver">Getting Started — IntersectionObserver</h1>
+<p>The Intersection Observer API provides a way to asynchronously observe changes in the intersection of a target element</p>
+<p>Let’s see the example first. From the following example, the section are changing its opacity when user scrolls around.</p>
+<p>This is specification of IntersectionObserver, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API">https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API</a>, and its compatible with major modern browsers except Safari. However with a simple polyfill, it’s also working with Safari browser.</p>
+<p>To add the polyfill, simply add the following to your page.</p>
+<pre><code>&lt;script src=&quot;[https://unpkg.com/intersection-observer](https://unpkg.com/intersection-observer)&quot;&gt;&lt;/script&gt;</code></pre>
+<p>Let me give you simple steps of how to use IntersectionObserver.</p>
+<ol>
+<li><p>Define observer (What to do when intersection happens).</p>
+<p> function handleIntersect(entries, observer) {
+   entries.forEach(function(entry) {</p>
+<pre><code> entry.target.innerHTML = entry.intersectionRatio * 100 + &quot;% visible&quot;;
+ entry.target.style.opacity = entry.intersectionRatio;</code></pre>
+<p>   });
+ }</p>
+<p> // createObserver();
+ var options = {
+   // root: null,
+   // rootMargin: &quot;0px&quot;,
+   //threshold: 1, // calling callback only once when 100 visible
+   threshold: Array(10).fill().map((v, i) =&gt; i / 10) // to call 10 times
+   //threshold: [0.2, 0.4, 0.6, 0.8, 1.0], // calling callback 5 times
+   //threshold: 0, // calling callback only once when 1px visible
+ };</p>
+<p> var observer = new IntersectionObserver(handleIntersect, options);</p>
+</li>
+<li><p>Define what to observe</p>
+<p> var box1 = document.querySelector(&quot;#my-box-1&quot;);
+ observer.observe(box1);</p>
+</li>
+</ol>
+<p>Hope this makes you feel easy with IntersectionObserver.</p>
+<p>Happy Coding</p>

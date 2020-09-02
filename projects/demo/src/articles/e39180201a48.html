@@ -1,0 +1,73 @@
+<h1 id="angular-animate-with-ngifngfor">Angular: Animate with *ngIf/*ngFor</h1>
+<p>Better display with most-used Angular feature *ngIf/*ngFor</p>
+<p><img src="https://cdn-images-1.medium.com/max/9610/0*igUOFQAPQOcxe07S" alt="Photo by [noor Younis](https://unsplash.com/@nooryounis?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@nooryounis?utm_source=medium&amp;utm_medium=referral">noor Younis</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<p>The best way to have animation is to use CSS.</p>
+<p>However there are also limitations with CSS animation especially;</p>
+<ul>
+<li><p>When you hide an element using <code>display:none</code></p>
+</li>
+<li><p>When you destroy an element using <code>*ngIf</code> and <code>*ngFor</code></p>
+</li>
+</ul>
+<p>To overcome limitations of ideal CSS animation, Angular provide its own animation without using any 3rd party library, <a href="https://angular.io/guide/animations">https://angular.io/guide/animations</a></p>
+<p>Using Angular animation, it’s possible to have your own animation for the most-used structural directives such as <code>*ngIf</code> and <code>*ngFor</code> .</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*suvA0qVS7he2oD8z3o9BHA.gif" alt=""></p>
+<p>Here are the steps to make it.</p>
+<ol>
+<li><p>Create a application-wide sharable animation. <code>app.animation.ts</code></p>
+</li>
+<li><p>Import <code>BrowserAnimationsModule</code> to module. <code>app.module.ts</code></p>
+</li>
+<li><p>Import and define animation in component. <code>app.component.ts</code></p>
+</li>
+<li><p>Apply the animation to html. app.component.html</p>
+</li>
+</ol>
+<h3 id="1-create-a-application-wide-sharable-animation">1. Create a application-wide sharable animation.</h3>
+<pre><code>import { ... } from &#39;[@angular/animations](http://twitter.com/angular/animations)&#39;;
+
+export const **fadeAnimation** = trigger(&#39;**fadeAnimation**&#39;, [
+  transition(&#39;:enter&#39;, [
+    style({ opacity: 0 }), animate(&#39;300ms&#39;, style({ opacity: 1 }))]
+  ),
+  transition(&#39;:leave&#39;,
+    [style({ opacity: 1 }), animate(&#39;300ms&#39;, style({ opacity: 0 }))]
+  )
+]);</code></pre>
+<h3 id="2-import-browseranimationsmodule-to-module">2. Import <code>BrowserAnimationsModule</code> to module.</h3>
+<pre><code>import { ... } from &#39;[@angular/platform-browser](http://twitter.com/angular/platform-browser)/animations&#39;;
+
+[@NgModule](http://twitter.com/NgModule)({
+  imports:      [ BrowserModule, **BrowserAnimationsModule** ],
+  declarations: [ AppComponent ],
+  bootstrap:    [ AppComponent ]
+})</code></pre>
+<h3 id="3-import-animations-and-declare-in-component">3. Import animations and declare in component.</h3>
+<pre><code>import {...} from &#39;./app.animations&#39;;
+
+@Component({
+  ...
+  animations: [**fadeAnimation**, **listAnimation**]})
+export class AppComponent  {
+}</code></pre>
+<h3 id="4-apply-the-animation-to-html-appcomponenthtml">4. Apply the animation to html. app.component.html</h3>
+<pre><code>&lt;b [@fadeAnimation](http://twitter.com/fadeAnimation) *ngIf=&quot;show&quot;&gt;fade animation&lt;/b&gt;
+
+&lt;ul [[@listAnimation](http://twitter.com/listAnimation)]=&quot;items.length&quot; class=&quot;items&quot;&gt;
+  &lt;li *ngFor=&quot;let item of items&quot; class=&quot;item&quot;&gt; {{item}}&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<p>Here is the fully working demo at stackblitz.</p>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><p><a href="https://developers.google.com/web/fundamentals/design-and-ux/animations/css-vs-javascript">https://developers.google.com/web/fundamentals/design-and-ux/animations/css-vs-javascript</a></p>
+</li>
+<li><p><a href="https://stackblitz.com/edit/animate-display-none?file=index.js">https://stackblitz.com/edit/animate-display-none</a></p>
+</li>
+</ul>

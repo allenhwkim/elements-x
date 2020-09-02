@@ -1,0 +1,73 @@
+<h1 id="dynamic-image-loading-with-angular">Dynamic Image Loading With Angular</h1>
+<p>The simplest way to lazy load DOM elements within page with Angular</p>
+<p>Let’s assume that there are 100+ images on your page, and you only see two or three of them when the page loads. Then, why browsers load 100 images when the page initializes?</p>
+<p>There is no way not to load image as long as there are <img> tag in your html. This means you have to change html not to have image tags and change html dynamically to avoid initial image loading. However, changing html dynamically is not an easy task, and it requires a lot of scripting.</p>
+<p>Fortunately, Angular has its own way to do this task using <code>ng-container</code> and <code>ngTemplateOutlet</code>. The way to achieve to this goal is also to use HTML5 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API">IntersectionObserver</a>. I am not going to explain how <code>ng-container</code> and <code>ngTemplateOutlet</code> works. About those, please learn from the following sites; <a href="https://angular.io/guide/structural-directives">Angular — Structural Directives</a> and <a href="https://blog.angular-university.io/angular-ng-template-ng-container-ngtemplateoutlet/">The Complete Guide To Angular Templates</a></p>
+<p><img src="https://cdn-images-1.medium.com/max/3124/1*HW879ydGhKsXkXS4bRzmdg.png" alt=""></p>
+<p>To make a long story short. This is the angular html code, and this is the working demo; <a href="https://ngui-in-view-basic.stackblitz.io/">https://ngui-in-view-basic.stackblitz.io/</a></p>
+<pre><code>&lt;hr/&gt;
+List Of Images
+&lt;hr/&gt;
+
+&lt;div *ngFor=&quot;let i of numArr&quot;&gt;
+  &lt;**ngui-in-view**&gt;
+    &lt;img ***ngIf** src=&quot;https://picsum.photos/800/300?image={{i}}&gt;
+  &lt;/ngui-in-view&gt;
+&lt;/div&gt;</code></pre>
+<p>The full example is here at <a href="https://stackblitz.com/edit/ngui-in-view-basic">https://stackblitz.com/edit/ngui-in-view-basic</a></p>
+<p>The above code will not load any image unless you see it. There are two things to notice; <ngui-in-view> and *ngIf.</p>
+<ul>
+<li><p><code>&lt;ngui-in-view&gt;</code>: A custom component to show the contents only if in view.</p>
+</li>
+<li><p><code>*ngIf</code>: this will generate <code>ng-template</code> internally, which Angular does not render unless condition meets.</p>
+</li>
+</ul>
+<p>First, lets take a look at <code>&lt;ngui-in-view&gt;</code> component.</p>
+<p>To explain the above code,</p>
+<pre><code>ngOnInit(): void {
+  if (isPlatformBrowser(this.platformId)) {
+    this.observer = new
+      IntersectionObserver(this.handleIntersect.bind(this), this.options);
+    this.observer.observe(this.element.nativeElement);
+  }
+}</code></pre>
+<p>When a component is initialized, it will register an IntersectionObserver, so that when element is visible, it calls the callback <code>handleIntersect</code>.</p>
+<pre><code>handleIntersect(entries, observer): void {
+  entries.forEach((entry: IntersectionObserverEntry) =&gt; {
+    if (entry.isIntersecting) {
+      this.inView = true;
+      this.inView$.emit(entry);
+      // this.defaultInViewHandler(entry);
+    } else {
+      this.notInView$.emit(entry);
+    }
+  });
+}</code></pre>
+<p>The observer callback <code>handleIntersect</code> sets <code>inView</code> to <code>true</code> and fires <code>inView$</code> event when the element is visible and fires <code>notInView$</code> event when the element is not visible.</p>
+<pre><code>`@ContentChild(TemplateRef) template: TemplateRef&lt;any&gt;;`</code></pre>
+<p>It’s the reference to <code>&lt;ng-template&gt;</code> tag. In this example it’s <code>*ngIf</code>.
+<code>&lt;div *ngIf&gt;1&lt;div&gt;</code> is the same as <code>&lt;ng-template [ngIf]=&quot;&quot;&gt;1&lt;ng-template&gt;</code> .</p>
+<pre><code>@Component({
+  selector: &#39;ngui-in-view&#39;,
+  template: `
+    &lt;ng-container *ngIf=&quot;inView&quot; [ngTemplateOutlet]=&quot;template&quot;&gt;
+    &lt;/ng-container&gt;
+  `
+})</code></pre>
+<p><code>ng-container</code> will show the template; <code>&lt;img *ngIf src=”https://picsum.photos/800/300?image={{i}}&quot; height=”33%”</code>, specified by <code>ngTemplateOutlet</code> when <code>inView</code> is true, which means when element is visible.</p>
+<p>Visiting <code>app.component.html</code> again, there are 100s of images, and only visible elements will be downloaded and displayed.</p>
+<pre><code>&lt;div *ngFor=&quot;let i of numArr&quot;&gt;
+  &lt;**ngui-in-view**&gt;
+    &lt;img ***ngIf** src=&quot;https://picsum.photos/800/300?image={{i}}&gt;
+  &lt;/ngui-in-view&gt;
+&lt;/div&gt;</code></pre>
+<p>You can see the full code here. <a href="https://stackblitz.com/edit/ngui-in-view-basic">https://stackblitz.com/edit/ngui-in-view-basic</a></p>
+<p>Next article will deal with virtual list, not infinite list, which will expand this concept. You can see the preview of virtual list at <a href="https://stackblitz.com/edit/ngui-in-view-virtual-list">here</a></p>
+<p>Happy coding,
+and happy Angular</p>
+<p>Allen Kim</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

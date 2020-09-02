@@ -1,0 +1,79 @@
+<h1 id="why-not-fire-touch-events">Why not fire touch events?</h1>
+<p>Instead of callbacks or promise?</p>
+<h3 id="instead-of-callbacks-or-promise">Instead of callbacks or promise?</h3>
+<p>TouchUI is a open-source library that fires touch event on a registered element. It doesn’t have any dependencies, and it’s very small, only <strong>4.6 kB minified + gzipped</strong>!</p>
+<ul>
+<li><p><a href="https://unpkg.com/touch-ui@0.2.1/dist/touch-ui.min.js">Minified code</a></p>
+</li>
+<li><p><a href="https://unpkg.com/touch-ui@0.2.1/dist/touch-ui.js">Uncompressed code</a></p>
+</li>
+<li><p><a href="https://github.com/allenhwkim/touch-ui">Browse the source on GitHub</a></p>
+</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p>It’s easy to use. For default behaviour, just include the library and create an instance.</p>
+<pre><code>`new TouchUI();`</code></pre>
+<p>By default, all elements of HTML document is ready to fire touch events; <code>tab</code>, <code>double-tab</code>, <code>triple-tab</code>, <code>hold</code>, <code>tap-and-hold</code>, and <code>double-tap-and-hold</code> . All you need to do is add an event listener to the element.</p>
+<pre><code>`var myEl = document.getElementById(&#39;my-touch&#39;);
+myEl.addEventListener(&#39;tap&#39;, function(e) {
+  console.log(e);
+}`</code></pre>
+<p>There are many events that are supported from this library.</p>
+<p><code>new TouchUI()</code> makes any element of document to fire the following events;</p>
+<ul>
+<li><p><code>tap</code> / <code>double-tap</code> / <code>triple-tap</code></p>
+</li>
+<li><p><code>hold</code> / <code>tap-and-hold</code> / <code>double-tap-and-hold</code></p>
+</li>
+</ul>
+<p><code>TouchUI.draggable(el)</code> makes the element to fire the following events including all<code>new TouchUI()</code> events.</p>
+<ul>
+<li><code>drag-start</code> / <code>drag-move</code> / <code>drag-end</code></li>
+</ul>
+<p><code>TouchUI.droppable(el)</code> makes the element to fire the following events including all<code>new TouchUI()</code> events.</p>
+<ul>
+<li><code>drag-enter</code> / <code>drag-leave</code> / <code>drop</code></li>
+</ul>
+<p>The same applies to <code>TouchUI.swipable(el)</code>.</p>
+<ul>
+<li><code>swipe-left</code> / <code>swipe-right</code> / <code>swipe-up</code> / <code>swipe-down</code></li>
+</ul>
+<p>The same applies to <code>TouchUI.pannable(el)</code>.</p>
+<ul>
+<li><code>pan-start</code> / <code>pan-move</code> / <code>pan-end</code></li>
+</ul>
+<p>The same applies to <code>TouchUI.resizable(el)</code>.</p>
+<ul>
+<li><code>resize-start</code> / <code>resize-move</code> / <code>resize-end</code></li>
+</ul>
+<p>There are some recommendation when you want your HTML touchable. This is not only for this library but also for all touch-desired web pages.</p>
+<ol>
+<li><p><code>meta</code> tag is recommended, it gives more control back to the webpage by disabling unnecessary zooming.</p>
+<p> `<head></p>
+   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+ </head>`
+
+</li>
+</ol>
+<p>2 . CSS property is <code>touch-action </code>css property is recommended as<code>none</code> to the element that you are going to touch. This prevents default vertical or horizontal scrolling to the element.</p>
+<pre><code>.my-touch-area {
+  touch-action: none;
+}</code></pre>
+<h2 id="touchui-examples">TouchUI Examples</h2>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*aENtvaluGW4E4a5t.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*dHyVMKF1R-WVeRw3.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*PcmOn4TPz6Bn4sh89NCQzg.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*qLQvGwMP8NGeqvnW.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*ypnMFdIZM4vD42y7.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*SZdE3F37DjIFr0Sm.png" alt=""></p>
+<h2 id="notes">Notes</h2>
+<p>Why another touch Javascript instead of others? The main reason is to have Javascript event fired for touch events, not callbacks. Also, it is very focused on simplicity and design. In the result,</p>
+<ul>
+<li><p>All events fired by this library work for desktop browsers, of course, as well as mobile browsers.</p>
+</li>
+<li><p>It does not deal with multi-touch events. e.g. two finger zoom, two finger swipe, etc. The reason is that each mobile browser has its own way of dealing with multi-touch events and this library does not make another hacks on the top of the default behaviour, which makes less maintainable and more complicated.</p>
+</li>
+<li><p>It fires a Javascript event without using any callbacks, so that you can add event listener like a vanilla Javascript. This is unlike other touch libraries, which you have to learn their own way to use their own callbacks.</p>
+</li>
+</ul>
+<p>Thanks for reading this. This library written by <a href="https://github.com/allenhwkim">Allen Kim</a>. Please watch <a href="https://github.com/allenhwkim/touch-ui/subscription">github issues</a> for more changes.</p>

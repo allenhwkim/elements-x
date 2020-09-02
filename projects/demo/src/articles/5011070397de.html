@@ -1,0 +1,33 @@
+<h1 id="javascript-convert-string-to-object-value-without-eval">Javascript: Convert String To Object Value Without <code>eval</code></h1>
+<p>This is how to convert &quot;foo.bar.fuz.baz&quot; to the actual value of foo.bar.fuz.baz . If the value is not available, it returns undefined</p>
+<pre><code>function str2Val(str, scope=window) {
+  const keys = str.split(/[\.\[\]&#39;&quot;]/).filter(e =&gt; e);
+  let ret = scope;
+
+  try {
+    keys.forEach(key =&gt; {
+      ret = ret[key];
+    });
+    return ret;
+  } catch(e) {
+    return undefined;
+  }
+}
+
+// The following is for test
+window.foo = {
+  bar: {
+    a: {
+      b: {
+        &#39;c-end&#39;: &#39;hello&#39;
+      }
+    }
+  }
+}
+
+console.log(str2Val(&quot;foo.bar.a.b[&#39;c-end&#39;]&quot;))
+console.log(str2Val(`foo[&#39;bar&#39;].a[&quot;b&quot;][&#39;c-end&#39;]`))
+console.log(str2Val(`bar.a[&quot;b&quot;][&#39;c-end&#39;]`, foo))
+console.log(str2Val(`foo[&#39;error&#39;].a[&quot;b&quot;].c`, window, true))
+console.log(str2Obj(`bar.a[&quot;b&quot;][&#39;c-end&#39;]`, foo))
+console.log(str2Obj(`foo[&#39;error&#39;].a[&quot;b&quot;].c`, window, true))</code></pre>

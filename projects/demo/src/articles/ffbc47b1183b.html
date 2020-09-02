@@ -1,0 +1,151 @@
+<h1 id="how-to-parse-javascript-from-source">How To Parse Javascript From Source</h1>
+<p>This is a short version of how to parse Javascript from source. I am writing this tutorial mainly to explain how ngentest is written…</p>
+<pre><code>**class **Car {
+  constructor(make, model) {
+    **this**.make = make;
+    **this**.model = model;
+  }
+
+  getName() {
+    console.log(&#39;color&#39;, this.make, this.model);
+    **return this**.make + &quot; &quot; + **this**.model;
+  }
+}</code></pre>
+<p>On this tutorial, we will parse <code>car.js</code> to find out the following;</p>
+<ul>
+<li><p>constructor parameters; <code>make</code> and <code>model</code>, and and its statements</p>
+</li>
+<li><p>function name, <code>getName</code>, and its statements</p>
+</li>
+</ul>
+<h3 id="first-parse-javascript-with-acorn">First, Parse Javascript with acorn.</h3>
+<pre><code>const Parser = require(‘acorn’).Parser;
+const fs = require(&#39;fs&#39;);
+
+const source = fs.readFileSync(&#39;./car.js&#39;, &#39;utf8&#39;)
+const parsed = jsParser.parse(source);</code></pre>
+<p>To see the parsed output of the above, please visit <a href="https://astexplore.net,">https://astexplore.net,</a> then copy paste the <code>Car</code> class code. I found the site is very useful when programming.</p>
+<p><img src="https://cdn-images-1.medium.com/max/4024/1*r8ZprbWJfLGO92HGwV3gcg.png" alt=""></p>
+<p>From the parsed info, you see two <code>MethodDefinition</code>s. The first one is <code>constuctor</code> method and the second one is <code>getName</code> method.</p>
+<p><img src="https://cdn-images-1.medium.com/max/3280/1*g9KLUjZnOMmHLdrmci3wIw.png" alt=""></p>
+<p>Before we start, find <code>ClassDeclaration</code> from parsed.</p>
+<pre><code>const classDecl = parsed.body[0];</code></pre>
+<h3 id="first-get-constructor-info">First, Get Constructor info.</h3>
+<p>To get the <code>constructor</code> method definition, you need to find the node that has <code>constructor</code> kind.</p>
+<pre><code>const ctrDef = 
+  classDecl.body.body.find(node =&gt;** node.kind === &#39;constructor&#39;**);</code></pre>
+<p>To get parameters names of the constructor,</p>
+<pre><code>const ctrParameters = **ctrDef.value.params**.map(el =&gt; **el.name**);</code></pre>
+<p>To get code statements of the constructor,</p>
+<pre><code>const ctrStatements = ctrDef.value.body;</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2012/1*eMYReBI0qyttqPWY8H3R7g.png" alt=""></p>
+<h3 id="second-get-getname-method-info">Second, Get ‘getName’ method info.</h3>
+<p>To get the <code>getName</code> method, you need to find the node that has <code>method</code> kind and its <code>name</code> is <code>getName</code></p>
+<pre><code>const methodDef = classDecl.body.body.find(
+  node =&gt; (**node.kind === &#39;method&#39;**) &amp;&amp; (**node.key.name === &#39;getName&#39;**)
+);</code></pre>
+<p>To get parameters names of the method<code>getName</code>,</p>
+<pre><code>const methodParameters = **methodDef.value.params**.map(el =&gt; el.name);</code></pre>
+<p>To get code statements of the constructor,</p>
+<pre><code>const methodStatements = methodDef.value.body;</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*bU0cYzpg07ZU36MrMgMvbw.png" alt=""></p>
+<p>To get further into the type of AST nodes, you can visit <a href="https://github.com/estree/estree/blob/master/es5.md">github estree</a>. Here are the types of AST, Abstract Syntax Tree, nodes.</p>
+<ul>
+<li>BreakStatement</li>
+<li>Identifier</li>
+<li>Literal</li>
+<li>ThisExpression</li>
+<li>ThrowStatement</li>
+<li>ArrayExpression</li>
+<li>ArrayPattern</li>
+<li>ArrowFunctionExpression</li>
+<li>BinaryExpression</li>
+<li>BlockStatement</li>
+<li>CatchClause</li>
+<li>ConditionalExpression</li>
+<li>ExpressionStatement</li>
+<li>ForInStatement</li>
+<li>ForOfStatement</li>
+<li>ForStatement</li>
+<li>FunctionExpression</li>
+<li>IfStatement</li>
+<li>LogicalExpression</li>
+<li>NewExpression</li>
+<li>ObjectExpression</li>
+<li>ReturnStatement</li>
+<li>SpreadElement</li>
+<li>SwitchStatement</li>
+<li>TemplateLiteral</li>
+<li>TryStatement</li>
+<li>UnaryExpression</li>
+<li>UpdateExpression</li>
+<li>VariableDeclaration</li>
+<li>WhileStatement</li>
+<li>WhileExpression</li>
+<li>YieldExpression</li>
+<li>AssignmentExpression</li>
+<li>CallExpression</li>
+<li>MemberExpression</li>
+</ul>
+<p>To summarize, the following is full code from this tutorial. You can simply copy/paste to experience it, e.g. <code>parse-javascript.js</code></p>
+<pre><code>const Parser = require(&#39;acorn&#39;).Parser;
+const fs = require(&#39;fs&#39;);
+
+const parsed = Parser.parse(`
+class Car {
+  constructor(make, model) {
+    this.make = make;
+    this.model = model;
+  }
+
+getName() {
+    console.log(&#39;color&#39;, this.make, this.model);
+    return this.make + &quot; &quot; + this.model;
+  }
+}`);
+
+const classDecl = parsed.body[0];
+
+const ctrDef = classDecl.body.body.find(node =&gt; node.kind === &#39;constructor&#39;);
+const ctrParams = ctrDef.value.params.map(el =&gt; el.name);
+const ctrStmts = ctrDef.value.body;
+
+const methodDef = classDecl.body.body.find(
+  node =&gt; (node.kind === &#39;method&#39;) &amp;&amp; (node.key.name === &#39;getName&#39;)
+);
+const methodParams = methodDef.value.params.map(el =&gt; el.name);
+const methodStmts = methodDef.value.body;
+
+console.log({ ctrParams, ctrStmts, methodParams, methodStmts });</code></pre>
+<p>When you run the above code, you will see the following;</p>
+<pre><code>$ node ./parse-typescript.js
+{ ctrParams: [ &#39;make&#39;, &#39;model&#39; ],
+  ctrStmts:
+   Node {
+     type: &#39;BlockStatement&#39;,
+     start: 40,
+     end: 91,
+     body: [ [Node], [Node] ] },
+  methodParams: [],
+  methodStmts:
+   Node {
+     type: &#39;BlockStatement&#39;,
+     start: 105,
+     end: 200,
+     body: [ [Node], [Node] ] } }</code></pre>
+<p>Javascript parsing has been used to develop <a href="https://github.com/allenhwkim/ngentest">ngentest</a>, which creates Angular unit tests automatically, <a href="https://github.com/allenhwkim/ngentest">https://github.com/allenhwkim/ngentest</a>.</p>
+<p><code>[ngentest</code>](<a href="https://github.com/allenhwkim/ngentest">https://github.com/allenhwkim/ngentest</a>) is a Angular5, 6, 7, 8+ unit test generator for components, directives, services, and pipes, and it is heavily rely on Javascript AST parsing. As you read its ngentest README.md, it compiles Typescript to Javascript. then parse and get the following info.</p>
+<ul>
+<li><p>constructor param data</p>
+</li>
+<li><p>provider mock data</p>
+</li>
+<li><p>accessor tests</p>
+</li>
+<li><p>function tests</p>
+</li>
+<li><p>imports statements info.</p>
+</li>
+</ul>
+<p>Hope this helps someone.</p>
+<p>Happy coding :)</p>

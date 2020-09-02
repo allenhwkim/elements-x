@@ -1,0 +1,88 @@
+<h1 id="angular-build-tabs-with-no-js">Angular: Build Tabs With no JS.</h1>
+<p>No need to use JS with Angular for Tabs</p>
+<p><img src="https://cdn-images-1.medium.com/max/6144/0*YQFL9nhONW77JXoF" alt="Photo by [Florencia Viadana](https://unsplash.com/@florenciaviadana?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@florenciaviadana?utm_source=medium&amp;utm_medium=referral">Florencia Viadana</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<p>These are the steps.</p>
+<ol>
+<li><p>Have your HTML ready</p>
+</li>
+<li><p>Control selected tab with <code>tab</code> variable</p>
+</li>
+<li><p>Style it</p>
+</li>
+</ol>
+<p>This is the final output.</p>
+<h3 id="first-save-your-html-ready">First, save your HTML ready</h3>
+<pre><code>&lt;div class=&quot;tabs&quot;&gt;
+  &lt;div class=&quot;index&quot;&gt;
+    &lt;div&gt;Tab 1&lt;/div&gt;
+    &lt;div&gt;Tab 2&lt;/div&gt;
+    &lt;div&gt;Tab 3&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;contents&quot;&gt;
+    &lt;div&gt; Tab 1 contents. Hello &lt;/div&gt;
+    &lt;div&gt; Tab 2 contents. Angular &lt;/div&gt;
+    &lt;div&gt; Tab 3 contents. Tabs &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h3 id="second-control-selected-tab-with-tab-variable">Second, control selected tab with <code>tab</code> variable</h3>
+<pre><code>&lt;div class=&quot;tabs&quot;&gt;
+  &lt;div class=&quot;index&quot;&gt;
+    &lt;div **tabindex=&quot;0&quot; role=&quot;tab&quot;**
+      **(click)=&quot;tab=1&quot; (keyup.enter)=&quot;tab=1&quot;**
+      **[ngClass]=&quot;{active: tab===1}&quot;**&gt;Tab 1&lt;/div&gt;
+    &lt;div tabindex=&quot;0&quot; role=&quot;tab&quot;
+      (click)=&quot;tab=2&quot; (keyup.enter)=&quot;tab=2&quot;
+      [ngClass]=&quot;{active: tab===2}&quot;&gt;Tab 2&lt;/div&gt;
+    &lt;div tabindex=&quot;0&quot; role=&quot;tab&quot;
+      (click)=&quot;tab=3&quot; (keyup.enter)=&quot;tab=3&quot;
+      [ngClass]=&quot;{active: tab===3}&quot;&gt;Tab 3&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;contents&quot;&gt;
+    &lt;div ***ngIf=&quot;tab === 1&quot;**&gt; Tab 1 contents. Hello &lt;/div&gt;
+    &lt;div *ngIf=&quot;tab === 2&quot;&gt; Tab 2 contents. Angular &lt;/div&gt;
+    &lt;div *ngIf=&quot;tab === 3&quot;&gt; Tab 3 contents. Tabs &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<ul>
+<li><p><code>tabindex=&quot;0&quot;</code> for keyboard navigation to work</p>
+</li>
+<li><p><code>role=&quot;0&quot;</code> for accessibility</p>
+</li>
+<li><p><code>(click)=”tab=X”</code> and<code> (keyup.enter)=”tab=2&quot;</code> to set active tab</p>
+</li>
+<li><p><code>[ngClass]=&quot;{active: tab === X}&quot;</code> to display active tab.</p>
+</li>
+<li><p><code>*ngIf=&quot;tab === X&quot;</code> to display active contents only</p>
+</li>
+</ul>
+<h3 id="third-style-it">Third, style it</h3>
+<pre><code>.tabs {
+  .index {
+    display: flex;
+    * {
+      border: 1px solid #ccc;
+      background: #EEE;
+      padding: 4px 12px;
+      border-radius: 4px 4px 0 0;
+      position: relative;
+      top: 1px;
+    }
+    .active {
+      background: #FFF;
+      border-bottom: 1px solid transparent;
+    }
+  }
+  .contents {
+    border: 1px solid #ccc;
+    min-height: 120px;
+    padding: 12px;
+  }
+}</code></pre>
+<p>Done! no more.</p>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

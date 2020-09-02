@@ -12,6 +12,7 @@ import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-scss';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes : Routes = [
   { path: 'components', component: ComponentsIndexComponent },
@@ -24,6 +25,7 @@ const routes : Routes = [
   imports: [
     BrowserModule,
     ElementsExtendedModule,
+    HttpClientModule,
     RouterModule.forRoot(routes)
   ],
   declarations: [

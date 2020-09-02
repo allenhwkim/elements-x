@@ -1,0 +1,41 @@
+<h1 id="angular-trap-focus-with-in-a-block">Angular: Trap focus with in a block</h1>
+<p>trapFocus directive</p>
+<p><img src="https://cdn-images-1.medium.com/max/9184/0*506JOLnHhbe41yiA" alt="Photo by [me_13](https://unsplash.com/@me_13?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@me_13?utm_source=medium&amp;utm_medium=referral">me_13</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<p>This is how to instruction of building a directive which trap focus within a block, for example, not leaving dialog until it’s closed.</p>
+<h3 id="steps">Steps</h3>
+<ol>
+<li><p>Create <code>TrapFocusDirective</code></p>
+</li>
+<li><p>Use it.</p>
+</li>
+</ol>
+<h3 id="1-create-trapfocusdirective">1. Create <code>TrapFocusDirective</code></h3>
+<p>The principle for it is simple</p>
+<ol>
+<li><p>When <code>Shift-Tab</code> pressed on the first element, focus the last element.</p>
+</li>
+<li><p>When <code>Tab</code> pressed on the last element, focus the first element.</p>
+</li>
+</ol>
+<h3 id="2-use-it">2. Use It.</h3>
+<p>In your module, e.g.,<code> app.module.ts</code></p>
+<pre><code>import { **TrapFocusDirective** } from &#39;./trap-focus.directive&#39;;
+
+@NgModule({
+  imports: [ ... ],
+  declarations: [ ..., **TrapFocusDirective** ],
+  ..
+});
+export class AppModule { }</code></pre>
+<p>In your html, e.g., <code>app.component.html</code></p>
+<pre><code>&lt;fieldset **trapFocus** &gt;
+  .....
+&lt;/fieldset&gt;</code></pre>
+<p>Here is the demo.</p>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

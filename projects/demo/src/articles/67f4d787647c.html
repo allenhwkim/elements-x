@@ -1,0 +1,75 @@
+<h1 id="angular-monitor-element-is-in-viewport-after-scrolling">Angular: Monitor element is in viewport after scrolling</h1>
+<p>Let’s say you need to display a thousand image.</p>
+<p><img src="https://cdn-images-1.medium.com/max/8544/0*jy3S4kbxU9-iPjkX" alt="Photo by [Paul Hermann](https://unsplash.com/@plhrmnn?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@plhrmnn?utm_source=medium&amp;utm_medium=referral">Paul Hermann</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<p>Let’s say you need to display a thousands of images.</p>
+<pre><code>&lt;div class=”img-container” *ngFor=”let el of images; let i=index”&gt;
+  &lt;img src=”https://picsum.photos/600/300?image={{i}}&quot;&gt;
+&lt;/div&gt;</code></pre>
+<p>What’s the issue with the above code to display 1000 images?</p>
+<p>The problem of the above code is it actually download 1000 images and make it ready to display. When you inspect the network activity, you can actually see it.</p>
+<p><img src="https://cdn-images-1.medium.com/max/5748/1*UAZ7MNOjq7KnHAs49ZLgPg.png" alt="Too many DOM elements are loading even though users don’t see those."><em>Too many DOM elements are loading even though users don’t see those.</em></p>
+<p>What you really want is to download images only when you are able to see those. The following is an Angular idea to do it. <code>*inView</code> only download image only if the image is in viewport.</p>
+<p><img src="https://cdn-images-1.medium.com/max/5748/1*_flLHMlTAzfoIwARCK0eJg.png" alt="The right amount of DOM elements, users can see, are loading."><em>The right amount of DOM elements, users can see, are loading.</em></p>
+<pre><code>&lt;div class=”img-container” *ngFor=”let el of images; let i=index”&gt;
+  &lt;img ***inView** src=”https://picsum.photos/600/300?image={{i}}&quot;&gt;
+&lt;/div&gt;</code></pre>
+<p>The trick to do this is to use Angular structural directive, and make it to render only if the <code>img</code> tag is in viewport. How can you check if it’s in viewport? Luckily, we have <code>[IntersectionObserver</code>](<a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API">https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API</a>) , that allows to check the element is intersect with viewport or not.</p>
+<p>Based on caniuse.com, IntersectionObserver is working on almost all browsers except Internet Explorer. To make it to work on IE, use this ployfill, <a href="https://github.com/w3c/IntersectionObserver/tree/master/polyfill">https://github.com/w3c/IntersectionObserver/tree/master/polyfill</a></p>
+<p><img src="https://cdn-images-1.medium.com/max/4508/1*L9qQrNX3UmHhBGg2cwA4cw.png" alt=""></p>
+<p>The following is the summarized code of this directive, which has less than 50 lines of code.</p>
+<h3 id="constructor">Constructor</h3>
+<pre><code>  constructor(
+    private vcRef: ViewContainerRef,
+    private tplRef: TemplateRef&lt;any&gt;
+  ) {}</code></pre>
+<p>With <code>&lt;div *inView&gt;A&lt;/div&gt;</code>, it can be converted to <code>&lt;ng-template [inView]&gt;&lt;div&gt;A&lt;/ng-template&gt;</code>.</p>
+<p>With<code>&lt;ng-template [inView]&gt;&lt;div&gt;A&lt;/ng-template&gt;</code>, you may match to <code>[inView]</code> to ViewContainerRef and <code>ng-template</code> to TemplateRef.</p>
+<h3 id="ngafterviewinit"><strong>ngAfterViewInit</strong></h3>
+<pre><code>ngAfterViewInit() {
+    const commentEl = this.vcRef.element.nativeElement;
+    const elToObserve = commentEl.parentElement;
+    this.setMinWidthHeight(elToObserve);
+
+    const observer = new IntersectionObserver(entries =&gt; {
+        entries.forEach(entry =&gt; {
+          this.renderContents(entry.isIntersecting)
+        });
+      }, {threshold: [0, .1, .9, 1]});
+    observer.observe(elToObserve);
+  }</code></pre>
+<ul>
+<li><p><code>this.vcRef.element.nativeElement</code> :<code>&lt;ng-template&gt;</code> is expressed as a comment when it is rendered; <code>&lt;!--container--&gt;</code></p>
+</li>
+<li><p>Because you cannot register IntersectionObserver to a comment, which is not an element, you need to observe its parent element.</p>
+</li>
+<li><p>If the parent element does not have any width or height, you need to set minimum width and height to prevent all <code>*inView</code> elements rendered at the same time.</p>
+</li>
+<li><p><code>observer.observe(elToObserve)</code> will monitor if it is in viewport or not, and if it’s in viewport, it render HTML contents.</p>
+</li>
+</ul>
+<h3 id="rendercontents">renderContents</h3>
+<pre><code>  renderContents(isInView) {
+    if (isInView &amp;&amp; !this.alreadyRendered) {
+      this.vcRef.clear();
+      this.vcRef.createEmbeddedView(this.tplRef);
+      this.alreadyRendered = true;
+    }
+  }</code></pre>
+<p>using <code>ViewContainerRef#createEmbeddedView</code> , it renders HTML contents ONLY if not rendered yet.</p>
+<p>To see it working, follow stackblitz link</p>
+<p>Happy Coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>
+<h2 id="references">References:</h2>
+<ul>
+<li><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API">https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API</a></p>
+</li>
+<li><p><a href="https://medium.com/allenhwkim/simple-lazy-loading-with-angular-716dd3b174a">https://medium.com/allenhwkim/simple-lazy-loading-with-angular-716dd3b174a</a></p>
+</li>
+<li><p><a href="https://medium.com/@allenhwkim/angular-create-my-own-ngif-bb4fc534cbe">https://medium.com/@allenhwkim/angular-create-my-own-ngif-bb4fc534cbe</a></p>
+</li>
+</ul>

@@ -1,0 +1,90 @@
+<h1 id="git-how-to-rollback-pushed-changes">Git, How To Rollback Pushed Changes</h1>
+<p>This is how you rollback your recent commits to a certain point using git revert.</p>
+<p>Let’s say you have the following log.</p>
+<pre><code>$ git log
+
+commit **b1fcde85ef02de679d1246a6caf402d1f9290847**
+0.7.0
+
+commit **db6e674dbebba85d510d33de2d0fa24ecce55d2e**
+upgraded with browser mode
+
+commit **2ff779489b069e00bfb48aeb9c70716f9009fb2a**
+added more commands and refactored commands; see, go to, and added src/web for browser mode
+
+commit 3273827504fe1fb754e030786aa7bd5a2c6b141a
+0.6.2
+
+commit 543e63da81d1f13ce977a39313f33190f755a436
+refactored with file names and variable names
+
+commit 21ce08b576c4e6e6d20c769dc60cc1d3c7d4d400</code></pre>
+<p>You want to go back to 0.6.2, which is commit <code>3273875</code>.</p>
+<p>From the above, you want to revert the following commits;</p>
+<pre><code>b1fcde85ef02de679d1246a6caf402d1f9290847
+db6e674dbebba85d510d33de2d0fa24ecce55d2e
+2ff779489b069e00bfb48aeb9c70716f9009fb2a</code></pre>
+<p>Then, <code>git revert</code> these commits.</p>
+<pre><code>$ git revert b1fcde85ef02de679d1246a6caf402d1f9290847
+$ git revert db6e674dbebba85d510d33de2d0fa24ecce55d2e
+$ git revert 2ff779489b069e00bfb48aeb9c70716f9009fb2a</code></pre>
+<p>Now your git log will look like the following, which results in 3 commit messages.</p>
+<pre><code>$ git log**
+commit 5d926a8fb66cd596c18aaa78e152d5182017a530
+**Revert &quot;added more commands and refactored commands; see, go to, amd addes src/web for browser mode&quot;
+
+This reverts commit 2ff779489b069e00bfb48aeb9c70716f9009fb2a.
+
+**commit 04364fa9dd2150e25652364accb22efda5d36f18
+**Revert &quot;upgraded with browser mode&quot;
+
+This reverts commit db6e674dbebba85d510d33de2d0fa24ecce55d2e.
+
+**commit e766d09dd871f303a3aba683b569e8daad092612
+**Revert &quot;0.7.0&quot;
+
+This reverts commit b1fcde85ef02de679d1246a6caf402d1f9290847.
+
+commit b1fcde85ef02de679d1246a6caf402d1f9290847
+0.7.0</code></pre>
+<p>However, you don’t like so many revert commits. You want a single commit for all 3 reverts.</p>
+<p>To merge commit messages, use <code>git rebase -i</code>. <code>-i</code> means ‘interactive’.</p>
+<pre><code>$ git rebase -i
+**pick** e766d09 Revert &quot;0.7.0&quot;
+**pick** 04364fa Revert &quot;upgraded with browser mode&quot;
+**pick** 5d926a8 Revert &quot;added more commands and refactored commands; see, go to, amd addes src/web for browser mode&quot;</code></pre>
+<p>To make a single commit message, change <code>pick</code> to <code>squash</code> except the first one.</p>
+<pre><code>**pick** e766d09 Revert &quot;0.7.0&quot;
+**squash** 04364fa Revert &quot;upgraded with browser mode&quot;
+**squash** 5d926a8 Revert &quot;added more commands and refactored commands; see, go to, amd addes src/web for browser mode&quot;</code></pre>
+<p>When you save this commit message, you will see one combined revert commit.</p>
+<pre><code>$ git log
+**commit 48e2c0577ded94bc54ff4f3df677d5ddfeccb2bf**
+
+Revert &quot;0.7.0&quot;
+
+This reverts commit b1fcde85ef02de679d1246a6caf402d1f9290847.
+
+Revert &quot;upgraded with browser mode&quot;
+
+This reverts commit db6e674dbebba85d510d33de2d0fa24ecce55d2e.
+
+Revert &quot;added more commands and refactored commands; see, go to, amd addes src/web for browser mode&quot;
+
+This reverts commit 2ff779489b069e00bfb48aeb9c70716f9009fb2a.
+
+commit b1fcde85ef02de679d1246a6caf402d1f9290847
+0.7.0
+
+commit db6e674dbebba85d510d33de2d0fa24ecce55d2e
+upgraded with browser mode
+
+commit 2ff779489b069e00bfb48aeb9c70716f9009fb2a
+added more commands and refactored commands; see, go to, amd addes src/web for browser mode
+
+commit 3273827504fe1fb754e030786aa7bd5a2c6b141a
+0.6.2</code></pre>
+<p>That’s it. Now compare between current status and 0.6.2 version, <code>3273827</code>.</p>
+<pre><code>$ git diff HEAD..`3273827
+$ `</code></pre>
+<p>You will see nothing different. Rollback successful!!!</p>

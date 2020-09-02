@@ -1,0 +1,157 @@
+<h1 id="why-angular-js-so-difficult">Why Angular JS So Difficult</h1>
+<p>Many people say “AngularJS is Amazing”, but they also say “AngularJS is Hard As Hell”. I have been learning and using AngularJS for long…</p>
+<p>Did I say “<strong>Easy</strong>”? Yes I did. You may say “No, the learning curve of AngularJS is very steep, and it’s hard to learn”.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*Le4NWnMPwFOvu5ea.png" alt=""></p>
+<p><a href="http://www.bennadel.com/blog/2439-my-experience-with-angularjs-the-super-heroic-javascript-mvw-framework.htm">Image from bennadel.com</a></p>
+<p>Based on my experience, it’s hard because we still think HTML is not expressive enough for business requirements and all dynamic functionalities. Once we change our mind that HTML has full expression including dynamic features, it gets easier to learn AngularJS.</p>
+<p>How come? HTML is static and has limited tags and attributes!!! period!! It’s never been used for behavioural functionalities. Yes, it has been. However, AngularJS changes HTML behavioural as defined, yes, “Behavioural As Defined”, and again, “Behavioural As Defined”.</p>
+<h2 id="1-html-is-behavioural-as-defined">1. HTML is Behavioural As Defined</h2>
+<p>Let’s see HTML code some without AngularJS.</p>
+<pre><code>`&lt;button onclick=&quot;alert(‘clicked’)&quot;&gt;Click Here&lt;/button&gt;`</code></pre>
+<p>It is a very simple input field, and it’s also behavioural. Because;</p>
+<ul>
+<li><p>Button responds to your click</p>
+</li>
+<li><p>When clicked, it show alert window with message.</p>
+</li>
+<li><p>It’s not static. It responds to your action.</p>
+</li>
+</ul>
+<p>Many would say that “onclick” part is a behaviour. Thus, we need to put that into Javascript file and collect all behavioural separate from documentation part. Although, the above code is not perfect, it is totally W3C compliant, and it is valid code.</p>
+<p>In fact, HTML is already behaviour-oriented. For example;</p>
+<ul>
+<li><p><strong>href</strong> attribute
+It respond to your click and redirect your page to the link given</p>
+</li>
+<li><p><strong>select</strong> tag
+It hides all available options except the selected one, but when it is clicked, it shows all options and hides back when you selected it again , or clicked in other part of document.</p>
+</li>
+<li><p><strong>radio</strong> button
+It marks the clicked one as selected, and unmarks when other radio button is clicked.</p>
+</li>
+</ul>
+<p>AngularJS expands this behavioural part of HTML by using its own framework. Let’s make the above code into AngularJS code.</p>
+<pre><code>`&lt;button ng-click=&quot;whatever()&gt;Click Here&lt;/button&gt;`</code></pre>
+<p>As we all know, we have been avoiding to code like the above because;</p>
+<ol>
+<li><p>“whatever()” is defined in global scope, and maintaining functions in global scope could lead us to an unmanageable code. Bad! In fact, “whatever()” is not defined in global scope. It’s defined within the given controller or directive scope. So, code will be well organized and easy to maintain.</p>
+</li>
+<li><p>“whatever()” is a behaviour. We need to code all behavioural part into a separate file. As I mentioned above, HTML is already behaviour-oriented. i.e. href, select, radio button, etc. HTML is NOT an XML, nor pdf. HTML is not a document, but a language that respond to users’ actions. Coding behaviour into HTML is totally ok.</p>
+</li>
+<li><p>“ng-click” is NOT a valid attribute. Yes it is. “data-ng-click”, “data-foo”, “data-bar”, these are all valid HTML5 attribute.</p>
+</li>
+</ol>
+<h2 id="2-angularjs-is-a-framework-not-a-library">2. AngularJS is a Framework Not a Library</h2>
+<p>Martin Folwer discusses the difference between a library and a framework in his article, <a href="http://martinfowler.com/bliki/InversionOfControl.html">Inversion of Control</a></p>
+<p>A library is essentially a set of functions that <strong>you call to execute</strong>, and each call does some work and returns control to you.</p>
+<p>A framework embodies some abstract design, with more behaviour built in. In order to use a framework, you need to insert your behaviour into various places. The <strong>framework calls your code</strong> at these points.</p>
+<p>In summary, your code calls a library but a framework calls your code.</p>
+<p>With AngularJS, you write HTML code, and let AngularJS pick up your code and run it. Again, you are just declaring what needs to be done, and does not care about how it is done.</p>
+<p>Of course, if you are a directive builder, you need to get into the details of how it is done, but as an AngularJS user, you really don’t care how default directives are executed.</p>
+<p>What other libraries do you know?</p>
+<ul>
+<li><p>jQuery</p>
+</li>
+<li><p>BackboneJS</p>
+</li>
+<li><p>MooTools</p>
+</li>
+<li><p>Kinetic.js</p>
+</li>
+<li><p>Three.js</p>
+</li>
+</ul>
+<p>Yes, jQuery is a library, and BackboneJS is a library.</p>
+<h2 id="3-angularjs-is-declarative-not-imperative">3. AngularJS is Declarative Not Imperative</h2>
+<p><strong>Imperative Programming Example</strong></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*jTHXI2oafqKz6w0P.png" alt=""></p>
+<p>Let’s look at the baby on the left side. To make him eat and grow well, we need to tell every single instruction to get the job done. Open mouth, watch this, swallow it, don’t spit, don’t drop.. etc.</p>
+<p>According to <a href="http://en.wikipedia.org/wiki/Imperative_programming">Wikipedia Definition</a>, imperative programming is focused on describing how a program operates. Imperative programming is telling it how to do something, and as a result, what you want to happen will happen.</p>
+<p>The following HTML is to show a Google map in imperative programming. It’s not only showing a map, but it does more;</p>
+<ol>
+<li><p>Add a marker</p>
+</li>
+<li><p>When marker is clicked, it zooms in</p>
+</li>
+<li><p>When map center is changed, it center back to the marker.</p>
+</li>
+</ol>
+<p>This is the html.</p>
+<pre><code>`&lt;div id=&quot;map-canvas&quot;&gt;&lt;/div&gt;`</code></pre>
+<p>To make this happen, you need to tell the HTML what to do in every single step, and the following is the Javascript required to make it happen.</p>
+<pre><code>`function initialize() {
+  var mapOptions = { ... OMITTED .. }`
+
+`  var map = new google.maps.Map(document.querySelector(&#39;map-canvas&#39;),
+      mapOptions);`
+
+`  var marker = new google.maps.Marker({ ... OMITTED .. });`
+
+`  google.maps.event.addListener(map, &#39;center_changed&#39;, function() {
+     ... OMITTED ..
+  });`
+
+`  google.maps.event.addListener(marker, &#39;click&#39;, function() {
+     ... OMITTED ..
+  });
+}`</code></pre>
+<p>You can see the complete code <a href="https://developers.google.com/maps/documentation/javascript/examples/event-simple">here</a>. With imperative programming, you need to tell every single step what needs to be done and how it has to be done.</p>
+<p><strong>Declrative Programming Example</strong></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*DupCql7ZwrcRnFCs.png" alt=""></p>
+<p>The boy on the left side can eat by himself. We don’t need to tell him how to eat food. The only thing we need to do is give him food, of course, good healthy food.</p>
+<p>The following code is AngularJS way of how we define a map in html. Unlike a simple <code>div</code> tag, it has all required behaviour in HTML, and HTML is declarative enough to show what needs to be done.</p>
+<pre><code>`&lt;google-map zoom=&quot;4&quot; center=&quot;-25.363882, 131.044922&quot; 
+   on-center-changed=&quot;recenterToMarker()&quot;&gt;
+  &lt;marker position=&quot;-25.363882, 131.044922&quot; 
+     on-click=&quot;zoomCloser()&quot; 
+     title=&quot;Click to zoom&quot;&gt;
+  &lt;/marker&gt; 
+&lt;/google-map&gt;`</code></pre>
+<p>These are what needs to be done described on the above html;</p>
+<ol>
+<li><p>Level of zoom</p>
+</li>
+<li><p>Centre of map</p>
+</li>
+<li><p>What needs to be done when map centre is changed</p>
+</li>
+<li><p>Marker and its title</p>
+</li>
+<li><p>Position of the marker</p>
+</li>
+<li><p>What needs to be done when the marker is clicked.</p>
+</li>
+</ol>
+<p>To see the fully working example of that code, please visit <a href="http://ngmap.github.io/events.html#/event-simple#event-simple">here</a></p>
+<h2 id="angularjs-is-html-centric">AngularJS is HTML-centric</h2>
+<p><strong>Not MVC-patterned</strong></p>
+<p>So many years, we are so accustomed to MVC pattern, even in HTML/Javascript front-end development. It worked for many years with BackboneJS and jQuery MVC implementations. However, unless you are very good at designing and maintaining your code cleanly, it is hard to organize and make it easy to maintain in MVC-patterned way.</p>
+<p>The reason is simple, the interactions between user and web page does not start from controller, the starting point of MVC-pattern. As you see in the diagram below, in MVC-pattern, user interaction are starting from controller, not view(HTML). However, in reality, user talks to HTML, and everything starts from HTML, not a controller that overlooks HTML.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*axdumkciDFOIyxjS.png" alt=""></p>
+<p>In AngularJS, this changes. Everything is HTML-centric;</p>
+<ol>
+<li><p>User interactions starts from HTML</p>
+</li>
+<li><p>Scope is within HTML</p>
+</li>
+<li><p>Functionality is exposed out to HTML</p>
+</li>
+<li><p>Coding starts from HTML</p>
+</li>
+</ol>
+<p><img src="https://cdn-images-1.medium.com/max/2000/0*KlUEOBCabrIHtgU7.png" alt=""></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I have started this article with the title of “Why AngularJS So Difficult”, and my answer to it is, because <strong>“We are still thinking HTML/Javascript-Together”</strong>, and we are not really thinking “HTML-first”. All three sections mentioned in this article are all about HTML.</p>
+<ol>
+<li><p>HTML is Dynamic As Defined</p>
+</li>
+<li><p>AngularJS is Declarative Not Imperative</p>
+</li>
+<li><p>AngularJS is HTML-centric</p>
+</li>
+</ol>
+<p>Do you really think “HTML can express everything”? If you can answer it as yes, AngularJS gets easier.</p>
+<p>Then, what is Javascript for AngularJS? It is only, only to make HTML work. So, define HTML declarative enough, then make that HTML work with Javascript.</p>
+<p>AngularJS 2.0 is on its way, and it is not a refactored version of 1.3, but a rewritten from the scratch with ES6. Everything will change; controller, scope, direct injection, and even coding style. However, one thing does not change in 2.0 is “HTML-centric Principle”.</p>
+<p>Next, I will write about AngularJS coding style, which is somewhat difficult for jQuery or vanilla Javascript developers.</p>
+<p>Allen Kim</p>

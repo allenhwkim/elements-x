@@ -8,6 +8,7 @@ export const CONFIG = {
     clock: {  icon: 'fas fa-clock' , text: 'Clock'},
     currency: { icon: 'fas fa-won-sign', text: 'Currency'},
     dialog: { icon: 'fas fa-window-maximize', text: 'Dialog'},
+    file: { icon: 'fas fa-upload', text: 'File'},
     input: { icon: 'fas fa-keyboard', text: 'Input'},
     list: {  icon: 'fas fa-list', text: 'List'},
     menu: { icon: 'fas fa-sitemap', text: 'Menu'},

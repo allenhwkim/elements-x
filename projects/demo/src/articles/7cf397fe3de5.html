@@ -1,0 +1,122 @@
+<h1 id="how-to-build-a-calendar-widget">How to Build a Calendar Widget</h1>
+<p>This tutorial is to build a calendar section with minimal Javascript. This is a normal calendar for a month.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*Rf_GokoGvWxZ8-9ZYTXGWg.png" alt=""></p>
+<p>As you see the calendar above, a calendar dates are;</p>
+<ol>
+<li><p>Previous month days</p>
+</li>
+<li><p>This month days</p>
+</li>
+<li><p>Next month days</p>
+</li>
+</ol>
+<p>When we add all these three group of days, the number of days are always 42 days because we show 6 weeks with 7 days per week.</p>
+<p>Thus, if we know all 42 days of a month, we can easily build a calendar.</p>
+<p>Let’s do one by one.</p>
+<h3 id="first-get-days-of-the-previous-month-for-this-month-calendar">First, get days of the previous month for this month calendar</h3>
+<p>For example, if you want March 2019 calendar, this function will return days for this portion.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*GNUzjr2iy-eNopOP9dMeUg.png" alt=""></p>
+<pre><code>function getLeadingDays(date, staDay = 0) { // 0: sunday
+  const ret = [];
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const firstWeekday = new Date(year, month, 1).getDay();
+  const days = (firstWeekday + 7) - (staDay +7) - 1;
+  for (let i = days * -1; i &lt;= 0; i++) {
+    ret.push(new Date(year, month, i).getDate());
+  }
+  return ret;
+}
+
+// getLeadingDays(new Date(&#39;2019-02-15&#39;)) // [27, 28, 29, 30, 31]
+// getLeadingDays(new Date(&#39;2019-03-15&#39;)) // [24, 25, 26, 27, 28]</code></pre>
+<h3 id="secondly-get-days-for-this-month">Secondly, get days for this month.</h3>
+<p>We just need days starting from 1st to end day of the month.</p>
+<pre><code>function getMonthDays(date) {
+  const ret = [];
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const lastDay = new Date(year, month+1, 0).getDate();
+  for (let i = 1; i &lt;= lastDay; i++) ret.push(i);
+  return ret;
+}
+
+// getMonthDays(new Date(&#39;2019-02-15&#39;)) // [1,2...28]
+// getMonthDays(new Date(&#39;2019-03-15&#39;)) // [1,2,...31]</code></pre>
+<h3 id="third-get-days-of-the-next-month-for-this-month-calendar">Third, get days of the next month for this month calendar</h3>
+<p>To get the next month days, you just fill out blanks.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*Eqzmz2I3soZ81kEnCcGgSA.png" alt=""></p>
+<pre><code>function getTrailingDays(leadingDays, monthDays) {
+  const ret = [];
+  const days = 42 - (leadingDays.length + monthDays.length);
+  for (let i = 1; i &lt;= days; i++) ret.push(i);
+  return ret;
+}
+
+// For March 2019, it will be 42 days
+//  minus 5 days for the previous month days, 24th .. 28th,
+//  miuns, 31 days for days of this month
+// Thus, It would be 6 days. (42 - 5 - 31)</code></pre>
+<p>Now you have three group of days, total 42 days. Let’s code html to show all 42 days.</p>
+<pre><code>&lt;div class=&quot;calendar&quot;&gt;
+  &lt;div class=&quot;days&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<p>Then, you fill 42 days with Javascript.</p>
+<pre><code>function showCalendar(year, month) {
+  const date = new Date(year, month+1, 1);
+  const daysPrevMonth = getLeadingDays(date);
+  const daysThisMonth = getMonthDays(date);
+  const daysNextMonth = getTrailingDays(daysPrevMonth, daysThisMonth);
+  const daysEl = document.querySelector(&#39;.calendar .days&#39;);
+  [...daysPrevMonth, ...daysThisMonth, ...daysNextMonth]
+    .forEach(num =&gt; {
+      daysEl.insertAdjacentHTML(&#39;beforeend&#39;, 
+        `&lt;button&gt;${num}&lt;/button&gt;`
+      );
+    });
+}
+
+showCalendar(2019, 3);</code></pre>
+<h3 id="this-is-how-it-looks-like-with-all-42-days"><strong>This is how it looks like with all 42 days.</strong></h3>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*-0_mgsWRLTQHXF_kEysaMA.png" alt=""></p>
+<p>Uh oh. That’s not what you want. You want to see it as a calendar. To do so, you just need to add small css to show only 7 days per row.</p>
+<pre><code>.calendar {width: 250px;}
+.calendar .days button { width: calc(100% / 7);}</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*kYzKWyie5gqA-MZ89jPhEA.png" alt=""></p>
+<p>Now, you have all necessity of calendar.</p>
+<p>Only you have left is to add some buttons and labels to make it look like a real calendar.</p>
+<p><strong>Let us also show days of week and title of this calendar too.</strong></p>
+<p>This is html required.</p>
+<pre><code>&lt;div class=&quot;calendar&quot;&gt;
+  &lt;span class=&quot;**year**&quot;&gt;&lt;/span&gt; &lt;!-- year --&gt;
+  &lt;span class=&quot;**month**&quot;&gt;&lt;/span&gt; &lt;!-- month--&gt;
+  &lt;div class=&quot;**week-days**&quot;&gt; &lt;!-- show week days --&gt;
+    &lt;b&gt;**Su**&lt;/b&gt;&lt;b&gt;**Mo**&lt;/b&gt;&lt;b&gt;**Tu**&lt;/b&gt;&lt;b&gt;**We**&lt;/b&gt;&lt;b&gt;**Th**&lt;/b&gt;&lt;b&gt;**Fr**&lt;/b&gt;&lt;b&gt;**Sa**&lt;/b&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;days&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<p>and this is JavaScript for it.</p>
+<pre><code>const monthEl = document.querySelector(&#39;.calendar .month&#39;);const yearEl = document.querySelector(&#39;.calendar .year&#39;);
+
+monthEl.innerHTML = monthNames[date.getMonth()];
+yearEl.innerHTML = date.getFullYear();</code></pre>
+<p>Ta da<del>~</del></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*22QcED97mAUbCU-shmHLHQ.png" alt=""></p>
+<p>To see complete html, css and Javascript for this, you can visit the following demo.</p>
+<p>If you want a fully functional calendar, please check out <a href="https://allenhwkim.github.io/html-custom-elements/#calendar">this</a>. It has more features than we just went through;</p>
+<ul>
+<li><p>Selected date feature</p>
+</li>
+<li><p>Minimum and maximum date to navigate and/or to select.</p>
+</li>
+<li><p>Configurable week-day format.</p>
+</li>
+<li><p>Firing an event when a date is clicked.</p>
+</li>
+<li><p>You can use this one for your input field.</p>
+</li>
+</ul>
+<p>Code for the full featured calendar, <code>[&lt;hce-calendar&gt;</code>](<a href="https://allenhwkim.github.io/html-custom-elements/#calendar">https://allenhwkim.github.io/html-custom-elements/#calendar</a>), can be found at <a href="https://github.com/allenhwkim/html-custom-elements/tree/master/src/calendar">github</a>.</p>
+<p>Do you like VanillaJS coding without a framework? If so, you may also like <a href="https://allenhwkim.github.io/html-custom-elements/#calendar">html custom elements</a>.</p>
+<p><a href="https://allenhwkim.github.io/html-custom-elements/#calendar">**html-custom-elements</a>** is a collection of simple and useful custom elements. It is a lightweight, framework-independent, and works on all modern browsers including IE11.</p>
+<p>Happy Coding :)</p>

@@ -1,0 +1,49 @@
+<h1 id="getting-started--mutationobserver">Getting Started — MutationObserver</h1>
+<p>MutationObserver provides developers with a way to react to changes in a DOM</p>
+<p>For example;</p>
+<ul>
+<li><p>I want to do something only if when elements of this block is changed.</p>
+</li>
+<li><p>I want to do something when attribute is changed.</p>
+</li>
+<li><p>User updated the contents of this block, and I want to do something</p>
+</li>
+</ul>
+<p>You can find MutationObserver Spec. at <a href="http://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">here</a></p>
+<p>The following is an advanced example with Chrome Extension. Add this chrome extension, and open facebook. You will see that all your operation is mirrored out to to another window.</p>
+<ul>
+<li><a href="https://chrome.google.com/webstore/detail/pagemirror-build-by-kuoll/kefndlndbcgpbimijjjefolmglodjoda?hl=en">https://chrome.google.com/webstore/detail/pagemirror-build-by-kuoll/kefndlndbcgpbimijjjefolmglodjoda?hl=en</a> (<a href="http://facebook.com">Facebook.com</a>)</li>
+</ul>
+<p><img src="https://cdn-images-1.medium.com/max/3072/1*O8vlLUHw0VITelDX6bTLWg.png" alt=""></p>
+<p>Enough said. Let’s code it.</p>
+<ol>
+<li><p>What shoud I do? Define callback then create an observer.</p>
+<p> // Callback function to execute when mutations are observed
+ var callback = function(mutationsList) {
+   for(var mutation of mutationsList) {</p>
+<pre><code> alert(`${mutation.type} has been changed.`);</code></pre>
+<p>   }
+ };</p>
+<p> // Create an observer instance linked to the callback function
+ var observer = new MutationObserver(callback);</p>
+</li>
+<li><p>What do I observe? call <code>observer.observe(el)</code></p>
+<p> // Start observing the target node for configured mutations
+ var targetNode = document.querySelector(&#39;#some-id&#39;);
+ observer.observe(targetNode, {
+   attributes: true,
+   characterData: true,
+   childList: true,
+   subtree: true
+ });</p>
+</li>
+</ol>
+<p>If you like this article, you may also like the implementation of MutationObserver with <a href="https://mymce.github.io">mce(Materialized Custom Element)</a>, which observes the changes on the document and add custom behaviour to elements.</p>
+<p>Another articles;</p>
+<ol>
+<li><p><a href="https://medium.com/allenhwkim/back-to-element-c4aecf3c6b64">https://medium.com/allenhwkim/back-to-element-c4aecf3c6b64</a></p>
+</li>
+<li><p><a href="https://medium.com/allenhwkim/simple-spa-building-with-mce-f507e5f0236">https://medium.com/allenhwkim/simple-spa-building-with-mce-f507e5f0236</a></p>
+</li>
+</ol>
+<p>Happy Coding!</p>

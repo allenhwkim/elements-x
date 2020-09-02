@@ -1,0 +1,98 @@
+<h1 id="angular-syntax-highlighted-code-with-prism">Angular: Syntax-Highlighted Code with Prism</h1>
+<p>You want more than <pre> tag? Just add “prism” attribute.</p>
+<p><img src="https://cdn-images-1.medium.com/max/11776/0*ChUHRhettJEaEoEY" alt="Photo by [Malcolm Lightbody](https://unsplash.com/@mlightbody?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@mlightbody?utm_source=medium&amp;utm_medium=referral">Malcolm Lightbody</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<p>TLDR; compare the difference with prism and without it.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*4asCug0NZjAb7s7uUJl5Bw.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*lKuGWPhLHxTnJKXkUY5-3Q.png" alt="Before vs. After"><em>Before vs. After</em></p>
+<p>What makes it different? The difference in code is only to add <code>“prism” </code>attribute and “dark” class, which is optional.</p>
+<pre><code>&lt;pre **prism** class=&quot;**dark**&quot;&gt;
+  var x = 1;
+  var y = 2;
+&lt;/pre&gt;</code></pre>
+<p>Here are the steps needed to use <code>prism</code> component in your app.</p>
+<ol>
+<li><p>Install <code>prismjs</code></p>
+</li>
+<li><p>Add prism theme style to your<code> style.css</code></p>
+</li>
+<li><p>Add <code>prismjs</code> to your <code>app.module.ts</code></p>
+</li>
+<li><p>Create <code>prism.component.ts</code></p>
+</li>
+<li><p>Done</p>
+</li>
+</ol>
+<h3 id="1-install-prismjs">1. Install prismjs</h3>
+<pre><code>$ npm install prismjs --save-dev</code></pre>
+<h3 id="2-add-prism-theme-style-to-your-stylecss">2. Add prism theme style to your<code> style.css</code></h3>
+<pre><code>@import &quot;~prismjs/themes/prism-dark.css&quot;;</code></pre>
+<p>Available theme css;</p>
+<ul>
+<li><p>prism-coy.css</p>
+</li>
+<li><p>prism-dark.css</p>
+</li>
+<li><p>prism-funky.css</p>
+</li>
+<li><p>prism-solarizedlight.css</p>
+</li>
+<li><p>prism-tomorrow.css</p>
+</li>
+<li><p>prism-twilight.css</p>
+</li>
+<li><p>prism.css</p>
+</li>
+</ul>
+<h3 id="3-add-prismjs-to-your-appmodulets"><strong>3. Add <code>prismjs</code> to your <code>app.module.ts</code></strong></h3>
+<pre><code>import { NgModule } from &#39;@angular/core&#39;;
+import { BrowserModule } from &#39;@angular/platform-browser&#39;;
+import { FormsModule } from &#39;@angular/forms&#39;;
+
+import { AppComponent } from &#39;./app.component&#39;;
+import { **PrismComponent** } from &#39;./prism.component&#39;;
+
+**import &#39;prismjs/components/prism-css&#39;;
+import &#39;prismjs/components/prism-javascript&#39;;
+import &#39;prismjs/components/prism-typescript&#39;;
+import &#39;prismjs/components/prism-scss&#39;;**
+
+@NgModule({
+  imports:      [ BrowserModule, FormsModule ],
+  declarations: [ AppComponent, **PrismComponent** ],
+  bootstrap:    [ AppComponent ]
+})
+export class AppModule { }</code></pre>
+<h3 id="4-create-prismcomponentts">4. Create <code>prism.component.ts</code></h3>
+<pre><code>import { Component, ElementRef, Input, AfterViewInit } from &#39;[@angular/core](http://twitter.com/angular/core)&#39;;
+**import Prism from &#39;prismjs&#39;;**
+
+[@Component](http://twitter.com/Component)({
+  selector: &#39;prism, [prism]&#39;,
+  template: &#39;&lt;ng-content&gt;&lt;/ng-content&gt;&#39;,
+  styles: [`
+    :host.dark { background: #333; color: #FFF;}`
+  ]
+})
+export class PrismComponent implements AfterViewInit {
+  [@Input](http://twitter.com/Input)() code: string;
+  [@Input](http://twitter.com/Input)() language = &#39;javascript&#39;;
+
+  constructor(private el: ElementRef) {}
+
+  ngAfterViewInit() {
+    const code = (this.code || this.el.nativeElement.innerText)
+    const grammar =** Prism.languages[this.language];**
+    const html = **Prism.highlight(code, grammar, this.language);**
+    this.el.nativeElement.innerHTML = html;
+  }
+}</code></pre>
+<p>Done!!</p>
+<p><img src="https://cdn-images-1.medium.com/max/2680/1*RhtMMLibFrvaPPiTOTKotQ.png" alt=""></p>
+<p>Here is demo.</p>
+<p>Happy Coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular: Collection of Tips and Tricks</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

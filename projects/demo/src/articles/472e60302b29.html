@@ -1,0 +1,49 @@
+<h1 id="angular-build-a-custom-password-field">Angular: Build A Custom Password Field</h1>
+<p>Hide Password With dots</p>
+<p>Saying you need a password field but you must not save password, and you also want to avoid all browser default behaviour regarding password field. e.g. Agent application.</p>
+<p>What if you can hide user input with dots?</p>
+<p>There are ways to do it, but each one has it’s own downside</p>
+<ul>
+<li><p>Use <code>-webkit-text-security</code> property, but only works with Chrome Browser</p>
+</li>
+<li><p>Make your own like <a href="https://stackblitz.com/edit/angular-custom-password">this</a>, but too much coding and maintenance.</p>
+</li>
+<li><p>Use custom font which hiding input, but build a font?</p>
+</li>
+</ul>
+<p>Answer to this question is to use a pre-built custom font, which is called <a href="http://github.com/noppa/text-security#readme">text-surity</a>.</p>
+<p>Here are the steps how to use this node module.</p>
+<ol>
+<li><p>Install</p>
+</li>
+<li><p>Update<code> styles.css</code></p>
+</li>
+<li><p>Use it</p>
+</li>
+</ol>
+<h3 id="1-install">1. Install</h3>
+<pre><code>$ npm install security-text --save
+$ cp -R node_modules/text-security src/assets/ # if not using .scss</code></pre>
+<h3 id="2-update-stylescss">2. Update<code> styles.css</code></h3>
+<pre><code>[@import](http://twitter.com/import) &quot;~text-security/text-security.css&quot;;</code></pre>
+<p>This will install following fonts</p>
+<ul>
+<li><p>text-security-disc</p>
+</li>
+<li><p>text-security-circle</p>
+</li>
+<li><p>text-seciuryt-square</p>
+</li>
+</ul>
+<h3 id="3-use-it">3. Use it</h3>
+<pre><code>&lt;input style=&quot;font-family: **text-security-disc**;&quot; /&gt;
+&lt;input style=&quot;font-family: **text-security-circle**;&quot; /&gt;
+&lt;input style=&quot;font-family: **text-security-square**;&quot; /&gt;</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*KR9pLT48VcepxWSyhpo7_Q.png" alt=""></p>
+<p>Happy Coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

@@ -1,0 +1,17 @@
+<h1 id="nodejs-walk-directory">NodeJS Walk Directory</h1>
+<p>List all files in a directory recursively, and do something on each.</p>
+<pre><code>const fs = require(&#39;fs&#39;), path = require(&#39;path&#39;);
+
+function walkDir(dir, callback) {
+  fs.readdirSync(dir).forEach( f =&gt; {
+    let dirPath = path.join(dir, f);
+    let isDirectory = fs.statSync(dirPath).isDirectory();
+    isDirectory ? 
+      walkDir(dirPath, callback) : callback(path.join(dir, f));
+  });
+};</code></pre>
+<p>Usage Example</p>
+<pre><code>walkDir(&#39;my-dir&#39;, function(filePath) {
+  const fileContents = fs.readFileSync(filePath, &#39;utf8&#39;);
+  console.log(filePath, fileContents);
+});</code></pre>

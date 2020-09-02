@@ -1,0 +1,24 @@
+<h1 id="firebase-storage-crud">Firebase Storage CRUD</h1>
+<p>How to upload, read, delete files with Firebase</p>
+<p>Notes to upload and download from Firebase storage. 
+If you want to know about Firebase database, read ‘<a href="https://medium.com/@allenhwkim/firebase-crud-7d74d06d8c54">Firebase Basic CRUD</a>’.</p>
+<h3 id="indexhtml">index.html</h3>
+<pre><code>`&lt;script src=&quot;https://unpkg.com/firebase/firebase.js&quot;&gt;&lt;/script&gt;`</code></pre>
+<h3 id="mainjs">main.js</h3>
+<pre><code>`firebase.initializeApp({
+    apiKey: &quot;[api_key]&quot;,
+    authDomain: &quot;[any_title].firebaseapp.com&quot;,
+    databaseURL: &quot;https://[any_title].firebaseio.com&quot;,
+    storageBucket: &quot;[any_title].appspot.com&quot;,
+  });`
+
+var storageRef = firebase.storage().ref();</code></pre>
+<h3 id="createupdate">Create/Update</h3>
+<pre><code>var file = ... // use the Blob or File API
+storageRef.put(&#39;images/stars.jpg&#39;).then(function(snapshot) {
+  console.log(&#39;Uploaded a blob or file!&#39;);
+});</code></pre>
+<h3 id="read">Read</h3>
+<pre><code>storageRef.child(&#39;images/stars.jpg&#39;).getDownloadURL()</code></pre>
+<h3 id="delete">Delete</h3>
+<pre><code>storageRef.child(&#39;images/stars.jpg&#39;).delete().then(...)</code></pre>

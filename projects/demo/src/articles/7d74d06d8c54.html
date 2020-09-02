@@ -1,0 +1,22 @@
+<h1 id="firebase-basic-crud">Firebase Basic CRUD</h1>
+<p>Notes to create, read, update, delete an entry from Firebase realtime database.</p>
+<h3 id="indexhtml">index.html</h3>
+<pre><code>`&lt;script src=&quot;https://unpkg.com/firebase/firebase.js&quot;&gt;&lt;/script&gt;`</code></pre>
+<h3 id="mainjs">main.js</h3>
+<pre><code>`firebase.initializeApp({
+    apiKey: &quot;[api_key]&quot;,
+    authDomain: &quot;[any_title].firebaseapp.com&quot;,
+    databaseURL: &quot;https://[any_title].firebaseio.com&quot;,
+    storageBucket: &quot;[any_title].appspot.com&quot;,
+  });
+var messagesRef = firebase.database().ref(&#39;messages&#39;);`</code></pre>
+<h3 id="create"><strong>C</strong>reate</h3>
+<pre><code>messagesRef.push(message).then(...);</code></pre>
+<h3 id="read"><strong>R</strong>ead</h3>
+<pre><code>messagesRef.child(messageId).once(&#39;value&#39;).then(snapshot =&gt; {
+  ...
+});</code></pre>
+<h3 id="update"><strong>U</strong>pdate</h3>
+<pre><code>messagesRef.child(message[&#39;.key&#39;]).set(message).then(...);</code></pre>
+<h3 id="delete"><strong>D</strong>elete</h3>
+<pre><code>messagesRef.child(message[&#39;.key&#39;]).remove();</code></pre>

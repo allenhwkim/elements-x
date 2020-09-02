@@ -1,0 +1,59 @@
+<h1 id="how-to-build-a-carousel-in-pure-javascript">How to Build a Carousel in Pure Javascript</h1>
+<p>As a minimalist, here I share smallest Vanilla JS carousel coding technique.</p>
+<p>I am going to show images with in list, <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code>. Then, I display these images horizontally with css. Next I add two buttons to navigate among images. Finally, I code 7 lines of Javascript to complete this carousel.</p>
+<p>Sounds simple? Let’s go.</p>
+<h3 id="1-show-images">1. Show Images</h3>
+<pre><code>    &lt;ul&gt;
+      &lt;li&gt;&lt;img class=&quot;img1&quot; src=&quot;//picsum.photos/300/200?1&quot;&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;img class=&quot;img2&quot; src=&quot;//picsum.photos/300/200?2&quot;&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;img class=&quot;img3&quot; src=&quot;//picsum.photos/300/200?3&quot;&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;img class=&quot;img4&quot; src=&quot;//picsum.photos/300/200?4&quot;&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;img class=&quot;img5&quot; src=&quot;//picsum.photos/300/200?5&quot;&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;img class=&quot;img6&quot; src=&quot;//picsum.photos/300/200?6&quot;&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;img class=&quot;img7&quot; src=&quot;//picsum.photos/300/200?7&quot;&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;img class=&quot;img8&quot; src=&quot;//picsum.photos/300/200?8&quot;&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;img class=&quot;img9&quot; src=&quot;//picsum.photos/300/200?9&quot;&gt;&lt;/li&gt;
+    &lt;/ul&gt;</code></pre>
+<h3 id="2-style-images">2. Style images</h3>
+<pre><code>ul { display: flex; margin: 0; padding: 0; overflow: hidden; }
+li { display: block; list-style: none; }</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2900/1*ReaeLoIawxjRQibyLtHlfQ.png" alt=""></p>
+<h3 id="3-add-buttons-to-navigate">3. Add buttons to navigate</h3>
+<pre><code>&lt;button onclick=&quot;show(-1)&quot;&gt;&amp;lt;&lt;/button&gt;
+&lt;button onclick=&quot;show(+1)&quot;&gt;&amp;gt;&lt;/button&gt;
+&lt;style&gt;
+  button.prev, button.next {
+    display: flex; font-size: 32px;
+    align-items: center; justify-content: center;
+    color: #FFF; background-color: #333;
+    border-radius: 50%;
+    width: 44px; height: 44px;
+  }
+  button.prev {
+    position: absolute; left: 0; top: 80px;
+  }
+  button.next {
+    position: absolute; right: 0; top: 80px;
+  }
+&lt;/style&gt;</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2696/1*MPZ9eruDc0ZfGAYLBTO9dA.png" alt=""></p>
+<h3 id="4-last-code-javascript-7-lines">4. Last, Code Javascript (7 lines)</h3>
+<pre><code>let liEls = document.querySelectorAll(&#39;ul li&#39;);
+let index = 0;
+window.show = function(increase) {
+  index = index + increase;
+  index = Math.min(Math.max(index,0), liEls.length-1);
+  liEls[index].scrollIntoView({behavior: &#39;smooth&#39;});
+}</code></pre>
+<p>All done. Here we go. The good thing about this is that this technique is not limited to images, but you can use it for all types of list with different width and heights.</p>
+<p>Feel free to fork <a href="https://stackblitz.com/edit/medium-carousel?file=index.html">stackblitz</a> code and change contents of <li> contents.</p>
+<p>The following is Angular version the above technique.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2804/1*zx3MwVKjNW5tyOudmOll7A.png" alt=""></p>
+<p>The principle applied to Angular component is the same.</p>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

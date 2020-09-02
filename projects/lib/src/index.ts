@@ -6,7 +6,7 @@ export * from './checkbox';
 export * from './clock';
 export * from './currency';
 export * from './dialog';
-export * from './example';
+export * from './file';
 export * from './input';
 export * from './list';
 export * from './menu';

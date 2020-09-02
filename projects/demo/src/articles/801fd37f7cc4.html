@@ -1,0 +1,228 @@
+<h1 id="vuefirebase">Vue/Firebase</h1>
+<p>This is the implementation notes Vue + Firbase.</p>
+<h2 id="getting-started-with-vue--webpack">Getting Started with Vue / Webpack</h2>
+<pre><code>$ npm install -g vue-cli
+$ vue init webpack vue-firebase-practive # vue init &lt;template&gt; &lt;project&gt;
+$ cd vue-firebase-practice
+$ npm install
+$ npm start</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/NaN/1*hfYZRj2a91b4dMRBUH2Avw.png" alt=""></p>
+<p>Take a look at the files that we are going to modify.</p>
+<pre><code>$ ls src/main.js
+$ ls src/router/index.js
+$ ls src/components/HelloWorld.vue</code></pre>
+<p>This is the page flow diagram that we want to implement.</p>
+<p><img src="https://cdn-images-1.medium.com/max/NaN/1*xeHpflBiaQNdfu3ifFTi8Q.png" alt=""></p>
+<h2 id="create-pages-and-routes-without-firebase">Create Pages and Routes Without Firebase</h2>
+<p>These files are going to be updated.</p>
+<pre><code>$ vi src/router/index.js
+$ vi src/components/Login.vue
+$ vi src/components/SignUp.vue</code></pre>
+<h3 id="srcrouterindexjs">src/router/index.js</h3>
+<pre><code>import Vue from &#39;vue&#39;
+import Router from &#39;vue-router&#39;
+import HelloWorld from &#39;@/components/HelloWorld&#39;
+import Login from &#39;@/components/Login&#39;
+import SignUp from &#39;@/components/SignUp&#39;
+
+Vue.use(Router)
+
+let router = new Router({
+  routes: [
+    { path: &#39;*&#39;, redirect: &#39;/login&#39; },
+    { path: &#39;/&#39;, redirect: &#39;/login&#39; },
+    { path: &#39;/login&#39;, name: &#39;Login&#39;, component: Login },
+    { path: &#39;/sign-up&#39;, name: &#39;SignUp&#39;, component: SignUp },
+    { path: &#39;/hello-world&#39;, name: &#39;HelloWorld&#39;, component: HelloWorld }
+  ]
+})
+
+export default router</code></pre>
+<h3 id="srccomponentsloginvue">src/components/Login.vue</h3>
+<pre><code>&lt;template&gt;
+  &lt;div class=&quot;login&quot;&gt;
+    &lt;h3&gt;Sign In&lt;/h3&gt;
+    &lt;input type=&quot;text&quot; v-model=&quot;email&quot; placeholder=&quot;Email&quot;&gt;&lt;br/&gt;
+    &lt;input type=&quot;password&quot; v-model=&quot;password&quot; placeholder=&quot;Password&quot;&gt;&lt;br/&gt;
+    &lt;button v-on:click=&quot;signIn&quot;&gt;Connection&lt;/button&gt;
+    &lt;p&gt;You don&#39;t have an account? You can &lt;router-link to=&quot;/sign-up&quot;&gt;create one&lt;/router-link&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  export default {
+    name: &#39;login&#39;,
+    data: function() {
+      return {
+        email: &#39;&#39;,
+        password: &#39;&#39;
+      };
+    },
+    methods: {
+      signIn: function() {}
+    }
+  }
+&lt;/script&gt;</code></pre>
+<h3 id="srccomponentssignupvue"><strong>src/components/SignUp.vue</strong></h3>
+<pre><code>&lt;template&gt;
+  &lt;div class=&quot;sign-up&quot;&gt;
+    &lt;p&gt; Let&#39;s create a new account !&lt;/p&gt;
+    &lt;input type=&quot;text&quot; v-model=&quot;email&quot; placeholder=&quot;Email&quot;&gt;&lt;br/&gt;
+    &lt;input type=&quot;password&quot; v-model=&quot;password&quot; placeholder=&quot;Password&quot;&gt;&lt;br/&gt;
+    &lt;button v-on:click=&quot;signUp&quot;&gt;Sign Up&lt;/button&gt;
+    &lt;span&gt; or go gack to &lt;router-link to=&quot;/login&quot;&gt;login.&lt;/router-link&gt; &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  import firebase from &#39;firebase&#39;;
+
+  export default {
+    name: &#39;signUp&#39;,
+    data: function() { 
+      return { email: &#39;&#39;, password: &#39;&#39; }
+    },
+    methods: {
+      signUp: function() {}
+    }
+  }
+&lt;/script&gt;</code></pre>
+<p>Let’s check the app</p>
+<pre><code>$ npm start
+# [http://localhost:8080/#/login](http://localhost:8080/#/login)
+# [http://localhost:8080/#/s](http://localhost:8080/#/login)ign-up
+# [http://localhost:8080/#/](http://localhost:8080/#/login)hello-world</code></pre>
+<h2 id="lets-connect-all-pages-with-firebase-auth">Let’s Connect All Pages With Firebase Auth.</h2>
+<p>These files will be updated</p>
+<pre><code>$ vi src/main.js
+$ vi src/router/index.js
+$ vi src/components/Login.vue
+$ vi src/components/SignUp.vue</code></pre>
+<h3 id="srcmainjs">src/main.js</h3>
+<pre><code>import Vue from &#39;vue&#39;
+import App from &#39;./App&#39;
+import router from &#39;./router&#39;
+**import firebase from &#39;firebase&#39;**
+
+Vue.config.productionTip = false
+
+**let config = {
+  apiKey: &#39;AIzaSyAn-nythRaG7e4QUUDwUnto9ge3lBDgRPg&#39;,
+  authDomain: &#39;korean-reporters.firebaseapp.com&#39;,
+  databaseURL: &#39;[https://korean-reporters.firebaseio.com&#39;](https://korean-reporters.firebaseio.com&#39;),
+  projectId: &#39;korean-reporters&#39;,
+  storageBucket: &#39;korean-reporters.appspot.com&#39;,
+  messagingSenderId: &#39;391638268798&#39;
+}
+firebase.initializeApp(config)
+firebase.auth().onAuthStateChanged(function (user) {
+  console.log(&#39;Firebase auth status chaged with &#39;, user)
+})**
+
+/* eslint-disable no-new */
+new Vue({
+  el: &#39;#app&#39;,
+  router,
+  components: { App },
+  template: &#39;&lt;App/&gt;&#39;
+})</code></pre>
+<h3 id="srcrouterindexjs-1">src/router/index.js</h3>
+<pre><code>import Vue from &#39;vue&#39;
+import Router from &#39;vue-router&#39;
+import HelloWorld from &#39;@/components/HelloWorld&#39;
+import Login from &#39;@/components/Login&#39;
+import SignUp from &#39;@/components/SignUp&#39;
+**import firebase from &#39;firebase&#39;**
+
+Vue.use(Router)
+
+let router = new Router({
+  routes: [
+    { path: &#39;*&#39;, redirect: &#39;/login&#39; },
+    { path: &#39;/&#39;, redirect: &#39;/login&#39; },
+    { path: &#39;/login&#39;, name: &#39;Login&#39;, component: Login },
+    { path: &#39;/sign-up&#39;, name: &#39;SignUp&#39;, component: SignUp },
+    {
+      path: &#39;/hello-world&#39;,
+      name: &#39;HelloWorld&#39;,
+      component: HelloWorld,
+**      meta: {
+        requiresAuth: true
+      }**
+    }
+  ]
+})
+
+**router.beforeEach((to, from, next) =&gt; {
+  let currentUser = firebase.auth().currentUser
+  let requiresAuth = to.matched.some(record =&gt; record.meta.requiresAuth)
+  (requiresAuth &amp;&amp; !currentUser) ? next(&#39;login&#39;) : next()
+})**
+
+export default router</code></pre>
+<h3 id="srcrouterloginvue">src/router/Login.vue</h3>
+<pre><code>&lt;template&gt;
+  &lt;div class=&quot;login&quot;&gt;
+    &lt;h3&gt;Sign In&lt;/h3&gt;
+    &lt;input type=&quot;text&quot; v-model=&quot;email&quot; placeholder=&quot;Email&quot;&gt;&lt;br/&gt;
+    &lt;input type=&quot;password&quot; v-model=&quot;password&quot; placeholder=&quot;Password&quot;&gt;&lt;br/&gt;
+    &lt;button v-on:click=&quot;signIn&quot;&gt;Connection&lt;/button&gt;
+    &lt;p&gt;You don&#39;t have an account? You can &lt;router-link to=&quot;/sign-up&quot;&gt;create one&lt;/router-link&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+**  import firebase from &#39;firebase&#39;;**
+
+export default {
+    name: &#39;login&#39;,
+    data: function() {
+      return { email: &#39;&#39;, password: &#39;&#39; }
+    },
+    methods: {
+      signIn: function() {
+**        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
+          user =&gt; this.$router.replace(&#39;hello-world&#39;),
+          err =&gt; alert(&#39;Ooops.&#39; + err.message)
+        )**
+      }
+    }
+  }
+&lt;/script&gt;</code></pre>
+<h3 id="srcroutersignupvue">src/router/SignUp.vue</h3>
+<pre><code>&lt;template&gt;
+  &lt;div class=&quot;sign-up&quot;&gt;
+    &lt;p&gt; Let&#39;s create a new account !&lt;/p&gt;
+    &lt;input type=&quot;text&quot; v-model=&quot;email&quot; placeholder=&quot;Email&quot;&gt;&lt;br/&gt;
+    &lt;input type=&quot;password&quot; v-model=&quot;password&quot; placeholder=&quot;Password&quot;&gt;&lt;br/&gt;
+    &lt;button v-on:click=&quot;signUp&quot;&gt;Sign Up&lt;/button&gt;
+    &lt;span&gt; or go gack to &lt;router-link to=&quot;/login&quot;&gt;login.&lt;/router-link&gt; &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  **import firebase from &#39;firebase&#39;;**
+
+  export default {
+    name: &#39;signUp&#39;,
+    data: function() { 
+      return { email: &#39;&#39;, password: &#39;&#39; }
+    },
+    methods: {
+      signUp: function() {
+**        firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
+          user =&gt; this.$router.replace(&#39;hello-world&#39;),
+          err =&gt; alert(&#39;Ooops, &#39; + err.message)
+        )**
+      }
+    }
+  }
+&lt;/script&gt;</code></pre>
+<p>Let’s check the app</p>
+<pre><code>$ npm start
+# [http://localhost:8080/#/](http://localhost:8080/#/login)hello-world
+# [http://localhost:8080/#/s](http://localhost:8080/#/login)ign-up
+# [http://localhost:8080/#/](http://localhost:8080/#/login)login</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2560/1*J-jV9-boQ0ESY8yvEfh6KA.png" alt=""></p>
+<p>Happy Coding,</p>
+<p>Allen Kim</p>

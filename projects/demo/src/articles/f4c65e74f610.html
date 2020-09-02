@@ -1,0 +1,159 @@
+<h1 id="angular-build-a-dropdown-menu">Angular: Build A Dropdown Menu</h1>
+<p>HTML-first/Minimal Javascript/Accessibility-In-Mind</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li><p>Must be able to navigate with keyboard <code>Tab/Shift-Tab/Left/Right/Up/Down</code></p>
+</li>
+<li><p>Must open a sub menu keyboard <code>Enter/Space/Down</code></p>
+</li>
+<li><p>Must execute a menu item with keyboard <code>Enter</code> and click</p>
+</li>
+<li><p>Must close menu with keyboard<code>Esc</code></p>
+</li>
+<li><p>Must disable menu item with <code>disabled</code> attribute</p>
+</li>
+<li><p>Must be accessibility-compliant with attributes, <code>role/aria-haspopup/aria-expanded/tabindex</code></p>
+</li>
+<li><p>Must pre-select a menu item with id when initialized</p>
+</li>
+<li><p>Must open submenu when mouse is over a menu item</p>
+</li>
+</ul>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*496XE6L4Dfk2lpvbY7WXfQ.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*0ZM5ZqvL3nWR59DBBZlbkA.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2852/1*904WCsJ6KqYVKZCF9bbLbg.png" alt="Standard HTML ………………………Angular User HTML………………………….….. ……………Angular User HTML after initialized………………………………….."><em>Standard HTML ………………………Angular User HTML………………………….….. ……………Angular User HTML after initialized…………………………………..</em></p>
+<h2 id="html">HTML</h2>
+<p>This guide will use <code>ul</code> <code>li</code> as html elements and it’s going to be styled like dropdown menu.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*q_5WCToRbNbU90VD2Ej53A.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/3112/1*kyXnVP-EbiNXGUtubZ7H_A.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/3124/1*BNaqPiMoSwUCtf8BEPCO_w.png" alt=""></p>
+<h2 id="javascript-development-steps">Javascript Development Steps</h2>
+<p>There are two main things to do with angular; setting attributes and event listeners.</p>
+<h3 id="step-1-set-attributes">Step 1: Set Attributes</h3>
+<ul>
+<li><p><code>role=&quot;menuitem”</code> <code>role=&quot;menubar&quot;</code></p>
+</li>
+<li><p><code>tabindex=&quot;0&quot;</code> <code>tabindex=&quot;-1&quot;</code></p>
+</li>
+<li><p><code>aria-expanded=&quot;false&quot;</code></p>
+</li>
+</ul>
+<h3 id="step-2-set-event-listeners-to-all-menu-items">Step 2: Set event listeners to all menu items</h3>
+<ul>
+<li><p>focus: set <code>aria-expanded=”true&quot;</code> attribute</p>
+</li>
+<li><p>click: toggle <code>aria-expanded</code> attribute with value of <code>true</code> or <code>false</code></p>
+</li>
+<li><p>keydown: enable navigation or click</p>
+</li>
+<li><p>click: select menu item</p>
+</li>
+</ul>
+<h3 id="step-3-enable-to-select-a-menu-item">Step 3: Enable to select a menu item</h3>
+<h2 id="javascript-code">JavaScript Code</h2>
+<h3 id="step-1-set-attributes-1">Step 1: Set Attributes</h3>
+<p>It will set following attributes; <code>tabindex</code>, <code>aria-haspopup</code>, <code>aria-expanded</code>, <code>role</code>, and these attributes will be used for styling and coding.</p>
+<pre><code>setMenuAttributes(ulEl) {
+  !ulEl.getAttribute(&#39;role&#39;) &amp;&amp; ulEl.setAttribute(&#39;role&#39;, &#39;menu&#39;);
+  Array.from(ulEl.querySelectorAll(&#39;li&#39;))
+    .forEach( (liEl: HTMLElement) =&gt; {
+      const disabled = liEl.getAttribute(&#39;disabled&#39;) !== null; 
+      liEl.setAttribute(&#39;tabindex&#39;, disabled ? &#39;-1&#39;: &#39;0&#39;);
+      liEl.setAttribute(&#39;role&#39;, &#39;menuitem&#39;);
+      const subMenuEl = liEl.querySelector(&#39;ul&#39;);
+      if (subMenuEl) { // if has submenu
+        liEl.setAttribute(&#39;aria-haspopup&#39;, &#39;true&#39;);
+        liEl.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);
+        this.setMenuAttributes(subMenuEl);
+      }
+    });
+}</code></pre>
+<h3 id="step-2-set-event-listeners">Step 2: Set event listeners</h3>
+<p>It will set event listeners for all <code>li</code> menu items to listen to <code>keydown</code> event and mouse events; <code>focus</code>, <code>blur</code>, <code>click</code>.</p>
+<pre><code>setMenuEventListeners(ulEl) {
+  Array.from(ulEl.querySelectorAll(&#39;li&#39;))
+    .forEach( (liEl: HTMLElement) =&gt; {
+      liEl.addEventListener(&#39;keydown&#39;, this.keyHandler.bind(this));
+      liEl.addEventListener(&#39;focus&#39;, this.focusHandler.bind(this));
+      liEl.addEventListener(&#39;blur&#39;, this.blurHandler.bind(this));
+      liEl.addEventListener(&#39;click&#39;, this.clickHandler.bind(this));
+   });
+}</code></pre>
+<p><strong>Keyboard Event Listeners</strong></p>
+<pre><code>keyHandler(event: any) {
+    switch(event.code) {
+      case &#39;Escape&#39;: ... // close menu
+      case &#39;Enter&#39;:  ... // open sub menu, or execute
+      case &#39;Space&#39;: ... // open sub menu, or execute
+      case &#39;ArrowUp&#39;: ... // close submenu or move
+      case &#39;ArrowLeft&#39;: ... // move
+      case &#39;ArrowDown&#39;: .. // open sub menu or move
+      case &#39;ArrowRight&#39;: ... // move to next
+    }
+    event.stopPropagation();
+  }</code></pre>
+<p><strong>Mouse Event Listeners</strong></p>
+<pre><code>focusHandler(event) {
+  // change aria-haspopup attribute value to true/false
+  event.stopPropagation();
+}
+
+blurHandler(event) {
+  // change aria-expanded attribute value to true/false 
+  event.stopPropagation();
+}
+
+clickHandler(event) {
+  // fire menu selected event
+  // set class `selected` to a menu item
+  event.stopPropagation();
+}</code></pre>
+<h3 id="step-3-enable-pre-select-menu">Step 3: Enable pre-select menu</h3>
+<p>This will allow menu to pre-select an item when application is initialized or url is changed.</p>
+<pre><code>if (this.selectedId) {
+  const menuItem =
+    this.elRef.nativeElement.querySelector(&#39;#&#39;+this.selectedId);
+  this.doSelectMenuItem(menuItem);
+}</code></pre>
+<h2 id="styles">Styles</h2>
+<p>Things to remember for styling</p>
+<ul>
+<li><p>Remove default <code>ul</code>, <code>li</code> style</p>
+</li>
+<li><p>Hide submenu items</p>
+</li>
+<li><p>Show submenu items when selected</p>
+<p>  ul { /* disable original style */</p>
+<pre><code>margin: 0;
+padding: 0;
+list-style: none;
+display: flex;
+background: #FFF;
+position: relative;
+border: 1px solid #ccc;</code></pre>
+<p>  }</p>
+<p>  li &gt; ul {  </p>
+<pre><code>display: none; /* hide submenu */</code></pre>
+<p>  }
+  li[aria-expanded=true] &gt; ul,
+  li:hover &gt; ul {  /* show submenu when hover or focused */</p>
+<pre><code>display: flex;
+position: absolute;
+flex-flow: column;
+top: 100%;</code></pre>
+<p>  }</p>
+</li>
+</ul>
+<p>The working example can be found at <a href="https://stackblitz.com/edit/angular-dropdown-menu">https://stackblitz.com/edit/angular-dropdown-menu</a>.</p>
+<h3 id="references">References:</h3>
+<ul>
+<li><a href="https://www.w3.org/WAI/tutorials/menus/application-menus-code/">https://www.w3.org/WAI/tutorials/menus/application-menus-code/</a></li>
+</ul>
+<p>Happy coding :)</p>
+<p>Allen Kim</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

@@ -1,0 +1,196 @@
+<h1 id="how-to-parse-typescript-from-source">How To Parse Typescript From Source</h1>
+<p>This is a short and summarized version of how to parse Typescript from source . You can read more about Typescript AST at the official…</p>
+<p>I am writing this tutorial mainly to explain how <a href="https://github.com/allenhwkim/ngentest">ngentest</a> is written. However, this will be also useful who wants to know how to parse Typescript.</p>
+<p>To start, let’s say you have a very simple Typescript file, <code>my.component.ts</code></p>
+<pre><code>import { **Component** } from &#39;**@angular/core**&#39;;
+
+@[Component](https://angular.io/api/core/Component)({
+  selector: &#39;my&#39;,
+  template: &#39;hello me.&#39;
+})
+export class **MyComponent** {
+}</code></pre>
+<p>The end goal for this tutorial is to get the following info from the above code using typescript parser, <code>typescript</code>.</p>
+<ul>
+<li><p>import info, <code>Component</code>, <code>@angular/core</code></p>
+</li>
+<li><p>decorator name, <code>Component</code></p>
+</li>
+<li><p>class name, <code>MyComponent</code></p>
+<p>  const ts = <strong>require(&#39;typescript&#39;)</strong>;
+  const node = <strong>ts.createSourceFile</strong>(</p>
+<pre><code>&#39;x.ts&#39;,   // fileName
+**fs.readFileSync(&#39;./my.component.ts&#39;, &#39;utf8&#39;)**, // sourceText
+ts.ScriptTarget.Latest // langugeVersion</code></pre>
+<p>  );</p>
+</li>
+</ul>
+<p>The source file, <code>my.component.ts</code>, is now parsed using <code>createSoureFile</code> function, and now you are ready to look into AST, Abstract Syntax Tree. When you print out node, you will see the following.</p>
+<pre><code>console.log(node);
+&gt; SourceFileObject {
+&gt;   ...,
+&gt;   **kind:** 273,
+&gt;   **text: &#39;...&#39;,
+**&gt;   ...
+&gt; }
+ts.SyntaxKind[node.kind]
+&gt; `SourceFile`</code></pre>
+<p>Each node has property <code>kind</code>, a number, which represents the type of node. To read the string representation of node type, you can get it from <code>ts.SyntaxKind</code>.</p>
+<h3 id="first-get-import-information">First, get import information.</h3>
+<p>Every node has its children nodes and you can find them using the given function <code>forEachChild</code>.</p>
+<pre><code>node.forEachChild(child =&gt; console.log(**ts.SyntaxKind[child.kind]**))
+**&gt; ImportDeclaration**
+&gt; ClassDeclaration
+&gt; EndOfFileToken</code></pre>
+<p>As you see above, ImportDeclaration is the node that has import statement info. To get the node, ImportDeclaration, you need to assign it to a variable.</p>
+<pre><code>var importDecl;
+node.forEachChild(child =&gt; {
+  if (**ts.SyntaxKind[child.kind] === &#39;ImportDeclaration&#39;) **{
+    importDecl = child;**
+**  }
+});
+console.log(importDecl);
+&gt; NodeObject {
+&gt;   ...
+&gt;  importClause:
+&gt;   NodeObject {
+&gt;    ...
+&gt;    namedBindings:
+&gt;      NodeObject {
+&gt;        ...
+&gt;        **elements: [Array]** } }, // this has info of `Component`
+&gt;  moduleSpecifier:
+&gt;   TokenObject {
+&gt;     ...
+&gt;     text: &#39;[@angular/core](http://twitter.com/angular/core)&#39; },
+&gt;  modifierFlagsCache: 536870912 }</code></pre>
+<p>Now you have found the node that has import declaration info., <code>importDecl</code>, Now, let’s extract import file names, and module name from <code>importDecl</code>.</p>
+<pre><code>importDecl.importClause.namedBindings.elements.map(
+  el =&gt; el.name.escapedText
+);
+&gt; [ &#39;Component&#39; ]
+importDecl.moduleSpecifier.text;
+&gt; &#39;@angular/core&#39;</code></pre>
+<h3 id="second-get-decorator-name">Second, get decorator name.</h3>
+<p>From the given example file, decorator <code>@Component</code>belongs to class MyComponent.</p>
+<pre><code>**@Component**({
+  selector: &#39;my&#39;,
+  template: &#39;hello me.&#39;
+})
+export class **MyComponent** {
+}</code></pre>
+<p>Thus, you need to get class <code>MyComponent</code> from the parsed info. As the same way we get ImportDeclaration, we need to extract ClassDeclaration.</p>
+<pre><code>var classDecl;
+node.forEachChild(child =&gt; {
+  if (**ts.SyntaxKind[child.kind] === &#39;ClassDeclaration&#39;) **{
+    classDecl = child;**
+**  }
+});
+console.log(classDecl);
+&gt; NodeObject {
+&gt;  ...
+&gt;  decorators:
+&gt;   [ NodeObject {
+&gt;       ...
+&gt;      ** expression: [Object] **},  // @Component is here
+&gt;     ...],
+&gt;  name:
+&gt;   IdentifierObject {
+&gt;     ...
+&gt;     escapedText: &#39;MyComponent&#39; },
+&gt;  ... }</code></pre>
+<p>Now, let’s extract decorator name <code>Component</code>.</p>
+<pre><code>classDecl.decorators[0].expression.expression.escapedText;
+&gt; &#39;Component&#39;</code></pre>
+<h3 id="last-get-class-name">Last, get class name.</h3>
+<pre><code>node.forEachChild(child =&gt; console.log(**ts.SyntaxKind[child.kind]**))
+&gt; ImportDeclaration
+**&gt; ClassDeclaration**
+&gt; EndOfFileToken</code></pre>
+<p>Getting class name is simpler than getting decorator info.</p>
+<pre><code>node.forEachChild(child =&gt; {
+  if (**ts.SyntaxKind[child.kind] === &#39;ClassDeclaration&#39;) **{
+    classDecl = child;**
+**  }
+});
+console.log(classDecl);
+&gt; NodeObject {
+&gt;  ...,
+&gt;  name:
+&gt;   IdentifierObject {
+&gt;     ...
+&gt;     **escapedText: &#39;MyComponent&#39; **}, // class name is here
+&gt;  ... }</code></pre>
+<p>Let’s get the class name.</p>
+<pre><code>classDecl.name.escapedText
+&gt; &#39;MyComponet&#39;</code></pre>
+<p>To summarize, the following is full code from this tutorial. You can simply copy/paste to experience it, e.g. <code>parse-typescript.js</code></p>
+<pre><code>const ts = require(&#39;typescript&#39;);
+**const node = ts.createSourceFile(**
+  &#39;x.ts&#39;,`
+    import { Component } from &#39;[@angular/core](http://twitter.com/angular/core)&#39;;
+    [@Component](http://twitter.com/Component)({selector: &#39;my&#39;, template: &#39;hello me.&#39; })
+    export class MyComponent {}`,
+  ts.ScriptTarget.Latest
+);
+
+**// Get import info.**
+var importDecl;
+node.forEachChild(child =&gt; {
+  if (ts.SyntaxKind[child.kind] === &#39;ImportDeclaration&#39;) {
+    importDecl = child;
+  }
+});
+const importFiles = importDecl.importClause.namedBindings.elements.map(
+  el =&gt; el.name.escapedText
+);
+const importLib = importDecl.moduleSpecifier.text;
+
+**// Get decorator info.**
+var classDecl;
+node.forEachChild(child =&gt; {
+  if (ts.SyntaxKind[child.kind] === &#39;ClassDeclaration&#39;) {
+    classDecl = child;
+  }
+});
+const decoratorName = classDecl.decorators[0].expression.expression.escapedText;
+const decoratorParams = 
+  classDecl.decorators[0].expression.arguments.reduce((acc, el) =&gt; {
+    el.properties.forEach(
+      prop =&gt; acc[prop.name.escapedText] = prop.initializer.text
+    );
+    return acc;
+  }, {});
+
+**// Get class name**
+const className =classDecl.name.escapedText
+
+console.log({
+  importFiles,
+  importLib,
+  decoratorName,
+  decoratorParams,
+  className
+});</code></pre>
+<p><code>$ node ./parse-typescript.js</code></p>
+<pre><code>{ importFiles: [ &#39;Component&#39; ],
+  importLib: &#39;[@angular/core](http://twitter.com/angular/core)&#39;,
+  decoratorName: &#39;Component&#39;,
+  decoratorParams: { selector: &#39;my&#39;, template: &#39;hello me.&#39; },
+  className: &#39;MyComponent&#39; }</code></pre>
+<p>The above technique has been used to develop <a href="https://github.com/allenhwkim/ngentest">ngentest</a>, which creates Angular unit tests automatically, <a href="https://github.com/allenhwkim/ngentest">https://github.com/allenhwkim/ngentest</a>.</p>
+<p><code>[ngentest</code>](<a href="https://github.com/allenhwkim/ngentest">https://github.com/allenhwkim/ngentest</a>) is a Angular5,6,7,8+ unit test generator for components, directives, servides, and pipes, and it is heavily rely on typescript AST parsing. As you read its README.md it parses a Typescript file and get the following info.</p>
+<ul>
+<li><p>imports statements info.</p>
+</li>
+<li><p>@Input statements info.</p>
+</li>
+<li><p>@Output statements info.</p>
+</li>
+<li><p>constructor providers info..</p>
+</li>
+<li><p>selector info. used in @Component or @Directove decorator.</p>
+</li>
+</ul>
+<p>Hope this helps someone.</p>
+<p>Happy coding :)</p>

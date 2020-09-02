@@ -1,0 +1,137 @@
+<h1 id="ava-the-test-tool-that-works">Ava, The Test Tool That Works</h1>
+<p>If you have written Javascript tests, you already know the pain. It’s too much to learn, too many things to follow; Mocha, Jasmine, tape…</p>
+<p>In addition, it runs test in parallel by default, which means your test will run faster than ever.</p>
+<ol>
+<li><p>Install ava, a test tool</p>
+<p> $ npm install ava --save-dev</p>
+</li>
+<li><p>Write your test <code>my-test.spec.js</code></p>
+<p> import test from &#39;ava&#39;;         // this is ES6 syntax :)</p>
+<p> test(‘test 1’, t =&gt; t.pass()}); // arrow function?, works!!</p>
+</li>
+<li><p>Run test</p>
+<p> $ ava my-test.spec.js</p>
+</li>
+</ol>
+<p>It’s that simple unlike others; jasmine, karma, mocha, .. etc.</p>
+<p>Of course, there are more to learn to master your tests. For more to learn;</p>
+<ul>
+<li><p><a href="#8b34">ES6 Source Code Support</a></p>
+</li>
+<li><p><a href="#7654">Browser Support</a></p>
+</li>
+<li><p><a href="#fbba">Simple Reporting</a></p>
+</li>
+<li><p><a href="#9f5a">Assertions</a></p>
+</li>
+<li><p><a href="#fee8">Mock/Stub</a></p>
+</li>
+</ul>
+<h2 id="es6-source-test">ES6 Source Test</h2>
+<p><strong>SyntaxError: Unexpected token export</strong>
+<a href="https://github.com/avajs/ava/blob/master/docs/recipes/babelrc.md#transpiling-tests-and-sources-the-same-way"><strong>avajs/ava</strong>
+<em>rocket: Futuristic JavaScript test runner</em>github.com</a></p>
+<p><a href="https://github.com/avajs/ava/blob/master/docs/recipes/babelrc.md">https://github.com/avajs/ava/blob/master/docs/recipes/babelrc.md</a>#transpiling-sources</p>
+<pre><code>$ npm install babel-register — save-dev</code></pre>
+<p>package.json</p>
+<pre><code>{
+...
+&quot;ava&quot;: {
+    &quot;files&quot;: [
+      &quot;src/**/*.spec.js&quot;
+    ],
+    &quot;require&quot;: [
+      &quot;babel-register&quot;  // automatically compile files on the fly
+    ],
+    &quot;inherit&quot;: true,    // inherit source file transpile config
+    &quot;verbose&quot;: true     // enable the verbose reporter
+  }
+}</code></pre>
+<p>Run ES6 source code with <code>ava</code></p>
+<pre><code>$ ava</code></pre>
+<h2 id="browser-support">Browser Support</h2>
+<p><strong>ReferenceError: document is not defined</strong></p>
+<p><a href="https://github.com/avajs/ava/blob/master/docs/recipes/browser-testing.md#install-browser-env">https://github.com/avajs/ava/blob/master/docs/recipes/browser-testing.md#install-browser-env</a></p>
+<p>To resolve, this, you need to install <a href="https://github.com/lukechilds/browser-env">browser-env</a> to simulates a global browser environment using jsdom.</p>
+<pre><code>$ npm install --save-dev browser-env</code></pre>
+<p>test/helpers/setup-browser-env.js</p>
+<pre><code>import browserEnv from ‘browser-env’;
+browserEnv([‘window’, ‘document’, ‘navigator’]);</code></pre>
+<p>package.json</p>
+<pre><code>&quot;ava&quot;: {
+  &quot;files&quot;: [
+    &quot;src/**/*.spec.js&quot;
+  ],
+  &quot;require&quot;: [
+    &quot;babel-register&quot;,
+    &quot;./test/helpers/setup-browser-env.js&quot;
+  ],
+  &quot;inherit&quot;: true
+}</code></pre>
+<h2 id="simple-reporting">Simple Reporting</h2>
+<p>By simply adding <code>verbose</code> as true into your package.json like the <a href="#6f25">above</a>, you can see the full test results.</p>
+<p><a href="https://github.com/avajs/ava#reporters">https://github.com/avajs/ava#reporters</a></p>
+<pre><code>&quot;ava&quot;: {
+    ...
+    &quot;verbose&quot;: true     // enable the verbose reporter
+  }
+}
+
+✔ singleton test
+
+✔ bar
+
+2 tests passed [18:31:53]</code></pre>
+<h2 id="assertions">Assertions</h2>
+<p><a href="https://github.com/avajs/ava-assert">https://github.com/avajs/ava-assert</a></p>
+<p><strong>.pass() **Passing assertion.
+**.fail() **Failing assertion.
+**.truthy(value) **Assert that value is truthy.
+**.falsy(value) **Assert that value is falsy.
+**.true(value) **Assert that value is true.
+**.false(value)</strong> Assert that value is false.
+<strong>.is(value, expected) **Assert that value is equal to expected.
+**.not(value, expected) **Assert that value is not equal to expected.
+**.deepEqual(value, expected) **Assert that value is deep equal to expected.
+**.notDeepEqual(value, expected)</strong> Assert that value is not deep equal to expected.
+**.throws(function|promise) **Assert that function throws an error
+**.notThrows(function|promise) **Assert that function doesn’t throw an error
+**.regex(contents, regex) **Assert that contents matches regex.
+**.notRegex(contents, regex) **Assert that contents does not match regex.
+**.ifError(error) **Assert that error is falsy.</p>
+<h2 id="mockstub">Mock/Stub</h2>
+<p>sinon for rescue!!</p>
+<h3 id="faking-dom-object">Faking DOM object</h3>
+<p>Code</p>
+<pre><code>document.body.getElementsByTagName(‘div’)[0].getAttribute(‘data-example’)</code></pre>
+<p>Test</p>
+<pre><code>var els = sinon.stub(document.body, ‘getElementsByTagName’);
+els.withArgs(‘div’).returns([{
+  getAttribute: sinon.stub();
+}])</code></pre>
+<h3 id="faking-a-function">Faking a function</h3>
+<p>Let’s say you have a class which update database when it is instantiated with <code>new</code>. When you test this, you don’t want to update database, you just want to test the instantiated correctly and make it sure the db update function is called.</p>
+<pre><code>class A {
+  constructor() {
+    this.updateDatabase(); // You want to fake this
+  }
+}</code></pre>
+<p>By using <code>sinon.stub</code> and returning a fake response using <code>returns</code>, you can make a very simple test.</p>
+<pre><code>let stub = sinon.stub(A.prototype, &#39;updateDatabase&#39;).returns(1);
+new A();
+t.is(spy.callCount, 1);</code></pre>
+<h2 id="settimeout-test">setTimeout Test</h2>
+<p>Asynchronous callback is often used in code. However, testing it is a really pain, but not with <code>ava </code>by;</p>
+<ol>
+<li><p>using <code>test.cb</code></p>
+</li>
+<li><p>and, calling <code>t.end()</code> when test ends.</p>
+</li>
+</ol>
+<p><a href="https://github.com/avajs/ava#callback-support">https://github.com/avajs/ava#callback-support</a></p>
+<pre><code>**test.cb**(&#39;setTimeout test&#39;, t =&gt; {
+  setTimeout(() =&gt; {
+    t.pass();
+    **t.end();**
+  }, 1000);
+});</code></pre>

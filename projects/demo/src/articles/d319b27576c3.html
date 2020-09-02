@@ -1,0 +1,152 @@
+<h1 id="resolving-before-route---vuejs">Resolving Before Route - VueJS</h1>
+<p>This is one of many articles that I have covered about VueJS</p>
+<ul>
+<li><p><a href="https://medium.com/p/6bb1481c6844/edit">React Vs Vue</a></p>
+</li>
+<li><p><a href="https://medium.com/p/6dc90cba4b96/edit">Routing With Nuxt: VueJS</a></p>
+</li>
+<li><p><a href="https://medium.com/p/efc3dad45eac/edit">Multi-Language With Nuxt: VueJS</a></p>
+</li>
+<li><p><a href="https://medium.com/p/d319b27576c3/edit">**Resolving Before Route: VueJS</a> (This Article)**</p>
+</li>
+<li><p>Form Valiadation: VueJS</p>
+</li>
+<li><p>Generating Documentation: VueJS</p>
+</li>
+<li><p>Multiple Modules: VueJS</p>
+</li>
+</ul>
+<p><a href="https://medium.com/p/6dc90cba4b96/edit">In the previous article</a>, I have covered the following items in this article</p>
+<ul>
+<li><p>State management using Vuex, a VueJS core plugin</p>
+</li>
+<li><p>Server-Side Rendering using Nuxt, a VueJS core plugin</p>
+</li>
+<li><p>Routing using vie-router, core plugin, including</p>
+</li>
+<li><p>Basic routing</p>
+</li>
+<li><p>Lazy loading</p>
+</li>
+<li><p>Building a package for production.</p>
+</li>
+<li><p>Multi-Language Translation using Nuxt and SSR.</p>
+</li>
+</ul>
+<p>This article will simply cover how to resolve data before routing(changing the page/going to a different page)</p>
+<p>With <code>vue-router</code>, there are several guards to redirect or cancel the navigation. For example, if you can’t receive the user data, don’t show up user details page.</p>
+<p>There are three kinds of guards; global guards, per-route guard, and in-component guards. All guards accept <code>to</code>, <code>from</code>, and <code>next</code> as parameters</p>
+<ul>
+<li><p>global guards.</p>
+</li>
+<li><p><code>router.beforeEach</code></p>
+</li>
+<li><p><code>router.beforeResolve</code></p>
+</li>
+<li><p><code>router.afterEach</code></p>
+</li>
+<li><p>per-route guard</p>
+</li>
+<li><p><code>route.beforeEnter</code></p>
+</li>
+<li><p>in-component guards</p>
+</li>
+<li><p><code>beforeRouteEnter</code> : called before the navigation is confirmed</p>
+</li>
+<li><p><code>beforeRouteUpdate</code> : called when the current component has changed</p>
+</li>
+<li><p><code>beforeRouteLeave</code> : used to prevent the users from leaving the page</p>
+</li>
+</ul>
+<p>This is the sequence.</p>
+<ol>
+<li><p><code>*beforeRouteLeave</code>*</p>
+</li>
+<li><p>router.beforeEach</p>
+</li>
+<li><p><code>*beforeRouteUpdate</code>*</p>
+</li>
+<li><p>route.beforeEnter</p>
+</li>
+<li><p><code>***beforeRouteEnter</code>***</p>
+</li>
+<li><p>router.beforeResolve</p>
+</li>
+<li><p>router.afterEach</p>
+</li>
+</ol>
+<p><a href="https://router.vuejs.org/en/advanced/navigation-guards.html#incomponent-guards">https://router.vuejs.org/en/advanced/navigation-guards.html#incomponent-guard</a>s</p>
+<p>Since all guards accept <code>to</code>, <code>from</code>, and <code>next</code> as parameters, too cancel the navigation, call <code>next(false)</code>, and to redirect call <code>next(&lt;path&gt;)</code> as example of <code>next(&#39;/&#39;)</code> or <code>next({ path: &#39;/&#39; })</code>. What if you want to continue the navigatoin, call <code>next()</code>. If you call <code>next(error)</code>, <code>router.onError(error)</code> will be performed. To summarize;</p>
+<ol>
+<li><p>continue <code>next()</code></p>
+</li>
+<li><p>cancel <code>next(false)</code></p>
+</li>
+<li><p>redirect <code>next(&lt;path&gt;)</code></p>
+</li>
+<li><p>error out <code>next(error)</code></p>
+</li>
+</ol>
+<p>To resolve data before route, we use <code>beforeRouteEnter</code> with the following code.</p>
+<pre><code>&lt;template&gt;
+   ...
+    &lt;ul id=&quot;posts&quot;&gt;
+      &lt;li **v-for=&quot;post in posts&quot;** :key=&quot;post.id&quot;&gt;
+        &lt;hr /&gt;
+        &lt;b&gt;{{ **post.title** }}&lt;/b&gt;
+        {{ **post.body** }}
+      &lt;/li&gt;
+    &lt;/ul&gt;
+   ...
+&lt;/template&gt;
+
+&lt;script&gt;
+  import axios from &#39;axios&#39;;
+
+  export default {
+    data() {
+      return {
+**        posts: []
+**      }
+    },
+    **beforeRouteEnter** (to, from, **next**) {
+      axios.get(&#39;[https://jsonplaceholder.typicode.com/posts&#39;](https://jsonplaceholder.typicode.com/posts&#39;))
+        .then(response =&gt; {
+          **next**(vm =&gt; (**vm.posts = response.data**) )
+        })
+    }
+  }
+&lt;/script&gt;</code></pre>
+<p>There is also a <code>fetch</code> method in Nuxt framework to set <code>state</code> variables. However, I might be wrongly doing, but I could not find any difference to <code>beforeRouteEnter</code> method. <a href="https://nuxtjs.org/api/pages-fetch/">https://nuxtjs.org/api/pages-fetch/</a></p>
+<p>You can find the working example with code from <a href="https://github.com/allenhwkim/vue-nuxt-practice/tree/3.0">github</a>.</p>
+<h2 id="review">Review</h2>
+<p><a href="https://medium.com/p/6bb1481c6844/edit">The previous article</a> and <a href="https://medium.com/p/6dc90cba4b96/edit">this article</a> has covered the following;</p>
+<ul>
+<li><p>State management using Vuex, a VueJS core plugin</p>
+</li>
+<li><p>Server-Side Rendering using Nuxt, a VueJS core plugin</p>
+</li>
+<li><p>Routing using vie-router, core plugin, including</p>
+</li>
+<li><p>Basic routing</p>
+</li>
+<li><p>Lazy loading</p>
+</li>
+<li><p>Building a package for production</p>
+</li>
+<li><p>Multi-language translation using vue-i18n, 3rd party tool</p>
+</li>
+<li><p><a href="https://medium.com/p/d319b27576c3/edit">Resolving before route</a></p>
+</li>
+</ul>
+<p>The next and future article will cover more</p>
+<ul>
+<li><p>Form validation using computed property</p>
+</li>
+<li><p>Documentation using docsify, 3rd party tool</p>
+</li>
+<li><p>Separate modules / namespace</p>
+</li>
+</ul>
+<p>See you at the next article</p>
+<p>Happy coding</p>

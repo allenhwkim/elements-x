@@ -1,0 +1,62 @@
+<h1 id="close-div-when-clicking-outside-it">Close Div When Clicking Outside It</h1>
+<p>No more document.addEventListener(‘click’, …)</p>
+<h3 id="1-create-a-button-to-open-a-popup-and-a-popup-itself">1. Create a button to open a popup and a popup itself</h3>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*otRu6TLwb2wF8uq4F0Bddw.png" alt=""></p>
+<pre><code>&lt;button onclick=&quot;showPopup()&quot;&gt;Open Popup&lt;/button&gt;
+
+&lt;div class=&quot;popup&quot;&gt;
+  &lt;div class=&quot;blocker&quot; onclick=&quot;hidePopup()&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;contents&quot;&gt;This is popup&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+<h3 id="2-now-style-it">2. Now style it</h3>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*5UHawkjTrXbajJyXVc1Z3Q.png" alt=""></p>
+<pre><code>.popup { display: none; }
+.popup.open { display: block; }
+
+.blocker {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: &#39; &#39;;
+    background: rgba(0,0,0,.5);
+}
+.popup .contents {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFF;
+
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}</code></pre>
+<h3 id="3-add-javascript-openclose-the-popup">3. Add Javascript open/close the popup</h3>
+<pre><code>&lt;script&gt;
+const popup = document.querySelector(&#39;.popup&#39;);
+function showPopup() {
+  popup.classList.add(&#39;open&#39;);
+}
+function hidePopup() {
+  popup.classList.remove(&#39;open&#39;);
+}
+&lt;/script&gt;</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*d_QIgNl5vUyB7NwiKi_Z5A.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*7xIA8oxMe_ApUTInKK-wtg.png" alt=""></p>
+<p>The key here is to <strong>open and close a page blocker and popup contents together</strong>. Treat the page blocker as a part of popup.</p>
+<p>The above code is demoed here.</p>
+<p>If you think this technique is useful, please give me some claps. It would be very helpful for me to write more like this.</p>
+<p>Happy coding.</p>
+<p>If you like this, you may also like these;</p>
+<ul>
+<li><p><a href="https://allenhwkim.github.io/jsanimation/#home">https://allenhwkim.github.io/jsanimation/#home</a></p>
+</li>
+<li><p><a href="https://allenhwkim.github.io/html-custom-elements/#home">https://allenhwkim.github.io/html-custom-elements/#home</a></p>
+</li>
+</ul>

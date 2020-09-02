@@ -1,0 +1,81 @@
+<h1 id="getting-started--docker-on-mac-os-x">Getting Started — Docker on Mac Os X</h1>
+<p>Study notes for Docker, a container as a service platform</p>
+<h2 id="1-install-docker-ce-on-mac">1. Install Docker CE on Mac</h2>
+<p><a href="https://docs.docker.com/docker-for-mac/install/">https://docs.docker.com/docker-for-mac/install/</a></p>
+<ul>
+<li><p>[Get Docker for Mac <a href="https://download.docker.com/mac/stable/Docker.dmg">Stable</a>] — 336 MB at the time of Jan 22nd 2018</p>
+</li>
+<li><p>Run</p>
+</li>
+</ul>
+<p><img src="https://cdn-images-1.medium.com/max/5688/1*6pmSec8j6oJF6hm_UQchEw.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*yf9RLo6jfhRUPuZb43EoBg.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*Y3y5Vkp5k5HS_AUD8tViVg.png" alt=""></p>
+<pre><code>**~$  docker --version**
+Docker version 17.12.0-ce, build c97c6d6
+**~$  docker run hello-world**
+Unable to find image &#39;hello-world:latest&#39; locally
+latest: Pulling from library/hello-world
+ca4f61b1923c: Pull complete
+Digest: .....
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly
+....</code></pre>
+<h2 id="2-build-a-containers--app--libsbins--environment">2. Build A Containers — app + libs/bins + environment</h2>
+<p><a href="https://docs.docker.com/get-started/part2/">https://docs.docker.com/get-started/part2/</a>
+<a href="https://nodejs.org/en/docs/guides/nodejs-docker-webapp/">https://nodejs.org/en/docs/guides/nodejs-docker-webapp/</a></p>
+<pre><code>$ mkdir hello-docker
+$ cd hello-docker
+$ npm init
+$ npm install express --save</code></pre>
+<h3 id="1-create-indexjs">1. Create <code>index.js</code></h3>
+<pre><code>var express = require(&#39;express&#39;)
+var app = express()
+
+app.get(&#39;/&#39;, (req, res) =&gt; res.send(&#39;Hello World!&#39;));
+app.listen(8081, _ =&gt; console.log(&#39;app listening on port 8081!&#39;));</code></pre>
+<h3 id="2-create-dockerfile">2. Create <code>Dockerfile</code></h3>
+<pre><code>`FROM node:7
+WORKDIR /app
+COPY package.json /app
+RUN npm install
+COPY . /app
+CMD node index.js
+EXPOSE 8081`</code></pre>
+<h3 id="3-build-and-run">3. Build and Run</h3>
+<pre><code>**$ ls**
+Dockerfile index.js package.json
+**$ `docker build -t hello-docker .`
+**Sending build context to Docker daemon  3.072kB
+Step 1/7 : FROM node:7
+...
+**$ docker run -p 8081:8081 -d hello-docker**
+
+**$ curl localhost:8081
+$ docker images # list images
+$ docker container ls   # listcontainers
+$ docker exec -it &lt;container-id&gt; /bin/bash
+$ docker container stop &lt;container-id&gt;**</code></pre>
+<h3 id="to-publish-your-docker-container">To publish your docker container</h3>
+<pre><code>$ docker login
+$ docker tag image allenhwkim/hello-docker:0.1.0
+$ docker push allenhwkim/hello-docker:0.1.0
+$ docker run -p 8081:8081 allenhwkim/hello-docker:0.1.0</code></pre>
+<h2 id="review">Review</h2>
+<p>After this short lab, now it’s time to look at how docker works. Here are some terms and concepts we need to know.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2018/1*TDWsiXHCEAG9n3nMOygBeA.png" alt="[https://docs.docker.com/engine/docker-overview/#the-docker-daemon](https://docs.docker.com/engine/docker-overview/#the-docker-daemon)"><em><a href="https://docs.docker.com/engine/docker-overview/#the-docker-daemon">https://docs.docker.com/engine/docker-overview/#the-docker-daemon</a></em></p>
+<p><strong>Docker daemon</strong> listens for Docker API requests and manages Docker objects; images, containers, networks, and volumes.</p>
+<p><strong>Docker Client</strong> is the primary way that Docker users interact with Docker.</p>
+<p><strong>Docker Registry</strong> is storage for docker images. Public Docker registeries are Docker Hub and Docker Cloud.</p>
+<p>An <strong>image</strong> is a read-only template with instructions for creating a Docker container.</p>
+<p>A <strong>container</strong> is a runnable instance of an image. You can create, start, stop, move, or delete a container using Docker clients(API or CLI). A container is defined by its image as well as any configuration options.</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*LO0OxSo3XnhA_85IBE4P7w.png" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*076iI5ApSaJ-vlqqkPzm5w.png" alt="Container VS Virtual Machine"><em>Container VS Virtual Machine</em></p>
+<p><strong>Services</strong> allow you to scale containers across multiple Docker daemons, which all work together as a <strong><em>swarm</em></strong> with multiple <strong><em>managers</em></strong> and <strong><em>workers</em></strong>.</p>
+<p>A <strong>service</strong> allows you to define the desired state, such as the number of replicas of the service that must be available at any given time.</p>
+<h3 id="image-vs-container">Image VS container</h3>
+<p>An** image** is basically an immutable template for creating a container. It’s easier to understand the difference between an image and container by considering what happens to an image when turned into a <strong>container</strong>.</p>
+<p>The Docker engine takes the <strong>image</strong> and adds a read-write filesystem on top, then initializes various settings. These settings include network options (IP, port, etc.), name, ID, and any resource limits (CPU, memory).</p>
+<p>Thanks</p>

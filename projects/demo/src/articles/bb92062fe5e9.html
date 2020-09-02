@@ -1,0 +1,57 @@
+<h1 id="angular-watch-for-element-changes-made-to-dom-tree">Angular: Watch for element changes made to DOM tree</h1>
+<p>using directive watchDomTree and event (dom-changed)</p>
+<p><img src="https://cdn-images-1.medium.com/max/11208/0*aGpJzf0GBEa9u2fY" alt="Photo by [Dan Burton](https://unsplash.com/@single_lens_reflex?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@single_lens_reflex?utm_source=medium&amp;utm_medium=referral">Dan Burton</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<p>As some of you may know already, with<code>[MutationObserver</code>](<a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver</a>) , you can monitor DOM changes. (FYI, MutationObserver also works in IE11)</p>
+<p>Here is Vanilla JS version of how to detect any change in your document.</p>
+<pre><code>const observer = **new MutationObserver**(list =&gt; {
+  console.log(‘mutation list’, list);
+});
+**observer.observe**(document.body, {attributes: true, childList: true, subtree: true});
+// perform any DOM change action in your page. e.g. show/hide</code></pre>
+<p>Let’s now wrap this into an Angular directive.</p>
+<p>The key point of it is to <strong>fire a CustomEvent from inside a directive</strong>, which is a little modified version of the code above.</p>
+<pre><code>const observer = new MutationObserver(list =&gt; {
+  const evt = new CustomEvent(&#39;dom-changed&#39;, {
+    detail: list, bubbles: true
+  });
+  el.dispatchEvent(evt);
+});
+observer.observe(el, {...});</code></pre>
+<p>This is how to use this directive, <code>watchDomChange</code> .</p>
+<pre><code>&lt;div watchDomTree (dom-changed)=&quot;handleDomChange($event)&quot;&gt;&lt;/div&gt;</code></pre>
+<p>This is full code for this directive, followed by demo.</p>
+<pre><code>import { Directive, ElementRef, OnInit} from &#39;[@angular/core](http://twitter.com/angular/core)&#39;;
+
+// watch dom change and fire (dom-changed) event
+[@Directive](http://twitter.com/Directive)({
+  selector: &#39;[watchDomTree]&#39;
+})
+export class DomChangedDirective implements OnInit {
+  constructor(private elRef: ElementRef) {}
+
+ngOnInit() {
+    this.registerDomChangedEvent(this.elRef.nativeElement);
+  }
+
+  registerDomChangedEvent(el) {
+    const observer = new MutationObserver( list =&gt; {
+      const evt =
+        new CustomEvent(&#39;dom-changed&#39;, 
+          {detail: list, bubbles: true});
+      el.dispatchEvent(evt);
+    });
+    const attributes = true;
+    const childList = true;
+    const subtree = true;
+    observer.observe(el, {attributes, childList, subtree});
+  }
+}</code></pre>
+<p>Here is the demo.</p>
+<p><img src="https://cdn-images-1.medium.com/max/3248/1*i3-LqnAyNpggXrwke0sLTg.png" alt=""></p>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
+<p>*<em>Do you think this useful? If so please;
+**</em> **Clap 👏 button **below️ to let others to see this too.</p>
+<ul>
+<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
+</ul>

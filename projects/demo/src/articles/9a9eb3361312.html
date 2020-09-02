@@ -1,0 +1,117 @@
+<h1 id="fake-it-until-make-it-mock-responses">Fake It Until Make It, mock-responses</h1>
+<p>It’s much easier to develop front-end app with NOT-real API response</p>
+<h3 id="question-should-we-wait-until-back-end-api-is-fully-working">Question: Should we wait until back-end API is fully working?</h3>
+<p>There are always incompletion or delays on API development, which makes front-end development very difficult to finalize their work efficiently. For example, HTML, CSS, and Javascript is all implemented, but back-end API is not working right now. Should we wait until it works?</p>
+<h3 id="answer-no-go-ahead-with-fake-api">Answer: No, go ahead with fake API.</h3>
+<p>For traditional development, we have been waiting for the API server to provide fully working responses, and it was a waste of time.</p>
+<p>For new development environment, such as Angular, React, or VueJS, which allows us to proxy API responses instead of using real API server when real API is not complete or is not stable.</p>
+<ul>
+<li><p><a href="https://angular.io/guide/build#proxying-to-a-backend-server">https://angular.io/guide/build#proxying-to-a-backend-server</a></p>
+</li>
+<li><p><a href="https://create-react-app.dev/docs/proxying-api-requests-in-development/">https://create-react-app.dev/docs/proxying-api-requests-in-development/</a></p>
+</li>
+<li><p><a href="https://cli.vuejs.org/config/#devserver-proxy">https://cli.vuejs.org/config/#devserver-proxy</a></p>
+</li>
+</ul>
+<p>Proxied not-a-real API responses will return a saved response from you, which is also updatable until the real API service is fully delivered. From now, I call this proxied not-a-real API response as** mock responses**.</p>
+<h3 id="concept-for-mock-api-responses">Concept For Mock API Responses</h3>
+<p>The concept for faking API response is simple. It does not use real back-end API. Freeing us from not using real API make us get away from all complication of back-end setups; DB, services, configuration, and more.</p>
+<p>Before:</p>
+<pre><code>Front-End-Application &lt;-&gt; Back-End API &lt;-&gt; Back-End DB
+                                       &lt;-&gt; Back-End Services
+                                       &lt;-&gt; Back-End Config</code></pre>
+<p>After:</p>
+<pre><code>Front-End-Application &lt;-&gt; Front-End Mock Response API </code></pre>
+<h3 id="how">How?</h3>
+<p>You need to develop a fake front-end mock response API server, then use it.</p>
+<p>If you don’t have your own fake front-end mock response server, use <a href="https://github.com/allenhwkim/mock-responses">mock-responses</a>, which is developed by Allen Kim.</p>
+<p>Since<a href="https://github.com/allenhwkim/mock-responses"> mock-responses </a>has been tested and used by Angular development, I here provide angular examples of how to set up mock-responses.</p>
+<p><strong>Step 1: Initialize your Angular application (skip this if you have an app.)</strong></p>
+<pre><code>$ npm install -g [@angular/cli](http://twitter.com/angular/cli)
+$ ng new my-app
+$ cd my-app 
+$ ng serve --open</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/4932/1*yY1NqlLkU1kIGdwewp026g.png" alt=""></p>
+<p><strong>Step 2: Add an HTTP call (skip this if you alreay have http calls)</strong></p>
+<p>src/app/app.module.ts</p>
+<pre><code>import { BrowserModule } from &#39;[@angular/platform-browser](http://twitter.com/angular/platform-browser)&#39;;
+import { NgModule } from &#39;[@angular/core](http://twitter.com/angular/core)&#39;;
+import { HttpClientModule } from &#39;[@angular/common](http://twitter.com/angular/common)/http&#39;;
+
+import { AppComponent } from &#39;./app.component&#39;;
+
+[@NgModule](http://twitter.com/NgModule)({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }</code></pre>
+<p>src/app/app.component.ts</p>
+<pre><code>import { Component } from &#39;[@angular/core](http://twitter.com/angular/core)&#39;;
+import { HttpClient } from &#39;[@angular/common](http://twitter.com/angular/common)/http&#39;;
+
+[@Component](http://twitter.com/Component)({
+  selector: &#39;app-root&#39;,
+  templateUrl: &#39;./app.component.html&#39;,
+  styleUrls: [&#39;./app.component.css&#39;]
+})
+export class AppComponent {
+  title = &#39;my-app&#39;;
+  apiData: any;
+
+  constructor(private http: HttpClient) {
+    this.http.get(&#39;/api/hello&#39;).subscribe(
+      resp =&gt; this.apiData,
+      error =&gt; window.alert(error.message)
+    );
+  }
+}</code></pre>
+<p>As result, you will see the following error because <code>http://localhost:4200/api/hello</code> does not exist.</p>
+<p><img src="https://cdn-images-1.medium.com/max/5268/1*AYqP7egHJlcjW_hRi0N-Zg.png" alt=""></p>
+<p><strong>Step 3: Set mock-responses to handle HTTP call</strong></p>
+<p>To make your api <code>[http://localhost:4200/api/hello</code>](<a href="http://localhost:4200/api/hello">http://localhost:4200/api/hello</a>) available on your application without using real API response, install and set up <a href="https://github.com/allenhwkim/mock-responses">mock-responses</a>.</p>
+<p><strong>Step 3–1. set up proxy.config.js</strong></p>
+<pre><code>module.exports = [{
+  context: [&#39;/api&#39;, &#39;/developer&#39;, &#39;/use-cases&#39;, &#39;/mock-responses&#39;],
+  target: &#39;[http://localhost:3331&#39;](https://www.rogers.com&#39;),
+  secure: false
+}];</code></pre>
+<p>**Step 3–2. setup mock-responses **in a different window, so that you can see how the server is working.</p>
+<pre><code>`$ npm i mock-responses @nestjs/platform-express -D
+$ npx mock-responses`</code></pre>
+<p>You will see the following files are create to run a fake api server.</p>
+<pre><code>- mock-responses.config.js # configuration file
+- mock-responses.sql # Sqlite3 sql file, to initialize data
+- mock-responses.sqlite3 # Sqlite3 DB file, to serve API</code></pre>
+<p>If you are curious about the actual data, please install db browser app from <a href="https://sqlitebrowser.org/">https://sqlitebrowser.org/</a>. Open DB Browser for SQlite and select .sqlite3 file from “Open Database”</p>
+<p><img src="https://cdn-images-1.medium.com/max/4196/1*2aEnpIr5GAYGlx80meq9TQ.png" alt=""></p>
+<p><strong>Step 3–3. Restart your Angular app.</strong></p>
+<pre><code>$ ng serve --proxy-config proxy.config.js</code></pre>
+<p><img src="https://cdn-images-1.medium.com/max/5540/1*7Fvl0psxzPgIbP7LsWZjGQ.png" alt=""></p>
+<p>Now API call is successfully made without an error and without using real back-end servers.</p>
+<p><img src="https://cdn-images-1.medium.com/max/5196/1*NlqQ29nj7bSgXHgCmQrSaw.png" alt=""></p>
+<p><a href="https://github.com/allenhwkim/mock-responses">mock-responses</a> comes with user interfaces. Thus, you don’t need coding to enable your own faked API response.</p>
+<p>Here are few screenshots that you can experience.</p>
+<p><img src="https://cdn-images-1.medium.com/max/5272/1*j5umU9RSt4ZCTwNB0EIhcg.png" alt="Dashboard"><em>Dashboard</em></p>
+<p><img src="https://cdn-images-1.medium.com/max/5268/1*KNHzBPepCyOZv7rm-e-JEw.png" alt="mock responses"><em>mock responses</em></p>
+<p><img src="https://cdn-images-1.medium.com/max/5256/1*bKdMKCz4esi4vsA3AZFKeQ.png" alt="mock responses — edit"><em>mock responses — edit</em></p>
+<p><img src="https://cdn-images-1.medium.com/max/5256/1*tpN04cN2H2poFTGTC6jACw.png" alt="use cases"><em>use cases</em></p>
+<p><img src="https://cdn-images-1.medium.com/max/5272/1*KKHMlzjW9H7n-XITMwZWlQ.png" alt="use cases — edit"><em>use cases — edit</em></p>
+<p>If you are curious about mock-responses, here are the technical specs.</p>
+<ul>
+<li><p>server: NodeJS / NestJS</p>
+</li>
+<li><p>client: Angular9</p>
+</li>
+<li><p>code : <a href="https://github.com/allenhwkim/mock-responses">https://github.com/allenhwkim/mock-responses</a></p>
+</li>
+</ul>
+<p>If you have any questions regarding <a href="https://github.com/allenhwkim/mock-responses">mock-responses</a>, please write your questions at <a href="https://github.com/allenhwkim/mock-responses/issues/new">github issues </a>instead of adding comments here (not very notification-friendly)</p>
+<p>Please also let me know if you have a better idea.</p>
+<p>Happy coding :)</p>

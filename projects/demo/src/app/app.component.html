@@ -15,7 +15,7 @@
         <a routerLink="/tools" routerLinkActive="active">Tools</a>
       </div>
       <div class="icons">
-        <a href="{{CONFIG.githubRepo}}">
+        <a href="{{config.githubRepo}}">
           <i class="fab fa-github"></i>
         </a>
       </div>
@@ -24,9 +24,18 @@
 
   <div class="main">
     <aside class="aside">
-      <ul>
-        <li *ngFor="let comp of components" routerLink="/components/{{comp[0]}}" routerLinkActive="active"> 
+      <ul *ngIf="urlGroup === 'components'">
+        <li *ngFor="let comp of components" 
+          routerLink="/components/{{comp[0]}}" 
+          routerLinkActive="active"> 
           <i class="{{comp[1].icon}}"></i> <b>{{comp[1].text}}</b>
+        </li> 
+      </ul>
+      <ul *ngIf="urlGroup === 'articles'">
+        <li *ngFor="let article of articles" 
+          routerLink="/articles/{{article[1].uniqueSlug}}"
+          routerLinkActive="active"> 
+          {{article[1].title}}
         </li> 
       </ul>
     </aside>

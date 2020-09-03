@@ -59,12 +59,14 @@ const urls = `
   https://medium.com/allenhwkim/building-a-carousel-in-angular-way-84d2c45baf02
   `.split('\n').map(el => el.trim()).filter(el => el);
 
+const targetDir = `projects/demo/src/app/articles`;
 const all = urls.map(url => {
   return med2md(url).then(result => {
-    const {id, title, mediumUrl} = result.json.payload.value;
-    console.log('exporting article', mediumUrl, 'to', `projects/demo/src/articles/${id}.html`);
-    fs.writeFileSync(`projects/demo/src/articles/${id}.html`, result.html.toString());
-    return {id, title, mediumUrl};
+    const {id, title, mediumUrl, uniqueSlug} = result.json.payload.value;
+    const path = `${targetDir}/${uniqueSlug}.html`;
+    console.log('exporting article', mediumUrl, 'to', path);
+    fs.writeFileSync(path, result.html.toString());
+    return {id, title, mediumUrl, uniqueSlug};
   });
 });
 
@@ -72,6 +74,7 @@ Promise.all(all)
  .then(o => {
    const articles = {};
    o.forEach(el => articles[el.id] = el);
-    console.log('writing index to', `projects/demo/src/articles/info.ts`);
-   fs.writeFileSync(`projects/demo/src/articles/info.ts`, `export articles= ${ JSON.stringify(articles, null, 2) };`);
+   const path = `${targetDir}/index.ts`;
+   console.log('writing index to', path);
+   fs.writeFileSync(path, `export const articles = ${ JSON.stringify(articles, null, 2) };`);
  });

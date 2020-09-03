@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './404.component';
 import { ElementsExtendedModule } from '../../../lib/src';
 import { ComponentsComponent } from './components.component';
+import { ArticlesComponent } from './articles.component';
 import { IndexComponent as ComponentsIndexComponent } from './components/index.componnt';
 
 import 'prismjs/components/prism-css';
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 const routes : Routes = [
   { path: 'components', component: ComponentsIndexComponent },
   { path: 'components/:name', component: ComponentsComponent },
+  { path: 'articles/:name', component: ArticlesComponent },
   { path: '', redirectTo: 'components', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
@@ -29,7 +31,7 @@ const routes : Routes = [
     RouterModule.forRoot(routes)
   ],
   declarations: [
-    AppComponent, ComponentsComponent
+    AppComponent, ComponentsComponent, ArticlesComponent
   ],
   providers: [],
   bootstrap: [AppComponent],

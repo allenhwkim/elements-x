@@ -1,7 +1,8 @@
 import { Component, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TabsComponent } from '../../../lib/src';
-import { CONFIG } from './config';
+import { config } from './config';
+import { components } from './components/index';
 import { usageTemplate } from './components/usage';
 
 @Component({
@@ -9,12 +10,12 @@ import { usageTemplate } from './components/usage';
     <div class="header vcentered">
       <h2 class="name">{{component?.text}}</h2>
       <div class="links">
-        <a target="_blank" href="${CONFIG.githubRepo}/blob/master/projects/lib/src/{{componentName}}/{{componentName}}.component.ts">
+        <a target="_blank" href="${config.githubRepo}/blob/master/projects/lib/src/{{componentName}}/{{componentName}}.component.ts">
           <ee-button class="no-border no-shadow icon" title="code">
             <i class="fab fa-angular"></i>
           </ee-button>
         </a>
-        <a target="_blank" href="${CONFIG.githubRepo}/issues?q={{componentName}}+in%3Atitle">
+        <a target="_blank" href="${config.githubRepo}/issues?q={{componentName}}+in%3Atitle">
           <ee-button class="no-border no-shadow icon" title="issues">
             <i class="fas fa-comments"></i>
           </ee-button>
@@ -87,7 +88,7 @@ export class ComponentsComponent implements AfterViewInit {
   }
 
   async loadComponent() {
-    this.component = CONFIG.components[this.componentName];
+    this.component = components[this.componentName];
     this.cdr.detectChanges();
     const klassName = `${this.component.text}Component`;
     this.dynContainer && this.dynContainer.clear();

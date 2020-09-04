@@ -28,14 +28,16 @@
         <li *ngFor="let comp of components" 
           routerLink="/components/{{comp[0]}}" 
           routerLinkActive="active"> 
-          <i class="{{comp[1].icon}}"></i> <b>{{comp[1].text}}</b>
+          <i class="{{comp[1].icon}}"></i>
+          <b>{{comp[1].text}}</b>
         </li> 
       </ul>
       <ul *ngIf="urlGroup === 'articles'">
         <li *ngFor="let article of articles" 
           routerLink="/articles/{{article[1].uniqueSlug}}"
           routerLinkActive="active"> 
-          {{article[1].title}}
+          <i class="fas fa-newspaper"></i> 
+          <b>{{article[1].title}} </b>
         </li> 
       </ul>
     </aside>

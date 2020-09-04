@@ -40,6 +40,14 @@
           <b>{{article[1].title}} </b>
         </li> 
       </ul>
+      <ul *ngIf="urlGroup === 'tools'">
+        <li *ngFor="let tool of tools" 
+          routerLink="/tools/{{tool[0]}}"
+          routerLinkActive="active"> 
+          <i class="fas fa-newspaper"></i> 
+          <b>{{tool[1].text}} </b>
+        </li> 
+      </ul>
     </aside>
     <article class="article">
       <section>

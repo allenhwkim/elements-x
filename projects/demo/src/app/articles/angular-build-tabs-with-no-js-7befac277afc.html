@@ -1,62 +1,59 @@
-<h1 id="angular-build-tabs-with-no-js">Angular: Build Tabs With no JS.</h1>
-<p>No need to use JS with Angular for Tabs</p>
-<p><img src="https://cdn-images-1.medium.com/max/6144/0*YQFL9nhONW77JXoF" alt="Photo by [Florencia Viadana](https://unsplash.com/@florenciaviadana?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@florenciaviadana?utm_source=medium&amp;utm_medium=referral">Florencia Viadana</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Angular: Build Tabs With no JS.</h1>
+<h2 class="subtitle">No need to use JS with Angular for Tabs</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/0*YQFL9nhONW77JXoF" /><figcaption>Photo by <a href="https://unsplash.com/@florenciaviadana?utm_source=medium&utm_medium=referral">Florencia Viadana</a> on <a href="https://unsplash.com?utm_source=medium&utm_medium=referral">Unsplash</a></figcaption></figure></div>
 <p>These are the steps.</p>
-<ol>
-<li><p>Have your HTML ready</p>
-</li>
-<li><p>Control selected tab with <code>tab</code> variable</p>
-</li>
-<li><p>Style it</p>
-</li>
-</ol>
+<li class="number">Have your HTML ready</li>
+<li class="number">Control selected tab with <span class="quote">tab</span> variable</li>
+<li class="number">Style it</li>
 <p>This is the final output.</p>
-<h3 id="first-save-your-html-ready">First, save your HTML ready</h3>
-<pre><code>&lt;div class=&quot;tabs&quot;&gt;
-  &lt;div class=&quot;index&quot;&gt;
-    &lt;div&gt;Tab 1&lt;/div&gt;
-    &lt;div&gt;Tab 2&lt;/div&gt;
-    &lt;div&gt;Tab 3&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;contents&quot;&gt;
-    &lt;div&gt; Tab 1 contents. Hello &lt;/div&gt;
-    &lt;div&gt; Tab 2 contents. Angular &lt;/div&gt;
-    &lt;div&gt; Tab 3 contents. Tabs &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<h3 id="second-control-selected-tab-with-tab-variable">Second, control selected tab with <code>tab</code> variable</h3>
-<pre><code>&lt;div class=&quot;tabs&quot;&gt;
-  &lt;div class=&quot;index&quot;&gt;
-    &lt;div **tabindex=&quot;0&quot; role=&quot;tab&quot;**
-      **(click)=&quot;tab=1&quot; (keyup.enter)=&quot;tab=1&quot;**
-      **[ngClass]=&quot;{active: tab===1}&quot;**&gt;Tab 1&lt;/div&gt;
-    &lt;div tabindex=&quot;0&quot; role=&quot;tab&quot;
-      (click)=&quot;tab=2&quot; (keyup.enter)=&quot;tab=2&quot;
-      [ngClass]=&quot;{active: tab===2}&quot;&gt;Tab 2&lt;/div&gt;
-    &lt;div tabindex=&quot;0&quot; role=&quot;tab&quot;
-      (click)=&quot;tab=3&quot; (keyup.enter)=&quot;tab=3&quot;
-      [ngClass]=&quot;{active: tab===3}&quot;&gt;Tab 3&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;contents&quot;&gt;
-    &lt;div ***ngIf=&quot;tab === 1&quot;**&gt; Tab 1 contents. Hello &lt;/div&gt;
-    &lt;div *ngIf=&quot;tab === 2&quot;&gt; Tab 2 contents. Angular &lt;/div&gt;
-    &lt;div *ngIf=&quot;tab === 3&quot;&gt; Tab 3 contents. Tabs &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<ul>
-<li><p><code>tabindex=&quot;0&quot;</code> for keyboard navigation to work</p>
-</li>
-<li><p><code>role=&quot;0&quot;</code> for accessibility</p>
-</li>
-<li><p><code>(click)=”tab=X”</code> and<code> (keyup.enter)=”tab=2&quot;</code> to set active tab</p>
-</li>
-<li><p><code>[ngClass]=&quot;{active: tab === X}&quot;</code> to display active tab.</p>
-</li>
-<li><p><code>*ngIf=&quot;tab === X&quot;</code> to display active contents only</p>
-</li>
-</ul>
-<h3 id="third-style-it">Third, style it</h3>
-<pre><code>.tabs {
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fstackblitz.com%2Fedit%2Fangular-min-tabs%3Fembed%3D1%26file%3Dsrc%252Fapp%252Fapp.component.html&display_name=StackBlitz&url=https%3A%2F%2Fstackblitz.com%2Fedit%2Fangular-min-tabs%3Ffile%3Dsrc%252Fapp%252Fapp.component.html&image=https%3A%2F%2Fc.staticblitz.com%2Fassets%2Ficon-1d2450aadcf984376236c23cd2ab0ba231ddd1d85c9b72990ed2ede5b4974d1b.png&key=a19fcc184b9711e1b4764040d3dc5c07&type=text%2Fhtml&schema=stackblitz" width="745" height="400"></iframe><figcaption></figcaption></figure></div>
+<h2>First, save your HTML ready</h2>
+<pre>&lt;div class="tabs">
+  &lt;div class="index">
+    &lt;div>Tab 1&lt;/div>
+    &lt;div>Tab 2&lt;/div>
+    &lt;div>Tab 3&lt;/div>
+  &lt;/div>
+  &lt;div class="contents">
+    &lt;div> Tab 1 contents. Hello &lt;/div>
+    &lt;div> Tab 2 contents. Angular &lt;/div>
+    &lt;div> Tab 3 contents. Tabs &lt;/div>
+  &lt;/div>
+&lt;/div></pre>
+<h2>Second, control selected tab with <span class="quote">tab</span> variable</h2>
+<pre>&lt;div class="tabs">
+  &lt;div class="index">
+    &lt;div <b>tabindex="0" role="tab"</b>
+      <b>(click)="tab=1" (keyup.enter)="tab=1"</b>
+      <b>[ngClass]="{active: tab===1}"</b>>Tab 1&lt;/div>
+    &lt;div tabindex="0" role="tab"
+      (click)="tab=2" (keyup.enter)="tab=2"
+      [ngClass]="{active: tab===2}">Tab 2&lt;/div>
+    &lt;div tabindex="0" role="tab"
+      (click)="tab=3" (keyup.enter)="tab=3"
+      [ngClass]="{active: tab===3}">Tab 3&lt;/div>
+  &lt;/div>
+  &lt;div class="contents">
+    &lt;div <b>*ngIf="tab === 1"</b>> Tab 1 contents. Hello &lt;/div>
+    &lt;div *ngIf="tab === 2"> Tab 2 contents. Angular &lt;/div>
+    &lt;div *ngIf="tab === 3"> Tab 3 contents. Tabs &lt;/div>
+  &lt;/div>
+&lt;/div></pre>
+<li class="bulletin"><span class="quote">tabindex="0"</span> for keyboard navigation to work</li>
+<li class="bulletin"><span class="quote">role="0"</span> for accessibility</li>
+<li class="bulletin"><span class="quote">(click)=”tab=X”</span> and<span class="quote"> (keyup.enter)=”tab=2"</span> to set active tab</li>
+<li class="bulletin"><span class="quote">[ngClass]="{active: tab === X}"</span> to display active tab.</li>
+<li class="bulletin"><span class="quote">*ngIf="tab === X"</span> to display active contents only</li>
+<h2>Third, style it</h2>
+<pre>.tabs {
   .index {
     display: flex;
     * {
@@ -77,12 +74,10 @@
     min-height: 120px;
     padding: 12px;
   }
-}</code></pre>
+}</pre>
 <p>Done! no more.</p>
 <p>Happy coding :)</p>
-<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
-<p>*<em>Do you think this useful? If so please;
-**</em> **Clap 👏 button **below️ to let others to see this too.</p>
-<ul>
-<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
-</ul>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">Angular Random How-Tos</a>. You may find some useful articles for your daily development.</p>
+<p><a href="https://twitter.com/allenhwkim">Follow Allen on Twitter (@allenhwkim)</a> <b>Do you think this useful? If so please;
+*</b>below️ to let others to see this too.
+* <b>Clap 👏 button </b></p>

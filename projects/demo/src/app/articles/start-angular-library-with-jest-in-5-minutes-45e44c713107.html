@@ -1,30 +1,30 @@
-<h1 id="start-angular-library-with-jest-in-5-minutes">Start Angular Library with Jest In 5 minutes</h1>
-<p>☝ The Jest setup described in this article is tested with Angular CLI 9</p>
-<p><img src="https://cdn-images-1.medium.com/max/3350/0*TxWHwZ_DevNspPoW.jpg" alt=""></p>
+<style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Start Angular Library with Jest In 5 minutes</h1>
+<blockquote><i>☝ The Jest setup described in this article is tested with Angular CLI 9</i></blockquote>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/0*TxWHwZ_DevNspPoW.jpg" /><figcaption></figcaption></figure></div>
 <p>You like Angular and you also like Jest? However Angular CLI comes with Karma and Jasmine. This article provides bash shell commands to convert Angular projects from Angular/Karma to Angular/Jest in 5 minutes.</p>
 <p>Here are the steps.</p>
-<ol>
-<li><p>Initialize the library</p>
-</li>
-<li><p>Uninstall Karma / Protractor / Jasmine</p>
-</li>
-<li><p>Install Jest and create jest.setup.ts / jest.config.js</p>
-</li>
-<li><p>Update tsconfig.spec.json</p>
-</li>
-<li><p>Last, remove src/test.ts and usages</p>
-</li>
-</ol>
-<h3 id="1-initialize-the-library">1. Initialize the library</h3>
-<pre><code>$ ng new **my-lib** --create-application=false
-$ cd **my-lib**
-$ ng generate library **my-lib
-**$ ng generate application **my-lib-demo**
-
-$ ng build **my-lib** # Check if build good**
-**$ ng build **my-lib-demo **# Check if build good</code></pre>
-<h3 id="2-uninstall-karma--protractor--jasmine">2. Uninstall Karma / Protractor / Jasmine</h3>
-<pre><code>$ npm uninstall --save-dev \
+<li class="number">Initialize the library</li>
+<li class="number">Uninstall Karma / Protractor / Jasmine</li>
+<li class="number">Install Jest and create jest.setup.ts / jest.config.js</li>
+<li class="number">Update tsconfig.spec.json</li>
+<li class="number">Last, remove src/test.ts and usages</li>
+<h2>1. Initialize the library</h2>
+<pre>$ ng new <b>my-lib</b> --create-application=false
+$ cd <b>my-lib</b>
+$ ng generate library <b>my-lib
+</b>$ ng generate application <b>my-lib-demo</b></pre>
+<pre>$ ng build <b>my-lib</b> # Check if build good<b>
+</b>$ ng build <b>my-lib-demo </b># Check if build good</pre>
+<h2>2. Uninstall Karma / Protractor / Jasmine</h2>
+<pre>$ npm uninstall --save-dev \
   karma karma-chrome-launcher \
   karma-coverage-istanbul-reporter \
   karma-jasmine karma-jasmine-html-reporter \
@@ -33,56 +33,47 @@ $ ng build **my-lib** # Check if build good**
   jamine-spec-reporter \
   @types/jasminewd2 \
   @types/jasmine \
-  jasmine-spec-reporter --save-dev
-
-$ rm -rf \
-  projects/**my-lib-demo**/karma.conf.js \
-  projects/**my-lib-demo**/e2e \
-  projects/**my-lib**/karma.conf.js</code></pre>
-<h3 id="3-install-jest-and-create-jestsetupts--jestconfigjs">3. Install Jest and create jest.setup.ts / jest.config.js</h3>
-<p>Jest requires <code>jest.config.ts</code>.</p>
-<pre><code>$ npm install -D @types/jest jest jest-preset-angular ts-jest
-
-$ echo &quot;*import *&#39;jest-preset-angular&#39;;&quot; &gt; jest.setup.ts
-$ contents=&quot;*module*.exports = *{
-  *preset: &#39;jest-preset-angular&#39;,
-  setupFilesAfterEnv: *[*&#39;*&lt;*rootDir*&gt;*/../../jest.setup.ts&#39;*]
-}*;&quot;;
-$ echo &quot;$contents&quot; &gt; projects/**my-lib**/jest.config.js
-$ echo &quot;$contents&quot; &gt; projects/**my-lib-demo**/jest.config.js</code></pre>
-<h3 id="4-update-tsconfigspecjson">4. Update tsconfig.spec.json</h3>
-<p>Add <code>esModuleInterop</code> and <code>emitDecoratorMetadata</code> as true.</p>
-<pre><code>$ vi projects/**my-lib**/tsconfig.spec.json projects/**my-lib-demo**/tsconfig.spec.json
-
-{
-  &quot;extends&quot;: &quot;../../tsconfig.json&quot;,
-  &quot;compilerOptions&quot;: {
-    &quot;outDir&quot;: &quot;../../out-tsc/spec&quot;,
-    &quot;types&quot;: [ &quot;jest&quot;, &quot;node&quot; ],
-    &quot;esModuleInterop&quot;: true,
-    &quot;emitDecoratorMetadata&quot;: true
+  jasmine-spec-reporter --save-dev</pre>
+<pre>$ rm -rf \
+  projects/<b>my-lib-demo</b>/karma.conf.js \
+  projects/<b>my-lib-demo</b>/e2e \
+  projects/<b>my-lib</b>/karma.conf.js</pre>
+<h2>3. Install Jest and create jest.setup.ts / jest.config.js</h2>
+<p>Jest requires <span class="quote">jest.config.ts</span>.</p>
+<pre>$ npm install -D @types/jest jest jest-preset-angular ts-jest</pre>
+<pre>$ echo "<b>my-lib</b>'jest-preset-angular';" > jest.setup.ts
+$ contents="<b>my-lib-demo</b>.exports = <i>import </i>preset: 'jest-preset-angular',
+  setupFilesAfterEnv: <i>module</i>'<i>{
+  </i>rootDir<i>[</i>/../../jest.setup.ts'<i><</i>;";
+$ echo "$contents" > projects/<i>></i>/jest.config.js
+$ echo "$contents" > projects/<i>]
+}</i>/jest.config.js</pre>
+<h2>4. Update tsconfig.spec.json</h2>
+<p>Add <span class="quote">esModuleInterop</span> and <span class="quote">emitDecoratorMetadata</span> as true.</p>
+<pre>$ vi projects/<b>my-lib</b>/tsconfig.spec.json projects/<b>my-lib-demo</b>/tsconfig.spec.json</pre>
+<pre>{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/spec",
+    "types": [ "jest", "node" ],
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true
   },
   ...
-}</code></pre>
-<h3 id="5-last-remove-srctestts-and-usages">5. Last, remove src/test.ts and usages</h3>
-<p><code>src/test.ts</code> is never used with Jest.</p>
-<pre><code>$ rm projects/**my-lib-demo**/src/test.ts projects/**my-lib**/src/test.ts
-$ vi projects/**my-lib-demo**/tsconfig.spec.json projects/**my-lib**/tsconfig.spec.json projects/**my-lib**/tsconfig.lib.json angular.json</code></pre>
-<p><strong>All Done!!!!!!</strong>. Now let’s run the test with Jest command.</p>
-<pre><code>$ npx jest --config projects/**my-lib**/jest.config.js
-$ npx jest --config projects/**my-lib-demo**/jest.config.js</code></pre>
-<p><img src="https://cdn-images-1.medium.com/max/4832/1*44c1jA5gKUxKk2amVDDPdg.png" alt=""></p>
+}</pre>
+<h2>5. Last, remove src/test.ts and usages</h2>
+<p><span class="quote">src/test.ts</span> is never used with Jest.</p>
+<pre>$ rm projects/<b>my-lib-demo</b>/src/test.ts projects/<b>my-lib</b>/src/test.ts
+$ vi projects/<b>my-lib-demo</b>/tsconfig.spec.json projects/<b>my-lib</b>/tsconfig.spec.json projects/<b>my-lib</b>/tsconfig.lib.json angular.json</pre>
+<p><b>All Done!!!!!!</b>. Now let’s run the test with Jest command.</p>
+<pre>$ npx jest --config projects/<b>my-lib</b>/jest.config.js
+$ npx jest --config projects/<b>my-lib-demo</b>/jest.config.js</pre>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*44c1jA5gKUxKk2amVDDPdg.png" /><figcaption></figcaption></figure></div>
 <p>Happy coding :)</p>
-<p>Do you like Angular? You may find some useful articles for your daily development at <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*.</p>
-<p>*<em>Do you think this useful? If so please;
-**</em> **Clap 👏 button **below️ to let others to see this too.</p>
-<ul>
-<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
-</ul>
-<h3 id="references">References</h3>
-<ol>
-<li><p><a href="https://angular.io/guide/creating-libraries">https://angular.io/guide/creating-libraries</a></p>
-</li>
-<li><p><a href="https://medium.com/angular-in-depth/migrate-your-angular-library-to-jest-faba9579591a">https://medium.com/angular-in-depth/migrate-your-angular-library-to-jest-faba9579591a</a></p>
-</li>
-</ol>
+<p>Do you like Angular? You may find some useful articles for your daily development at <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">Angular Random How-Tos</a>.</p>
+<p><a href="https://twitter.com/allenhwkim">Follow Allen on Twitter (@allenhwkim)</a> <b>Do you think this useful? If so please;
+*</b>below️ to let others to see this too.
+* <b>Clap 👏 button </b></p>
+<h2>References</h2>
+<li class="number"><a href="https://angular.io/guide/creating-libraries">https://angular.io/guide/creating-libraries</a></li>
+<li class="number"><a href="https://medium.com/angular-in-depth/migrate-your-angular-library-to-jest-faba9579591a">https://medium.com/angular-in-depth/migrate-your-angular-library-to-jest-faba9579591a</a></li>

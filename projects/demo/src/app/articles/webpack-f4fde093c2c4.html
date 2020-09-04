@@ -1,80 +1,82 @@
-<h1 id="webpack-for-dummies">Webpack For Dummies</h1>
-<p>Basic Concept of Webpack; entry, output, loaders, and plugins</p>
+<style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Webpack For Dummies</h1>
+<h2 class="subtitle">Basic Concept of Webpack; entry, output, loaders, and plugins</h2>
 <p>What is webpack? webpack is a package bundler for your Javascript application. This is to give basic idea of how to create your own webpack.config.js.</p>
 <p>There are four terms to know, and it’s all about input and output.</p>
-<h2 id="concepts">Concepts</h2>
-<ul>
-<li><p>What is your input? <strong>entry</strong></p>
-</li>
-<li><p>What is your output? <strong>output</strong></p>
-</li>
-<li><p>What to do with input? <strong>loaders</strong></p>
-</li>
-<li><p>What to do with output? <strong>plugins</strong></p>
-</li>
-</ul>
-<h2 id="simple-example">Simple Example</h2>
-<h3 id="indexjs">index.js</h3>
-<pre><code>`import bar from &#39;./bar&#39;;
-bar();`</code></pre>
-<h3 id="barjs">bar.js</h3>
-<pre><code>`export default function bar() {
+<h1>Concepts</h1>
+<li class="bulletin">What is your input? <b>entry</b></li>
+<li class="bulletin">What is your output? <b>output</b></li>
+<li class="bulletin">What to do with input? <b>loaders</b></li>
+<li class="bulletin">What to do with output? <b>plugins</b></li>
+<h1>Simple Example</h1>
+<h2>index.js</h2>
+<pre><span class="quote">import bar from './bar';
+bar();</span></pre>
+<h2>bar.js</h2>
+<pre><span class="quote">export default function bar() {
   //
-}`</code></pre>
-<h3 id="webpackconfigjs">webpack.config.js</h3>
-<pre><code>`module.exports = {
-  entry: &#39;./index.js&#39;,
+}</span></pre>
+<h2>webpack.config.js</h2>
+<pre><span class="quote">module.exports = {
+  entry: './index.js',
   output: {
-    filename: &#39;bundle.js&#39;
+    filename: 'bundle.js'
   }
-};`</code></pre>
-<h3 id="indexhtml">index.html</h3>
-<pre><code>`&lt;html&gt;
-  &lt;head&gt; ... &lt;/head&gt;
-  &lt;body&gt;
+};</span></pre>
+<h2>index.html</h2>
+<pre><span class="quote">&lt;html>
+  &lt;head> ... &lt;/head>
+  &lt;body>
     ...
-    &lt;script src=&quot;bundle.js&quot;&gt;&lt;/script&gt; // this has index.js,
-  &lt;/body&gt;
-&lt;/html&gt;`</code></pre>
-<h2 id="getting-started">Getting Started</h2>
-<pre><code>`$ npm install --save-dev webpack` 
+    &lt;script src="bundle.js">&lt;/script> // this has index.js,
+  &lt;/body>
+&lt;/html></span></pre>
+<h1>Getting Started</h1>
+<pre><span class="quote">$ npm install --save-dev webpack</span> 
 ## create a webpack.config.js
-`$ webpack`</code></pre>
-<h2 id="webpackconfigjs-1">webpack.config.js</h2>
-<h2 id="entry">entry</h2>
-<pre><code>`module.exports = {
-  entry: &#39;./path/to/my/entry/file.js&#39;
-};`</code></pre>
-<h2 id="output">output</h2>
-<pre><code>`module.exports = {
+<span class="quote">$ webpack</span></pre>
+<h1>webpack.config.js</h1>
+<h1>entry</h1>
+<pre><span class="quote">module.exports = {
+  entry: './path/to/my/entry/file.js'
+};</span></pre>
+<h1>output</h1>
+<pre><span class="quote">module.exports = {
   ...
   output: {
-    filename: &#39;my-first-webpack.bundle.js&#39;
+    filename: 'my-first-webpack.bundle.js'
   }
-};`</code></pre>
-<h2 id="loaders">loaders</h2>
-<pre><code>`module.exports = {
+};</span></pre>
+<h1>loaders</h1>
+<pre><span class="quote">module.exports = {
   ...
   module: {
     rules: [
-      { test: /\.ts$/, use: &#39;ts-loader&#39;}
+      { test: /\.ts$/, use: 'ts-loader'}
     ]
   }
-}`</code></pre>
-<h2 id="plugins">plugins</h2>
-<pre><code>`module.exports = {
+}</span></pre>
+<h1>plugins</h1>
+<pre><span class="quote">module.exports = {
   ...
   plugins: [
     new webpack.optimize.UglifyJsPlugin()
   ]
-}`</code></pre>
-<h2 id="webpack-for-development">webpack for development</h2>
-<pre><code>`$ npm install webpack-dev-server --save-dev
-$ node_modules/.bin/webpack-dev-server`</code></pre>
-<h2 id="demos">Demos</h2>
+}</span></pre>
+<h1>webpack for development</h1>
+<pre><span class="quote">$ npm install webpack-dev-server --save-dev
+$ node_modules/.bin/webpack-dev-server</span></pre>
+<h1>Demos</h1>
 <p><a href="https://github.com/ruanyf/webpack-demos">https://github.com/ruanyf/webpack-demos</a></p>
-<pre><code>`$ git clone https://github.com/ruanyf/webpack-demos.git
+<pre><span class="quote">$ git clone https://github.com/ruanyf/webpack-demos.git
 $ cd webpack-demos
 $ npm i
 $ cd demo01
-$ webpack-dev-server`</code></pre>
+$ webpack-dev-server</span></pre>

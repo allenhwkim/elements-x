@@ -1,25 +1,31 @@
-<h1 id="how-to-fire-customevent">How To Fire CustomEvent</h1>
+<style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">How To Fire CustomEvent</h1>
 <p>CustomEvent polyfill and usage</p>
 <p>This is polyfill for IE11</p>
-<pre><code>(function () {
-  if (window.CustomEvent) return false;
-
-  function CustomEvent(event, params) {
+<pre>(function () {
+  if (window.CustomEvent) return false;</pre>
+<pre>  function CustomEvent(event, params) {
     params = params || { 
      bubbles: false, cancelable: false, detail: undefined 
     }; 
-    var evt = document.createEvent( &#39;CustomEvent&#39; );
+    var evt = document.createEvent( 'CustomEvent' );
     evt.initCustomEvent( 
       event, params.bubbles, params.cancelable, params.detail
     );
     return evt;
-  }
-
-  CustomEvent.prototype = window.Event.prototype;
+  }</pre>
+<pre>  CustomEvent.prototype = window.Event.prototype;
   window.CustomEvent = CustomEvent;
-})();</code></pre>
+})();</pre>
 <p>How to fire a custom event on an element</p>
-<pre><code>const el = document.getElementById(&#39;foo&#39;);
-el.dispatchEvent(new CustomEvent(&#39;my-event&#39;, {
+<pre>const el = document.getElementById('foo');
+el.dispatchEvent(new CustomEvent('my-event', {
   bubbles: true, detail: new Date()
-}));</code></pre>
+}));</pre>

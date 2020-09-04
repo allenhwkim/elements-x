@@ -1,25 +1,31 @@
-<h1 id="close-div-when-clicking-outside-it">Close Div When Clicking Outside It</h1>
-<p>No more document.addEventListener(‘click’, …)</p>
-<h3 id="1-create-a-button-to-open-a-popup-and-a-popup-itself">1. Create a button to open a popup and a popup itself</h3>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*otRu6TLwb2wF8uq4F0Bddw.png" alt=""></p>
-<pre><code>&lt;button onclick=&quot;showPopup()&quot;&gt;Open Popup&lt;/button&gt;
-
-&lt;div class=&quot;popup&quot;&gt;
-  &lt;div class=&quot;blocker&quot; onclick=&quot;hidePopup()&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;contents&quot;&gt;This is popup&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<h3 id="2-now-style-it">2. Now style it</h3>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*5UHawkjTrXbajJyXVc1Z3Q.png" alt=""></p>
-<pre><code>.popup { display: none; }
-.popup.open { display: block; }
-
-.blocker {
+<style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1>Close Div When Clicking Outside of It</h1>
+<h2>No more document.addEventListener(‘click’, …)</h2>
+<h2>1. Create a button to open a popup and a popup itself</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*otRu6TLwb2wF8uq4F0Bddw.png" /><figcaption></figcaption></figure></div>
+<pre>&lt;button onclick="showPopup()">Open Popup&lt;/button></pre>
+<pre>&lt;div class="popup">
+  &lt;div class="blocker" onclick="hidePopup()">&lt;/div>
+  &lt;div class="contents">This is popup&lt;/div>
+&lt;/div></pre>
+<h2>2. Now style it</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*5UHawkjTrXbajJyXVc1Z3Q.png" /><figcaption></figcaption></figure></div>
+<pre>.popup { display: none; }
+.popup.open { display: block; }</pre>
+<pre>.blocker {
     position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
-    content: &#39; &#39;;
+    content: ' ';
     background: rgba(0,0,0,.5);
 }
 .popup .contents {
@@ -30,33 +36,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #FFF;
-
-    position: fixed;
+    background: #FFF;</pre>
+<pre>    position: fixed;
     top: 50vh;
     left: 50vw;
     transform: translate(-50%, -50%);
-}</code></pre>
-<h3 id="3-add-javascript-openclose-the-popup">3. Add Javascript open/close the popup</h3>
-<pre><code>&lt;script&gt;
-const popup = document.querySelector(&#39;.popup&#39;);
+}</pre>
+<h2>3. Add Javascript open/close the popup</h2>
+<pre>&lt;script>
+const popup = document.querySelector('.popup');
 function showPopup() {
-  popup.classList.add(&#39;open&#39;);
+  popup.classList.add('open');
 }
 function hidePopup() {
-  popup.classList.remove(&#39;open&#39;);
+  popup.classList.remove('open');
 }
-&lt;/script&gt;</code></pre>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*d_QIgNl5vUyB7NwiKi_Z5A.png" alt=""></p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*7xIA8oxMe_ApUTInKK-wtg.png" alt=""></p>
-<p>The key here is to <strong>open and close a page blocker and popup contents together</strong>. Treat the page blocker as a part of popup.</p>
+&lt;/script></pre>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-6"><img src="https://cdn-images-1.medium.com/1*d_QIgNl5vUyB7NwiKi_Z5A.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/1*7xIA8oxMe_ApUTInKK-wtg.png" /><figcaption></figcaption></figure></div>
+<p>The key here is to <b>open and close a page blocker and popup contents together</b>. Treat the page blocker as a part of popup.</p>
 <p>The above code is demoed here.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fstackblitz.com%2Fedit%2Fclose-div-click-out-of-it%3Fembed%3D1%26file%3Dindex.html&url=https%3A%2F%2Fstackblitz.com%2Fedit%2Fclose-div-click-out-of-it%3Fembed%3D1%26file%3Dindex.html&image=https%3A%2F%2Fc.staticblitz.com%2Fassets%2Ficon-664493542621427cc8adae5e8f50d632f87aaa6ea1ce5b01e9a3d05b57940a9f.png&key=a19fcc184b9711e1b4764040d3dc5c07&type=text%2Fhtml&schema=stackblitz" width="745" height="400"></iframe><figcaption></figcaption></figure></div>
 <p>If you think this technique is useful, please give me some claps. It would be very helpful for me to write more like this.</p>
 <p>Happy coding.</p>
 <p>If you like this, you may also like these;</p>
-<ul>
-<li><p><a href="https://allenhwkim.github.io/jsanimation/#home">https://allenhwkim.github.io/jsanimation/#home</a></p>
-</li>
-<li><p><a href="https://allenhwkim.github.io/html-custom-elements/#home">https://allenhwkim.github.io/html-custom-elements/#home</a></p>
-</li>
-</ul>
+<li class="bulletin"><a href="https://allenhwkim.github.io/jsanimation/#home">https://allenhwkim.github.io/jsanimation/#home</a></li>
+<li class="bulletin"><a href="https://allenhwkim.github.io/html-custom-elements/#home">https://allenhwkim.github.io/html-custom-elements/#home</a></li>

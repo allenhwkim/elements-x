@@ -1,24 +1,31 @@
-<h1 id="firebase-storage-crud">Firebase Storage CRUD</h1>
-<p>How to upload, read, delete files with Firebase</p>
+<style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Firebase Storage CRUD</h1>
+<h2 class="subtitle">How to upload, read, delete files with Firebase</h2>
 <p>Notes to upload and download from Firebase storage. 
 If you want to know about Firebase database, read ‘<a href="https://medium.com/@allenhwkim/firebase-crud-7d74d06d8c54">Firebase Basic CRUD</a>’.</p>
-<h3 id="indexhtml">index.html</h3>
-<pre><code>`&lt;script src=&quot;https://unpkg.com/firebase/firebase.js&quot;&gt;&lt;/script&gt;`</code></pre>
-<h3 id="mainjs">main.js</h3>
-<pre><code>`firebase.initializeApp({
-    apiKey: &quot;[api_key]&quot;,
-    authDomain: &quot;[any_title].firebaseapp.com&quot;,
-    databaseURL: &quot;https://[any_title].firebaseio.com&quot;,
-    storageBucket: &quot;[any_title].appspot.com&quot;,
-  });`
-
-var storageRef = firebase.storage().ref();</code></pre>
-<h3 id="createupdate">Create/Update</h3>
-<pre><code>var file = ... // use the Blob or File API
-storageRef.put(&#39;images/stars.jpg&#39;).then(function(snapshot) {
-  console.log(&#39;Uploaded a blob or file!&#39;);
-});</code></pre>
-<h3 id="read">Read</h3>
-<pre><code>storageRef.child(&#39;images/stars.jpg&#39;).getDownloadURL()</code></pre>
-<h3 id="delete">Delete</h3>
-<pre><code>storageRef.child(&#39;images/stars.jpg&#39;).delete().then(...)</code></pre>
+<h2>index.html</h2>
+<pre><span class="quote">&lt;script src="https://unpkg.com/firebase/firebase.js">&lt;/script></span></pre>
+<h2>main.js</h2>
+<pre><span class="quote">firebase.initializeApp({
+    apiKey: "[api_key]",
+    authDomain: "[any_title].firebaseapp.com",
+    databaseURL: "https://[any_title].firebaseio.com",
+    storageBucket: "[any_title].appspot.com",
+  });</span></pre>
+<pre>var storageRef = firebase.storage().ref();</pre>
+<h2>Create/Update</h2>
+<pre>var file = ... // use the Blob or File API
+storageRef.put('images/stars.jpg').then(function(snapshot) {
+  console.log('Uploaded a blob or file!');
+});</pre>
+<h2>Read</h2>
+<pre>storageRef.child('images/stars.jpg').getDownloadURL()</pre>
+<h2>Delete</h2>
+<pre>storageRef.child('images/stars.jpg').delete().then(...)</pre>

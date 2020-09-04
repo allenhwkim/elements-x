@@ -1,36 +1,36 @@
-<h1 id="angular-ngrxstore-side-by-side-code-comparison">Angular @ngrx/store Side-By-Side Code Comparison</h1>
+<style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Angular @ngrx/store Side-By-Side Code Comparison</h1>
 <p>Here I compare two ways of displaying Todo between using @ngrx/store and without using it.</p>
-<ul>
-<li><p><a href="https://stackblitz.com/edit/todo-list-async?file=app%2Ftodos.service.ts">https://stackblitz.com/edit/todo-list-async</a></p>
-</li>
-<li><p><a href="https://stackblitz.com/edit/ngrx-store-todo-list-part1?file=app%2Ftodos.service.ts">https://stackblitz.com/edit/ngrx-store-todo-list-part1</a></p>
-</li>
-</ul>
+<li class="bulletin"><a href="https://stackblitz.com/edit/todo-list-async?file=app%2Ftodos.service.ts">https://stackblitz.com/edit/todo-list-async</a></li>
+<li class="bulletin"><a href="https://stackblitz.com/edit/ngrx-store-todo-list-part1?file=app%2Ftodos.service.ts">https://stackblitz.com/edit/ngrx-store-todo-list-part1</a></li>
 <p>Assuming readers understand Angular HTTP call, from below here, I want to compare files side-by-side, so that you can see what difference they have.</p>
-<h3 id="appmodulets">app.module.ts</h3>
+<h2>app.module.ts</h2>
 <p>With @ngrx/store, we need to import reducers and effects at the app root level.</p>
-<p><img src="https://cdn-images-1.medium.com/max/2316/1*RFC4tnLeR_m-7pTjM0jmyA.png" alt=""></p>
-<p><img src="https://cdn-images-1.medium.com/max/2300/1*SNWhiP4SObizmg6UIZYgJg.png" alt="**left**: normal, **right**: w/ ngrx/store">*<strong>left</strong>: normal, <strong>right</strong>: w/ ngrx/store*</p>
-<h3 id="appcomponentts">app.component.ts</h3>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-6"><img src="https://cdn-images-1.medium.com/1*RFC4tnLeR_m-7pTjM0jmyA.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/1*SNWhiP4SObizmg6UIZYgJg.png" /><figcaption><b>left</b>: normal, <b>right</b>: w/ ngrx/store</figcaption></figure></div>
+<h2>app.component.ts</h2>
 <p>Without @ngrx/store, data is retrieved from a service.</p>
-<p>Unlike a normal service, with @ngrx/store is <code>todos$</code> are retrieved from <code>store.select</code> after calling <code>store.dispatch(getTodos())</code>, which is linked to <code>getTodos$</code> property in <code>todos.effetcs.ts.</code></p>
-<p><img src="https://cdn-images-1.medium.com/max/2316/1*ODCCKYKNj3i7vyZWkJWRVA.png" alt=""></p>
-<p><img src="https://cdn-images-1.medium.com/max/2328/1*uLUcNdc0WqOHm_HzT0TkOw.png" alt="**left**: normal, **right**: w/ ngrx/store">*<strong>left</strong>: normal, <strong>right</strong>: w/ ngrx/store*</p>
-<h3 id="appcomponenthtml-the-same">app.component.html (the same)</h3>
-<p><img src="https://cdn-images-1.medium.com/max/2292/1*RcXCBG8U2GzUFzTbmoO-Ww.png" alt=""></p>
-<h3 id="todocomponenttsthe-same">todo.component.ts(the same)</h3>
-<p><img src="https://cdn-images-1.medium.com/max/2332/1*pCzPbQrLxMj-3Es71PiuJA.png" alt=""></p>
-<h3 id="todocomponenttsthe-same-1">todo.component.ts(the same)</h3>
-<p><img src="https://cdn-images-1.medium.com/max/2304/1*71EPvu0tdw2ZsPoTvb4GRg.png" alt=""></p>
-<h3 id="todosservicetsthe-same">todos.service.ts(the same)</h3>
-<p><img src="https://cdn-images-1.medium.com/max/2304/1*e5k_yqOm8GUJYbVWRwXJMA.png" alt=""></p>
-<h3 id="todosreductersts">todos.reducters.ts</h3>
-<p>It defines pure functions which implement action with two parameters; <code>type</code>, and <code>payload</code>.</p>
-<p><img src="https://cdn-images-1.medium.com/max/2208/1*4t_ywwa_9SsJPevaf8alPw.png" alt=""></p>
-<p><img src="https://cdn-images-1.medium.com/max/2344/1*Pcp_Iz9Nuw6hEDGzysII0g.png" alt="**left**: normal, **right**: w/ ngrx/store">*<strong>left</strong>: normal, <strong>right</strong>: w/ ngrx/store*</p>
-<h3 id="todoseffectsts">todos.effects.ts</h3>
-<p>It defines a function to be executed when <code>store.dispatch</code> is called.</p>
-<p><img src="https://cdn-images-1.medium.com/max/2208/1*4t_ywwa_9SsJPevaf8alPw.png" alt=""></p>
-<p><img src="https://cdn-images-1.medium.com/max/2288/1*U952iRD3MWQJOEGQ6b0Nbg.png" alt="**left**: normal, **right**: w/ ngrx/store">*<strong>left</strong>: normal, <strong>right</strong>: w/ ngrx/store*</p>
+<p>Unlike a normal service, with @ngrx/store is <span class="quote">todos$</span> are retrieved from <span class="quote">store.select</span> after calling <span class="quote">store.dispatch(getTodos())</span>, which is linked to <span class="quote">getTodos$</span> property in <span class="quote">todos.effetcs.ts.</span></p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-6"><img src="https://cdn-images-1.medium.com/1*ODCCKYKNj3i7vyZWkJWRVA.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/1*uLUcNdc0WqOHm_HzT0TkOw.png" /><figcaption><b>left</b>: normal, <b>right</b>: w/ ngrx/store</figcaption></figure></div>
+<h2>app.component.html (the same)</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*RcXCBG8U2GzUFzTbmoO-Ww.png" /><figcaption></figcaption></figure></div>
+<h2>todo.component.ts(the same)</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*pCzPbQrLxMj-3Es71PiuJA.png" /><figcaption></figcaption></figure></div>
+<h2>todo.component.ts(the same)</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*71EPvu0tdw2ZsPoTvb4GRg.png" /><figcaption></figcaption></figure></div>
+<h2>todos.service.ts(the same)</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*e5k_yqOm8GUJYbVWRwXJMA.png" /><figcaption></figcaption></figure></div>
+<h2>todos.reducters.ts</h2>
+<p>It defines pure functions which implement action with two parameters; <span class="quote">type</span>, and <span class="quote">payload</span>.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-6"><img src="https://cdn-images-1.medium.com/1*4t_ywwa_9SsJPevaf8alPw.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/1*Pcp_Iz9Nuw6hEDGzysII0g.png" /><figcaption><b>left</b>: normal, <b>right</b>: w/ ngrx/store</figcaption></figure></div>
+<h2>todos.effects.ts</h2>
+<p>It defines a function to be executed when <span class="quote">store.dispatch</span> is called.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-6"><img src="https://cdn-images-1.medium.com/1*4t_ywwa_9SsJPevaf8alPw.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/1*U952iRD3MWQJOEGQ6b0Nbg.png" /><figcaption><b>left</b>: normal, <b>right</b>: w/ ngrx/store</figcaption></figure></div>
 <p>This is my first trial of understanding @ngrx/store, and I might not have clearly understand the benefits of using @ngrx/store. However, I wish this side-by-side comparison is helpful to others.</p>
 <p>Cheers</p>

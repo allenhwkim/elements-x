@@ -1,68 +1,71 @@
-<h1 id="margin-collapsing-explained">Margin Collapsing Explained</h1>
-<p>What you get is not what you coded.</p>
-<p><img src="https://cdn-images-1.medium.com/max/12000/0*RQFUgjY3oWv1YVSm" alt="Photo by [Suad Kamardeen](https://unsplash.com/@skmuse_?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@skmuse_?utm_source=medium&amp;utm_medium=referral">Suad Kamardeen</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
-<p>As the documentation said, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing">Mozilla Documentation</a>, the <strong>top</strong> and <strong>bottom</strong> margins of <strong>blocks</strong> are <strong>sometimes</strong> combined (collapsed) into a single margin.</p>
-<ul>
-<li><p>The margins of adjacent siblings are collapsed.</p>
-</li>
-<li><p>For empty block, its top and bottom margins collapse</p>
-</li>
-</ul>
+<style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Margin Collapsing Explained</h1>
+<h2 class="subtitle">What you get is not what you coded.</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/0*RQFUgjY3oWv1YVSm" /><figcaption>Photo by <a href="https://unsplash.com/@skmuse_?utm_source=medium&utm_medium=referral">Suad Kamardeen</a> on <a href="https://unsplash.com?utm_source=medium&utm_medium=referral">Unsplash</a></figcaption></figure></div>
+<p>As the documentation said, <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Mastering_margin_collapsing">Mozilla Documentation</a>, the <b>top</b> and <b>bottom</b> margins of <b>blocks</b> are <b>sometimes</b> combined (collapsed) into a single margin.</p>
+<li class="bulletin">The margins of adjacent siblings are collapsed.</li>
+<li class="bulletin">For empty block, its top and bottom margins collapse</li>
 <p>It’s better to see it rather than words.</p>
-<h3 id="example-1">Example 1</h3>
+<h2>Example 1</h2>
 <p>The top/bottom margins of adjacent siblings are collapsed.</p>
-<p>From the following example, the margin between box 1 and box 2 is <em>not 36px</em>, which is box 1 bottom margin 12px and box 2 top margin 24px. but it is <em>24px</em> which is bigger margin between 12px and 24px.</p>
-<pre><code>&lt;div class=&quot;container&quot;&gt;
-  &lt;div class=&quot;box1&quot;&gt; box1: margin: 12px &lt;/div&gt;
-  &lt;div class=&quot;box2&quot;&gt; box2: margin: 24px &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<p><img src="https://cdn-images-1.medium.com/max/2992/1*s9t0WUU4byMwBOSw82AcDw.png" alt=""></p>
-<h3 id="example-2">Example 2</h3>
-<p>If the container does not have any content separating style, e.g. <code>border</code>, <code>padding</code>, margin collapsing will happen to the outside of parent.</p>
+<p>From the following example, the margin between box 1 and box 2 is <i>not 36px</i>, which is box 1 bottom margin 12px and box 2 top margin 24px. but it is <i>24px</i> which is bigger margin between 12px and 24px.</p>
+<pre>&lt;div class="container">
+  &lt;div class="box1"> box1: margin: 12px &lt;/div>
+  &lt;div class="box2"> box2: margin: 24px &lt;/div>
+&lt;/div></pre>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*s9t0WUU4byMwBOSw82AcDw.png" /><figcaption></figcaption></figure></div>
+<h2>Example 2</h2>
+<p>If the container does not have any content separating style, e.g. <span class="quote">border</span>, <span class="quote">padding</span>, margin collapsing will happen to the outside of parent.</p>
 <p>The following example has the following code.</p>
 <p>We just saw that box1 bottom margin and box2 top margin collapses. How about box2 bottom margin and and box3 top margin which are not sibling? Margin collapsing also happens when the container does not have border or padding.</p>
-<pre><code>&lt;div class=&quot;container no-border&quot; style=&quot;background:#eee&quot;&gt;
-  &lt;div class=&quot;box1&quot;&gt; box1: margin: 12px &lt;/div&gt;
-  &lt;div class=&quot;box2&quot;&gt; box2: margin: 24px &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;box3&quot;&gt;box3: margin: 24px&lt;/div&gt;</code></pre>
-<p><img src="https://cdn-images-1.medium.com/max/2976/1*s2hQbBtu2ZnlwTJCBSVenw.png" alt=""></p>
+<pre>&lt;div class="container no-border" style="background:#eee">
+  &lt;div class="box1"> box1: margin: 12px &lt;/div>
+  &lt;div class="box2"> box2: margin: 24px &lt;/div>
+&lt;/div>
+&lt;div class="box3">box3: margin: 24px&lt;/div></pre>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*s2hQbBtu2ZnlwTJCBSVenw.png" /><figcaption></figcaption></figure></div>
 <p>To see it clearly, following is example of margin collapsing not happening when the container has a blue border.</p>
-<pre><code>&lt;div class=&quot;container no-border&quot;
-  style=&quot;background:#eee; **border: 1px solid blue**&quot;&gt;
-  &lt;div class=&quot;box1&quot;&gt; box1: margin: 12px &lt;/div&gt;
-  &lt;div class=&quot;box2&quot;&gt; box2: margin: 24px &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;box3&quot;&gt;box3: margin: 24px&lt;/div&gt;</code></pre>
-<p><img src="https://cdn-images-1.medium.com/max/2684/1*b3Zsqa4FXpyZo--ZSd1isw.png" alt=""></p>
-<h3 id="example-3">Example 3</h3>
+<pre>&lt;div class="container no-border"
+  style="background:#eee; <b>border: 1px solid blue</b>">
+  &lt;div class="box1"> box1: margin: 12px &lt;/div>
+  &lt;div class="box2"> box2: margin: 24px &lt;/div>
+&lt;/div>
+&lt;div class="box3">box3: margin: 24px&lt;/div></pre>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*b3Zsqa4FXpyZo--ZSd1isw.png" /><figcaption></figcaption></figure></div>
+<h2>Example 3</h2>
 <p>Margin collapsing applies to empty box. The following example has 3 empty box1s, which has 12px top/bottom margin. No matter how many empty boxes are there, no margin applies to empty boxes.</p>
-<pre><code>&lt;div class=&quot;container&quot;&gt;
-  &lt;div class=&quot;**box1**&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;**box1**&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;**box1**&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;box2&quot;&gt; box2: margin: 24px &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<p><img src="https://cdn-images-1.medium.com/max/2952/1*fwcKXATJdlyy501iAO9ETA.png" alt=""></p>
-<h3 id="example-4">Example 4</h3>
-<p>Margin collapsing does <strong>NOT</strong> apply to inline-block;</p>
-<pre><code>&lt;div class=&quot;container&quot;&gt;
-  &lt;div class=&quot;box1 **inline-block**&quot;&gt; box1: margin: 12px &lt;/div&gt;
-  &lt;div class=&quot;box2 **inline-block**&quot;&gt; box2: margin: 24px &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<p><img src="https://cdn-images-1.medium.com/max/2972/1*8Ngrwf_GQJ_la5_5wdDbnw.png" alt=""></p>
-<h3 id="example-5">Example 5</h3>
-<p>Margin collapsing does <strong>NOT</strong> apply to flex box.</p>
-<pre><code>&lt;div class=&quot;container flex&quot;&gt;
-  &lt;div class=&quot;box1&quot;&gt; box1: margin: 12px &lt;/div&gt;
-  &lt;div class=&quot;box2&quot;&gt; box2: margin: 24px &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<p><img src="https://cdn-images-1.medium.com/max/2968/1*jtGLsUX4vivQoCPPqOK8BA.png" alt=""></p>
+<pre>&lt;div class="container">
+  &lt;div class="<b>box1</b>">&lt;/div>
+  &lt;div class="<b>box1</b>">&lt;/div>
+  &lt;div class="<b>box1</b>">&lt;/div>
+  &lt;div class="box2"> box2: margin: 24px &lt;/div>
+&lt;/div></pre>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*fwcKXATJdlyy501iAO9ETA.png" /><figcaption></figcaption></figure></div>
+<h2>Example 4</h2>
+<p>Margin collapsing does <b>NOT</b> apply to inline-block;</p>
+<pre>&lt;div class="container">
+  &lt;div class="box1 <b>inline-block</b>"> box1: margin: 12px &lt;/div>
+  &lt;div class="box2 <b>inline-block</b>"> box2: margin: 24px &lt;/div>
+&lt;/div></pre>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*8Ngrwf_GQJ_la5_5wdDbnw.png" /><figcaption></figcaption></figure></div>
+<h2>Example 5</h2>
+<p>Margin collapsing does <b>NOT</b> apply to flex box.</p>
+<pre>&lt;div class="container flex">
+  &lt;div class="box1"> box1: margin: 12px &lt;/div>
+  &lt;div class="box2"> box2: margin: 24px &lt;/div>
+&lt;/div></pre>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*jtGLsUX4vivQoCPPqOK8BA.png" /><figcaption></figcaption></figure></div>
 <p>Here is a code and demo you can experience margin collapsing.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fstackblitz.com%2Fedit%2Fmargin-collapse%3Fembed%3D1%26view%3Dpreview&display_name=StackBlitz&url=https%3A%2F%2Fstackblitz.com%2Fedit%2Fmargin-collapse%3Fview%3Dpreview&image=https%3A%2F%2Fc.staticblitz.com%2Fassets%2Ficon-1d2450aadcf984376236c23cd2ab0ba231ddd1d85c9b72990ed2ede5b4974d1b.png&key=a19fcc184b9711e1b4764040d3dc5c07&type=text%2Fhtml&schema=stackblitz" width="745" height="400"></iframe><figcaption></figcaption></figure></div>
 <p>Happy coding :)</p>
-<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
-<p>*<em>Do you think this useful? If so please;
-**</em> **Clap 👏 button **below️ to let others to see this too.</p>
-<ul>
-<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
-</ul>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">Angular Random How-Tos</a>. You may find some useful articles for your daily development.</p>
+<p><a href="https://twitter.com/allenhwkim">Follow Allen on Twitter (@allenhwkim)</a> <b>Do you think this useful? If so please;
+*</b>below️ to let others to see this too.
+* <b>Clap 👏 button </b></p>

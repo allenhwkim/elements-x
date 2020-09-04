@@ -1,40 +1,42 @@
-<h1 id="angular-encrypt--decrypt">Angular: Encrypt | Decrypt</h1>
-<p>Using CryptoJS</p>
-<p><img src="https://cdn-images-1.medium.com/max/11520/0*GeO-t3bQpebArDJR" alt="Photo by [Markus Spiske](https://unsplash.com/@markusspiske?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@markusspiske?utm_source=medium&amp;utm_medium=referral">Markus Spiske</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
-<pre><code>Tell me {{ &#39;U2F...3yeKpfg=`&#39; | decrypted }} // `I♥U</code></pre>
-<h2 id="steps">Steps:</h2>
-<ol>
-<li><p>Create <code>encrypted</code> /<code>decrypted</code> pipes</p>
-</li>
-<li><p>Declare the pipes in your module</p>
-</li>
-<li><p>Use it</p>
-</li>
-</ol>
-<h3 id="1-create-encrypted-decrypted-pipes">1. Create encrypted /decrypted pipes</h3>
-<h3 id="2-declare-the-pipes-in-your-module">2. Declare the pipes in your module</h3>
-<pre><code>import { **EncryptPipe**, **DecryptPipe**} from &#39;./encrypt-decrypt.pipe&#39;;
-
-@NgModule({
+<style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Angular: Encrypt | Decrypt</h1>
+<h2>Using CryptoJS, tell me “I♥U”</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/0*GeO-t3bQpebArDJR" /><figcaption>Photo by <a href="https://unsplash.com/@markusspiske?utm_source=medium&utm_medium=referral">Markus Spiske</a> on <a href="https://unsplash.com?utm_source=medium&utm_medium=referral">Unsplash</a></figcaption></figure></div>
+<pre>Tell me {{ 'U2F...3yeKpfg=<span class="quote">' | decrypted }} // </span>I♥U</pre>
+<h1>Steps:</h1>
+<li class="number">Create <span class="quote">encrypted</span> /<span class="quote">decrypted</span> pipes</li>
+<li class="number">Declare the pipes in your module</li>
+<li class="number">Use it</li>
+<h2>1. Create encrypted /decrypted pipes</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><iframe data-script="https://gist.github.com/allenhwkim/318a29c9ac9af8fe8864dc2be1374feb.js" style="display:none; max-width: 100%; border: 0" width="1280" title="Angular: Encrypt/Decrypt"></iframe>
+                <script src="https://gist.github.com/allenhwkim/318a29c9ac9af8fe8864dc2be1374feb.js"></script><figcaption></figcaption></figure></div>
+<h2>2. Declare the pipes in your module</h2>
+<pre>import { <b>EncryptPipe</b>, <b>DecryptPipe</b>} from './encrypt-decrypt.pipe';</pre>
+<pre>@NgModule({
   imports:      [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent, **EncryptPipe**, **DecryptPipe** ],
-  providers:    [ **EncryptPipe**, **DecryptPipe** ],
+  declarations: [ AppComponent, <b>EncryptPipe</b>, <b>DecryptPipe</b> ],
+  providers:    [ <b>EncryptPipe</b>, <b>DecryptPipe</b> ],
   bootstrap:    [ AppComponent ]
-})
-
-export class AppModule { }</code></pre>
-<h3 id="3-use-it">3. Use it</h3>
+})</pre>
+<pre>export class AppModule { }</pre>
+<h2>3. Use it</h2>
 <p>In html</p>
-<pre><code>&lt;div&gt;Encrypted : {{ secret | **encrypted** }}&lt;/div&gt;</code></pre>
+<pre>&lt;div>Encrypted : {{ secret | <b>encrypted</b> }}&lt;/div></pre>
 <p>In component</p>
-<pre><code>constructor(**encryptPipe: EncryptPipe**) {
-  console.log(&#39;encrypted&#39;, **encryptPipe.transform**(this.secret))
-}</code></pre>
+<pre>constructor(<b>encryptPipe: EncryptPipe</b>) {
+  console.log('encrypted', <b>encryptPipe.transform</b>(this.secret))
+}</pre>
 <p>Here is the demo</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fstackblitz.com%2Fedit%2Fangular-encrypt-decrypt%3Fembed%3D1%26file%3Dsrc%252Fapp%252Fapp.component.html%26view%3Dpreview&display_name=StackBlitz&url=https%3A%2F%2Fstackblitz.com%2Fedit%2Fangular-encrypt-decrypt%3Ffile%3Dsrc%252Fapp%252Fapp.component.html%26view%3Dpreview&image=https%3A%2F%2Fc.staticblitz.com%2Fassets%2Ficon-1d2450aadcf984376236c23cd2ab0ba231ddd1d85c9b72990ed2ede5b4974d1b.png&key=a19fcc184b9711e1b4764040d3dc5c07&type=text%2Fhtml&schema=stackblitz" width="745" height="400"></iframe><figcaption></figcaption></figure></div>
 <p>Happy coding :)</p>
-<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
-<p>*<em>Do you think this useful? If so please;
-**</em> **Clap 👏 button **below️ to let others to see this too.</p>
-<ul>
-<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
-</ul>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">Angular Random How-Tos</a>. You may find some useful articles for your daily development.</p>
+<p><a href="https://twitter.com/allenhwkim">Follow Allen on Twitter (@allenhwkim)</a> <b>Do you think this useful? If so please;
+*</b>below️ to let others to see this too.
+* <b>Clap 👏 button </b></p>

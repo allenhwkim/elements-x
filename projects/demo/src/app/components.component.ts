@@ -63,6 +63,9 @@ import { usageTemplate } from './components/usage';
       background: #FFF;
       box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
     }
+    .tab-contents {
+      width: calc(100% - 250px);
+    }
   `]
 })
 export class ComponentsComponent implements AfterViewInit {

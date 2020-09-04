@@ -1,42 +1,48 @@
-<h1 id="angular-watch-for-element-changes-made-to-dom-tree">Angular: Watch for element changes made to DOM tree</h1>
-<p>using directive watchDomTree and event (dom-changed)</p>
-<p><img src="https://cdn-images-1.medium.com/max/11208/0*aGpJzf0GBEa9u2fY" alt="Photo by [Dan Burton](https://unsplash.com/@single_lens_reflex?utm_source=medium&amp;utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&amp;utm_medium=referral)"><em>Photo by <a href="https://unsplash.com/@single_lens_reflex?utm_source=medium&amp;utm_medium=referral">Dan Burton</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
-<p>As some of you may know already, with<code>[MutationObserver</code>](<a href="https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver</a>) , you can monitor DOM changes. (FYI, MutationObserver also works in IE11)</p>
+<style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Angular: Watch for element changes made to DOM tree</h1>
+<h2 class="subtitle">using directive watchDomTree and event (dom-changed)</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/0*aGpJzf0GBEa9u2fY" /><figcaption>Photo by <a href="https://unsplash.com/@single_lens_reflex?utm_source=medium&utm_medium=referral">Dan Burton</a> on <a href="https://unsplash.com?utm_source=medium&utm_medium=referral">Unsplash</a></figcaption></figure></div>
+<p>As some of you may know already, with<span class="quote">MutationObserver</span> , you can monitor DOM changes. (FYI, MutationObserver also works in IE11)</p>
 <p>Here is Vanilla JS version of how to detect any change in your document.</p>
-<pre><code>const observer = **new MutationObserver**(list =&gt; {
+<pre>const observer = <b>new MutationObserver</b>(list => {
   console.log(‘mutation list’, list);
 });
-**observer.observe**(document.body, {attributes: true, childList: true, subtree: true});
-// perform any DOM change action in your page. e.g. show/hide</code></pre>
+<b>observer.observe</b>(document.body, {attributes: true, childList: true, subtree: true});
+// perform any DOM change action in your page. e.g. show/hide</pre>
 <p>Let’s now wrap this into an Angular directive.</p>
-<p>The key point of it is to <strong>fire a CustomEvent from inside a directive</strong>, which is a little modified version of the code above.</p>
-<pre><code>const observer = new MutationObserver(list =&gt; {
-  const evt = new CustomEvent(&#39;dom-changed&#39;, {
+<p>The key point of it is to <b>fire a CustomEvent from inside a directive</b>, which is a little modified version of the code above.</p>
+<pre>const observer = new MutationObserver(list => {
+  const evt = new CustomEvent('dom-changed', {
     detail: list, bubbles: true
   });
   el.dispatchEvent(evt);
 });
-observer.observe(el, {...});</code></pre>
-<p>This is how to use this directive, <code>watchDomChange</code> .</p>
-<pre><code>&lt;div watchDomTree (dom-changed)=&quot;handleDomChange($event)&quot;&gt;&lt;/div&gt;</code></pre>
+observer.observe(el, {...});</pre>
+<p>This is how to use this directive, <span class="quote">watchDomChange</span> .</p>
+<pre>&lt;div watchDomTree (dom-changed)="handleDomChange($event)">&lt;/div></pre>
 <p>This is full code for this directive, followed by demo.</p>
-<pre><code>import { Directive, ElementRef, OnInit} from &#39;[@angular/core](http://twitter.com/angular/core)&#39;;
-
-// watch dom change and fire (dom-changed) event
-[@Directive](http://twitter.com/Directive)({
-  selector: &#39;[watchDomTree]&#39;
+<pre>import { Directive, ElementRef, OnInit} from '<a href="http://twitter.com/angular/core">@angular/core</a>';</pre>
+<pre>// watch dom change and fire (dom-changed) event
+<a href="http://twitter.com/Directive">@Directive</a>({
+  selector: '[watchDomTree]'
 })
 export class DomChangedDirective implements OnInit {
-  constructor(private elRef: ElementRef) {}
-
-ngOnInit() {
+  constructor(private elRef: ElementRef) {}</pre>
+<pre>ngOnInit() {
     this.registerDomChangedEvent(this.elRef.nativeElement);
   }
-
+  
   registerDomChangedEvent(el) {
-    const observer = new MutationObserver( list =&gt; {
+    const observer = new MutationObserver( list => {
       const evt =
-        new CustomEvent(&#39;dom-changed&#39;, 
+        new CustomEvent('dom-changed', 
           {detail: list, bubbles: true});
       el.dispatchEvent(evt);
     });
@@ -45,13 +51,11 @@ ngOnInit() {
     const subtree = true;
     observer.observe(el, {attributes, childList, subtree});
   }
-}</code></pre>
+}</pre>
 <p>Here is the demo.</p>
-<p><img src="https://cdn-images-1.medium.com/max/3248/1*i3-LqnAyNpggXrwke0sLTg.png" alt=""></p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/1*i3-LqnAyNpggXrwke0sLTg.png" /><figcaption></figcaption></figure><figure class="layout-3"><iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fstackblitz.com%2Fedit%2Fangular-dom-changed%3Fembed%3D1%26file%3Dsrc%252Fapp%252Fapp.component.html&display_name=StackBlitz&url=https%3A%2F%2Fstackblitz.com%2Fedit%2Fangular-dom-changed%3Ffile%3Dsrc%252Fapp%252Fapp.component.html&image=https%3A%2F%2Fc.staticblitz.com%2Fassets%2Ficon-1d2450aadcf984376236c23cd2ab0ba231ddd1d85c9b72990ed2ede5b4974d1b.png&key=a19fcc184b9711e1b4764040d3dc5c07&type=text%2Fhtml&schema=stackblitz" width="745" height="400"></iframe><figcaption></figcaption></figure></div>
 <p>Happy coding :)</p>
-<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">*Angular Random How-Tos</a>*. You may find some useful articles for your daily development.</p>
-<p>*<em>Do you think this useful? If so please;
-**</em> **Clap 👏 button **below️ to let others to see this too.</p>
-<ul>
-<li><a href="https://twitter.com/allenhwkim">**Follow Allen on Twitter **(@allenhwkim)</a></li>
-</ul>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">Angular Random How-Tos</a>. You may find some useful articles for your daily development.</p>
+<p><a href="https://twitter.com/allenhwkim">Follow Allen on Twitter (@allenhwkim)</a> <b>Do you think this useful? If so please;
+*</b>below️ to let others to see this too.
+* <b>Clap 👏 button </b></p>

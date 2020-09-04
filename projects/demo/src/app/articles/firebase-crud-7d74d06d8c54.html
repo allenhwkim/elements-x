@@ -1,22 +1,30 @@
-<h1 id="firebase-basic-crud">Firebase Basic CRUD</h1>
+<style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Firebase Basic CRUD</h1>
 <p>Notes to create, read, update, delete an entry from Firebase realtime database.</p>
-<h3 id="indexhtml">index.html</h3>
-<pre><code>`&lt;script src=&quot;https://unpkg.com/firebase/firebase.js&quot;&gt;&lt;/script&gt;`</code></pre>
-<h3 id="mainjs">main.js</h3>
-<pre><code>`firebase.initializeApp({
-    apiKey: &quot;[api_key]&quot;,
-    authDomain: &quot;[any_title].firebaseapp.com&quot;,
-    databaseURL: &quot;https://[any_title].firebaseio.com&quot;,
-    storageBucket: &quot;[any_title].appspot.com&quot;,
+<h2>index.html</h2>
+<pre><span class="quote">&lt;script src="https://unpkg.com/firebase/firebase.js">&lt;/script></span></pre>
+<h2>main.js</h2>
+<pre><span class="quote">firebase.initializeApp({
+    apiKey: "[api_key]",
+    authDomain: "[any_title].firebaseapp.com",
+    databaseURL: "https://[any_title].firebaseio.com",
+    storageBucket: "[any_title].appspot.com",
   });
-var messagesRef = firebase.database().ref(&#39;messages&#39;);`</code></pre>
-<h3 id="create"><strong>C</strong>reate</h3>
-<pre><code>messagesRef.push(message).then(...);</code></pre>
-<h3 id="read"><strong>R</strong>ead</h3>
-<pre><code>messagesRef.child(messageId).once(&#39;value&#39;).then(snapshot =&gt; {
+var messagesRef = firebase.database().ref('messages');</span></pre>
+<h2><b>C</b>reate</h2>
+<pre>messagesRef.push(message).then(...);</pre>
+<h2><b>R</b>ead</h2>
+<pre>messagesRef.child(messageId).once('value').then(snapshot => {
   ...
-});</code></pre>
-<h3 id="update"><strong>U</strong>pdate</h3>
-<pre><code>messagesRef.child(message[&#39;.key&#39;]).set(message).then(...);</code></pre>
-<h3 id="delete"><strong>D</strong>elete</h3>
-<pre><code>messagesRef.child(message[&#39;.key&#39;]).remove();</code></pre>
+});</pre>
+<h2><b>U</b>pdate</h2>
+<pre>messagesRef.child(message['.key']).set(message).then(...);</pre>
+<h2><b>D</b>elete</h2>
+<pre>messagesRef.child(message['.key']).remove();</pre>

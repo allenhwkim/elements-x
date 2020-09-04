@@ -14,15 +14,16 @@ export class AppComponent {
   config = config;
   components = Object.entries(components);
   articles = Object.entries(articles);
-  urlGroup: string;
+  urlGroup: string = 'components';
 
   constructor(
     private router: Router
   ) {
     this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd) {
-        this.urlGroup = event.url.match(/\/([^\/]+)/)[1];
-        console.log(this.urlGroup);
+        if (event.url.match(/\/([^\/]+)/)) {
+          this.urlGroup = event.url.match(/\/([^\/]+)/)[1];
+        }
       }
     })
   }

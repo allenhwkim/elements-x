@@ -1,7 +1,15 @@
-<h1 id="why-not-modal">Why Not Modal</h1>
+<style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1>Why We Should Avoid Modal Dialog</h1>
 <p>I have written an article about how we properly use modal dialog, <a href="https://medium.com/allenhwkim/modal-or-not-modal-3d65de64d82c">https://medium.com/allenhwkim/modal-or-not-modal-3d65de64d82c</a>.</p>
 <p>This article, I talk about only negative sides of modal dialogs.</p>
-<h3 id="when-you-make-it-as-a-dialog-the-contents-is-not-navigable-by-url-because-the-state-of-dialog-is-not-representable-by-url">When you make it as a dialog, the contents is not navigable by URL because the state of dialog is not representable by URL.</h3>
+<h2>When you make it as a dialog, the contents is not navigable by URL because the state of dialog is not representable by URL.</h2>
 <p>I do not find any reason we should intentionally make the state not navigable. 
 For example, I want to save the payment page url, so that I can easily pay when I need it. But, but, it’s a dialog. I have to click it to see the dialog.</p>
 <p>Let’s imagine this conversion.</p>
@@ -13,87 +21,47 @@ A: Link on the top right side of your monitor! It says “Make Payment”.
 B: Are you on desktop? It looks different on iPad.
 A: Uhhokaaay….</p>
 <p>From Facebook changes, I think NOT using modal dialog is a trend now.</p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*9Owl8zjOCxCCZmu9SA8kog.png" alt=""></p>
-<p><img src="https://cdn-images-1.medium.com/max/2000/1*TmTe12Or6_YoG8ow22B-tQ.png" alt=""></p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-6"><img src="https://cdn-images-1.medium.com/1*9Owl8zjOCxCCZmu9SA8kog.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/1*TmTe12Or6_YoG8ow22B-tQ.png" /><figcaption></figcaption></figure></div>
 <p>From the article, <a href="https://developer.paciellogroup.com/blog/2018/06/the-current-state-of-modal-dialog-accessibility/">The current state of modal dialog accessibility</a></p>
-<blockquote>
-<p><em>Modal dialogs continue to be troublesome UI components all across the web. Putting aside the fact they are often misused and thrust on users in a manner that interrupts their current task (asking me to sign up for your newsletter, while I’m in the middle of reading an article, is not cool), even appropriately used modals often lack considerations for accessibility.</em></p>
-</blockquote>
-<h2 id="for-the-sake-of-accessibility-its-a-programming-nightmare">For the sake of accessibility, it’s a programming nightmare.</h2>
+<blockquote><i>Modal dialogs continue to be troublesome UI components all across the web. Putting aside the fact they are often misused and thrust on users in a manner that interrupts their current task (asking me to sign up for your newsletter, while I’m in the middle of reading an article, is not cool), even appropriately used modals often lack considerations for accessibility.</i></blockquote>
+<h1>For the sake of accessibility, it’s a programming nightmare.</h1>
 <p>Based on W3C standard and webAIM, a modal must have the following accessibility requirement. Modal dialogs contain their tab sequence. That is, Tab and Shift + Tab do not move focus outside the dialog. However, unlike most non-modal dialogs, modal dialogs do not provide means for moving keyboard focus outside the dialog window without closing the dialog.</p>
-<ul>
-<li><p>Modal dialogs should be navigable with ‘<strong>Tab</strong>’ and ‘<strong>Shift-Tab</strong>’ key.</p>
-</li>
-<li><p>Modal dialogs should be closable with ‘<strong>Esc</strong>’ key and close button.</p>
-</li>
-<li><p>Modal dialogs maintain focus until dismissed.</p>
-</li>
-<li><p>Modal dialogs should maintain keyboard focus.</p>
-</li>
-<li><p>Non-modal dialogs should close automatically when they lose focus.</p>
-</li>
-<li><p>When a dialog closes, focus should usually return to the element that opened the dialog.</p>
-</li>
-<li><p>When dialog is open, the underlying page contents should not be scrollable.</p>
-</li>
-<li><p>Modal dialogs should have **role=“dialog”, aria-modal=“true” and aria-label **to dialog title</p>
-</li>
-</ul>
+<li class="bulletin">Modal dialogs should be navigable with ‘<b>Tab</b>’ and ‘<b>Shift-Tab</b>’ key.</li>
+<li class="bulletin">Modal dialogs should be closable with ‘<b>Esc</b>’ key and close button.</li>
+<li class="bulletin">Modal dialogs maintain focus until dismissed.</li>
+<li class="bulletin">Modal dialogs should maintain keyboard focus.</li>
+<li class="bulletin">Non-modal dialogs should close automatically when they lose focus.</li>
+<li class="bulletin">When a dialog closes, focus should usually return to the element that opened the dialog.</li>
+<li class="bulletin">When dialog is open, the underlying page contents should not be scrollable.</li>
+<li class="bulletin">Modal dialogs should have <b>role=“dialog”, aria-modal=“true” and aria-label </b>to dialog title</li>
 <p>Problems</p>
-<ol>
-<li><p>The underlying page must NOT be scrollable and must NOT be focused with ‘Tab’ while a modal dialog is open. This script will make your code complicated if you don’t use a well-tested framework.</p>
-</li>
-<li><p>What if a component in a modal dialog should accept escape key? It should close the dialog, or should it behave as a a normal escape key?
+<li class="number">The underlying page must NOT be scrollable and must NOT be focused with ‘Tab’ while a modal dialog is open. This script will make your code complicated if you don’t use a well-tested framework.</li>
+<li class="number">What if a component in a modal dialog should accept escape key? It should close the dialog, or should it behave as a a normal escape key?
 For example we can have a dropdown menu in a dialog, and we should use ‘Esc’ key to close the dropdown menu. 
-On this case should we ignore ‘Esc’ key of closing dialog, or closing dropdown menu? You will need another keyboard controlling Javascript, which makes your code more complicated.</p>
-</li>
-</ol>
-<h2 id="how-do-you-display-full-page-dialog-contents-in-tablet-or-mobile-devices-properly">How do you display full page dialog contents in tablet or mobile devices properly?</h2>
+On this case should we ignore ‘Esc’ key of closing dialog, or closing dropdown menu? You will need another keyboard controlling Javascript, which makes your code more complicated.</li>
+<h1>How do you display full page dialog contents in tablet or mobile devices properly?</h1>
 <p>Mobile first! However, Modals and mobile devices usually don’t play well together. Viewing the content is difficult because modals either are too large, taking up too much screen space or too small. 
 The following is example of modal dialog makes users confused when it comes to tablet or mobile devices.</p>
-<ul>
-<li><p>How do we scroll properly within dialog without the underlying page scrolling?</p>
-</li>
-<li><p>Should dialog cover header and footer too? If not, dialog should be between header and footer?</p>
-</li>
-<li><p>Why do we bother users by these things by making it as a dialog?</p>
-</li>
-</ul>
-<p><img src="https://cdn-images-1.medium.com/max/4000/0*i9Po0V2G4VjHaDKm.jpg" alt=""></p>
-<h2 id="performance-degrade">Performance Degrade</h2>
+<li class="bulletin">How do we scroll properly within dialog without the underlying page scrolling?</li>
+<li class="bulletin">Should dialog cover header and footer too? If not, dialog should be between header and footer?</li>
+<li class="bulletin">Why do we bother users by these things by making it as a dialog?</li>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/0*i9Po0V2G4VjHaDKm.jpg" /><figcaption></figcaption></figure></div>
+<h1>Performance Degrade</h1>
 <p>It’s not easy to lazy load modal dialog codes including js, css, html, and library used by modal without extra programming. No matter user open a modal or not, the code for modal dialogs must be always ready to take an action from user, so that it can immediately open the dialog. Let’s imagine that you have 3 to 4 modal dialogs to open on your dashboard page. Your dashboard page will be loaded much more slowly with modal dialogs although there is very little possibility user opens all modal dialogs.</p>
-<h2 id="conclusion">Conclusion</h2>
+<h1>Conclusion</h1>
 <p>Modal windows are a useful and effective interface widget to use when designers use them right. Use modal dialog with this in mind</p>
-<ul>
-<li><p>The modal dialog is not navigable in URL nature.</p>
-</li>
-<li><p>The modal window should have a Cancel/Close button.</p>
-</li>
-<li><p>‘Esc’ key should close the window</p>
-</li>
-<li><p>Close when clicking outside the modal window</p>
-</li>
-<li><p>Modal dialogs maintain focus until dismissed.</p>
-</li>
-<li><p>Don’t put too much contents into modal dialog.</p>
-</li>
-</ul>
+<li class="bulletin">The modal dialog is not navigable in URL nature.</li>
+<li class="bulletin">The modal window should have a Cancel/Close button.</li>
+<li class="bulletin">‘Esc’ key should close the window</li>
+<li class="bulletin">Close when clicking outside the modal window</li>
+<li class="bulletin">Modal dialogs maintain focus until dismissed.</li>
+<li class="bulletin">Don’t put too much contents into modal dialog.</li>
 <p>References:</p>
-<ul>
-<li><p><a href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal">https://www.w3.org/TR/wai-aria-practices/#dialog_modal</a></p>
-</li>
-<li><p><a href="https://webaim.org/resources/evalquickref/">https://webaim.org/resources/evalquickref/</a></p>
-</li>
-<li><p><a href="https://webaim.org/techniques/keyboard/">https://webaim.org/techniques/keyboard/</a></p>
-</li>
-<li><p><a href="https://uxplanet.org/best-practices-for-modals-overlays-dialog-windows-c00c66cddd8c">https://uxplanet.org/best-practices-for-modals-overlays-dialog-windows-c00c66cddd8c</a></p>
-</li>
-<li><p><a href="https://www.nngroup.com/articles/modal-nonmodal-dialog/">https://www.nngroup.com/articles/modal-nonmodal-dialog/</a></p>
-</li>
-<li><p><a href="https://community.appway.com/screen/kb/article/design-patterns-for-replacing-modal-windows-1482810903553">https://community.appway.com/screen/kb/article/design-patterns-for-replacing-modal-windows-1482810903553</a></p>
-</li>
-<li><p><a href="https://ux.stackexchange.com/questions/52042/is-it-acceptable-to-open-a-modal-popup-on-top-of-another-modal-popup">https://ux.stackexchange.com/questions/52042/is-it-acceptable-to-open-a-modal-popup-on-top-of-another-modal-popup</a></p>
-</li>
-<li><p><a href="http://www.uxforthemasses.com/overlays/">http://www.uxforthemasses.com/overlays/</a></p>
-</li>
-</ul>
+<li class="bulletin"><a href="https://www.w3.org/TR/wai-aria-practices/#dialog_modal">https://www.w3.org/TR/wai-aria-practices/#dialog_modal</a></li>
+<li class="bulletin"><a href="https://webaim.org/resources/evalquickref/">https://webaim.org/resources/evalquickref/</a></li>
+<li class="bulletin"><a href="https://webaim.org/techniques/keyboard/">https://webaim.org/techniques/keyboard/</a></li>
+<li class="bulletin"><a href="https://uxplanet.org/best-practices-for-modals-overlays-dialog-windows-c00c66cddd8c">https://uxplanet.org/best-practices-for-modals-overlays-dialog-windows-c00c66cddd8c</a></li>
+<li class="bulletin"><a href="https://www.nngroup.com/articles/modal-nonmodal-dialog/">https://www.nngroup.com/articles/modal-nonmodal-dialog/</a></li>
+<li class="bulletin"><a href="https://community.appway.com/screen/kb/article/design-patterns-for-replacing-modal-windows-1482810903553">https://community.appway.com/screen/kb/article/design-patterns-for-replacing-modal-windows-1482810903553</a></li>
+<li class="bulletin"><a href="https://ux.stackexchange.com/questions/52042/is-it-acceptable-to-open-a-modal-popup-on-top-of-another-modal-popup">https://ux.stackexchange.com/questions/52042/is-it-acceptable-to-open-a-modal-popup-on-top-of-another-modal-popup</a></li>
+<li class="bulletin"><a href="http://www.uxforthemasses.com/overlays/">http://www.uxforthemasses.com/overlays/</a></li>

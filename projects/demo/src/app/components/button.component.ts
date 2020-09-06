@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule, PrismModule } from '../../../../lib/src';
+import { ButtonModule, PrismModule, AceModule } from '../../../../lib/src';
+import { CustomCssComponent } from './custom-css.component';
 
 export const usage = {
   template: `
@@ -12,7 +13,7 @@ export const usage = {
       <ee-button disabled> Disabled </ee-button>
     </div>`,
   style: `
-    .custom ee-button {
+    ee-button {
       --primary: green;
       --accent: orange;L:
       --disabled: grey;
@@ -22,21 +23,18 @@ export const usage = {
 
 @Component({
   template: `
-<h3>Features</h3>
-<li> When clicked, button become automatically disabled for a second to prevent double click </li>
-<li> Able to show loading sign with 'loadingBy' property </li>
-<li> Customizable color and button size(height) </li>
-<li> css is overridable. To override style, re-define variable values and css properties.
-  <pre ee-prism language="css">
-  .custom ee-button {{'{'}}
+<custom-css>
+  ee-button {{'{'}}
     --primary: green;
     --accent: orange;
     --disabled: grey;
     --size: 32px;
   }
-  </pre>
-</li>
+</custom-css>
 
+<li> When clicked, button become automatically disabled for a second to prevent double click </li>
+<li> Able to show loading sign setting loading class </li>
+<li> Customizable color and button size(height) </li>
 <h3>Default</h3>
 <div class="example">
   <p>
@@ -60,43 +58,39 @@ export const usage = {
 <h3>Loading</h3>
 <p>
   Any element with "loading" class is hidden in default.
-  When the condition given with property "loadingBy" is true, it shows the element with "loading" class.
+  If the button class contains "loading" the loading sign become visible.
   While it is loading, users won't be able to click the button.
 </p>
 
 Click the below buttons to see loading sign.
 <div class="example loading-section">
-  <ee-button (click)="onSubmit(1)" [loadingBy]="!apiResp1">
-    <i class="loading"></i> 
+  <ee-button class="loading">
+    <img class="loading" height="24" src="assets/loading.gif" />
     Default
   </ee-button>
-  <ee-button class="primary" (click)="onSubmit(2)" [loadingBy]="!apiResp2"> 
+  <ee-button class="primary loading"> 
     Primary
-    <i class="loading"></i>
+    <img class="loading" height="24" src="assets/loading.gif" />
   </ee-button>
-  <ee-button class="accent" (click)="onSubmit(3)" [loadingBy]="!apiResp3">
-    <i class="loading"></i>
+  <ee-button class="accent loading">
+    <img class="loading" height="24" src="assets/loading.gif" />
     Accent
   </ee-button>
   <pre language="html" ee-prism>
-  &lt;ee-button (click)="onSubmit(1)" 
-    [<b>loadingBy</b>]="<b>!apiResp1</b>">
-    &lt;i class="<b>loading</b>">&lt;/i> 
+  &lt;ee-button  class="loading"">
+    &lt;img class="loading" height="24" src="assets/loading.gif" />
     Default
   &lt;/ee-button>
-  &lt;ee-button class="primary" (click)="onSubmit(2)" 
-    [<b>loadingBy</b>]="<b>!apiResp2</b>"> 
+  &lt;ee-button class="primary loading"> 
     Primary
-    &lt;i class="<b>loading</b>">&lt;/i>
+    &lt;img class="loading" height="24" src="assets/loading.gif" />
   &lt;/ee-button>
-  &lt;ee-button class="accent" (click)="onSubmit(3)" 
-    [<b>loadingBy</b>]="<b>!apiResp3</b>">
-    &lt;i class="<b>loading</b>">&lt;/i>
+  &lt;ee-button class="accent loading">
+    &lt;img class="loading" height="24" src="assets/loading.gif" />
     Accent
   &lt;/ee-button>
   </pre>
 </div>
-
 
 <h3>no-bg</h3>
 Button with "no-class" attribute won't have background color, switching to text color.
@@ -182,33 +176,11 @@ Button with "icon" class will have rounded shape instead of rectanble shape.
   @keyframes loading {
     to { transform: rotate(360deg); }
   }
-  .loading {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    position: relative;
-    top: 2px;
-    border: .2em solid currentColor;
-    border-right-color: transparent;
-    border-radius: 50%;
-    animation: loading .75s linear infinite;
-  }
    `]
 })
-export class ButtonComponent {
-  apiResp1;
-  apiResp2;
-  apiResp3;
-  apiResp4;
-  onSubmit(num) {
-    this[`apiResp${num}`] = undefined;
-    setTimeout(_ => {
-      this[`apiResp${num}`] = [{},{}];
-    }, 2000);
-  }
-}
+export class ButtonComponent {}
 
 @NgModule({
-  declarations: [ButtonComponent],
-  imports: [ ButtonModule, FormsModule, CommonModule, PrismModule ]
+  declarations: [ButtonComponent, CustomCssComponent],
+  imports: [ ButtonModule, FormsModule, CommonModule, PrismModule, AceModule ]
 }) class DynModule {}

@@ -99,7 +99,7 @@ import { HttpClient } from '@angular/common/http';
     }
   `]
 })
-export class ArticlesComponent implements AfterViewInit {
+export class ArticleComponent implements AfterViewInit {
   html: any;
   article: any;
 

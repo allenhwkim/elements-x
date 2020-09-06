@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AceModule } from './ace';
 import { ButtonModule } from './button';
 import { CalendarModule } from './calendar';
 import { CarouselModule } from './carousel';
@@ -22,6 +23,7 @@ import { A11yOutlineModule } from './a11y-outline';
 @NgModule({
   imports: [
     A11yOutlineModule,
+    AceModule,
     ButtonModule,
     CalendarModule,
     CarouselModule,
@@ -44,6 +46,7 @@ import { A11yOutlineModule } from './a11y-outline';
   ],
   exports: [
     A11yOutlineModule,
+    AceModule,
     ButtonModule,
     CalendarModule,
     CarouselModule,

@@ -1,4 +1,5 @@
 export * from './a11y-outline';
+export * from './ace';
 export * from './button';
 export * from './calendar';
 export * from './carousel';

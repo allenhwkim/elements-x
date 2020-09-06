@@ -2,7 +2,11 @@ import { Component, Input, ViewEncapsulation, HostBinding, HostListener, Element
 
 @Component({
   selector: 'ee-button',
-  template: `<ng-content></ng-content>`,
+  template: `
+  <div class="button-container">
+    <ng-content></ng-content>
+  </div>
+  `,
   encapsulation: ViewEncapsulation.None,
   styles: [`
   ee-button {
@@ -29,6 +33,12 @@ import { Component, Input, ViewEncapsulation, HostBinding, HostListener, Element
     box-shadow: 2px 2px 4px #CCC;
   }
 
+  ee-button .button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   ee-button:active { box-shadow: none; transform: translate(2px, 2px); }
   ee-button.no-shadow { box-shadow: none; }
   ee-button.no-border { border: none; }
@@ -48,32 +58,22 @@ import { Component, Input, ViewEncapsulation, HostBinding, HostListener, Element
   ee-button.no-bg[disabled] { background: none; color: #BBB;}
 
   ee-button.clicked { pointer-events: none; }
-  ee-button:not(.clicked) .loading { display: none; }
-  ee-button:.clicked .loading { display: initial; }
+
+  ee-button.loading { pointer-events: none; }
+  ee-button:not(.loading) .loading { display: none; }
+  ee-button:.loading .loading { display: initial; }
   `]
 })
 export class ButtonComponent  {
   @Input() disabled: string;
-  @Input() loadingBy;
   @HostBinding('attr.tabindex') get tabindex() {
     return this.disabled === undefined ? 0 : -1;
   };
-  @HostBinding('class.clicked') get clsClicked() { 
-    if (this.loadingBy === undefined)
-      return this._clicked
-    else if (this.loadingBy !== undefined && this._clicked)
-      return this.loadingBy
-  }
+  @HostBinding('class.clicked') clicked;
   @HostListener('click') onClicked() {
-    this._clicked = true;
-    if (this.loadingBy === undefined) {
-      setTimeout(_ => this._clicked = false, 1000);
-    }
+    this.clicked = true;
+    setTimeout(_ => this.clicked = false, 1000);
   }
-  // indicates user clicked button.
-  // w/o this.loadingBy, reset after 1 second 
-  // w/ this.loadingBy, reset by this.loadingBy
-  _clicked = false;
 
   constructor(private el: ElementRef) {}
 }

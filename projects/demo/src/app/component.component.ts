@@ -68,7 +68,7 @@ import { usageTemplate } from './components/usage';
     }
   `]
 })
-export class ComponentsComponent implements AfterViewInit {
+export class ComponentComponent implements AfterViewInit {
   componentName: string;
   component: any;
   usageText: string;

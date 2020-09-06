@@ -2,6 +2,7 @@ import { Component, VERSION, HostBinding, AfterViewInit } from '@angular/core';
 import { config } from './config';
 import { components } from './components/index';
 import { articles } from './articles/index';
+import { tools } from './tools/index';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 
 @Component({
@@ -14,6 +15,7 @@ export class AppComponent {
   config = config;
   components = Object.entries(components);
   articles = Object.entries(articles);
+  tools = Object.entries(tools);
   urlGroup: string = 'components';
 
   constructor(

@@ -1,15 +1,15 @@
 {
-  "name": "elements-extended",
-  "version": "0.0.0",
+  "name": "elements-x",
+  "version": "0.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "rm -rf dist && ng build lib --prod",
+    "publish": "cd dist/lib && npm publish && cd -",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {},
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1000.6",
@@ -20,6 +20,7 @@
     "@angular/compiler": "~10.0.10",
     "@angular/compiler-cli": "~10.0.10",
     "@angular/core": "~10.0.10",
+    "@angular/elements": "~10.0.10",
     "@angular/forms": "~10.0.10",
     "@angular/platform-browser": "~10.0.10",
     "@angular/platform-browser-dynamic": "~10.0.10",

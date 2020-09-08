@@ -19,6 +19,7 @@ import { Component, ElementRef, OnDestroy, HostListener } from '@angular/core';
    left: 0;
    width: 100%;
    box-shadow: 2px 2px 8px #CCC;
+   z-index: 1;
  }
    `]
 })

@@ -19,7 +19,7 @@ export class TabsComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes) {
-    console.log('!!!!!!!!!!!!!!!!!!!!!', changes)
+    // console.log('!!!!!!!!!!!!!!!!!!!!!', changes)
   }
 
   initializeData() {

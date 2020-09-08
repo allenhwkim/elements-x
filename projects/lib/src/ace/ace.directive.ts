@@ -1,5 +1,5 @@
 import * as ace from 'brace';
-import { Directive, Input, Output, EventEmitter, NgZone, OnInit, ElementRef, AfterViewInit } from '@angular/core';
+import { Directive, Input, Output, EventEmitter, NgZone, ElementRef, AfterViewInit } from '@angular/core';
 import * as prettier from 'prettier';
 import * as cssParser from 'prettier/parser-postcss';
 import * as jsParser from 'prettier/parser-babel';

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ElementsExtendedModule } from '../../../../lib/src';
+import { ElementsXModule } from '../../../../lib/src';
 
 export const usage = {
   template: `<ee-file>Select File</ee-file>`,
@@ -90,5 +90,5 @@ export class FileComponent {
 
 @NgModule({
   declarations: [FileComponent],
-  imports: [ ElementsExtendedModule, FormsModule, CommonModule]})
+  imports: [ ElementsXModule, FormsModule, CommonModule]})
 class DynModule {}

@@ -1,6 +1,6 @@
 import { Component, ElementRef, AfterViewInit, HostListener, ChangeDetectionStrategy, ChangeDetectorRef, Input, OnInit} from '@angular/core';
-import { fireCustomEvent } from '../fire-custom-event';
-import { OverlayComponent } from '../overlay.component';
+import { fireCustomEvent } from './fire-custom-event';
+import { OverlayComponent } from './overlay.component';
 
 @Component({
   selector: 'ee-clock',

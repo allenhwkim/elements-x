@@ -1,11 +1,12 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injector, DoBootstrap } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button.component';
-import { RippleModule } from '../ripple';
 
 @NgModule({
   declarations: [ButtonComponent],
   imports: [CommonModule],
-  exports: [ButtonComponent, RippleModule]
+  exports: [ButtonComponent]
 })
-export class ButtonModule { }
+export class ButtonModule { 
+  constructor(private injector: Injector) {}
+}

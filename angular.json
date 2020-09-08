@@ -12,7 +12,7 @@
         "@schematics/angular:component": { "skipTests": true },
         "@schematics/angular:module": { "skipTests": true },
         "@schematics/angular:directive": { "skipTests": true },
-        "@schematics/angular:servide": { "skipTests": true },
+        "@schematics/angular:servide": { "skipTests": true }
       },
       "architect": {
         "build": {
@@ -55,6 +55,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+             "allowedCommonJsDependencies": [
+                "brace/mode/html",
+                "brace/mode/javascript",
+                "brace/mode/css",
+                "prettier/parser-postcss",
+                "prettier/parser-babel",
+                "prettier/parser-html"
+             ],
             "outputPath": "dist/demo",
             "index": "projects/demo/src/index.html",
             "main": "projects/demo/src/main.ts",

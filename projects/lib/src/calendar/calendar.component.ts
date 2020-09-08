@@ -3,9 +3,9 @@ import {
   ElementRef, OnInit, Inject, LOCALE_ID, ChangeDetectionStrategy
 } from '@angular/core';
 
-import { localDate } from '../local-date';
-import { fireCustomEvent} from '../fire-custom-event';
-import { OverlayComponent } from '../overlay.component';
+import { localDate } from './local-date';
+import { fireCustomEvent} from './fire-custom-event';
+import { OverlayComponent } from './overlay.component';
 
 @Component({
   selector: 'ee-calendar',

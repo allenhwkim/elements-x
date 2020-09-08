@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ElementsExtendedModule } from '../../../../lib/src';
+import { ElementsXModule } from '../../../../lib/src';
 
 export const usage = {
   template: `<ee-calendar></ee-calendar>`
@@ -77,6 +77,6 @@ export class CalendarComponent {
 
 @NgModule({
   declarations: [CalendarComponent],
-  imports: [ ElementsExtendedModule, FormsModule, CommonModule ]})
+  imports: [ ElementsXModule, FormsModule, CommonModule ]})
 class DynModule {}
 

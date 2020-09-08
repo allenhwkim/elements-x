@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './404.component';
-import { ElementsExtendedModule } from '../../../lib/src';
+import { ElementsXModule } from '../../../lib/src';
 import { ComponentComponent } from './component.component';
 import { ArticleComponent } from './article.component';
 import { ToolComponent } from './tool.component';
@@ -40,7 +40,7 @@ const routes : Routes = [
 @NgModule({
   imports: [
     BrowserModule,
-    ElementsExtendedModule,
+    ElementsXModule,
     HttpClientModule,
     RouterModule.forRoot(routes)
   ],

@@ -3,8 +3,5 @@
     "lib": {
       "entryFile": "public-api.ts"
     }
-  },
-  "dependencies": {
-    "prismjs": "^1.21.0"
   }
 }

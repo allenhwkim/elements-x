@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ElementsExtendedModule } from '../../../../lib/src';
+import { ElementsXModule } from '../../../../lib/src';
 
 @Component({
   template: `<h2>tooltip</h2>  <ee-tooltip></ee-tooltip>`,
@@ -13,5 +13,5 @@ export class TooltipComponent {}
 
 @NgModule({
   declarations: [TooltipComponent],
-  imports: [ ElementsExtendedModule, FormsModule, CommonModule ]})
+  imports: [ ElementsXModule, FormsModule, CommonModule ]})
 class DynModule {}

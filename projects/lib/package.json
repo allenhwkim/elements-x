@@ -1,12 +1,10 @@
 {
-  "name": "lib",
-  "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^9.1.12",
-    "@angular/core": "^9.1.12"
-  },
+  "name": "elements-x",
+  "version": "0.1.4",
   "dependencies": {
-    "tslib": "^2.0.0",
-    "prismjs": "^1.21.0"
+    "tslib": "^2.0.0"
+  },
+  "publishConfig": {
+    "registry":"https://registry.npmjs.org"
   }
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ElementsExtendedModule } from '../../../../lib/src';
+import { ElementsXModule } from '../../../../lib/src';
 
 @Component({
   template: `
@@ -17,10 +17,11 @@ import { ElementsExtendedModule } from '../../../../lib/src';
     <li>Custom elements friendly</li>
   </ul>
   To do
-  <li>pagination</li>
-  <li>masked input</li>
-  <li>markdown</li>
-
+  <li>x-pagination</li>
+  <li>x-masked-input</li>
+  <li>x-markdown</li>
+  <li>x-inview: angular-in-view</li>
+  <li>x-ace</li>
   `,
   styles: [``]
 })
@@ -28,5 +29,5 @@ export class IndexComponent {}
 
 @NgModule({
   declarations: [IndexComponent],
-  imports: [ ElementsExtendedModule, FormsModule, CommonModule ]})
+  imports: [ ElementsXModule, FormsModule, CommonModule ]})
 class DynModule {}

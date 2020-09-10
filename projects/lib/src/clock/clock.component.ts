@@ -1,6 +1,6 @@
 import { Component, ElementRef, AfterViewInit, HostListener, ChangeDetectionStrategy, ChangeDetectorRef, Input, OnInit} from '@angular/core';
 import { fireCustomEvent } from './fire-custom-event';
-import { OverlayComponent } from './overlay.component';
+import { OverlayComponent as ClockOverlayComponent } from './overlay.component';
 
 @Component({
   selector: 'ee-clock',
@@ -30,7 +30,7 @@ import { OverlayComponent } from './overlay.component';
     }
   `]
 })
-export class ClockComponent extends OverlayComponent implements OnInit, AfterViewInit {
+export class ClockComponent extends ClockOverlayComponent implements OnInit, AfterViewInit {
   onDrag = false;
   time: Date = new Date();
   dratStaPos; // used to check if drag started

@@ -5,7 +5,7 @@ import {
 
 import { localDate } from './local-date';
 import { fireCustomEvent} from './fire-custom-event';
-import { OverlayComponent } from './overlay.component';
+import { OverlayComponent as CalendarOverlayComponent } from './overlay.component';
 
 @Component({
   selector: 'ee-calendar',
@@ -13,7 +13,7 @@ import { OverlayComponent } from './overlay.component';
   styleUrls: [ './calendar.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent extends OverlayComponent implements OnInit {
+export class CalendarComponent extends CalendarOverlayComponent implements OnInit {
   @Input() locale: string;
   @Input('date') selectedDate: any;
   @Input('min-date') minDate: any = '1969-01-01';

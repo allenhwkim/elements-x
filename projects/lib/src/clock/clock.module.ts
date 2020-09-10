@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClockComponent } from './clock.component';
-// import { OverlayComponent } from './overlay.component';
+import { OverlayComponent as ClockOverlayComponent } from './overlay.component';
 
 @NgModule({
-  // declarations: [ClockComponent, OverlayComponent],
-  declarations: [ClockComponent],
+  declarations: [ClockComponent, ClockOverlayComponent],
   imports: [CommonModule],
   exports: [ClockComponent]
 })

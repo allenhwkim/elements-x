@@ -1,0 +1,82 @@
+
+<app-custom-css>
+  .app x-file input {
+    background: red;
+  }
+  .app x-file .x-slot {
+    background: blue;
+    color: #FFF;
+    border-radius: 8px;
+  }
+  .app x-file:hover .x-slot,
+  .app x-file.dragover .x-slot {
+    color: #333;
+  }
+</app-custom-css>
+
+<div class="example">
+
+  <x-file id="file-selector" upload-fn="upload">
+    <input class="input" type="file" multiple="multiple"/><br/>
+    or, Drag and drop files <br/>
+    or Copy and paste files here
+  </x-file>
+
+  <app-pre>
+    &lt;<b>x-file</b> id="file-selector" <b>upload-fn="upload"</b>>
+      &lt;input class="input" type="file" multiple="multiple"/>&lt;br/>
+      or, Drag and drop files &lt;br/>
+      or Copy and paste files here
+    &lt;/x-file>
+    &lt;script>
+      document.querySelector('#file-selector').addEventListener('<b>x-file-selected</b>', event => {
+        console.log(event.detail);
+      });
+
+      function upload(file) { // imgur anonymous upload
+        let formData = new FormData();
+        formData.append('image', file, file.name);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://api.imgur.com/3/image.json');
+        xhr.setRequestHeader('Authorization', 'Client-ID YOUR_CLIENT_ID');
+        xhr.send(formData);
+        return xhr;
+      }
+    &lt;/script>
+  </app-pre>
+</div>
+
+<h3>Features </h3>
+<li> Supports drag and drop file selection </li>
+<li> Supports copy and paste file selection </li>
+<li> Supports select file from popup</li>
+<li> Supports custom contents and design</li>
+<li> Show preview of image </li>
+<li> Accept upload function </li>
+<li> Show upload progress </li>
+
+<h3>Attributes</h3>
+<li><b>upload-fn</b>:  string, the uplod function name that returnxs xhr</li>
+
+<h3>Events</h3> 
+<li><b>x-file-changed</b>: fired when collected files are changed with the values of list of files</li>
+<li><b>x-file-progress</b>: fired when upload is in progress</li>
+<li><b>x-file-load</b>: fired when upload is done successfully</li>
+<li><b>x-file-error</b>: fired when upload is errored</li>
+
+<script>
+  document.querySelector('#file-selector').addEventListener('x-file-selected', event => {
+    console.log(event.detail);
+  });
+
+  function upload(file) {
+    let formData = new FormData();
+    // var blob = new Blob(['<a>hi</a>'], { type: "text/xml"});
+    formData.append('image', file, file.name);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://api.imgur.com/3/image.json');
+    xhr.setRequestHeader('Authorization', 'Client-ID 863c02f211a9506');
+    xhr.send(formData);
+    return xhr;
+  }
+</script>

@@ -1,0 +1,16 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">How To Fire CustomEvent</h1>
+<p>CustomEvent polyfill and usage</p>
+<p>This is polyfill for IE11</p>
+<pre>(function () {<br/>  if (window.CustomEvent) return false;</pre>
+<pre>  function CustomEvent(event, params) {<br/>    params = params || { <br/>     bubbles: false, cancelable: false, detail: undefined <br/>    }; <br/>    var evt = document.createEvent( 'CustomEvent' );<br/>    evt.initCustomEvent( <br/>      event, params.bubbles, params.cancelable, params.detail<br/>    );<br/>    return evt;<br/>  }</pre>
+<pre>  CustomEvent.prototype = window.Event.prototype;<br/>  window.CustomEvent = CustomEvent;<br/>})();</pre>
+<p>How to fire a custom event on an element</p>
+<pre>const el = document.getElementById('foo');<br/>el.dispatchEvent(new CustomEvent('my-event', {<br/>  bubbles: true, detail: new Date()<br/>}));</pre></div>

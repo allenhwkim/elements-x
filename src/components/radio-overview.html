@@ -1,0 +1,103 @@
+
+<app-custom-css>
+  .app x-radio input[type="radio"] {
+    --x-radio-size: 36px;
+    --x-radio-border: blue;
+    --x-radio-fill: red;
+    --x-radio-icon: '\2714';
+    --x-radio-color: #FFF;
+  }
+  .app x-radio input:checked::after {
+    background: var(--x-radio-fill);
+  }
+</app-custom-css>
+
+<div class="example">
+
+  <h3>Default</h3>
+
+  <label>
+    <x-radio>
+      <input type="radio" name="r1" value="1" checked> Yes
+    </x-radio>
+  </label>
+  <label>
+    <x-radio>
+      <input type="radio" name="r1" value="0"> No
+    </x-radio>
+  </label>
+
+  <app-pre>
+    &lt;label>
+      &lt;x-radio>
+        &lt;input type="radio" name="r1" value="1" checked> Yes
+      &lt;/x-radio>
+    &lt;/label>
+    &lt;label>
+      &lt;x-radio>
+        &lt;input type="radio" name="r1" value="0"> No
+      &lt;/x-radio>
+    &lt;/label
+  </app-pre>
+
+  <h3>Custom</h3>
+  <label>
+    <x-radio border="red" color="red" fill="red" size="24px" icon="★">
+      <input type="radio" name="r2" value="1"> Yes
+    </x-radio>
+  </label>
+  <label>
+    <x-radio border="red" color="red" fill="red" size="24px" icon="★">
+      <input type="radio" name="r2" value="0" checked> No
+    </x-radio>
+  </label>
+  <app-pre>
+    &lt;label>
+      &lt;x-radio border="red" color="red" fill="red" size="24px" icon="★">
+        &lt;input type="radio" name="r2" value="1"> Yes
+      &lt;/x-radio>
+    &lt;/label>
+    &lt;label>
+      &lt;x-radio border="red" color="red" fill="red" size="24px" icon="★">
+        &lt;input type="radio" name="r2" value="0" checked> No
+      &lt;/x-radio>
+    &lt;/label>  
+  </app-pre>
+
+  <h3>Disabled</h3>
+
+  <label>
+    <x-radio border="red" color="red" fill="red" size="24px" icon="★">
+    <input disabled type="radio" value="true" name="r3" checked> 
+    Yes
+    </x-radio>
+  </label>
+  <label>
+    <x-radio border="red" color="red" fill="red" size="24px" icon="★">
+      <input disabled type="radio" value="false" name="r3">
+      No
+    </x-radio>
+  </label>
+  <app-pre>
+    &lt;label>
+      &lt;x-radio border="red" color="red" fill="red" size="24px" icon="★">
+      &lt;input disabled type="radio" value="true" name="r3" checked> 
+      Yes
+      &lt;/x-radio>
+    &lt;/label>
+    &lt;label>
+      &lt;x-radio border="red" color="red" fill="red" size="24px" icon="★">
+        &lt;input disabled type="radio" value="false" name="r3">
+        No
+      &lt;/x-radio>
+    &lt;/label> 
+  </app-pre>
+
+</div>
+
+<h3>Attributes</h3>
+<li><b>size</b>: Default 20px, width and height of the radio button</li>
+<li><b>border</b>: Default #333, border color of the radio button</li>
+<li><b>fill</b>: Default red, background color of the radion button</li>
+<li><b>icon</b>: Default '\25CF', ●, circle icon</li>
+<li><b>color</b>: Default inherit, color of the radio button</li>

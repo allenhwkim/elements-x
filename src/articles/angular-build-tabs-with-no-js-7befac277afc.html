@@ -1,0 +1,32 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Angular: Build Tabs With no JS.</h1>
+<h2 class="subtitle">No need to use JS with Angular for Tabs</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/0*YQFL9nhONW77JXoF" /><figcaption>Photo by <a href="https://unsplash.com/@florenciaviadana?utm_source=medium&utm_medium=referral">Florencia Viadana</a> on <a href="https://unsplash.com?utm_source=medium&utm_medium=referral">Unsplash</a></figcaption></figure></div>
+<p>These are the steps.</p>
+<div class="list number">Have your HTML ready</div>
+<div class="list number">Control selected tab with <span class="quote">tab</span> variable</div>
+<div class="list number">Style it</div>
+<p>This is the final output.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fstackblitz.com%2Fedit%2Fangular-min-tabs%3Fembed%3D1%26file%3Dsrc%252Fapp%252Fapp.component.html&display_name=StackBlitz&url=https%3A%2F%2Fstackblitz.com%2Fedit%2Fangular-min-tabs%3Ffile%3Dsrc%252Fapp%252Fapp.component.html&image=https%3A%2F%2Fc.staticblitz.com%2Fassets%2Ficon-1d2450aadcf984376236c23cd2ab0ba231ddd1d85c9b72990ed2ede5b4974d1b.png&key=a19fcc184b9711e1b4764040d3dc5c07&type=text%2Fhtml&schema=stackblitz" width="745" height="400"></iframe><figcaption></figcaption></figure></div>
+<h2>First, save your HTML ready</h2>
+<pre>&lt;div class="tabs"><br/>  &lt;div class="index"><br/>    &lt;div>Tab 1&lt;/div><br/>    &lt;div>Tab 2&lt;/div><br/>    &lt;div>Tab 3&lt;/div><br/>  &lt;/div><br/>  &lt;div class="contents"><br/>    &lt;div> Tab 1 contents. Hello &lt;/div><br/>    &lt;div> Tab 2 contents. Angular &lt;/div><br/>    &lt;div> Tab 3 contents. Tabs &lt;/div><br/>  &lt;/div><br/>&lt;/div></pre>
+<h2>Second, control selected tab with <span class="quote">tab</span> variable</h2>
+<pre>&lt;div class="tabs"><br/>  &lt;div class="index"><br/>    &lt;div <b>tabindex="0" role="tab"</b><br/>      <b>(click)="tab=1" (keyup.enter)="tab=1"</b><br/>      <b>[ngClass]="{active: tab===1}"</b>>Tab 1&lt;/div><br/>    &lt;div tabindex="0" role="tab"<br/>      (click)="tab=2" (keyup.enter)="tab=2"<br/>      [ngClass]="{active: tab===2}">Tab 2&lt;/div><br/>    &lt;div tabindex="0" role="tab"<br/>      (click)="tab=3" (keyup.enter)="tab=3"<br/>      [ngClass]="{active: tab===3}">Tab 3&lt;/div><br/>  &lt;/div><br/>  &lt;div class="contents"><br/>    &lt;div <b>*ngIf="tab === 1"</b>> Tab 1 contents. Hello &lt;/div><br/>    &lt;div *ngIf="tab === 2"> Tab 2 contents. Angular &lt;/div><br/>    &lt;div *ngIf="tab === 3"> Tab 3 contents. Tabs &lt;/div><br/>  &lt;/div><br/>&lt;/div></pre>
+<div class="list bulletin"><span class="quote">tabindex="0"</span> for keyboard navigation to work</div>
+<div class="list bulletin"><span class="quote">role="0"</span> for accessibility</div>
+<div class="list bulletin"><span class="quote">(click)=”tab=X”</span> and<span class="quote"> (keyup.enter)=”tab=2"</span> to set active tab</div>
+<div class="list bulletin"><span class="quote">[ngClass]="{active: tab === X}"</span> to display active tab.</div>
+<div class="list bulletin"><span class="quote">*ngIf="tab === X"</span> to display active contents only</div>
+<h2>Third, style it</h2>
+<pre>.tabs {<br/>  .index {<br/>    display: flex;<br/>    * {<br/>      border: 1px solid #ccc;<br/>      background: #EEE;<br/>      padding: 4px 12px;<br/>      border-radius: 4px 4px 0 0;<br/>      position: relative;<br/>      top: 1px;<br/>    }<br/>    .active {<br/>      background: #FFF;<br/>      border-bottom: 1px solid transparent;<br/>    }<br/>  }<br/>  .contents {<br/>    border: 1px solid #ccc;<br/>    min-height: 120px;<br/>    padding: 12px;<br/>  }<br/>}</pre>
+<p>Done! no more.</p>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">Angular Random How-Tos</a>. You may find some useful articles for your daily development.</p>
+<p><b>Do you think this useful? If so please;<br/>*</b> <b>Clap 👏 button </b>below️ to let others to see this too.<br/>* <a href="https://twitter.com/allenhwkim">Follow Allen on Twitter (@allenhwkim)</a></p></div>

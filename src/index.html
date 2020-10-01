@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Elements-X</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="assets/normalize.css" />
+    <link rel="stylesheet" href="assets/fontawesome/css/all.css" />
+  </head>
+  <body>
+    <div class="app" ee-a11y-outline>
+      <header class="header">
+        <section class="logo vcentered hcentered">
+          <div class="title"> Elements-X </div>
+        </section>
+        <nav class="header-nav" ripple>
+          <x-click class="hamburger vcentered hcentered" set=".app.collapsed">
+            <i class="fa fa-bars"></i>
+          </x-click>
+          <div class="links">
+            <!-- side bar update -->
+            <x-route target="side-bar">
+              <a href="/components*" src="/src/app-components-routes.html">Components</a>
+              <a href="/articles*" src="/src/app-articles-routes.html">Aritcles</a>
+              <a href="/tools*" src="/src/app-tools-routes.html">Tools</a>
+              <a href="" src="/src/app-components-routes.html"></a>
+            </x-route>
+          </div>
+          <div class="icons">
+            <a href="https://github.com/elements-x/elements-x">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </nav>
+      </header>
+    
+      <div class="main">
+        <aside class="aside" id="side-bar"></aside>
+        <article class="article">
+          <app-group-header></app-group-header>
+          <section class="article-contents" id="article-contents"></section>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

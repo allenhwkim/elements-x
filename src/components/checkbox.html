@@ -1,0 +1,14 @@
+<x-tabs>
+  <div class="tabs">
+    <div ripple tab-for="overview">OVERVIEW</div>
+    <div ripple tab-for="usage">USAGE</div>
+  </div>
+  <div class="tab-contents">
+    <div contents-for="overview">
+      <x-include src="/components/checkbox-overview.html"></x-include>
+    </div>
+    <div class="usage" contents-for="usage">
+      <x-include src="/components/checkbox-usage.html"></x-include>
+    </div>
+  </div>  
+</x-tabs>

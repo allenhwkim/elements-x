@@ -1,0 +1,32 @@
+<h2>URL Decoder/Encoder</h2>
+<button id="load-sample">Example</button>
+
+<div class="uri-encode-decode">
+  <textarea id="text"></textarea>
+  <x-button> encodeURI </x-button>
+  <x-button> decodeURI </x-button>
+  <x-button> encodeURIComponent </x-button>
+  <x-button> decodeURIComponent </x-button>
+</div>
+
+<style>
+  #text {
+    width: 800px;
+    height: 300px;
+  }
+</style>
+
+<script>
+  (function() {
+    document.querySelector('#load-sample').addEventListener('click', e => {
+      document.querySelector('#text').value = `https://foo.com/#/foo?x=;,:@&bar=+$-_.!~*'()ABC abc 123`;
+    })
+    document.querySelectorAll('.uri-encode-decode x-button').forEach(button => {
+      button.addEventListener('click', event => {
+        const funcName = event.target.innerText.trim();
+        const src = document.querySelector('#text').value;
+        document.querySelector('#text').value = window[funcName](src);
+      });
+    });
+  })();
+</script>

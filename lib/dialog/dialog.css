@@ -1,0 +1,45 @@
+x-dialog.x-visible {
+  display: block;
+}
+x-dialog {
+  display: none;
+}
+
+x-dialog .x-blocker {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+x-dialog .x-dialog {
+  position: fixed;
+  box-shadow: 8px 8px 16px #999;
+  background-color: white;
+  padding: 8px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  min-width: 400px;
+  min-height: 200px;
+}
+
+x-dialog .x-dialog .x-close-button {
+  position: absolute;
+  top: 0;
+  right: 8px;
+  border: 0;
+  background: transparent;
+  opacity: .5;
+}
+
+x-dialog.not-closable .x-dialog .x-close-button {
+  display: none;
+}
+x-dialog.not-closable .x-blocker {
+  pointer-events: none;
+}

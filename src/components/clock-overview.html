@@ -1,0 +1,63 @@
+
+<app-custom-css>
+  .app x-clock { width: 200px; height: 200px; }
+  .app x-clock .x-clock-circle { fill: green; stroke: blue; }
+  .app x-clock .x-clock-1-minute { stroke: white; }
+  .app x-clock .x-clock-5-minute { stroke: gold; } 
+  .app x-clock .x-clock-hour-hand { 
+    stroke: yellow; 
+    filter: drop-shadow(4px 4px 8px yellow);
+  }
+  .app x-clock .x-clock-minute-hand { stroke: orange; } 
+  .app x-clock .x-clock-numbers text { fill: yellow; } 
+  .app x-clock .x-clock-digital text { fill: white; } 
+</app-custom-css>
+
+<div class="example">
+  <p>
+    Press tab to select hour or miniute to update. Then, press arrow keys; up/down/left/right to update time our minutes
+  </p>
+  <p>
+    Or, drag hour or minute hand to adjust time.
+  </p>
+  
+  <x-clock></x-clock>
+  <pre> &lt;kx-clock>&lt;/kx-clock> </pre>
+  
+  <h3>Used with input</h3>
+  <input id="time" />
+  <x-overlay trigger="time" id="clock">
+    <x-clock hour="10" minute="9"></kx-clock>
+  </x-overlay>
+  <app-pre>
+    &lt;input id="<b>time</b>" />
+    &lt;x-overlay trigger="time" id="<b>clock</b>">
+      <b>&lt;x-clock hour="10" minute="9">&lt;/kx-clock></b>
+    &lt;/x-overlay>
+    &lt;script>
+      document.querySelector('<b>#clock</b>').addEventListener('<b>x-time-selected</b>', e => {
+        document.querySelector('<b>input#time</b>').value = e.detail;
+      });
+    &lt;/script>
+  </app-pre>
+
+</div>
+
+<h3>Features </h3>
+<li>Select time with analog clock</li>
+
+<h3>Attributes</h3>
+<li><b>hour</b>: 0 to 24</li>
+<li><b>minute</b>: 0 to 59</li>
+
+<h3>Events</h3>
+<li><b>x-time-selected</b>: a custom event. selected time is in event.detail</li>
+
+<h3>Events</h3>
+<div>Not Applicable</div>
+
+<script>
+  document.querySelector('#clock').addEventListener('x-time-selected', e => {
+    document.querySelector('input#time').value = e.detail;
+  });
+</script>

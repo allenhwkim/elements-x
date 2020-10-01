@@ -1,0 +1,41 @@
+import { setElementHTML } from '../common/util'
+
+class XInit extends HTMLElement {
+  // disconnectedCallback() {}
+  // adoptedCallback() {}
+  // static get observedAttributes() { return ['src']; }
+  // attributeChangedCallback(name, oldValue, newValue) { }
+
+  constructor(...args) {
+    const self = super(...args);
+    return self;
+  }
+
+  connectedCallback() {
+    const selector = this.getAttribute('selector') || '';
+    const value = this.getAttribute('value') || '';
+    const attrMatches = selector.match(/\[([a-z0-9\-]+)\]$/);
+    const includeMatches = value.match(/\.html$/);
+    const el = document.querySelector(selector);
+    if (el) {
+      if (includeMatches) { // include html
+        window.fetch(value).then(resp => resp.text())
+          .then(html => {
+            // el.innerHTML = html;
+            setElementHTML(el, html);
+          });
+      } else if (attrMatches) { // set attribute value
+        el.setAttribute(attrMatches[1], value);
+      } else if (el) {
+        el.innerText = value;
+      }
+    } else {
+      console.error({el, selector})
+    }
+  }
+}
+
+if (!customElements.get('x-init')) {
+  customElements.define('x-init', XInit);
+}
+

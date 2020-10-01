@@ -1,0 +1,79 @@
+<x-tabs>
+  <div class="tabs">
+    <div tab-for="html">HTML</div>
+    <div tab-for="ng">Angular</div>
+    <div tab-for="vue">VueJs</div>
+    <div tab-for="react">React</div>
+  </div>
+  <div class="contents">
+    <app-pre contents-for="html">
+      &lt;html>
+        &lt;head>
+          &lt;script src="https://unpkg.com/elements-x/dist/dialog">&lt;/script>
+        &lt;/head>
+        &lt;body>
+          &lt;button onclick="document.querySelector('#dialog1').open()">Open Diaog&lt;/button>
+          &lt;x-dialog id="dialog1">
+            This is a dialog.
+          &lt;/x-dialog>
+        &lt;/body>
+      &lt;/html>
+    </app-pre>
+    <app-pre contents-for="ng">
+      import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      <b>import 'elements-x/dist/dialog';</b>
+      
+      @Component({
+        selector: 'my-app',
+        template: `
+          &lt;button onclick="document.querySelector('#dialog1').open()">Open Diaog&lt;/button>
+          &lt;x-dialog id="dialog1">
+            This is a dialog.
+          &lt;/x-dialog>
+        `
+      })
+      class AppComponent  {}
+      
+      @NgModule({
+        imports:      [ BrowserModule ],
+        declarations: [ AppComponent ],
+        bootstrap:    [ AppComponent ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      })
+      export class AppModule {
+        setTime($event) { console.log($vent); }
+      }
+    </app-pre>
+    <app-pre contents-for="vue">
+      &lt;template>
+        &lt;button onclick="document.querySelector('#dialog1').open()">Open Diaog&lt;/button>
+        &lt;x-dialog id="dialog1">
+          This is a dialog.
+        &lt;/x-dialog>
+      &lt;/template>
+      
+      &lt;script>
+      <b>import 'elements-x/dist/dialog';</b>
+      
+      export default {
+        name: "App",
+        methods: function(event) { console.log(evetn); }
+      };
+      &lt;/script>
+    </app-pre>
+    <app-pre contents-for="react">
+      import React from "react";
+      <b>import 'elements-x/dist/dialog';</b>
+
+      export default function App() {
+        return (
+          &lt;button onclick="document.querySelector('#dialog1').open()">Open Diaog&lt;/button>
+          &lt;x-dialog id="dialog1">
+            This is a dialog.
+          &lt;/x-dialog>
+        );
+      }
+    </app-pre>
+  </div>
+</x-tabs>

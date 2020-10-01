@@ -1,0 +1,99 @@
+<x-tabs>
+  <div class="tabs">
+    <div tab-for="js">Javascript</div>
+    <div tab-for="ng">Angular</div>
+    <div tab-for="vue">VueJs</div>
+    <div tab-for="react">React</div>
+  </div>
+  <div class="contents">
+    <app-pre contents-for="js">
+      &lt;script src="https://unpkg.com/elements-x/dist/tabs">&lt;/script>
+      &lt;x-tabs>
+        &lt;div class="tabs">
+          &lt;div tab-for="html">HTML&lt;/div>
+          &lt;div tab-for="js">Javascript&lt;/div>
+          &lt;div class="ink-bar">&lt;/div>
+        &lt;/div>
+        &lt;div class="tab-contents">
+          &lt;div contents-for="html">Html Contents&lt;/div>
+          &lt;div contents-for="js">Javascript Contents&lt;/div>
+        &lt;/div>
+      &lt;/x-tabs>
+
+    </app-pre>
+    <app-pre contents-for="ng">
+      import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      <b>import 'elements-x/dist/tabs';</b>
+      
+      @Component({
+        selector: 'my-app',
+        template: `
+          &lt;x-tabs>
+            &lt;div class="tabs">
+              &lt;div tab-for="html">HTML&lt;/div>
+              &lt;div tab-for="js">Javascript&lt;/div>
+              &lt;div class="ink-bar">&lt;/div>
+            &lt;/div>
+            &lt;div class="tab-contents">
+              &lt;div contents-for="html">Html Contents&lt;/div>
+              &lt;div contents-for="js">Javascript Contents&lt;/div>
+            &lt;/div>
+          &lt;/x-tabs>
+        `
+      })
+      class AppComponent  {}
+      
+      @NgModule({
+        imports:      [ BrowserModule ],
+        declarations: [ AppComponent ],
+        bootstrap:    [ AppComponent ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      })
+      export class AppModule {}
+    </app-pre>
+    <app-pre contents-for="vue">
+      &lt;template>
+        &lt;x-tabs>
+          &lt;div class="tabs">
+            &lt;div tab-for="html">HTML&lt;/div>
+            &lt;div tab-for="js">Javascript&lt;/div>
+            &lt;div class="ink-bar">&lt;/div>
+          &lt;/div>
+          &lt;div class="tab-contents">
+            &lt;div contents-for="html">Html Contents&lt;/div>
+            &lt;div contents-for="js">Javascript Contents&lt;/div>
+          &lt;/div>
+        &lt;/x-tabs>
+      &lt;/template>
+      
+      &lt;script>
+      <b>import 'elements-x/dist/tabs';</b>
+      
+      export default {
+        name: "App"
+      };
+      &lt;/script>
+    </app-pre>
+    <app-pre contents-for="react">
+      import React from "react";
+      <b>import 'elements-x/dist/button';</b>
+
+      export default function App() {
+        return (
+          &lt;x-tabs>
+            &lt;div class="tabs">
+              &lt;div tab-for="html">HTML&lt;/div>
+              &lt;div tab-for="js">Javascript&lt;/div>
+              &lt;div class="ink-bar">&lt;/div>
+            &lt;/div>
+            &lt;div class="tab-contents">
+              &lt;div contents-for="html">Html Contents&lt;/div>
+              &lt;div contents-for="js">Javascript Contents&lt;/div>
+            &lt;/div>
+          &lt;/x-tabs>
+        );
+      }
+    </app-pre>
+  </div>
+</x-tabs>

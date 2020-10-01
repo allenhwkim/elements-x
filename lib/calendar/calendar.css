@@ -1,0 +1,56 @@
+x-calendar .x-header {
+  display: flex;
+  padding: 12px 8px;
+  font-weight: bold;
+}
+x-calendar .x-header  .x-month-year {
+  flex: 1;
+}
+x-calendar .x-header  .x-month-year .year {
+  border: 0;
+  font-weight: bold;
+  font-size: 1em;
+}
+x-calendar .x-header  .x-month-year button {
+  background: transparent;
+  border: 0;
+}
+
+x-calendar .x-week-days-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+ x-calendar .x-week-days-container .x-weekday {
+  background: #CCC;
+}
+
+x-calendar .x-days-container { 
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px 12px 4px;
+}
+
+x-calendar .x-weekday,
+x-calendar .x-date {
+  border: 0;
+  background: #FFF;
+  font-size: 1em;
+  line-height: 1.5em;
+  box-sizing: border-box;
+  width: calc(100%/7);
+  text-align: center;
+}
+x-calendar .x-date span {
+  display: inline-block;
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+}
+x-calendar .x-date:not(.x-same-month) { color: #ccc }
+x-calendar .x-date:not([disabled]) { cursor: pointer }
+
+x-calendar .x-date.x-selected span,
+x-calendar .x-date:not([disabled]):hover span {
+  background: #ccc;
+}

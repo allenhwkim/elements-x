@@ -1,0 +1,30 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Getting Started — MutationObserver</h1>
+<p><span class="quote">MutationObserver</span> provides developers with a way to react to changes in a <a href="https://developer.mozilla.org/en-US/docs/DOM">DOM</a></p>
+<p>For example;</p>
+<div class="list bulletin">I want to do something only if when elements of this block is changed.</div>
+<div class="list bulletin">I want to do something when attribute is changed.</div>
+<div class="list bulletin">User updated the contents of this block, and I want to do something</div>
+<p>You can find MutationObserver Spec. at <a href="http://developer.mozilla.org/en-US/docs/Web/API/MutationObserver">here</a></p>
+<p>The following is an advanced example with Chrome Extension. Add this chrome extension, and open facebook. You will see that all your operation is mirrored out to to another window.</p>
+<div class="list bulletin"><a href="https://chrome.google.com/webstore/detail/pagemirror-build-by-kuoll/kefndlndbcgpbimijjjefolmglodjoda?hl=en">https://chrome.google.com/webstore/detail/pagemirror-build-by-kuoll/kefndlndbcgpbimijjjefolmglodjoda?hl=en</a> (<a href="http://facebook.com">Facebook.com</a>)</div>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/1*O8vlLUHw0VITelDX6bTLWg.png" /><figcaption></figcaption></figure></div>
+<p>Enough said. Let’s code it.</p>
+<div class="list number">What shoud I do? Define callback then create an observer.</div>
+<pre>// Callback function to execute when mutations are observed<br/>var callback = function(mutationsList) {<br/>  for(var mutation of mutationsList) {<br/>    alert(`${mutation.type} has been changed.`);<br/>  }<br/>};</pre>
+<pre>// Create an observer instance linked to the callback function<br/>var observer = new MutationObserver(callback);</pre>
+<p>2. What do I observe? call <span class="quote">observer.observe(el)</span></p>
+<pre>// Start observing the target node for configured mutations<br/>var targetNode = document.querySelector('#some-id');<br/>observer.observe(targetNode, {<br/>  attributes: true,<br/>  characterData: true,<br/>  childList: true,<br/>  subtree: true<br/>});</pre>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fcodepen.io%2Fallenhwkim%2Fembed%2Fpreview%2FRxqPNN%3Fheight%3D600%26slug-hash%3DRxqPNN%26default-tabs%3Djs%2Cresult%26host%3Dhttps%3A%2F%2Fcodepen.io%26embed-version%3D2&url=https%3A%2F%2Fcodepen.io%2Fallenhwkim%2Fpen%2FRxqPNN&image=https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fi.cdpn.io%2F679916.RxqPNN.small.4afeb531-2747-4499-a4c4-304f1fc39c0e.png&key=a19fcc184b9711e1b4764040d3dc5c07&type=text%2Fhtml&schema=codepen" width="800" height="600"></iframe><figcaption></figcaption></figure></div>
+<p>If you like this article, you may also like the implementation of MutationObserver with <a href="https://mymce.github.io">mce(Materialized Custom Element)</a>, which observes the changes on the document and add custom behaviour to elements.</p>
+<p>Another articles;</p>
+<div class="list number"><a href="https://medium.com/allenhwkim/back-to-element-c4aecf3c6b64">https://medium.com/allenhwkim/back-to-element-c4aecf3c6b64</a></div>
+<div class="list number"><a href="https://medium.com/allenhwkim/simple-spa-building-with-mce-f507e5f0236">https://medium.com/allenhwkim/simple-spa-building-with-mce-f507e5f0236</a></div>
+<p>Happy Coding!</p></div>

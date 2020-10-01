@@ -1,0 +1,66 @@
+x-checkbox input {
+  --x-checkbox-size: 20px;
+  --x-checkbox-border: #333;
+  --x-checkbox-fill: #FFF;
+  --x-checkbox-icon: '\2714';
+  --x-checkbox-color: inherit;
+  outline: none;
+  position: relative;
+  width: 1px;
+  height: 1px;
+  display: inline-block;
+  margin: 0;
+  margin-right: var(--x-checkbox-size);
+  margin-bottom: var(--x-checkbox-size);
+  vertical-align: middle;
+}
+
+x-checkbox input:focus::after,
+x-checkbox input:hover::after {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  height: calc(var(--x-checkbox-size) + 12px);
+  width: calc(var(--x-checkbox-size) + 12px);
+  border-radius: 50%;
+  background: rgba(0,0,0,.1);
+  z-index: -1;
+}
+
+x-checkbox input::before  {
+  display: flex;
+  box-sizing: border-box;
+  content: '';
+  position: absolute;
+  width: var(--x-checkbox-size);
+  height: var(--x-checkbox-size);
+  background-color: #FFF;
+  border-radius: 4px;
+  border: 1px solid var(--x-checkbox-border);
+  color: var(--x-checkbox-color);
+  align-items: center;
+  justify-content: center;
+}
+
+x-checkbox input:disabled {
+  opacity: 0.5;
+  background: #CCC;
+}
+
+x-checkbox input:checked::before {
+  content: var(--x-checkbox-icon);
+  background-color: var(--x-checkbox-fill, #FFF);
+}
+
+x-checkbox.filled input:checked::before {
+  border: none;
+  background: var(--x-checkbox-fill);
+  color: #FFF;
+}
+
+x-checkbox.filled input:checked.disabled::before {
+  border: 1px solid #CCC;
+  background: #CCC;
+  color: #FFF;
+}

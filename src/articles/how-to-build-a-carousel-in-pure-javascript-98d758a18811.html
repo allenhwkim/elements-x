@@ -1,0 +1,32 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">How to Build a Carousel in Pure Javascript</h1>
+<p>As a minimalist, here I share smallest Vanilla JS carousel coding technique.</p>
+<p>I am going to show images with in list, <span class="quote">&lt;ul></span> and <span class="quote">&lt;li></span>. Then, I display these images horizontally with css. Next I add two buttons to navigate among images. Finally, I code 7 lines of Javascript to complete this carousel.</p>
+<p>Sounds simple? Let’s go.</p>
+<h2>1. Show Images</h2>
+<pre>    &lt;ul><br/>      &lt;li>&lt;img class="img1" src="//picsum.photos/300/200?1">&lt;/li><br/>      &lt;li>&lt;img class="img2" src="//picsum.photos/300/200?2">&lt;/li><br/>      &lt;li>&lt;img class="img3" src="//picsum.photos/300/200?3">&lt;/li><br/>      &lt;li>&lt;img class="img4" src="//picsum.photos/300/200?4">&lt;/li><br/>      &lt;li>&lt;img class="img5" src="//picsum.photos/300/200?5">&lt;/li><br/>      &lt;li>&lt;img class="img6" src="//picsum.photos/300/200?6">&lt;/li><br/>      &lt;li>&lt;img class="img7" src="//picsum.photos/300/200?7">&lt;/li><br/>      &lt;li>&lt;img class="img8" src="//picsum.photos/300/200?8">&lt;/li><br/>      &lt;li>&lt;img class="img9" src="//picsum.photos/300/200?9">&lt;/li><br/>    &lt;/ul></pre>
+<h2>2. Style images</h2>
+<pre>ul { display: flex; margin: 0; padding: 0; overflow: hidden; }<br/>li { display: block; list-style: none; }</pre>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/1*ReaeLoIawxjRQibyLtHlfQ.png" /><figcaption></figcaption></figure></div>
+<h2>3. Add buttons to navigate</h2>
+<pre>&lt;button onclick="show(-1)">&lt;&lt;/button><br/>&lt;button onclick="show(+1)">&gt;&lt;/button><br/>&lt;style><br/>  button.prev, button.next {<br/>    display: flex; font-size: 32px;<br/>    align-items: center; justify-content: center;<br/>    color: #FFF; background-color: #333;<br/>    border-radius: 50%;<br/>    width: 44px; height: 44px;<br/>  }<br/>  button.prev {<br/>    position: absolute; left: 0; top: 80px;<br/>  }<br/>  button.next {<br/>    position: absolute; right: 0; top: 80px;<br/>  }<br/>&lt;/style></pre>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/1*MPZ9eruDc0ZfGAYLBTO9dA.png" /><figcaption></figcaption></figure></div>
+<h2>4. Last, Code Javascript (7 lines)</h2>
+<pre>let liEls = document.querySelectorAll('ul li');<br/>let index = 0;<br/>window.show = function(increase) {<br/>  index = index + increase;<br/>  index = Math.min(Math.max(index,0), liEls.length-1);<br/>  liEls[index].scrollIntoView({behavior: 'smooth'});<br/>}</pre>
+<p>All done. Here we go. The good thing about this is that this technique is not limited to images, but you can use it for all types of list with different width and heights.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fstackblitz.com%2Fedit%2Fmedium-carousel%3Fembed%3D1%26file%3Dindex.js%26view%3Dpreview&url=https%3A%2F%2Fstackblitz.com%2Fedit%2Fmedium-carousel%3Fembed%3D1%26file%3Dindex.js%26view%3Dpreview&image=https%3A%2F%2Fc.staticblitz.com%2Fassets%2Ficon-664493542621427cc8adae5e8f50d632f87aaa6ea1ce5b01e9a3d05b57940a9f.png&key=a19fcc184b9711e1b4764040d3dc5c07&type=text%2Fhtml&schema=stackblitz" width="745" height="400"></iframe><figcaption></figcaption></figure></div>
+<p>Feel free to fork <a href="https://stackblitz.com/edit/medium-carousel?file=index.html">stackblitz</a> code and change contents of <li> contents.</p>
+<p>The following is Angular version the above technique.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/1*zx3MwVKjNW5tyOudmOll7A.png" /><figcaption></figcaption></figure></div>
+<p>The principle applied to Angular component is the same.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fstackblitz.com%2Fedit%2Fangular-min-carousel%3Fembed%3D1%26view%3Dpreview&display_name=StackBlitz&url=https%3A%2F%2Fstackblitz.com%2Fedit%2Fangular-min-carousel%3Fview%3Dpreview&image=https%3A%2F%2Fc.staticblitz.com%2Fassets%2Ficon-1d2450aadcf984376236c23cd2ab0ba231ddd1d85c9b72990ed2ede5b4974d1b.png&key=a19fcc184b9711e1b4764040d3dc5c07&type=text%2Fhtml&schema=stackblitz" width="745" height="400"></iframe><figcaption></figcaption></figure></div>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">Angular Random How-Tos</a>. You may find some useful articles for your daily development.</p>
+<p><b>Do you think this useful? If so please;<br/>*</b> <b>Clap 👏 button </b>below️ to let others to see this too.<br/>* <a href="https://twitter.com/allenhwkim">Follow Allen on Twitter (@allenhwkim)</a></p></div>

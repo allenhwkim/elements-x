@@ -1,0 +1,123 @@
+<app-custom-css>
+  .app x-menu > ul.dropdown-menu {
+    background: blue;
+    color: #FFF;
+  }
+  .app x-menu > ul.dropdown-menu > li[aria-expanded],
+  .app x-menu > ul.dropdown-menu > li > ul {
+    color: initial;
+  }
+
+</app-custom-css>
+
+<div class="example">
+
+  <h2>Menu Style</h2>
+
+  <x-menu id="my-menu" selected="redo">
+    <ul class="dropdown-menu">
+      <li> File
+        <ul>
+          <li>New</li>
+          <li>Open
+            <ul>
+              <li>File A</li>
+              <li id="file-b">File B</li>
+              <li>File C</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li> Edit
+        <ul>
+          <li>Undo</li>
+          <li id="redo">Redo</li>
+          <li disabled>Cut</li>
+          <li disabled>Copy</li>
+          <li disabled>Paste</li>
+        </ul>
+      </li>
+      <li> Format
+        <ul>
+          <li>Font</li>
+          <li>Text</li>
+        </ul>
+      </li>
+      <li> View
+        <ul>
+          <li>100%</li>
+          <li>Zoom In</li>
+          <li>Zoom Out</li>
+        </ul>
+      </li>
+      <li id="help">Help</li>
+    </ul>
+  </x-menu>
+
+  <script>
+    document.querySelector('#my-menu').addEventListener('x-menu-select', e => {
+      console.log(111111111111, e.detail);
+    });
+  </script>
+  
+  <app-pre>
+    &lt;x-menu id="my-menu" <b>menu-style</b> selected="redo">
+      &lt;ul class="<b>dropdown-menu</b>">
+        &lt;li> File
+          &lt;ul>
+            &lt;li>New&lt;/li>
+            &lt;li>Open
+              &lt;ul>
+                &lt;li>File A&lt;/li>
+                &lt;li id="file-b">File B&lt;/li>
+                &lt;li>File C&lt;/li>
+              &lt;/ul>
+            &lt;/li>
+          &lt;/ul>
+        &lt;/li>
+        &lt;li> Edit
+          &lt;ul>
+            &lt;li>Undo&lt;/li>
+            &lt;li id="redo">Redo&lt;/li>
+            &lt;li disabled>Cut&lt;/li>
+            &lt;li disabled>Copy&lt;/li>
+            &lt;li disabled>Paste&lt;/li>
+          &lt;/ul>
+        &lt;/li>
+        &lt;li> Format
+          &lt;ul>
+            &lt;li>Font&lt;/li>
+            &lt;li>Text&lt;/li>
+          &lt;/ul>
+        &lt;/li>
+        &lt;li> View
+          &lt;ul>
+            &lt;li>100%&lt;/li>
+            &lt;li>Zoom In&lt;/li>
+            &lt;li>Zoom Out&lt;/li>
+          &lt;/ul>
+        &lt;/li>
+        &lt;li id="help">Help&lt;/li>
+      &lt;/ul>
+    &lt;/x-menu>
+    &lt;script>
+      document.querySelector('#my-menu').addEventListener('x-menu-select', e => {
+        console.log(e.detail);
+      });
+    &lt;/script>
+  </app-pre>
+</div>
+
+<h3>Features </h3>
+<li>Convert ul/li list to hierarchy collapsable drodown menu</li> 
+<li>Provide navigation using keyboard</li>
+<li>Accessibility full-feagtured</li>
+<li>Fire 'x-menu-selct` evnet when menu item is clicked or enter pressed</li>
+<li>Highlight selected item</li>
+
+<h3>Attributes</h3>
+<li><b>menu-style</b>: When given, the list works like menu</li>
+<li><b>selected</b>: the id of preselected menu item, default null</li>
+
+<h3>Events</h3> 
+<li><b>x-list-select</b>: Fired when menu item is selected by click or enter pressed</li>

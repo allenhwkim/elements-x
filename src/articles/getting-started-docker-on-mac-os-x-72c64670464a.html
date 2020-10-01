@@ -1,0 +1,45 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Getting Started — Docker on Mac Os X</h1>
+<h2 class="subtitle">Study notes for Docker, a container as a service platform</h2>
+<h1>1. Install Docker CE on Mac</h1>
+<p><a href="https://docs.docker.com/docker-for-mac/install/">https://docs.docker.com/docker-for-mac/install/</a></p>
+<div class="list bulletin"><a href="https://download.docker.com/mac/stable/Docker.dmg">Get Docker for Mac [Stable</a>] — 336 MB at the time of Jan 22nd 2018</div>
+<div class="list bulletin">Run</div>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-6"><img src="https://cdn-images-1.medium.com/max/700/1*6pmSec8j6oJF6hm_UQchEw.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/max/700/1*yf9RLo6jfhRUPuZb43EoBg.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/max/700/1*Y3y5Vkp5k5HS_AUD8tViVg.png" /><figcaption></figcaption></figure></div>
+<pre><b>~$  docker --version</b><br/>Docker version 17.12.0-ce, build c97c6d6<br/><b>~$  docker run hello-world</b><br/>Unable to find image 'hello-world:latest' locally<br/>latest: Pulling from library/hello-world<br/>ca4f61b1923c: Pull complete<br/>Digest: .....<br/>Status: Downloaded newer image for hello-world:latest</pre>
+<pre>Hello from Docker!<br/>This message shows that your installation appears to be working correctly<br/>....</pre>
+<h1>2. Build A Containers — app + libs/bins + environment</h1>
+<p><a href="https://docs.docker.com/get-started/part2/">https://docs.docker.com/get-started/part2/</a><br/><a href="https://nodejs.org/en/docs/guides/nodejs-docker-webapp/">https://nodejs.org/en/docs/guides/nodejs-docker-webapp/</a></p>
+<pre>$ mkdir hello-docker<br/>$ cd hello-docker<br/>$ npm init<br/>$ npm install express --save</pre>
+<h2>1. Create <span class="quote">index.js</span></h2>
+<pre>var express = require('express')<br/>var app = express()</pre>
+<pre>app.get('/', (req, res) => res.send('Hello World!'));<br/>app.listen(8081, _ => console.log('app listening on port 8081!'));</pre>
+<h2>2. Create <span class="quote">Dockerfile</span></h2>
+<pre><span class="quote">FROM node:7<br/>WORKDIR /app<br/>COPY package.json /app<br/>RUN npm install<br/>COPY . /app<br/>CMD node index.js<br/>EXPOSE 8081</span></pre>
+<h2>3. Build and Run</h2>
+<pre><b>$ ls</b><br/>Dockerfile index.js package.json<br/><b>$ docker build -t hello-docker .<br/></b>Sending build context to Docker daemon  3.072kB<br/>Step 1/7 : FROM node:7<br/>...<br/><span class="quote"><b>$ docker run -p 8081:8081 -d hello-docker</b></span></pre>
+<pre><b>$ curl localhost:8081<br/>$ docker images # list images<br/>$ docker container ls   # listcontainers<br/>$ docker exec -it <container-id> /bin/bash<br/>$ docker container stop <container-id></b></pre>
+<h2>To publish your docker container</h2>
+<pre>$ docker login<br/>$ docker tag image allenhwkim/hello-docker:0.1.0<br/>$ docker push allenhwkim/hello-docker:0.1.0<br/>$ docker run -p 8081:8081 allenhwkim/hello-docker:0.1.0</pre>
+<h1>Review</h1>
+<p>After this short lab, now it’s time to look at how docker works. Here are some terms and concepts we need to know.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/1*TDWsiXHCEAG9n3nMOygBeA.png" /><figcaption><a href="https://docs.docker.com/engine/docker-overview/#the-docker-daemon">https://docs.docker.com/engine/docker-overview/#the-docker-daemon</a></figcaption></figure></div>
+<p><b>Docker daemon</b> listens for Docker API requests and manages Docker objects; images, containers, networks, and volumes.</p>
+<p><b>Docker Client</b> is the primary way that Docker users interact with Docker.</p>
+<p><b>Docker Registry</b> is storage for docker images. Public Docker registeries are Docker Hub and Docker Cloud.</p>
+<p>An <b>image</b> is a read-only template with instructions for creating a Docker container.</p>
+<p>A <b>container</b> is a runnable instance of an image. You can create, start, stop, move, or delete a container using Docker clients(API or CLI). A container is defined by its image as well as any configuration options.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-6"><img src="https://cdn-images-1.medium.com/max/700/1*LO0OxSo3XnhA_85IBE4P7w.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/max/700/1*076iI5ApSaJ-vlqqkPzm5w.png" /><figcaption>Container VS Virtual Machine</figcaption></figure></div>
+<p><b>Services</b> allow you to scale containers across multiple Docker daemons, which all work together as a <b>swarm</b> with multiple <i><b>managers</b></i> and <i><b>workers</b></i>.</p>
+<p>A <b>service</b> allows you to define the desired state, such as the number of replicas of the service that must be available at any given time.</p>
+<h2>Image VS container</h2>
+<p>An<b> image</b> is basically an immutable template for creating a container. It’s easier to understand the difference between an image and container by considering what happens to an image when turned into a <b>container</b>.</p>
+<p>The Docker engine takes the <b>image</b> and adds a read-write filesystem on top, then initializes various settings. These settings include network options (IP, port, etc.), name, ID, and any resource limits (CPU, memory).</p>
+<p>Thanks</p></div>

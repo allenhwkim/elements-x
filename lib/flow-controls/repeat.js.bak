@@ -1,0 +1,54 @@
+import { setElementHTML } from '../common/util'
+
+// <x-repeat [dataList]="[{id:1, date: new Date()}]">
+//   <li id="${id}">${id} ${date.getTime()}</li>
+// <x-repeat>
+class XRepeat extends HTMLElement {
+  // disconnectedCallback() {}
+  // adoptedCallback() {}
+  // static get observedAttributes() { return ['c', 'l']; }
+  // attributeChangedCallback(name, oldValue, newValue) {}
+
+  constructor(...args) {
+    const self = super(...args);
+    this.template; // the original template
+    return self;
+  }
+
+  get dataList() { return this._dataList; }
+  set dataList(list) {
+    this._dataList = list;
+    this._render();
+  }
+
+  connectedCallback() {
+    this.template = this.innerHTML;
+    if (this.dataList) {
+      this._render();
+    } else if (this.dataset.list) {
+      this.dataList = JSON.parse(this.dataset.list);
+    }
+  }
+
+  _render() {
+    // this.innerHTML = ''; // reset
+    setElementHTML(this, '');
+
+    const func = new Function('expr', `return thisexpr;`);
+
+    (this.dataList || []).forEach( item => {
+      let html = this.template;
+      html.match(/\${[^}]+}/g).forEach( expr => {
+        html = html.replace(/\${([^}]+)}/g, (m, expr) => {
+          const func = new Function(`return this.${expr};`);
+          return `${func.bind(item)()}`;
+        })
+      });
+      this.insertAdjacentHTML('beforeend', html);
+    })    
+  }
+}
+
+if (!customElements.get('x-repeat')) {
+  customElements.define('x-repeat', XRepeat);
+}

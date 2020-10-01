@@ -1,0 +1,94 @@
+<x-tabs>
+  <div class="tabs">
+    <div tab-for="js">Javascript</div>
+    <div tab-for="ng">Angular</div>
+    <div tab-for="vue">VueJs</div>
+    <div tab-for="react">React</div>
+  </div>
+  <div class="contents">
+    <app-pre contents-for="js">
+      &lt;script src="https://unpkg.com/elements-x/dist/radio">&lt;/script>
+      &lt;label>
+        &lt;kx-radio>
+          &lt;input type="radio" name="r1" value="1" checked> Yes
+        &lt;/kx-radio>
+      &lt;/label>
+      &lt;label>
+        &lt;kx-radio>
+          &lt;input type="radio" name="r1" value="1"> No
+        &lt;/kx-radio>
+      &lt;/label>
+    </app-pre>
+    <app-pre contents-for="ng">
+      import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      <b>import 'elements-x/dist/radio';</b>
+      
+      @Component({
+        selector: 'my-app',
+        template: `
+          &lt;label>
+            &lt;kx-radio>
+              &lt;input type="radio" name="r1" value="1" checked> Yes
+            &lt;/kx-radio>
+          &lt;/label>
+          &lt;label>
+            &lt;kx-radio>
+              &lt;input type="radio" name="r1" value="1"> No
+            &lt;/kx-radio>
+          &lt;/label>
+        `
+      })
+      class AppComponent  {}
+      
+      @NgModule({
+        imports:      [ BrowserModule ],
+        declarations: [ AppComponent ],
+        bootstrap:    [ AppComponent ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      })
+      export class AppModule {}
+    </app-pre>
+    <app-pre contents-for="vue">
+      &lt;template>
+        &lt;label>
+          &lt;kx-radio>
+            &lt;input type="radio" name="r1" value="1" checked> Yes
+          &lt;/kx-radio>
+        &lt;/label>
+        &lt;label>
+          &lt;kx-radio>
+            &lt;input type="radio" name="r1" value="1"> No
+          &lt;/kx-radio>
+        &lt;/label>
+      &lt;/template>
+      
+      &lt;script>
+      <b>import 'elements-x/dist/radio';</b>
+      
+      export default {
+        name: "App"
+      };
+      &lt;/script>
+    </app-pre>
+    <app-pre contents-for="react">
+      import React from "react";
+      <b>import 'elements-x/dist/button';</b>
+
+      export default function App() {
+        return (
+          &lt;label>
+            &lt;kx-radio>
+              &lt;input type="radio" name="r1" value="1" checked> Yes
+            &lt;/kx-radio>
+          &lt;/label>
+          &lt;label>
+            &lt;kx-radio>
+              &lt;input type="radio" name="r1" value="1"> No
+            &lt;/kx-radio>
+          &lt;/label>
+        );
+      }
+    </app-pre>
+  </div>
+</x-tabs>

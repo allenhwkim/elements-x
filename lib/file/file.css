@@ -1,0 +1,58 @@
+x-file .x-slot {
+  display: block;
+  cursor: grab;
+  background: #F5F5F5;
+  padding: 1em;
+  border: 1px solid #F5F5F5;
+  box-sizing: border-box;
+}
+x-file .x-slot:hover,
+x-file.dragover .x-slot {
+  background: #FFF;
+  border: 1px solid #CCC;
+}
+x-file .x-file {
+  display: flex;
+  border-top: 1px solid #ccc;
+  padding: 8px;
+  position: relative;
+  justify-content: space-between;
+}
+x-file .x-file:last-child {
+  border-bottom: 1px solid #ccc;
+}
+x-file .x-file .x-name {
+  width: 40%;
+}
+x-file .x-file .x-preview {
+  max-width: 200px;
+  max-height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+x-file .x-file .x-buttons * {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+x-file .x-file .x-buttons .x-upload {
+  font-size: 1.1em;
+  display: none;
+}
+x-file .x-file .x-progress {
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  transition: width .3s;
+  background: red;
+}
+x-file.x-with-upload .x-buttons .x-upload {
+  display: initial;
+}
+x-file.x-with-upload .x-progress {
+  display: initial;
+}

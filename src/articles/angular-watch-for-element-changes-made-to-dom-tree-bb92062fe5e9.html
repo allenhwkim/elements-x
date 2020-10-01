@@ -1,0 +1,28 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Angular: Watch for element changes made to DOM tree</h1>
+<h2 class="subtitle">using directive watchDomTree and event (dom-changed)</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/0*aGpJzf0GBEa9u2fY" /><figcaption>Photo by <a href="https://unsplash.com/@single_lens_reflex?utm_source=medium&utm_medium=referral">Dan Burton</a> on <a href="https://unsplash.com?utm_source=medium&utm_medium=referral">Unsplash</a></figcaption></figure></div>
+<p>As some of you may know already, with<span class="quote">MutationObserver</span> , you can monitor DOM changes. (FYI, MutationObserver also works in IE11)</p>
+<p>Here is Vanilla JS version of how to detect any change in your document.</p>
+<pre>const observer = <b>new MutationObserver</b>(list => {<br/>  console.log(‘mutation list’, list);<br/>});<br/><b>observer.observe</b>(document.body, {attributes: true, childList: true, subtree: true});<br/>// perform any DOM change action in your page. e.g. show/hide</pre>
+<p>Let’s now wrap this into an Angular directive.</p>
+<p>The key point of it is to <b>fire a CustomEvent from inside a directive</b>, which is a little modified version of the code above.</p>
+<pre>const observer = new MutationObserver(list => {<br/>  const evt = new CustomEvent('dom-changed', {<br/>    detail: list, bubbles: true<br/>  });<br/>  el.dispatchEvent(evt);<br/>});<br/>observer.observe(el, {...});</pre>
+<p>This is how to use this directive, <span class="quote">watchDomChange</span> .</p>
+<pre>&lt;div watchDomTree (dom-changed)="handleDomChange($event)">&lt;/div></pre>
+<p>This is full code for this directive, followed by demo.</p>
+<pre>import { Directive, ElementRef, OnInit} from '<a href="http://twitter.com/angular/core">@angular/core</a>';</pre>
+<pre>// watch dom change and fire (dom-changed) event<br/><a href="http://twitter.com/Directive">@Directive</a>({<br/>  selector: '[watchDomTree]'<br/>})<br/>export class DomChangedDirective implements OnInit {<br/>  constructor(private elRef: ElementRef) {}</pre>
+<pre>ngOnInit() {<br/>    this.registerDomChangedEvent(this.elRef.nativeElement);<br/>  }<br/>  <br/>  registerDomChangedEvent(el) {<br/>    const observer = new MutationObserver( list => {<br/>      const evt =<br/>        new CustomEvent('dom-changed', <br/>          {detail: list, bubbles: true});<br/>      el.dispatchEvent(evt);<br/>    });<br/>    const attributes = true;<br/>    const childList = true;<br/>    const subtree = true;<br/>    observer.observe(el, {attributes, childList, subtree});<br/>  }<br/>}</pre>
+<p>Here is the demo.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/1*i3-LqnAyNpggXrwke0sLTg.png" /><figcaption></figcaption></figure><figure class="layout-3"><iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fstackblitz.com%2Fedit%2Fangular-dom-changed%3Fembed%3D1%26file%3Dsrc%252Fapp%252Fapp.component.html&display_name=StackBlitz&url=https%3A%2F%2Fstackblitz.com%2Fedit%2Fangular-dom-changed%3Ffile%3Dsrc%252Fapp%252Fapp.component.html&image=https%3A%2F%2Fc.staticblitz.com%2Fassets%2Ficon-1d2450aadcf984376236c23cd2ab0ba231ddd1d85c9b72990ed2ede5b4974d1b.png&key=a19fcc184b9711e1b4764040d3dc5c07&type=text%2Fhtml&schema=stackblitz" width="745" height="400"></iframe><figcaption></figcaption></figure></div>
+<p>Happy coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">Angular Random How-Tos</a>. You may find some useful articles for your daily development.</p>
+<p><b>Do you think this useful? If so please;<br/>*</b> <b>Clap 👏 button </b>below️ to let others to see this too.<br/>* <a href="https://twitter.com/allenhwkim">Follow Allen on Twitter (@allenhwkim)</a></p></div>

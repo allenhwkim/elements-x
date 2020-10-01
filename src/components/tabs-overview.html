@@ -1,0 +1,62 @@
+
+<app-custom-css>
+  .tabs-example x-tabs .tabs {
+    border-bottom: 2px solid #999;
+  }
+  
+  .tabs-example x-tabs .tabs [tab-for] {
+    align-items: center;
+    min-width: 120px;
+    background: #666;
+    color: #FFF;
+  }
+  
+  .tabs-example x-tabs .tabs [tab-for][aria-selected] {
+    background: orange;
+    color: #FFF;
+    border-bottoM: 2px solid #FFF;
+  }
+  
+  .tabs-example x-tabs .tabs  .underline-bar {
+    display: none;
+  }
+</app-custom-css>
+
+<div class="tabs-example">
+
+  <h2>Example</h2>
+  <x-tabs selected="js">
+    <div class="tabs">
+      <div tab-for="html">HTML</div>
+      <div tab-for="na" disabled>Disabled</div>
+      <div tab-for="js">Javascript</div>
+      <div class="ink-bar"></div>
+    </div>
+    <div class="tab-contents">
+      <div contents-for="html">Html Contents</div>
+      <div contents-for="js">Javascript Contents</div>
+      <div contents-for="na">Disabled Contents</div>
+    </div>
+  </x-tabs>
+
+  <p></p>
+  <app-pre>
+    &lt;x-tabs selected="js">
+      &lt;div class="tabs">
+        &lt;div tab-for="html">HTML&lt;/div>
+        &lt;div tab-for="na" disabled>Disabled&lt;/div>
+        &lt;div tab-for="js">Javascript&lt;/div>
+        &lt;div class="ink-bar">&lt;/div>
+      &lt;/div>
+      &lt;div class="tab-contents">
+        &lt;div contents-for="html">Html Contents&lt;/div>
+        &lt;div contents-for="js">Javascript Contents&lt;/div>
+        &lt;div contents-for="na">Disabled Contents&lt;/div>
+      &lt;/div>
+    &lt;/x-tabs>
+  </app-pre>
+
+  <h2>Attributes</h2>
+  <li><b>selected</b>: First selected tab</li>
+   
+</div>

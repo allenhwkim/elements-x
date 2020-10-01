@@ -1,0 +1,87 @@
+x-textfield  {
+  position:  relative;
+  display:  inline-block;
+  padding:  1em 8px 0 4px;
+  border-bottom:  1px  solid#CCC;
+}
+
+x-textfield .ink-bar  {  /*  hidden  2px  line  */
+  position:  absolute;
+  bottom:  0;
+  left:  calc(50% - 5px);
+  height:  2px;
+  width:  10px;
+  visibility:  hidden;
+  background-color:#8e44ad;
+  transition:  0.2s  ease  all;
+}
+
+x-textfield.x-focused .ink-bar  {  /*  2px  100%  line  */
+  left: 0;
+  width:  100%;
+  visibility:  visible;
+}
+
+x-textfield input, x-textfield .input  {
+  width: 100%;
+  outline:  none;
+  border:  none;
+  padding:  0  0  6px  0;
+}
+
+x-textfield .label  {
+  position:  absolute;
+  pointer-events: none; 
+  box-sizing: border-box;
+  opacity:  0.5;
+  cursor:  text;
+  transition:  0.2s  ease  all;
+  user-select:  none;
+  top: 11px;
+  left: 4px;
+}
+
+x-textfield:not(.empty)  .label,  
+x-textfield.x-focused .label  {
+  top: 2px;
+  font-size: 12px;
+}
+
+x-textfield .icon {
+  font-size: 20px;
+  position: absolute;
+  opacity: .5;
+  pointer-events: none;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  top: 0;
+}
+
+/* left-side icon and input */
+x-textfield.x-has-icon-left  .icon {
+  left: 4px;
+}
+x-textfield.x-has-icon-left input,
+x-textfield.x-has-icon-left .input {
+  padding-left: 1.8em;
+}
+x-textfield.x-has-icon-left .label {
+  box-sizing: border-box;
+  left: 30px;
+}
+
+x-textfield.x-has-icon-left:not(.empty)  .label,  
+x-textfield.x-has-icon-left.focused .label  {
+  left: 32px;
+}
+
+/* input and right-side icon */
+x-textfield.x-has-icon-right input,
+x-textfield.x-has-icon-right .input {
+  box-sizing: border-box;
+  padding-right: 24px;
+}
+x-textfield.x-has-icon-right .icon {
+  right: 4px;
+}

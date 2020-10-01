@@ -1,0 +1,57 @@
+<app-custom-css>
+.app x-dialog .x-blocker {
+  background: rgba(0, 0, 0, 0.6);
+}
+.app x-dialog .x-dialog {
+  background-color: blue;
+  border-radius: 8px;
+  color: #FFF;
+  padding: 24px;
+}
+.app x-dialog .x-dialog .x-close-button {
+  background: #FFF;
+  border-radius: 50%;
+  opacity: 1;
+  top: 8px;
+}
+</app-custom-css>
+<div class="example">
+  <x-button onclick="document.querySelector('#dialog1').open()">Open Diaog</x-button>
+  <x-dialog id="dialog1">
+    This is a dialog.
+  </x-dialog>
+
+  <app-pre>
+    &lt;button onclick="document.querySelector('#dialog1').open()">Open Diaog&lt;/button>
+    &lt;x-dialog id="dialog1">
+      This is a dialog.
+    &lt;/x-dialog>
+  </app-pre>
+
+  <x-button onclick="document.querySelector('#dialog2').open()">Open Non-closable Diaog</x-button>
+  <x-dialog id="dialog2" closable="false">
+    This is a non-closable dialog.
+    <button onclick="document.querySelector('#dialog2').close()">Close</button>
+  </x-dialog>
+  <app-pre>
+    &lt;button onclick="document.querySelector('#dialog2').open()">Open Non-closable Diaog&lt;/button>
+    &lt;x-dialog id="dialog2" closable="false">
+      This is a non-closable dialog.
+      &lt;button onclick="document.querySelector('#dialog2').close()">Close&lt;/button>
+    &lt;/x-dialog>
+  </app-pre>
+</div>
+
+<h3>Features </h3>
+<li> close dialog when background clicked</li>
+<li> when esc pressed close dialog</li>
+<li> when open, trap focus within it.</li>
+<li> when closed, focus back to trigger element</li>
+<li> fire event when opened or closed</li>
+
+<h3>Attributes</h3>
+<li><b>closable</b>: Default true, if false, only closable by close function()</li>
+
+<h3>Events</h3>
+<li><b>x-dialog-close</b>: Fired when dialog close</li>
+<li><b>x-dialog-open</b>: Fired when dialog open</li>

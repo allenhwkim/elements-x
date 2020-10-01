@@ -1,0 +1,40 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Angular5+ Jest Unit Test Examples</h1>
+<p>This is my note of Angular5+ Component/Directory/Service tess with Jest.</p>
+<p>This same technique has been applied to my automatic test generator. If you feel it’s too much to write tests, you should read this to save your time.</p>
+<p><a href="https://medium.com/allenhwkim/generate-angular-unit-tests-automatically-1300601ed73">https://medium.com/allenhwkim/generate-angular-unit-tests-automatically</a></p>
+<h2>Component Test</h2>
+<p>app.component</p>
+<pre>import { Component } from '<a href="http://twitter.com/angular/core">@angular/core</a>';</pre>
+<pre><a href="http://twitter.com/Component">@Component</a>({<br/>  selector: 'app-root',<br/>  template: `<br/>    &lt;h1>Welcome to app.&lt;/h1><br/>    &lt;my-component-1>&lt;/my-component-1><br/>    &lt;my-component-2>&lt;/my-component-2><br/>`<br/>})<br/>export class AppComponent {<br/>  message: string;<br/>  title = 'app';<br/>}</pre>
+<p>jest-setup.ts</p>
+<pre>import { Component } from '<a href="http://twitter.com/angular/core">@angular/core</a>';</pre>
+<pre>/**<br/> * Examples:<br/> * MockComponent({selector: 'some-component'});<br/> * MockComponent({selector: 'some-component', inputs: ['some-input', 'some-other-input']});<br/> */<br/>export function <b>MockComponent</b>(selector, options = {}) Component {</pre>
+<pre>  const metadata: Component = {<br/>    selector,<br/>    template: options.template || '',<br/>    inputs: options.inputs || [],<br/>    outputs: options.outputs || [],<br/>    exportAs: options.exportAs || ''<br/>  };</pre>
+<pre>  class Mock {<br/>    constructor() {<br/>      metadata.outputs.forEach(method => {<br/>        this[method] = new EventEmitter&lt;any>();<br/>      });<br/>    }<br/>  }</pre>
+<pre>  return Component(metadata)(Mock as any);<br/>}</pre>
+<p>app.component.spec.ts</p>
+<pre>import { async, TestBed } from '@angular/core/testing';<br/>import { NO_ERRORS_SCHEMA } from '@angular/core';<br/><br/>// do not import any other than you test. For others, mock it<br/>import { AppComponent } from './app.component';<br/>import { MockComponent } from '../../test/jest-setup';<br/><br/>describe('AppComponent', () => {<br/>  var fixture, component;<br/><br/>  beforeEach(async(() => {<br/>    TestBed.configureTestingModule({<br/>      declarations: [<br/>        AppComponent,<br/>        MockComponent('my-component-1'),<br/>        MockComponent('my-component-2')<br/>      ]<br/>      // schemas: [NO_ERRORS_SCHEMA]<br/>    }).compileComponents();<br/>    fixture = TestBed.createComponent(AppComponent);<br/>    component = fixture.debugElement.componentInstance;<br/>  }));<br/><br/>  it('should create the app', async(() => {<br/>    expect(component).toBeTruthy();<br/>    expect(copmponent.title).toEqual('app');<br/>    fixture.detectChanges();<br/>    const compiled = fixture.debugElement.nativeElement;<br/>    const h1 = compiled.querySelector('h1');<br/>    expect(h1.textContent).toContain('Welcome to app!');<br/>  }));<br/><br/>});</pre>
+<h2>Directive Test</h2>
+<blockquote>Reference. <a href="https://codecraft.tv/courses/angular/unit-testing/directives/">https://codecraft.tv/courses/angular/unit-testing/directives/</a></blockquote>
+<p>my.directive.ts</p>
+<pre><a href="http://twitter.com/Directive">@Directive</a>({<br/>  selector: '[foo], [bar]'<br/>})<br/>export class MyDirective {<br/>  <a href="http://twitter.com/Output">@Output</a>() foo: EventEmitter&lt;any> = new EventEmitter();<br/>  <a href="http://twitter.com/Output">@Output</a>() bar: EventEmitter&lt;any> = new EventEmitter();</pre>
+<pre>  constructor(<br/>    public element: ElementRef,<br/>    public renderer: Renderer2) {<br/>  }</pre>
+<pre>  ngOnInit() {<br/>    this.foo.emit(1);<br/>    this.bar.emit(2);<br/>  }<br/>}</pre>
+<p>my.directive.spec.ts</p>
+<pre>import { async, ComponentFixture, TestBed } <br/>  from '@angular/core/testing';<br/>import { Component, NO_ERRORS_SCHEMA } from '@angular/core';<br/><br/>// Do not import any other than you test. For others, mock it<br/>import { MyDirective } from './my.directive';<br/><br/>@Component({<br/>  template: `&lt;div (foo)="a($event)" (bar)="b($event)">`<br/>})<br/>class TestComponent {<br/>  a(entry): void {/* */}<br/>  b(entry): void {/* */}<br/>}<br/><br/>describe('MyDirective Test', () => {<br/>  let fixture: ComponentFixture&lt;TestComponent>;<br/>  let component: TestComponent;<br/><br/>  beforeEach(async(() => {<br/>    TestBed.configureTestingModule({<br/>      declarations: [ MyDirective, TestComponent ]<br/>      // schemas: [NO_ERRORS_SCHEMA]<br/>    }).compileComponents();<br/>    fixture = TestBed.createComponent(TestComponent);<br/>    component = fixture.componentInstance;<br/>  }));<br/><br/>  it("should test", async(() => {<br/>    expect(component).toBeTruthy();<br/>    expect(copmponent.title).toEqual('app');<br/>    fixture.detectChanges();<br/>    const compiled = fixture.debugElement.nativeElement;<br/>    const h1 = compiled.querySelector('h1');<br/>    expect(h1.textContent).toContain('Welcome to app!');<br/>  }));<br/><br/>});</pre>
+<h2>Service Test</h2>
+<p>my.service.ts</p>
+<pre>import { Injectable } from '@angular/core';<br/>import { SomeService } from './some.service';<br/><br/>@Injectable()<br/>export class SomeService {<br/><br/>  constructor(private someService: SomeService) {}<br/><br/>  getValue(): any {<br/>    return this.someService.getValue();<br/>  }<br/><br/>}</pre>
+<p>my.service.spec.ts</p>
+<pre>// do not import any other than you test. For others, mock it<br/>import { MyService } from './master.service';<br/><br/>describe('MyService', () => {<br/>  let service;<br/>  let someService;<br/>  class SomeService {<br/>    getValue = function() {};<br/>  }<br/><br/>  beforeEach(() => {<br/>    someService = new SomeService();<br/>    service = new MyService(someService);<br/>  });<br/><br/>  it('#getValue should return value', () => {<br/>    const spy = jest.spyOn(someService, 'getValue');<br/>    spy.mockReturnValue('stub value');<br/><br/>    expect(service.getValue()).toBe('stub value');<br/>    expect(spy).toHaveBeenCalled();<br/>  });<br/>});</pre>
+<blockquote>For http test, look at this. <a href="https://izifortune.com/unit-testing-angular-applications-with-jest/">https://izifortune.com/unit-testing-angular-applications-with-jest/</a></blockquote>
+<div class="list bulletin">For more detailed code at <a href="https://github.com/allenhwkim/ngx-module-starter">https://github.com/allenhwkim/ngx-module-starter</a></div>
+<div class="list bulletin">For jest setup code at: <a href="https://gist.github.com/allenhwkim/42b7388efa9e80a02d8b115aa5d2e2d7#file-jest-setup-ts">jest-setup.ts</a></div></div>

@@ -1,0 +1,37 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Angular: Build A Calendar In 50 lines</h1>
+<h2 class="subtitle">Minimal Calendar Widget Development</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/0*lwZedkxyKn2TMNhT" /><figcaption>Photo by <a href="https://unsplash.com/@millesanders?utm_source=medium&utm_medium=referral">Mille Sanders</a> on <a href="https://unsplash.com?utm_source=medium&utm_medium=referral">Unsplash</a></figcaption></figure></div>
+<p>Building a calendar seems not easy and complicated. This is the instruction how to make it simple.</p>
+<h1>Steps to make it.</h1>
+<div class="list number">Get the first start day of calendar, not day “1”, but the starting Sunday.</div>
+<div class="list number">Gather all 42 days, 6 week days, starting from the starting Sunday</div>
+<div class="list number">Then show these by 7 days a row</div>
+<div class="list number">Extras; style it, add buttons, fire events</div>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-6"><img src="https://cdn-images-1.medium.com/max/700/1*drI5Hfge_BpJnVj49ff2Bg.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/max/700/1*d2WObwOIPuoTW9HBiCiTHg.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/max/700/1*Oo6-pZ03jyZqrjmy4C5_Vg.png" /><figcaption></figcaption></figure><figure class="layout-6"><img src="https://cdn-images-1.medium.com/max/700/1*xqLmjDjn8BNBmYc9eI_7_w.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/max/700/1*OgkLtA40BE2k9Y7oMIMTWw.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/max/700/1*g9bRXd0XHAPUgoHn49hs8A.png" /><figcaption></figcaption></figure><figure class="layout-1"><iframe data-script="https://gist.github.com/allenhwkim/7e1d6a1224d923b91945810e61028cc2.js" style="display:none; max-width: 100%; border: 0" width="1280" title="Calendar"></iframe>
+                <script src="https://gist.github.com/allenhwkim/7e1d6a1224d923b91945810e61028cc2.js"></script><figcaption></figcaption></figure></div>
+<h2>1. Get the first start day of calendar, not day “1”, but the starting Sunday.</h2>
+<pre>getCalendarStartDay(date = new Date) {<br/>  const [year, month] = [date.getFullYear(), date.getMonth()];<br/>  const firstDayOfMonth = new Date(year, month, 1).getTime();<br/>  return this.range(1,7)<br/>    .map(num => new Date(firstDayOfMonth - DAY_MS * num))<br/>    .find(dt => dt.getDay() === 0)<br/>}</pre>
+<h2>2. Gather all 42 days, 6 week days, starting from the starting Sunday</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/1*aQdbya6WR2HqV4XI9BzTMw.png" /><figcaption></figcaption></figure></div>
+<pre>getAllDays(date = new Date) {<br/>  const calStartTime =  this.<b>getCalendarStartDay</b>(date).getTime();<br/>  return this.range(0, 41)<br/>    .map(num => new Date(calStartTime + DAY_MS * num));<br/>}</pre>
+<h2>3. Then show these by 7 days a row</h2>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-6"><img src="https://cdn-images-1.medium.com/max/700/1*d2WObwOIPuoTW9HBiCiTHg.png" /><figcaption></figcaption></figure><figure class="layout-7"><img src="https://cdn-images-1.medium.com/max/700/1*Oo6-pZ03jyZqrjmy4C5_Vg.png" /><figcaption></figcaption></figure></div>
+<pre>&lt;li class="days" *ngFor="let day of <b>days</b>"> {{day}} &lt;/li>&lt;li *ngFor="let date of <b>getAllDays</b>" (click)="selected.emit(date)"><br/>  {{date | date:'d'}}<br/>&lt;/li><br/>&lt;style><br/>  ul { margin: 0; padding: 0; list-style: none;}<br/>  li {<br/>    display: inline-block;<br/>    border: 1px solid #ccc;<br/>    width: calc(100%/7 - 2px);<br/>    text-align: center;<br/>    cursor: pointer;<br/>  }<br/>&lt;/style></pre>
+<h2>4. Extras; style it, add buttons, fire events</h2>
+<p>When a date is clicked, fire <span class="quote">selected</span> event</p>
+<pre>@Output() selected = new EventEmitter();</pre>
+<p>When user want to see different months, provide a feature for it.</p>
+<pre>setMonth(inc) {<br/>  const [year, month] = [this.date.getFullYear(), this.date.getMonth()];<br/>  this.date = new Date(year, month + inc, 1);<br/>  this.dates = this.getCalendarDays(this.date);<br/>}</pre>
+<p>Here is the working demo. Please feel free to steal the code.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><iframe src="https://cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fstackblitz.com%2Fedit%2Fng-min-calendar%3Fembed%3D1%26file%3Dsrc%252Fapp%252Fapp.component.html&display_name=StackBlitz&url=https%3A%2F%2Fstackblitz.com%2Fedit%2Fng-min-calendar%3Ffile%3Dsrc%252Fapp%252Fapp.component.html&image=https%3A%2F%2Fc.staticblitz.com%2Fassets%2Ficon-1d2450aadcf984376236c23cd2ab0ba231ddd1d85c9b72990ed2ede5b4974d1b.png&key=a19fcc184b9711e1b4764040d3dc5c07&type=text%2Fhtml&schema=stackblitz" width="745" height="400"></iframe><figcaption></figcaption></figure></div>
+<p>Happy Coding :)</p>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">Angular Random How-Tos</a>. You may find some useful articles for your daily development.</p>
+<p><b>Do you think this useful? If so please;<br/>*</b> <b>Clap 👏 button </b>below️ to let others to see this too.<br/>* <a href="https://twitter.com/allenhwkim">Follow Allen on Twitter (@allenhwkim)</a></p></div>

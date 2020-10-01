@@ -1,0 +1,47 @@
+x-tabs .tabs {
+  border-bottom: 1px solid #999;
+  display: flex;
+  position: relative;
+}
+
+x-tabs .tabs [tab-for] {
+  margin: 1px 2px 0 0;
+  padding: 12px;
+  position: relative;
+  opacity: .7;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  min-width: 160px;
+  outline: 0;
+}
+
+x-tabs .tabs [tab-for][aria-selected] {
+  background: #FFF;
+  opacity: 1;
+}
+
+x-tabs .tabs [tab-for][disabled] {
+  opacity: .5;
+  pointer-events: none;
+}
+
+x-tabs .tabs  .underline-bar {
+  position: absolute;
+  bottom: -1px;
+  height: 2px;
+  background: #333;
+  border-radius: 2px 2px 0 0;
+  transition: 500ms cubic-bezier(0.35, 0, 0.25, 1);
+}
+
+x-tabs .tab-contents [contents-for] {
+  min-height: 100px;
+  padding: 8px 16px;
+  display: none;
+}
+
+x-tabs .tab-contents [contents-for][aria-selected] {
+  display: block;
+}

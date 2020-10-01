@@ -1,0 +1,80 @@
+<x-tabs>
+  <div class="tabs">
+    <div tab-for="js">Javascript</div>
+    <div tab-for="ng">Angular</div>
+    <div tab-for="vue">VueJs</div>
+    <div tab-for="react">React</div>
+  </div>
+  <div class="contents">
+    <app-pre contents-for="js">
+      <b>import 'elements-x/dist/carousel';</b>
+
+      const appDiv = document.getElementById('app');
+      appDiv.innerHTML = `
+      <b>&lt;x-carousel [selected]="1"></b>
+        &lt;img class="img1" src="//picsum.photos/300/200?1">
+        &lt;img class="img2" src="//picsum.photos/300/200?2">
+        &lt;img class="img3" src="//picsum.photos/300/200?3">
+      <b>&lt;/x-carousel></b>
+      `;
+    </app-pre>
+    <app-pre contents-for="ng">
+      import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      <b>import 'elements-x/dist/carousel';</b>
+      
+      @Component({
+        selector: 'my-app',
+        template: `
+          <b>&lt;x-carousel [selected]="1"></b>
+            &lt;img class="img1" src="//picsum.photos/300/200?1">
+            &lt;img class="img2" src="//picsum.photos/300/200?2">
+            &lt;img class="img3" src="//picsum.photos/300/200?3">
+          <b>&lt;/x-carousel></b>
+        `
+      })
+      class AppComponent  {}
+      
+      @NgModule({
+        imports:      [ BrowserModule ],
+        declarations: [ AppComponent ],
+        bootstrap:    [ AppComponent ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      })
+      export class AppModule {}
+    </app-pre>
+    <app-pre contents-for="vue">
+      &lt;template>
+        <b>&lt;x-carousel [selected]="1"></b>
+          &lt;img class="img1" src="//picsum.photos/300/200?1">
+          &lt;img class="img2" src="//picsum.photos/300/200?2">
+          &lt;img class="img3" src="//picsum.photos/300/200?3">
+        <b>&lt;/x-carousel></b>
+      &lt;/template>
+      
+      &lt;script>
+      <b>import 'elements-x/dist/carousel';</b>
+      
+      export default {
+        name: "App"
+      };
+      &lt;/script>
+    </app-pre>
+    <app-pre contents-for="react">
+      import React from "react";
+      <b>import 'elements-x/dist/button';</b>
+
+      export default function App() {
+        return (
+          &lt;div>
+            <b>&lt;x-carousel [selected]="1"></b>
+              &lt;img class="img1" src="//picsum.photos/300/200?1">
+              &lt;img class="img2" src="//picsum.photos/300/200?2">
+              &lt;img class="img3" src="//picsum.photos/300/200?3">
+            <b>&lt;/x-carousel></b>
+          &lt;/div>
+        );
+      }
+    </app-pre>
+  </div>
+</x-tabs>

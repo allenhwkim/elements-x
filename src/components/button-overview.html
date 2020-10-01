@@ -1,0 +1,135 @@
+
+<app-custom-css>
+  .app x-button {
+    --primary: green;
+    --accent: orange;
+    --disabled: grey;
+    --size: 32px;
+  }
+</app-custom-css>
+
+<li> When clicked, button become automatically disabled for a second to prevent double click </li>
+<li> Able to show loading sign setting loading class </li>
+<li> Customizable color and button size(height) </li>
+<h3>Default</h3>
+<div class="example">
+  <p>
+    <x-button ripple class="ripple"> Default </x-button>
+    <x-button class="ripple primary"> Primary </x-button>
+    <x-button class="ripple accent"> Accent </x-button>
+    <x-button disabled> Disabled </x-button>
+  </p>
+  <pre language="html">
+    &lt;x-button> Default &lt;/x-button>
+    &lt;x-button class="<b>primary</b>"> Primary &lt;/x-button>
+    &lt;x-button class="<b>accent</b>"> Accent &lt;/x-button>
+    &lt;x-button <b>disabled</b>> Disabled &lt;/x-button>
+  </pre>
+</div>
+
+<h3>Loading</h3>
+<p>
+  Any element with "loading" class is hidden in default.
+  If the button class contains "loading" the loading sign become visible.
+  While it is loading, users won't be able to click the button.
+</p>
+
+Click the below buttons to see loading sign.
+<div class="example loading-section">
+  <x-button class="loading">
+    <img class="loading" height="24" src="assets/loading.gif" />
+    Default
+  </x-button>
+  <x-button class="primary loading"> 
+    Primary
+    <img class="loading" height="24" src="assets/loading.gif" />
+  </x-button>
+  <x-button class="accent loading">
+    <img class="loading" height="24" src="assets/loading.gif" />
+    Accent
+  </x-button>
+  <pre language="html">
+  &lt;x-button  class="loading"">
+    &lt;img class="loading" height="24" src="assets/loading.gif" />
+    Default
+  &lt;/x-button>
+  &lt;x-button class="primary loading"> 
+    Primary
+    &lt;img class="loading" height="24" src="assets/loading.gif" />
+  &lt;/x-button>
+  &lt;x-button class="accent loading">
+    &lt;img class="loading" height="24" src="assets/loading.gif" />
+    Accent
+  &lt;/x-button>
+  </pre>
+</div>
+
+<h3>no-bg</h3>
+Button with "no-class" attribute won't have background color, switching to text color.
+
+<div class="example custom">
+  <x-button class="no-bg"> Default </x-button>
+  <x-button class="primary no-bg"> Primary </x-button>
+  <x-button class="accent no-bg"> Accent </x-button>
+  <x-button disabled class="no-bg"> Disabled </x-button>
+  <pre language="html">
+  &lt;x-button class="<b>no-bg</b>"> Default &lt;/x-button>
+  &lt;x-button class="primary <b>no-bg</b>"> Primary &lt;/x-button>
+  &lt;x-button class="accent <b>no-bg</b>"> Accent &lt;/x-button>
+  &lt;x-button disabled class="<b>no-bg</b>"> Disabled &lt;/x-button>
+  </pre>
+</div>
+
+<h3>no-border</h3>
+<div class="example">
+  <x-button class="no-bg no-border"> Default </x-button>
+  <x-button class="primary no-bg no-border"> Primary </x-button>
+  <x-button class="accent no-bg no-border"> Accent </x-button>
+  <x-button disabled class="no-bg no-border"> Disabled </x-button>
+  <pre language="html">
+  &lt;x-button class="no-bg no-border"> Default &lt;/x-button>
+  &lt;x-button class="primary no-bg no-border"> Primary &lt;/x-button>
+  &lt;x-button class="accent no-bg no-border"> Accent &lt;/x-button>
+  &lt;x-button disabled class="no-bg no-border"> Disabled &lt;/x-button>
+  </pre>
+</div>
+
+<h3>no-shadow</h3>
+Button with "no-shadow" class wont' have raised effect.
+<div class="example">
+  <x-button class="no-bg no-border no-shadow"> Default </x-button>
+  <x-button class="primary no-bg no-border no-shadow"> Primary </x-button>
+  <x-button class="accent no-bg no-border no-shadow"> Accent </x-button>
+  <x-button disabled class="no-bg no-border no-shadow"> Disabled </x-button>
+  <pre language="html">
+  &lt;x-button class="no-bg no-border <b>no-shadow</b>"> Default &lt;/x-button>
+  &lt;x-button class="primary no-bg no-border <b>no-shadow</b>"> Primary &lt;/x-button>
+  &lt;x-button class="accent no-bg no-border <b>no-shadow</b>"> Accent &lt;/x-button>
+  &lt;x-button disabled class="no-bg no-border <b>no-shadow</b>"> Disabled &lt;/x-button>
+  </pre>
+</div>
+
+<h3>Icon</h3>
+Button with "icon" class will have rounded shape instead of rectanble shape.
+<div class="example">
+  <x-button class="icon">&#9829;</x-button>
+  <x-button class="icon primary">&#9829;</x-button>
+  <x-button class="icon accent">&#9829;</x-button>
+  <x-button class="icon" disabled>&#9829;</x-button> Default
+  <br/>
+  <x-button class="icon no-bg ">&#9829;</x-button>
+  <x-button class="icon primary no-bg">&#9829;</x-button>
+  <x-button class="icon accent no-bg">&#9829;</x-button>
+  <x-button class="icon no-bg" disabled>&#9829;</x-button> no-bg
+  <br/>
+  <x-button class="icon no-bg no-border no-shadow">&#9829;</x-button>
+  <x-button class="icon primary no-bg no-border no-shadow">&#9829;</x-button>
+  <x-button class="icon accent no-bg no-border no-shadow">&#9829;</x-button>
+  <x-button class="icon no-bg no-border no-shadow" disabled>&#9829;</x-button> no-border
+  <pre language="html">
+  &lt;x-button class="<b>icon</b>">&#9829;&lt;/x-button>
+  &lt;x-button class="<b>icon</b> primary">&#9829;&lt;/x-button>
+  &lt;x-button class="<b>icon</b> accent">&#9829;&lt;/x-button>
+  &lt;x-button class="<b>icon</b>" disabled>&#9829;&lt;/x-button>
+  </pre>
+</div>

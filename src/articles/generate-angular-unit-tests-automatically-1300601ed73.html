@@ -1,0 +1,70 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Generate Angular Unit Test Automatically</h1>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/1*-uHL2ySyPEnjr7JHPzdZzw.png" /><figcaption></figcaption></figure></div>
+<p>How much do you like to write unit tests from the scratch? My guess is “not so much”. The reason behind this guess is that writing the first successful unit test is just a copy/paste/modification job, and it’s not a pleasant task.</p>
+<p>What if there is a command that can do this job(copy/paste/modification)?</p>
+<p><b>TL;DR; Yes, there is a command.</b></p>
+<p>Assuming you coded your component, and you want to write a test,</p>
+<pre><span class="quote">$ npm install ngentest -g # to run this command anywhere<br/>$ ngentest my.component.ts # node_modules/.bin/gentest</span></pre>
+<p>This will output your auto-generated unit test, and it’s guaranteed to work.</p>
+<h1>Test requires more coding, and it’s true :(</h1>
+<p>Writing a component is one thing and testing it is another thing. To make your test to work, you need to know and code more the following;</p>
+<div class="list bulletin">Import statements</div>
+<div class="list bulletin">Classes to mock</div>
+<div class="list bulletin">Window objects to mock</div>
+<div class="list bulletin">Create <span class="quote">TestBed</span> and configure it before each tests</div>
+<div class="list bulletin">Setup providers using mocks</div>
+<div class="list bulletin">Etc</div>
+<p>The above is just for a component. When it comes to a directive it requires even more for you to code;</p>
+<div class="list bulletin">Create a component to test a directive</div>
+<div class="list bulletin">Get the directive instance from the component</div>
+<div class="list bulletin">Setting up <span class="quote">@input</span>s and <span class="quote">@output</span>s to test</div>
+<div class="list bulletin">and more</div>
+<p>It already makes you tired before you write the test. You have been doing this job by copying, pasting and modifying your code, and I am sure you don’t like it. If there were an AI program, then I would ask AI program to do this job rather than I write it by myself.</p>
+<h1>Generate the first unit test automatically</h1>
+<p>There is no reason to automate copying/pasting/modifying the test codes for each type; components, directives, services and pipes. It’s just a matter of;</p>
+<div class="list number">Parsing a Typescript file and find out the proper file type.</div>
+<div class="list number">Building data for unit test from the parsed Typescript.</div>
+<div class="list bulletin">className</div>
+<div class="list bulletin">imports</div>
+<div class="list bulletin">input/output attributes and properties</div>
+<div class="list bulletin">mocks</div>
+<div class="list bulletin">providers for TestBed</div>
+<div class="list bulletin">list of functions to test</div>
+<p>3. Finally, generating unit test from a template</p>
+<p>That’s how the Angular Test Generator has been created. <a href="https://github.com/allenhwkim/ngentest">https://github.com/allenhwkim/ngentest</a>.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/1*-Eudun1Oncstreod9SewcA.png" /><figcaption></figcaption></figure></div>
+<p>By running a <span class="quote">ngentest</span> command, more than half of your test will be done. The only thing you have left is to complete each function tests.</p>
+<p>(UPDATE), Now, it also generate function tests</p>
+<pre><span class="quote">$ ngentest my.component.ts # node_modules/.bin/gentest<br/>$ ngentest my.directive.ts -s # output to my.directive.spec.ts<br/>$ ngentest my.pipe.ts > my.pipe.test.ts <br/>$ ngentest my.service.ts</span></pre>
+<p>As you see it <a href="https://github.com/allenhwkim/ngentest/blob/master/examples/example.component.spec.ts">here from the generated code example</a>, the constructor test is 100% complete, but function tests are not done, and I don’t think even an AI can do this properly(one day, maybe?). You still need to complete each function tests to make the code coverage 100%.</p>
+<p>(UPDATE), Now, <a href="https://github.com/allenhwkim/ngentest/">ngentest</a> also generate function tests</p>
+<p>The following is an example of automatically generated tests by <span class="quote">ngentest</span>.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><iframe data-script="https://gist.github.com/allenhwkim/60119335073cbf9b9ad04423fe2be630.js" style="display:none; max-width: 100%; border: 0" width="1280" title="ngentest example"></iframe>
+                <script src="https://gist.github.com/allenhwkim/60119335073cbf9b9ad04423fe2be630.js"></script><figcaption></figcaption></figure></div>
+<p><b>The good thing is it generate a way more than half of your unit test.</b> With this help, you can save a lot of time.</p>
+<p>These are number of <b>minimal coverage percentage </b>by ngentest for each type. <br/>For simple components and directives, it covers <b>100% </b>of your time easily.</p>
+<div class="list bulletin">Component (65%)</div>
+<div class="list bulletin">Directive (65%)</div>
+<div class="list bulletin">Service (70%)</div>
+<div class="list bulletin">Pipe (80%)</div>
+<p>In general, with <span class="quote">ngentest</span>, you can write more than half of your unit test.</p>
+<div style="display:flex; flex-wrap: wrap"><figure class="layout-1"><img src="https://cdn-images-1.medium.com/max/700/1*8_YMUGnqxTRfFPLfQ7Y05A.png" /><figcaption></figcaption></figure></div>
+<h1>Conclusion</h1>
+<p>You can find the code here at Github, <a href="https://github.com/allenhwkim/ngentest/tree/master/src">https://github.com/allenhwkim/ngentest</a></p>
+<p>To try this, all you need to do is to install and run <span class="quote">ngentest</span> with your file.</p>
+<pre><span class="quote">$ npm install ngentest -g # to run this command anywhere<br/>$ ngentest my.component.ts</span></pre>
+<p>Happy Coding :)</p>
+<p>May 12th, 2018</p>
+<p>Allen Kim</p>
+<a href="https://medium.com/allenhwkim/how-to-parse-typescript-from-source-643387971f4e">https://medium.com/allenhwkim/how-to-parse-typescript-from-source-643387971f4e</a>
+<a href="https://medium.com/allenhwkim/how-to-parse-javascript-from-source-ffbc47b1183b">https://medium.com/allenhwkim/how-to-parse-javascript-from-source-ffbc47b1183b</a>
+<p>This article is a part of <a href="https://medium.com/@allenhwkim/angular-random-how-tos-61be27cac0a2">Angular Random How-Tos</a>. You may find some useful articles for your daily development.</p>
+<p><b>Do you think this useful? If so please;<br/>*</b> <b>Clap 👏 button </b>below️ to let others to see this too.<br/>* <a href="https://twitter.com/allenhwkim">Follow Allen on Twitter (@allenhwkim)</a></p></div>

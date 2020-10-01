@@ -1,0 +1,76 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Multiple Language With Nuxt— VueJS</h1>
+<p>This is one of many articles that I have covered about VueJS</p>
+<div class="list bulletin"><a href="https://medium.com/p/6bb1481c6844/edit">React Vs Vue</a></div>
+<div class="list bulletin"><a href="https://medium.com/p/6dc90cba4b96/edit">Routing With Nuxt: VueJS</a></div>
+<div class="list bulletin"><a href="https://medium.com/p/efc3dad45eac/edit">Multi-Language With Nuxt: VueJS</a></div>
+<div class="list bulletin"><a href="https://medium.com/p/d319b27576c3/edit">Resolving Before Route: VueJS</a></div>
+<div class="list bulletin">Form Valiadation: VueJS</div>
+<div class="list bulletin">Generating Documentation: VueJS</div>
+<div class="list bulletin">Multiple Modules: VueJS</div>
+<p><a href="https://medium.com/p/6dc90cba4b96/edit">In the previous article</a>, I have covered the following items in this article</p>
+<div class="list bulletin">State management using Vuex, a VueJS core plugin</div>
+<div class="list bulletin">Server-Side Rendering using Nuxt, a VueJS core plugin</div>
+<div class="list bulletin">Routing using vie-router, core plugin, including<br/>- Basic routing<br/>- Lazy loading</div>
+<div class="list bulletin">Building a package for production</div>
+<p>This article will cover multi-language translation using vue-i18n with Nuxt framework.</p>
+<p><a href="https://medium.com/p/6dc90cba4b96/edit">The previous Nuxt implementation</a> is all written in English. If you want to add French pages and the language translation must be done in server-side for better performance, we need to use vue-i18n and some setups.</p>
+<p>This tutorial will tell you how to implement multiple language in VueJS with server-side rendering feature using Nuxt platform and follows examples at <a href="https://nuxtjs.org/examples/i18n">https://nuxtjs.org/examples/i18n</a></p>
+<h2>Steps required.</h2>
+<div class="list number">install vue-i18n and store file</div>
+<div class="list number">Create a middleware to handle different languages</div>
+<div class="list number">Create locale files</div>
+<div class="list number">Create(or) update pages with translation in mind</div>
+<h1>Install i18n and store file</h1>
+<h2>install node module</h2>
+<pre>$ npm install vue-i18n --save</pre>
+<h2>plugins/i18n.js</h2>
+<p>This sets up VueI18n application-wide</p>
+<pre>import Vue from 'vue';<br/>import VueI18n from 'vue-i18n';</pre>
+<pre>Vue.use(VueI18n);</pre>
+<pre>export default ({ app, store }) => {<br/>  // Set i18n instance on app<br/>  // This way we can use it in middleware and pages asyncData/fetch<br/>  app.i18n = new VueI18n({<br/>    locale: store.state.locale,<br/>    fallbackLocale: 'en',<br/>    messages: {<br/>      'en': require('~/locales/en.json'),<br/>      'fr': require('~/locales/fr.json')<br/>    }<br/>  });</pre>
+<pre>  app.i18n.path = (link) => {<br/>    if (app.i18n.locale === app.i18n.fallbackLocale) {<br/>      return `/${link}`;<br/>    }</pre>
+<pre>    return `/${app.i18n.locale}/${link}`;<br/>  }<br/>}</pre>
+<h2>store/index.js</h2>
+<p>Each state needs to know what language is currently in use. Vuex store is there for this purpose.</p>
+<pre>export const state = () => ({<br/>  locales: [‘en’, ‘fr’],<br/>  locale: ‘en’<br/>})</pre>
+<pre>export const mutations = {<br/>  SET_LANG(state, locale) {<br/>    if (state.locales.indexOf(locale) !== -1) {<br/>      state.locale = locale<br/>    }<br/>  }<br/>}</pre>
+<h2>nuxt.config.js</h2>
+<pre>module.exports = {<br/>  loading: { color: '#3B8070' },<br/>  build: {               // customize webpack build<br/>    vendor: ['vue-i18n'] // webpack vue-i18n.bundle.js<br/>  },<br/>  router: {              //<i> customize nuxt.js router (vue-router).</i><br/>    middleware: 'i18n'   // middleware all pages of the application<br/>  },<br/>  plugins: ['~/plugins/i18n.js'], // webpack plugin<br/>  generate: {<br/>    routes: ['/', '/about', '/fr', '/fr/about']<br/>  }<br/>}</pre>
+<p>To define a dynamic route with a param, you need to define a .vue file <i>OR a directory prefixed by an underscore. e.g., _LANG</i></p>
+<h1><b>Create a middleware to handle different languages</b></h1>
+<p>middleware/i18n.js</p>
+<pre>/*<br/> * 1. sets i18n.locale and state.locale if possible<br/> * 2. redirects if not with locale<br/> */<br/>export default function ({ <br/>  isHMR, app, store, route, params, error, redirect <br/>}) {<br/>  if (isHMR) { // ignore if called from hot module replacement<br/>    return;<br/>  } // if url does not have language, redirect to english<br/>  else if (!params.lang) { <br/>    return redirect('/en'+route.fullPath);<br/>  }</pre>
+<pre>  // based on directory structure _lang/xxxx, en/about has params.lang as "en"<br/>  const locale = params.lang || 'en'; <br/>  store.commit('SET_LANG', locale); // set store<br/>  app.i18n.locale = store.state.locale;<br/>}</pre>
+<h1>Create locale files</h1>
+<p>Based on the setup, two files are used by <span class="quote">plugins/i18n.js</span>; <span class="quote">locales/en.json</span>, and <span class="quote">locales/fr.json</span> This step is to setup contents of these two files to make the language translation to work without a glitch.</p>
+<p>locales/en.json</p>
+<pre>{<br/>  "links": {<br/>    "home": "Home",<br/>    ...<br/>  },<br/>  "home": {<br/>    "title": "Welcome",<br/>    "introduction": "This is an introduction in English."<br/>  },<br/>  "about": {<br/>    "title": "About",<br/>    "introduction": "..."<br/>  }<br/>}</pre>
+<p>locales/fr.json</p>
+<pre>{<br/>  "links": {<br/>    "home": "Accueil",<br/>    ...<br/>  },<br/>  "home": {<br/>    "title": "Bienvenue",<br/>    "introduction": "Ceci est un texte d'introduction en Français."<br/>  },<br/>  "about": {<br/>    "title": "À propos",<br/>    "introduction": "..."<br/>  }<br/>}</pre>
+<h1>Create(or) update pages with translation in mind</h1>
+<p>pages/_lang/index.vue<br/>pages/_lang/about.vue<br/>pages/_lang/contact.vue<br/>pages/_lang/projects.vue</p>
+<pre>&lt;template><br/>  &lt;div class="Content"><br/>    &lt;div class="container"><br/>      &lt;h1 class="Content__Title">{{ <b>$t('about.title') </b>}}&lt;/h1><br/>      &lt;p>{{ <b>$t('about.introduction')</b> }}&lt;/p><br/>    &lt;/div><br/>  &lt;/div><br/>&lt;/template></pre>
+<pre>&lt;script><br/>export default {<br/>  head() {<br/>    return { title: this.<b>$t('about.title')</b> }<br/>  }<br/>}<br/>&lt;/script></pre>
+<p>The code can be found <a href="https://github.com/allenhwkim/vue-nuxt-practice/tree/2.0">here</a>, and you can see the working example here; <a href="https://vue-nuxt-translation.firebaseapp.com/fr/contact">https://vue-nuxt-translation.firebaseapp.com/fr/contact</a></p>
+<h1>Review</h1>
+<p><a href="https://medium.com/p/6bb1481c6844/edit">The previous article</a> and <a href="https://medium.com/p/6dc90cba4b96/edit">this article</a> has covered the following;</p>
+<div class="list bulletin">State management using Vuex, a VueJS core plugin</div>
+<div class="list bulletin">Server-Side Rendering using Nuxt, a VueJS core plugin</div>
+<div class="list bulletin">Routing using vie-router, core plugin, including<br/>- Basic routing<br/>- Lazy loading</div>
+<div class="list bulletin">Building a package for production</div>
+<div class="list bulletin">Multi-language translation using vue-i18n, 3rd party tool</div>
+<p>The next and future article will cover more</p>
+<div class="list bulletin"><a href="https://medium.com/p/d319b27576c3/edit">Resolving before route</a></div>
+<div class="list bulletin">Form validation using computed property</div>
+<div class="list bulletin">Documentation using docsify, 3rd party tool</div>
+<div class="list bulletin">Separate modules / namespace</div>
+<p>See you at the next article</p>
+<p>Happy coding</p></div>

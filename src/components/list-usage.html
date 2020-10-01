@@ -1,0 +1,98 @@
+<x-tabs>
+  <div class="tabs">
+    <div tab-for="js">Javascript</div>
+    <div tab-for="ng">Angular</div>
+    <div tab-for="vue">VueJs</div>
+    <div tab-for="react">React</div>
+  </div>
+  <div class="contents">
+    <app-pre contents-for="js">
+      <b>import 'elements-x/dist/list';</b>
+
+      const appDiv = document.getElementById('app');
+      appDiv.innerHTML = `
+        &lt;x-list>
+          &lt;div>File&lt;/div>
+          &lt;div>Edit&lt;/div>
+          &lt;div>Format&lt;/div>
+          &lt;div>View&lt;/div>
+          &lt;div>Help&lt;/div>
+        &lt;/x-list>
+      `;
+    </app-pre>
+    <app-pre contents-for="ng">
+      import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      <b>import 'elements-x/dist/list';</b>
+      
+      @Component({
+        selector: 'my-app',
+        template: `
+          &lt;x-list (x-list-select)="handleEvent($event)">
+            &lt;div>File&lt;/div>
+            &lt;div>Edit&lt;/div>
+            &lt;div>Format&lt;/div>
+            &lt;div>View&lt;/div>
+            &lt;div>Help&lt;/div>
+          &lt;/x-list>
+        `
+      })
+      class AppComponent  {
+        handleEvent(event) { console.log(event) }
+      }
+      
+      @NgModule({
+        imports:      [ BrowserModule ],
+        declarations: [ AppComponent ],
+        bootstrap:    [ AppComponent ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      })
+      export class AppModule {
+      }
+    </app-pre>
+    <app-pre contents-for="vue">
+      &lt;template>
+        &lt;x-list v-on:x-list-select="handleEvent">
+          &lt;div>File&lt;/div>
+          &lt;div>Edit&lt;/div>
+          &lt;div>Format&lt;/div>
+          &lt;div>View&lt;/div>
+          &lt;div>Help&lt;/div>
+        &lt;/x-list>
+      &lt;/template>
+      
+      &lt;script>
+      <b>import 'elements-x/dist/list';</b>
+      
+      export default {
+        name: "App",
+        methods: {
+          handleEvent: function(event) { console.log(event); }
+        }
+      };
+      &lt;/script>
+    </app-pre>
+    <app-pre contents-for="react">
+      import React from "react";
+      <b>import 'elements-x/dist/list';</b>
+
+      export default function App() {
+        componentDidMount() {
+          ReactDOM.findDOMNode(this).addEventListener('x-list-select', this.handleEvent);
+        }
+
+        handleEvent(event) { console.log(event); }
+
+        return (
+          &lt;x-list>
+            &lt;div>File&lt;/div>
+            &lt;div>Edit&lt;/div>
+            &lt;div>Format&lt;/div>
+            &lt;div>View&lt;/div>
+            &lt;div>Help&lt;/div>
+          &lt;/x-list>
+        );
+      }
+    </app-pre>
+  </div>
+</x-tabs>

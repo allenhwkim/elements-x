@@ -1,0 +1,63 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Resolving Before Route - VueJS</h1>
+<p>This is one of many articles that I have covered about VueJS</p>
+<div class="list bulletin"><a href="https://medium.com/p/6bb1481c6844/edit">React Vs Vue</a></div>
+<div class="list bulletin"><a href="https://medium.com/p/6dc90cba4b96/edit">Routing With Nuxt: VueJS</a></div>
+<div class="list bulletin"><a href="https://medium.com/p/efc3dad45eac/edit">Multi-Language With Nuxt: VueJS</a></div>
+<div class="list bulletin"><a href="https://medium.com/p/d319b27576c3/edit">Resolving Before Route: VueJS</a></div>
+<div class="list bulletin">Form Valiadation: VueJS</div>
+<div class="list bulletin">Generating Documentation: VueJS</div>
+<div class="list bulletin">Multiple Modules: VueJS</div>
+<p><a href="https://medium.com/p/6dc90cba4b96/edit">In the previous article</a>, I have covered the following items in this article</p>
+<div class="list bulletin">State management using Vuex, a VueJS core plugin</div>
+<div class="list bulletin">Server-Side Rendering using Nuxt, a VueJS core plugin</div>
+<div class="list bulletin">Routing using vie-router, core plugin, including<br/>- Basic routing<br/>- Lazy loading</div>
+<div class="list bulletin">Building a package for production.</div>
+<div class="list bulletin">Multi-Language Translation using Nuxt and SSR.</div>
+<p>This article will simply cover how to resolve data before routing(changing the page/going to a different page)</p>
+<p>With <span class="quote">vue-router</span>, there are several guards to redirect or cancel the navigation. For example, if you can’t receive the user data, don’t show up user details page.</p>
+<p>There are three kinds of guards; global guards, per-route guard, and in-component guards. All guards accept <span class="quote">to</span>, <span class="quote">from</span>, and <span class="quote">next</span> as parameters</p>
+<div class="list bulletin">global guards.<br/>- <span class="quote">router.beforeEach</span><br/>- <span class="quote">router.beforeResolve</span><br/>- <span class="quote">router.afterEach</span></div>
+<div class="list bulletin">per-route guard<br/>- <span class="quote">route.beforeEnter</span></div>
+<div class="list bulletin">in-component guards<br/>- <span class="quote">beforeRouteEnter</span> : called before the navigation is confirmed<br/>- <span class="quote">beforeRouteUpdate</span> : called when the current component has changed<br/>- <span class="quote">beforeRouteLeave</span> : used to prevent the users from leaving the page</div>
+<p>This is the sequence.</p>
+<div class="list number"><span class="quote">beforeRouteLeave</span></div>
+<div class="list number">router.beforeEach</div>
+<div class="list number"><span class="quote">beforeRouteUpdate</span></div>
+<div class="list number">route.beforeEnter</div>
+<div class="list number"><span class="quote">beforeRouteEnter</span></div>
+<div class="list number">router.beforeResolve</div>
+<div class="list number">router.afterEach</div>
+<p><a href="https://router.vuejs.org/en/advanced/navigation-guards.html#incomponent-guards">https://router.vuejs.org/en/advanced/navigation-guards.html#incomponent-guard</a>s</p>
+<p>Since all guards accept <span class="quote">to</span>, <span class="quote">from</span>, and <span class="quote">next</span> as parameters, too cancel the navigation, call <span class="quote">next(false)</span>, and to redirect call <span class="quote">next(&lt;path>)</span> as example of <span class="quote">next('/')</span> or <span class="quote">next({ path: '/' })</span>. What if you want to continue the navigatoin, call <span class="quote">next()</span>. If you call <span class="quote">next(error)</span>, <span class="quote">router.onError(error)</span> will be performed. To summarize;</p>
+<div class="list number">continue <span class="quote">next()</span></div>
+<div class="list number">cancel <span class="quote">next(false)</span></div>
+<div class="list number">redirect <span class="quote">next(&lt;path>)</span></div>
+<div class="list number">error out <span class="quote">next(error)</span></div>
+<p>To resolve data before route, we use <span class="quote">beforeRouteEnter</span> with the following code.</p>
+<pre>&lt;template><br/>   ...<br/>    &lt;ul id="posts"><br/>      &lt;li <b>v-for="post in posts"</b> :key="post.id"><br/>        &lt;hr /><br/>        &lt;b>{{ <b>post.title</b> }}&lt;/b><br/>        {{ <b>post.body</b> }}<br/>      &lt;/li><br/>    &lt;/ul><br/>   ...<br/>&lt;/template></pre>
+<pre>&lt;script><br/>  import axios from 'axios';</pre>
+<pre>  export default {<br/>    data() {<br/>      return {<br/><b>        posts: []<br/></b>      }<br/>    },<br/>    <b>beforeRouteEnter</b> (to, from, <b>next</b>) {<br/>      axios.get('<a href="https://jsonplaceholder.typicode.com/posts'">https://jsonplaceholder.typicode.com/posts'</a>)<br/>        .then(response => {<br/>          <b>next</b>(vm => (<b>vm.posts = response.data</b>) )<br/>        })<br/>    }<br/>  }<br/>&lt;/script></pre>
+<p>There is also a <span class="quote">fetch</span> method in Nuxt framework to set <span class="quote">state</span> variables. However, I might be wrongly doing, but I could not find any difference to <span class="quote">beforeRouteEnter</span> method. <a href="https://nuxtjs.org/api/pages-fetch/">https://nuxtjs.org/api/pages-fetch/</a></p>
+<p>You can find the working example with code from <a href="https://github.com/allenhwkim/vue-nuxt-practice/tree/3.0">github</a>.</p>
+<h1>Review</h1>
+<p><a href="https://medium.com/p/6bb1481c6844/edit">The previous article</a> and <a href="https://medium.com/p/6dc90cba4b96/edit">this article</a> has covered the following;</p>
+<div class="list bulletin">State management using Vuex, a VueJS core plugin</div>
+<div class="list bulletin">Server-Side Rendering using Nuxt, a VueJS core plugin</div>
+<div class="list bulletin">Routing using vie-router, core plugin, including<br/>- Basic routing<br/>- Lazy loading</div>
+<div class="list bulletin">Building a package for production</div>
+<div class="list bulletin">Multi-language translation using vue-i18n, 3rd party tool</div>
+<div class="list bulletin"><a href="https://medium.com/p/d319b27576c3/edit">Resolving before route</a></div>
+<p>The next and future article will cover more</p>
+<div class="list bulletin">Form validation using computed property</div>
+<div class="list bulletin">Documentation using docsify, 3rd party tool</div>
+<div class="list bulletin">Separate modules / namespace</div>
+<p>See you at the next article</p>
+<p>Happy coding</p></div>

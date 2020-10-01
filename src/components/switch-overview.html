@@ -1,0 +1,69 @@
+
+<app-custom-css>
+  .app x-switch {
+    --x-switch-size: 24px;
+    --x-switch-color: blue;
+  }
+</app-custom-css>
+
+<div class="example">
+  <p>
+    DEFAULT: <br/>
+    <x-switch checked>
+      <b>OFF</b> <b>ON</b>
+    </x-switch>
+    <x-switch>
+      <b>OFF</b> <b>ON</b>
+    </x-switch>
+  </p>
+  <app-pre>
+    &lt;x-switch checked>
+      &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
+    &lt;/x-switch>
+    &lt;x-switch>
+      &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
+    &lt;/x-switch>
+  </app-pre>
+
+  <p>
+    Custom: <br/>
+    <x-switch checked="true" color="blue" size="24px">
+      <b>No</b> <b>Yes</b>
+    </x-switch>
+    <x-switch color="blue" size="24px" [checked]="false">
+      <b>No</b> <b>Yes</b>
+    </x-switch>
+  </p>
+  <app-pre>
+    &lt;x-switch checked="true" color="blue" size="24px">
+      &lt;b>No&lt;/b> &lt;b>Yes&lt;/b>
+    &lt;/x-switch>
+    &lt;x-switch color="blue" size="24px" [checked]="false">
+      &lt;b>No&lt;/b> &lt;b>Yes&lt;/b>
+    &lt;/x-switch>
+  </app-pre>
+
+  <p>
+    DISABLED: <br/>
+    <x-switch checked disabled>
+      <b>OFF</b> <b>ON</b>
+    </x-switch>
+    <x-switch disabled>
+      <b>OFF</b> <b>ON</b>
+    </x-switch>
+  </p>
+  <app-pre>
+    &lt;x-switch checked disabled>
+      &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
+    &lt;/x-switch>
+    &lt;x-switch disabled>
+      &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
+    &lt;/x-switch>
+  </app-pre>
+
+
+</div>
+
+<h3>Attributes</h3>
+<li><b>size</b>: Default 32px, height of the switch button</li>
+<li><b>color</b>: Default red, color of the switch button</li>

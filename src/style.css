@@ -1,0 +1,34 @@
+/* <head>...<link href="style.[hash].css" rel="stylesheet"></head> */
+
+body * {
+  box-sizing: border-box;
+}
+body:not(.a11y-outline) :focus {
+  outline: none !important;
+}
+html, body {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  color: #333;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+  opacity: .9;
+}
+a:hover, a.active {
+  opacity: 1;
+}
+
+
+.vcentered {
+  display: flex;
+  align-items: center;
+}
+.hcentered {
+  display: flex;
+  justify-content: center;
+}

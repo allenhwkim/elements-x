@@ -1,0 +1,41 @@
+x-carousel { display: block; position: relative; }
+x-carousel .x-items { overflow: auto; display: flex; }
+x-carousel .x-items * { transform: scale(0.99); opacity: .5; transition: all .3s; }
+x-carousel .x-items .x-active {  transform: scale(1); opacity: 1; }
+x-carousel .x-button {
+  border: 0;
+  background: transparent;
+  display: inline-block;
+  color: #FFF;
+  opacity: .3;
+}
+x-carousel .x-button:hover,
+x-carousel .x-button:focus {
+  opacity: 1;
+}
+x-carousel .x-button.x-prev { 
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+}
+x-carousel .x-button.x-next {
+  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+}
+x-carousel .x-next.x-button::before { font-size: 2em; content: '\25B6'; }
+x-carousel .x-prev.x-button::before { font-size: 2em; content: '\25C0'; }
+x-carousel .x-shortcuts {
+  position: absolute;
+  bottom: 4px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+x-carousel .x-shortcuts .x-button {
+  width: 1em; 
+  height: 1em;
+  border-radius: 50%;
+  background: #FFF;
+  opacity: .3;
+  color: transparent;
+}
+x-carousel .x-shortcuts .x-button:hover,
+x-carousel .x-shortcuts .x-button:focus { opacity: .7 }
+x-carousel .x-shortcuts .x-button.x-active { opacity: 1 }

@@ -1,0 +1,51 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">Git, How To Rollback Pushed Changes</h1>
+<p>This is how you rollback your recent commits to a certain point using <span class="quote">git revert</span>.</p>
+<p>Let’s say you have the following log.</p>
+<pre>$ git log</pre>
+<pre>commit <b>b1fcde85ef02de679d1246a6caf402d1f9290847</b><br/>0.7.0</pre>
+<pre>commit <b>db6e674dbebba85d510d33de2d0fa24ecce55d2e</b><br/>upgraded with browser mode</pre>
+<pre>commit <b>2ff779489b069e00bfb48aeb9c70716f9009fb2a</b><br/>added more commands and refactored commands; see, go to, and added src/web for browser mode</pre>
+<pre>commit 3273827504fe1fb754e030786aa7bd5a2c6b141a<br/>0.6.2</pre>
+<pre>commit 543e63da81d1f13ce977a39313f33190f755a436<br/>refactored with file names and variable names</pre>
+<pre>commit 21ce08b576c4e6e6d20c769dc60cc1d3c7d4d400</pre>
+<p>You want to go back to 0.6.2, which is commit <span class="quote">3273875</span>.</p>
+<p>From the above, you want to revert the following commits;</p>
+<pre>b1fcde85ef02de679d1246a6caf402d1f9290847<br/>db6e674dbebba85d510d33de2d0fa24ecce55d2e<br/>2ff779489b069e00bfb48aeb9c70716f9009fb2a</pre>
+<p>Then, <span class="quote">git revert</span> these commits.</p>
+<pre>$ git revert b1fcde85ef02de679d1246a6caf402d1f9290847<br/>$ git revert db6e674dbebba85d510d33de2d0fa24ecce55d2e<br/>$ git revert 2ff779489b069e00bfb48aeb9c70716f9009fb2a</pre>
+<p>Now your git log will look like the following, which results in 3 commit messages.</p>
+<pre>$ git log<b><br/>commit 5d926a8fb66cd596c18aaa78e152d5182017a530<br/></b>Revert "added more commands and refactored commands; see, go to, amd addes src/web for browser mode"</pre>
+<pre>This reverts commit 2ff779489b069e00bfb48aeb9c70716f9009fb2a.</pre>
+<pre><b>commit 04364fa9dd2150e25652364accb22efda5d36f18<br/></b>Revert "upgraded with browser mode"</pre>
+<pre>This reverts commit db6e674dbebba85d510d33de2d0fa24ecce55d2e.</pre>
+<pre><b>commit e766d09dd871f303a3aba683b569e8daad092612<br/></b>Revert "0.7.0"</pre>
+<pre>This reverts commit b1fcde85ef02de679d1246a6caf402d1f9290847.</pre>
+<pre>commit b1fcde85ef02de679d1246a6caf402d1f9290847<br/>0.7.0</pre>
+<p>However, you don’t like so many revert commits. You want a single commit for all 3 reverts.</p>
+<p>To merge commit messages, use <span class="quote">git rebase -i</span>. <span class="quote">-i</span> means ‘interactive’.</p>
+<pre>$ git rebase -i<br/><b>pick</b> e766d09 Revert "0.7.0"<br/><b>pick</b> 04364fa Revert "upgraded with browser mode"<br/><b>pick</b> 5d926a8 Revert "added more commands and refactored commands; see, go to, amd addes src/web for browser mode"</pre>
+<p>To make a single commit message, change <span class="quote">pick</span> to <span class="quote">squash</span> except the first one.</p>
+<pre><b>pick</b> e766d09 Revert "0.7.0"<br/><b>squash</b> 04364fa Revert "upgraded with browser mode"<br/><b>squash</b> 5d926a8 Revert "added more commands and refactored commands; see, go to, amd addes src/web for browser mode"</pre>
+<p>When you save this commit message, you will see one combined revert commit.</p>
+<pre>$ git log<br/><b>commit 48e2c0577ded94bc54ff4f3df677d5ddfeccb2bf</b></pre>
+<pre>Revert "0.7.0"</pre>
+<pre>This reverts commit b1fcde85ef02de679d1246a6caf402d1f9290847.</pre>
+<pre>Revert "upgraded with browser mode"</pre>
+<pre>This reverts commit db6e674dbebba85d510d33de2d0fa24ecce55d2e.</pre>
+<pre>Revert "added more commands and refactored commands; see, go to, amd addes src/web for browser mode"</pre>
+<pre>This reverts commit 2ff779489b069e00bfb48aeb9c70716f9009fb2a.</pre>
+<pre>commit b1fcde85ef02de679d1246a6caf402d1f9290847<br/>0.7.0</pre>
+<pre>commit db6e674dbebba85d510d33de2d0fa24ecce55d2e<br/>upgraded with browser mode</pre>
+<pre>commit 2ff779489b069e00bfb48aeb9c70716f9009fb2a<br/>added more commands and refactored commands; see, go to, amd addes src/web for browser mode</pre>
+<pre>commit 3273827504fe1fb754e030786aa7bd5a2c6b141a<br/>0.6.2</pre>
+<p>That’s it. Now compare between current status and 0.6.2 version, <span class="quote">3273827</span>.</p>
+<pre>$ git diff HEAD..<span class="quote">3273827<br/>$ </span></pre>
+<p>You will see nothing different. Rollback successful!!!</p></div>

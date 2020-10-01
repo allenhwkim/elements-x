@@ -1,0 +1,14 @@
+<div class="medium-article"><style>
+          figure { margin: 16px 0;}
+          img {max-width: 100%; max-height: 100%;}
+          .layout-1 { max-width: 680px; }
+          .layout-3 { max-width: 1192px; }
+          .layout-5 { width: 100%; }
+          .layout-6 { width: 30%;}
+          .layout-7 { width: 30%;}</style>
+<h1 class="title">NodeJS Walk Directory</h1>
+<p>List all files in a directory recursively, and do something on each.</p>
+<pre>const fs = require('fs'), path = require('path');</pre>
+<pre>function walkDir(dir, callback) {<br/>  fs.readdirSync(dir).forEach( f => {<br/>    let dirPath = path.join(dir, f);<br/>    let isDirectory = fs.statSync(dirPath).isDirectory();<br/>    isDirectory ? <br/>      walkDir(dirPath, callback) : callback(path.join(dir, f));<br/>  });<br/>};</pre>
+<p>Usage Example</p>
+<pre>walkDir('my-dir', function(filePath) {<br/>  const fileContents = fs.readFileSync(filePath, 'utf8');<br/>  console.log(filePath, fileContents);<br/>});</pre></div>

@@ -1,0 +1,53 @@
+x-button {
+  --primary: #3751B5;
+  --accent: #FF4081;
+  --disabled: rgba(0,0,0,.26);
+  --size: 32px;
+  display: inline-block;
+  margin: 8px 8px 8px 0;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+  white-space: nowrap;
+  vertical-align: bottom;
+  text-align: center;
+  min-width: 60px;
+  line-height: var(--size);
+  /* overflow: visible; */
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: 2px 2px 4px #CCC;
+}
+
+x-button .x-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+x-button:active { box-shadow: none; transform: translate(2px, 2px); }
+x-button.no-shadow { box-shadow: none; }
+x-button.no-border { border: none; }
+x-button.icon { border-radius: 50%; min-width: var(--size); padding: 0; }
+
+x-button.primary { background: var(--primary); color: #FFF; }
+x-button.accent { background: var(--accent); color: #FFF;}
+
+x-button.no-bg { background: #FFF; }
+x-button.no-bg.primary { background: none; color: var(--primary);}
+x-button.no-bg.accent { background: none; color: var(--accent); }
+x-button.no-bg:hover { background-color: #F0F0F0; }
+x-button.no-bg.primary:hover { background-color: #F0F0F0; }
+x-button.no-bg.accent:hover { background-color: #F0F0F0; }
+
+x-button[disabled] { color: var(--disabled); pointer-events: none; }
+x-button.no-bg[disabled] { background: none; color: #BBB;}
+
+x-button.clicked { pointer-events: none; }
+
+x-button.loading { pointer-events: none; }
+x-button:not(.loading) .loading { display: none; }
+x-button:.loading .loading { display: initial; }}

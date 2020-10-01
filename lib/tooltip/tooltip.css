@@ -1,0 +1,54 @@
+x-tooltip {
+  position: absolute;
+}
+
+x-tooltip .x-overlay {
+  display: block;
+  background: #3D474B;
+  border: 1px solid #ccc;
+  padding: 8px;
+  color: #FFF;
+  box-shadow: 4px 4px 8px #ccc;
+}
+
+x-tooltip .x-arrow .x-icon{
+  position: relative;
+  width: 0;
+  height: 0;
+  display: block;
+  z-index: 1;
+  transform: translateX(-50%);
+}
+x-tooltip .x-arrow .x-icon::after {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: -11px;
+}
+
+x-tooltip .x-arrow.up .x-icon {
+  /* top: 1px; */
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #CCC;
+}
+x-tooltip .x-arrow.up .x-icon::after {
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-bottom: 11px solid #3D474B;
+  top: 2px;
+}
+
+x-tooltip .x-arrow.down .x-icon {
+  /* bottom: 1px; */
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #CCC;
+}
+x-tooltip .x-arrow.down .x-icon::after {
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-top: 11px solid #3D474B;
+  bottom: 2px;
+}

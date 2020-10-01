@@ -1,0 +1,57 @@
+<app-custom-css>
+.app x-overlay .x-overlay {
+  background: blue;
+  color: #FFF;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 4px 4px 8px #333;
+}
+</app-custom-css>
+
+<div class="example">
+  <button id="show-overlay">Show Overlay</button>
+  <x-overlay trigger="show-overlay">
+    <div style="padding: 24px;">
+      <button>Hello</button>
+      <button>Overlay</button>
+    </div>
+  </x-overlay>
+  <app-pre>
+    &lt;button <b>id="show-overlay"</b>>Show Overlay&lt;/button>
+    <b>&lt;x-overlay trigger="show-overlay"></b>
+      &lt;div style="padding: 24px;">
+        &lt;button>Hello&lt;/button>
+        &lt;button>Overlay&lt;/button>
+      &lt;/div>
+    <b>&lt;/x-overlay></b>
+  </app-pre>
+
+  <input id="my-input"/> <button>?</button>
+  <x-overlay trigger="my-input" trigger-actions="click,focus">
+    <div style="padding: 24px;">
+      Hello My Overlay
+    </div>
+  </x-overlay>
+
+</div>
+
+<h2>Feature</h2>
+<li> open overlay when trigger element focused or clicked </li>
+<li> close overlay when document clicked</li>
+<li> when esc pressed close overlay</li>
+<li> when open, trap focus within it.</li>
+<li> position overlay underneath or over the trigger element</li>
+<li> when closed, focus back to trigger element</li>
+<li> Customizable trigger actions</li>
+<li> Customizable close actions</li>
+<li> Customizable arrow display</li>
+
+<h2>Attributes</h2>
+<li><b>trigger</b>: id of element to activate this overlay</li>
+<li><b>show-arrow</b>: Default false, for tooltip, show arrow </li>
+<li><b>trigger-actions</b>: Default click, actions to open overlay </li>
+<li><b>close-actions</b>: Default blur, actions to close overlay </li>
+
+<h2>Events</h2>
+<li><b>x-overlay-open</b>: Fired when overlay opened with reason</li>
+<li><b>x-overlay-close</b>: Fired when overlay closed with reason</li>

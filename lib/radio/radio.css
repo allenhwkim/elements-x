@@ -1,0 +1,59 @@
+x-radio input {
+  --x-radio-size: 20px;
+  --x-radio-border: #333;
+  --x-radio-fill: red;
+  --x-radio-icon: '\25CF';
+  --x-radio-color: inherit;
+  width: 1px;
+  height: 1px;
+  margin: 0 var(--x-radio-size) var(--x-radio-size) 0;
+  box-sizing: border-box;
+  position: relative;
+  vertical-align: middle;
+}
+
+x-radio input:not(:disabled):focus::before,
+x-radio input:not(:disabled):hover::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  height: calc(var(--x-radio-size) + 12px);
+  width: calc(var(--x-radio-size) + 12px);
+  border-radius: 50%;
+  background: rgba(0,0,0,.1);
+}
+
+x-radio input::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  content: ' ';
+  width: var(--x-radio-size);
+  height: var(--x-radio-size);
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  border: 1px solid var(--x-radio-border);
+  align-items: center;
+  justify-content: center;
+}
+
+x-radio input:checked::after {
+  content: var(--x-radio-icon);
+  font-size: calc(var(--x-radio-size) / 1.5);
+  line-height: var(--x-radio-size);
+}
+
+x-radio input:disabled::after {
+  opacity: .5;
+  background: #ccc;
+  pointer-events: none;
+}
+
+x-radio.filled input:checked::after {
+  border: none;
+  background: var(--x-radio-fill);
+  color: #FFF;
+}

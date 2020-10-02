@@ -4,7 +4,7 @@ const css = `
   app-pre { 
     display: block;
     font-family: monospace;
-    white-space: pre;
+    white-space: pre-wrap;
     background: #eee;
     font-size: 14px;
     padding: 12px;

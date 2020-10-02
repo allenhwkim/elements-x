@@ -1,0 +1,35 @@
+<h2>Format JSON</h2>
+<a href="javascript:void(0)" id="example-btn">
+  Example
+</a>
+<textarea id="json-code"></textarea>
+<x-button id="format-btn">Format</x-button>
+
+<style>
+  #json-code {
+    display: block;
+    font-family: monospace;
+    opacity: .8;
+    height: 240px;
+    width: 100%;
+
+  }
+</style>
+
+<script>
+  (function(){
+    const jsonCode = document.querySelector('#json-code');
+    document.querySelector('#example-btn').addEventListener('click', e => {
+      jsonCode.innerText = `{"foo": 1, "bar": 2}`;
+    });
+    document.querySelector('#format-btn').addEventListener('click', e => {
+      try {
+        const parsed = JSON.parse(jsonCode.value);
+        jsonCode.value = JSON.stringify(parsed, null, '  ');
+      } catch (e) {
+        jsonCode.value = e;
+        throw e;  
+      }
+    });
+  })();
+</script>

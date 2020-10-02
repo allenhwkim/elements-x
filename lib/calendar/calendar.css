@@ -43,9 +43,7 @@ x-calendar .x-date {
 }
 x-calendar .x-date span {
   display: inline-block;
-  border-radius: 50%;
-  width: 1.5em;
-  height: 1.5em;
+  padding: 0 4px;
 }
 x-calendar .x-date:not(.x-same-month) { color: #ccc }
 x-calendar .x-date:not([disabled]) { cursor: pointer }

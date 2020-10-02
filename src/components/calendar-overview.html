@@ -7,7 +7,7 @@
     font-weight: bold;
     background: #FFF;
   }
-  .app x-calendar[x-jbr9ho] .x-date {
+  .app x-calendar .x-date {
     background: blue;
     color: #FFF;
   }
@@ -15,7 +15,18 @@
 
 <div class="example">
   <h3> Calendar in a block</h3>
-  <x-calendar id="calendar1"></x-calendar>
+  <select id="locale" onchange="this.nextElementSibling.setAttribute('locale', this.value)">
+    <option>Select Language</option>
+    <option value="en-US">English</option>
+    <option value="ko-KR">Korean</option>
+    <option value="ko-KR-u-nu-hanidec">Korean / Chinese Date</option>
+    <option value="zh-CN">Chinese</option>
+    <option value="ar-EG">Arabic/Egypt</option>
+    <option value="fa-AF">Dari/Afghanistan</option>
+    <option value="th-TH">Thai</option>
+    <option value="th-TH-u-nu-thai-ca-chinese">Thai/Thai Date</option>
+  </select>
+  <x-calendar id="calendar1" locale="ko-KR"></x-calendar>
   Selected: <span id="date1"></span>
   <app-pre>
     &lt;<b>x-calendar id="<b>calendar1</b>"</b>>&lt;/<b>x-calendar</b>>

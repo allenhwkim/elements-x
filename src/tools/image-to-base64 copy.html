@@ -1,0 +1,53 @@
+<h2>Format HTML</h2>
+
+<div class="format-html">
+  <div>
+    <h3>Input</h3>
+    <textarea id="input"></textarea>
+  </div>
+  <div>
+    <h3>Output</h3>
+    <textarea id="output"></textarea>
+  </div>
+</div>
+
+<style>
+  .format-html {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .format-html > div {
+    width: 100%;
+    padding: 8px;
+  }
+  .format-html textarea {
+    width: 100%;
+    margin: 8px;
+    height: 200px;
+    opacity: .7;
+  }
+</style>
+
+<script>
+  document.querySelector('#input').addEventListener('change', event => {
+    const output = document.querySelector('#output');
+    const urlCSS = document.querySelector('#url-css');
+    if (event.detail) {
+      const file = event.detail[0];
+      const readFile = new Promise((res, rej) => {
+        const reader = new FileReader();
+        reader.onload = e => res(e.target.result);
+        reader.onerror = e => rej(e);
+        reader.readAsDataURL(file);
+      });
+      readFile.then(url => {
+        file.dataURL = url;
+        urlSrc.value = file.dataURL;
+        urlCSS.value = `url('${file.dataURL}')`;
+      })
+    } else {
+      urlSrc.value = '';
+      urlCSS.value = '';
+    }
+  });
+</script>

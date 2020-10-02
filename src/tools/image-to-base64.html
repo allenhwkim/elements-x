@@ -1,0 +1,82 @@
+<h2>Convert Image To Base64</h2>
+<x-file id="file-selector">
+  <div>
+    Drag and drop files <br/>
+    or Copy and paste files here
+  </div>
+  <label>
+    Or, Click Here
+    <input class="input" type="file" />
+  </label>
+</x-file>
+<div class="base64-output">
+  <div>
+    <h3>Image URL</h3>
+    <textarea id="url-src"></textarea>
+  </div>
+  <div>
+    <h3>CSS URL</h3>
+    <textarea id="url-css"></textarea>
+  </div>
+</div>
+
+<style>
+  #file-selector slot {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 12px;
+  }
+  #file-selector slot div {
+    padding: 16px;
+    flex: 1;
+    text-align: center;
+  }
+  #file-selector slot label {
+    background: #999;
+    color: #FFF;
+    padding: 16px;
+    margin: 8px;
+  }
+  #file-selector input {
+    display: none;
+  }
+  .base64-output > div {
+    width: 100%;
+    padding: 8px;
+  }
+  .base64-output textarea {
+    width: 100%;
+    margin: 8px;
+    height: 200px;
+    opacity: .7;
+  }
+  .base64-output {
+    display: flex;
+    justify-content: space-evenly;
+  }
+</style>
+
+<script>
+  document.querySelector('#file-selector').addEventListener('x-file-changed', event => {
+    const urlSrc = document.querySelector('#url-src');
+    const urlCSS = document.querySelector('#url-css');
+    if (event.detail) {
+      const file = event.detail[0];
+      const readFile = new Promise((res, rej) => {
+        const reader = new FileReader();
+        reader.onload = e => res(e.target.result);
+        reader.onerror = e => rej(e);
+        reader.readAsDataURL(file);
+      });
+      readFile.then(url => {
+        file.dataURL = url;
+        urlSrc.value = file.dataURL;
+        urlCSS.value = `url('${file.dataURL}')`;
+      })
+    } else {
+      urlSrc.value = '';
+      urlCSS.value = '';
+    }
+  });
+</script>

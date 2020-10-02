@@ -29,7 +29,7 @@
       or Copy and paste files here
     &lt;/x-file>
     &lt;script>
-      document.querySelector('#file-selector').addEventListener('<b>x-file-selected</b>', event => {
+      document.querySelector('#file-selector').addEventListener('<b>x-file-changed</b>', event => {
         console.log(event.detail);
       });
 
@@ -65,7 +65,7 @@
 <li><b>x-file-error</b>: fired when upload is errored</li>
 
 <script>
-  document.querySelector('#file-selector').addEventListener('x-file-selected', event => {
+  document.querySelector('#file-selector').addEventListener('x-file-changed', event => {
     console.log(event.detail);
   });
 

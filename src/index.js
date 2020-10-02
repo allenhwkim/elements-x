@@ -11,6 +11,7 @@ import './app-pre';
 import './app-group-header';
 import './app-articles';
 import './tools/app-unicodes';
+import './app-prettier';
 
 // enable/disable outline for click and tab
 document.body.addEventListener('click', 

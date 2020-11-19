@@ -70,8 +70,10 @@ const promises = urls.map(url => {
     .then(({json, html}) => {
       const {id, title, mediumUrl, uniqueSlug} = json.payload.value;
       const previewContent = json.payload.value.previewContent.bodyModel.paragraphs;
-      const subtitle = json.payload.value.previewContent.subtitle;
-      return {id, title, subtitle, mediumUrl, uniqueSlug, html, previewContent};
+      const subtitle = json.payload.value.previewContent.subtitle; 
+      const createdAt = json.payload.value.createdAt;
+      const updatedAt = json.payload.value.updatedAt;
+      return {id, title, subtitle, mediumUrl, uniqueSlug, html, previewContent, createdAt, updatedAt};
     });
 });
 
@@ -79,11 +81,11 @@ Promise.all(promises).then(all => {
   const index = {};
   const targetDir = `src/articles`;
   all.forEach(el => {
-    const {id, subtitle, title, mediumUrl, uniqueSlug, html, previewContent} = el;
+    const {id, subtitle, title, mediumUrl, uniqueSlug, html, previewContent, createdAt, updatedAt} = el;
     const previewHTML =  previewContent.map(p => {
       return MediumToHtml.processParagraph(p, title, subtitle, mediumUrl)
     }).join('');
-    index[id] = {id, title, mediumUrl, uniqueSlug, previewHTML};
+    index[id] = {id, title, mediumUrl, uniqueSlug, previewHTML, createdAt, updatedAt};
     const path  = `${targetDir}/${uniqueSlug}.html`;
     fs.writeFileSync(path, html);
     console.log('exported article', mediumUrl, 'to', path);

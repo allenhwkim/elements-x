@@ -1,0 +1,231 @@
+<style>
+  .date-format-inputs > div { display: flex}
+  .date-format-inputs > div > b { min-width: 220px;}
+  #date-format-output { background: #CCC;}
+  #date-format-code { display: inline-block; white-space: pre-wrap; word-break; break-worl=d}
+</style>
+<h2> Format Date </h2>
+<div>
+  Date: <b id="date-format-output" style="background: #ccc"></b>
+</div>
+<div>
+  Code:
+  <pre id="date-format-code"></pre>
+</div>
+
+<div class="date-format-inputs">
+  <div>
+    <b>locale:</b>>
+    <span>
+      <input type="radio" name="locale" />undefined
+      <input type="radio" name="locale" value="en-US"  />English
+      <input type="radio" name="locale" value="ca-FR"  />French
+      <input type="radio" name="locale" value="ko-KR"  />Korean
+      <input type="radio" name="locale"  value="ko-KR-u-nu-hanidec">Korean / Chinese Date
+      <input type="radio" name="locale"  value="zh-CN">Chinese
+      <input type="radio" name="locale"  value="ar-EG">Arabic/Egypt
+      <input type="radio" name="locale"  value="fa-AF">Dari/Afghanistan
+      <input type="radio" name="locale"  value="th-TH">Thai
+      <input type="radio" name="locale"  value="th-TH-u-nu-thai-ca-chinese">Thai/Thai Date
+    </span>
+  </div>
+
+  <div>
+    <b>timeZone: </b>
+    <span>
+      <input type="radio" name="timeZone" />undefined
+      <input type="radio" name="timeZone" value="UTC"  />UTC
+    </span>
+  </div>
+
+  <div>
+    <b>hour12: </b>
+    <span>
+      <input type="radio" name="hour12" />undefined
+      <input type="radio" name="hour12" value="true"  />true
+      <input type="radio" name="hour12" value="false"  />false
+    </span>
+  </div>
+
+  <div>
+    <b>hourCycle: </b>
+    <span>
+      <input type="radio" name="hourCycle" />undefined
+      <input type="radio" name="hourCycle" value="h11"  />h11
+      <input type="radio" name="hourCycle" value="h12"  />h12
+      <input type="radio" name="hourCycle" value="h23"  />h23
+      <input type="radio" name="hourCycle" value="h24"  />h24
+    </span>
+  </div>
+
+  <div>
+    <b>formatMatcher: </b>
+    <span>
+      <input type="radio" name="formatMatcher" />undefined
+      <input type="radio" name="formatMatcher" value="basic"  />basic
+      <input type="radio" name="formatMatcher" value="best fit"  />best 
+    fit
+    </span>
+  </div>
+
+  <div>
+    <b>weekday: </b>
+    <span>
+      <input type="radio" name="weekday" />undefined
+      <input type="radio" name="weekday" value="long"  />long
+      <input type="radio" name="weekday" value="short"  />short
+      <input type="radio" name="weekday" value="narrow"  />narrow
+    </span>
+  </div>
+
+  <div>
+    <b>era: </b>
+    <span>
+      <input type="radio" name="era" />undefined
+      <input type="radio" name="era" value="long"  />long
+      <input type="radio" name="era" value="short"  />short
+      <input type="radio" name="era" value="narrow"  />narrow
+    </span>
+  </div>
+
+  <div>
+    <b>year: </b>
+    <span>
+      <input type="radio" name="year" />undefined
+      <input type="radio" name="year" value="long"  />long
+      <input type="radio" name="year" value="short"  />short
+    </span>
+  </div>
+
+  <div>
+    <b>month: </b>
+    <span>
+      <input type="radio" name="month" />undefined
+      <input type="radio" name="month" value="long"  />long
+      <input type="radio" name="month" value="short"  />short
+      <input type="radio" name="month" value="narrow"  />narrow
+      <input type="radio" name="month" value="2-digit"  />2-digit
+      <input type="radio" name="month" value="numeric"  />numeric
+    </span>
+  </div>
+
+  <div>
+    <b>day: </b>
+    <span>
+      <input type="radio" name="day" />undefined
+      <input type="radio" name="day" value="2-digit"  />2-digit
+      <input type="radio" name="day" value="numeric"  />numeric
+    </span>
+  </div>
+
+  <div>
+    <b>hour: </b>
+      <input type="radio" name="hour" />undefined
+      <span>
+      <input type="radio" name="hour" value="2-digit"  />2-digit
+      <input type="radio" name="hour" value="numeric"  />numeric
+    </span>
+  </div>
+
+  <div>
+    <b>minute: </b>
+    <span>
+      <input type="radio" name="minute" />undefined
+      <input type="radio" name="minute" value="2-digit"  />2-digit
+      <input type="radio" name="minute" value="numeric"  />numeric
+    </span>
+  </div>
+
+  <div>
+    <b>second: </b>
+    <span>
+      <input type="radio" name="second" />undefined
+      <input type="radio" name="second" value="2-digit"  />2-digit
+      <input type="radio" name="second" value="numeric"  />numeric
+    </span>
+  </div>
+
+  <div>
+    <b>timeZoneName: </b>
+    <span>
+      <input type="radio" name="timeZoneName" />undefined
+      <input type="radio" name="timeZoneName" value="long"  />long
+      <input type="radio" name="timeZoneName" value="short"  />short
+    </span>
+  </div>
+
+
+  <div>
+    <b>fractionalSecondDigits: </b>
+    <span>
+      <input type="radio" name="fractioalSecondDigits" />undefined
+      <input type="radio" name="fractioalSecondDigits" value="0"  />0
+      <input type="radio" name="fractioalSecondDigits" value="1"  />1
+      <input type="radio" name="fractioalSecondDigits" value="2"  />2
+      <input type="radio" name="fractioalSecondDigits" value="3"  />3
+    </span>
+  </div>
+
+  <div>
+    <b>calendar: </b>
+    <span>
+      <input type="radio" name="calendar" />undefined
+      <input type="radio" name="calendar" value="arab"  />arab
+      <input type="radio" name="calendar" value="arabext"  />arabext
+      <input type="radio" name="calendar" value="bali"  /> bali
+      <input type="radio" name="calendar" value="beng"  />beng
+      <input type="radio" name="calendar" value="deva"  />deva
+      <input type="radio" name="calendar" value="fullwide"  />fullwide
+      <input type="radio" name="calendar" value="gujr"  />gujr
+      <input type="radio" name="calendar" value="guru"  />guru
+      <input type="radio" name="calendar" value="hanidec"  />hanidec
+      <input type="radio" name="calendar" value="khmr"  />khmr
+      <input type="radio" name="calendar" value="knda"  />knda
+      <input type="radio" name="calendar" value="laoo"  />laoo
+      <input type="radio" name="calendar" value="latn"  />latn
+      <input type="radio" name="calendar" value="limb"  />limb
+      <input type="radio" name="calendar" value="mlym"  />mlym
+      <input type="radio" name="calendar" value="mong"  />mong
+      <input type="radio" name="calendar" value="mymr"  />mymr
+      <input type="radio" name="calendar" value="orya"  />orya
+      <input type="radio" name="calendar" value="tamldec"  />tamldec
+      <input type="radio" name="calendar" value="telu"  />telu
+      <input type="radio" name="calendar" value="thai"  />thai
+      <input type="radio" name="calendar" value="tibt"  />tibt
+    </span>
+  </div>
+    
+</div>
+
+<script>
+(function() {
+  function getOptions() {
+    let locale;
+    let options;
+    Array.from(document.querySelectorAll('.date-format-inputs input')).forEach(el => {
+      const [name, value] = [el.name, el.value];
+      if (el.checked && name !== 'locale') {
+        options = options || {};
+        (value) && (options[name] = value);
+      } else if (el.checked && name === 'locale') {
+        locale = value;
+      }
+    });
+    return {locale, options};
+  }
+  function displayOutput() {
+    const {locale, options} = getOptions();
+    const output = (new Date()).toLocaleDateString(locale, options);
+    document.querySelector('#date-format-output').innerText = output;
+    if (locale || options) {
+      document.querySelector('#date-format-code').innerText = 
+        `(new Date()).toLocaleDateString('${locale}', ${JSON.stringify(options)})`;
+    } else {
+      document.querySelector('#date-format-code').innerText = 
+        `(new Date()).toLocaleDateString()`;
+    }
+  }
+  document.querySelector('.date-format-inputs').addEventListener('click', displayOutput);
+  displayOutput();
+})();
+</script>

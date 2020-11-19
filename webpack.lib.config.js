@@ -30,7 +30,7 @@ module.exports = {
     maxAssetSize: 512384
   },
   plugins: [
-    new CleanWebpackPlugin()
+    // new CleanWebpackPlugin()
   ],
   resolve: { extensions: [".js", ".ts"] },
   module: {

@@ -9,13 +9,13 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = {
   entry: "./src/index.js", 
   output: {
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(__dirname, "./dist/demo"),
     filename: "[name].[chunkhash].js"
   },
-  optimization: process.env.NODE_ENV === 'production' ? {
-      minimize: true, 
-      minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin()] 
-    } : undefined,
+  // optimization: process.env.NODE_ENV === 'production' ? {
+  //     minimize: true, 
+  //     minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin()] 
+  //   } : undefined,
   node: {
     fs: 'empty'
   },
@@ -43,7 +43,7 @@ module.exports = {
       { from: "./src/tools", to: "tools" },
       { from: "./src/*.html" },
     ]),
-    new CleanWebpackPlugin()
+    // new CleanWebpackPlugin()
   ],
   resolve: { extensions: [".js", ".ts"] },
   module: {

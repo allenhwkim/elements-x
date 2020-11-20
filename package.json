@@ -11,7 +11,7 @@
     "start": "webpack-dev-server --history-api-fallback"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.com/"
   },
   "files": [
     "dist"

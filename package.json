@@ -1,5 +1,5 @@
 {
-  "name": "element-x",
+  "name": "elements-x",
   "version": "0.1.1",
   "description": "Collection of simple, customizable and extendible custom elements",
   "main": "dist/index.js",

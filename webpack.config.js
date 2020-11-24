@@ -42,6 +42,7 @@ module.exports = {
       { from: "./src/components", to: "components" },
       { from: "./src/tools", to: "tools" },
       { from: "./src/*.html" },
+      { from: "./src/_redirects" }
     ]),
     // new CleanWebpackPlugin()
   ],

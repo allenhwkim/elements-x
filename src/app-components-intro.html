@@ -1,4 +1,36 @@
-<img src="assets/elements-x.png" width="100%"/>
-<video controls width="100%">
+<img src="assets/elements-x.png" width="100%" />
+<video controls width="100%" onplay="this.playbackRate = 2;">
   <source src="assets/intro.mov" />
 </video>
+
+<article class="markdown-body entry-content container-lg" itemprop="text">
+  <h2>How to use</h2>
+  <ul class="default">
+    <li>Add script to head
+      <app-pre>&lt;script src="https://unpkg.com/elements-x"&gt;&lt;script&gt;</app-pre>
+    </li>
+    <li>Write your html elements.
+      <app-pre>&lt;x-button class="primary"&gt;My Button&lt;/x-button&gt;</app-pre>
+    </li>
+  </ul>
+
+  <h2>Usage with npm</h2>
+  <ul class="default">
+    <li>Install package
+      <app-pre>$ npm install elements-x --save-dev</app-pre>
+    </li>
+    <li>Import package
+      <app-pre>import “elements-x”;</app-pre>
+    </li>
+    <li>Write your html elements.
+      <app-pre>&lt;x-button class="primary"&gt;My Button&lt;/x-button&gt;</app-pre>
+    </li>
+  </ul>
+
+  <h2>How Is It Different?</h2>
+  <ul class="default">
+    <li>It’s custom-elements, which works like html tags</li>
+    <li>NOT dependent to any framework; Angular, React, nor, VueJS</li>
+    <li>Customizable look-and-feel</li>
+  </ul>
+</article>

@@ -15,17 +15,27 @@
 
 <div class="example">
   <h3> Calendar in a block</h3>
-  <select id="locale" onchange="this.nextElementSibling.setAttribute('locale', this.value)">
-    <option>Select Language</option>
-    <option value="en-US">English</option>
-    <option value="ko-KR">Korean</option>
-    <option value="ko-KR-u-nu-hanidec">Korean / Chinese Date</option>
-    <option value="zh-CN">Chinese</option>
-    <option value="ar-EG">Arabic/Egypt</option>
-    <option value="fa-AF">Dari/Afghanistan</option>
-    <option value="th-TH">Thai</option>
-    <option value="th-TH-u-nu-thai-ca-chinese">Thai/Thai Date</option>
-  </select>
+  <script>function setCal1(locale) {
+    document.querySelector('#calendar1').setAttribute('locale',locale);
+  }</script>
+  <label onclick="setCal1('en-US')">
+    <x-radio><input type="radio" name="r1"> English</x-radio>
+  </label>
+  <label onclick="setCal1('ko-KR')">
+    <x-radio><input type="radio" name="r1"> Korean</x-radio>
+  </label>
+  <label onclick="setCal1('zh-CN-u-nu-hanidec')">
+    <x-radio><input type="radio" name="r1"> Chinese</x-radio>
+  </label>
+  <label onclick="setCal1('ar-EG')">
+    <x-radio><input type="radio" name="r1">Arabic/Egypt</x-radio>
+  </label>
+  <label onclick="setCal1('fa-AF)">
+    <x-radio><input type="radio" name="r1">Dari/Afghanistan</x-radio>
+  </label>
+  <label onclick="setCal1('th-TH-n-nu-thai-ca-chinese')">
+    <x-radio><input type="radio" name="r1">Thai</x-radio>
+  </label>
   <x-calendar id="calendar1" locale="ko-KR"></x-calendar>
   Selected: <span id="date1"></span>
   <app-pre>

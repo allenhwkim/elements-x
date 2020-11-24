@@ -1,4 +1,3 @@
-# Elements X
 
 ![image](https://user-images.githubusercontent.com/1437734/100136034-78959200-2e58-11eb-8125-260b78054a10.png)
 

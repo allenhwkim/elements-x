@@ -15,14 +15,14 @@ class AppArticles extends HTMLElement {
       if (preview) {
         ulEl.insertAdjacentHTML('beforeend', `
           <li class="article">
-            <a href="/articles/${article.uniqueSlug}">
+            <a href="/article/${article.uniqueSlug}">
             ${article.previewHTML}
             </a>
           </li>
         `);
       } else {
         ulEl.insertAdjacentHTML('beforeend', `
-          <li href="/articles/${article.uniqueSlug}" src="/articles/${article.uniqueSlug}.html">
+          <li href="/article/${article.uniqueSlug}" src="/articles/${article.uniqueSlug}.html">
             <i class="fas fa-book-open"></i>
             <b>${article.title}</b>
           </li>

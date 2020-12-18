@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const PrerenderSpaPlugin = require('prerender-spa-plugin');
 
 module.exports = {
   entry: "./src/index.js", 
@@ -25,6 +26,7 @@ module.exports = {
     maxAssetSize: 1024000
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "Webpack 4 Starter",
       template: "./src/index.html",
@@ -44,7 +46,10 @@ module.exports = {
       { from: "./src/*.html" },
       { from: "./src/_redirects" }
     ]),
-    // new CleanWebpackPlugin()
+    new PrerenderSpaPlugin({
+      staticDir: path.join(__dirname, 'dist/demo'),
+      routes: [ '/', '/component', '/article', '/tool', '/tool/unicodes' ]
+    })
   ],
   resolve: { extensions: [".js", ".ts"] },
   module: {

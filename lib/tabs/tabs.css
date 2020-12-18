@@ -2,6 +2,7 @@ x-tabs .tabs {
   border-bottom: 1px solid #999;
   display: flex;
   position: relative;
+  cursor: pointer;
 }
 
 x-tabs .tabs [tab-for] {

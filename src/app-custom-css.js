@@ -37,7 +37,7 @@ const css = `
 
 const html = `
   <div class="custom-css">
-    <a id="edit-css">Edit Custom Style</a>
+    <a id="edit-css">Override Default Style</a>
     <div class="editor-container ace">
       Edit css here. Then, it will be applied to all.
       <pre id="ace-editor">

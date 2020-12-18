@@ -29,12 +29,13 @@ class AppPre extends HTMLElement {
   }
 
   _fixIndent(code) {
-    const removeThis = (code.match(/^([\n\t ]+)/) || [])[1].replace(/\n/,'');
-    if (removeThis) {
+    const firstIndent = code.match(/^([\n\t ]+)/);
+    if (firstIndent) {
+      const removeThis = firstIndent[1].replace(/\n/,'');
       const re = new RegExp(`^${removeThis}`, 'gm')
       return code.replace(re, '');
     }
-    return code;
+   return code;
   }
 }
 

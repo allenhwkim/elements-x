@@ -12,6 +12,8 @@ const css = `
     border: 1px solid #ccc;
     height: 320px;
     white-space: pre-wrap;
+    font-size: 14px;
+    overflow: auto;
   }
 `;
 

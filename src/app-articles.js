@@ -8,28 +8,28 @@ class AppArticles extends HTMLElement {
   }
 
   connectedCallback() {
-    const ulEl = document.createElement('ul');
+    const divEl = document.createElement('div');
     const preview = this.getAttribute('preview') !== null;
     for (var key in articles) {
       const article = articles[key];
       if (preview) {
-        ulEl.insertAdjacentHTML('beforeend', `
-          <li class="article">
+        divEl.insertAdjacentHTML('beforeend', `
+          <a class="article">
             <a href="/article/${article.uniqueSlug}">
             ${article.previewHTML}
             </a>
-          </li>
+          </a>
         `);
       } else {
-        ulEl.insertAdjacentHTML('beforeend', `
-          <li href="/article/${article.uniqueSlug}" src="/articles/${article.uniqueSlug}.html">
+        divEl.insertAdjacentHTML('beforeend', `
+          <a href="/article/${article.uniqueSlug}" src="/articles/${article.uniqueSlug}.html">
             <i class="fas fa-book-open"></i>
             <b>${article.title}</b>
-          </li>
+          </a>
         `);
       }
     }
-    this.appendChild(ulEl);
+    this.appendChild(divEl);
   }
 
 }

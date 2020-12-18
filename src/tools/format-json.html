@@ -1,35 +1,45 @@
 <h2>Format JSON</h2>
-<a href="javascript:void(0)" id="example-btn">
-  Example
-</a>
-<textarea id="json-code"></textarea>
-<x-button id="format-btn">Format</x-button>
+
+<div class="flex">
+  <div class="left">
+    <h3>Source</h3>
+    <textarea id="source"></textarea>
+  </div>
+
+  <div class="right">
+    <h3>Result</h3>
+    <app-prettier id="result" parser="json" contenteditable></app-prettier>
+  </div>
+</div>
+
+<x-button id="format">Format</x-button>
 
 <style>
-  #json-code {
-    display: block;
-    font-family: monospace;
-    opacity: .8;
-    height: 240px;
-    width: 100%;
-
-  }
+ .flex {
+   display: flex; justify-content: space-between;
+ }
+ .flex .left, .flex .right {
+   flex: 1; margin: 0 8px;
+ }
+ .flex .left #source {
+  min-height: 320px; width: 100%; font-size: 14px;
+ }
 </style>
 
 <script>
   (function(){
-    const jsonCode = document.querySelector('#json-code');
-    document.querySelector('#example-btn').addEventListener('click', e => {
-      jsonCode.innerText = `{"foo": 1, "bar": 2}`;
-    });
-    document.querySelector('#format-btn').addEventListener('click', e => {
+    document.querySelector('#source').innerText = '{"foo": 1, "bar": 2}';
+    document.querySelector('#format').addEventListener('click', function() {
+      const jsonCode = document.querySelector('#source').value;
+      const resultEl = document.querySelector('#result');
       try {
-        const parsed = JSON.parse(jsonCode.value);
-        jsonCode.value = JSON.stringify(parsed, null, '  ');
+        const parsed = JSON.parse(jsonCode);
+        resultEl.innerText = JSON.stringify(parsed, null, '  ');
       } catch (e) {
-        jsonCode.value = e;
+        resultEl.innerText = e;
         throw e;  
       }
     });
+    document.querySelector('#format').click();
   })();
 </script>

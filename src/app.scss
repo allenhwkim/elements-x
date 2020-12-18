@@ -89,7 +89,7 @@ ul:not(.default) {
     min-height: calc(100vh - 60px);
     transition: width .3s;
     padding: 20px;
-    li {
+    li, a {
       padding: 10px 20px;
       margin: 0 -20px;
       display: flex;

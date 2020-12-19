@@ -119,7 +119,7 @@ ul:not(.default) {
 
   .article {
     min-height: calc(100vh - 60px);
-    // width: calc(100% - 250px);
+    width: calc(100% - 250px);
     padding: 20px;
     flex: 1;
     background: #F5F5F5;
@@ -134,7 +134,7 @@ ul:not(.default) {
 
 app-group-header .header {
   display: flex;
-  margin: -20px -20px 0 -20px;
+  // margin: -20px -20px 0 -20px;
   height: 56px;
   padding: 0 20px;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
@@ -149,7 +149,6 @@ app-group-header .header .links {
 }
 
 .article-contents {
-  // width: calc(100% - 250px);
   margin-top: 20px;
   padding: 20px;
   font-size: 18px;
@@ -157,6 +156,9 @@ app-group-header .header .links {
   box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
   pre {
     overflow: auto;
+  }
+  .articles-container {
+    column-count: 2;
   }
 }
 

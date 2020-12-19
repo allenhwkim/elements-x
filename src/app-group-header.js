@@ -6,7 +6,7 @@ const componentsHeaderHTML = `
     <div class="links">
       <a target="_blank" id="github-code" href="https://github.com/components-x/components-x">
         <x-button class="no-border no-shadow icon" title="code">
-          <i class="fab fa-angular"></i>
+          <i class="fab fa-js-square"></i>
         </x-button>
       </a>
       <a target="_blank" id="github-issue" href="https://github.com/components-x/components-x/issues">
@@ -51,7 +51,7 @@ class AppGroupHeader extends HTMLElement {
   _setComponentHeader(route) {
     this.innerHTML = componentsHeaderHTML;
 
-    const componentRoute = route.path.indexOf('/components') !== -1;
+    const componentRoute = route.path.indexOf('/component') !== -1;
     if (componentRoute) {
       const elName = route.name.toLowerCase();
       if (elName ) {

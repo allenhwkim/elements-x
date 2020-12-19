@@ -1,3 +1,4 @@
+import { WatchDirectoryFlags } from 'typescript';
 import { articles } from './articles';
 
 class AppArticles extends HTMLElement {
@@ -13,7 +14,8 @@ class AppArticles extends HTMLElement {
     for (var key in articles) {
       const article = articles[key];
       if (preview) {
-        divEl.setAttribute('style', 'column-count: 2')
+        divEl.classList.add('articles-container');
+        // divEl.setAttribute('style', 'column-count: 2')
         divEl.insertAdjacentHTML('beforeend', `
           <div class="article">
             <a href="/article/${article.uniqueSlug}">

@@ -1,0 +1,38 @@
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .app > .header .logo {
+    display: none;
+  }
+  .app > .header .header-nav {
+    font-size: 18px;
+  }
+  .app > .main .aside {
+    width: 60px;
+    .route-item i {
+      font-size: 20px;
+    }
+    .route-item b {
+      display: none;
+    }
+    .route-item:hover {
+      b {
+        position: absolute;
+        display: initial;
+        background: inherit;
+        padding: 0 4px 2px 2px;
+      }
+    }
+  }
+  .app > .header .header-nav .icons {
+    display: none;
+  }
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+  .app > .header .logo,
+  .app > .main .aside {
+    width: 200px;
+  }
+  .app > .main .article {
+    width: calc(100% - 200px);
+  }
+}

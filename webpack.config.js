@@ -49,7 +49,17 @@ module.exports = {
     ]),
     new PrerenderSpaPlugin({
       staticDir: path.join(__dirname, 'dist/demo'),
-      routes: [ '/', '/component', '/article', '/tool', '/tool/unicodes' ]
+      routes: [ '/', '/component', '/article', '/tool' ],
+      renderer: new PrerenderSpaPlugin.PuppeteerRenderer({
+        // renderAfterDocumentEvent: 'x-load-html',
+
+        // Optional - Wait to render until the specified element is detected using `document.querySelector`
+        // renderAfterElementExists: '#end-of-pre-rendering'
+
+        // Optional - Wait to render until a certain amount of time has passed.
+        // NOT RECOMMENDED
+        renderAfterTime: 5000, // Wait 5 seconds.
+      })
     })
   ],
   resolve: { extensions: [".js", ".ts"] },

@@ -23,7 +23,9 @@ class AppArticles extends HTMLElement {
         `);
       } else {
         divEl.insertAdjacentHTML('beforeend', `
-          <a href="/article/${article.uniqueSlug}" src="/articles/${article.uniqueSlug}.html">
+          <a class="route-item"
+            href="/article/${article.uniqueSlug}"
+            src="/articles/${article.uniqueSlug}.html">
             <i class="fas fa-book-open"></i>
             <b>${article.title}</b>
           </a>

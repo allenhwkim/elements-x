@@ -13,13 +13,13 @@ ul:not(.default) {
   }
   .main .aside {
     width: 60px;
-    li i {
+    .route-item i {
       font-size: 20px;
     }
-    li b {
+    .route-item b {
       display: none;
     }
-    li:hover {
+    .route-item:hover {
       b {
         position: absolute;
         display: initial;
@@ -89,7 +89,7 @@ ul:not(.default) {
     min-height: calc(100vh - 60px);
     transition: width .3s;
     padding: 20px;
-    li, a {
+    .route-item {
       padding: 10px 20px;
       margin: 0 -20px;
       display: flex;
@@ -103,7 +103,7 @@ ul:not(.default) {
         font-weight: normal;
       }
     }
-    li:hover, li.active {
+    .route-item:hover, .route-item.active {
       outline: 0;
       background: #30393D;
     }

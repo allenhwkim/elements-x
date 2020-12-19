@@ -49,6 +49,9 @@ ul:not(.default) {
     line-height: 22px;
     text-transform: uppercase;
     transition: width .3s;
+    img {
+      width: 100%;
+    }
   }
   .header-nav {
     display: flex;
@@ -82,6 +85,7 @@ ul:not(.default) {
 
 .app > .main {
   display: flex;
+  word-break: break-word;
   .aside {
     background: #3D474C;
     width: 250px;
@@ -115,7 +119,7 @@ ul:not(.default) {
 
   .article {
     min-height: calc(100vh - 60px);
-    width: calc(100% - 250px);
+    // width: calc(100% - 250px);
     padding: 20px;
     flex: 1;
     background: #F5F5F5;
@@ -145,12 +149,15 @@ app-group-header .header .links {
 }
 
 .article-contents {
-  width: calc(100% - 250px);
+  // width: calc(100% - 250px);
   margin-top: 20px;
   padding: 20px;
   font-size: 18px;
   background: #FFF;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+  pre {
+    overflow: auto;
+  }
 }
 
 .article-contents .medium-article {

@@ -1,4 +1,6 @@
 /* <head>...<link href="style.[hash].css" rel="stylesheet"></head> */
+@import './app.scss';
+@import './app.mobile.scss';
 
 body * {
   box-sizing: border-box;

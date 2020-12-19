@@ -80,7 +80,7 @@ module.exports = {
         use: ['raw-loader']
       },
       { // extract as css file into html for these
-        test: [/style.css$|app.scss$/],
+        test: [/style.css$/],
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
       },
       {

@@ -13,12 +13,13 @@ class AppArticles extends HTMLElement {
     for (var key in articles) {
       const article = articles[key];
       if (preview) {
+        divEl.setAttribute('style', 'column-count: 2')
         divEl.insertAdjacentHTML('beforeend', `
-          <a class="article">
+          <div class="article">
             <a href="/article/${article.uniqueSlug}">
             ${article.previewHTML}
             </a>
-          </a>
+          </div>
         `);
       } else {
         divEl.insertAdjacentHTML('beforeend', `

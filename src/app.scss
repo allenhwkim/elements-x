@@ -241,9 +241,6 @@ app-group-header .header .links {
   figure {
     margin: 0;
   }
-  ul {
-    column-count: 2;
-  }
   .list {
     margin-top: 16px;
   }
@@ -253,6 +250,7 @@ app-group-header .header .links {
     min-height: auto;
     box-shadow: 4px 4px 8px #ccc;
     display: inline-block;
+    overflow: auto;
   }
   h1.title {
     line-height: normal;

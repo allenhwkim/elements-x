@@ -8,9 +8,26 @@
   }
 </app-custom-css>
 
-<li> When clicked, button become automatically disabled for a second to prevent double click </li>
-<li> Able to show loading sign setting loading class </li>
-<li> Customizable color and button size(height) </li>
+<h3>How it is different from html &lt;button></h3>
+<ul class="default">
+  <li> Better look-and-feel.</li> 
+  <li> Disabled for a second when clicked.
+    <p>
+      A button become automatically disabled for a second when clicked to prevent double click
+    </p>
+  </li>
+  <li> Showing loading sign.
+    <p>
+      An element with 'loading' class is hidden in default. It shows up when x-button has 'loading' class.
+    </p>
+  </li>
+  <li> Customizable color and button size.
+    <p>
+      Try different styling by clicking "Overvide Default Style".
+    </p>
+  </li>
+</ul>
+
 <h3>Default</h3>
 <div class="example">
   <p>
@@ -34,22 +51,25 @@
   While it is loading, users won't be able to click the button.
 </p>
 
-Click the below buttons to see loading sign.
+Click the below buttons to see loading sign. 
 <div class="example loading-section">
-  <x-button class="loading">
+  <x-button onclick="this.classList.toggle('loading')">
     <img class="loading" height="24" src="assets/loading.gif" />
     Default
   </x-button>
-  <x-button class="primary loading"> 
+  <x-button class="primary" onclick="this.classList.toggle('loading')"> 
     Primary
     <img class="loading" height="24" src="assets/loading.gif" />
   </x-button>
-  <x-button class="accent loading">
+  <x-button class="accent" onclick="this.classList.toggle('loading')" >
     <img class="loading" height="24" src="assets/loading.gif" />
     Accent
   </x-button>
+  <div>
+    <a href="javascript:void(0)" onclick="document.querySelectorAll('.loading-section x-button').forEach(el => el.classList.remove('loading'))">Click here</a> to remove all loading signs.
+  </div>
   <pre language="html">
-  &lt;x-button  class="loading"">
+  &lt;x-button class="loading"">
     &lt;img class="loading" height="24" src="assets/loading.gif" />
     Default
   &lt;/x-button>
@@ -65,7 +85,7 @@ Click the below buttons to see loading sign.
 </div>
 
 <h3>no-bg</h3>
-Button with "no-class" attribute won't have background color, switching to text color.
+Button with "lasbg" attribute won't have background color, switching to text color.
 
 <div class="example custom">
   <x-button class="no-bg"> Default </x-button>
@@ -133,3 +153,8 @@ Button with "icon" class will have rounded shape instead of rectanble shape.
   &lt;x-button class="<b>icon</b>" disabled>&#9829;&lt;/x-button>
   </pre>
 </div>
+
+<div class="fb-comments" data-href="dynamic" data-width="" data-numposts="5"></div>
+<script>
+  document.querySelector('.fb-comments').("data-href", window.location.href);
+</script>

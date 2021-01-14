@@ -1,5 +1,3 @@
-import  {setCustomElementHTMLCss}  from '../lib/common/util';
-
 const componentsHeaderHTML = `
   <div class="header vcentered">
     <h2 class="name" id="component-name">Component</h2>

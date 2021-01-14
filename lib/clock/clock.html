@@ -20,12 +20,15 @@
 
       <!-- hands -->
       <g id="hands" transform="rotate(180)">
+        <circle class="x-clock-center" r="7" fill="#333" />
         <g id="hour-hand" tabindex="0">
-          <line  class="x-clock-hour-hand" stroke-width="5" y2="70" stroke-linecap="round" stroke="#333" opacity=".5" />
-          <circle class="x-clock-center" r="7" fill="#333" />
+          <line  class="x-clock-hour-hand" stroke-width="5" y2="70" stroke-linecap="round" stroke="#333"  />
         </g>
         <g id="minute-hand" tabindex="0" (keydown)="onKeydown($event, 1)">
-          <line class="x-clock-minute-hand" stroke-width="5" y2="85" stroke-linecap="round" stroke="#666" opacity=".5" />
+          <line class="x-clock-minute-hand" stroke-width="5" y2="85" stroke-linecap="round" stroke="#666" />
+        </g>
+        <g id="second-hand">
+          <line class="x-clock-second-hand" stroke-width="2" y2="95" stroke="#999" />
         </g>
       </g>
       <!-- numbers -->
@@ -45,7 +48,7 @@
       </g>
 
       <g id="digital"  class="x-clock-digital">
-        <text id="digital-text" x="-35" y="30"></text>
+        <text id="digital-text" x="-45" y="30"></text>
       </g>
     </g>
   </svg>

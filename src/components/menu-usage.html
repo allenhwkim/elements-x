@@ -84,7 +84,7 @@
 
       export default function App() {
         componentDidMount() {
-          ReactDOM.findDOMNode(this).addEventListener('x-list-select', this.handleEvent);
+          ReactDOM.findDOMNode(this).addEventListener('x-menuitem-selected', this.handleEvent);
         }
 
         handleEvent(event) { console.log(event); }

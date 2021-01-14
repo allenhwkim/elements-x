@@ -7,15 +7,36 @@
   .app x-menu > ul.dropdown-menu > li > ul {
     color: initial;
   }
-
 </app-custom-css>
+
+<style>
+  .message br {
+    display: none;
+  }
+  .message {
+    height: 1em;
+    background: red;
+    color: #FFF;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
+
+<h3>Features </h3>
+<ul class="default">
+  <li>Convert ul/li list to hierarchy collapsable drodown menu</li> 
+  <li>Provide navigation using keyboard</li>
+  <li>Accessibility full-feagtured</li>
+  <li>Fire 'x-menuitem-selected` evnet when menu item is clicked or enter pressed</li>
+  <li>With 'selected' attribute, it highlights selected item</li>
+</ul>
 
 <div class="example">
 
-  <h2>Menu Style</h2>
-
+  <h2>Example</h2>
   <x-menu id="my-menu" selected="redo">
-    <ul class="dropdown-menu">
+    <ul>
       <li> File
         <ul>
           <li>New</li>
@@ -53,6 +74,14 @@
       <li id="help">Help</li>
     </ul>
   </x-menu>
+  <div class="message" id="message-div">
+    &nbsp;
+  </div>
+  <script>
+    document.querySelector('#my-menu').addEventListener('x-menuitem-selected', evt => {
+      document.querySelector('#message-div').innerText = `selected "${evt.detail.outerHTML}:`;
+    });
+  </script>
 
   <script>
     document.querySelector('#my-menu').addEventListener('x-menu-select', e => {
@@ -61,8 +90,8 @@
   </script>
   
   <app-pre>
-    &lt;x-menu id="my-menu" <b>menu-style</b> selected="redo">
-      &lt;ul class="<b>dropdown-menu</b>">
+    &lt;x-menu id="my-menu" selected="redo">
+      &lt;ul>
         &lt;li> File
           &lt;ul>
             &lt;li>New&lt;/li>
@@ -108,16 +137,8 @@
   </app-pre>
 </div>
 
-<h3>Features </h3>
-<li>Convert ul/li list to hierarchy collapsable drodown menu</li> 
-<li>Provide navigation using keyboard</li>
-<li>Accessibility full-feagtured</li>
-<li>Fire 'x-menu-selct` evnet when menu item is clicked or enter pressed</li>
-<li>Highlight selected item</li>
-
 <h3>Attributes</h3>
-<li><b>menu-style</b>: When given, the list works like menu</li>
 <li><b>selected</b>: the id of preselected menu item, default null</li>
 
 <h3>Events</h3> 
-<li><b>x-list-select</b>: Fired when menu item is selected by click or enter pressed</li>
+<li><b>x-menuitem-selected</b>: Fired when menu item is selected by click or enter pressed</li>

@@ -33,12 +33,15 @@ x-textfield .label  {
   position:  absolute;
   pointer-events: none; 
   box-sizing: border-box;
-  opacity:  0.5;
   cursor:  text;
   transition:  0.2s  ease  all;
   user-select:  none;
-  top: 11px;
+  top: 16px;
   left: 4px;
+  background: #FFF;
+  width: 100%;
+  z-index: 1;
+  color: #888;
 }
 
 x-textfield:not(.empty)  .label,  
@@ -53,9 +56,8 @@ x-textfield .icon {
   opacity: .5;
   pointer-events: none;
   display: flex;
-  height: 100%;
   align-items: center;
-  top: 0;
+  top: 16px;
 }
 
 /* left-side icon and input */
@@ -67,8 +69,9 @@ x-textfield.x-has-icon-left .input {
   padding-left: 1.8em;
 }
 x-textfield.x-has-icon-left .label {
+  width: calc(100% - 36px);
   box-sizing: border-box;
-  left: 30px;
+  left: 36px;
 }
 
 x-textfield.x-has-icon-left:not(.empty)  .label,  
@@ -84,4 +87,7 @@ x-textfield.x-has-icon-right .input {
 }
 x-textfield.x-has-icon-right .icon {
   right: 4px;
+}
+x-textfield.x-has-icon-right .label {
+  width: calc(100% - 36px);
 }

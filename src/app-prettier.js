@@ -30,8 +30,9 @@ class AppPrettier extends HTMLElement {
 
   connectedCallback() {
     this.parser = this.getAttribute('parser') || this.parser;
-    setCustomElementHTMLCss(this, null, css);
-    this.format();
+    setCustomElementHTMLCss(this, null, css).then(_ => {
+      this.format();
+    });
   }
 
   format(code) {

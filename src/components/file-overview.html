@@ -14,7 +14,50 @@
   }
 </app-custom-css>
 
+<h3>Features </h3>
+<ul class="default">
+  <li> To collect files, user can drag and drop a file or multiple files. </li>
+  <li> To collect files, user can copy/paste a file. </li>
+  <li>
+    Users can see the preview of file if the collected file is an image.
+  </li>
+  <li> 
+    Provides file uploading functionality.
+    <p>To enable uploading functionality, user need to provide a upload function.</p>
+    <p>Upload button is visible when user collect a file.</p>
+    <p>When upload button is clicked, it executes the provided upload function.</p>
+    <p>It also shows the progress of upload. </p>
+  </li>
+  <li> Supports custom contents and design</li>
+  <li> 
+    Customizable contents and design.
+    <p>
+      Try different styling by clicking "Overvide Default Style".
+    </p>
+  </li>
+  <li>
+     It fires custom events when
+     <p>File is changed</p>
+     <p>File is being uploaded or uploaded successfully</p>
+  </li>
+</ul>
+
 <div class="example">
+  <h3>Example</h3>
+
+  <x-file>
+    <input class="input" type="file"/>
+  </x-file>
+
+  <app-pre>
+    &lt;<b>x-file</b>>
+      &lt;input class="input" type="file"/>
+    &lt;/x-file>
+  </app-pre>
+</div>
+
+<div class="example">
+  <h3>Example with upload functionality</h3>
 
   <x-file id="file-selector" upload-fn="upload">
     <input class="input" type="file" multiple="multiple"/><br/>
@@ -46,17 +89,8 @@
   </app-pre>
 </div>
 
-<h3>Features </h3>
-<li> Supports drag and drop file selection </li>
-<li> Supports copy and paste file selection </li>
-<li> Supports select file from popup</li>
-<li> Supports custom contents and design</li>
-<li> Show preview of image </li>
-<li> Accept upload function </li>
-<li> Show upload progress </li>
-
 <h3>Attributes</h3>
-<li><b>upload-fn</b>:  string, the uplod function name that returnxs xhr</li>
+<li><b>upload-fn</b>:  string, the uplod function name that returns xhr</li>
 
 <h3>Events</h3> 
 <li><b>x-file-changed</b>: fired when collected files are changed with the values of list of files</li>

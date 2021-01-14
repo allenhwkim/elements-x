@@ -23,14 +23,68 @@
   }
 </app-custom-css>
 
+<style>
+  .message br {
+    display: none;
+  }
+  .message {
+    height: 1em;
+    background: red;
+    color: #FFF;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
+
+<h3>Features </h3>
+<ul class="default">
+  <li>Provides navigation through list itmes using keyboard.</li>
+  <li>Fires 'x-listitem-selcted` evnet when item is selected by click or keyboard.</li>
+  <li>Converts ul/li list to a structured collapsable list.</li> 
+  <li>Accessibility full-featured using tabs, space, and arrow keys.</li>
+  <li>Highlights selected item.</li>
+</ul>
+
+<div class="example">
+  <h2>With DIV</h2>
+  You can navigate list items using keyboard arrow buttons.
+
+  <x-list select-first id="list-div">
+    <div>Cat</div>
+    <div>Dog</div>
+    <div>Fish</div>
+    <div>Bird</div>
+  </x-list>
+  <div class="message" id="message-div">
+    &nbsp;
+  </div>
+  <script>
+    document.querySelector('#list-div').addEventListener('x-listitem-selected', evt => {
+      document.querySelector('#message-div').innerText = `selected "${evt.detail.outerHTML}:`;
+    });
+  </script>
+
+  <app-pre>
+    &lt;x-list select-first>
+      &lt;div>Cat&lt;/div>
+      &lt;div>Dog&lt;/div>
+      &lt;div>Fish&lt;/div>
+      &lt;div>Bird&lt;/div>
+    &lt;/x-list>
+  </app-pre>
+
+</div>
+
+
 <div class="example">
 
   <h2>With UL/LI</h2>
   <p>
     The below is multi-leveled list. Click the list, 
-    and usinghkeyboard to open, close, or navigate ist items.
+    and usingh keyboard to open, close, or navigate list items.
   </p>
-  <x-list selected="file-b">
+  <x-list id="list-ul-li" selected="file-b">
     <ul class="x-expanded" >
       <li> File
         <ul>
@@ -69,6 +123,14 @@
       <li id="help">Help</li>
     </ul>
   </x-list>
+  <div class="message" id="message-ul-li">
+    &nbsp;
+  </div>
+  <script>
+    document.querySelector('#list-ul-li').addEventListener('x-listitem-selected', evt => {
+      document.querySelector('#message-ul-li').innerText = `selected "${evt.detail.outerHTML}:`;
+    });
+  </script>
 
   <app-pre>
     &lt;x-list selected="file-b">
@@ -112,35 +174,7 @@
     &lt;/x-list>>
   </app-pre>
 
-  <h2>With DIV</h2>
-  <x-list select-first>
-    <div>File</div>
-    <div>Edit</div>
-    <div>Format</div>
-    <div>View</div>
-    <div>Help</div>
-  </x-list>
-
-  <app-pre>
-    &lt;x-list select-first>
-      &lt;div>File&lt;/div>
-      &lt;div>Edit&lt;/div>
-      &lt;div>Format&lt;/div>
-      &lt;div>View&lt;/div>
-      &lt;div>Help&lt;/div>
-    &lt;/x-list>
-  </app-pre>
-
 </div>
-
-<h3>Features </h3>
-<li>Convert ul/li list to hierarchy collapsable list</li> 
-<li>Provide navigation using keyboard</li>
-<li>Fire 'x-list-selct` evnet when item is clickd or enter pressed</li>
-<li>Select first item in default</li>
-<li>When menu-style given as attribute, it responds to mouse hover</li>
-<li>Accessibility full-feagtured</li>
-<li>Highlight selected item</li>
 
 <h3>Attributes</h3>
 <li><b>menu-style</b>: When given, the list works like menu by responding to mouseenter/mouseleave</li>
@@ -148,4 +182,4 @@
 <li><b>selected</b>:  the id of preselected menu item, default null</li>
 
 <h3>Events</h3> 
-<li><b>x-list-select</b>: Fired when menu item is selected by click or enter pressed</li>
+<li><b>x-listitem-selected</b>: Fired when menu item is selected by click or enter pressed</li>

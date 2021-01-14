@@ -23,7 +23,7 @@ x-carousel .x-next.x-button::before { font-size: 2em; content: '\25B6'; }
 x-carousel .x-prev.x-button::before { font-size: 2em; content: '\25C0'; }
 x-carousel .x-shortcuts {
   position: absolute;
-  bottom: 4px;
+  bottom: 24px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -33,7 +33,8 @@ x-carousel .x-shortcuts .x-button {
   height: 1em;
   border-radius: 50%;
   background: #FFF;
-  opacity: .3;
+  opacity: .5;
+  margin: 0 1px;
   color: transparent;
 }
 x-carousel .x-shortcuts .x-button:hover,

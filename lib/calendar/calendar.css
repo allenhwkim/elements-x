@@ -1,3 +1,7 @@
+x-overlay x-calendar {
+  display: block;
+  width: 320px;
+}
 x-calendar .x-header {
   display: flex;
   padding: 12px 8px;
@@ -5,6 +9,9 @@ x-calendar .x-header {
 }
 x-calendar .x-header  .x-month-year {
   flex: 1;
+}
+x-calendar .x-header  .x-month-year .x-years{
+  border: none;
 }
 x-calendar .x-header  .x-month-year .year {
   border: 0;

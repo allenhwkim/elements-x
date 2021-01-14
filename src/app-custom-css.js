@@ -39,7 +39,7 @@ const html = `
   <div class="custom-css">
     <a id="edit-css">Override Default Style</a>
     <div class="editor-container ace">
-      Edit css here. Then, it will be applied to all.
+     When edit the default style css, it will be automatically applied.
       <pre id="ace-editor">
         <slot></slot>
       </pre>
@@ -59,11 +59,17 @@ class AppCustomCss extends HTMLElement {
     return self;
   }
 
-  connectedCallback() {
-    setCustomElementHTMLCss(this, html, css);
-    document.addEventListener('click', this.docClickListener)
-    this._addEventListeners();
-    this._initAceEditor();
+  connectedCallback()  {
+    if (!this.calledOnce) {
+      this.calledOnce = true;
+      setCustomElementHTMLCss(this, html, css)
+        .then(_ => {
+          document.addEventListener('click', this.docClickListener)
+          this._addEventListeners();
+          this._initAceEditor();
+          this.style.display = 'block';
+        })
+    }
   }
 
   disconnectedCallback() {
@@ -74,8 +80,6 @@ class AppCustomCss extends HTMLElement {
   _addEventListeners() {
     this.querySelector('#edit-css').addEventListener('click', 
       _ => this.classList.add('visible'));
-    // this.querySelector('#reset-css').addEventListener('click',
-    //   _ => this._resetCustomStyle());
   }
 
   _docClick(event) {
@@ -102,7 +106,8 @@ class AppCustomCss extends HTMLElement {
   _initAceEditor() {
     const el = this.querySelector('#ace-editor');
     const code = el.innerText;
-    const editor = ace.edit('ace-editor');
+    // const editor = ace.edit('ace-editor'); // this cause error intermittently
+    const editor = ace.edit(el);
     editor.$blockScrolling = Infinity;
 
     const value = prettier.format(code, {parser: 'css', plugins: [cssParser]});

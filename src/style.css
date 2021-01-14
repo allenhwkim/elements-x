@@ -1,7 +1,6 @@
 /* <head>...<link href="style.[hash].css" rel="stylesheet"></head> */
 @import './app.scss';
 @import './app.mobile.scss';
-
 body * {
   box-sizing: border-box;
 }
@@ -24,7 +23,20 @@ a {
 a:hover, a.active {
   opacity: 1;
 }
-
+ul.default li p {
+  position: relative;
+  margin: 4px 16px;
+}
+li p::before {
+  content: '-';
+  position: absolute;
+  left: -12px;
+}
+app-custom-css {
+  display: none;
+  position: absolute;
+  right: 48px;
+}
 
 .vcentered {
   display: flex;

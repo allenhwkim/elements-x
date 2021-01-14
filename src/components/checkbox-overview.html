@@ -9,8 +9,40 @@
   }
 </app-custom-css>
 
-<div class="example">
+<h3>Features </h3>
+<ul class="default">
+  <li>
+    Provides custom look-and-feel of a html check box.
+    <p> size </p>
+    <p> border </p>
+    <p> background color </p>
+    <p> icon </p>
+    <p> icon color</p>
+  </li>
+</ul>
 
+<div class="example">
+  <div class="demo">
+    <h3>Default</h3>
+    <label>
+      <x-checkbox>
+        <input type="checkbox" checked />
+      </x-checkbox>
+      Checked 
+    </label>
+  </div>
+  <app-pre>
+    &lt;label>
+      &lt;x-checkbox>
+        &lt;input type="checkbox" checked />
+      &lt;/x-checkbox>
+      Checked 
+    &lt;/label>
+  </app-pre>
+</div>
+
+<div class="example">
+  <h3>Custom Checkbox with Attributes</h3>
   <div class="demo">
     <label>
       <x-checkbox fill="blue" icon="✖" size="24px">
@@ -27,36 +59,15 @@
       Check here 
     &lt;/label>
   </app-pre>
-
-  <div class="demo">
-    <h3>Enabled</h3>
-    <label>
-      <x-checkbox>
-        <input type="checkbox" checked />
-      </x-checkbox>
-      Check here 
-    </label>
-  </div>
-  <app-pre>
-    &lt;label>
-      &lt;x-checkbox>
-        &lt;input type="checkbox" checked />
-      &lt;/x-checkbox>
-      Check here 
-    &lt;/label>
-  </app-pre>
-
-  <h3>Features </h3>
-  <li>Customizable size, border, background color, icon character, and icon color</li>
-
-  <h3>Attributes</h3>
-  <li><b>size</b>: Default 20px, width and height of the checkbox</li>
-  <li><b>border</b>: Default #333, border color of the checkbox</li>
-  <li><b>fill</b>: Default red, background color of the checkbox</li>
-  <li><b>icon</b>: Default '\2714', check icon</li>
-  <li><b>color</b>: Default inherit, color of the check icon</li>
-
-  <h3>Events</h3>
-  <div>Not Applicable</div>
-
 </div>
+
+
+<h3>Attributes</h3>
+<li><b>size</b>: Default 20px, width and height of the checkbox</li>
+<li><b>border</b>: Default #333, border color of the checkbox</li>
+<li><b>fill</b>: Default red, background color of the checkbox</li>
+<li><b>icon</b>: Default '\2714', check icon</li>
+<li><b>color</b>: Default inherit, color of the check icon</li>
+
+<h3>Events</h3>
+<div>Not Applicable</div>

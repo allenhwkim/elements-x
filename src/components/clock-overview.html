@@ -13,38 +13,42 @@
   .app x-clock .x-clock-digital text { fill: white; } 
 </app-custom-css>
 
+<h3>Features </h3>
+<ul class="default">
+  <li>Shows an analog clock with give hour and minute.</li>
+  <li>With run="true", clock runs by itself</li>
+  <li>Updatable hour and minute by dragging hour hand or minute hand.</li>
+  <li>Fires `x-time-selected` when time changes.</li>
+  <li>
+    Diaplay a clock on a page flow or as a dropdown
+    <p>It can be used with a button or input tag</p>
+  </li>
+</ul>
+
 <div class="example">
+  <h3>Usage with input field</h3>
   <p>
-    Press tab to select hour or miniute to update. Then, press arrow keys; up/down/left/right to update time our minutes
-  </p>
-  <p>
-    Or, drag hour or minute hand to adjust time.
+    To update time, press tab to select hour hand or minute hand,
+    Then, press arrow keys; up/down/left/right to update time.
+    Or, simply, drag hour hand or minute hand to adjust time.
   </p>
   
-  <x-clock></x-clock>
-  <app-pre> &lt;kx-clock>&lt;/kx-clock> </app-pre>
-  
-  <h3>Used with input</h3>
   <input id="time" />
   <x-overlay trigger="time" id="clock">
-    <x-clock hour="10" minute="9"></kx-clock>
+    <x-clock hour="22" minute="10"></kx-clock>
   </x-overlay>
   <app-pre>
     &lt;input id="<b>time</b>" />
-    &lt;x-overlay trigger="time" id="<b>clock</b>">
-      <b>&lt;x-clock hour="10" minute="9">&lt;/kx-clock></b>
+    &lt;x-overlay trigger="time" hour="22" minute="10">
+      <b>&lt;x-clock>&lt;/kx-clock></b>
     &lt;/x-overlay>
-    &lt;script>
-      document.querySelector('<b>#clock</b>').addEventListener('<b>x-time-selected</b>', e => {
-        document.querySelector('<b>input#time</b>').value = e.detail;
-      });
-    &lt;/script>
   </app-pre>
-
 </div>
 
-<h3>Features </h3>
-<li>Select time with analog clock</li>
+<div class="example">
+  <x-clock run="true"></x-clock>
+  <app-pre> &lt;kx-clock run="true">&lt;/kx-clock> </app-pre>
+</div>
 
 <h3>Attributes</h3>
 <li><b>hour</b>: 0 to 24</li>

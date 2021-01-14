@@ -3,12 +3,22 @@
   .app x-switch {
     --x-switch-size: 24px;
     --x-switch-color: blue;
+    min-width: 71px;
   }
 </app-custom-css>
 
+<h3>Features</h3>
+<ul class="default">
+  <li>Modifiable On/Off Text</li>
+  <li>
+    Customizable color and button size.
+    <p>Try different styling by clicking "Overvide Default Style".</p>
+  </li>
+</ul>
+
 <div class="example">
+  <h3>Default</h3>
   <p>
-    DEFAULT: <br/>
     <x-switch checked>
       <b>OFF</b> <b>ON</b>
     </x-switch>
@@ -26,7 +36,7 @@
   </app-pre>
 
   <p>
-    Custom: <br/>
+    <h3>Custom</h3>
     <x-switch checked="true" color="blue" size="24px">
       <b>No</b> <b>Yes</b>
     </x-switch>

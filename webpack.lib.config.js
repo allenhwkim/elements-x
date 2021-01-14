@@ -17,10 +17,10 @@ module.exports = {
     path: path.resolve(__dirname, "./dist"),
     filename: "[name].js"
   },
-  // optimization: {
-  //   minimize: true, 
-  //   minimizer: [new TerserPlugin()] 
-  // },
+  optimization: {
+    minimize: true, 
+    minimizer: [new TerserPlugin()] 
+  },
   node: {
     fs: 'empty'
   },

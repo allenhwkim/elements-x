@@ -47,11 +47,12 @@ class AppUnicodes extends HTMLElement {
   }
 
   connectedCallback() {
-    setCustomElementHTMLCss(this, html, css);
-    for (var group in Unicodes) {
-      const data = Unicodes[group];
-      this.appendChild(this._getHTML(group, data));
-    }
+    setCustomElementHTMLCss(this, html, css).then(_ => {
+      for (var group in Unicodes) {
+        const data = Unicodes[group];
+        this.appendChild(this._getHTML(group, data));
+      }
+    });
   }
 
   search(str) {

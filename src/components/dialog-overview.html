@@ -15,6 +15,14 @@
   top: 8px;
 }
 </app-custom-css>
+
+<h3>Features </h3>
+<li> close dialog when background clicked</li>
+<li> when esc pressed close dialog</li>
+<li> when open, trap focus within it.</li>
+<li> when closed, focus back to trigger element</li>
+<li> fire event when opened or closed</li>
+
 <div class="example">
   <x-button onclick="document.querySelector('#dialog1').open()">Open Diaog</x-button>
   <x-dialog id="dialog1">
@@ -41,13 +49,6 @@
     &lt;/x-dialog>
   </app-pre>
 </div>
-
-<h3>Features </h3>
-<li> close dialog when background clicked</li>
-<li> when esc pressed close dialog</li>
-<li> when open, trap focus within it.</li>
-<li> when closed, focus back to trigger element</li>
-<li> fire event when opened or closed</li>
 
 <h3>Attributes</h3>
 <li><b>closable</b>: Default true, if false, only closable by close function()</li>

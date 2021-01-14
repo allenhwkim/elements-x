@@ -5,7 +5,7 @@ https://elements-x.com/component/calendar
 https://elements-x.com/component/carousel
 https://elements-x.com/component/checkbox
 https://elements-x.com/component/clock
-https://elements-x.com/component/currency
+https://elements-x.com/component/number
 https://elements-x.com/component/dialog
 https://elements-x.com/component/file
 https://elements-x.com/component/list

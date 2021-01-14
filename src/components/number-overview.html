@@ -1,29 +1,39 @@
 
+<h3>Features </h3>
+<ul class="default">
+  <li> 
+    Format a number to currency or any number format using Intl.NumberFormat
+  </li>
+  <li> 
+    Provides international currency format, EUR, KRW, JPY
+  </li>
+</ul>
+
 <div class="example">
 
-  <x-currency value="1234567.890"></x-currency>
+  <x-number value="1234567.890"></x-number>
   <app-pre>
-    &lt;x-currency style="currency" currency="USD" value="1234567.890"">&lt;/x-currency>
+    &lt;x-number style="currency" currency="USD" value="1234567.890"">&lt;/x-number>
   </app-pre>
   
-  <x-currency locale="fr-CA" currency="CAD" value="1234567.890"></x-currency>
+  <x-number locale="fr-CA" currency="CAD" value="1234567.890"></x-number>
   <app-pre>
-    &lt;x-currency  locale="fr-CA" style="currency" currency="CAD" value="1234567.890">&lt;/x-currency>
+    &lt;x-number  locale="fr-CA" style="currency" currency="CAD" value="1234567.890">&lt;/x-number>
   </app-pre>
   
-  <x-currency locale="kr" value="1234567.890" currency="KRW"></x-currency>
+  <x-number locale="kr" value="1234567.890" currency="KRW"></x-number>
   <app-pre>
-    &lt;x-currency locale="kr" style="currency" value="1234567.890" currency="KRW">&lt;/x-currency>
+    &lt;x-number locale="kr" style="currency" value="1234567.890" currency="KRW">&lt;/x-number>
   </app-pre>
   
-  <x-currency locale="de" currency="EUR"  value="1234567.890"></x-currency>
+  <x-number locale="de" currency="EUR"  value="1234567.890"></x-number>
   <app-pre>
-    &lt;x-currency locale="de" style="currency" currency="USD"  value="1234567.890">&lt;/x-currency>
+    &lt;x-number locale="de" style="currency" currency="USD"  value="1234567.890">&lt;/x-number>
   </app-pre>
   
-  <x-currency locale="ja-JP" value="1234567.890" currency="JPY"></x-currency>
+  <x-number locale="ja-JP" value="1234567.890" currency="JPY"></x-number>
   <app-pre>
-    &lt;x-currency locale="ja-JP" style="currency" value="1234567.890" currency="JPY">&lt;/x-currency>
+    &lt;x-number locale="ja-JP" style="currency" value="1234567.890" currency="JPY">&lt;/x-number>
   </app-pre>
   
   <x-number locale="en-IN" maximum-significant-digits="3" value="1234567.890"></x-number>
@@ -58,9 +68,6 @@
   </app-pre>
   
 </div>
-
-<h3>Features </h3>
-<li> Convert number to currency or any number format using Intl.NumberFormat  </li>
 
 <h3>Attributes</h3>
 Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat

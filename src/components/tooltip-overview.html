@@ -13,29 +13,27 @@
   }
 </app-custom-css>
 
+<h2>Feature</h2>
+<ul class="default">
+  <li> open tooltip when trigger element hovered, clicked, or focused </li>
+  <li> close tooltip when document clicked, mouseleave, or blur</li>
+  <li> when esc pressed, close tooltip</li>
+  <li> when open, trap focus within inside tooltip.</li>
+  <li> position tooltip underneath or over the trigger element</li>
+</ul>
+
 <div class="example">
-  <button id="show-tooltip">Show tooltip</button>
+  <span tabindex="0" id="show-tooltip">Show tooltip</span>
   <x-tooltip trigger="show-tooltip">
     Hello Tooltip
   </x-tooltip>
   <app-pre>
-    &lt;button <b>id="show-tooltip"</b>>Show Tooltip&lt;/button>
+    &lt;span tabindex="0" <b>id="show-tooltip"</b>>Show Tooltip&lt;/span>
     <b>&lt;x-tooltip trigger="show-tooltip"></b>
       Hello Tooltip
     <b>&lt;/x-tooltip></b>
   </app-pre>
 </div>
 
-<h2>Feature</h2>
-<li> open tooltip when trigger element hovered, clicked, or focused </li>
-<li> close tooltip when document clicked, mouseleave, or blur</li>
-<li> when esc pressed, close tooltip</li>
-<li> when open, trap focus within inside tooltip.</li>
-<li> position tooltip underneath or over the trigger element</li>
-
 <h2>Attributes</h2>
 <li><b>trigger</b>: id of element to activate this tooltip</li>
-
-<h2>Events</h2>
-<li><b>x-overlay-open</b>: Fired when tooltip opened with reason</li>
-<li><b>x-overlay-close</b>: Fired when tooltip closed with reason</li>

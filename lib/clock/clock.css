@@ -8,3 +8,9 @@ x-clock .x-clock {
   width: 100%;
   height: 100%;
 }
+x-clock .x-clock #second-hand {
+  display: none;
+}
+x-clock[run=true] .x-clock #second-hand {
+  display: initial;
+}

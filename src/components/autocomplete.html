@@ -1,0 +1,137 @@
+<h3>Autocomplete using `x-list` and `x-overlay`</h3>
+
+<p>
+  There are many open source autocomplete elements in the Internet.
+  Calling it as "all-in-one autocomplete", it provides its promising built-in features with easy implementation.
+<p>
+
+<p>
+  However, when users wants to have its own features beyond its built-in features, it's more problematic
+  than build one from the scratch because touching built-in features is more complicated and sometimes it seems not possibie.
+</p>
+
+<p>
+  You may end up with the following question when you want to modify all-in-one autocomlete component.
+</p>
+<ul class="default">
+  <li> What if the input field is not &lt;input tag, e.g, editable &div> tag?</li>
+  <li> How about customized dropdown list, e.g. with different background, color, font, and even with images?</li>
+  <li> Dealing with complicated list source, such as remote source, different types of program source(e.g. Promise)?</li>
+  <li> Dealing with showing different display value from the selected item?</li>
+</ul>
+
+<p>
+  elements-x does not have its own autocomplete. Instead it provides the tools to build autocomplete which are;
+</p>
+<ul class="default">
+  <li>x-overlay</li>
+  <li>x-list</li>
+</ul>
+
+<p>
+  These two can be combined with any input to build your own auto complete.
+</p>
+
+<h3>Features</h3>
+<ul class="default">
+  <li> input field <p>To get the search value from the list</p> </li> 
+  <li> x-overlay  <p>As a container of `x-list`</p></li> 
+  <li> x-list  <p>To show list of items matching to search</p> </li> 
+</ul>
+
+<p>
+The following example is to choose a country using countries API; https://restcountries.eu/rest/v2/name/XXX.
+The usage of this API is found at https://restcountries.eu/#api-endpoints-name.
+The API returns list of country by the given name with detail of country code, name, and etc.
+</p>
+
+<div class="example">
+  <div class="demo">
+    <input id="country-name" placeholder="Enter country name" />
+    <x-overlay id="country-list-overlay" trigger="country-name" style="min-width: 196px;">
+      <x-list id="country-list">Search a country.</x-list>
+    </x-overlay>
+    <br/>
+    <b>Selected Country:</b>
+    <pre id="country-object" style="margin:0"></pre>
+  </div>
+</div>
+<script>
+  // listen to input element key typing, then update the autocomplete list
+  const inputEl = document.querySelector('#country-name');
+  inputEl.addEventListener('input', event => {
+    if (!event.target.value) return;
+    const listEl = document.querySelector('#country-list');
+    window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
+      .then(resp => resp.ok && resp.json())
+      .then(resp => {
+        if (resp) { // when response has country list
+          listEl.innerHTML = ''; // empty out the previous list
+          resp.slice(0,6).forEach(country => {
+            const divEl = document.createElement('div');
+            divEl.country = country;
+            divEl.insertAdjacentHTML('beforeend', `<b>${country.alpha3Code}</b> ${country.name}`);
+            listEl.appendChild(divEl);
+          });
+        } else { // when response has an error
+          listEl.innerHTML = ''; // empty out the previous list
+          listEl.insertAdjacentHTML('beforeend', `<div>Cannot find a country.</div>`);
+          listEl.appendChild(divEl);
+        }
+      });
+  });
+
+  // listen to autocomplete list selection, then update input field and more
+  const listOverlay = document.querySelector('#country-list-overlay');
+  listOverlay.addEventListener('x-listitem-selected', event => {
+    listOverlay.close();
+    document.querySelector('#country-name').value = event.detail.country.name;
+    document.querySelector('#country-object').innerHTML = JSON.stringify(event.detail.country, null, '  ');
+  });
+</script>
+
+<br/><br/>
+HTML Code:
+<app-pre contents-for="html">
+  &lt;input id="country-name" placeholder="Enter country name" />
+  &lt;x-overlay id="country-list-overlay" trigger="country-name">
+    &lt;x-list id="country-list">Search a country&lt;/x-list>
+  &lt;/x-overlay>
+  &lt;/br>
+  &lt;b>Selected Country:&lt;/b>
+  &lt;pre id="country-object" style="margin:0">&lt;/pre>
+</app-pre>
+Javascript Code:
+<app-pre contents-for="js">
+  // listen to input element key typing, then update the autocomplete list
+  const inputEl = document.querySelector('#country-name');
+  inputEl.addEventListener('input', event => {
+    if (!event.target.value) return;
+    const listEl = document.querySelector('#country-list');
+    window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
+      .then(resp => resp.ok && resp.json())
+      .then(resp => {
+        if (resp) { // when response has country list
+          listEl.innerHTML = ''; // empty out the previous list
+          resp.slice(0,6).forEach(country => {
+            const divEl = document.createElement('div');
+            divEl.country = country;
+            divEl.insertAdjacentHTML('beforeend', `&lt;b>${country.alpha3Code}&lt;/b> ${country.name}`);
+            listEl.appendChild(divEl);
+          });
+        } else { // when response has an error
+          listEl.innerHTML = ''; // empty out the previous list
+          listEl.insertAdjacentHTML('beforeend', `&lt;div>Cannot find a country.&lt;/div>`);
+          listEl.appendChild(divEl);
+        }
+      });
+  });
+
+  // listen to autocomplete list selection, then update input field and more
+  const listOverlay = document.querySelector('#country-list-overlay');
+  listOverlay.addEventListener('x-listitem-selected', event => {
+    listOverlay.close();
+    document.querySelector('#country-name').value = event.detail.country.name;
+    document.querySelector('#country-object').innerHTML = JSON.stringify(event.detail.country, null, '  ');
+  });
+</app-pre>

@@ -1,3 +1,164 @@
-<input placeholder="search unicodes"
-  oninput="document.querySelector('#unicodes').search(this.value)">
-<app-unicodes id="unicodes" search=""></app-unicodes>
+<pph2> Unicode </h2>
+<style>
+  .block-header sub { cursor: pointer; font-weight: 400;}
+  .block-section { display: flex;  height: 480px;}
+  .block-section.folded { display: none; }
+  .block-section .left { height: 100%; width: 320px; overflow: auto;}
+  .block-section .left .blocks { margin: 0; width: 100%; }
+  .block-section .left .blocks li { cursor: pointer; }
+  .block-section .left .blocks li.selected { background: #CCC; }
+  .block-section .right { height: 100%; overflow: auto; flex: 1; }
+  .block-section .block-codes {display: flex; flex-wrap: wrap; padding: 0px 4px; }
+  .code {position: relative; padding: 4px; text-align: center; border: 1px solid #ccc; width: 80px; }
+  .code .int { display: block; }
+  .code .web { font-size: 14px;}
+  .code .css { font-size: 14px;}
+  .code .char { display: block; font-size: 32px;}
+  .code .desc { position: absolute; display: none; background: #333; color: #FFF;}
+  .code:hover .desc { display: block; left: 8px; top: 8px; white-space: nowrap; z-index: 1; }
+  .search-result { display: flex; flex-wrap: wrap;}
+</style>
+
+<div class='search-section'>
+  <form onsubmit="searchFunction(event)">
+    <input id="search-input" placeholder="search unicodes">
+    <button type="submit" id="search-btn">Search</button>
+  </form>
+  <ul class="search-result">
+  </ul>
+</div>
+
+<h3 class="block-header">Blocks <sub>toggle</sub></h3>
+<div class="block-section unicodes">
+  <div class="left">
+    <ul class="blocks default">
+    </ul>
+  </div>
+
+  <div class="right">
+    <ul class="block-codes">
+      Select a block to see uni-codes of a block.
+    </ul>
+  </div>
+</div>
+
+<p>
+  &nbsp;
+</p>
+
+<script>
+  // (128753).toString(16) // 1f6f1
+  class UniCode {
+    static getBlocks() {
+      return fetch('https://codepoints.net/api/v1/block')
+        .then(resp => resp.json())
+    }
+    
+    static getBlock(blockName) {
+      return fetch(`https://codepoints.net/api/v1/block/${blockName}`)
+        .then(resp => resp.json())
+        .then(resp => {
+          const sta = parseInt(resp.first.replace('U+',''), 16);
+          const end = parseInt(resp.last.replace('U+', ''), 16);
+          return {
+            block: resp,
+            codes: Array.from({ length: end - sta + 1}, (_, i) => i + sta)
+          };
+        })
+    }
+
+    static search(string) {
+      return fetch(`https://codepoints.net/api/v1/search?q=${string}`)
+        .then(resp => resp.json())
+    }
+
+    static getCode(number) {
+      const hex = (number).toString(16);
+      return fetch(`https://codepoints.net/api/v1/codepoint/${hex}?property=na,age,gc`)
+        .then(resp => resp.json())
+    }
+  }
+
+  const blockHeader = document.querySelector('.block-header');
+  blockHeader.addEventListener('click', _ => 
+    document.querySelector('.block-section').classList.toggle('folded'));
+
+  const blocksEl = document.querySelector('.unicodes .blocks');
+  const blockCodesEl = document.querySelector('.unicodes .block-codes');
+
+  function getCodeHTML(code) {
+    const hex = code.toString(16); // integer to hex
+    return `<span class="code" code="${code}">
+      <span class="int">${code}</span> 
+      <span class="web">&amp;#x${hex};</span> 
+      <span class="css">'\\u#${hex}'</span>
+      <b class="char">&#x${hex};</b>
+      <div class="desc"></div>
+    </span>`;
+  }
+  
+  UniCode.getBlocks().then(resp => {
+    resp.block.forEach(blockName => {
+      const liEl = document.createElement('li');
+      liEl.innerText = blockName;
+      blocksEl.appendChild(liEl);
+
+      liEl.addEventListener('click', _ => {
+        blocksEl.querySelectorAll('.selected').forEach(el => el.classList.remove('selected'));
+        liEl.classList.add('selected');
+        UniCode.getBlock(blockName).then(({resp, codes}) => {
+          blockCodesEl.innerHTML = '';
+          codes.forEach(code => {
+            blockCodesEl.insertAdjacentHTML('beforeend', getCodeHTML(code));
+          });
+        });
+      }); 
+    })
+  }).then(_ => blocksEl.firstElementChild.click() );
+
+  const searchButtonEl = document.querySelector('#search-btn');
+  const searchResultEl = document.querySelector('.search-result');
+  const searchFunction =  function(event) {
+    event.preventDefault();
+    UniCode.search(document.querySelector('#search-input').value).then(resp => {
+      searchResultEl.innerHTML = '';
+      resp.result.forEach(code => {
+        if (isGraphic(code)) {
+          searchResultEl.insertAdjacentHTML('beforeend', getCodeHTML(code));
+        }
+      })
+    })
+  }
+  searchButtonEl.addEventListener('click', searchFunction);
+  const searchStr = Object.fromEntries(new URLSearchParams(location.search)).q;
+  if (searchStr) {
+    document.querySelector('#search-input').value = searchStr;
+    searchButtonEl.click();
+  }
+
+  searchResultEl.addEventListener('click', event => {
+    const codeEl = event.target.closest('.code');
+    const descEl = codeEl.querySelector('.desc:empty');
+    if (descEl) {
+      const code = codeEl.getAttribute('code');
+      const hex = parseInt(code).toString(16); 
+      UniCode.getCode(hex).then(resp => descEl.innerHTML = resp.na );
+    }
+  })
+
+  function isGraphic(num) {
+    return (
+      (num >= parseInt('07C0', 16) && num <= parseInt('085F', 16))   || // nko, samaritan, mandaic
+      (num >= parseInt('1680', 16)  && num <= parseInt('169F', 16))  || // ogham
+      (num >= parseInt('20A0', 16)  && num <= parseInt('2C5F', 16))  || // symbols and shapes
+      (num >= parseInt('2FF0', 16)  && num <= parseInt('2FFF', 16))  || // deographic Description Characters
+      (num >= parseInt('4DC0', 16)  && num <= parseInt('4DFF', 16))  || //
+      (num >= parseInt('10000', 16) && num <= parseInt('1044F', 16)) || // linear b, aegean ....
+      (num >= parseInt('11100', 16) && num <= parseInt('1114F', 16)) || // chakma
+      (num >= parseInt('12000', 16) && num <= parseInt('1342F', 16)) || // cuneiform, early dynastic, egyptian
+      (num >= parseInt('16800', 16) && num <= parseInt('16A3F', 16)) || // bammum
+      (num >= parseInt('1D100', 16) && num <= parseInt('2A6DF', 16)) // symbols
+    );
+  }
+</script>
+

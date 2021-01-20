@@ -25,7 +25,7 @@ class AppPre extends HTMLElement {
   connectedCallback() {
     setCustomElementHTMLCss(this, null, css).then(_ => {
       const newText = this._fixIndent(this.innerHTML)
-      this.innerHTML = newText;
+      this.innerHTML = newText.replace(/^\n/, '');
     });
   }
 

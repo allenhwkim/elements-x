@@ -1,5 +1,12 @@
 <h3>Autocomplete using `x-list` and `x-overlay`</h3>
 
+<b> TL;DR, Not One-For-All, But All-For-One </b>
+
+<style>
+  .code {display: none; padding: 12px; border: 1px so}
+  .code.visible {display: block;}
+</style>
+
 <p>
   There are many open source autocomplete elements in the Internet.
   Calling it as "all-in-one autocomplete", it provides its promising built-in features with easy implementation.
@@ -14,124 +21,389 @@
   You may end up with the following question when you want to modify all-in-one autocomlete component.
 </p>
 <ul class="default">
-  <li> What if the input field is not &lt;input tag, e.g, editable &div> tag?</li>
-  <li> How about customized dropdown list, e.g. with different background, color, font, and even with images?</li>
-  <li> Dealing with complicated list source, such as remote source, different types of program source(e.g. Promise)?</li>
-  <li> Dealing with showing different display value from the selected item?</li>
+  <li> What if the input field is not &lt;input> tag? e.g, editable &lt;div> tag</li>
+  <li> What if it requires unique dropdown list? e.g. with different background, color, font, and even with images</li>
+  <li> What if list data structure is complicated? e.g., such as remote source, different types of program source(e.g. Promise)</li>
+  <li> What if input tag has some unique behaviour?</li>
+  <li> What if there are some unique functions need to be executed for event handling?</li>
 </ul>
 
 <p>
-  elements-x does not have its own autocomplete. Instead it provides the tools to build autocomplete which are;
+  elements-x does not have autocomplete as a separte tag.
+  Instead, it provides the tools to build autocomplete features, which are;
 </p>
 <ul class="default">
-  <li>x-overlay</li>
-  <li>x-list</li>
+  <li> x-overlay  <p>As a container of `x-list`</p></li> 
+  <li> x-list  <p>To show list of items matching to search</p> </li> 
 </ul>
 
 <p>
   These two can be combined with any input to build your own auto complete.
 </p>
 
-<h3>Features</h3>
-<ul class="default">
-  <li> input field <p>To get the search value from the list</p> </li> 
-  <li> x-overlay  <p>As a container of `x-list`</p></li> 
-  <li> x-list  <p>To show list of items matching to search</p> </li> 
-</ul>
+For autocomplete with elements-x, you need two html sections;
+<ol>
+  <li>input section</li>
+  <li>list section</li>
+</ol>
+Also, you need to have Javascript to handle events;
+<ol>
+  <li>input event</li>
+  <li>list item selected event</li>
+</ol>
 
-<p>
-The following example is to choose a country using countries API; https://restcountries.eu/rest/v2/name/XXX.
-The usage of this API is found at https://restcountries.eu/#api-endpoints-name.
-The API returns list of country by the given name with detail of country code, name, and etc.
-</p>
+<div class="simple">
+  <h3> Simple Autocomplete </h3>
 
-<div class="example">
-  <div class="demo">
-    <input id="country-name" placeholder="Enter country name" />
-    <x-overlay id="country-list-overlay" trigger="country-name" style="min-width: 196px;">
-      <x-list id="country-list">Search a country.</x-list>
-    </x-overlay>
-    <br/>
-    <b>Selected Country:</b>
-    <pre id="country-object" style="margin:0"></pre>
+  <input placeholder="Select pet types" id="simple-input" />
+  <x-overlay id="simple-list" trigger="simple-input">
+    <x-list select-first="false">
+      <div>Cats</div>
+      <div>Dogs</div>
+      <div>Birds</div>
+      <div>Rabbits</div>
+      <div>Guinea pigs</div>
+      <div>Fish</div>
+    </x-list>
+  </x-overlay>
+
+  <script>
+    const simpleInput = document.querySelector('#simple-input');
+    const simpleList = document.querySelector('#simple-list');
+
+    // listen to input element key typing, then show different list
+    simpleInput.addEventListener('input', event => {
+      const val = event.target.value.toLowerCase();
+      simpleList.querySelectorAll('x-list > *').forEach(el => {
+        el.style.display =  el.innerText.toLowerCase().indexOf(val) === -1 ? 'none': '';
+      });
+    }); 
+
+    // listen to event of listitem selected, then set input value
+    simpleList.addEventListener('x-listitem-selected', event => {
+      simpleInput.value = event.detail.innerText;
+      simpleList.close();
+    });
+  </script>
+
+  <a href="javascript:void(0)" onclick="this.nextElementSibling.classList.toggle('visible')">show/hide code</a>
+  <div class="code">
+    HTML Code:
+    <app-pre>
+      &lt;input placeholder="Select pet types" id="simple-input" />
+      &lt;x-overlay id="simple-list" trigger="simple-input">
+        &lt;x-list select-first="false">
+          &lt;div>Cats&lt;/div>
+          &lt;div>Dogs&lt;/div>
+          &lt;div>Birds&lt;/div>
+          &lt;div>Rabbits&lt;/div>
+          &lt;div>Guinea pigs&lt;/div>
+          &lt;div>Fish&lt;/div>
+        &lt;/x-list>
+      &lt;/x-overlay>
+    </app-pre>
+
+    Javascript Code:
+    <app-pre>
+      const simpleInput = document.querySelector('#simple-input');
+      const simpleList = document.querySelector('#simple-list');
+
+      // listen to input element key typing, then show different list
+      simpleInput.addEventListener('input', event => {
+        const val = event.target.value.toLowerCase();
+        simpleList.querySelectorAll('x-list > *').forEach(el => {
+          el.style.display =  el.innerText.toLowerCase().indexOf(val) === -1 ? 'none': '';
+        });
+      }); 
+
+      // listen to event of listitem selected, then set input value
+      simpleList.addEventListener('x-listitem-selected', event => {
+        simpleInput.value = event.detail.innerText;
+        simpleList.close();
+      });
+    </app-pre>
   </div>
 </div>
-<script>
-  // listen to input element key typing, then update the autocomplete list
-  const inputEl = document.querySelector('#country-name');
-  inputEl.addEventListener('input', event => {
-    if (!event.target.value) return;
-    const listEl = document.querySelector('#country-list');
-    window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
-      .then(resp => resp.ok && resp.json())
-      .then(resp => {
-        if (resp) { // when response has country list
-          listEl.innerHTML = ''; // empty out the previous list
-          resp.slice(0,6).forEach(country => {
-            const divEl = document.createElement('div');
-            divEl.country = country;
-            divEl.insertAdjacentHTML('beforeend', `<b>${country.alpha3Code}</b> ${country.name}`);
-            listEl.appendChild(divEl);
-          });
-        } else { // when response has an error
-          listEl.innerHTML = ''; // empty out the previous list
-          listEl.insertAdjacentHTML('beforeend', `<div>Cannot find a country.</div>`);
-          listEl.appendChild(divEl);
-        }
+
+<div class="example">
+  <h3> Combobox Style Autocomplete </h3>
+  <div class="autocomplete">
+    <input placeholder="Select favorite pet" id="my-input" />
+    <x-overlay id="my-list" trigger="my-input">
+      <x-list select-first="false">
+        <div>Cats</div>
+        <div>Dogs</div>
+        <div>Birds</div>
+        <div>Rabbits</div>
+        <div>Guinea pigs</div>
+        <div>Fish</div>
+      </x-list>
+    </x-overlay>
+  </div>
+
+  <style>
+  .autocomplete { position: relative; display: inline-block; }
+  .autocomplete::after { position: absolute; content: '▼'; right: 4px; top: 4px; }
+  .autocomplete input { padding-right: 20px; }
+  </style>
+
+  <script>
+    const myInput = document.querySelector('#my-input');
+    const myList = document.querySelector('#my-list');
+
+    // listen to input element key typing, then show different list
+    myInput.addEventListener('input', event => {
+      const val = event.target.value.toLowerCase();
+      myList.querySelectorAll('x-list > *').forEach(el => {
+        el.style.display =  el.innerText.toLowerCase().indexOf(val) === -1 ? 'none': '';
       });
-  });
+    }); 
 
-  // listen to autocomplete list selection, then update input field and more
-  const listOverlay = document.querySelector('#country-list-overlay');
-  listOverlay.addEventListener('x-listitem-selected', event => {
-    listOverlay.close();
-    document.querySelector('#country-name').value = event.detail.country.name;
-    document.querySelector('#country-object').innerHTML = JSON.stringify(event.detail.country, null, '  ');
-  });
-</script>
+    // listen to event of listitem selected, then set input value
+    myList.addEventListener('x-listitem-selected', event => {
+      myInput.value = event.detail.innerText;
+      myList.close();
+    });
+  </script>
 
-<br/><br/>
-HTML Code:
-<app-pre contents-for="html">
-  &lt;input id="country-name" placeholder="Enter country name" />
-  &lt;x-overlay id="country-list-overlay" trigger="country-name">
-    &lt;x-list id="country-list">Search a country&lt;/x-list>
-  &lt;/x-overlay>
-  &lt;/br>
-  &lt;b>Selected Country:&lt;/b>
-  &lt;pre id="country-object" style="margin:0">&lt;/pre>
-</app-pre>
-Javascript Code:
-<app-pre contents-for="js">
-  // listen to input element key typing, then update the autocomplete list
-  const inputEl = document.querySelector('#country-name');
-  inputEl.addEventListener('input', event => {
-    if (!event.target.value) return;
-    const listEl = document.querySelector('#country-list');
-    window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
-      .then(resp => resp.ok && resp.json())
-      .then(resp => {
-        if (resp) { // when response has country list
-          listEl.innerHTML = ''; // empty out the previous list
-          resp.slice(0,6).forEach(country => {
-            const divEl = document.createElement('div');
-            divEl.country = country;
-            divEl.insertAdjacentHTML('beforeend', `&lt;b>${country.alpha3Code}&lt;/b> ${country.name}`);
-            listEl.appendChild(divEl);
-          });
-        } else { // when response has an error
-          listEl.innerHTML = ''; // empty out the previous list
-          listEl.insertAdjacentHTML('beforeend', `&lt;div>Cannot find a country.&lt;/div>`);
-          listEl.appendChild(divEl);
-        }
+  <a href="javascript:void(0)" onclick="this.nextElementSibling.classList.toggle('visible')">show/hide code</a>
+  <div class="code">
+    HTML Code:
+    <app-pre>
+      &lt;div class="autocomplete">
+        &lt;input placeholder="Select favorite pet" id="my-input" />
+        &lt;x-overlay id="my-list" trigger="my-input">
+          &lt;x-list select-first="false">
+            &lt;div>Cats&lt;/div>
+            &lt;div>Dogs&lt;/div>
+            &lt;div>Birds&lt;/div>
+            &lt;div>Rabbits&lt;/div>
+            &lt;div>Guinea pigs&lt;/div>
+            &lt;div>Fish&lt;/div>
+          &lt;/x-list>
+        &lt;/x-overlay>
+      &lt;/div>
+    </app-pre>
+
+    CSS Code:
+    <app-pre>
+      .autocomplete { position: relative; display: inline-block; }
+      .autocomplete::after { position: absolute; content: '▼'; right: 4px; top: 4px; }
+      .autocomplete input { padding-right: 20px; }ML
+    </app-pre>
+
+    Javascript Code:
+    <app-pre>
+      const myInput = document.querySelector('#my-input');
+      const myList = document.querySelector('#my-list');
+
+      // listen to input element key typing, then show different list
+      myInput.addEventListener('input', event => {
+        const val = event.target.value.toLowerCase();
+        myList.querySelectorAll('x-list > *').forEach(el => {
+          el.style.display =  el.innerText.toLowerCase().indexOf(val) === -1 ? 'none': '';
+        });
+      }); 
+
+      // listen to event of listitem selected, then set input value
+      myList.addEventListener('x-listitem-selected', event => {
+        myInput.value = event.detail.innerText;
+        myList.close();
       });
-  });
+    </app-pre>
+  </div>
+</div>
 
-  // listen to autocomplete list selection, then update input field and more
-  const listOverlay = document.querySelector('#country-list-overlay');
-  listOverlay.addEventListener('x-listitem-selected', event => {
-    listOverlay.close();
-    document.querySelector('#country-name').value = event.detail.country.name;
-    document.querySelector('#country-object').innerHTML = JSON.stringify(event.detail.country, null, '  ');
-  });
-</app-pre>
+<div class="example">
+  <h3>Autocomplete with RESTful API</h3>
+  <p>
+  The following example is to choose a country using countries API; https://restcountries.eu/rest/v2/name/XXX.
+  The usage of this API is found at https://restcountries.eu/#api-endpoints-name.
+  The API returns list of country by the given name with detail of country code, name, and etc.
+  </p>
+
+  <div class="example">
+    <div class="demo">
+      <input id="country-name" placeholder="Enter country name" />
+      <x-overlay id="country-list-overlay" trigger="country-name">
+        <x-list id="country-list">Search a country.</x-list>
+      </x-overlay>
+      <br/>
+      <b>Selected Country:</b>
+      <pre id="country-object" style="margin:0; height: 200px;"></pre>
+    </div>
+  </div>
+  <script>
+    // listen to input element key typing, then update the autocomplete list
+    const inputEl = document.querySelector('#country-name');
+    inputEl.addEventListener('input', event => {
+      if (!event.target.value) return;
+      const listEl = document.querySelector('#country-list');
+      window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
+        .then(resp => resp.ok && resp.json())
+        .then(resp => {
+          if (resp) { // when response has country list
+            listEl.innerHTML = ''; // empty out the previous list
+            resp.slice(0,6).forEach(country => {
+              const divEl = document.createElement('div');
+              divEl.country = country;
+              divEl.insertAdjacentHTML('beforeend', `<b>${country.alpha3Code}</b> ${country.name}`);
+              listEl.appendChild(divEl);
+            });
+          } else { // when response has an error
+            listEl.innerHTML = ''; // empty out the previous list
+            listEl.insertAdjacentHTML('beforeend', `<div>Cannot find a country.</div>`);
+          }
+        });
+    });
+
+    // listen to autocomplete list selection, then update input field and more
+    const listOverlay = document.querySelector('#country-list-overlay');
+    listOverlay.addEventListener('x-listitem-selected', event => {
+      listOverlay.close();
+      if (event.detail.country) {
+        document.querySelector('#country-name').value = event.detail.country.name;
+        document.querySelector('#country-object').innerHTML = JSON.stringify(event.detail.country, null, '  ');
+      }
+    });
+  </script>
+
+  <a href="javascript:void(0)" onclick="this.nextElementSibling.classList.toggle('visible')">show/hide code</a>
+  <div class="code">
+    HTML Code:
+    <app-pre>
+      &lt;input id="country-name" placeholder="Enter country name" />
+      &lt;x-overlay id="country-list-overlay" trigger="country-name">
+        &lt;x-list id="country-list">Search a country&lt;/x-list>
+      &lt;/x-overlay>
+      &lt;/br>
+      &lt;b>Selected Country:&lt;/b>
+      &lt;pre id="country-object" style="margin:0">&lt;/pre>
+    </app-pre>
+
+    Javascript Code:
+    <app-pre>
+      // listen to input element key typing, then update the autocomplete list
+      const inputEl = document.querySelector('#country-name');
+      inputEl.addEventListener('input', event => {
+        if (!event.target.value) return;
+        const listEl = document.querySelector('#country-list');
+        window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
+          .then(resp => resp.ok && resp.json())
+          .then(resp => {
+            if (resp) { // when response has country list
+              listEl.innerHTML = ''; // empty out the previous list
+              resp.slice(0,6).forEach(country => {
+                const divEl = document.createElement('div');
+                divEl.country = country;
+                divEl.insertAdjacentHTML('beforeend', `&lt;b>${country.alpha3Code}&lt;/b> ${country.name}`);
+                listEl.appendChild(divEl);
+              });
+            } else { // when response has an error
+              listEl.innerHTML = ''; // empty out the previous list
+              listEl.insertAdjacentHTML('beforeend', `&lt;div>Cannot find a country.&lt;/div>`);
+              listEl.appendChild(divEl);
+            }
+          });
+      });
+
+      // listen to autocomplete list selection, then update input field and more
+      const listOverlay = document.querySelector('#country-list-overlay');
+      listOverlay.addEventListener('x-listitem-selected', event => {
+        listOverlay.close();
+        document.querySelector('#country-name').value = event.detail.country.name;
+        document.querySelector('#country-object').innerHTML = JSON.stringify(event.detail.country, null, '  ');
+      });
+    </app-pre>
+  </div>
+</div>
+
+<div class="example">
+  <h3>Autocomplete with style, x-textfield</h3>
+
+  The following example is to show more stylish input textfield, x-textfield.
+
+  <div style="position:relative">
+    <x-textfield id="pet-textfield">
+      <span class="label">Pet Name</span>
+      <input placeholder="Select favorite pet" id="pet-name" />
+      <b class="icon" aria-hidden="true">▼</b>
+      <div class="ink-bar"></div>
+    </x-textfield>
+    <x-overlay id="pets" trigger="pet-name">
+      <x-list select-first="false">
+        <div>Cats</div>
+        <div>Dogs</div>
+        <div>Birds</div>
+        <div>Rabbits</div>
+        <div>Guinea pigs</div>
+        <div>Fish</div>
+      </x-list>
+    </x-overlay>
+  </div>
+  <script>
+    const petsEl = document.querySelector('#pets');
+    const petTextfield = document.querySelector('#pet-textfield');
+    const petName = document.querySelector('#pet-name');
+
+    // listen to event of listitem selected, then set input value
+    petsEl.addEventListener('x-listitem-selected', event => {
+      petTextfield.setValue(event.detail.innerText);
+      petsEl.close();
+    });
+
+    // listen toinput element key typing, then show different list
+    petName.addEventListener('input', event => {
+      const val = event.target.value.toLowerCase();
+      document.querySelectorAll('#pets x-list > *').forEach(el => {
+        el.style.display =  el.innerText.toLowerCase().indexOf(val) === -1 ? 'none': '';
+      });
+    });
+  </script>
+
+  <a href="javascript:void(0)" onclick="this.nextElementSibling.classList.toggle('visible')">show/hide code</a>
+  <div class="code">
+    HTML Code: 
+    <app-pre>
+      &lt;div style="position:relative">
+        &lt;x-textfield id="pet-textfield">
+          &lt;span class="label">Pet Name&lt;/span>
+          &lt;input placeholder="Select favorite pet" id="pet-name" />
+          &lt;b class="icon" aria-hidden="true">▼&lt;/b>
+          &lt;div class="ink-bar">&lt;/div>
+        &lt;/x-textfield>
+        &lt;x-overlay id="pets" trigger="pet-name">
+          &lt;x-list select-first="false">
+            &lt;div>Cats&lt;/div>
+            &lt;div>Dogs&lt;/div>
+            &lt;div>Birds&lt;/div>
+            &lt;div>Rabbits&lt;/div>
+            &lt;div>Guinea pigs&lt;/div>
+            &lt;div>Fish&lt;/div>
+          &lt;/x-list>
+        &lt;/x-overlay>
+      &lt;/div>
+    </app-pre>
+
+    Javascript Code:
+    <app-pre>
+      const petsEl = document.querySelector('#pets');
+      const petTextfield = document.querySelector('#pet-textfield');
+      const petName = document.querySelector('#pet-name');
+
+      // listen to event of listitem selected, then set input value
+      petsEl.addEventListener('x-listitem-selected', event => {
+        petTextfield.setValue(event.detail.innerText);
+        petsEl.close();
+      });
+
+      // listen toinput element key typing, then show different list
+      petName.addEventListener('input', event => {
+        const val = event.target.value.toLowerCase();
+        document.querySelectorAll('#pets x-list > *').forEach(el => {
+          el.style.display =  el.innerText.toLowerCase().indexOf(val) === -1 ? 'none': '';
+        });
+      });
+    </app-pre>
+  </div>
+</div>

@@ -12,8 +12,8 @@
           &lt;script src="https://unpkg.com/elements-x/dist/dialog">&lt;/script>
         &lt;/head>
         &lt;body>
-          &lt;button onclick="document.querySelector('#dialog1').open()">Open Diaog&lt;/button>
-          &lt;x-dialog id="dialog1">
+          &lt;button id="button1">Open Diaog&lt;/button>
+          &lt;x-dialog trigger="button1">
             This is a dialog.
           &lt;/x-dialog>
         &lt;/body>
@@ -27,8 +27,8 @@
       @Component({
         selector: 'my-app',
         template: `
-          &lt;button onclick="document.querySelector('#dialog1').open()">Open Diaog&lt;/button>
-          &lt;x-dialog id="dialog1">
+          &lt;button id="button1">Open Diaog&lt;/button>
+          &lt;x-dialog trigger="button1">
             This is a dialog.
           &lt;/x-dialog>
         `
@@ -42,13 +42,12 @@
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
       })
       export class AppModule {
-        setTime($event) { console.log($vent); }
       }
     </app-pre>
     <app-pre contents-for="vue">
       &lt;template>
-        &lt;button onclick="document.querySelector('#dialog1').open()">Open Diaog&lt;/button>
-        &lt;x-dialog id="dialog1">
+        &lt;button id="button1">Open Diaog&lt;/button>
+        &lt;x-dialog trigger="button1">
           This is a dialog.
         &lt;/x-dialog>
       &lt;/template>
@@ -68,8 +67,8 @@
 
       export default function App() {
         return (
-          &lt;button onclick="document.querySelector('#dialog1').open()">Open Diaog&lt;/button>
-          &lt;x-dialog id="dialog1">
+          &lt;button id="button1">Open Diaog&lt;/button>
+          &lt;x-dialog trigger="button1">
             This is a dialog.
           &lt;/x-dialog>
         );

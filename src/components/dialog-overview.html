@@ -24,28 +24,33 @@
 <li> fire event when opened or closed</li>
 
 <div class="example">
-  <x-button onclick="document.querySelector('#dialog1').open()">Open Diaog</x-button>
-  <x-dialog id="dialog1">
-    This is a dialog.
+  <x-button id="button1">Open Diaog</x-button>
+  <x-dialog trigger="button1">
+    <div>This is a dialog.</div>
+    <button>Button 1</button>
+    <button>Button 2</button>
+    <button>Button 3</button>
   </x-dialog>
 
   <app-pre>
-    &lt;button onclick="document.querySelector('#dialog1').open()">Open Diaog&lt;/button>
-    &lt;x-dialog id="dialog1">
+    &lt;button id="button1">Open Diaog&lt;/button>
+    &lt;x-dialog trigger="button1">
       This is a dialog.
     &lt;/x-dialog>
   </app-pre>
+</div>
 
-  <x-button onclick="document.querySelector('#dialog2').open()">Open Non-closable Diaog</x-button>
-  <x-dialog id="dialog2" closable="false">
-    This is a non-closable dialog.
-    <button onclick="document.querySelector('#dialog2').close()">Close</button>
+<div class="example">
+  <x-button id="button2">Open Non-closable Diaog</x-button>
+  <x-dialog trigger="button2" closable="false">
+    This is a non-closable dialog. <br/>
+    <button onclick="this.closest('x-dialog').close()">Close</button>
   </x-dialog>
   <app-pre>
-    &lt;button onclick="document.querySelector('#dialog2').open()">Open Non-closable Diaog&lt;/button>
-    &lt;x-dialog id="dialog2" closable="false">
-      This is a non-closable dialog.
-      &lt;button onclick="document.querySelector('#dialog2').close()">Close&lt;/button>
+    &lt;button id="button2">Open Non-closable Diaog&lt;/button>
+    &lt;x-dialog trigger="button2" closable="false">
+      This is a non-closable dialog. &lt;br/>
+      &lt;button onclick="this.closest('x-dialog').close()">Close&lt;/button>
     &lt;/x-dialog>
   </app-pre>
 </div>

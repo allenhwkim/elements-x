@@ -1,24 +1,25 @@
-<h3>Autocomplete using `x-list` and `x-overlay`</h3>
-
-<b> TL;DR, Not One-For-All, But All-For-One </b>
+<h3 class="tldr"> TL;DR, Not One-For-All, But All-For-One </h3>
 
 <style>
+  .tldr { color: #999; }
   .code {display: none; padding: 12px; border: 1px so}
   .code.visible {display: block;}
 </style>
 
 <p>
-  There are many open source autocomplete elements in the Internet.
-  Calling it as "all-in-one autocomplete", it provides its promising built-in features with easy implementation.
-<p>
-
-<p>
-  However, when users wants to have its own features beyond its built-in features, it's more problematic
-  than build one from the scratch because touching built-in features is more complicated and sometimes it seems not possibie.
+  There are many open source one-for-all solutions in the Internet. 
+  Calling it as "all-in-one autocomplete", they provides their own promising built-in 
+  features with easy implementation.
 </p>
 
 <p>
-  You may end up with the following question when you want to modify all-in-one autocomlete component.
+  However, when users wants to have their own features beyond its built-in features, 
+  it's more problematic than building a new one from the scratch because updating built-in 
+  features is more complicated and sometimes it seems not doable.
+</p>
+
+<p>
+  With your own requirements with all-in-one autocomplete, you may end up with the following questions.
 </p>
 <ul class="default">
   <li> What if the input field is not &lt;input> tag? e.g, editable &lt;div> tag</li>
@@ -29,12 +30,18 @@
 </ul>
 
 <p>
-  elements-x does not have autocomplete as a separte tag.
-  Instead, it provides the tools to build autocomplete features, which are;
+  elements-x does not have autocomplete as a separate tag.
+  Instead, it provides the tools to build custom autocomplete features, which are;
 </p>
 <ul class="default">
-  <li> x-overlay  <p>As a container of `x-list`</p></li> 
-  <li> x-list  <p>To show list of items matching to search</p> </li> 
+  <li> 
+    <a href="overlay">x-overlay</a> 
+    <p>As a container of `x-list`</p>
+   </li> 
+  <li> 
+    <a href="list">x-list</a>
+    <p>To show list of items matching to search</p>
+  </li> 
 </ul>
 
 <p>

@@ -1,4 +1,4 @@
-import  {setCustomElementHTMLCss}  from '../lib/common/util';
+import  {setCustomElementHTMLCss}  from '../../lib/common/util';
 
 const css = `
   app-pre { 

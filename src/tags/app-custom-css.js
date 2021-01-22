@@ -3,7 +3,7 @@ import 'brace/mode/css';
 import 'brace/theme/github';
 import * as prettier from 'prettier';
 import * as cssParser from 'prettier/parser-postcss';
-import  {setCustomElementHTMLCss}  from '../lib/common/util';
+import  {setCustomElementHTMLCss}  from '../../lib/common/util';
 
 const css = `
   app-custom-css .custom-css { 

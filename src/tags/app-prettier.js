@@ -2,7 +2,7 @@ import * as prettier from 'prettier';
 import * as cssParser from 'prettier/parser-postcss';
 import * as htmlParser from 'prettier/parser-html';
 import * as jsParser from 'prettier/parser-babel';
-import  {setCustomElementHTMLCss}  from '../lib/common/util';
+import  {setCustomElementHTMLCss}  from '../../lib/common/util';
 
 const css = `
   app-prettier {

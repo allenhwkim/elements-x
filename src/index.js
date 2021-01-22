@@ -3,16 +3,13 @@ import '../src/style.css';
 import '../src/app.scss';
 import '../src/app.mobile.scss';
 
-// import webpackgif from './assets/images/webpack.gif';
-// setting the source of img document.getElementById('webpack-gif').setAttribute('src', webpackgif);
-
 import '../lib';
-import './app-custom-css';
-import './app-pre';
-import './app-group-header';
-import './app-articles';
-// import './tools/app-unicodes';
-import './app-prettier';
+import './tags/app-custom-css';
+import './tags/app-pre';
+import './tags/app-group-header';
+import './tags/app-articles';
+import './tags/app-prettier';
+import './tags/app-facebook-comments';
 
 // enable/disable outline for click and tab
 document.body.addEventListener('click', 

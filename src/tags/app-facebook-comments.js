@@ -4,22 +4,32 @@ const html = `
   <script async defer crossorigin="anonymous"
     src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=254907754864724"
     nonce="qRsDD5xh"></script>
-  <div class="fb-comments" data-href="${window.location.href}" data-width="100%" data-numposts="5"></div>
-  <div class="facebook-comments"></div>
 `;
 
 class AppFacebookCommenets extends HTMLElement {
 
   constructor(...args) {
     const self = super(...args);
+    this.resetCommentsFunc = this.resetComments.bind(this);
     return self;
   }
 
   connectedCallback() {
     setCustomElementHTMLCss(this, html)
       .then( _ => {
-        document.body.addEventListener('x-route-change', this.resetComments.bind(this));
+        setTimeout(_ => {
+          const href = window.location.href.replace(window.location.search, '');
+          this.insertAdjacentHTML(
+            'beforeend',
+            `<div class="fb-comments" data-href="${href}" data-width="100%" data-numposts="5"></div>`
+          );
+          document.body.addEventListener('x-route-change', this.resetCommentsFunc );
+        }, 1000);
       });
+  }
+
+  disconnectedCallback() {
+    document.body.removeEventListener('x-route-change', this.resetCommentsFunc);
   }
 
   resetComments(event) {

@@ -61,19 +61,5 @@
         </article>
       </div>
     </div>
-    <script>
-      document.body.addEventListener('x-route-change', event => {
-        const iframe = document.querySelector('.fb-comments iframe'); 
-        if (iframe) {
-          setTimeout(_ => {
-            const href = window.location.href.replace(window.location.search, '');
-            const iframeSrc = iframe.getAttribute('src')
-              .replace(/&href=[^&]+/, `&href=${encodeURIComponent(href)}`);
-            iframe.setAttribute('src', iframeSrc);
-            console.log({href});
-          }, 500);
-        }
-      });
-    </script>
   </body>
 </html>

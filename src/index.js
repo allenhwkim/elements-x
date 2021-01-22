@@ -9,7 +9,6 @@ import './tags/app-pre';
 import './tags/app-group-header';
 import './tags/app-articles';
 import './tags/app-prettier';
-import './tags/app-facebook-comments';
 
 // enable/disable outline for click and tab
 document.body.addEventListener('click', 
@@ -37,5 +36,19 @@ window.addEventListener('DOMContentLoaded', function() {
       gtag('js', new Date());
       gtag('config', 'G-5EB3NQZC8W');
     }, 1000);
+  }
+});
+
+// facebook comments
+document.body.addEventListener('x-route-change', event => {
+  const iframe = document.querySelector('.fb-comments iframe'); 
+  if (iframe) {
+    setTimeout(_ => {
+      const href = window.location.href.replace(window.location.search, '');
+      const iframeSrc = iframe.getAttribute('src')
+        .replace(/&href=[^&]+/, `&href=${encodeURIComponent(href)}`);
+      iframe.setAttribute('src', iframeSrc);
+      console.log({href});
+    }, 500);
   }
 });

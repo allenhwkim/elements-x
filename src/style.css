@@ -37,6 +37,9 @@ app-custom-css {
   position: absolute;
   right: 48px;
 }
+input {
+  height: 32px;
+}
 
 .vcentered {
   display: flex;

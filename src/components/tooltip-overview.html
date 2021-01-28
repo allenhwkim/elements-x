@@ -23,15 +23,21 @@
 </ul>
 
 <div class="example">
-  <span tabindex="0" id="show-tooltip">Show tooltip</span>
+  <a href="javascript:void(0)" tabindex="0" id="show-tooltip">Show tooltip</a>
   <x-tooltip trigger="show-tooltip">
-    Hello Tooltip
+    Hello Tooltip<br/>
+    <button>button 1</button><br/>
+    <button>button 2</button><br/>
+    <button>button 3</button><br/>
   </x-tooltip>
-  <app-pre>
-    &lt;span tabindex="0" <b>id="show-tooltip"</b>>Show Tooltip&lt;/span>
-    <b>&lt;x-tooltip trigger="show-tooltip"></b>
-      Hello Tooltip
-    <b>&lt;/x-tooltip></b>
+  <app-pre> 
+    &lt;a href="javascript:void(0)" tabindex="0" id="show-tooltip">Show tooltip&lt;/a>
+    &lt;x-tooltip trigger="show-tooltip">
+      Hello Tooltip&lt;br/>
+      &lt;button>button 1&lt;/button>&lt;br/>
+      &lt;button>button 2&lt;/button>&lt;br/>
+      &lt;button>button 3&lt;/button>&lt;br/>
+    </x-tooltip>
   </app-pre>
 </div>
 

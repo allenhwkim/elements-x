@@ -13,13 +13,13 @@ x-textfield .ink-bar  {  /*  hidden  2px  line  */
   width:  10px;
   visibility:  hidden;
   background-color:#8e44ad;
-  transition:  0.2s  ease  all;
 }
 
 x-textfield.x-focused .ink-bar  {  /*  2px  100%  line  */
   left: 0;
   width:  100%;
   visibility:  visible;
+  transition:  0.2s  ease  all;
 }
 
 x-textfield input, x-textfield .input  {
@@ -27,6 +27,8 @@ x-textfield input, x-textfield .input  {
   outline:  none;
   border:  none;
   padding:  0  0  6px  0;
+  height: 26px;
+  opacity: 0;
 }
 
 x-textfield .label  {
@@ -34,7 +36,6 @@ x-textfield .label  {
   pointer-events: none; 
   box-sizing: border-box;
   cursor:  text;
-  transition:  0.2s  ease  all;
   user-select:  none;
   top: 16px;
   left: 4px;
@@ -42,12 +43,22 @@ x-textfield .label  {
   width: 100%;
   z-index: 1;
   color: #888;
+  background: transparent;
 }
 
 x-textfield:not(.empty)  .label,  
 x-textfield.x-focused .label  {
+  transition:  0.2s  ease  all;
   top: 2px;
   font-size: 12px;
+}
+
+x-textfield:not(.empty):not(.x-focused) .input,
+x-textfield:not(.empty):not(.x-focused) input,
+x-textfield.x-focused .input,
+x-textfield.x-focused input  {
+  opacity: 1;
+  transition: opacity .35s ease-in-out;
 }
 
 x-textfield .icon {

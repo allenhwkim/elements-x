@@ -278,24 +278,22 @@ Also, you need to have Javascript to handle events;
   <div class="code">
     HTML Code: 
     <app-pre>
-      &lt;div style="position:relative">
-        &lt;x-textfield id="pet-textfield">
-          &lt;span class="label">Pet Name&lt;/span>
-          &lt;input placeholder="Select favorite pet" id="pet-name" />
-          &lt;b class="icon" aria-hidden="true">▼&lt;/b>
-          &lt;div class="ink-bar">&lt;/div>
-        &lt;/x-textfield>
-        &lt;x-overlay id="pets" trigger="pet-name">
-          &lt;x-list select-first="false">
-            &lt;div>Cats&lt;/div>
-            &lt;div>Dogs&lt;/div>
-            &lt;div>Birds&lt;/div>
-            &lt;div>Rabbits&lt;/div>
-            &lt;div>Guinea pigs&lt;/div>
-            &lt;div>Fish&lt;/div>
-          &lt;/x-list>
-        &lt;/x-overlay>
-      &lt;/div>
+      &lt;x-textfield id="pet-textfield">
+        &lt;span class="label">Pet Name&lt;/span>
+        &lt;input placeholder="Select favorite pet" <b>id="pet-name"</b> />
+        &lt;b class="icon" aria-hidden="true">▼&lt;/b>
+        &lt;div class="ink-bar">&lt;/div>
+      &lt;/x-textfield>
+      &lt;x-overlay id="pets" <b>trigger="pet-name"</b>>
+        &lt;x-list select-first="false" <b>filter-by="pet-name"</b>>
+          &lt;div>Cats&lt;/div>
+          &lt;div>Dogs&lt;/div>
+          &lt;div>Birds&lt;/div>
+          &lt;div>Rabbits&lt;/div>
+          &lt;div>Guinea pigs&lt;/div>
+          &lt;div>Fish&lt;/div>
+        &lt;/x-list>
+      &lt;/x-overlay>
     </app-pre>
   </div>
 </div>

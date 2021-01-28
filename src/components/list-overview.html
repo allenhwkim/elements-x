@@ -43,6 +43,7 @@
   <li>Fires 'x-listitem-selcted` evnet when item is selected by click or keyboard.</li>
   <li>Converts ul/li list to a structured collapsable list.</li> 
   <li>Accessibility full-featured using tabs, space, and arrow keys.</li>
+  <li>Show only related items by linking to input element.</li>
   <li>Highlights selected item.</li>
 </ul>
 
@@ -73,9 +74,36 @@
       &lt;div>Bird&lt;/div>
     &lt;/x-list>
   </app-pre>
-
 </div>
 
+<div class="example">
+  <h2>With INPUT</h2>
+  <p>
+    You can link to input element to display only related items.
+  </p>
+
+  <input id="pets" placeholder="Search pet">
+  <x-list select-first filter-by="pets">
+    <div>Cats</div>
+    <div>Dogs</div>
+    <div>Birds</div>
+    <div>Rabbits</div>
+    <div>Guinea pigs</div>
+    <div>Fish</div>
+  </x-list>
+
+  <app-pre>
+    &lt;input <b>id="pets"</b> placeholder="Search pet">
+    &lt;x-list select-first <b>filter-by="pets"</b>>
+      &lt;div>Cats&lt;/div>
+      &lt;div>Dogs&lt;/div>
+      &lt;div>Birds&lt;/div>
+      &lt;div>Rabbits&lt;/div>
+      &lt;div>Guinea pigs&lt;/div>
+      &lt;div>Fish&lt;/div>
+    &lt;/x-list>
+  </app-pre>
+</div
 
 <div class="example">
 
@@ -180,6 +208,7 @@
 <li><b>menu-style</b>: When given, the list works like menu by responding to mouseenter/mouseleave</li>
 <li><b>select-first</b>: Default true, select the first item when initialized</li>
 <li><b>selected</b>:  the id of preselected menu item, default null</li>
+<li><b>filter-by</b>: input element id to filter children input</li>
 
 <h3>Events</h3> 
 <li><b>x-listitem-selected</b>: Fired when menu item is selected by click or enter pressed</li>

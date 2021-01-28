@@ -2,7 +2,7 @@
 
 <style>
   .tldr { color: #999; }
-  .code {display: none; padding: 12px; border: 1px so}
+  .code { padding: 12px;}
   .code.visible {display: block;}
 </style>
 
@@ -61,10 +61,15 @@ Also, you need to have Javascript to handle events;
 
 <div class="simple">
   <h3> Simple Autocomplete </h3>
+  <p>
+    For simple autocomplete, you do not need to have Javascript to handle events.
+    Instead, by setting attribute "trigger" of &x-obverlay> and "filter-by" of &x-list> with 
+    value of &input> id, it will work without any Javascript coding.
+  </p>
 
   <input placeholder="Select pet types" id="simple-input" />
   <x-overlay id="simple-list" trigger="simple-input">
-    <x-list select-first="false">
+    <x-list select-first="false" filter-by="simple-input">
       <div>Cats</div>
       <div>Dogs</div>
       <div>Birds</div>
@@ -74,32 +79,12 @@ Also, you need to have Javascript to handle events;
     </x-list>
   </x-overlay>
 
-  <script>
-    const simpleInput = document.querySelector('#simple-input');
-    const simpleList = document.querySelector('#simple-list');
-
-    // listen to input element key typing, then show different list
-    simpleInput.addEventListener('input', event => {
-      const val = event.target.value.toLowerCase();
-      simpleList.querySelectorAll('x-list > *').forEach(el => {
-        el.style.display =  el.innerText.toLowerCase().indexOf(val) === -1 ? 'none': '';
-      });
-    }); 
-
-    // listen to event of listitem selected, then set input value
-    simpleList.addEventListener('x-listitem-selected', event => {
-      simpleInput.value = event.detail.innerText;
-      simpleList.close();
-    });
-  </script>
-
-  <a href="javascript:void(0)" onclick="this.nextElementSibling.classList.toggle('visible')">show/hide code</a>
   <div class="code">
     HTML Code:
     <app-pre>
-      &lt;input placeholder="Select pet types" id="simple-input" />
-      &lt;x-overlay id="simple-list" trigger="simple-input">
-        &lt;x-list select-first="false">
+      &lt;input placeholder="Select pet types" <b>id="simple-input"</b> />
+      &lt;x-overlay id="simple-list" <b>trigger="simple-input"</b>>
+        &lt;x-list select-first="false" <b>filter-by="simple-input"</b>>
           &lt;div>Cats&lt;/div>
           &lt;div>Dogs&lt;/div>
           &lt;div>Birds&lt;/div>
@@ -107,27 +92,7 @@ Also, you need to have Javascript to handle events;
           &lt;div>Guinea pigs&lt;/div>
           &lt;div>Fish&lt;/div>
         &lt;/x-list>
-      &lt;/x-overlay>
-    </app-pre>
-
-    Javascript Code:
-    <app-pre>
-      const simpleInput = document.querySelector('#simple-input');
-      const simpleList = document.querySelector('#simple-list');
-
-      // listen to input element key typing, then show different list
-      simpleInput.addEventListener('input', event => {
-        const val = event.target.value.toLowerCase();
-        simpleList.querySelectorAll('x-list > *').forEach(el => {
-          el.style.display =  el.innerText.toLowerCase().indexOf(val) === -1 ? 'none': '';
-        });
-      }); 
-
-      // listen to event of listitem selected, then set input value
-      simpleList.addEventListener('x-listitem-selected', event => {
-        simpleInput.value = event.detail.innerText;
-        simpleList.close();
-      });
+      &lt;/x-overlay
     </app-pre>
   </div>
 </div>
@@ -137,7 +102,7 @@ Also, you need to have Javascript to handle events;
   <div class="autocomplete">
     <input placeholder="Select favorite pet" id="my-input" />
     <x-overlay id="my-list" trigger="my-input">
-      <x-list select-first="false">
+      <x-list select-first="false" filter-by="my-input">
         <div>Cats</div>
         <div>Dogs</div>
         <div>Birds</div>
@@ -154,33 +119,13 @@ Also, you need to have Javascript to handle events;
   .autocomplete input { padding-right: 20px; }
   </style>
 
-  <script>
-    const myInput = document.querySelector('#my-input');
-    const myList = document.querySelector('#my-list');
-
-    // listen to input element key typing, then show different list
-    myInput.addEventListener('input', event => {
-      const val = event.target.value.toLowerCase();
-      myList.querySelectorAll('x-list > *').forEach(el => {
-        el.style.display =  el.innerText.toLowerCase().indexOf(val) === -1 ? 'none': '';
-      });
-    }); 
-
-    // listen to event of listitem selected, then set input value
-    myList.addEventListener('x-listitem-selected', event => {
-      myInput.value = event.detail.innerText;
-      myList.close();
-    });
-  </script>
-
-  <a href="javascript:void(0)" onclick="this.nextElementSibling.classList.toggle('visible')">show/hide code</a>
   <div class="code">
     HTML Code:
     <app-pre>
       &lt;div class="autocomplete">
-        &lt;input placeholder="Select favorite pet" id="my-input" />
-        &lt;x-overlay id="my-list" trigger="my-input">
-          &lt;x-list select-first="false">
+        &lt;input placeholder="Select favorite pet" <b>id="my-input"</b> />
+        &lt;x-overlay id="my-list" <b>trigger="my-input"</b>>
+          &lt;x-list select-first="false" <b>filter-by="my-input"</b>>
             &lt;div>Cats&lt;/div>
             &lt;div>Dogs&lt;/div>
             &lt;div>Birds&lt;/div>
@@ -196,28 +141,9 @@ Also, you need to have Javascript to handle events;
     <app-pre>
       .autocomplete { position: relative; display: inline-block; }
       .autocomplete::after { position: absolute; content: '▼'; right: 4px; top: 4px; }
-      .autocomplete input { padding-right: 20px; }ML
+      .autocomplete input { padding-right: 20px; }
     </app-pre>
 
-    Javascript Code:
-    <app-pre>
-      const myInput = document.querySelector('#my-input');
-      const myList = document.querySelector('#my-list');
-
-      // listen to input element key typing, then show different list
-      myInput.addEventListener('input', event => {
-        const val = event.target.value.toLowerCase();
-        myList.querySelectorAll('x-list > *').forEach(el => {
-          el.style.display =  el.innerText.toLowerCase().indexOf(val) === -1 ? 'none': '';
-        });
-      }); 
-
-      // listen to event of listitem selected, then set input value
-      myList.addEventListener('x-listitem-selected', event => {
-        myInput.value = event.detail.innerText;
-        myList.close();
-      });
-    </app-pre>
   </div>
 </div>
 
@@ -276,7 +202,7 @@ Also, you need to have Javascript to handle events;
   </script>
 
   <a href="javascript:void(0)" onclick="this.nextElementSibling.classList.toggle('visible')">show/hide code</a>
-  <div class="code">
+  <div class="code" style="display:none">
     HTML Code:
     <app-pre>
       &lt;input id="country-name" placeholder="Enter country name" />
@@ -338,7 +264,7 @@ Also, you need to have Javascript to handle events;
       <div class="ink-bar"></div>
     </x-textfield>
     <x-overlay id="pets" trigger="pet-name">
-      <x-list select-first="false">
+      <x-list select-first="false" filter-by="pet-name">
         <div>Cats</div>
         <div>Dogs</div>
         <div>Birds</div>
@@ -348,27 +274,7 @@ Also, you need to have Javascript to handle events;
       </x-list>
     </x-overlay>
   </div>
-  <script>
-    const petsEl = document.querySelector('#pets');
-    const petTextfield = document.querySelector('#pet-textfield');
-    const petName = document.querySelector('#pet-name');
 
-    // listen to event of listitem selected, then set input value
-    petsEl.addEventListener('x-listitem-selected', event => {
-      petTextfield.setValue(event.detail.innerText);
-      petsEl.close();
-    });
-
-    // listen toinput element key typing, then show different list
-    petName.addEventListener('input', event => {
-      const val = event.target.value.toLowerCase();
-      document.querySelectorAll('#pets x-list > *').forEach(el => {
-        el.style.display =  el.innerText.toLowerCase().indexOf(val) === -1 ? 'none': '';
-      });
-    });
-  </script>
-
-  <a href="javascript:void(0)" onclick="this.nextElementSibling.classList.toggle('visible')">show/hide code</a>
   <div class="code">
     HTML Code: 
     <app-pre>
@@ -390,27 +296,6 @@ Also, you need to have Javascript to handle events;
           &lt;/x-list>
         &lt;/x-overlay>
       &lt;/div>
-    </app-pre>
-
-    Javascript Code:
-    <app-pre>
-      const petsEl = document.querySelector('#pets');
-      const petTextfield = document.querySelector('#pet-textfield');
-      const petName = document.querySelector('#pet-name');
-
-      // listen to event of listitem selected, then set input value
-      petsEl.addEventListener('x-listitem-selected', event => {
-        petTextfield.setValue(event.detail.innerText);
-        petsEl.close();
-      });
-
-      // listen toinput element key typing, then show different list
-      petName.addEventListener('input', event => {
-        const val = event.target.value.toLowerCase();
-        document.querySelectorAll('#pets x-list > *').forEach(el => {
-          el.style.display =  el.innerText.toLowerCase().indexOf(val) === -1 ? 'none': '';
-        });
-      });
     </app-pre>
   </div>
 </div>

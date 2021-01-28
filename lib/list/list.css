@@ -1,3 +1,6 @@
+x-list {
+  display: block;
+}
 x-list ul {
   list-style: none;
   padding-left: 32px;

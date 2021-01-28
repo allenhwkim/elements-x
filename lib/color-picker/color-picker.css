@@ -1,0 +1,22 @@
+x-color-picker {
+  position: relative;
+  display: block;
+}
+
+x-color-picker > .circle {
+  border: 2px solid;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top:0;
+  left: 0;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+x-color-picker > .desc {
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+}

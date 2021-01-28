@@ -78,6 +78,7 @@ x-textfield.x-has-icon-left  .icon {
 x-textfield.x-has-icon-left input,
 x-textfield.x-has-icon-left .input {
   margin-left: 1.8em;
+  width: calc(100% - 1.8em);
 }
 x-textfield.x-has-icon-left .label {
   width: calc(100% - 36px);

@@ -1,0 +1,71 @@
+<x-tabs>
+  <div class="tabs">
+    <div tab-for="js">Javascript</div>
+    <div tab-for="ng">Angular</div>
+    <div tab-for="vue">VueJs</div>
+    <div tab-for="react">React</div>
+  </div>
+  <div class="contents">
+    <app-pre contents-for="js">
+      <b>import 'elements-x/dist/clock';</b>
+
+      const myDiv = document.getElementById('my');
+      myDiv.innerHTML = `
+        <b>&lt;x-clock hour="10" minute="9">&lt;/x-clock></b>
+      `;
+    </app-pre>
+    <app-pre contents-for="ng">
+      import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      <b>import 'elements-x/dist/clock';</b>
+      
+      @Component({
+        selector: 'my-app',
+        template: `
+          <b>&lt;x-clock hour="10" minute="9" (x-time-selected)="setTime($event)">&lt;/x-clock></b>
+        `
+      })
+      class AppComponent  {}
+      
+      @NgModule({
+        imports:      [ BrowserModule ],
+        declarations: [ AppComponent ],
+        bootstrap:    [ AppComponent ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      })
+      export class AppModule {
+        setTime($event) { console.log($vent); }
+      }
+    </app-pre>
+    <app-pre contents-for="vue">
+      &lt;template>
+        <b>&lt;x-clock hour="10" minute="9" v-on:x-time-selected="setTime">&lt;/x-clock></b>
+      &lt;/template>
+      
+      &lt;script>
+      <b>import 'elements-x/dist/clock';</b>
+      
+      export default {
+        name: "App",
+        methods: function(event) { console.log(event); }
+      };
+      &lt;/script>
+    </app-pre>
+    <app-pre contents-for="react">
+      import React from "react";
+      <b>import 'elements-x/dist/clock';</b>
+
+      export default function App() {
+        componentDidMount() {
+          ReactDOM.findDOMNode(this).addEventListener('x-clock', this.handleEvent);
+        }
+
+        handleEvent(event) { console.log(event); }
+
+        return (
+          <b>&lt;x-clock hour="10" minute="9">&lt;/x-clock></b>
+        );
+      }
+    </app-pre>
+  </div>
+</x-tabs>

@@ -1,0 +1,41 @@
+
+<app-custom-css>
+  .app x-color-picker {
+  }
+</app-custom-css>
+
+<h3>Features </h3>
+<ul class="default">
+  <li>Fill value of input field when target is provided</li>
+  <li>Fires 'x-color-changed' event when color changed.</li>
+</ul>
+
+<div class="example">
+  <h3>Usage with x-overlay / input</h3>
+  <input id="color" />
+  <x-overlay trigger="color" id="clock-picker">
+    <x-color-picker target="color"></x-color-picker>
+  </x-overlay>
+  <app-pre>
+    &lt;input id="color" />
+    &lt;x-overlay trigger="color" id="clock-picker">
+      &lt;x-color-picker target="color">&lt;/x-color-picker>
+    &lt;/x-overlay>
+  </app-pre>
+</div>
+
+<div class="example">
+  <h3>Usage with input</h3>
+  
+  <input id="color2" />
+  <x-color-picker target="color2" width="400" height="300"></x-color-picker>
+  <app-pre>
+    &lt;input id="color"  width="400" height="300"/>
+    &lt;x-color-picker target="color">&lt;/x-color-picker>
+  </app-pre>
+</div>
+<h3>Attributes</h3>
+<li><b>trigger</b>: id of input field</li>
+
+<h3>Events</h3>
+<li><b>x-time-selected</b>: a custom event. selected time is in event.detail</li>

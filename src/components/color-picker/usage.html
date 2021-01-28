@@ -1,0 +1,71 @@
+<x-tabs>
+  <div class="tabs">
+    <div tab-for="js">Javascript</div>
+    <div tab-for="ng">Angular</div>
+    <div tab-for="vue">VueJs</div>
+    <div tab-for="react">React</div>
+  </div>
+  <div class="contents">
+    <app-pre contents-for="js">
+      <b>import 'elements-x/dist/color-picker';</b>
+
+      const myDiv = document.getElementById('my');
+      myDiv.innerHTML = `
+        <b>&lt;x-color-picker>&lt;/x-color-picker></b>
+      `;
+    </app-pre>
+    <app-pre contents-for="ng">
+      import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      <b>import 'elements-x/dist/color-picker';</b>
+      
+      @Component({
+        selector: 'my-app',
+        template: `
+          <b>&lt;x-color-picker (x-color-changed)="setColor($event)">&lt;/x-color-picker></b>
+        `
+      })
+      class AppComponent  {}
+      
+      @NgModule({
+        imports:      [ BrowserModule ],
+        declarations: [ AppComponent ],
+        bootstrap:    [ AppComponent ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      })
+      export class AppModule {
+        setColor($event) { console.log($event); }
+      }
+    </app-pre>
+    <app-pre contents-for="vue">
+      &lt;template>
+        <b>&lt;x-color-picker>&lt;/x-color-picker></b>
+      &lt;/template>
+      
+      &lt;script>
+      <b>import 'elements-x/dist/color-picker';</b>
+      
+      export default {
+        name: "App",
+        methods: function(event) { console.log(event); }
+      };
+      &lt;/script>
+    </app-pre>
+    <app-pre contents-for="react">
+      import React from "react";
+      <b>import 'elements-x/dist/color-picker';</b>
+
+      export default function App() {
+        componentDidMount() {
+          ReactDOM.findDOMNode(this).addEventListener('x-color-changed', this.handleEvent);
+        }
+
+        handleEvent(event) { console.log(event); }
+
+        return (
+          <b>&lt;x-color-picker>&lt;/x-color-picker></b>
+        );
+      }
+    </app-pre>
+  </div>
+</x-tabs>

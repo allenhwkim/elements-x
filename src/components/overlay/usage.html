@@ -1,0 +1,99 @@
+<x-tabs>
+  <div class="tabs">
+    <div tab-for="js">Javascript</div>
+    <div tab-for="ng">Angular</div>
+    <div tab-for="vue">VueJs</div>
+    <div tab-for="react">React</div>
+  </div>
+  <div class="contents">
+    <app-pre contents-for="js">
+      <b>import 'elements-x/dist/overlay';</b>
+
+      const myDiv = document.getElementById('my');
+      myDiv.innerHTML = `<b>
+        &lt;button id="show-overlay">Show Overlay&lt;/button>
+        &lt;x-overlay trigger="show-overlay">
+          &lt;button>Hello&lt;/button>
+          &lt;button>Overlay&lt;/button>
+        &lt;/x-overlay></b>
+      `;
+    </app-pre>
+    <app-pre contents-for="ng">
+      import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      <b>import 'elements-x/dist/overlay';</b>
+      
+      @Component({
+        selector: 'my-app',
+        template: `<b>
+          &lt;button id="show-overlay">Show Overlay&lt;/button>
+          &lt;x-overlay trigger="show-overlay"
+            (x-overlay-close)="handleEvent($event)"
+            (x-overlay-open)="handleEvent($event)">
+            &lt;button>Hello&lt;/button>
+            &lt;button>Overlay&lt;/button>
+          &lt;/x-overlay></b>
+        `'
+      })
+      class AppComponent  {
+        handleEvent(event) { console.log(event); }
+      }
+      
+      @NgModule({
+        imports:      [ BrowserModule ],
+        declarations: [ AppComponent ],
+        bootstrap:    [ AppComponent ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      })
+      export class AppModule {}
+    </app-pre>
+    <app-pre contents-for="vue">
+      &lt;template><b>
+        &lt;button id="show-overlay">Show Overlay&lt;/button>
+        &lt;x-overlay
+          v-on:x-overlay-open="handleEvent"
+          v-on:x-overlay-close="handleEvent"
+          trigger="show-overlay">
+          &lt;button>Hello&lt;/button>
+          &lt;button>Overlay&lt;/button>
+        &lt;/x-overlay></b>
+      &lt;/template>
+      
+      &lt;script>
+      <b>import 'elements-x/dist/overlay';</b>
+      
+      export default {
+        name: "App",
+        methods: {
+          handleEvent: function (event) { console.log(event) }
+        }
+
+      };
+      &lt;/script>
+    </app-pre>
+    <app-pre contents-for="react">
+      import React from "react";
+      <b>import 'elements-x/dist/overlay';</b>
+
+      export default function App() {
+
+        componentDidMount() {
+          ReactDOM.findDOMNode(this).addEventListener('x-overlay-open', this.handleEvent);
+          ReactDOM.findDOMNode(this).addEventListener('x-overlay-close', this.handleEvent);
+        }
+
+        handleEvent(event) { console.log(event); }
+
+        return (
+          &lt;div><b>
+            &lt;button id="show-overlay">Show Overlay&lt;/button>
+            &lt;x-overlay trigger="show-overlay">
+              &lt;button>Hello&lt;/button>
+              &lt;button>Overlay&lt;/button>
+            &lt;/x-overlay></b>
+          &lt;/div>
+        );
+      }
+    </app-pre>
+  </div>
+</x-tabs>

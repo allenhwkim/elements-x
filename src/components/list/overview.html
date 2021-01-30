@@ -51,7 +51,7 @@
   <h2>With DIV</h2>
   You can navigate list items using keyboard arrow buttons.
 
-  <x-list select-first id="list-div">
+  <x-list select-first="true" id="list-div">
     <div>Cat</div>
     <div>Dog</div>
     <div>Fish</div>
@@ -67,11 +67,32 @@
   </script>
 
   <app-pre>
-    &lt;x-list select-first>
+    &lt;x-list select-first="true">
       &lt;div>Cat&lt;/div>
       &lt;div>Dog&lt;/div>
       &lt;div>Fish&lt;/div>
       &lt;div>Bird&lt;/div>
+    &lt;/x-list>
+  </app-pre>
+</div>
+
+<div class="example">
+  <h2>With selected attribute</h2>
+  if 'selected' attribute is given with id of list item, it will be highlighted when initialized.
+
+  <x-list selected="fish">
+    <div id="cat">Cat</div>
+    <div id="dog">Dog</div>
+    <div id="fish">Fish</div>
+    <div id="bird">Bird</div>
+  </x-list>
+
+  <app-pre>
+    &lt;x-list selected="fish">
+      &lt;div id="cat">Cat&lt;/div>
+      &lt;div id="dog">Dog&lt;/div>
+      &lt;div id="fish">Fish&lt;/div>
+      &lt;div id="bird">Bird&lt;/div>
     &lt;/x-list>
   </app-pre>
 </div>
@@ -103,24 +124,56 @@
       &lt;div>Fish&lt;/div>
     &lt;/x-list>
   </app-pre>
-</div
+</div>
 
 <div class="example">
+  <h2>As a popup with x-overlay</h2>
+  <p>
+    You can display x-list as an overlay with x-overlay 
+  </p>
 
+  <input id="pets-2" placeholder="Search pet">
+  <x-overlay trigger="pets-2">
+    <x-list select-first filter-by="pets-2">
+      <div>Cats</div>
+      <div>Dogs</div>
+      <div>Birds</div>
+      <div>Rabbits</div>
+      <div>Guinea pigs</div>
+      <div>Fish</div>
+    </x-list>
+  </x-overlay>
+
+  <app-pre>
+    &lt;input id="pets-2" placeholder="Search pet">
+    &lt;x-overlay trigger="pets-2">
+      &lt;x-list select-first filter-by="pets-2">
+        &lt;div>Cats&lt;/div>
+        &lt;div>Dogs&lt;/div>
+        &lt;div>Birds&lt;/div>
+        &lt;div>Rabbits&lt;/div>
+        &lt;div>Guinea pigs&lt;/div>
+        &lt;div>Fish&lt;/div>
+      &lt;/x-list>
+    &lt;/x-overlay>>
+  </app-pre>
+</div>
+
+<div class="example">
   <h2>With UL/LI</h2>
   <p>
     The below is multi-leveled list. Click the list, 
     and usingh keyboard to open, close, or navigate list items.
   </p>
-  <x-list id="list-ul-li" selected="file-b">
+  <x-list id="list-ul-li" selected="new">
     <ul class="x-expanded" >
       <li> File
         <ul>
-          <li>New</li>
+          <li id="new">New</li>
           <li>Open
             <ul>
               <li>File A</li>
-              <li id="file-b">File B</li>
+              <li>File B</li>
               <li>File C</li>
             </ul>
           </li>
@@ -161,15 +214,15 @@
   </script>
 
   <app-pre>
-    &lt;x-list selected="file-b">
+    &lt;x-list selected="new">
       &lt;ul class="x-expanded" >
         &lt;li> File
           &lt;ul>
-            &lt;li>New&lt;/li>
+            &lt;li id="new">New&lt;/li>
             &lt;li>Open
               &lt;ul>
                 &lt;li>File A&lt;/li>
-                &lt;li id="file-b">File B&lt;/li>
+                &lt;li>File B&lt;/li>
                 &lt;li>File C&lt;/li>
               &lt;/ul>
             &lt;/li>
@@ -201,7 +254,69 @@
       &lt;/ul>
     &lt;/x-list>>
   </app-pre>
+</div>
 
+<div class="example">
+  <h2>With list data to generate HTML from template</h2>
+  <p>
+    You can also generate list items automatically by providing template and list data.
+    Whenever list data changes, html inside x-list also changes.
+    Also, when list item is generated, a variable is assigned to list item with the value of item data.
+    You can set the variable name by proving 'var-name' as an attribute of &lt;template> tag.
+  </p>
+
+  <input id="country-name">
+  <x-list id="country-list" style="height: 200px; overflow: auto; padding: 8px;">
+    <template var-name="country">
+      <div><b>${alpha3Code}</b> ${name}</div>
+    </template>
+    <div>Search a country</div>
+  </x-list>
+
+  <script>
+  // listen to input element key typing, then update the autocomplete list
+  var countryName = document.querySelector('#country-name');
+  var countryList = document.querySelector('#country-list');
+  countryName.addEventListener('input', event => {
+    if (!event.target.value) return;
+    window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
+      .then(resp => resp.ok && resp.json())
+      .then(resp => resp && (countryList.datalist = resp));
+  });
+
+  // listen to autocomplete list selection, then update input field and more
+  countryList.addEventListener('x-listitem-selected', event => {
+    countryName.value = event.detail.country.name;
+  });
+  </script>
+
+  HTML
+  <app-pre>
+    &lt;input id="country-name">
+    &lt;x-list id="country-list">
+      &lt;template var-name="country">
+        &lt;div>&lt;b>${alpha3Code}&lt;/b> ${name}&lt;/div>
+      &lt;/template>
+    &lt;/x-list>
+  </app-pre>
+ 
+  Javascript
+  <app-pre>
+    // listen to input element key typing, then update the autocomplete list
+    var countryName = document.querySelector('#country-name');
+    var countryList = document.querySelector('#country-list');
+    countryName.addEventListener('input', event => {
+      if (!event.target.value) return;
+      window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
+        .then(resp => resp.ok && resp.json())
+        .then(resp => resp && (countryList.datalist = resp));
+    });
+  
+    // listen to autocomplete list selection, then update input field and more
+    countryList.addEventListener('x-listitem-selected', event => {
+      countryName.value = event.detail.country.name;
+    });
+  </app-pre>
 </div>
 
 <h3>Attributes</h3>

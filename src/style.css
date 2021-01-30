@@ -40,6 +40,10 @@ app-custom-css {
 input {
   height: 32px;
 }
+x-click {
+  cursor: pointer;
+  color: blue;
+}
 
 .vcentered {
   display: flex;

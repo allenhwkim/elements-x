@@ -2,8 +2,8 @@
 
 <style>
   .tldr { color: #999; }
-  .code { padding: 12px;}
-  .code.visible {display: block;}
+  .code { padding: 12px; }
+  .code:not(.visible) {display: none;}
 </style>
 
 <p>
@@ -201,8 +201,8 @@ Also, you need to have Javascript to handle events;
     });
   </script>
 
-  <a href="javascript:void(0)" onclick="this.nextElementSibling.classList.toggle('visible')">show/hide code</a>
-  <div class="code" style="display:none">
+  <x-click set=".restful.code.visible">show/hide code</x-click>
+  <div class="restful code">
     HTML Code:
     <app-pre>
       &lt;input id="country-name" placeholder="Enter country name" />

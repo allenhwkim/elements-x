@@ -281,7 +281,7 @@
     if (!event.target.value) return;
     window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
       .then(resp => resp.ok && resp.json())
-      .then(resp => resp && (countryList.datalist = resp));
+      .then(resp => countryList.datalist = resp)
   });
 
   // listen to autocomplete list selection, then update input field and more

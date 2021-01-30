@@ -1,5 +1,7 @@
 x-list {
   display: block;
+  max-height: 300px;
+  overflow: auto;
 }
 x-list ul {
   list-style: none;

@@ -6,10 +6,8 @@ const css = `
     font-family: monospace;
     white-space: pre-wrap;
     background: #eee;
-    font-size: 14px;
     padding: 12px;
     margin: 8px 0;
-    line-height: 18px;
   }`;
 
 class AppPre extends HTMLElement {

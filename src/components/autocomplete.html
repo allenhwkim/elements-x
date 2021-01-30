@@ -148,110 +148,6 @@ Also, you need to have Javascript to handle events;
 </div>
 
 <div class="example">
-  <h3>Autocomplete with RESTful API</h3>
-  <p>
-  The following example is to choose a country using countries API; https://restcountries.eu/rest/v2/name/XXX.
-  The usage of this API is found at https://restcountries.eu/#api-endpoints-name.
-  The API returns list of country by the given name with detail of country code, name, and etc.
-  </p>
-
-  <div class="example">
-    <div class="demo">
-      <input id="country-name" placeholder="Enter country name" />
-      <x-overlay id="country-list-overlay" trigger="country-name">
-        <x-list id="country-list">Search a country.</x-list>
-      </x-overlay>
-      <br/>
-      <b>Selected Country:</b>
-      <pre id="country-object" style="margin:0; height: 200px;"></pre>
-    </div>
-  </div>
-  <script>
-    // listen to input element key typing, then update the autocomplete list
-    const inputEl = document.querySelector('#country-name');
-    inputEl.addEventListener('input', event => {
-      if (!event.target.value) return;
-      const listEl = document.querySelector('#country-list');
-      window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
-        .then(resp => resp.ok && resp.json())
-        .then(resp => {
-          if (resp) { // when response has country list
-            listEl.innerHTML = ''; // empty out the previous list
-            resp.slice(0,6).forEach(country => {
-              const divEl = document.createElement('div');
-              divEl.country = country;
-              divEl.insertAdjacentHTML('beforeend', `<b>${country.alpha3Code}</b> ${country.name}`);
-              listEl.appendChild(divEl);
-            });
-          } else { // when response has an error
-            listEl.innerHTML = ''; // empty out the previous list
-            listEl.insertAdjacentHTML('beforeend', `<div>Cannot find a country.</div>`);
-          }
-        });
-    });
-
-    // listen to autocomplete list selection, then update input field and more
-    const listOverlay = document.querySelector('#country-list-overlay');
-    listOverlay.addEventListener('x-listitem-selected', event => {
-      listOverlay.close();
-      if (event.detail.country) {
-        document.querySelector('#country-name').value = event.detail.country.name;
-        document.querySelector('#country-object').innerHTML = JSON.stringify(event.detail.country, null, '  ');
-      }
-    });
-  </script>
-
-  <x-click set=".restful.code.visible">show/hide code</x-click>
-  <div class="restful code">
-    HTML Code:
-    <app-pre>
-      &lt;input id="country-name" placeholder="Enter country name" />
-      &lt;x-overlay id="country-list-overlay" trigger="country-name">
-        &lt;x-list id="country-list">Search a country&lt;/x-list>
-      &lt;/x-overlay>
-      &lt;/br>
-      &lt;b>Selected Country:&lt;/b>
-      &lt;pre id="country-object" style="margin:0">&lt;/pre>
-    </app-pre>
-
-    Javascript Code:
-    <app-pre>
-      // listen to input element key typing, then update the autocomplete list
-      const inputEl = document.querySelector('#country-name');
-      inputEl.addEventListener('input', event => {
-        if (!event.target.value) return;
-        const listEl = document.querySelector('#country-list');
-        window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
-          .then(resp => resp.ok && resp.json())
-          .then(resp => {
-            if (resp) { // when response has country list
-              listEl.innerHTML = ''; // empty out the previous list
-              resp.slice(0,6).forEach(country => {
-                const divEl = document.createElement('div');
-                divEl.country = country;
-                divEl.insertAdjacentHTML('beforeend', `&lt;b>${country.alpha3Code}&lt;/b> ${country.name}`);
-                listEl.appendChild(divEl);
-              });
-            } else { // when response has an error
-              listEl.innerHTML = ''; // empty out the previous list
-              listEl.insertAdjacentHTML('beforeend', `&lt;div>Cannot find a country.&lt;/div>`);
-              listEl.appendChild(divEl);
-            }
-          });
-      });
-
-      // listen to autocomplete list selection, then update input field and more
-      const listOverlay = document.querySelector('#country-list-overlay');
-      listOverlay.addEventListener('x-listitem-selected', event => {
-        listOverlay.close();
-        document.querySelector('#country-name').value = event.detail.country.name;
-        document.querySelector('#country-object').innerHTML = JSON.stringify(event.detail.country, null, '  ');
-      });
-    </app-pre>
-  </div>
-</div>
-
-<div class="example">
   <h3>Autocomplete with style, x-textfield</h3>
 
   The following example is to show more stylish input textfield, x-textfield.
@@ -294,6 +190,99 @@ Also, you need to have Javascript to handle events;
           &lt;div>Fish&lt;/div>
         &lt;/x-list>
       &lt;/x-overlay>
+    </app-pre>
+  </div>
+</div>
+
+<div class="example">
+  <h3>Autocomplete with RESTful API</h3>
+  <p>
+  The following example is to choose a country using countries API; https://restcountries.eu/rest/v2/name/XXX.
+  The usage of this API is found at https://restcountries.eu/#api-endpoints-name.
+  The API returns list of country by the given name with detail of country code, name, and etc.
+  </p>
+
+  <div class="example">
+    <div class="demo" style="position:relative">
+      <input id="country-name" placeholder="Enter country name" />
+      <x-overlay id="country-list-overlay" trigger="country-name">
+        <x-list id="country-list">
+          <div>Search a country.</div>
+          <template var-name="country">
+            <div><b>${alpha3Code}</b> ${name}</div>
+          </template>
+          <template class="error">
+            <div>Cannot find a country.</div>
+          </template>
+        </x-list>
+      </x-overlay>
+      <br/>
+      <b>Selected Country:</b>
+      <pre id="country-object" style="margin:0; height: 200px;"></pre>
+    </div>
+  </div>
+  <script>
+    // listen to input element key typing, then update the autocomplete list
+    var $_ = document.querySelector.bind(document);
+    $_('#country-name').addEventListener('input', event => {
+      if (!event.target.value) return;
+      window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
+        .then(resp => resp.ok && resp.json())
+        .then(resp => $_('#country-list').datalist = resp);
+    });
+
+    // listen to autocomplete list selection, then update input field and more
+    const listOverlay = $_('#country-list-overlay');
+    listOverlay.addEventListener('x-listitem-selected', event => {
+      if (event.detail.country) {
+        $_('#country-name').value = event.detail.country.name;
+        $_('#country-object').innerHTML = JSON.stringify(event.detail.country, null, '  ');
+      }
+      listOverlay.close();
+    });
+  </script>
+
+  <x-click set=".restful.code.visible">show/hide code</x-click>
+  <div class="restful code">
+    HTML Code:
+    <app-pre>
+      &lt;input id="<b>country-name"</b> placeholder="Enter country name" />
+      &lt;x-overlay id="<b>country-list-overlay"</b> trigger="country-name">
+        &lt;x-list id="<b>country-list"</b>>
+          &lt;div>Search a country.&lt;/div>
+          &lt;template var-name="<b>country</b>">
+            &lt;div>&lt;b>${alpha3Code}&lt;/b> ${name}&lt;/div>
+          &lt;/template>
+          &lt;template class="<b>error</b>">
+            &lt;div>Cannot find a country.&lt;/div>
+          &lt;/template>
+        &lt;/x-list>
+      &lt;/x-overlay>
+      &lt;br/>
+      &lt;b>Selected Country:&lt;/b>
+      &lt;pre id="country-object" style="margin:0; height: 200px;">&lt;/pre>
+    </app-pre>
+
+    Javascript Code:
+    <app-pre>
+      // listen to input element key typing, then update the autocomplete list
+      var $_ = document.querySelector.bind(document);
+      $_('#country-name').addEventListener('input', event => {
+        if (!event.target.value) return;
+        window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
+          .then(resp => resp.ok && resp.json())
+          .then(resp => $_('#country-list').datalist = resp);
+      });
+  
+      // listen to autocomplete list selection, then update input field and more
+      const listOverlay = $_('#country-list-overlay');
+      listOverlay.addEventListener('x-listitem-selected', event => {
+        if (event.detail.country) {
+          $_('#country-name').value = event.detail.country.name;
+          $_('#country-object').innerHTML = JSON.stringify(event.detail.country, null, '  ');
+        }
+        listOverlay.close();
+      });
     </app-pre>
   </div>
 </div>

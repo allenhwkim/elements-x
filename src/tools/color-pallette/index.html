@@ -1,0 +1,167 @@
+<style>
+  .inline-block {display: inline-block; vertical-align: top; padding: 0 12px;}
+  .inputs { width: 360px; vertical-align: top;}
+  .inputs input {height: 32px; vertical-align: top}
+  .inputs .color-picker #color-1 { color: transparent; box-shadow: inset 0 0 12px #FFF; width: 48px; height: 32px; border: none;}
+  .inputs .color-value  #color-list-overlay{ max-height: 200px; }
+  .inputs .color-value  #color-list-overlay .color {width:32px;display: inline-block;}
+  .inputs .color-value  #color-value {display: inline-block; padding: 1px 2px;}
+  #msg { width:100%; }
+  .action-btns .label {display: inline-block; }
+  .pallette {display: flex; text-align: center; flex-wrap: wrap; }
+  .pallette .hex {font-size: 14px;}
+  .pallette .color {width: 60px; height: 32px; cursor: pointer;}
+  .pallette .color:hover {box-shadow: inset 0 0 4px #333;}
+</style>
+
+<h1>Color Picker</h1>
+
+<P>
+  Click any color to find its relevant colours.
+</P>
+
+<div class="inputs inline-block">
+  <div class="color-picker inline-block">
+    <input id="color-1" readonly/>
+    <x-overlay trigger="color-1">
+      <x-color-picker target="color-1"></x-color-picker>
+    </x-overlay>
+  </div>
+
+  <div class="color-value inline-block" style="position: relative">
+    <input id="color-value">
+    <x-overlay id="color-list-overlay" trigger="color-value">
+      <x-list id="color-list">
+        <template var-name="color">
+          <div value="${hex}">
+            <span class="color" style="background:${hex}">&nbsp;</span> ${name}
+          </div>
+        </template>
+      </x-list>
+    </x-overlay>
+  </div>
+
+  <div class="shades">
+    <br/>
+    <div class="colors">
+      <div class="pallette shades-1"></div>
+      <div class="pallette shades-2"></div>
+    </div>
+  </div>
+
+  <div>
+    <br/>
+    <div class="action-btns">
+      <button value="spin:10">+10<sup>&#x25cb;</sup></button>
+      <span class="label">H</span>
+      <button value="spin:-10">-10<sup>&#x25cb;</sup></button>
+    </div>
+    <div class="action-btns">
+      <button value="saturate:10%">+10%</button>
+      <span class="label">S</span>
+      <button value="saturate:-10%">-10%</button>
+    </div>
+    <div class="action-btns">
+      <button value="lighten:10%">+10%</button>
+      <span class="label">L</span>
+      <button value="lighten:-10%">-10%</button>
+    </div>
+  </div>
+
+  <pre id="msg"></pre>
+</div>
+
+<div class="related-colors inline-block">
+
+  <div class="predefined colors">
+    <h3 class="header" style="margin-top:0">Predefined Colours</h3>
+    <div class="colors pallette">
+      <div class="color-container">
+        <div class="color" title="#da2a1c" style="background:#da2a1c">&nbsp;</div>
+        <div class="hex">#da2a1c</div>
+        </div>
+      <div class="color-container">
+        <div class="color" title="#ffe600" style="background:#ffe600">&nbsp;</div>
+        <div class="hex">#ffe600</div>
+        </div>
+      <div class="color-container">
+        <div class="color" title="#ff0000" style="background:#ff0000">&nbsp;</div>
+        <div class="hex">#ff0000</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="complementary">
+    <h3 class="header">Complementary / Split Complmentary</h3>
+    <div class="colors pallette"></div>
+  </div>
+
+  <div class="triadic">
+    <h3 class="header">Triadic / Tetriadic</h3>
+    <div class="colors pallette"></div>
+  </div>
+
+  <div class="analagous">
+    <h3 class="header">Analagous</h3>
+    <div class="colors pallette"></div>
+  </div>
+
+</div>
+
+<h2>Color Description</h2>
+From <a href="https://www.ethangardner.com/articles/2009/03/15/a-math-based-approach-to-colour-theory-using-hue-saturation-and-brightness-hsb/">here</a>
+
+<div class="complementary">
+  <h3 id="complementary">Complementary</h3>
+  <p>A complementary color scheme is a two-color combination consisting of a base color
+  (H<sub>0</sub>) and another color (H<sub>1</sub>) that is 180 degrees apart from H<sub>0</sub> on the color wheel.</p>
+
+  <ul>
+    <li>formula: H<sub>1</sub> = |(H<sub>0</sub> + 180 degrees) - 360 degrees|</li>
+  </ul>
+</div>
+
+<div class="split-complementary">
+  <h3 id="split-complementary">Split Complementary</h3>
+  <p>A split-complementary color scheme is a three-color combination that consists of a base color (H<sub>0</sub>) and two colors (H<sub>1</sub> and H<sub>2</sub>) that are 150 degrees and 210 degrees apart from H<sub>0</sub> respectively.</p>
+
+  <ul>
+    <li>formula: H<sub>1</sub> = |(H<sub>0</sub> + 150 degrees) - 360 degrees|</li>
+    <li>formula: H<sub>2</sub> = |(H<sub>0</sub> + 210 degrees) - 360 degrees|</li>
+  </ul>
+</div>
+
+<div class="triadic">
+  <h3 id="triadic">Triadic</h3>
+  <p>This is a three-color combination that consists of a base color (H<sub>0</sub>) and two colors (H<sub>1</sub> and H<sub>2</sub>) that are 120 degrees and 240 degrees apart from H<sub>0</sub> respectively.</p>
+
+  <ul>
+    <li>formula: H<sub>1</sub> = |(H<sub>0</sub> + 120 degrees) - 360 degrees|</li>
+    <li>formula: H<sub>2</sub> = |(H<sub>0</sub> + 240 degrees) - 360 degrees|</li>
+  </ul>
+</div>
+
+<div class="tetradic">
+  <h3 id="tetradic">Tetradic</h3>
+  <p>A four-color combination that consists of a base color (H<sub>0</sub>) and three colors (H<sub>1</sub>, H<sub>2</sub>, and H<sub>3</sub>) that are 90 degrees, 180 degrees, and 270 degrees     apart from H<sub>0</sub> respectively.</p>
+
+  <ul>
+    <li>formula: H<sub>1</sub> = |(H<sub>0</sub> + 90 degrees) - 360 degrees|</li>
+    <li>formula: H<sub>2</sub> = |(H<sub>0</sub> + 180 degrees) - 360 degrees|</li>
+    <li>formula: H<sub>3</sub> = |(H<sub>0</sub> + 270 degrees) - 360 degrees|</li>
+  </ul>
+</div>
+
+<di class="analagous">
+  <h3 id="analagous">Analagous</h3>
+  <p>Analagous color schemes use a combination consisting of a base color (H<sub>0</sub>) and one or more adjacent colors (30 degrees apart) on the color wheel.</p>
+
+  <ul>
+    <li>formula: H<sub>1</sub> = |(H<sub>0</sub> + 30 degrees) - 360 degrees|</li>
+    <li>formula: H<sub>2</sub> = |(H<sub>0</sub> + 60 degrees) - 360 degrees|</li>
+    <li>formula: H<sub>3</sub> = |(H<sub>0</sub> + 90 degrees) - 360 degrees|</li>
+  </ul>
+</div>
+
+<script src="/tools/color-pallette/color.js"></script>
+<script src="/tools/color-pallette/init.js"></script>

@@ -9,7 +9,7 @@
     "build:demo": "cross-env NODE_ENV=development webpack --mode=development",
     "build:lib": "webpack --config webpack.lib.config.js --mode=production",
     "start": "webpack-dev-server --history-api-fallback",
-    "eslint": "eslint src lib --fix && git add"
+    "eslint": "eslint src lib --fix && git add ."
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.com/"

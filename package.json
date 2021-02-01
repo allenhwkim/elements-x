@@ -11,12 +11,12 @@
     "start": "webpack-dev-server --history-api-fallback",
     "eslint": "eslint --fix && git add"
   },
-  "hooks": {
-    "pre-commit": "lint-staged"
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.com/"
   },
+  "pre-commit": [
+    "eslint"
+  ],
   "files": [
     "dist"
   ],

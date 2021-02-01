@@ -10,6 +10,15 @@
     "build:lib": "webpack --config webpack.lib.config.js --mode=production",
     "start": "webpack-dev-server --history-api-fallback"
   },
+  "hooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.com/"
   },

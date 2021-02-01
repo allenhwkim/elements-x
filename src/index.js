@@ -20,11 +20,11 @@ document.body.addEventListener('keydown',
 window.addEventListener('DOMContentLoaded', function() {
   if (window.location.hostname !== 'localhost') {
     [ {
-        src: 'https://www.googletagmanager.com/gtag/js?id=G-5EB3NQZC8W', async: '' 
-      },{
-        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', async: '',
-        'data-ad-client': 'ca-pub-4555199270235339'
-      }
+      src: 'https://www.googletagmanager.com/gtag/js?id=G-5EB3NQZC8W', async: '' 
+    },{
+      src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', async: '',
+      'data-ad-client': 'ca-pub-4555199270235339'
+    }
     ].forEach( function addScriptEl(el) {
       var script = document.createElement('script');
       for(var key in el) { script[key] = el[key]; }
@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', function() {
     });
     setTimeout(function() {
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag(){window.dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-5EB3NQZC8W');
     }, 1000);

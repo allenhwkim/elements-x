@@ -22,8 +22,8 @@ class AppPre extends HTMLElement {
 
   connectedCallback() {
     setCustomElementHTMLCss(this, null, css).then(_ => {
-      const newText = this._fixIndent(this.innerHTML)
-      this.innerHTML = newText.replace(/^\n/, '').trim();;
+      const newText = this._fixIndent(this.innerHTML);
+      this.innerHTML = newText.replace(/^\n/, '').trim();
     });
   }
 
@@ -31,10 +31,10 @@ class AppPre extends HTMLElement {
     const firstIndent = code.match(/^([\n\t ]+)/);
     if (firstIndent) {
       const removeThis = firstIndent[1].replace(/\n/,'');
-      const re = new RegExp(`^${removeThis}`, 'gm')
+      const re = new RegExp(`^${removeThis}`, 'gm');
       return code.replace(re, '');
     }
-   return code;
+    return code;
   }
 }
 

@@ -14,10 +14,8 @@ const componentsHeaderHTML = `
       </a>
     </div>
   </div>`;
-const articlesHeaderHTML = `article header`;
-const toolsHeaderHTML = `tools header`;
-
-const css = ``;
+const articlesHeaderHTML = 'article header';
+const toolsHeaderHTML = 'tools header';
 
 class AppGroupHeader extends HTMLElement {
   // adoptedCallback() {}
@@ -31,7 +29,7 @@ class AppGroupHeader extends HTMLElement {
 
   connectedCallback() {
     document.addEventListener('x-route-change', event => {
-      const groupName = event.detail.state.href.match(/^\/[^\/]*/)[0];
+      const groupName = event.detail.state.href.match(/^\/[^/]*/)[0];
       const route = event.detail.state;
       if (groupName.indexOf('components')) {
         this._setComponentHeader(route);
@@ -61,9 +59,9 @@ class AppGroupHeader extends HTMLElement {
       } else {
         this.querySelector('#component-name').innerText = 'Components'; 
         this.querySelector('#github-code').setAttribute('href', 
-          `https://github.com/elements-x/elements-x`);
+          'https://github.com/elements-x/elements-x');
         this.querySelector('#github-issue').setAttribute('href', 
-          `https://github.com/elements-x/elements-x/issues`);
+          'https://github.com/elements-x/elements-x/issues');
       }
       this.style.display = 'block';
     } else {

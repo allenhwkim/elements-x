@@ -45,7 +45,7 @@ const html = `
       </pre>
     </div>
   </div>
-`
+`;
 
 class AppCustomCss extends HTMLElement {
   // adoptedCallback() {}
@@ -64,16 +64,16 @@ class AppCustomCss extends HTMLElement {
       this.calledOnce = true;
       setCustomElementHTMLCss(this, html, css)
         .then(_ => {
-          document.addEventListener('click', this.docClickListener)
+          document.addEventListener('click', this.docClickListener);
           this._addEventListeners();
           this._initAceEditor();
           this.style.display = 'block';
-        })
+        });
     }
   }
 
   disconnectedCallback() {
-    document.removeEventListener('click', this.docClickListener)
+    document.removeEventListener('click', this.docClickListener);
     this.customStyleEl && this.customStyleEl.remove();
   }
 
@@ -124,7 +124,7 @@ class AppCustomCss extends HTMLElement {
     editor.setOption('maxLines', 200);
     editor.setOption('mode', 'ace/mode/css');
     editor.setOption('theme', 'ace/theme/github');
-    editor.on('blur', args => {
+    editor.on('blur', _ => {
       this._applyCustomCss(editor.getValue());
     });
 

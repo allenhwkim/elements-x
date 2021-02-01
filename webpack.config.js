@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const PrerenderSpaPlugin = require('prerender-spa-plugin');
 
 module.exports = {
@@ -13,17 +12,21 @@ module.exports = {
     path: path.resolve(__dirname, "./dist/demo"),
     filename: "[name].[chunkhash].js"
   },
-  // optimization: process.env.NODE_ENV === 'production' ? {
-  //     minimize: true, 
-  //     minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin()] 
-  //   } : undefined,
+  // target: ['web', 'es5'],
+  optimization: process.env.NODE_ENV === 'production' ? 
+    {
+      minimize: true, 
+      minimizer: [
+        new TerserPlugin({extractComments: false}),
+      ] 
+    } : undefined,
   node: {
     fs: 'empty'
   },
   performance: {
     hints: false,
-    maxEntrypointSize: 1024000,
-    maxAssetSize: 1024000
+    // maxEntrypointSize: 1024000,
+    // maxAssetSize: 1024000
   },
   plugins: [
     new CleanWebpackPlugin(),

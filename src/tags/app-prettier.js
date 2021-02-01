@@ -41,7 +41,7 @@ class AppPrettier extends HTMLElement {
       const options = {
         parser: this.parser,
         plugins: [cssParser, jsParser, htmlParser]
-      }
+      };
       console.log({options});  
       this.innerText = prettier.format(code, options);
     }

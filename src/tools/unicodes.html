@@ -48,7 +48,7 @@
 
 <script>
   // (128753).toString(16) // 1f6f1
-  class UniCode {
+  var UniCode = class {
     static getBlocks() {
       return fetch('https://codepoints.net/api/v1/block')
         .then(resp => resp.json())
@@ -79,12 +79,12 @@
     }
   }
 
-  const blockHeader = document.querySelector('.block-header');
+  var blockHeader = document.querySelector('.block-header');
   blockHeader.addEventListener('click', _ => 
     document.querySelector('.block-section').classList.toggle('folded'));
 
-  const blocksEl = document.querySelector('.unicodes .blocks');
-  const blockCodesEl = document.querySelector('.unicodes .block-codes');
+  var blocksEl = document.querySelector('.unicodes .blocks');
+  var blockCodesEl = document.querySelector('.unicodes .block-codes');
 
   function getCodeHTML(code) {
     const hex = code.toString(16); // integer to hex
@@ -116,9 +116,9 @@
     })
   }).then(_ => blocksEl.firstElementChild.click() );
 
-  const searchButtonEl = document.querySelector('#search-btn');
-  const searchResultEl = document.querySelector('.search-result');
-  const searchFunction =  function(event) {
+  var searchButtonEl = document.querySelector('#search-btn');
+  var searchResultEl = document.querySelector('.search-result');
+  var searchFunction =  function(event) {
     event.preventDefault();
     UniCode.search(document.querySelector('#search-input').value).then(resp => {
       searchResultEl.innerHTML = '';
@@ -130,7 +130,7 @@
     })
   }
   searchButtonEl.addEventListener('click', searchFunction);
-  const searchStr = Object.fromEntries(new URLSearchParams(location.search)).q;
+  var searchStr = Object.fromEntries(new URLSearchParams(location.search)).q;
   if (searchStr) {
     document.querySelector('#search-input').value = searchStr;
     searchButtonEl.click();

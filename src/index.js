@@ -48,7 +48,6 @@ document.body.addEventListener('x-route-change', event => {
       const iframeSrc = iframe.getAttribute('src')
         .replace(/&href=[^&]+/, `&href=${encodeURIComponent(href)}`);
       iframe.setAttribute('src', iframeSrc);
-      console.log({href});
     }, 500);
   }
 });

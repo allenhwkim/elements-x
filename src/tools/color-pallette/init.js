@@ -1,21 +1,26 @@
-// eslint-disable-next-line no-undef
-const color = new Color();
-
-const colorEl = document.querySelector('#color-1');
-const colorValueEl = document.querySelector('#color-value');
-const msgEl = document.querySelector('#msg');
-const colorPickerOverlay = document.querySelector('x-overlay[trigger=color-1]');
-
-// colorEl.addEventListener('change', setValues);
-colorPickerOverlay.addEventListener('color-selected', setValues); // old
-colorPickerOverlay.addEventListener('x-color-changed', setValues); // new
-colorValueEl.addEventListener('input', showColorList);
-colorValueEl.addEventListener('change', setValues);
-
-document.querySelectorAll('.action-btns').forEach(el =>el.addEventListener('click', modify));
-document.querySelectorAll('.pallette').forEach(el => el.addEventListener('click', setValues));
-
+var {color, colorEl, colorValueEl, msgEl} = initColors();
 setColor('#ff0000');
+
+function initColors() {
+  // eslint-disable-next-line no-undef
+  const color = new Color();
+
+  const colorEl = document.querySelector('#color-1');
+  const colorValueEl = document.querySelector('#color-value');
+  const msgEl = document.querySelector('#msg');
+  const colorPickerOverlay = document.querySelector('x-overlay[trigger=color-1]');
+
+  // colorEl.addEventListener('change', setValues);
+  colorPickerOverlay.addEventListener('color-selected', setValues); // old
+  colorPickerOverlay.addEventListener('x-color-changed', setValues); // new
+  colorValueEl.addEventListener('input', showColorList);
+  colorValueEl.addEventListener('change', setValues);
+
+  document.querySelectorAll('.action-btns').forEach(el =>el.addEventListener('click', modify));
+  document.querySelectorAll('.pallette').forEach(el => el.addEventListener('click', setValues));
+
+  return {color, colorEl, colorValueEl, msgEl};
+}
 
 function setColor(hex) {
   colorEl.value = hex;
@@ -102,11 +107,11 @@ function setShades(color) {
 /**
  * color list auto complete
  */
-const colorListOverlay = document.querySelector('#color-list-overlay');
-colorListOverlay.addEventListener('x-listitem-selected', event => {
-  setColor(event.detail.color.hex);
-  colorListOverlay.close();
-});
+document.querySelector('#color-list-overlay')
+  .addEventListener('x-listitem-selected', event => {
+    setColor(event.detail.color.hex);
+    document.querySelector('#color-list-overlay').close();
+  });
 
 function showColorList(event) {
   const search = event.target.value;
@@ -114,5 +119,5 @@ function showColorList(event) {
   // eslint-disable-next-line no-undef
   const colors = (Color.getNamedColors(search) || []).map( ([name, hex]) => ({name, hex}));
   colorListEl.datalist = colors;
-  colorListOverlay.open();
+  document.querySelector('#color-list-overlay').open();
 }

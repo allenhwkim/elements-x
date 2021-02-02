@@ -1,4 +1,4 @@
-class Color { // eslint-disable-line no-unused-vars
+var Color = class { // eslint-disable-line no-unused-vars
   constructor(color) {
     this.r = this.g = this.b = 0; // red, green, blue
     this.h = this.s = this.l = 0; // hue, saturation, lightness
@@ -181,4 +181,4 @@ class Color { // eslint-disable-line no-unused-vars
       ([k,_]) => k.indexOf(color) > -1
     );
   }
-}
+};

@@ -21,7 +21,7 @@ class AppPre extends HTMLElement {
   }
 
   connectedCallback() {
-    setCustomElementHTMLCss(this, null, css, 500).then(_ => {
+    setCustomElementHTMLCss(this, null, css).then(_ => {
       const code = this.innerHTML.replace(/<br>/g, '\n').replace(/<[^>]+>/g, '');
       this.innerHTML = fixIndent(code);
     });

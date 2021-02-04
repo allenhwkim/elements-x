@@ -1,4 +1,4 @@
-import  {setCustomElementHTMLCss}  from '../../lib/common/util';
+import  {setCustomElementHTMLCss, fixIndent}  from '../../lib/common/util';
 
 const css = `
   app-pre { 
@@ -21,20 +21,10 @@ class AppPre extends HTMLElement {
   }
 
   connectedCallback() {
-    setCustomElementHTMLCss(this, null, css).then(_ => {
-      const newText = this._fixIndent(this.innerHTML);
-      this.innerHTML = newText.replace(/^\n/, '').trim();
+    setCustomElementHTMLCss(this, null, css, 500).then(_ => {
+      const code = this.innerHTML.replace(/<br>/g, '\n').replace(/<[^>]+>/g, '');
+      this.innerHTML = fixIndent(code);
     });
-  }
-
-  _fixIndent(code) {
-    const firstIndent = code.match(/^([\n\t ]+)/);
-    if (firstIndent) {
-      const removeThis = firstIndent[1].replace(/\n/,'');
-      const re = new RegExp(`^${removeThis}`, 'gm');
-      return code.replace(re, '');
-    }
-    return code;
   }
 }
 

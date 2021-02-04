@@ -8,7 +8,7 @@
 
   <div class="right">
     <h3>Result</h3>
-    <app-prettier id="result" parser="json" contenteditable></app-prettier>
+    <div class="result" id="result" contenteditable></div> 
   </div>
 </div>
 
@@ -23,6 +23,14 @@
  }
  .flex .left #source {
   min-height: 320px; width: 100%; font-size: 14px;
+ }
+ .result {
+   font-family: monospace;
+   display: block;
+   border: 1px solid #ccc;
+   height: 320px;
+   white-space: pre-wrap;
+   overflow: auto;
  }
 </style>
 

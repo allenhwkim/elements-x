@@ -1,14 +1,9 @@
-// <body>...<script type="text/javascript" src="main.[hash].js"></script></body>
-import '../src/style.css';
-import '../src/app.scss';
-import '../src/app.mobile.scss';
+import './style.css';
+import './app.css';
+import './app.mobile.css';
 
-import '../lib';
-import './tags/app-custom-css';
-import './tags/app-pre';
-import './tags/app-group-header';
-import './tags/app-articles';
-import './tags/app-prettier';
+import 'elements-x';
+import './tags';
 
 // enable/disable outline for click and tab
 document.body.addEventListener('click', 

@@ -1,8 +1,3 @@
-import * as ace from 'brace';
-import 'brace/mode/css';
-import 'brace/theme/github';
-import * as prettier from 'prettier';
-import * as cssParser from 'prettier/parser-postcss';
 import  {setCustomElementHTMLCss}  from '../../lib/common/util';
 
 const css = `
@@ -36,15 +31,32 @@ const css = `
   `;
 
 const html = `
+  <script src="https://unpkg.com/ace-builds@1.4.12/src-min-noconflict/ace.js"></script>
   <div class="custom-css">
     <a id="edit-css">Override Default Style</a>
     <div class="editor-container ace">
-     When edit the default style css, it will be automatically applied.
-      <pre id="ace-editor">
+      <app-pre id="ace-editor">
         <slot></slot>
-      </pre>
+      </app-pre>
+      <x-button id="apply-custom-style" class="primary">Apply Custom Style</x-button>
     </div>
   </div>
+  <script>
+    setTimeout(_ => {
+      var editor = ace.edit("ace-editor");
+      editor.$blockScrolling = Infinity;
+
+      editor.clearSelection();
+      editor.resize();
+  
+      editor.setOption('useWorker', false); // disable error highlighting
+      editor.setOption('maxLines', 200);
+      editor.setOption('mode', 'ace/mode/css');
+      editor.setOption('theme', 'ace/theme/github');
+      editor.setOption('fontSize', '16px');
+      window.aceEditor = editor;
+    }, 1000);
+  </script>
 `;
 
 class AppCustomCss extends HTMLElement {
@@ -66,7 +78,6 @@ class AppCustomCss extends HTMLElement {
         .then(_ => {
           document.addEventListener('click', this.docClickListener);
           this._addEventListeners();
-          this._initAceEditor();
           this.style.display = 'block';
         });
     }
@@ -80,6 +91,10 @@ class AppCustomCss extends HTMLElement {
   _addEventListeners() {
     this.querySelector('#edit-css').addEventListener('click', 
       _ => this.classList.add('visible'));
+    this.querySelector('#apply-custom-style').addEventListener('click', _ => {
+      const css = window.aceEditor.getValue();
+      this._applyCustomCss(css);
+    });
   }
 
   _docClick(event) {
@@ -102,37 +117,8 @@ class AppCustomCss extends HTMLElement {
     this.classList.remove('visible');
     this.customStyleEl && this.customStyleEl.remove();
   }
-
-  _initAceEditor() {
-    const el = this.querySelector('#ace-editor');
-    const code = el.innerText;
-    // const editor = ace.edit('ace-editor'); // this cause error intermittently
-    const editor = ace.edit(el);
-    editor.$blockScrolling = Infinity;
-
-    const value = prettier.format(code, {parser: 'css', plugins: [cssParser]});
-    editor.setValue(value);
-    editor.clearSelection();
-
-    // const height =
-    //   (editor.getSession().getScreenLength() * editor.renderer.lineHeight) + 
-    //   editor.renderer['scrollBar'].getWidth();
-    // el.style.height  = height + "px";
-    editor.resize();
-
-    editor.setOption('useWorker', false); // disable error highlighting
-    editor.setOption('maxLines', 200);
-    editor.setOption('mode', 'ace/mode/css');
-    editor.setOption('theme', 'ace/theme/github');
-    editor.on('blur', _ => {
-      this._applyCustomCss(editor.getValue());
-    });
-
-    window.editor = editor;
-  }
 }
 
 if (!customElements.get('app-custom-css')) {
   customElements.define('app-custom-css', AppCustomCss);
 }
-

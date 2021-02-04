@@ -8,7 +8,7 @@
 
   <div class="right">
     <h3>Result</h3>
-    <app-prettier id="result" parser="css" contenteditable></app-prettier>
+    <div class="result" id="result" contenteditable></div>
   </div>
 </div>
 
@@ -21,17 +21,31 @@
    flex: 1; margin: 0 8px;
  }
  .flex .left #source {
-  min-height: 320px; width: 100%; font-size: 14px;
+  min-height: 320px; width: 100%; 
+ }
+ .result {
+   font-family: monospace;
+   display: block;
+   border: 1px solid #ccc;
+   height: 320px;
+   white-space: pre-wrap;
+   overflow: auto;
  }
 </style>
-<script>
+<script type="module">
+  import prettier from "https://unpkg.com/prettier@2.2.1/esm/standalone.mjs";
+  import parserCss from "https://unpkg.com/prettier@2.2.1/esm/parser-postcss.mjs";
+
+  function format(event) {
+    const code = document.querySelector('#source').value;
+    const formatted = prettier.format(code, { parser: 'css', plugins: [parserCss] });
+    document.querySelector('#result').innerText = formatted;
+  }
+
   (function(){
     document.querySelector('#source').innerText =
       '@media (max-width: 480px) { .bd-examples {margin-right: -.75rem;margin-left: -.75rem } .bd-examples>  { padding-right: .75rem; padding-left: .75rem; } }';
-    document.querySelector('#format').addEventListener('click', _ => {
-      document.querySelector('#result').innerText = document.querySelector('#source').value;
-      document.querySelector('#result').format();
-    });
+    document.querySelector('#format').addEventListener('click', format);
     document.querySelector('#format').click();
   })();
 </script>

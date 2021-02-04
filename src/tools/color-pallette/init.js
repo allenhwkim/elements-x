@@ -47,7 +47,7 @@ function setValues(event) {
 function modify(event) { // event value e.g. "spin:10"
   if (event.target.value) {
     const [action, v] = event.target.value.split(':');
-    console.log({action, v});
+    // console.log({action, v});
     colorEl.value = color[action](v);
     setValues();
   }

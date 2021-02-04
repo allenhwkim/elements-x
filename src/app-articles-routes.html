@@ -1,3 +1,31 @@
+<style>
+.article-contents .medium-article img {
+  max-width: 100%;
+}
+.article-contents .medium-article h1 {
+  margin: 70px 0 10px 0;
+  font-size: 32px;
+}
+.article-contents .medium-article h2 {
+  font-size: 24px;
+  margin: 44px 0 12px 0;
+}
+.article-contents .medium-article h2.subtitle {
+  line-height: 32px;
+  margin-bottom: 0;
+  font-weight: 300;
+}
+.article-contents .medium-article .list.number {
+  display: list-item;
+  margin-left: 1.3em;
+  list-style-type: decimal;
+}
+.article-contents .medium-article .list.bulletin {
+  display: list-item;
+  margin-left: 1.3em;
+  list-style-type: disc;
+}
+</style>
 <x-route target="article-contents">
   <app-articles></app-articles>
   <a class="route-item" href="/article" src="/src/app-articles-intro.html"></a>

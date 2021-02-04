@@ -37,6 +37,11 @@ app-custom-css {
 input {
   height: 32px;
 }
+input[type=checkbox],
+input[type=radio] {
+  height: auto;
+}
+
 x-click {
   cursor: pointer;
   color: blue;

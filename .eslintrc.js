@@ -1,7 +1,8 @@
+/* global module */
 module.exports = {
   plugins: [
-   'import',
-   'unused-imports',
+    'import',
+    'unused-imports',
   ],
   'env': {
     'browser': true,
@@ -17,10 +18,10 @@ module.exports = {
     'linebreak-style': [ 'error', 'unix' ],
     'quotes': [ 'error', 'single' ],
     'semi': [ 'error', 'always' ],
-    "unused-imports/no-unused-imports": "error",
-    'no-unused-vars': ["error", { 
-      varsIgnorePattern: "[_e]",
-      argsIgnorePattern: "[_e]"
+    // 'unused-imports/no-unused-imports': 'error', // causing error with require('....')
+    'no-unused-vars': ['error', { 
+      varsIgnorePattern: '[_e]',
+      argsIgnorePattern: '[_e]'
     }]
   }
 };

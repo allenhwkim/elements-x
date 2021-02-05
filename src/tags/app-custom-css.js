@@ -31,7 +31,6 @@ const css = `
   `;
 
 const html = `
-  <script src="https://unpkg.com/ace-builds@1.4.12/src-min-noconflict/ace.js"></script>
   <div class="custom-css">
     <a id="edit-css">Override Default Style</a>
     <div class="editor-container ace">

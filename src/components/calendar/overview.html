@@ -39,43 +39,31 @@
 
 <div class="example">
   <h3> Open calendar with button</h3>
-  <button id="show-calendar">Show Calendar</button>
-  <x-overlay id="calendar2" trigger="show-calendar">
-    <x-calendar></x-calendar>
+  <button>Show Calendar</button>
+  <x-overlay>
+    <x-calendar target="date2"></x-calendar>
   </x-overlay>
   Selected: <span id="date2"></span>
   <app-pre>
-    &lt;button id="<b>show-calendar</b>">Show Calendar&lt;/button>
-    &lt;x-overlay <b>trigger="show-calendar"</b>>
-      &lt;<b>x-calendar</b>>&lt;/<b>x-calendar</b>>
+    &lt;button>Show Calendar&lt;/button>
+    &lt;x-overlay>
+      &lt;<b>x-calendar</b>> target="date2"&lt;/<b>x-calendar</b>>
     &lt;/x-overlay>
   </app-pre>
-  <script>
-    document.querySelector('#calendar2').addEventListener('x-calendar-selected', event => {
-      document.querySelector('#date2').innerText = event.detail;
-      document.querySelector('#calendar2').close();
-    });
-  </script>
 </div>
 
 <div class="example">
   <h3> Open calendar for Input Field</h3>
-  <input id="calendar-input" />
-  <x-overlay id="calendar3" trigger="calendar-input">
+  <input />
+  <x-overlay>
     <x-calendar></x-calendar>
   </x-overlay>
   <app-pre>
-    &lt;input id="<b>calendar-input</b>" />
-    &lt;x-overlay <b>trigger="calendar-input"</b>>
+    &lt;input />
+    &lt;x-overlay>
       &lt;x-calendar>&lt;/x-calendar>
     &lt;/x-overlay>
   </app-pre>
-  <script>
-    document.querySelector('#calendar3').addEventListener('x-calendar-selected', event => {
-      document.querySelector('#calendar-input').value = event.detail;
-      document.querySelector('#calendar3').close();
-    });
-  </script>
 </div>
 
 <div class="example">
@@ -104,19 +92,15 @@
   <br/>
   <br/>
   <div style="width:400px; border: 1px solid #ccc">
-    <x-calendar id="calendar1" locale="en-US"></x-calendar>
+    <x-calendar target="date1" locale="en-US"></x-calendar>
   </div>
   Selected: <span id="date1"></span>
   <app-pre>
     &lt;div style="width:400px; border: 1px solid #ccc">
-      &lt;<b>x-calendar>&lt;</b>x-calendar</b>>
+      &lt;x-calendar target="date1" locale="en-US">&lt;/x-calendar>
     &lt;/div>
+    Selected: &lt;span id="date1">&lt;/span>
   </app-pre>
-  <script>
-    document.querySelector('#calendar1').addEventListener('x-calendar-selected', event => {
-      document.querySelector('#date1').innerText = event.detail;
-    });
-  </script>
 </div>
 
 <h2>Attributes</h2>
@@ -126,6 +110,7 @@
 <li><b>min-date</b>: lowest calendar date selectable. default. '1969-01-01'</li>
 <li><b>max-date</b>: lowest calendar date selectable. default. '2100-12-31'</li>
 <li><b>first-day-of-week</b>: Default 0, which is Sunday</li>
+<li><b>target</b>: id of element to be updated when a date is selected</li>
 
 <h2>Events</h2>
 <li><b>x-calendar-selected</b>: fired when date is selected with value in Date type</li>

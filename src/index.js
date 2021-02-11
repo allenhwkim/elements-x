@@ -4,6 +4,7 @@ import './app.mobile.css';
 
 import 'elements-x';
 import './tags';
+import { debounce } from '../lib/common/util';
 
 // enable/disable outline for click and tab
 document.body.addEventListener('click', 
@@ -35,14 +36,12 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 // facebook comments
-document.body.addEventListener('x-route-change', event => {
+document.body.addEventListener('x-route-change', debounce(event => {
   const iframe = document.querySelector('.fb-comments iframe'); 
   if (iframe) {
-    setTimeout(_ => {
-      const href = window.location.href.replace(window.location.search, '');
-      const iframeSrc = iframe.getAttribute('src')
-        .replace(/&href=[^&]+/, `&href=${encodeURIComponent(href)}`);
-      iframe.setAttribute('src', iframeSrc);
-    }, 500);
+    const href = window.location.href.replace(window.location.search, '');
+    const iframeSrc = iframe.getAttribute('src')
+      .replace(/&href=[^&]+/, `&href=${encodeURIComponent(href)}`);
+    iframe.setAttribute('src', iframeSrc);
   }
-});
+}, 500));

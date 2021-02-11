@@ -12,14 +12,14 @@
 
 <div class="example">
   <h3>Usage with x-overlay / input</h3>
-  <input id="color" />
-  <x-overlay trigger="color" id="clock-picker">
-    <x-color-picker target="color"></x-color-picker>
+  <input />
+  <x-overlay>
+    <x-color-picker></x-color-picker>
   </x-overlay>
   <app-pre>
-    &lt;input id="color" />
-    &lt;x-overlay trigger="color" id="clock-picker">
-      &lt;x-color-picker target="color">&lt;/x-color-picker>
+    &lt;input />
+    &lt;x-overlay>
+      &lt;x-color-picker>&lt;/x-color-picker>
     &lt;/x-overlay>
   </app-pre>
 </div>
@@ -37,7 +37,7 @@
 <h3>Attributes</h3>
 <li><b>width</b>: width of color pallette. e.g., 240</li>
 <li><b>height</b>: height of color pallette. e.g, 180</li>
-<li><b>trigger</b>: id of input field</li>
+<li><b>trigger</b>: id of element to be updated when a color is selected</li>
 
 <h3>Events</h3>
 <li><b>x-color-changed</b>: a custom event. selected color is in event.detail</li>

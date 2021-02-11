@@ -51,28 +51,27 @@
   <h2>With DIV</h2>
   You can navigate list items using keyboard arrow buttons.
 
-  <x-list select-first="true" id="list-div">
+  <x-list select-first="true" target="selected-pet">
     <div>Cat</div>
     <div>Dog</div>
     <div>Fish</div>
     <div>Bird</div>
   </x-list>
-  <div class="message" id="message-div">
-    &nbsp;
+  <div class="message">
+    <span> Selected </span> <span id="selected-pet"></span>
   </div>
-  <script>
-    document.querySelector('#list-div').addEventListener('x-listitem-selected', evt => {
-      document.querySelector('#message-div').innerText = `selected "${evt.detail.outerHTML}:`;
-    });
-  </script>
+
 
   <app-pre>
-    &lt;x-list select-first="true">
+    &lt;x-list select-first="true" target="selected-pet">
       &lt;div>Cat&lt;/div>
       &lt;div>Dog&lt;/div>
       &lt;div>Fish&lt;/div>
       &lt;div>Bird&lt;/div>
     &lt;/x-list>
+    &lt;div class="message">
+      &lt;span> Selected &lt;/span> &lt;span id="selected-pet">&lt;/span>
+    &lt;/div>
   </app-pre>
 </div>
 
@@ -133,9 +132,9 @@
   </p>
 
   <input id="pets-2" placeholder="Search pet">
-  <x-overlay trigger="pets-2">
+  <x-overlay>
     <x-list select-first filter-by="pets-2">
-      <div>Cats</div>
+      <div value="meow">Cats</div>
       <div>Dogs</div>
       <div>Birds</div>
       <div>Rabbits</div>
@@ -165,7 +164,7 @@
     The below is multi-leveled list. Click the list, 
     and usingh keyboard to open, close, or navigate list items.
   </p>
-  <x-list id="list-ul-li" selected="new">
+  <x-list id="list-ul-li" selected="new" target="menu-item-name">
     <ul class="x-expanded" >
       <li> File
         <ul>
@@ -205,13 +204,8 @@
     </ul>
   </x-list>
   <div class="message" id="message-ul-li">
-    &nbsp;
+    <span>Selected</span> <span id="menu-item-name"></span>
   </div>
-  <script>
-    document.querySelector('#list-ul-li').addEventListener('x-listitem-selected', evt => {
-      document.querySelector('#message-ul-li').innerText = `selected "${evt.detail.outerHTML}:`;
-    });
-  </script>
 
   <app-pre>
     &lt;x-list selected="new">
@@ -324,6 +318,7 @@
 <li><b>select-first</b>: Default true, select the first item when initialized</li>
 <li><b>selected</b>:  the id of preselected menu item, default null</li>
 <li><b>filter-by</b>: input element id to filter children input</li>
+<li><b>trigger</b>: id of element to be updated when a list-item is selected</li>
 
 <h3>Events</h3> 
 <li><b>x-listitem-selected</b>: Fired when menu item is selected by click or enter pressed</li>

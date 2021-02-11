@@ -1,3 +1,5 @@
+import {throttle} from '../../lib/common/util';
+
 const componentsHeaderHTML = `
   <div class="header vcentered">
     <h2 class="name" id="component-name">Component</h2>
@@ -28,26 +30,28 @@ class AppGroupHeader extends HTMLElement {
   }
 
   connectedCallback() {
-    document.addEventListener('x-route-change', event => {
-      const groupName = event.detail.state.href.match(/^\/[^/]*/)[0];
-      const route = event.detail.state;
-      if (groupName.indexOf('components')) {
-        this._setComponentHeader(route);
-      } else if (groupName.indexOf('tools')) {
-        this._setToolsHeader(route);
-      } else if (groupName.indexOf('articles')) {
-        this._setArticlesHeader(route);
-      } else {
-        this._setComponentHeader({name: ''});
-      }
-      this._prevGroupName = groupName;
-    });
+    document.addEventListener('x-route-change', throttle(
+      event => {
+        const groupName = event.detail.state.location.match(/^\/[^/]*/)[0];
+        const route = event.detail.state;
+        if (groupName.indexOf('components')) {
+          this._setComponentHeader(route);
+        } else if (groupName.indexOf('tools')) {
+          this._setToolsHeader(route);
+        } else if (groupName.indexOf('articles')) {
+          this._setArticlesHeader(route);
+        } else {
+          this._setComponentHeader({name: ''});
+        }
+        this._prevGroupName = groupName;
+      }, 500)
+    );
   }
 
   _setComponentHeader(route) {
     this.innerHTML = componentsHeaderHTML;
 
-    const componentRoute = route.path.indexOf('/component') !== -1;
+    const componentRoute = route.location.indexOf('/component') !== -1;
     if (componentRoute) {
       const elName = route.name.toLowerCase();
       if (elName ) {

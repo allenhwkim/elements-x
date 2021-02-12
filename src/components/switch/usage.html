@@ -8,7 +8,7 @@
   <div class="contents">
     <app-pre contents-for="js">
       &lt;script src="https://unpkg.com/elements-x/dist/switch">&lt;/script>
-      &lt;x-switch checked>
+      &lt;x-switch checked="checked">
         &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
       &lt;/x-switch>
     </app-pre>
@@ -20,7 +20,7 @@
       @Component({
         selector: 'my-app',
         template: `
-          &lt;x-switch checked>
+          &lt;x-switch checked="checked">
             &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
           &lt;/x-switch>
         `
@@ -37,7 +37,7 @@
     </app-pre>
     <app-pre contents-for="vue">
       &lt;template>
-        &lt;x-switch checked>
+        &lt;x-switch checked="checked">
           &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
         &lt;/x-switch>
       &lt;/template>
@@ -56,7 +56,7 @@
 
       export default function App() {
         return (
-          &lt;x-switch checked>
+          &lt;x-switch checked="checked">
             &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
           &lt;/x-switch>
         );

@@ -30,19 +30,19 @@
 
   <label>
     <x-radio>
-      <input type="radio" name="r1" value="1" checked> Yes
+      <input type="radio" name="r1" value="1" checked="checked" /> Yes
     </x-radio>
   </label>
   <label>
     <x-radio>
-      <input type="radio" name="r1" value="0"> No
+      <input type="radio" name="r1" value="0" /> No
     </x-radio>
   </label>
 
   <app-pre>
     &lt;label>
       &lt;x-radio>
-        &lt;input type="radio" name="r1" value="1" checked> Yes
+        &lt;input type="radio" name="r1" value="1" checked="checked"> Yes
       &lt;/x-radio>
     &lt;/label>
     &lt;label>
@@ -55,12 +55,12 @@
   <h3>Custom</h3>
   <label>
     <x-radio border="red" color="red" fill="red" size="24px" icon="★">
-      <input type="radio" name="r2" value="1"> Yes
+      <input type="radio" name="r2" value="1" /> Yes
     </x-radio>
   </label>
   <label>
     <x-radio border="red" color="red" fill="red" size="24px" icon="★">
-      <input type="radio" name="r2" value="0" checked> No
+      <input type="radio" name="r2" value="0" checked="checked" /> No
     </x-radio>
   </label>
   <app-pre>
@@ -71,7 +71,7 @@
     &lt;/label>
     &lt;label>
       &lt;x-radio border="red" color="red" fill="red" size="24px" icon="★">
-        &lt;input type="radio" name="r2" value="0" checked> No
+        &lt;input type="radio" name="r2" value="0" checked="checked"> No
       &lt;/x-radio>
     &lt;/label>  
   </app-pre>
@@ -80,26 +80,26 @@
 
   <label>
     <x-radio border="red" color="red" fill="red" size="24px" icon="★">
-    <input disabled type="radio" value="true" name="r3" checked> 
+    <input disabled="disabled" type="radio" value="true" name="r3" checked="checked" /> 
     Yes
     </x-radio>
   </label>
   <label>
     <x-radio border="red" color="red" fill="red" size="24px" icon="★">
-      <input disabled type="radio" value="false" name="r3">
+      <input disabled="disabled" type="radio" value="false" name="r3" />
       No
     </x-radio>
   </label>
   <app-pre>
     &lt;label>
       &lt;x-radio border="red" color="red" fill="red" size="24px" icon="★">
-      &lt;input disabled type="radio" value="true" name="r3" checked> 
+      &lt;input disabled="disabled" type="radio" value="true" name="r3" checked="checked"> 
       Yes
       &lt;/x-radio>
     &lt;/label>
     &lt;label>
       &lt;x-radio border="red" color="red" fill="red" size="24px" icon="★">
-        &lt;input disabled type="radio" value="false" name="r3">
+        &lt;input disabled="disabled" type="radio" value="false" name="r3">
         No
       &lt;/x-radio>
     &lt;/label> 

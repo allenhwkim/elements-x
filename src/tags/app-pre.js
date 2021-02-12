@@ -1,4 +1,4 @@
-import  {setCustomElementHTMLCss, fixIndent}  from '../../lib/common/util';
+import  {setCustomElementHTMLCss, fixIndent, addCss, removeCss}  from '../../lib/common/util';
 
 const css = `
   app-pre { 
@@ -21,10 +21,15 @@ class AppPre extends HTMLElement {
   }
 
   connectedCallback() {
-    setCustomElementHTMLCss(this, null, css).then(_ => {
+    addCss(this, css);
+    setCustomElementHTMLCss(this, null).then(_ => {
       const code = this.innerHTML.replace(/<br>/g, '\n').replace(/<[^>]+>/g, '');
       this.innerHTML = fixIndent(code);
     });
+  }
+
+  disconnectedCallback() {
+    removeCss(this);
   }
 }
 

@@ -32,8 +32,10 @@ class AppGroupHeader extends HTMLElement {
   connectedCallback() {
     document.addEventListener('x-route-change', throttle(
       event => {
-        const groupName = event.detail.state.location.match(/^\/[^/]*/)[0];
-        const route = event.detail.state;
+        const route = event.detail.state; 
+        const path = route.urlPath || '' + route.pattern;
+        const groupName = path.match(/^\/[^/]*/)[0];
+
         if (groupName.indexOf('components')) {
           this._setComponentHeader(route);
         } else if (groupName.indexOf('tools')) {
@@ -50,8 +52,10 @@ class AppGroupHeader extends HTMLElement {
 
   _setComponentHeader(route) {
     this.innerHTML = componentsHeaderHTML;
+  
+    const path = route.urlPath || '' + route.pattern;
+    const componentRoute = path.indexOf('/component') !== -1;
 
-    const componentRoute = route.location.indexOf('/component') !== -1;
     if (componentRoute) {
       const elName = route.name.toLowerCase();
       if (elName ) {

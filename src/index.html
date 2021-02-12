@@ -32,17 +32,20 @@
             </a>
           </div>
         </section>
-        <nav class="header-nav" ripple>
+        <nav class="header-nav">
           <x-click class="hamburger vcentered hcentered" set=".app.collapsed">
             <i class="fa fa-bars"></i>
           </x-click>
           <div class="links">
             <!-- side bar update -->
             <x-route target="side-bar">
+              <div pattern="/" src="/src/app-components-routes.html"></div>
+              <div pattern="/component/:name" src="/src/app-components-routes.html"></div>
+              <div pattern="/article/:title" src="/src/app-articles-routes.html"></div>
+              <div pattern="/tool/:page" src="/src/app-tools-routes.html"></div>
               <a href="/component" src="/src/app-components-routes.html">Components</a>
               <a href="/article" src="/src/app-articles-routes.html">Articles</a>
               <a href="/tool" src="/src/app-tools-routes.html">Tools</a>
-              <a href="/" src="/src/app-components-routes.html"></a>
             </x-route>
           </div>
           <div class="icons">

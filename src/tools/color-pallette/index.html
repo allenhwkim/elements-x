@@ -22,14 +22,14 @@
 
 <div class="inputs inline-block">
   <div class="color-picker inline-block">
-    <input id="color-1" readonly/>
+    <input id="color-1" readonly="readonly" />
     <x-overlay trigger="color-1">
       <x-color-picker target="color-1"></x-color-picker>
     </x-overlay>
   </div>
 
   <div class="color-value inline-block" style="position: relative">
-    <input id="color-value">
+    <input id="color-value" />
     <x-overlay id="color-list-overlay" trigger="color-value">
       <x-list id="color-list">
         <template var-name="color">
@@ -152,7 +152,7 @@ From <a href="https://www.ethangardner.com/articles/2009/03/15/a-math-based-appr
   </ul>
 </div>
 
-<di class="analagous">
+<div class="analagous">
   <h3 id="analagous">Analagous</h3>
   <p>Analagous color schemes use a combination consisting of a base color (H<sub>0</sub>) and one or more adjacent colors (30 degrees apart) on the color wheel.</p>
 

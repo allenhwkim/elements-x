@@ -19,7 +19,7 @@
 <div class="example">
   <h3>Default</h3>
   <p>
-    <x-switch checked>
+    <x-switch checked="checked">
       <b>OFF</b> <b>ON</b>
     </x-switch>
     <x-switch>
@@ -27,7 +27,7 @@
     </x-switch>
   </p>
   <app-pre>
-    &lt;x-switch checked>
+    &lt;x-switch checked="checked">
       &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
     &lt;/x-switch>
     &lt;x-switch>
@@ -40,7 +40,7 @@
     <x-switch checked="true" color="blue" size="24px">
       <b>No</b> <b>Yes</b>
     </x-switch>
-    <x-switch color="blue" size="24px" [checked]="false">
+    <x-switch color="blue" size="24px" checked="false">
       <b>No</b> <b>Yes</b>
     </x-switch>
   </p>
@@ -48,25 +48,25 @@
     &lt;x-switch checked="true" color="blue" size="24px">
       &lt;b>No&lt;/b> &lt;b>Yes&lt;/b>
     &lt;/x-switch>
-    &lt;x-switch color="blue" size="24px" [checked]="false">
+    &lt;x-switch color="blue" size="24px" checked="false">
       &lt;b>No&lt;/b> &lt;b>Yes&lt;/b>
     &lt;/x-switch>
   </app-pre>
 
   <p>
     DISABLED: <br/>
-    <x-switch checked disabled>
+    <x-switch checked="checked" disabled="disabled">
       <b>OFF</b> <b>ON</b>
     </x-switch>
-    <x-switch disabled>
+    <x-switch disabled="disabled">
       <b>OFF</b> <b>ON</b>
     </x-switch>
   </p>
   <app-pre>
-    &lt;x-switch checked disabled>
+    &lt;x-switch checked="checked" disabled="disabled">
       &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
     &lt;/x-switch>
-    &lt;x-switch disabled>
+    &lt;x-switch disabled="disabled">
       &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
     &lt;/x-switch>
   </app-pre>

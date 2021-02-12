@@ -102,8 +102,8 @@
     You can link to input element to display only related items.
   </p>
 
-  <input id="pets" placeholder="Search pet">
-  <x-list select-first filter-by="pets">
+  <input id="pets" placeholder="Search pet" />
+  <x-list select-first="true" filter-by="pets">
     <div>Cats</div>
     <div>Dogs</div>
     <div>Birds</div>
@@ -114,7 +114,7 @@
 
   <app-pre>
     &lt;input <b>id="pets"</b> placeholder="Search pet">
-    &lt;x-list select-first <b>filter-by="pets"</b>>
+    &lt;x-list select-first="true" <b>filter-by="pets"</b>>
       &lt;div>Cats&lt;/div>
       &lt;div>Dogs&lt;/div>
       &lt;div>Birds&lt;/div>
@@ -131,9 +131,9 @@
     You can display x-list as an overlay with x-overlay 
   </p>
 
-  <input id="pets-2" placeholder="Search pet">
+  <input id="pets-2" placeholder="Search pet" />
   <x-overlay>
-    <x-list select-first filter-by="pets-2">
+    <x-list select-first="true" filter-by="pets-2">
       <div value="meow">Cats</div>
       <div>Dogs</div>
       <div>Birds</div>
@@ -146,7 +146,7 @@
   <app-pre>
     &lt;input id="pets-2" placeholder="Search pet">
     &lt;x-overlay trigger="pets-2">
-      &lt;x-list select-first filter-by="pets-2">
+      &lt;x-list select-first="true" filter-by="pets-2">
         &lt;div>Cats&lt;/div>
         &lt;div>Dogs&lt;/div>
         &lt;div>Birds&lt;/div>
@@ -182,9 +182,9 @@
         <ul>
           <li>Undo</li>
           <li id="redo">Redo</li>
-          <li disabled>Cut</li>
-          <li disabled>Copy</li>
-          <li disabled>Paste</li>
+          <li disabled="disabled">Cut</li>
+          <li disabled="disabled">Copy</li>
+          <li disabled="disabled">Paste</li>
         </ul>
       </li>
       <li> Format
@@ -226,9 +226,9 @@
           &lt;ul>
             &lt;li>Undo&lt;/li>
             &lt;li id="redo">Redo&lt;/li>
-            &lt;li disabled>Cut&lt;/li>
-            &lt;li disabled>Copy&lt;/li>
-            &lt;li disabled>Paste&lt;/li>
+            &lt;li disabled="disabled">Cut&lt;/li>
+            &lt;li disabled="disabled">Copy&lt;/li>
+            &lt;li disabled="disabled">Paste&lt;/li>
           &lt;/ul>
         &lt;/li>
         &lt;li> Format
@@ -244,7 +244,7 @@
             &lt;li>Zoom Out&lt;/li>
           &lt;/ul>
         &lt;/li>
-        &lt;li id="help">Help</li>
+        &lt;li id="help">Help&lt;/li>
       &lt;/ul>
     &lt;/x-list>>
   </app-pre>
@@ -259,7 +259,7 @@
     You can set the variable name by proving 'var-name' as an attribute of &lt;template> tag.
   </p>
 
-  <input id="country-name">
+  <input id="country-name" />
   <x-list id="country-list" style="height: 200px; overflow: auto; padding: 8px;">
     <template var-name="country">
       <div><b>${alpha3Code}</b> ${name}</div>

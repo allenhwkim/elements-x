@@ -50,4 +50,4 @@ x-button.clicked { pointer-events: none; }
 
 x-button.loading { pointer-events: none; }
 x-button:not(.loading) .loading { display: none; }
-x-button:.loading .loading { display: initial; }}
+x-button.loading .loading { display: initial; }

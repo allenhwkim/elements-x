@@ -6,8 +6,8 @@
   "scripts": {
     "build": "rm -rf dist && npm run build:lib && npm run build:demo",
     "build:demo": "webpack --mode=production",
-    "build:lib": "webpack --config lib/webpack.config.js",
-    "start": "webpack serve --history-api-fallback",
+    "build:lib": "webpack --config lib/webpack.config.js --mode=production",
+    "start": "webpack serve --history-api-fallback --mode=development",
     "eslint": "eslint src lib --fix && git add"
   },
   "workspaces": [
@@ -42,6 +42,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-unused-imports": "^1.0.1",
     "file-loader": "^6.2.0",
+    "html-loader": "^1.3.2",
     "html-webpack-plugin": "^5.0.0",
     "mini-css-extract-plugin": "^1.3.5",
     "node-fetch": "^2.6.1",

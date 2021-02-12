@@ -19,7 +19,7 @@ x-list .x-highlighted {
 }
 
 /* with ul/li */
-x-list li.x-has-list[aria-expanded],
+x-list li.x-has-list[aria-expanded] {
   background: #f9f9f9;
 }
 x-list li.x-has-list[aria-expanded].x-highlighted {

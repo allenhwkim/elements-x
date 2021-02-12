@@ -1,10 +1,11 @@
-/*global require, module, __dirname, process*/
+/*global require, module, __dirname*/
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+// const PrerenderSpaPlugin = require('prerender-spa-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
@@ -46,7 +47,22 @@ module.exports = {
         { from: './src/_redirects' },
         { from: './robots.txt' }
       ]
-    })
+    }),
+    // new PrerenderSpaPlugin({
+    //   staticDir: path.join(__dirname, 'dist/demo'),
+    //   routes: [ '/', '/component', '/article', '/tool' ],
+    //   renderer: new PrerenderSpaPlugin.PuppeteerRenderer({
+    //     // renderAfterDocumentEvent: 'x-load-html',
+
+    //     // Optional - Wait to render until the specified element is detected using `document.querySelector`
+    //     // renderAfterElementExists: '#end-of-pre-rendering'
+
+    //     // Optional - Wait to render until a certain amount of time has passed.
+    //     // NOT RECOMMENDED
+    //     renderAfterTime: 5000, // Wait 5 seconds.
+    //     // headless: false 
+    //   })
+    // })
   ],
   module: {
     rules: [
@@ -61,8 +77,13 @@ module.exports = {
         }
       },
       { // load as string
-        test: [/.css$/, /.html$/],
-        exclude: [/index.html/, /style.css$/, /app.css$/, /app.mobile.css$/],
+        test: [/.html$/],
+        exclude: [/index.html/],
+        type: 'asset/source'
+      },
+      { // load as string
+        test: [/.css$/],
+        exclude: [/style.css$/, /app.css$/, /app.mobile.css$/],
         type: 'asset/source'
       },
       { // output as a file

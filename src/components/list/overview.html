@@ -103,7 +103,7 @@
   </p>
 
   <input id="pets" placeholder="Search pet" />
-  <x-list select-first="true" filter-by="pets">
+  <x-list select-first="true" search-input="pets">
     <div>Cats</div>
     <div>Dogs</div>
     <div>Birds</div>
@@ -114,7 +114,7 @@
 
   <app-pre>
     &lt;input <b>id="pets"</b> placeholder="Search pet">
-    &lt;x-list select-first="true" <b>filter-by="pets"</b>>
+    &lt;x-list select-first="true" <b>search-input="pets"</b>>
       &lt;div>Cats&lt;/div>
       &lt;div>Dogs&lt;/div>
       &lt;div>Birds&lt;/div>
@@ -133,7 +133,7 @@
 
   <input id="pets-2" placeholder="Search pet" />
   <x-overlay>
-    <x-list select-first="true" filter-by="pets-2">
+    <x-list select-first="true" search-input="pets-2">
       <div value="meow">Cats</div>
       <div>Dogs</div>
       <div>Birds</div>
@@ -146,7 +146,7 @@
   <app-pre>
     &lt;input id="pets-2" placeholder="Search pet">
     &lt;x-overlay trigger="pets-2">
-      &lt;x-list select-first="true" filter-by="pets-2">
+      &lt;x-list select-first="true" search-input="pets-2">
         &lt;div>Cats&lt;/div>
         &lt;div>Dogs&lt;/div>
         &lt;div>Birds&lt;/div>
@@ -155,98 +155,6 @@
         &lt;div>Fish&lt;/div>
       &lt;/x-list>
     &lt;/x-overlay>>
-  </app-pre>
-</div>
-
-<div class="example">
-  <h2>With UL/LI</h2>
-  <p>
-    The below is multi-leveled list. Click the list, 
-    and usingh keyboard to open, close, or navigate list items.
-  </p>
-  <x-list id="list-ul-li" selected="new" target="menu-item-name">
-    <ul class="x-expanded" >
-      <li> File
-        <ul>
-          <li id="new">New</li>
-          <li>Open
-            <ul>
-              <li>File A</li>
-              <li>File B</li>
-              <li>File C</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li> Edit
-        <ul>
-          <li>Undo</li>
-          <li id="redo">Redo</li>
-          <li disabled="disabled">Cut</li>
-          <li disabled="disabled">Copy</li>
-          <li disabled="disabled">Paste</li>
-        </ul>
-      </li>
-      <li> Format
-        <ul>
-          <li>Font</li>
-          <li>Text</li>
-        </ul>
-      </li>
-      <li> View
-        <ul>
-          <li>100%</li>
-          <li>Zoom In</li>
-          <li>Zoom Out</li>
-        </ul>
-      </li>
-      <li id="help">Help</li>
-    </ul>
-  </x-list>
-  <div class="message" id="message-ul-li">
-    <span>Selected</span> <span id="menu-item-name"></span>
-  </div>
-
-  <app-pre>
-    &lt;x-list selected="new">
-      &lt;ul class="x-expanded" >
-        &lt;li> File
-          &lt;ul>
-            &lt;li id="new">New&lt;/li>
-            &lt;li>Open
-              &lt;ul>
-                &lt;li>File A&lt;/li>
-                &lt;li>File B&lt;/li>
-                &lt;li>File C&lt;/li>
-              &lt;/ul>
-            &lt;/li>
-          &lt;/ul>
-        &lt;/li>
-        &lt;li> Edit
-          &lt;ul>
-            &lt;li>Undo&lt;/li>
-            &lt;li id="redo">Redo&lt;/li>
-            &lt;li disabled="disabled">Cut&lt;/li>
-            &lt;li disabled="disabled">Copy&lt;/li>
-            &lt;li disabled="disabled">Paste&lt;/li>
-          &lt;/ul>
-        &lt;/li>
-        &lt;li> Format
-          &lt;ul>
-            &lt;li>Font&lt;/li>
-            &lt;li>Text&lt;/li>
-          &lt;/ul>
-        &lt;/li>
-        &lt;li> View
-          &lt;ul>
-            &lt;li>100%&lt;/li>
-            &lt;li>Zoom In&lt;/li>
-            &lt;li>Zoom Out&lt;/li>
-          &lt;/ul>
-        &lt;/li>
-        &lt;li id="help">Help&lt;/li>
-      &lt;/ul>
-    &lt;/x-list>>
   </app-pre>
 </div>
 
@@ -260,17 +168,20 @@
   </p>
 
   <input id="country-name" />
-  <x-list id="country-list" style="height: 200px; overflow: auto; padding: 8px;">
+  <x-list id="country-list" style="height: 200px; overflow: auto; padding: 8px; border: 1px solid #ccc">
     <template var-name="country">
       <div><b>${alpha3Code}</b> ${name}</div>
     </template>
     <div>Search a country</div>
   </x-list>
+  <pre id="country-obj" style="height:300px;overflow:auto">
+  </pre>
 
   <script>
   // listen to input element key typing, then update the autocomplete list
   var countryName = document.querySelector('#country-name');
   var countryList = document.querySelector('#country-list');
+  var countryObj = document.querySelector('#country-obj');
   countryName.addEventListener('input', event => {
     if (!event.target.value) return;
     window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
@@ -281,6 +192,7 @@
   // listen to autocomplete list selection, then update input field and more
   countryList.addEventListener('x-listitem-selected', event => {
     countryName.value = event.detail.country.name;
+    countryObj.innerText = JSON.stringify(event.detail.country, null, '  ');
   });
   </script>
 
@@ -317,7 +229,7 @@
 <li><b>menu-style</b>: When given, the list works like menu by responding to mouseenter/mouseleave</li>
 <li><b>select-first</b>: Default true, select the first item when initialized</li>
 <li><b>selected</b>:  the id of preselected menu item, default null</li>
-<li><b>filter-by</b>: input element id to filter children input</li>
+<li><b>search-input</b>: input element id to filter children input</li>
 <li><b>trigger</b>: id of element to be updated when a list-item is selected</li>
 
 <h3>Events</h3> 

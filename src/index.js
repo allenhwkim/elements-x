@@ -36,12 +36,16 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 // facebook comments
-document.body.addEventListener('x-route-change', debounce(event => {
-  const iframe = document.querySelector('.fb-comments iframe'); 
-  if (iframe) {
-    const href = window.location.href.replace(window.location.search, '');
-    const iframeSrc = iframe.getAttribute('src')
-      .replace(/&href=[^&]+/, `&href=${encodeURIComponent(href)}`);
-    iframe.setAttribute('src', iframeSrc);
-  }
-}, 500));
+document.body.addEventListener('x-route-change', function() {
+  document.querySelector('.fb-comments').style.display = 'none'; // to avoid flicking
+  debounce(event => {
+    const iframe = document.querySelector('.fb-comments iframe'); 
+    if (iframe) {
+      const href = window.location.href.replace(window.location.search, '');
+      const iframeSrc = iframe.getAttribute('src')
+        .replace(/&href=[^&]+/, `&href=${encodeURIComponent(href)}`);
+      iframe.setAttribute('src', iframeSrc);
+    }
+    document.querySelector('.fb-comments').style.display = 'block';
+  }, 2000)();
+});

@@ -63,13 +63,13 @@ Also, you need to have Javascript to handle events;
   <h3> Simple Autocomplete </h3>
   <p>
     For simple autocomplete, you do not need to have Javascript to handle events.
-    Instead, by setting attribute "trigger" of &lt;x-obverlay> and "filter-by" of &lt;x-list> with 
+    Instead, by setting attribute "trigger" of &lt;x-obverlay> and "search-input" of &lt;x-list> with 
     value of &lt;input> id, it will work without any Javascript coding.
   </p>
 
   <input placeholder="Select pet types" id="simple-input" />
   <x-overlay id="simple-list" trigger="simple-input">
-    <x-list select-first="false" filter-by="simple-input">
+    <x-list select-first="false" search-input="simple-input">
       <div>Cats</div>
       <div>Dogs</div>
       <div>Birds</div>
@@ -84,7 +84,7 @@ Also, you need to have Javascript to handle events;
     <app-pre>
       &lt;input placeholder="Select pet types" <b>id="simple-input"</b> />
       &lt;x-overlay id="simple-list" <b>trigger="simple-input"</b>>
-        &lt;x-list select-first="false" <b>filter-by="simple-input"</b>>
+        &lt;x-list select-first="false" <b>search-input="simple-input"</b>>
           &lt;div>Cats&lt;/div>
           &lt;div>Dogs&lt;/div>
           &lt;div>Birds&lt;/div>
@@ -102,7 +102,7 @@ Also, you need to have Javascript to handle events;
   <div class="autocomplete">
     <input placeholder="Select favorite pet" id="my-input" />
     <x-overlay id="my-list" trigger="my-input">
-      <x-list select-first="false" filter-by="my-input">
+      <x-list select-first="false" search-input="my-input">
         <div>Cats</div>
         <div>Dogs</div>
         <div>Birds</div>
@@ -125,7 +125,7 @@ Also, you need to have Javascript to handle events;
       &lt;div class="autocomplete">
         &lt;input placeholder="Select favorite pet" <b>id="my-input"</b> />
         &lt;x-overlay id="my-list" <b>trigger="my-input"</b>>
-          &lt;x-list select-first="false" <b>filter-by="my-input"</b>>
+          &lt;x-list select-first="false" <b>search-input="my-input"</b>>
             &lt;div>Cats&lt;/div>
             &lt;div>Dogs&lt;/div>
             &lt;div>Birds&lt;/div>
@@ -160,7 +160,7 @@ Also, you need to have Javascript to handle events;
       <div class="ink-bar"></div>
     </x-textfield>
     <x-overlay id="pets" trigger="pet-name">
-      <x-list select-first="false" filter-by="pet-name">
+      <x-list select-first="false" search-input="pet-name">
         <div>Cats</div>
         <div>Dogs</div>
         <div>Birds</div>
@@ -181,7 +181,7 @@ Also, you need to have Javascript to handle events;
         &lt;div class="ink-bar">&lt;/div>
       &lt;/x-textfield>
       &lt;x-overlay id="pets" <b>trigger="pet-name"</b>>
-        &lt;x-list select-first="false" <b>filter-by="pet-name"</b>>
+        &lt;x-list select-first="false" <b>search-input="pet-name"</b>>
           &lt;div>Cats&lt;/div>
           &lt;div>Dogs&lt;/div>
           &lt;div>Birds&lt;/div>

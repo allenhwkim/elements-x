@@ -14,7 +14,7 @@
     display: none;
   }
   .message {
-    height: 1em;
+    padding: 8px;
     background: red;
     color: #FFF;
     overflow: hidden;
@@ -35,7 +35,11 @@
 <div class="example">
 
   <h2>Example</h2>
-  <x-menu id="my-menu" selected="redo">
+  <div class="message" id="message-div">
+    Select a menu item to display message here.
+  </div>
+  <br/>
+  <x-menu id="my-menu" selected="redo" class="dropdown">
     <ul>
       <li> File
         <ul>
@@ -74,21 +78,12 @@
       <li id="help">Help</li>
     </ul>
   </x-menu>
-  <div class="message" id="message-div">
-    &nbsp;
-  </div>
   <script>
     document.querySelector('#my-menu').addEventListener('x-menuitem-selected', evt => {
       document.querySelector('#message-div').innerText = `selected "${evt.detail.outerHTML}:`;
     });
   </script>
 
-  <script>
-    document.querySelector('#my-menu').addEventListener('x-menu-select', e => {
-      console.log(111111111111, e.detail);
-    });
-  </script>
-  
   <app-pre>
     &lt;x-menu id="my-menu" selected="redo">
       &lt;ul>
@@ -134,6 +129,121 @@
         console.log(e.detail);
       });
     &lt;/script>
+  </app-pre>
+</div>
+
+<div class="example">
+  <h2>With UL/LI</h2>
+  <p>
+    The below is multi-leveled list. Click the list, 
+    and usingh keyboard to open, close, or navigate list items.
+  </p>
+  <div class="message" id="message-ul-li">
+    Select an list item from the list.
+  </div>
+  <br/>
+
+  <x-menu id="list-ul-li" selected="new" target="menu-item-name">
+    <ul class="x-expanded" >
+      <li> File
+        <ul>
+          <li id="new">New</li>
+          <li>Open
+            <ul>
+              <li> Recent Files 
+                <ul>
+                  <li>File A</li>
+                  <li>File B</li>
+                  <li>File C</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li> Edit
+        <ul>
+          <li> Commands
+            <ul>
+              <li> Recent Comnands
+                <ul>
+                  <li>Undo</li>
+                  <li>Redo</li>
+                  <li>Open File</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul>
+          <li disabled="disabled">Cut</li>
+          <li disabled="disabled">Copy</li>
+          <li disabled="disabled">Paste</li>
+        </ul>
+      </li>
+      <li> Format
+        <ul>
+          <li>Font</li>
+          <li>Text</li>
+        </ul>
+      </li>
+      <li> View
+        <ul>
+          <li>100%</li>
+          <li>Zoom In</li>
+          <li>Zoom Out</li>
+        </ul>
+      </li>
+      <li id="help">Help</li>
+    </ul>
+  </x-list>
+
+  <script>
+    document.querySelector('#list-ul-li').addEventListener('x-menuitem-selected', evt => {
+      document.querySelector('#message-ul-li').innerText = `selected "${evt.detail.outerHTML}:`;
+    });
+  </script>
+
+  <app-pre>
+    &lt;x-list selected="new">
+      &lt;ul class="x-expanded" >
+        &lt;li> File
+          &lt;ul>
+            &lt;li id="new">New&lt;/li>
+            &lt;li>Open
+              &lt;ul>
+                &lt;li>File A&lt;/li>
+                &lt;li>File B&lt;/li>
+                &lt;li>File C&lt;/li>
+              &lt;/ul>
+            &lt;/li>
+          &lt;/ul>
+        &lt;/li>
+        &lt;li> Edit
+          &lt;ul>
+            &lt;li>Undo&lt;/li>
+            &lt;li id="redo">Redo&lt;/li>
+            &lt;li disabled="disabled">Cut&lt;/li>
+            &lt;li disabled="disabled">Copy&lt;/li>
+            &lt;li disabled="disabled">Paste&lt;/li>
+          &lt;/ul>
+        &lt;/li>
+        &lt;li> Format
+          &lt;ul>
+            &lt;li>Font&lt;/li>
+            &lt;li>Text&lt;/li>
+          &lt;/ul>
+        &lt;/li>
+        &lt;li> View
+          &lt;ul>
+            &lt;li>100%&lt;/li>
+            &lt;li>Zoom In&lt;/li>
+            &lt;li>Zoom Out&lt;/li>
+          &lt;/ul>
+        &lt;/li>
+        &lt;li id="help">Help&lt;/li>
+      &lt;/ul>
+    &lt;/x-list>>
   </app-pre>
 </div>
 

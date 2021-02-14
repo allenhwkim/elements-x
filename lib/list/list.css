@@ -3,41 +3,9 @@ x-list {
   max-height: 300px;
   overflow: auto;
 }
-x-list ul {
-  list-style: none;
-  padding-left: 32px;
-}
-x-list > ul {
-  padding-left: 0;
-}
-x-list > *, 
-x-list li {
+x-list > * {
   cursor: pointer;
 }
 x-list .x-highlighted {
   background: #ccc;
-}
-
-/* with ul/li */
-x-list li.x-has-list[aria-expanded] {
-  background: #f9f9f9;
-}
-x-list li.x-has-list[aria-expanded].x-highlighted {
-  background: #ccc;
-}
-x-list li:not([aria-expanded]) > ul {
-  display: none;
-}
- x-list li.x-has-list[aria-expanded] > ul {
-  background: #FFF;
-}
-x-list li.x-has-list[aria-expanded]::before {
-  content: '-';
-  display: inline-block;
-  width: 1em;
-}
-x-list li.x-has-list:not([aria-expanded])::before {
-  content: '+';
-  display: inline-block;
-  width: 1em;
 }

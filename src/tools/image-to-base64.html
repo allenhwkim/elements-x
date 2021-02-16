@@ -62,7 +62,7 @@
 </style>
 
 <script>
-  document.querySelector('#file-selector').addEventListener('x-file-changed', event => {
+  document.querySelector('#file-selector').addEventListener('x-file-selected', event => {
     const urlSrc = document.querySelector('#url-src');
     const urlCSS = document.querySelector('#url-css');
     if (event.detail) {

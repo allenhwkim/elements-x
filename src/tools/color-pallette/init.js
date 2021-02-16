@@ -11,8 +11,7 @@ function initColors() {
   const colorPickerOverlay = document.querySelector('x-overlay[trigger=color-1]');
 
   // colorEl.addEventListener('change', setValues);
-  colorPickerOverlay.addEventListener('color-selected', setValues); // old
-  colorPickerOverlay.addEventListener('x-color-changed', setValues); // new
+  colorPickerOverlay.addEventListener('x-color-selected', setValues);
   colorValueEl.addEventListener('input', showColorList);
   colorValueEl.addEventListener('change', setValues);
 

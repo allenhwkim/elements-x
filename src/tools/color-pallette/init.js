@@ -117,6 +117,6 @@ function showColorList(event) {
   const colorListEl = document.querySelector('#color-list');
   // eslint-disable-next-line no-undef
   const colors = (Color.getNamedColors(search) || []).map( ([name, hex]) => ({name, hex}));
-  colorListEl.datalist = colors;
+  colorListEl.value = colors;
   document.querySelector('#color-list-overlay').open();
 }

@@ -23,7 +23,7 @@ class AppPre extends HTMLElement {
   connectedCallback() {
     addCss(this, css);
     setCustomElementHTMLCss(this, null).then(_ => {
-      const code = this.innerHTML.replace(/<br>/g, '\n').replace(/<[^>]+>/g, '');
+      const code = this.innerHTML; // .replace(/<br>/g, '\n');
       this.innerHTML = fixIndent(code);
     });
   }

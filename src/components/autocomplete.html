@@ -228,7 +228,7 @@ Also, you need to have Javascript to handle events;
       if (!event.target.value) return;
       window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
         .then(resp => resp.ok && resp.json())
-        .then(resp => $_('#country-list').datalist = resp);
+        .then(resp => $_('#country-list').value = resp);
     });
 
     // listen to autocomplete list selection, then update input field and more
@@ -271,7 +271,7 @@ Also, you need to have Javascript to handle events;
         if (!event.target.value) return;
         window.fetch(`https://restcountries.eu/rest/v2/name/${event.target.value}`)
           .then(resp => resp.ok && resp.json())
-          .then(resp => $_('#country-list').datalist = resp);
+          .then(resp => $_('#country-list').value = resp);
       });
   
       // listen to autocomplete list selection, then update input field and more

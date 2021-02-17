@@ -1,0 +1,51 @@
+<link href="/components/div/todo/todo.css" rel="stylesheet">
+<h1 class="todo-header">todos</h1>
+
+<x-div class="todoapp">
+  <header class="header">
+    <input id="toggle-all" type="checkbox" class="toggle-all" /> 
+    <label for="toggle-all">Mark all as complete</label>
+    <input autofocus="autofocus" autocomplete="off" 
+      placeholder="What needs to be done?" class="new-todo" 
+      x-enter="add(todos, id=::id, done=false, name=::value)" />
+  </header>
+  <section class="main">
+    <x-list x-value="todos" class="todo-list">
+      <li class="todo">
+        <div class="view">
+          <input type="checkbox" class="toggle" />
+          <label contenteditable>A</label> 
+          <button class="destroy"></button>
+        </div>
+        <input type="text" class="edit" />
+      </li>
+      <li class="todo">
+        <div class="view">
+          <input type="checkbox" class="toggle" />
+          <label contenteditable>B</label> 
+          <button class="destroy"></button>
+        </div>
+        <input type="text" class="edit" />
+      </li>
+    </x-list>
+  </section>
+  <footer class="footer">
+    <span class="todo-count">
+      <strong>1</strong> item left 
+    </span>
+    <ul class="filters">
+      <li><a class="selected">All</a></li>
+      <li><a class="">Active</a></li>
+      <li><a class="">Completed</a></li>
+    </ul> 
+    <button class="clear-completed">
+      Clear completed
+    </button>
+  </footer>
+</x-div>
+
+<footer class="todoapp-info">
+  <p>Double-click to edit a todo</p>
+  <p>Written by <a href="https://allenhwkim.medium.com">Allen Kim</a></p>
+  <!-- <p>Part of <a href="http://todomvc.com">TodoMVC</a></p> -->
+</footer>

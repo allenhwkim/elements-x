@@ -1,0 +1,67 @@
+<style>
+  .example { display: flex; align-items: flex-start; }
+  .example > * { border: 1px solid #ccc; margin: 0 24px 0 0; padding: 12px;}
+</style>
+<h2>Simple Data Binding</h2>
+Following examples demonstrate simple data binding and event handling using &x-div> and attributes.
+
+<p>
+  This demo. shows the given name initially on both input field and message field. When input field
+  is updated, the message field is also updated with the same value.
+</p>
+
+This example uses only one property, name, and processing flow for property 'name' is like the following.
+<ul>
+  <li> <b>One-time Property Inititialization</b> <br/>
+    When &lt;x-div> starts, read 'name' attribute, then initialize "name" attribute.</li>
+  <li> <b>One-way Data Binding</b> <br/>
+    When &lt;x-div> property 'name' is assigned, it also binds value of elements having x-value attribute</li>
+  <li> <b>One-way Event Processing</b><br/>
+    When input event happens, it assigns input value to "name" property.</li>
+  <li> <b>One-way Data Binding</b> <br/>
+    When &lt;x-div> property 'name' is updated, it also binds value of elements having x-value attribute</li>
+</ul>
+
+<div class="example">
+  <x-div name="Mr X">
+    Name: <input x-value="name" x-input="set(name)"/>
+    <p>Hello <b x-value="name"></b> </p>
+  </x-div>
+  <app-pre>
+    &lt;x-div <b>name</b>="Mr X">
+      Name: &lt;input <b>x-value</b>="name" <b>x-input</b>="set(name)"/>
+      &lt;p>Hello &lt;b <b>x-value</b>="name">&lt;/b> &lt;/p>
+    &lt;/x-div>
+  </app-pre>
+</div>
+
+
+<h2>Simple Style Binding</h2>
+
+<p>
+  This demo. shows how to build a color using three input field, r, g, and b.
+  This example uses three property, r, g, and b, and these are used to show a background color.
+</p>
+
+<div class="example">
+  <x-div r="99" g="0" b="0" style="width: 240px;">
+    R: <input type="range" max="255" value="99" x-change="set(r)"/><br/>
+    G: <input type="range" max="255" value="0" x-change="set(g)"/><br/>
+    B: <input type="range" max="255" value="0" x-change="set(b)"/><br/>
+    <div x-style="background:rgb({{r}},{{g}},{{b}}); height: 60px;"></div>
+  </x-div>
+  <app-pre>
+    &lt;x-div r="99" g="0" b="0">
+      R: &lt;input type="range" max="255" value="99" <b>x-change</b>="set(r)"/>
+      G: &lt;input type="range" max="255" value="0" <b>x-change</b>="set(g)"/>
+      B: &lt;input type="range" max="255" value="0" <b>x-change</b>="set(b)"/>
+      &lt;div <b>x-style</b>="background:rgb(<b>{{r}},{{g}},{{b}}</b>)">&lt;/div>
+    &lt;/x-div>
+  </app-pre>
+</div>
+
+<p>
+  Next demo., Todo List, shows how to build a todo list only 
+  using &lt;x-div> and &lt;x-list without using any Javascript.
+</p>
+

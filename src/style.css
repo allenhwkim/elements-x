@@ -34,7 +34,7 @@ app-custom-css {
   position: absolute;
   right: 48px;
 }
-input {
+input:not([type]), input[type=text] {
   height: 32px;
 }
 input[type=checkbox],

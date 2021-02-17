@@ -47,5 +47,5 @@ document.body.addEventListener('x-route-change', function() {
       iframe.setAttribute('src', iframeSrc);
     }
     document.querySelector('.fb-comments').style.display = 'block';
-  }, 2000)();
+  }, 5000)();
 });

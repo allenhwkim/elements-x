@@ -170,7 +170,7 @@
   <input id="country-name" />
   <x-list id="country-list" style="height: 200px; overflow: auto; padding: 8px; border: 1px solid #ccc">
     <template var-name="country">
-      <div><b>${alpha3Code}</b> ${name}</div>
+      <div><b>{{alpha3Code}}</b> {{name}}</div>
     </template>
     <div>Search a country</div>
   </x-list>
@@ -201,7 +201,7 @@
     &lt;input id="country-name">
     &lt;x-list id="country-list">
       &lt;template var-name="country">
-        &lt;div>&lt;b>${alpha3Code}&lt;/b> ${name}&lt;/div>
+        &lt;div>&lt;b>{{alpha3Code}}&lt;/b> {{name}}&lt;/div>
       &lt;/template>
     &lt;/x-list>
   </app-pre>

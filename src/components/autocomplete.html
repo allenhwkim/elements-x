@@ -209,7 +209,7 @@ Also, you need to have Javascript to handle events;
         <x-list id="country-list">
           <div>Search a country.</div>
           <template var-name="country">
-            <div><b>${alpha3Code}</b> ${name}</div>
+            <div><b>{{alpha3Code}}</b> {{name}}</div>
           </template>
           <template class="error">
             <div>Cannot find a country.</div>
@@ -251,7 +251,7 @@ Also, you need to have Javascript to handle events;
         &lt;x-list id="<b>country-list"</b>>
           &lt;div>Search a country.&lt;/div>
           &lt;template var-name="<b>country</b>">
-            &lt;div>&lt;b>${alpha3Code}&lt;/b> ${name}&lt;/div>
+            &lt;div>&lt;b>{{alpha3Code}}&lt;/b> {{name}}&lt;/div>
           &lt;/template>
           &lt;template class="<b>error</b>">
             &lt;div>Cannot find a country.&lt;/div>

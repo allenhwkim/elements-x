@@ -33,8 +33,8 @@
     <x-overlay id="color-list-overlay" trigger="color-value">
       <x-list id="color-list">
         <template var-name="color">
-          <div value="${hex}">
-            <span class="color" style="background:${hex}">&nbsp;</span> ${name}
+          <div value="{{hex}}">
+            <span class="color" style="background:{{hex}}">&nbsp;</span> {{name}}
           </div>
         </template>
       </x-list>

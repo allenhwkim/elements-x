@@ -11,22 +11,16 @@
   </header>
   <section class="main">
     <x-list x-value="todos" class="todo-list">
-      <li class="todo">
-        <div class="view">
-          <input type="checkbox" class="toggle" />
-          <label contenteditable>A</label> 
-          <button class="destroy"></button>
-        </div>
-        <input type="text" class="edit" />
-      </li>
-      <li class="todo">
-        <div class="view">
-          <input type="checkbox" class="toggle" />
-          <label contenteditable>B</label> 
-          <button class="destroy"></button>
-        </div>
-        <input type="text" class="edit" />
-      </li>
+      <template var-name="todo">
+        <li class="todo">
+          <div class="view">
+            <input type="checkbox" class="toggle" checked="done" />
+            <label contenteditable>{{name}}</label> 
+            <button class="destroy"></button>
+          </div>
+          <input type="text" class="edit" />
+        </li>
+      </template>
     </x-list>
   </section>
   <footer class="footer">

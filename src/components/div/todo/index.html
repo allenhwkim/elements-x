@@ -4,28 +4,31 @@
 <x-div class="todoapp">
   <header class="header">
     <input id="toggle-all" type="checkbox" class="toggle-all" /> 
-    <label for="toggle-all">Mark all as complete</label>
+    <label for="toggle-all">
+      <span class="check-all" x-click="set(todos.done=false.done, true)">❯</span>
+      <span class="uncheck-all" x-click="set(todos.done=true.done, false)">❯</span>
+    </label>
     <input autofocus="autofocus" autocomplete="off" 
       placeholder="What needs to be done?" class="new-todo" 
-      x-enter="add(todos, id=::id, done=false, name=::value)" />
+      x-enter="add(todos, done=false, name=::value)" />
   </header>
   <section class="main">
     <x-list x-value="todos" class="todo-list">
       <template var-name="todo">
-        <li class="todo">
+        <li id="{{id}}" class="todo {{completed if done}}">
           <div class="view">
-            <input type="checkbox" class="toggle" checked="done" />
+            <input type="checkbox" class="toggle" checked="{{done}}"
+              x-click="set(todos.id={{id}}.done, ::checked)" />
             <label contenteditable>{{name}}</label> 
-            <button class="destroy"></button>
+            <button class="destroy" x-click="remove(todos.id={{id}})"></button>
           </div>
-          <input type="text" class="edit" />
         </li>
       </template>
     </x-list>
   </section>
-  <footer class="footer">
+  <footer class="footer" x-class="visible:todos.length">
     <span class="todo-count">
-      <strong x-value="todos.length">0</strong> item left 
+      <strong x-value="todos.done=false.length">0</strong> item left 
     </span>
     <ul class="filters">
       <li><a class="selected">All</a></li>

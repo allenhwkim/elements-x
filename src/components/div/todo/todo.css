@@ -229,16 +229,6 @@
   justify-content: space-between;
 	padding: 10px 15px;
   border-top: 1px solid #e6e6e6;
-}
-
-.todoapp .footer:before {
-	content: '';
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	height: 50px;
-	overflow: hidden;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
 	            0 8px 0 -3px #f6f6f6,
 	            0 9px 1px -3px rgba(0, 0, 0, 0.2),
@@ -267,6 +257,7 @@
 
 .todoapp .footer .filters li a {
 	color: inherit;
+  cursor: pointer;
 	margin: 3px;
 	padding: 3px 7px;
 	text-decoration: none;
@@ -278,7 +269,13 @@
 	border-color: rgba(175, 47, 47, 0.1);
 }
 
-.todoapp .footer .filters li a.selected {
+.todoapp .footer .filters:not([filter]) li.all  a {
+	border-color: rgba(175, 47, 47, 0.2);
+}
+.todoapp .footer .filters[filter="done=false"] .active a {
+	border-color: rgba(175, 47, 47, 0.2);
+}
+.todoapp .footer .filters[filter="done=true"] .completed a{
 	border-color: rgba(175, 47, 47, 0.2);
 }
 

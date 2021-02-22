@@ -1,7 +1,7 @@
 <link href="/components/div/todo/todo.css" rel="stylesheet">
 <h1 class="todo-header">todos</h1>
 
-<x-div class="todoapp">
+<x-div class="todoapp" debug="1">
   <header class="header">
     <input id="toggle-all" type="checkbox" class="toggle-all" /> 
     <label for="toggle-all">
@@ -13,7 +13,7 @@
       x-enter="add(todos, done=false, name=::value)" />
   </header>
   <section class="main">
-    <x-list x-value="todos" class="todo-list">
+    <x-list id="todo-list" x-value="todos" class="todo-list" order="id desc" x-attr="filter:{{filter}}">
       <template var-name="todo">
         <li id="{{id}}" class="todo {{completed if done}}">
           <div class="view">
@@ -30,12 +30,12 @@
     <span class="todo-count">
       <strong x-value="todos.done=false.length">0</strong> item left 
     </span>
-    <ul class="filters">
-      <li><a class="selected">All</a></li>
-      <li><a class="">Active</a></li>
-      <li><a class="">Completed</a></li>
+    <ul class="filters" x-attr="filter:{{filter}}">
+      <li class="all"> <a x-click="set(filter, '')">All</a> </li>
+      <li class="active"> <a x-click="set(filter, 'done=false')">Active</a> </li>
+      <li class="completed"> <a x-click="set(filter, 'done=true')">Completed</a> </li>
     </ul> 
-    <button class="clear-completed">
+    <button class="clear-completed" x-click="remove(todos.done=true)">
       Clear completed
     </button>
   </footer>

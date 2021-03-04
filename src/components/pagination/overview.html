@@ -1,0 +1,93 @@
+
+<app-custom-css>
+</app-custom-css>
+
+<h2>Pagination Element</h2>
+
+<script>
+document.addEventListener('x-page-selected', function(event) {
+  document.querySelector('.message').innerText
+    = JSON.stringify(event.detail, null, '  ');
+});
+</script>
+
+<p>
+The &lt;x-pagination> element enables the user to select a specific page from a range of pages that are composed by total records,  number of records per page, and the current page number.
+</p>
+
+<app-pre>
+  &lt;x-pagination value="4"
+    num-records-per-page="10"
+    num-pages="5"
+    total-records="1000">
+  &lt;/x-pagination>
+</app-pre>
+
+<p>
+  It fires 'x-page-selected' event when a page is selected, so that a page-related setion. e.g., list, can react to it.
+</p>
+
+<p>
+  The following example demonstrates customizable pagination section along with showing x-page-selected message detail.
+</p>
+
+<hr/>
+<p>
+  <x-pagination
+    num-records-per-page="10"
+    num-pages="5"
+    total-records="1000"
+    value="4">
+  </x-pagination>
+</p>
+<hr/>
+
+<p>
+  <label> Number of records per page:</label>
+  <input type="range" value="10" max="100" step="10"
+    oninput="this.nextElementSibling.innerText = this.value"
+    onchange="document.querySelector('x-pagination').setAttribute('num-records-per-page', this.value);" /><b>10</b>
+
+  <br/>
+  <label> Number of pages to show:</label>
+  <input type="range" value="5" max="9" min="1" step="2"
+    oninput="this.nextElementSibling.innerText = this.value"
+    onchange="document.querySelector('x-pagination').setAttribute('num-pages', this.value);" /><b>5</b>
+
+  <br/>
+  <label> Total number of records:</label>
+  <input type="range" value="1000" max="5000"
+    oninput="this.nextElementSibling.innerText = this.value"
+    onchange="document.querySelector('x-pagination').setAttribute('total-records', this.value);" /><b>1000</b>
+
+  <br/>
+  <label> Current page number:</label>
+  <input type="range" value="4" max="100"
+    oninput="this.nextElementSibling.innerText = this.value"
+    onchange="document.querySelector('x-pagination').setAttribute('value', this.value);" /><b>4</b>
+
+  <br/>
+  <label> Display Type:</label>
+  <br/>
+  <input type="radio" value="1" checked name="text-type"
+    onclick="document.querySelector('x-pagination').setAttribute('text-type', this.value);"/> Page Number
+  <input type="radio" value="2" name="text-type"
+    onclick="document.querySelector('x-pagination').setAttribute('text-type', this.value);"/> Start Number 
+  <input type="radio" value="3"  name="text-type"
+    onclick="document.querySelector('x-pagination').setAttribute('text-type', this.value);"/> End Number
+  <input type="radio" value="4"  name="text-type"
+    onclick="document.querySelector('x-pagination').setAttribute('text-type', this.value);"/> Start Number - End Number
+</p>
+
+<b>x-page-selected event detail.</b>
+<app-pre class="message">Empty</app-pre>
+
+<h3> Attributes </h3>
+
+<li><b>value</b>: page number</li>
+<li><b>num-records-per-page</b>: number of records per page</li>
+<li><b>num-pages</b>: number of page buttons to display.</li>
+<li><b>total-records</b>: number of total records.</li>
+
+<h3> Events </h3>
+<li><b>x-page-selected</b>: fired when a page is selected with value as page, offset, and limit</li>

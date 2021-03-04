@@ -7,7 +7,7 @@
     "build": "rm -rf dist && npm run build:lib && npm run build:demo",
     "build:demo": "webpack --mode=production",
     "build:lib": "webpack --config lib/webpack.config.js --mode=production",
-    "start": "webpack serve --history-api-fallback --mode=development",
+    "start": "webpack serve --mode=development",
     "eslint": "eslint src lib --fix && git add"
   },
   "workspaces": [

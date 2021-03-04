@@ -1,4 +1,4 @@
-import  {setCustomElementHTMLCss, addCss, removeCss}  from '../../lib/common/util';
+import  {setHTML, addCss, removeCss}  from '../../lib/common/util';
 
 const css = `
   app-custom-css .custom-css { 
@@ -73,7 +73,7 @@ class AppCustomCss extends HTMLElement {
   connectedCallback()  {
     this.calledOnce = true;
     addCss(this, css);
-    setCustomElementHTMLCss(this, html)
+    setHTML(this, html)
       .then(_ => {
         document.addEventListener('click', this.docClickListener);
         this._addEventListeners();

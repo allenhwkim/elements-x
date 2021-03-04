@@ -1,0 +1,32 @@
+x-pagination {
+  display: block;
+  text-align: center;
+}
+
+x-pagination > .pages {
+  display: inline-block;
+}
+
+x-pagination .page {
+  border: 1px solid #ccc;
+  min-width: 28px;
+  min-height: 28px;
+  cursor: pointer;
+  text-align: center;
+}
+x-pagination .prev.page::before {
+  content : '<';
+}
+x-pagination .next.page::before {
+  content : '>';
+}
+
+x-pagination > .page {
+  border: none;
+  background: transparent;
+}
+
+x-pagination .pages > .page.selected {
+  background: #333;
+  color: #FFF;
+}

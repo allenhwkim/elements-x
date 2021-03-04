@@ -1,0 +1,25 @@
+
+<app-custom-css>
+</app-custom-css>
+
+<h3>HTTP</h3>
+<ul class="default">
+  <li>Making http call; GET, POST, PUT, DELETE etc</li> 
+</ul>
+
+<div class="example">
+  <x-div debug="2">
+    <x-http x-http-success="set(resp, event.detail)" url="/components/list/countries.json" auto></x-http>
+    <b>HTTP Response:</b>
+    <pre id="message" x-value="resp" style="height: 300px; overflow: auto"></pre>
+  </x-div>
+
+  <app-pre>
+    &lt;x-http x-http-success="set(resp, event.detail)" url="/components/list/countries.json" auto>
+    &lt;/x-http>
+    &lt;b>HTTP Response:&lt;/b>
+    &lt;pre id="message" x-value="resp" style="height: 300px; overflow: auto">&lt;/pre>
+  </app-pre>
+</div>
+
+

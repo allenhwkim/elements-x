@@ -1,0 +1,60 @@
+<x-tabs>
+  <div class="tabs">
+    <div tab-for="js">Javascript</div>
+    <div tab-for="ng">Angular</div>
+    <div tab-for="vue">VueJs</div>
+    <div tab-for="react">React</div>
+  </div>
+  <div class="contents">
+    <app-pre contents-for="js">
+      <b>import 'elements-x/dist/http';</b>
+
+      const myDiv = document.getElementById('my');
+      myDiv.innerHTML = `&lt;x-http url="/components/list/countries.json" auto>&lt;/x-http>`;
+    </app-pre>
+    <app-pre contents-for="ng">
+      import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      <b>import 'elements-x/dist/http';</b>
+      
+      @Component({
+        selector: 'my-app',
+        template: '<b>&lt;x-http url="/components/list/countries.json" auto>&lt;/x-http></b>'
+      })
+      class AppComponent  {}
+      
+      @NgModule({
+        imports:      [ BrowserModule ],
+        declarations: [ AppComponent ],
+        bootstrap:    [ AppComponent ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      })
+      export class AppModule {}
+    </app-pre>
+    <app-pre contents-for="vue">
+      &lt;template>
+        <b>&lt;x-http url="/components/list/countries.json" auto>&lt;/x-http></b>
+      &lt;/template>
+      
+      &lt;script>
+      <b>import 'elements-x/dist/http';</b>
+      
+      export default {
+        name: "App"
+      };
+      &lt;/script>
+    </app-pre>
+    <app-pre contents-for="react">
+      import React from "react";
+      <b>import 'elements-x/dist/http';</b>
+
+      export default function App() {
+        return (
+          &lt;div>
+            <b>&lt;x-http url="/components/list/countries.json" auto>&lt;/x-http></b> 
+          &lt;/div>
+        );
+      }
+    </app-pre>
+  </div>
+</x-tabs>

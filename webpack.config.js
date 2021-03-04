@@ -11,10 +11,20 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = {
   entry: {
     main: './src/index.js',
+    'sample-app': './sample-app/index.js'
   },
   output: {
     path: path.resolve(__dirname, './dist/demo'),
     filename: '[name].[chunkhash].js'
+  },
+  devServer: {
+    historyApiFallback: {
+      rewrites: [
+        { from: /^\/sample-app\/*/, to: '/sample-app/index.html' },
+        { from: /^\//, to: '/index.html' }
+        // { from: /./, to: '/views/404.html' },
+      ]
+    }
   },
   optimization: {
     minimize: true, 
@@ -34,7 +44,16 @@ module.exports = {
   plugins: [
     new BundleAnalyzerPlugin({analyzerMode: 'static', openAnalyzer: false}),
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({template: 'src/index.html'}),
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      chunks: ['main'],
+      filename: 'index.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: 'sample-app/index.html', 
+      chunks: ['sample-app'],
+      filename: 'sample-app/index.html'
+    }),
     // new MiniCssExtractPlugin({ linkType: 'text/css', }),
     new MiniCssExtractPlugin({filename: '[name].[chunkhash].css'}),
     new CopyWebpackPlugin({
@@ -48,34 +67,9 @@ module.exports = {
         { from: './robots.txt' }
       ]
     }),
-    // new PrerenderSpaPlugin({
-    //   staticDir: path.join(__dirname, 'dist/demo'),
-    //   routes: [ '/', '/component', '/article', '/tool' ],
-    //   renderer: new PrerenderSpaPlugin.PuppeteerRenderer({
-    //     // renderAfterDocumentEvent: 'x-load-html',
-
-    //     // Optional - Wait to render until the specified element is detected using `document.querySelector`
-    //     // renderAfterElementExists: '#end-of-pre-rendering'
-
-    //     // Optional - Wait to render until a certain amount of time has passed.
-    //     // NOT RECOMMENDED
-    //     renderAfterTime: 5000, // Wait 5 seconds.
-    //     // headless: false 
-    //   })
-    // })
   ],
   module: {
     rules: [
-      // {
-      //   test: [/.js$|.ts$/],
-      //   exclude: /(node_modules)/,
-      //   use: {
-      //     loader: 'babel-loader',
-      //     options: {
-      //       presets: ['@babel/preset-env', '@babel/typescript']
-      //     }
-      //   }
-      // },
       { // load as string
         test: [/.html$/],
         exclude: [/index.html/],

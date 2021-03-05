@@ -31,7 +31,7 @@
     debug id="my-pagination" num-pages="9"
     page-only x-page-selected="set(#my-http[page], event.detail.page)">
   </x-pagination>
-  <x-http id="my-http" debug
+  <x-http id="my-http" debug page="1"
     x-http-success="set(resp, event.detail)"
     url="https://gorest.co.in/public-api/users" auto></x-http>
 </x-div>

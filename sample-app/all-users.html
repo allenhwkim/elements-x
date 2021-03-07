@@ -3,8 +3,8 @@
 </style>
 
 <h1> List All Users</h1>
-<x-div debug="2">
-  <x-list x-value="resp.data" limit="20"  debug
+<x-div>
+  <x-list x-value="resp.data" limit="20"
     x-pagination="my-pagination" style="max-height: initial">
     <table width="100%">
       <thead>
@@ -33,10 +33,10 @@
   <x-pagination 
     x-value="resp.meta.pagination.total"
     num-records-per-page="20"
-    debug id="my-pagination" num-pages="9"
+    id="my-pagination" num-pages="9"
     page-only x-page-selected="set(#my-http[page], event.detail.page)">
   </x-pagination>
-  <x-http id="my-http" debug page="1"
+  <x-http id="my-http" page="1"
     x-http-success="set(resp, event.detail)"
     url="https://gorest.co.in/public-api/users" auto></x-http>
 </x-div>

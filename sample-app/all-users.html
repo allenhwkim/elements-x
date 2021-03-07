@@ -1,8 +1,10 @@
 <style>
   th {background: #ccc}
 </style>
+
+<h1> List All Users</h1>
 <x-div debug="2">
-  <x-list x-value="resp.data" limit="20" 
+  <x-list x-value="resp.data" limit="20"  debug
     x-pagination="my-pagination" style="max-height: initial">
     <table width="100%">
       <thead>

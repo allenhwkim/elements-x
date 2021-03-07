@@ -1,1 +1,32 @@
-show user
+<style>label {display: inline-block; width: 120px; font-weight: bold;} </style>
+
+<h1> User Info.</h1>
+<x-div debug="2">
+  <p>
+    <label>ID:</label> <span x-value="resp.data.id"></span>
+  </p>
+  <p>
+    <label>Name:</label> <span x-value="resp.data.name"></span>
+  </p>
+  <p>
+    <label>Email:</label> <span x-value="resp.data.email"></span>
+  </p>
+  <p>
+    <label>Gender:</label> <span x-value="resp.data.gender"></span>
+  </p>
+  <p>
+    <label>Status:</label> <span x-value="resp.data.status"></span>
+  </p>
+  <p>
+    <label>Created at:</label> <span x-value="resp.data.created_at"></span>
+  </p>
+  <p>
+    <label>Updated at:</label> <span x-value="resp.data.updated_at"></span>
+  </p>
+  <x-http id="my-http" debug x-attr="user-id:route.params.id" auto
+    x-http-success="set(resp, event.detail)"
+    url="https://gorest.co.in/public-api/users/{{user-id}}">
+  </x-http>
+  <button x-click="goto(/sample-app/list)">List</button>
+  <button x-click="goto(/sample-app/edit/:id, route.params.id)">Edit</button>
+</x-div>

@@ -1,5 +1,6 @@
 <html>
   <head>
+    <base href="/">
     <link rel="stylesheet" href="/assets/normalize.css" />
     <link rel="stylesheet" href="/assets/fontawesome/css/all.css" />
     <style>
@@ -36,13 +37,13 @@
     </ul>
 
     <x-route target="route-contents">
-      <li pattern="/sample-app" src="/sample-app/all-users.html"></li> 
-      <li pattern="/sample-app/" src="/sample-app/all-users.html"></li> 
-      <li pattern="/sample-app/list" src="/sample-app/all-users.html"></li> 
-      <li pattern="/sample-app/new" src="/sample-app/new-user.html"></li> 
-      <li pattern="/sample-app/show/:id" src="/sample-app/show-user.html"></li> 
-      <li pattern="/sample-app/edit/:id" src="/sample-app/edit-user.html"></li> 
-      <li pattern="/sample-app/delete/:id" src="/sample-app/delete-user.html"></li> 
+      <a pattern="/sample-app" src="/sample-app/all-users.html"></a> 
+      <a pattern="/sample-app/" src="/sample-app/all-users.html"></a> 
+      <a pattern="/sample-app/list" src="/sample-app/all-users.html"></a> 
+      <a pattern="/sample-app/new" src="/sample-app/new-user.html"></a> 
+      <a pattern="/sample-app/show/:id" src="/sample-app/show-user.html"></a> 
+      <a pattern="/sample-app/edit/:id" src="/sample-app/edit-user.html"></a> 
+      <a pattern="/sample-app/delete/:id" src="/sample-app/delete-user.html"></a> 
     </x-route>
     <div class="example" id="route-contents">
     </div>

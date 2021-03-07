@@ -14,5 +14,6 @@ x-http .loading {
 }
 
 x-http .loading.visible {
+  background: #FFF;
   display: flex;
 }

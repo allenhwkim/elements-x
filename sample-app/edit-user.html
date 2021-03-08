@@ -1,13 +1,14 @@
 <style>label {display: inline-block; width: 120px; font-weight: bold;} </style>
 
 <h1> Edit User Info.</h1>
-<x-div>
+<x-div debug="2">
   <form>
     <x-http id="get-user" x-attr="user-id:route.params.id" method="GET" auto
       x-http-success="set(resp, event.detail)"
       url="https://gorest.co.in/public-api/users/{{user-id}}">
     </x-http>
-    <x-http id="save-user" x-attr="user-id:route.params.id" method="PUT" 
+    <x-http debug id="save-user" x-attr="user-id:route.params.id" method="PUT" 
+      x-headers="Authorization: Bearer ab59e108c5d279e83e51564c27aecd3282fd7c6e3af7bbb2fe23b3175c4d5c85"
       url="https://gorest.co.in/public-api/users/{{user-id}}"
       x-http-success="goto(/sample-app/list)">
     </x-http>

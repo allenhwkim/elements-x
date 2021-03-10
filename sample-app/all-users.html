@@ -4,6 +4,7 @@
 
 <h1> List All Users</h1>
 <x-div>
+  <a x-click="goto(/sample-app/new)">New User</a>
   <x-list x-value="resp.data" limit="20"
     x-pagination="my-pagination" style="max-height: initial">
     <table width="100%">

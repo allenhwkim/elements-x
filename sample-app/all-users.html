@@ -35,9 +35,9 @@
     x-value="resp.meta.pagination.total"
     num-records-per-page="20"
     id="my-pagination" num-pages="9"
-    page-only x-page-selected="set(#my-http[page], event.detail.page)">
+    page-only x-page-selected="set(#my-http.payload.page, event.detail.page)">
   </x-pagination>
-  <x-http id="my-http" page="1"
+  <x-http id="my-http" payload="page=1"
     x-http-success="set(resp, event.detail)"
     url="https://gorest.co.in/public-api/users" auto></x-http>
 </x-div>

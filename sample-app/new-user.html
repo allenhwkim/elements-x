@@ -9,7 +9,7 @@
       url="https://gorest.co.in/public-api/users"
       payload="gender=Male;status=Active"
       resp-status-code="code"
-      x-headers="Authorization: Bearer ab59e108c5d279e83e51564c27aecd3282fd7c6e3af7bbb2fe23b3175c4d5c85"
+      headers="Authorization: Bearer ab59e108c5d279e83e51564c27aecd3282fd7c6e3af7bbb2fe23b3175c4d5c85"
       x-http-success="goto(/sample-app/list)"
       x-http-error="set(#error-message, event.detail.data)">
     </x-http>

@@ -2,7 +2,7 @@ x-http {
   display: block;
 }
 
-x-http .loading {
+x-http > .loading {
   position: absolute;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@ x-http .loading {
   justify-content: center;
 }
 
-x-http .loading.visible {
+x-http > .loading.visible {
   background: #FFF;
   display: flex;
 }

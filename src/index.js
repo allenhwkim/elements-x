@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 // facebook comments
 document.body.addEventListener('x-route-change', function() {
-  if (window.location.hostname === 'localhost') return;
+  if (window.location.hostname.startsWith('localhost')) return;
 
   document.querySelector('.fb-comments').style.display = 'none'; // to avoid flicking
   debounce(event => {

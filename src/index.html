@@ -18,12 +18,7 @@
     <script defer src="https://unpkg.com/ace-builds@1.4.12/src-min-noconflict/ace.js"></script>
   </head>
   <body>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous"
-      src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=254907754864724"
-      nonce="qRsDD5xh"></script>
-
-    <div class="app" ee-a11y-outline>
+    <x-div class="app" ee-a11y-outline>
       <header class="header">
         <section class="logo vcentered hcentered">
           <div class="title"> 
@@ -33,9 +28,9 @@
           </div>
         </section>
         <nav class="header-nav">
-          <x-click class="hamburger vcentered hcentered" set=".app.collapsed">
+          <span x-click="toggle(.app.collapsed)" class="hamburger vcentered hcentered">
             <i class="fa fa-bars"></i>
-          </x-click>
+          </span>
           <div class="links">
             <!-- side bar update -->
             <x-route target="side-bar" main-route>
@@ -65,6 +60,10 @@
              data-width="100%" data-numposts="5"></div>
         </article>
       </div>
-    </div>
+    </x-div>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=254907754864724"
+      nonce="qRsDD5xh"></script>
   </body>
 </html>

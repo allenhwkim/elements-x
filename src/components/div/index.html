@@ -23,12 +23,12 @@ This example uses only one property, name, and processing flow for property 'nam
 </ul>
 
 <div class="example">
-  <x-div name="Mr X">
+  <x-div name="Elements-X" debug trace>
     Name: <input x-value="name" x-input="set(name)"/>
     <p>Hello <b x-value="name"></b> </p>
   </x-div>
   <app-pre>
-    &lt;x-div <b>name</b>="Mr X">
+    &lt;x-div <b>name</b>="Elements-X">
       Name: &lt;input <b>x-value</b>="name" <b>x-input</b>="set(name)"/>
       &lt;p>Hello &lt;b <b>x-value</b>="name">&lt;/b> &lt;/p>
     &lt;/x-div>
@@ -44,15 +44,15 @@ This example uses only one property, name, and processing flow for property 'nam
 </p>
 
 <div class="example">
-  <x-div r="99" g="0" b="0" style="width: 240px;">
-    R: <input type="range" max="255" value="99" x-change="set(r)"/><br/>
+  <x-div r="255" g="0" b="0" style="width: 240px;">
+    R: <input type="range" max="255" value="255" x-change="set(r)"/><br/>
     G: <input type="range" max="255" value="0" x-change="set(g)"/><br/>
     B: <input type="range" max="255" value="0" x-change="set(b)"/><br/>
     <div x-style="background:rgb({{r}},{{g}},{{b}}); height: 60px;"></div>
   </x-div>
   <app-pre>
-    &lt;x-div r="99" g="0" b="0">
-      R: &lt;input type="range" max="255" value="99" <b>x-change</b>="set(r)"/>
+    &lt;x-div r="255" g="0" b="0">
+      R: &lt;input type="range" max="255" value="255" <b>x-change</b>="set(r)"/>
       G: &lt;input type="range" max="255" value="0" <b>x-change</b>="set(g)"/>
       B: &lt;input type="range" max="255" value="0" <b>x-change</b>="set(b)"/>
       &lt;div <b>x-style</b>="background:rgb(<b>{{r}},{{g}},{{b}}</b>)">&lt;/div>

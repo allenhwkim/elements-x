@@ -242,7 +242,7 @@ Also, you need to have Javascript to handle events;
     });
   </script>
 
-  <x-click set=".restful.code.visible">show/hide code</x-click>
+  <span onclick="document.querySelector('.restful.code').classList.toggle('visible')">show/hide code</x-click>
   <div class="restful code">
     HTML Code:
     <app-pre>

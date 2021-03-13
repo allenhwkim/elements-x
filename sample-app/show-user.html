@@ -1,7 +1,11 @@
-<style>label {display: inline-block; width: 120px; font-weight: bold;} </style>
+<style>
+x-div[error] :not(.error) { display: none; }
+x-div:not([error]) .error { display: none; }
+label {display: inline-block; width: 120px; font-weight: bold;}
+</style>
 
 <h1> User Info.</h1>
-<x-div debug="2">
+<x-div debug trace id="user-info">
   <p>
     <label>ID:</label> <span x-value="resp.data.id"></span>
   </p>
@@ -23,10 +27,25 @@
   <p>
     <label>Updated at:</label> <span x-value="resp.data.updated_at"></span>
   </p>
+  <p class="error">
+    Unknown error to show this user.
+  </p>
   <x-http id="my-http" debug x-attr="user-id:route.params.id" auto
+    resp-status-code="code"
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
     x-http-success="set(resp, event.detail)"
+    x-http-error="set(#user-info[error], true)"
     url="https://gorest.co.in/public-api/users/{{user-id}}">
   </x-http>
-  <button x-click="goto(/sample-app/list)">List</button>
+  <x-http id="delete-user" method="DELETE" debug x-attr="user-id:route.params.id"
+    resp-status-code="code"
+    headers="Authorization: Bearer ab59e108c5d279e83e51564c27aecd3282fd7c6e3af7bbb2fe23b3175c4d5c85"
+    x-http-success="goto(/sample-app/list)"
+    x-http-error="set(#delete-message.innerText, event.detail.data.message)"
+    url="https://gorest.co.in/public-api/users/{{user-id}}">
+  </x-http>
   <button x-click="goto(/sample-app/edit/:id, route.params.id)">Edit</button>
+  <button x-click="fetch(#delete-user)">Delete</button>
+  <button x-click="goto(/sample-app/list)">List</button>
+  <div id="delete-message"></div>
 </x-div>

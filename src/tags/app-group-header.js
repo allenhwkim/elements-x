@@ -1,6 +1,9 @@
 import {throttle} from '../../lib/common/util';
 
 const componentsHeaderHTML = `
+  <style>
+  .header > .links > a { display: inline-block;}
+  </style>
   <div class="header vcentered">
     <h2 class="name" id="component-name">Component</h2>
     <div class="links">

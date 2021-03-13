@@ -77,6 +77,7 @@ app-group-header .header .links {
 }
 .app > .header .header-nav .hamburger {
   width: 60px;
+  cursor: pointer;
   height: 60px;
   color: #333;
   border-right: 1px solid rgba(0, 0, 0, 0.14);
@@ -84,12 +85,17 @@ app-group-header .header .links {
 .app > .header .header-nav .hamburger:hover {
   background: #4aa2ff;
 }
+.app > .header .header-nav .hamburger .fa-bars {
+  pointer-events: none;
+}
 .app > .header .header-nav .links {
   flex: 1;
   padding: 24px;
 }
 .app > .header .header-nav .links a {
   margin-right: 12px;
+  color: #FFF; 
+  text-decoration: none;
 }
 .app > .header .header-nav .icons {
   padding: 24px;
@@ -113,6 +119,8 @@ app-group-header .header .links {
   margin: 0 -20px;
   display: flex;
   align-items: center;
+  color: #FFF; 
+  text-decoration: none;
 }
 .app > .main .aside .route-item i {
   width: 22px;

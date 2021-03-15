@@ -3,6 +3,9 @@
   margin: 0;
   padding: 0;
 } */
+li {
+  margin: 8px 0;
+}
 
 app-group-header .header {
   display: flex;

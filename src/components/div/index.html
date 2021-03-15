@@ -3,37 +3,6 @@
   .example > * { border: 1px solid #ccc; margin: 0 24px 0 0; padding: 12px;}
 </style>
 
-&lt;x-div> enables DOM changes by reacting to data changes and events
-<ul>
-  <li>Reacts to data change, and bind to element properties. e.g. x-value="color",
-    x-style="color:rgb({{r}},{{g}},{{b}})"
-    <ul>
-      <li>x-value="..."</li>
-      <li>x-style="..."</li>
-      <li>x-class="..."</li>
-      <li>x-attr="..."</li>
-    </ul>
-  </li>
-  <li>Reacts to x-* events which has command expression, e.g., x-click="set(color, ::value)"
-    <ul>
-      <li>x-click="..."</li>
-      <li>x-input="..."</li>
-      <li>x-change="..."</li>
-      <li>x-enter="..."</li>
-      <li>x-http-success="..."</li>
-      <li>x-http-error="..."</li>
-      <li>x-listitem-selected="..."</li>
-      <li>x-menuitem-selected="..."</li>
-      <li>x-date-selected="..."</li>
-      <li>x-time-selected="..."</li>
-      <li>x-color-selected="..."</li>
-      <li>x-file-selected="..."</li>
-      <li>x-route-change="..."</li>
-      <li>x-page-selected="..."</li>
-    </ul>
-  </li>
-</ul>
-
 <h2>Simple Data Binding Example</h2>
 
 <p>
@@ -110,9 +79,163 @@ How it works?
   </li>
 </ol>
 
-
 <x-div>
   Next demo., <a x-click="goto(/component/div/todo)">Todo List</a>, shows how to build a todo list only 
   using &lt;x-div> and &lt;x-list> without using any Javascript.
 </x-div>
 
+<p>
+  &lt;x-div> enables DOM changes by reacting to data changes and events
+</p>
+
+<ul>
+  <li>Reacts to data change, and bind to element properties. e.g. x-value="color",
+    x-style="color:rgb({{r}},{{g}},{{b}})"
+    <ul>
+      <li>x-value="&lt;value-expression&gt;"</li>
+      <li>x-style="&lt;style-expression&gt;"</li>
+      <li>x-class="&lt;value-expression&gt;"</li>
+      <li>x-attr="&lt;attribute-expression&gt;"</li>
+    </ul>
+  </li>
+  <li>Reacts to x-* events which has command expression, e.g., x-click="set(color, ::value)"
+    <ul>
+      <li>x-click="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-input="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-change="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-enter="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-http-success="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-http-error="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-listitem-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-menuitem-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-date-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-time-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-color-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-file-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-route-change="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>x-page-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+    </ul>
+  </li>
+</ul>
+
+&lt;<a href="/component/div#value-expression">value-expression</a>&gt;<br/>
+&lt;<a href="/component/div#style-expression">style-expression</a>&gt;<br/>
+&lt;<a href="/component/div#attribute-expression">attribute-expression</a>&gt;<br/>
+&lt;<a href="/component/div#target-expression">target-expression</a>&gt;<br/>
+&lt;<a href="/component/div#commands">command</a>&gt;<br/>
+
+<h2 id="value-expression">Value Expression</h2>
+<ul>
+  <li><b>Boolean expression</b><br/>
+    If `true`, true, if `false`, false.<br/>
+  </li>
+  <li><b>Boolean expression with = </b><br/>
+    If it has equal sign(=), comparison expression, it returns true/false by comparing two expression.
+    <br/> For example `resp.data.genter=Male`, it returns true or false value by comparing
+    `resp.data.gender` and `Male`.
+  <li><b>Element property expression</b><br/>
+    Starts with `::`. It returns the property value of the element. e.g. `::id`, `::checked`, or `::value`
+  </li>
+  <li><b>Number expression</b><br/>
+    It returns integer or float number as deffined. e.g. `123`, `123.456`
+  </li>
+  <li><b>DOM selector expression</b><br/>
+    It returns value property or innerText propety of the element searchable by selector expression.
+    The selector must starts with an id(#) or class expression(.)
+    e.g. #foo.bar, .my-klass#my-id, .my-klass.my-el
+  </li>
+  <li><b>String expression</b><br/>
+    It returns string value as it is. String value must have a space or a special character unless it's wrapped with a quotation.
+    e.g. 'foo', foo bar, foo!bar 
+  </li>
+  <li><b>&lt;x-div&gt; property expression</b><br/>
+    It returns property value of &lt;x-div&gt;.
+    For example `myObj` returns the property value of `myObj` in  &lt;x-div&gt;. and 
+    `myObj.myKey` returns the property value of `myObj.myKey` in  &lt;x-div&gt;. 
+  </li>
+  <li><b>&lt;x-div&gt; array expression</b><br/>
+    This has equal sign(=) in it. It returns array that matches to expression.
+    For example `todos.done=false` returns all elements in  &lt;x-div&gt; `todos` which has property valye of `done` is `false`.
+  </li>
+</ul>
+
+<h2 id="style-expression">Style Expression</h2>
+inline-style expression with bindings(wrapped with '{{' and '}}'). e.g., 
+<ul>
+  <li>x-style="color:rgb({{r}},{{g}},{{b}})"</li>
+</ul>
+
+<h2 id="attribute-expression">Attribute Expression</h2>
+Attribute name and attribute value are separated by colon(:). e.g.,
+<ul>
+  <li>x-attr="filter:{{filter}}"</li>
+  <li>x-attr="user-id:route.params.id"</li>
+</ul>
+
+<h2 id="target-expression">Target Expression</h2>
+<ul>
+  <li>
+    <b>Element Attribute Expression</b>:<br/>
+    It must starts with sharp(#) or dot(.) and ends with array css selector. e.g., #my-div[my-attr]
+  </li>
+  <li>
+    <b>Element Property Expression</b>:<br/>
+    It must starts with sharp(#) or dot(.) and ends with element property name followed by dot(.).
+    #my-div.my-checkbox.checked
+  </li>
+  <li>
+    <b>Element Expression</b>: CSS selector. e.g,<br/>
+    #my-div
+  </li>
+  <li>
+    <b>&lt;x-div&gt; Property Expression</b>: e.g, <br/>
+    <ul>
+      <li>todos</li>
+      <li>todos.done=false.done </li>
+    </ul>
+  </li>
+  <li>
+    <b>&lt;x-div&gt; Array Expression</b>: e.g., todos.done=false.<br/>
+    
+    When it has comparison expression, equal sign(=), it represents all matching element of an array.
+    For `todos.done=false`, `todos` is a propety of &lt;x-div&gt;, which is an array type, and `done` is 
+    a property of array element, and `false` is possible value of `done`.
+  </li>
+</ul>
+
+<h2 id="commands">Commands</h2>
+<ul>
+  <li><b>add</b>: add(&lt;target-expression&gt;, &lt;source-expression&gt;)<br/>
+    If target is an array, add value to its end of array.
+    If target is not defined, it sets a new property to &lt;x-div&gt;
+  </li>
+  <li><b>remove</b>:add(&lt;target-expression&gt;, &lt;source-expression&gt;)<br/>
+    If target is a DOM element, removes the target from document.
+    If target is an array, removes the array elements from the array.
+    If target is a object property, delete the property from the object.
+  </li>
+  <li><b>goto</b>:goto(&lt;route-expression&gt;, param-valu, ...)<br/>
+    e.g. goto(/sample-app/show/:id, event.detail.data.id), goto(/sample-app/list)
+  </li>
+  <li><b>toggle</b>:toggle(&lt;css-selector&gt;)"<br/>
+    It add or remove the given class name or attribute of DOM element.
+    e.g., toggle(.app.collapsed)", toggle(#my-section[my-attr]) 
+  </li>
+  <li><b>fetch</b>:fetch(&lt;css-selector&gt;)<br/>
+    It runs `fetch` command of `x-http` element pointed by css selector.
+    e.g., fetch(#save-user)
+  </li>
+  <li><b>set</b>: set(&lt;target-expression&gt;, &lt;source-expression&gt;);
+    <ul>
+      <li>set(resp, event.detail)</li>
+      <li>set(#my-http.payload.page, event.detail.page)</li>
+      <li>set(#save-user.payload.name, ::value)</li>
+      <li>set(#save-user.payload.gender, Female)</li>
+      <li>set(#save-user.payload.status, ::checked, Active, Inactive)</li>
+      <li>set(#delete-message.innerText, event.detail.data.message)</li>
+      <li>set(todos.done=false.done, true)</li>
+      <li>set(todos.id={{id}}.done, ::checked)</li>
+      <li>set(filter, 'done=false')</li>
+    </ul>
+  </li>
+</ul>

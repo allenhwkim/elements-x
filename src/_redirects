@@ -1,7 +1,2 @@
-/sample-app /sample-app/index.html 200
-/sample-app/list /sample-app/index.html 200
-/sample-app/new /sample-app/index.html 200
-/sample-app/show/* /sample-app/index.html 200
-/sample-app/edit/* /sample-app/index.html 200
-/sample-app/delete/* /sample-app/index.html 200
+/sample-app/* /sample-app/index.html 200
 /*   /index.html   200

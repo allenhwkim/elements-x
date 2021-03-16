@@ -16,6 +16,11 @@ https://elements-x.com/component/switch
 https://elements-x.com/component/tabs
 https://elements-x.com/component/textfield
 https://elements-x.com/component/tooltip
+https://elements-x.com/component/pagination
+https://elements-x.com/component/div
+https://elements-x.com/component/http
+https://elements-x.com/component/autocomplete
+https://elements-x.com/component/div/todo
 https://elements-x.com/article
 https://elements-x.com/tool
 https://elements-x.com/tool/unicodes
@@ -27,3 +32,4 @@ https://elements-x.com/tool/format-css
 https://elements-x.com/tool/format-json
 https://elements-x.com/tool/format-date
 https://elements-x.com/tool/format-number
+https://elements-x.com/sample-app/list

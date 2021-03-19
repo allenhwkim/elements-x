@@ -6,13 +6,13 @@
     <div tab-for="react">React</div>
   </div>
   <div class="contents">
-    <app-pre contents-for="js">
+    <x-pre contents-for="js">
       &lt;script src="https://unpkg.com/elements-x/dist/switch">&lt;/script>
       &lt;x-switch checked="checked">
         &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
       &lt;/x-switch>
-    </app-pre>
-    <app-pre contents-for="ng">
+    </x-pre>
+    <x-pre contents-for="ng">
       import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
       import { BrowserModule } from '@angular/platform-browser';
       <b>import 'elements-x/dist/switch';</b>
@@ -34,8 +34,8 @@
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
       })
       export class AppModule {}
-    </app-pre>
-    <app-pre contents-for="vue">
+    </x-pre>
+    <x-pre contents-for="vue">
       &lt;template>
         &lt;x-switch checked="checked">
           &lt;b>OFF&lt;/b> &lt;b>ON&lt;/b>
@@ -49,8 +49,8 @@
         name: "App"
       };
       &lt;/script>
-    </app-pre>
-    <app-pre contents-for="react">
+    </x-pre>
+    <x-pre contents-for="react">
       import React from "react";
       <b>import 'elements-x/dist/button';</b>
 
@@ -61,6 +61,6 @@
           &lt;/x-switch>
         );
       }
-    </app-pre>
+    </x-pre>
   </div>
 </x-tabs>

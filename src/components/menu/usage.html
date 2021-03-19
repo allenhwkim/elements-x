@@ -6,7 +6,7 @@
     <div tab-for="react">React</div>
   </div>
   <div class="contents">
-    <app-pre contents-for="js">
+    <x-pre contents-for="js">
       <b>import 'elements-x/dist/list';</b>
 
       const myDiv = document.getElementById('my');
@@ -21,8 +21,8 @@
           &lt;/ul>
         &lt;/x-menu>
       `;
-    </app-pre>
-    <app-pre contents-for="ng">
+    </x-pre>
+    <x-pre contents-for="ng">
       import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
       import { BrowserModule } from '@angular/platform-browser';
       <b>import 'elements-x/dist/list';</b>
@@ -53,8 +53,8 @@
       })
       export class AppModule {
       }
-    </app-pre>
-    <app-pre contents-for="vue">
+    </x-pre>
+    <x-pre contents-for="vue">
       &lt;template>
         &lt;x-menu <b>menu-style</b>>
           &lt;ul class="<b>dropdown-menu</b>">
@@ -77,8 +77,8 @@
         }
       };
       &lt;/script>
-    </app-pre>
-    <app-pre contents-for="react">
+    </x-pre>
+    <x-pre contents-for="react">
       import React from "react";
       <b>import 'elements-x/dist/list';</b>
 
@@ -101,6 +101,6 @@
           &lt;/x-menu>
         );
       }
-    </app-pre>
+    </x-pre>
   </div>
 </x-tabs>

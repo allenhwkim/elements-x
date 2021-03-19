@@ -81,7 +81,7 @@ Also, you need to have Javascript to handle events;
 
   <div class="code visible">
     HTML Code:
-    <app-pre>
+    <x-pre>
       &lt;input placeholder="Select pet types" <b>id="simple-input"</b> />
       &lt;x-overlay id="simple-list" <b>trigger="simple-input"</b>>
         &lt;x-list select-first="false" <b>search-input="simple-input"</b>>
@@ -93,7 +93,7 @@ Also, you need to have Javascript to handle events;
           &lt;div>Fish&lt;/div>
         &lt;/x-list>
       &lt;/x-overlay
-    </app-pre>
+    </x-pre>
   </div>
 </div>
 
@@ -121,7 +121,7 @@ Also, you need to have Javascript to handle events;
 
   <div class="code visible">
     HTML Code:
-    <app-pre>
+    <x-pre>
       &lt;div class="autocomplete">
         &lt;input placeholder="Select favorite pet" <b>id="my-input"</b> />
         &lt;x-overlay id="my-list" <b>trigger="my-input"</b>>
@@ -135,14 +135,14 @@ Also, you need to have Javascript to handle events;
           &lt;/x-list>
         &lt;/x-overlay>
       &lt;/div>
-    </app-pre>
+    </x-pre>
 
     CSS Code:
-    <app-pre>
+    <x-pre>
       .autocomplete { position: relative; display: inline-block; }
       .autocomplete::after { position: absolute; content: '▼'; line-height: 32px; right: 4px; color: #999; }
       .autocomplete input { padding-right: 20px; }
-    </app-pre>
+    </x-pre>
 
   </div>
 </div>
@@ -173,7 +173,7 @@ Also, you need to have Javascript to handle events;
 
   <div class="code visible">
     HTML Code: 
-    <app-pre>
+    <x-pre>
       &lt;x-textfield id="pet-textfield">
         &lt;span class="label">Pet Name&lt;/span>
         &lt;input placeholder="Select favorite pet" <b>id="pet-name"</b> />
@@ -190,7 +190,7 @@ Also, you need to have Javascript to handle events;
           &lt;div>Fish&lt;/div>
         &lt;/x-list>
       &lt;/x-overlay>
-    </app-pre>
+    </x-pre>
   </div>
 </div>
 
@@ -245,7 +245,7 @@ Also, you need to have Javascript to handle events;
   <span onclick="document.querySelector('.restful.code').classList.toggle('visible')">show/hide code</x-click>
   <div class="restful code">
     HTML Code:
-    <app-pre>
+    <x-pre>
       &lt;input id="<b>country-name"</b> placeholder="Enter country name" />
       &lt;x-overlay id="<b>country-list-overlay"</b> trigger="country-name">
         &lt;x-list id="<b>country-list"</b>>
@@ -261,10 +261,10 @@ Also, you need to have Javascript to handle events;
       &lt;br/>
       &lt;b>Selected Country:&lt;/b>
       &lt;pre id="country-object" style="margin:0; height: 200px;">&lt;/pre>
-    </app-pre>
+    </x-pre>
 
     Javascript Code:
-    <app-pre>
+    <x-pre>
       // listen to input element key typing, then update the autocomplete list
       var $_ = document.querySelector.bind(document);
       $_('#country-name').addEventListener('input', event => {
@@ -283,6 +283,6 @@ Also, you need to have Javascript to handle events;
         }
         listOverlay.close();
       });
-    </app-pre>
+    </x-pre>
   </div>
 </div>

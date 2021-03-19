@@ -32,12 +32,12 @@
     <button>Button 3</button>
   </x-dialog>
 
-  <app-pre>
+  <x-pre>
     &lt;button id="button1">Open Diaog&lt;/button>
     &lt;x-dialog trigger="button1">
       This is a dialog.
     &lt;/x-dialog>
-  </app-pre>
+  </x-pre>
 </div>
 
 <div class="example">
@@ -46,13 +46,13 @@
     This is a non-closable dialog. <br/>
     <button onclick="this.closest('x-dialog').close()">Close</button>
   </x-dialog>
-  <app-pre>
+  <x-pre>
     &lt;button id="button2">Open Non-closable Diaog&lt;/button>
     &lt;x-dialog trigger="button2" closable="false">
       This is a non-closable dialog. &lt;br/>
       &lt;button onclick="this.closest('x-dialog').close()">Close&lt;/button>
     &lt;/x-dialog>
-  </app-pre>
+  </x-pre>
 </div>
 
 <h3>Attributes</h3>

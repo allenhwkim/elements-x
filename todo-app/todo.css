@@ -1,0 +1,319 @@
+html, body {
+  font-family: "Helvetica Neue",sans-serif;
+  font-size: 16px;
+  width: 100%;
+  height: 100%;
+  margin: 12px;
+  color: #333;
+}
+
+.todo-header {
+  font-size: 100px;
+  margin: 24px;
+	font-weight: 100;
+	text-align: center;
+	color: rgba(175, 47, 47, 0.15);
+  text-rendering: optimizeLegibility;
+}
+
+.todoapp {
+	background: #FFF;
+	color: #4d4d4d;
+	font-weight: 300;
+	line-height: 1.4em;
+	margin: 0 auto;
+	max-width: 680px;
+  min-width: 230px;
+	position: relative;
+  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
+	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+
+.todoapp button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  vertical-align: baseline;
+  color: inherit;
+  appearance: none;
+}
+
+.todoapp ::placeholder {
+	font-style: italic;
+	font-weight: 300;
+	color: #e6e6e6;
+}
+
+.todoapp .header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.todoapp .header .new-todo, 
+.todoapp .header .edit {
+	position: relative;
+	margin: 0;
+  width: 100%;
+  height: auto;
+	font-size: 24px;
+	font-family: inherit;
+	font-weight: inherit;
+	line-height: 1.4em;
+	color: inherit;
+	padding: 6px;
+	border: 1px solid #999;
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.todoapp .header .new-todo {
+	border: none;
+  background: rgba(0, 0, 0, 0.003);
+  box-shadow: none;
+	/* box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03); */
+}
+
+.todoapp .header .toggle-all {
+	text-align: center;
+	border: none; /* Mobile Safari */
+	opacity: 0;
+	position: absolute;
+}
+
+.todoapp .header .toggle-all + label .check-all,
+.todoapp .header .toggle-all + label .uncheck-all {
+  font-size: 22px;
+  transform: rotate(90deg);
+  padding: 10px 18px;
+  display: none;
+}
+
+.todoapp .header .toggle-all:checked + label .uncheck-all {
+  display: inline-block;
+  color: #666;
+}
+.todoapp .header .toggle-all:not(:checked) + label .check-all {
+  display: inline-block;
+  color: #e6e6e6;
+}
+
+.todoapp .main {
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid #e6e6e6;
+}
+
+.todoapp .main .todo-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-weight: 300;
+}
+
+.todoapp .main .todo-list li {
+	position: relative;
+	font-size: 24px;
+	border-bottom: 1px solid #ededed;
+}
+.todoapp .main .todo-list .x-highlighted {
+  background: #FFF;
+}
+
+.todoapp .main .todo-list li:last-child {
+	border-bottom: none;
+}
+
+.todoapp .main .todo-list li.editing {
+	border-bottom: none;
+	padding: 0;
+}
+
+.todoapp .main .todo-list li.editing .view {
+	display: none;
+}
+
+.todoapp .main .todo-list li .toggle {
+	text-align: center;
+	width: 40px;
+	/* auto, since non-WebKit browsers doesn't support input styling */
+	height: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+	border: none; /* Mobile Safari */
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.todoapp .main .todo-list li .toggle {
+	opacity: 0;
+}
+
+.todoapp .main .todo-list li .toggle + label {
+	/*
+		Firefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433
+		IE and Edge requires *everything* to be escaped to render, so we do that instead of just the `#` - https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7157459/
+	*/
+	background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23ededed%22%20stroke-width%3D%223%22/%3E%3C/svg%3E');
+	background-repeat: no-repeat;
+	background-position: center left;
+}
+
+.todoapp .main .todo-list li .toggle:checked + label {
+	background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23bddad5%22%20stroke-width%3D%223%22/%3E%3Cpath%20fill%3D%22%235dc2af%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22/%3E%3C/svg%3E');
+  text-decoration: line-through;
+  color: #e6e6e6;
+}
+
+.todoapp .main .todo-list li label {
+	word-break: break-all;
+	padding: 15px 15px 15px 60px;
+	display: block;
+	line-height: 1.2;
+	transition: color 0.4s;
+}
+
+.todoapp .main .todo-list li.completed label {
+	color: #d9d9d9;
+	text-decoration: line-through;
+}
+
+.todoapp .main .todo-list li .destroy {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 10px;
+	bottom: 0;
+	width: 40px;
+	height: 40px;
+	margin: auto 0;
+	font-size: 30px;
+	color: #cc9a9a;
+	margin-bottom: 11px;
+	transition: color 0.2s ease-out;
+}
+
+.todoapp .main .todo-list li .destroy:hover {
+	color: #af5b5e;
+}
+
+.todoapp .main .todo-list li .destroy:after {
+	content: '×';
+}
+
+.todoapp .main .todo-list li:hover .destroy {
+	display: block;
+}
+
+.todoapp .main .todo-list li .edit {
+	display: none;
+}
+
+.todoapp .main .todo-list li.editing .edit {
+  display: block;
+  width: 506px;
+  padding: 12px 16px;
+  margin: 0 0 0 43px;
+  box-sizing: content-box;
+  border: 1px solid #999;
+	box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.todoapp .main .todo-list li.editing:last-child {
+	margin-bottom: -1px;
+}
+
+.todoapp .footer {
+  display: none;
+}
+.todoapp .footer.visible {
+  display: flex;
+	color: #777;
+  justify-content: space-between;
+	padding: 10px 15px;
+  border-top: 1px solid #e6e6e6;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+	            0 8px 0 -3px #f6f6f6,
+	            0 9px 1px -3px rgba(0, 0, 0, 0.2),
+	            0 16px 0 -6px #f6f6f6,
+	            0 17px 2px -6px rgba(0, 0, 0, 0.2);
+}
+
+.todoapp .footer .todo-count {
+	float: left;
+	text-align: left;
+}
+
+.todoapp .footer .todo-count strong {
+	font-weight: 300;
+}
+
+.todoapp .footer .filters {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.todoapp .footer .filters li {
+	display: inline;
+}
+
+.todoapp .footer .filters li a {
+	color: inherit;
+  cursor: pointer;
+	margin: 3px;
+	padding: 3px 7px;
+	text-decoration: none;
+	border: 1px solid transparent;
+	border-radius: 3px;
+}
+
+.todoapp .footer .filters li a:hover {
+	border-color: rgba(175, 47, 47, 0.1);
+}
+
+.todoapp .footer .filters:not([filter]) li.all  a {
+	border-color: rgba(175, 47, 47, 0.2);
+}
+.todoapp .footer .filters[filter="done=false"] .active a {
+	border-color: rgba(175, 47, 47, 0.2);
+}
+.todoapp .footer .filters[filter="done=true"] .completed a{
+	border-color: rgba(175, 47, 47, 0.2);
+}
+
+.todoapp .footer .clear-completed,
+.todoapp .footer .clear-completed:active {
+	float: right;
+	position: relative;
+	line-height: 20px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.todoapp .footer .clear-completed:hover {
+	text-decoration: underline;
+}
+
+.todoapp-info {
+	margin: 65px auto 0;
+	color: #bfbfbf;
+	font-size: 10px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	text-align: center;
+}
+
+.todoapp-info a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 300;
+}
+
+.todoapp-info a:hover {
+	text-decoration: underline;
+}

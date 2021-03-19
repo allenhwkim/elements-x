@@ -6,15 +6,15 @@
     <div tab-for="react">React</div>
   </div>
   <div class="contents">
-    <app-pre contents-for="js">
+    <x-pre contents-for="js">
       <b>import 'elements-x/dist/clock';</b>
 
       const myDiv = document.getElementById('my');
       myDiv.innerHTML = `
         <b>&lt;x-clock hour="10" minute="9">&lt;/x-clock></b>
       `;
-    </app-pre>
-    <app-pre contents-for="ng">
+    </x-pre>
+    <x-pre contents-for="ng">
       import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
       import { BrowserModule } from '@angular/platform-browser';
       <b>import 'elements-x/dist/clock';</b>
@@ -36,8 +36,8 @@
       export class AppModule {
         setTime($event) { console.log($vent); }
       }
-    </app-pre>
-    <app-pre contents-for="vue">
+    </x-pre>
+    <x-pre contents-for="vue">
       &lt;template>
         <b>&lt;x-clock hour="10" minute="9" v-on:x-time-selected="setTime">&lt;/x-clock></b>
       &lt;/template>
@@ -50,8 +50,8 @@
         methods: function(event) { console.log(event); }
       };
       &lt;/script>
-    </app-pre>
-    <app-pre contents-for="react">
+    </x-pre>
+    <x-pre contents-for="react">
       import React from "react";
       <b>import 'elements-x/dist/clock';</b>
 
@@ -66,6 +66,6 @@
           <b>&lt;x-clock hour="10" minute="9">&lt;/x-clock></b>
         );
       }
-    </app-pre>
+    </x-pre>
   </div>
 </x-tabs>

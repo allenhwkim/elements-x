@@ -42,7 +42,7 @@
     margin: 12px 0;
     flex-wrap: wrap;
   }
-  .app .example app-pre {
+  .app .example x-pre {
     min-width: calc(100% / 3);
   }
   .message br {
@@ -106,7 +106,7 @@ If 'target' attribute is given with id an element, the selected item will be sho
     </div>
   </div>
 
-  <app-pre>
+  <x-pre>
     &lt;x-list selected="fish" target="selected-pet">
       &lt;div>Cat&lt;/div>
       &lt;div>Dog&lt;/div>
@@ -116,7 +116,7 @@ If 'target' attribute is given with id an element, the selected item will be sho
     &lt;div class="message">
       &lt;span> Selected &lt;/span> &lt;span id="selected-pet">&lt;/span>
     &lt;/div>
-  </app-pre>
+  </x-pre>
 </div>
 
 <h3 id="list-filtered">List, fitered </h3>
@@ -136,7 +136,7 @@ If 'target' attribute is given with id an element, the selected item will be sho
     </x-list>
   </div>
 
-  <app-pre>
+  <x-pre>
     &lt;input <b>id="pets"</b> placeholder="Search pet">
     &lt;x-list select-first="true" <b>search-input="pets"</b>>
       &lt;div>Cats&lt;/div>
@@ -146,7 +146,7 @@ If 'target' attribute is given with id an element, the selected item will be sho
       &lt;div>Guinea pigs&lt;/div>
       &lt;div>Fish&lt;/div>
     &lt;/x-list>
-  </app-pre>
+  </x-pre>
 </div>
 
 <h3 id="list-as-dropdown">List as dropdown </h3>
@@ -170,7 +170,7 @@ If 'target' attribute is given with id an element, the selected item will be sho
     </x-overlay>
   </div>
 
-  <app-pre>
+  <x-pre>
     &lt;input id="pets-2" placeholder="Search pet">
     &lt;x-overlay trigger="pets-2">
       &lt;x-list select-first="true" search-input="pets-2">
@@ -182,7 +182,7 @@ If 'target' attribute is given with id an element, the selected item will be sho
         &lt;div>Fish&lt;/div>
       &lt;/x-list>
     &lt;/x-overlay>>
-  </app-pre>
+  </x-pre>
 </div>
 
 <h3 id="list-by-data-n-template">List by data and template</h3>
@@ -216,7 +216,7 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
     </x-list>
     <x-http id="get-countries" url="/components/list/countries.json" auto></x-http>
   </div>
-  <app-pre>
+  <x-pre>
     &lt;x-list x-http="get-countries">
       &lt;table>
         &lt;thead>
@@ -241,7 +241,7 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
       &lt;/table>
     &lt;/x-list>
     &lt;x-http id="get-countries" url="/components/list/countries.json" auto>&lt;/x-http>
-  </app-pre>
+  </x-pre>
 </div>
 
 <h3 id="list-paginated">List, paginated</h3>
@@ -274,7 +274,7 @@ The following list displays <a target="_blank" href="/components/list/countries.
     <x-pagination id="country-pages"></x-pagination>
   </div>
   
-  <app-pre>
+  <x-pre>
     &lt;x-list limit="6" x-http="get-countries" x-pagination="country-pages">
       &lt;table width="100%">
         &lt;thead>
@@ -299,7 +299,7 @@ The following list displays <a target="_blank" href="/components/list/countries.
     &lt;/x-list>
     &lt;x-pagination id="country-pages">&lt;/x-pagination>
     &lt;x-http id="get-countries" url="/components/list/countries.json" auto>&lt;/x-http>
-  </app-pre>
+  </x-pre>
 </div>
 
 <h3 id="list-infinite-scrolling">List, infinite scrolling</h3>
@@ -338,7 +338,7 @@ It only shows 10 countries at the begining, but when it scrolls, it shows more a
     </x-list>
   </div>
 
-  <app-pre>
+  <x-pre>
     &lt;x-list limit="10" x-http="get-countries" <b>infinite-scroll</b>>
       &lt;table width="100%">
         &lt;thead>
@@ -365,7 +365,7 @@ It only shows 10 countries at the begining, but when it scrolls, it shows more a
       &lt;/table>
     &lt;/x-list>
     &lt;x-http id="get-countries" url="/components/list/countries.json" auto>&lt;/x-http>
-  </app-pre>
+  </x-pre>
 </div>
 
 

@@ -14,12 +14,12 @@
    <input x-value="name" x-input="set(name)"/>
     <p>Hello <b x-value="name"></b> </p>
   </x-div>
-  <app-pre>
+  <x-pre>
     &lt;x-div <b>name</b>="Elements-X">
       &lt;input <b>x-value</b>="name" <b>x-input</b>="set(name)"/>
       &lt;p>Hello &lt;b <b>x-value</b>="name">&lt;/b> &lt;/p>
     &lt;/x-div>
-  </app-pre>
+  </x-pre>
 </div>
 
 <p>
@@ -55,14 +55,14 @@ How it works?
     B: <input type="range" max="255" value="0" x-change="set(b)"/><br/>
     <div x-style="background:rgb({{r}},{{g}},{{b}}); height: 60px;"></div>
   </x-div>
-  <app-pre>
+  <x-pre>
     &lt;x-div r="255" g="0" b="0">
       R: &lt;input type="range" max="255" value="255" <b>x-change</b>="set(r)"/>
       G: &lt;input type="range" max="255" value="0" <b>x-change</b>="set(g)"/>
       B: &lt;input type="range" max="255" value="0" <b>x-change</b>="set(b)"/>
       &lt;div <b>x-style</b>="background:rgb(<b>{{r}},{{g}},{{b}}</b>)">&lt;/div>
     &lt;/x-div>
-  </app-pre>
+  </x-pre>
 </div>
 
 <p>
@@ -118,11 +118,15 @@ How it works?
   </li>
 </ul>
 
-&lt;<a href="/component/div#value-expression">value-expression</a>&gt;<br/>
+<h2>For Data Binding</h2>
 &lt;<a href="/component/div#style-expression">style-expression</a>&gt;<br/>
 &lt;<a href="/component/div#attribute-expression">attribute-expression</a>&gt;<br/>
-&lt;<a href="/component/div#target-expression">target-expression</a>&gt;<br/>
+&lt;<a href="/component/div#value-expression">value-expression</a>&gt;<br/>
+
+<h2>For Event Handling</h2>
+&lt;<a href="/component/div#value-expression">value-expression</a>&gt;<br/>
 &lt;<a href="/component/div#commands">command</a>&gt;<br/>
+&lt;<a href="/component/div#target-expression">target-expression</a>&gt;<br/>
 
 <h2 id="value-expression">Value Expression</h2>
 <ul>

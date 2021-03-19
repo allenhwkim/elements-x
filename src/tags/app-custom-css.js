@@ -34,9 +34,9 @@ const html = `
   <div class="custom-css">
     <a id="edit-css">Override Default Style</a>
     <div class="editor-container ace">
-      <app-pre id="ace-editor">
+      <x-pre id="ace-editor">
         <slot></slot>
-      </app-pre>
+      </x-pre>
       <x-button id="apply-custom-style" class="primary">Apply Custom Style</x-button>
     </div>
   </div>

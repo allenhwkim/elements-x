@@ -96,9 +96,9 @@ var Color = class { // eslint-disable-line no-unused-vars
       s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
 
       switch (max) {
-      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-      case g: h = (b - r) / d + 2; break;
-      case b: h = (r - g) / d + 4; break;
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
       }
       h /= 6;
     }

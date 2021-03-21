@@ -11,7 +11,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = {
   entry: {
     main: './src/index.js',
-    'sample-app': './sample-app/index.js'
+    'sample-app': './sample-app/index.js',
+    'todo-app': './todo-app/index.js'
   },
   output: {
     path: path.resolve(__dirname, './dist/demo'),
@@ -21,8 +22,8 @@ module.exports = {
     historyApiFallback: {
       rewrites: [
         { from: /^\/sample-app\//, to: '/sample-app/index.html' },
+        { from: /^\/todo-app\//, to: '/todo-app/index.html' },
         { from: /^\//, to: '/index.html' }
-        // { from: /./, to: '/views/404.html' },
       ]
     }
   },
@@ -44,16 +45,9 @@ module.exports = {
   plugins: [
     new BundleAnalyzerPlugin({analyzerMode: 'static', openAnalyzer: false}),
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      chunks: ['main'],
-      filename: 'index.html'
-    }),
-    new HtmlWebpackPlugin({
-      template: 'sample-app/index.html', 
-      chunks: ['sample-app'],
-      filename: 'sample-app/index.html'
-    }),
+    new HtmlWebpackPlugin({template: 'src/index.html', chunks: ['main'], filename: 'index.html' }),
+    new HtmlWebpackPlugin({template: 'sample-app/index.html', chunks: ['sample-app'], filename: 'sample-app/index.html'}),
+    new HtmlWebpackPlugin({template: 'todo-app/index.html', chunks: ['todo-app'], filename: 'todo-app/index.html'}),
     // new MiniCssExtractPlugin({ linkType: 'text/css', }),
     new MiniCssExtractPlugin({filename: '[name].[chunkhash].css'}),
     new CopyWebpackPlugin({

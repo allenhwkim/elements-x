@@ -9,6 +9,7 @@ https://elements-x.com/component/number
 https://elements-x.com/component/dialog
 https://elements-x.com/component/file
 https://elements-x.com/component/list
+https://elements-x.com/component/mapbox
 https://elements-x.com/component/menu
 https://elements-x.com/component/overlay
 https://elements-x.com/component/radio

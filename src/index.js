@@ -2,7 +2,9 @@ import './style.css';
 import './app.css';
 import './app.mobile.css';
 
-import 'elements-x';
+import {XMapbox} from 'elements-x';
+XMapbox.accessToken = 'pk.eyJ1IjoiYWxsZW5od2tpbSIsImEiOiJja21ydzdiZXUwYnprMnBwZjBoaml1MjJvIn0.YFuQaFPaHsd-NQhU002DCw';
+
 import './tags';
 import { debounce } from '../lib/common/util';
 

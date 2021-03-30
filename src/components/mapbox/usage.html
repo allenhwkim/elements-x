@@ -1,0 +1,64 @@
+<x-tabs>
+  <div class="tabs">
+    <div tab-for="js">Javascript</div>
+    <div tab-for="ng">Angular</div>
+    <div tab-for="vue">VueJs</div>
+    <div tab-for="react">React</div>
+  </div>
+  <div class="contents">
+    <x-pre contents-for="js">
+      <b>import {XMapbox} from 'elements-x/dist/mapbox';</b>
+      XMapbox.accessToken = 'get-it-from-https://account.mapbox.com/';
+
+      const myDiv = document.getElementById('my');
+      myDiv.innerHTML = `&lt;x-mapbox center="-74.5, 40">&lt;/x-mapbox>`;
+    </x-pre>
+    <x-pre contents-for="ng">
+      import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      <b>import {XMapbox} from 'elements-x/dist/mapbox';</b>
+      XMapbox.accessToken = 'get-it-from-https://account.mapbox.com/';
+      
+      @Component({
+        selector: 'my-app',
+        template: '<b>&lt;x-mapbox center="-74.5, 40">&lt;/x-mapbox></b>'
+      })
+      class AppComponent  {}
+      
+      @NgModule({
+        imports:      [ BrowserModule ],
+        declarations: [ AppComponent ],
+        bootstrap:    [ AppComponent ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      })
+      export class AppModule {}
+    </x-pre>
+    <x-pre contents-for="vue">
+      &lt;template>
+        <b>&lt;x-mapbox center="-74.5, 40">&lt;/x-mapbox></b>
+      &lt;/template>
+      
+      &lt;script>
+      <b>import {XMapbox} from 'elements-x/dist/mapbox';</b>
+      XMapbox.accessToken = 'get-it-from-https://account.mapbox.com/';
+      
+      export default {
+        name: "App"
+      };
+      &lt;/script>
+    </x-pre>
+    <x-pre contents-for="react">
+      import React from "react";
+      <b>import {XMapbox} from 'elements-x/dist/mapbox';</b>
+      XMapbox.accessToken = 'get-it-from-https://account.mapbox.com/';
+
+      export default function App() {
+        return (
+          &lt;div>
+            <b>&lt;x-mapbox center="-74.5, 40">&lt;/x-mapbox></b>
+          &lt;/div>
+        );
+      }
+    </x-pre>
+  </div>
+</x-tabs>

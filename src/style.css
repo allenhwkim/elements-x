@@ -20,6 +20,11 @@ a {
 a:hover, a.active {
   opacity: 1;
 }
+ul.no-style {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 ul.default li p {
   position: relative;
   margin: 4px 16px;
@@ -31,8 +36,8 @@ li p::before {
 }
 app-custom-css {
   display: none;
-  position: absolute;
-  right: 48px;
+  /* position: absolute;
+  right: 48px; */
 }
 input:not([type]), input[type=text] {
   height: 32px;

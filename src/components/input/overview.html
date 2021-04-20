@@ -1,0 +1,37 @@
+<style>
+  .header.type {
+    text-transform: uppercase;
+    border: 1px solid #ccc;
+    margin-top: 32px;
+    border-width: 2px 0;
+    padding: 8px;
+    margin: 32px 0 16px;
+    background: #eee;
+    font-size: 24px;
+  }
+  .toc {
+    font-weight: 600;
+  }
+  .types .tabs [tab-for] {
+    min-width: auto;
+  }
+</style>
+
+<x-tabs class="types">
+  <div class="tabs">
+    <div tab-for="checkbox">Checkbox</div>
+    <div tab-for="radio">Radio</div>
+    <div tab-for="date">Date</div>
+    <div tab-for="time">Time</div>
+    <div tab-for="color">Color</div>
+    <div tab-for="file">File</div>
+    <div tab-for="switch">Switch</div>
+    <div tab-for="text">Text</div>
+  </div>
+  <div class="contents">
+    <x-include contents-for="checkbox" src="components/input/types/checkbox.html"></x-include>
+    <x-include contents-for="radio" src="components/input/types/radio.html"></x-include>
+    <x-include contents-for="date" src="components/input/types/date.html"></x-include>
+    <x-include contents-for="time" src="components/input/types/time.html"></x-include>
+  </div>
+</x-tabs>

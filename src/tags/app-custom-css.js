@@ -2,17 +2,17 @@ import  {setHTML, addCss, removeCss}  from '../../lib/common/util';
 
 const css = `
   app-custom-css .custom-css { 
-    display: block;
+    display: inline-block;
     position: relative; 
-    text-align: right;
-    height: 2em;
+    // text-align: right;
+    // height: 2em;
   }
   app-custom-css.visible .ace {
     display: block;
     top: 0;
-    right: 0;
-    width: 70%;
-    min-width: 400px;
+    // right: 0;
+    // width: 70%;
+    min-width: 600px;
     box-shadow: 2px 2px 8px #CCC;
     z-index: 1;
   }

@@ -1,9 +1,10 @@
-x-checkbox input {
+x-input[type=checkbox] > input {
   --x-checkbox-size: 20px;
   --x-checkbox-border: #333;
   --x-checkbox-fill: #FFF;
   --x-checkbox-icon: '\2714';
   --x-checkbox-color: inherit;
+  --x-checkbox-radius: 4px;
   outline: none;
   position: relative;
   width: 1px;
@@ -15,8 +16,8 @@ x-checkbox input {
   vertical-align: middle;
 }
 
-x-checkbox input:focus::after,
-x-checkbox input:hover::after {
+x-input[type=checkbox] > input:focus::after,
+x-input[type=checkbox] > input:hover::after {
   content: '';
   position: absolute;
   left: -6px;
@@ -28,7 +29,7 @@ x-checkbox input:hover::after {
   z-index: -1;
 }
 
-x-checkbox input::before  {
+x-input[type=checkbox] > input::before  {
   display: flex;
   box-sizing: border-box;
   content: '';
@@ -36,30 +37,30 @@ x-checkbox input::before  {
   width: var(--x-checkbox-size);
   height: var(--x-checkbox-size);
   background-color: #FFF;
-  border-radius: 4px;
+  border-radius: var(--x-checkbox-radius);
   border: 1px solid var(--x-checkbox-border);
   color: var(--x-checkbox-color);
   align-items: center;
   justify-content: center;
 }
 
-x-checkbox input:disabled {
+x-input[type=checkbox] > input:disabled {
   opacity: 0.5;
   background: #CCC;
 }
 
-x-checkbox input:checked::before {
+x-input[type=checkbox] > input:checked::before {
   content: var(--x-checkbox-icon);
   background-color: var(--x-checkbox-fill, #FFF);
 }
 
-x-checkbox.filled input:checked::before {
+x-input[type=checkbox].filled > input:checked::before {
   border: none;
   background: var(--x-checkbox-fill);
   color: #FFF;
 }
 
-x-checkbox.filled input:checked.disabled::before {
+x-input[type=checkbox].filled > input:checked.disabled::before {
   border: 1px solid #CCC;
   background: #CCC;
   color: #FFF;

@@ -1,0 +1,20 @@
+<div id="date">
+  <h3> Time selector for Input Field</h3>
+  <x-input type="time"></x-input>
+  <x-pre>
+    &lt;x-input type="time">&lt;/x-input>
+  </x-pre>
+  <x-input type="time" hour="10" minute="15" run="true"></x-input>
+  <x-pre>
+    &lt;x-input type="time" hour="10" minute="15" run="true">&lt;/x-input>
+  </x-pre>
+
+  <h2>Attributes</h2>
+  <li><b>hour</b>: 0 to 24</li>
+  <li><b>minute</b>: 0 to 59</li>
+  <li><b>run</b>default false, if true, it runs the clock</li>
+
+  <h2>Events</h2>
+  <li><b>x-time-selected</b>: a custom event. selected time is in event.detail</li>
+
+</div>

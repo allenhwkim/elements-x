@@ -1,0 +1,50 @@
+<div id="checkbox">
+  <app-custom-css>
+    .app x-input[type=checkbox] > input[type=checkbox] {
+      --x-checkbox-size: 24px;
+      --x-checkbox-border: blue;
+      --x-checkbox-fill: red;
+      --x-checkbox-icon: '\2714';
+      --x-checkbox-color: #FFF;
+    }
+  </app-custom-css>
+
+  <p>
+    Provides custom look-and-feel of input checkbox with;
+    size, border, background color, icon, and icon color
+  </p>
+
+  <div class="example">
+    Instead of a normal input element with checkbox type, 
+    Extend it, with &lt;x-input type="checkbox">
+    <x-pre>
+      &lt;x-input type="checkbox" fill="blue" icon="✖">&lt;/x-input>
+      &lt;x-input type="checkbox" fill="red" icon="★">&lt;/x-input>
+      &lt;x-input type="checkbox" radius="50%" icon="☻">&lt;/x-input>
+    </x-pre>
+
+    <p>
+      <x-input type="checkbox" ></x-input>
+      <x-input type="checkbox" checked="checked"></x-input>
+      &nbsp;
+      <x-input fill="blue" icon="✖" type="checkbox"></x-input>
+      <x-input fill="blue" icon="✖" type="checkbox"checked="checked" ></x-input>
+      &nbsp;
+      <x-input fill="red" icon="★" type="checkbox"></x-input>
+      <x-input fill="red" icon="★" type="checkbox"checked="checked" ></x-input>
+      &nbsp;
+      <x-input radius="50%" icon="☻" type="checkbox"></x-input>
+      <x-input radius="50%" icon="☻" type="checkbox" checked="checked" ></x-input>
+    </p>
+
+  </div>
+
+  <h4>Attributes</h4>
+  <li><b>size</b>: Default 20px, width and height of the checkbox</li>
+  <li><b>border</b>: Default #333, border color of the checkbox</li>
+  <li><b>fill</b>: Default red, background color of the checkbox</li>
+  <li><b>icon</b>: Default '\2714', check icon</li>
+  <li><b>color</b>: Default inherit, color of the check icon</li>
+  <li><b>radius</b>: Default 4px, border corner radius of checkbox</li>
+
+</div>

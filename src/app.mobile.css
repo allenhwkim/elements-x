@@ -8,33 +8,33 @@
   .app>.main .aside {
     width: 60px;
   }
-  .app>.main .aside .route-item i {
+  .app > .main .aside .route-item i {
     font-size: 20px;
   }
-  .app>.main .aside .route-item b {
+  .app > .main .aside .route-item b {
     display: none;
   }
-  .app>.main .aside .route-item:hover b {
+  .app > .main .aside .route-item:hover b {
     position: absolute;
     display: initial;
     background: inherit;
     padding: 0 4px 2px 2px;
   }
-  .app>.main .article {
+  .app > .main .article {
     width: calc(100% - 60px);
     padding: 0;
   }
-  .app>.main .article .article-contents {
+  .app > .main .article .article-contents {
     margin-top: 0;
     padding: 8px;
   }
-  .app>.main .article .article-contents .articles-container {
+  .app > .main .article .article-contents .articles-container {
     column-count: 1;
   }
-  .app>.main .article x-tabs[x-qyw3n3] .tabs [tab-for] {
+  .app > .main .article x-tabs[x-qyw3n3] .tabs [tab-for] {
     min-width: 80px;
   }
-  .app>.header .header-nav .icons {
+  .app > .header .header-nav .icons {
     display: none;
   }
 }

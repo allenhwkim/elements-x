@@ -1,4 +1,4 @@
-x-radio input {
+x-input[type=radio] > input {
   --x-radio-size: 20px;
   --x-radio-border: #333;
   --x-radio-fill: red;
@@ -12,8 +12,8 @@ x-radio input {
   vertical-align: middle;
 }
 
-x-radio input:not(:disabled):focus::before,
-x-radio input:not(:disabled):hover::before {
+x-input[type=radio] > input:not(:disabled):focus::before,
+x-input[type=radio] > input:not(:disabled):hover::before {
   content: '';
   position: absolute;
   left: -6px;
@@ -24,7 +24,7 @@ x-radio input:not(:disabled):hover::before {
   background: rgba(0,0,0,.1);
 }
 
-x-radio input::after {
+x-input[type=radio] > input::after {
   position: absolute;
   top: 0;
   left: 0;
@@ -40,19 +40,19 @@ x-radio input::after {
   justify-content: center;
 }
 
-x-radio input:checked::after {
+x-input[type=radio] > input:checked::after {
   content: var(--x-radio-icon);
   font-size: calc(var(--x-radio-size) / 1.5);
   line-height: var(--x-radio-size);
 }
 
-x-radio input:disabled::after {
+x-input[type=radio] > input:disabled::after {
   opacity: .5;
   background: #ccc;
   pointer-events: none;
 }
 
-x-radio.filled input:checked::after {
+x-input.filled[type=radio] > input:checked::after {
   border: none;
   background: var(--x-radio-fill);
   color: #FFF;

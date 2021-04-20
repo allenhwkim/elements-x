@@ -7,36 +7,25 @@
   </div>
   <div class="contents">
     <x-pre contents-for="js">
-      <b>import 'elements-x/dist/checkbox';</b>
+      <b>import 'elements-x/dist/input';</b>
 
       const myDiv = document.getElementById('my');
       myDiv.innerHTML = `
-        &lt;label>
-          &lt;x-checkbox fill="blue" icon="✖" size="24px">
-            &lt;input checked="checked" type="checkbox"/>
-          &lt;/x-checkbox>
-          Check here 
-        &lt;/label>
+        TODO
       `;
     </x-pre>
     <x-pre contents-for="ng">
       import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
       import { BrowserModule } from '@angular/platform-browser';
-      <b>import 'elements-x/dist/checkbox';</b>
+      <b>import 'elements-x/dist/input';</b>
       
       @Component({
         selector: 'my-app',
         template: `
-          &lt;label>
-            &lt;x-checkbox fill="blue" icon="✖" size="24px">
-              &lt;input checked="checked" type="checkbox"/>
-            &lt;/x-checkbox>
-            Check here 
-          &lt;/label>
+        TODO
         `
-      })
-      class AppComponent  {}
-      
+      }) class AppComponent  {}
+           
       @NgModule({
         imports:      [ BrowserModule ],
         declarations: [ AppComponent ],
@@ -47,16 +36,11 @@
     </x-pre>
     <x-pre contents-for="vue">
       &lt;template>
-        &lt;label>
-          &lt;x-checkbox fill="blue" icon="✖" size="24px">
-            &lt;input checked="checked" type="checkbox"/>
-          &lt;/x-checkbox>
-          Check here 
-        &lt;/label>
+        TODO
       &lt;/template>
       
       &lt;script>
-      <b>import 'elements-x/dist/checkbox';</b>
+      <b>import 'elements-x/dist/input';</b>
       
       export default {
         name: "App"
@@ -69,12 +53,7 @@
 
       export default function App() {
         return (
-          &lt;label>
-            &lt;x-checkbox fill="blue" icon="✖" size="24px">
-              &lt;input checked="checked" type="checkbox"/>
-            &lt;/x-checkbox>
-            Check here 
-          &lt;/label>
+          TODO
         );
       }
     </x-pre>

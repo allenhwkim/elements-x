@@ -49,6 +49,7 @@ class AppGroupHeader extends HTMLElement {
           this._setComponentHeader({name: ''});
         }
         this._prevGroupName = groupName;
+        setTimeout(_ => window.scrollTo(0, 0)); // go to top;
       }, 500)
     );
   }
@@ -60,9 +61,10 @@ class AppGroupHeader extends HTMLElement {
     const componentRoute = path.indexOf('/component') !== -1;
 
     if (componentRoute) {
-      const elName = route.name.toLowerCase();
+      const elName = route.urlPath.replace('/component/','').split('/')[0];
+      // const elName = route.name.toLowerCase();
       if (elName ) {
-        this.querySelector('#component-name').innerText = route.name; 
+        this.querySelector('#component-name').innerText = elName; 
         this.querySelector('#github-code').setAttribute('href', 
           `https://github.com/elements-x/elements-x/tree/master/src/lib/${elName}`);
         this.querySelector('#github-issue').setAttribute('href', 

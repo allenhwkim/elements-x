@@ -1,0 +1,61 @@
+x-input[type="text"]  {
+  position:  relative;
+  display:  inline-block;
+  padding:  1em 8px 0 4px;
+  border-bottom:  1px  solid#CCC;
+}
+
+x-input[type="text"] .label  {
+  position:  absolute;
+  pointer-events: none; 
+  box-sizing: border-box;
+  cursor:  text;
+  user-select:  none;
+  top: 16px;
+  left: 4px;
+  background: #FFF;
+  width: 100%;
+  z-index: 1;
+  color: #888;
+  background: transparent;
+}
+
+x-input[type="text"]:not(.empty)  .label,  
+x-input[type="text"].x-focused .label  {
+  transition:  0.2s  ease  all;
+  top: 2px;
+  font-size: 12px;
+}
+
+x-input[type="text"] input  {
+  width: 100%;
+  outline:  none;
+  border:  none;
+  padding:  0  0  6px  0;
+  height: 26px;
+  opacity: 0;
+}
+
+x-input[type="text"]:not(.empty):not(.x-focused) input,
+x-input[type="text"].x-focused .input,
+x-input[type="text"].x-focused input  {
+  opacity: 1;
+  transition: opacity .35s ease-in-out;
+}
+
+x-input[type="text"] .ink-bar  {  /*  hidden  2px  line  */
+  position:  absolute;
+  bottom:  0;
+  left:  calc(50% - 5px);
+  height:  2px;
+  width:  10px;
+  visibility:  hidden;
+  background-color:#8e44ad;
+}
+
+x-input[type="text"].x-focused .ink-bar  {  /*  2px  100%  line  */
+  left: 0;
+  width:  100%;
+  visibility:  visible;
+  transition:  0.2s  ease  all;
+}

@@ -1,1 +1,44 @@
-Switch
+<h3>Features</h3>
+<ul class="default">
+  <li>Modifiable On/Off Text</li>
+  <li>Customizable color and button size.</li>
+</ul>
+
+<div class="example">
+  <h3>Default</h3>
+  <p>
+    <x-input type="switch" status="on"></x-input>
+    <x-input type="switch" status="off"></x-input>
+  </p>
+  <x-pre>
+    &lt;x-input type="switch">&lt;/x-input>
+  </x-pre>
+
+  <h3>Custom</h3>
+  <p>
+    <x-input type="switch" status="on" on="YES" off="No" color="blue"></x-input>
+    <x-input type="switch" status="off" on="YES" off="No" color="blue"></x-input>
+  </p>
+  <p>
+    <x-input type="switch" status="on" on="ON" off="OFF" color="orange"></x-input>
+    <x-input type="switch" status="off" on="ON" off="OFF" color="orange"></x-input>
+  </p>
+  <x-pre>
+  </x-pre>
+
+  <p>
+    DISABLED: <br/>
+    <x-input type="switch" status="on" on="ON" off="OFF" disabled="disabled"></x-input>
+    <x-input type="switch" status="off" on="ON" off="OFF" disabled="disabled"></x-input>
+  </p>
+  <x-pre>
+  </x-pre>
+
+</div>
+
+<h3>Attributes</h3>
+<li><b>color</b>: Default red, color of the switch button</li>
+<li><b>on</b>: Default ' ', text value when status is on</li>
+<li><b>off</b>: Default ' ', text value when status is off</li>
+<li><b>status</b>: Default 'off', switch status, 'on' or 'off'</li>
+<li><b>disabled</b>: disabled when provided </li>

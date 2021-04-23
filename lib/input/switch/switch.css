@@ -1,0 +1,71 @@
+x-input[type=switch] {
+  --x-switch-color: red;
+}
+
+x-input[type=switch] {
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 100px;
+  margin-right: .25em;
+  white-space: nowrap;
+  position: relative;
+  padding: 0 2px;
+}
+
+x-input[type=switch][aria-checked='true'] {
+  background:  var(--x-switch-color);
+  color: #FFF;
+  border: 2px solid var(--x-switch-color);
+  padding-left: 8px;
+}
+
+x-input[type=switch][aria-checked='false'] {
+  background: #FFF;
+  color: var(--x-switch-color);
+  border: 2px solid var(--x-switch-color);
+  padding-right: 8px;
+}
+
+x-input[type=switch] > .x-on, 
+x-input[type=switch] > .x-off { 
+  visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+x-input[type=switch] > .x-on  { margin-top: 0; }
+x-input[type=switch] > .x-off { margin-top: calc(-1em + -2px); }
+
+x-input[type=switch] > * > .x-ball { 
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background-color: var(--x-switch-color);
+}
+x-input[type=switch] > * > .x-text { 
+  flex: 1;
+}
+
+x-input[type=switch][aria-checked='true'] > .x-on  > .x-ball {
+  background-color: #FFF;
+}
+x-input[type=switch][aria-checked='true'] > .x-off  > .x-ball {
+  background-color: var(--x-switch-color);
+}
+
+x-input[type=switch][aria-checked='true'] > .x-on {
+  visibility: visible;
+}
+x-input[type=switch][aria-checked='false'] > .x-off {
+  visibility: visible;
+}
+
+x-input[type=switch][aria-checked][disabled] {
+  background: #CCC;
+  color: #FFF;
+  border: 2px solid #CCC;
+  pointer-events: none;
+}
+x-input[type=switch][aria-checked="false"][disabled] > * > .x-ball {
+  background: #FFF;
+}

@@ -1,0 +1,4 @@
+x-input[type=date] {
+  position: relative;
+  display: inline-block;
+}

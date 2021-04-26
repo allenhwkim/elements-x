@@ -19,14 +19,15 @@
 
 <x-tabs class="types">
   <div class="tabs">
-    <div tab-for="checkbox">Checkbox</div>
-    <div tab-for="radio">Radio</div>
+    <div tab-for="text">Text</div>
+    <div tab-for="select">Select</div>
     <div tab-for="date">Date</div>
     <div tab-for="time">Time</div>
+    <div tab-for="checkbox">Checkbox</div>
+    <div tab-for="radio">Radio</div>
     <div tab-for="color">Color</div>
     <div tab-for="file">File</div>
     <div tab-for="switch">Switch</div>
-    <div tab-for="text">Text</div>
   </div>
   <div class="tab-contents">
     <x-include contents-for="checkbox" src="components/input/types/checkbox.html"></x-include>
@@ -37,6 +38,7 @@
     <x-include contents-for="file" src="components/input/types/file.html"></x-include>
     <x-include contents-for="switch" src="components/input/types/switch.html"></x-include>
     <x-include contents-for="text" src="components/input/types/text.html"></x-include>
+    <x-include contents-for="select" src="components/input/types/select.html"></x-include>
   </div>
 </x-tabs>
 

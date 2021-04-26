@@ -3,6 +3,14 @@ x-input[type="text"]  {
   display:  inline-block;
   padding:  1em 8px 0 4px;
   border-bottom:  1px  solid#CCC;
+  background: #F8F8F8;
+}
+x-input[type="text"][disabled]  {
+  pointer-events: none; 
+  opacity: .5;
+}
+x-input[type="text"]:not([label])  {
+  padding-top: 6px;
 }
 
 x-input[type="text"] .label  {
@@ -19,6 +27,9 @@ x-input[type="text"] .label  {
   color: #888;
   background: transparent;
 }
+x-input[type="text"] .label:empty + input  {
+  opacity: 1;
+}
 
 x-input[type="text"]:not(.empty)  .label,  
 x-input[type="text"].x-focused .label  {
@@ -34,6 +45,7 @@ x-input[type="text"] input  {
   padding:  0  0  6px  0;
   height: 26px;
   opacity: 0;
+  background: transparent;
 }
 
 x-input[type="text"]:not(.empty):not(.x-focused) input,

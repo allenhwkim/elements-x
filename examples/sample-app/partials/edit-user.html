@@ -1,0 +1,41 @@
+<style>label {display: inline-block; width: 120px; font-weight: bold;} </style>
+
+<h2> Edit User Info.</h2>
+<x-div debug="2">
+  <form>
+    <x-http id="get-user" x-attr="user-id:route.params.id" method="GET" auto
+      x-http-success="set(resp, event.detail)"
+      url="https://gorest.co.in/public-api/users/{{user-id}}">
+    </x-http>
+    <x-http debug id="save-user" x-attr="user-id:route.params.id" method="PUT" 
+      headers="Authorization: Bearer ab59e108c5d279e83e51564c27aecd3282fd7c6e3af7bbb2fe23b3175c4d5c85"
+      url="https://gorest.co.in/public-api/users/{{user-id}}"
+      x-http-success="goto(/sample-app/show/:id, event.detail.data.id)">
+    </x-http>
+    <p>
+      <label>ID:</label> <span x-value="resp.data.id"></span>
+    </p>
+    <p>
+      <label>Name:</label> 
+      <input x-value="resp.data.name" x-change="set(#save-user.payload.name, ::value)" required />
+    </p>
+    <p>
+      <label>Email:</label> 
+      <input x-value="resp.data.email" size="50" x-change="set(#save-user.payload.email, ::value)" required />
+    </p>
+    <p>
+      <label>Gender:</label> 
+      <input type="radio" name="gender" x-attr="checked:resp.data.gender=Male"
+        x-click="set(#save-user.payload.gender, Male)" /> Male
+      <input type="radio" name="gender" x-attr="checked:resp.data.gender=Female"
+        x-click="set(#save-user.payload.gender, Female)" /> Female
+    </p>
+    <p>
+      <label>Status:</label> 
+      <input type="checkbox" x-attr="checked:resp.data.status=Active"
+        x-click="set(#save-user.payload.status, ::checked, Active, Inactive)" /> Active
+    </p>
+    <button x-click="fetch(#save-user)">Save</button>
+    <button type="button" x-click="goto(/sample-app/list)">List</button>
+  </form>
+</x-div>

@@ -172,9 +172,6 @@ app-group-header .header .links {
 .article-contents pre {
   overflow: auto;
 }
-.article-contents .articles-container {
-  column-count: 2;
-}
 .article-contents a {
   color: #00e;
 }

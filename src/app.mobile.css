@@ -20,20 +20,6 @@
     background: inherit;
     padding: 0 4px 2px 2px;
   }
-  .app > .main .article {
-    width: calc(100% - 60px);
-    padding: 0;
-  }
-  .app > .main .article .article-contents {
-    margin-top: 0;
-    padding: 8px;
-  }
-  .app > .main .article .article-contents .articles-container {
-    column-count: 1;
-  }
-  .app > .main .article x-tabs[x-qyw3n3] .tabs [tab-for] {
-    min-width: 80px;
-  }
   .app > .header .header-nav .icons {
     display: none;
   }

@@ -19,7 +19,6 @@ const componentsHeaderHTML = `
       </a>
     </div>
   </div>`;
-const articlesHeaderHTML = 'article header';
 const toolsHeaderHTML = 'tools header';
 
 class AppGroupHeader extends HTMLElement {
@@ -43,8 +42,6 @@ class AppGroupHeader extends HTMLElement {
           this._setComponentHeader(route);
         } else if (groupName.indexOf('tools')) {
           this._setToolsHeader(route);
-        } else if (groupName.indexOf('articles')) {
-          this._setArticlesHeader(route);
         } else {
           this._setComponentHeader({name: ''});
         }
@@ -60,7 +57,7 @@ class AppGroupHeader extends HTMLElement {
     const path = route.urlPath || '' + route.pattern;
     const componentRoute = path.indexOf('/component') !== -1;
 
-    if (componentRoute) {
+    if (componentRoute && route.urlPath) {
       const elName = route.urlPath.replace('/component/','').split('/')[0];
       // const elName = route.name.toLowerCase();
       if (elName ) {
@@ -80,10 +77,6 @@ class AppGroupHeader extends HTMLElement {
     } else {
       this.style.display = 'none';
     }
-  }
-
-  _setArticlesHeader(route) {
-    this.innerHTML = articlesHeaderHTML;
   }
 
   _setToolsHeader(route) {

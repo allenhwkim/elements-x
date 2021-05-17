@@ -1,0 +1,46 @@
+<head>
+  <script src="https://unpkg.com/elements-x"></script>
+</head>
+
+<h2>How To Build My Own Custom Element</h2>
+
+<p>
+  You can build your own custom elements with customizable CSS and your own HTML
+  by using built in common tools; setHTML, addCss, and removeCss.
+</p>
+
+<ul>
+  <li><b>setHTML</b>: set HTML to the custom element. Returns a Promise</li>
+  <li><b>addCss</b>: add scoped CSS to &lt;head&gt; </li>
+  <li><b>removeCss</b>: remove scoped CSS from &lt;head&gt </li>
+</ul>
+
+<h3>Example</h3>
+
+<x-pre>
+import {setHTML, addCss, removeCss} from 'elements-x/dist/common';
+
+const css = `
+  x-button .x-button-container { display: flex;
+    align-items: center;
+    justify-content: center;
+  }`;
+
+const html = `&lt;div class="x-button-container">&lt;slot>&lt;/slot>&lt;/div>`;
+
+class XButton extends HTMLElement {
+  connectedCallback() {
+    addCss(this, css);
+    setHTML(this, html).then(_ => console.log('Yay!'));
+  }
+
+  disconnectedCallback() {
+    removeCss(this);
+  }
+}
+
+if (!customElements.get('x-button')) {
+  customElements.define('x-button', XButton);
+}
+</x-pre>
+

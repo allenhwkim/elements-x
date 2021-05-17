@@ -1,0 +1,44 @@
+<style>
+  th {background: #ccc}
+</style>
+
+<h2> List All Users</h2>
+<x-div>
+  <a x-click="goto(/sample-app/new)">New User</a>
+  <div>
+    <x-list x-value="resp.data" limit="20"
+      x-pagination="my-pagination" style="max-height: initial">
+      <table width="100%">
+        <thead>
+          <tr>
+            <th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Status</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template>
+            <tr>
+              <td class="name">{{id}}</td>
+              <td class="name">{{name}}</td>
+              <td class="email">{{email}}</td>
+              <td class="gender">{{gender}}</td>
+              <td class="status">{{status}}</td>
+              <td class="actions">
+                <button x-click="goto(/sample-app/show/{{id}})">View</button>
+                <button x-click="goto(/sample-app/edit/{{id}})">Edit</button>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </x-list>
+    <x-http id="my-http" payload="page=1" x-http-success="set(resp, event.detail)"
+      url="https://gorest.co.in/public-api/users" auto></x-http>
+  </div>
+  <br/>
+  <x-pagination 
+    x-value="resp.meta.pagination.total"
+    num-records-per-page="20"
+    id="my-pagination" num-pages="9"
+    page-only x-page-selected="set(#my-http.payload.page, event.detail.page)">
+  </x-pagination>
+</x-div>

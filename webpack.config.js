@@ -11,8 +11,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = {
   entry: {
     main: './src/index.js',
-    'sample-app': './sample-app/index.js',
-    'todo-app': './todo-app/index.js'
+    // 'sample-app': './sample-app/index.js',
+    // 'todo-app': './todo-app/index.js'
   },
   output: {
     path: path.resolve(__dirname, './dist/demo'),
@@ -21,8 +21,7 @@ module.exports = {
   devServer: {
     historyApiFallback: {
       rewrites: [
-        { from: /^\/sample-app\//, to: '/sample-app/index.html' },
-        { from: /^\/todo-app\//, to: '/todo-app/index.html' },
+        { from: /^\/examples\//, to: '/examples/' },
         { from: /^\//, to: '/index.html' }
       ]
     }
@@ -46,8 +45,8 @@ module.exports = {
     new BundleAnalyzerPlugin({analyzerMode: 'static', openAnalyzer: false}),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({template: 'src/index.html', chunks: ['main'], filename: 'index.html' }),
-    new HtmlWebpackPlugin({template: 'sample-app/index.html', chunks: ['sample-app'], filename: 'sample-app/index.html'}),
-    new HtmlWebpackPlugin({template: 'todo-app/index.html', chunks: ['todo-app'], filename: 'todo-app/index.html'}),
+    // new HtmlWebpackPlugin({template: 'sample-app/index.html', chunks: ['sample-app'], filename: 'sample-app/index.html'}),
+    // new HtmlWebpackPlugin({template: 'todo-app/index.html', chunks: ['todo-app'], filename: 'todo-app/index.html'}),
     // new MiniCssExtractPlugin({ linkType: 'text/css', }),
     new MiniCssExtractPlugin({filename: '[name].[chunkhash].css'}),
     new CopyWebpackPlugin({
@@ -55,11 +54,10 @@ module.exports = {
         { from: './robots.txt' },
         { from: './src/_redirects' },
         { from: './src/assets', to: 'assets' },
-        { from: './src/articles', to: 'articles' },
         { from: './src/components', to: 'components' },
         { from: './src/tools', to: 'tools' },
         { from: './src/*.html' },
-        { from: './sample-app/partials/*.html' }
+        { from: './examples/**/*', to: 'examples' }
       ]
     }),
   ],

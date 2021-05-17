@@ -22,7 +22,6 @@ https://elements-x.com/component/div
 https://elements-x.com/component/http
 https://elements-x.com/component/autocomplete
 https://elements-x.com/component/div/todo
-https://elements-x.com/article
 https://elements-x.com/tool
 https://elements-x.com/tool/unicodes
 https://elements-x.com/tool/svg-to-url

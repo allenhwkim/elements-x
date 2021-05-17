@@ -10,7 +10,7 @@
 </p>
 
 <div class="example">
-  <x-div name="Elements-X" debug trace>
+  <x-div name="Elements-X" debug="" trace="">
    <input x-value="name" x-input="set(name)"/>
     <p>Hello <b x-value="name"></b> </p>
   </x-div>
@@ -45,7 +45,7 @@ How it works?
 
 <p>
   This demo. shows how to build a color using three input fields.
-  &ltx-div> has three property, r, g, and b, and these are used to show a background color of a &lt;div>
+  &lt;x-div> has three property, r, g, and b, and these are used to show a background color of a &lt;div>
 </p>
 
 <div class="example">
@@ -137,6 +137,7 @@ How it works?
     If it has equal sign(=), comparison expression, it returns true/false by comparing two expression.
     <br/> For example `resp.data.genter=Male`, it returns true or false value by comparing
     `resp.data.gender` and `Male`.
+  </li>
   <li><b>Element property expression</b><br/>
     Starts with `::`. It returns the property value of the element. e.g. `::id`, `::checked`, or `::value`
   </li>

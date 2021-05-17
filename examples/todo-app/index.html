@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <base href="/">
+    <link meta="description" content="Collection of HTML elements eXtended.
+    elements-x is a collection of custom elements which is style-customizable and independent from any framework." />
+    <link rel="stylesheet" href="/assets/normalize.css" />
+    <link rel="stylesheet" href="/assets/fontawesome/css/all.css" />
+    <link rel="stylesheet" href="/todo-app/todo.css" />
+    <script src="https://unpkg.com/elements-x"></script>
+  </head>
+  <body>
+    <h1 class="todo-header">todos</h1>
+
+    <x-div class="todoapp" debug="" trace="">
+      <header class="header">
+        <input id="toggle-all" type="checkbox" class="toggle-all" /> 
+        <label for="toggle-all">
+          <span class="check-all" x-click="set(todos.done=false.done, true)">❯</span>
+          <span class="uncheck-all" x-click="set(todos.done=true.done, false)">❯</span>
+        </label>
+        <input autocomplete="off" 
+          placeholder="What needs to be done?" class="new-todo" 
+          x-enter="add(todos, done=false, name=::value)" />
+      </header>
+
+      <section class="main">
+        <x-list id="todo-list" x-value="todos" class="todo-list" order="id desc" x-attr="filter:{{filter}}">
+          <template var-name="todo">
+            <li id="{{id}}" class="todo {{completed if done}}">
+              <input id="{{id}}-done" type="checkbox" class="toggle" checked="{{done}}"
+                x-click="set(todos.id={{id}}.done, ::checked)" />
+              <label class="image" for="{{id}}-done"></label>
+              <input class="name" value="{{name}}" x-change="set(todos.id={{id}}.name)" /> 
+              <button class="destroy" x-click="remove(todos.id={{id}})"></button>
+            </li>
+          </template>
+        </x-list>
+      </section>
+
+      <footer class="footer" x-class="visible:todos.length">
+        <span class="todo-count">
+          <strong x-value="todos.done=false.length">0</strong> item left 
+        </span>
+        <ul class="filters" x-attr="filter:{{filter}}">
+          <li class="all"> <a x-click="set(filter, '')">All</a> </li>
+          <li class="active"> <a x-click="set(filter, 'done=false')">Active</a> </li>
+          <li class="completed"> <a x-click="set(filter, 'done=true')">Completed</a> </li>
+        </ul> 
+        <button class="clear-completed" x-click="remove(todos.done=true)">
+          Clear completed
+        </button>
+      </footer>
+
+    </x-div>
+
+    <footer class="todoapp-info">
+      <p>Written with <a href="https://elements-x.com">Elements-X</a></p>
+      <!-- <p>Part of <a href="http://todomvc.com">TodoMVC</a></p> -->
+    </footer>
+
+    <hr style="margin:48px 0;" />
+    <b>HTML</b>
+    <x-pre>
+      &lt;h1 class="todo-header">todos&lt;/h1>
+
+      &lt;x-div class="todoapp"  debug="" trace="">
+  
+        &lt;header class="header">
+          &lt;input id="toggle-all" type="checkbox" class="toggle-all" /> 
+          &lt;label for="toggle-all">
+            &lt;span class="check-all" x-click="set(todos.done=false.done, true)">❯&lt;/span>
+            &lt;span class="uncheck-all" x-click="set(todos.done=true.done, false)">❯&lt;/span>
+          &lt;/label>
+          &lt;input autocomplete="off" 
+            placeholder="What needs to be done?" class="new-todo" 
+            x-enter="add(todos, done=false, name=::value)" />
+        &lt;/header>
+  
+        &lt;section class="main">
+          &lt;x-list id="todo-list" x-value="todos" class="todo-list" order="id desc" x-attr="filter:{{filter}}">
+            &lt;template var-name="todo">
+              &lt;li id="{{id}}" class="todo {{completed if done}}">
+                &lt;input id="{{id}}-done" type="checkbox" class="toggle" checked="{{done}}"
+                  x-click="set(todos.id={{id}}.done, ::checked)" />
+                &lt;label class="image" for="{{id}}-done">&lt;/label>
+                &lt;input class="name" value="{{name}}" x-change="set(todos.id={{id}}.name)" /> 
+                &lt;button class="destroy" x-click="remove(todos.id={{id}})">&lt;/button>
+              &lt;/li>
+            &lt;/template>
+          &lt;/x-list>
+        &lt;/section>
+  
+        &lt;footer class="footer" x-class="visible:todos.length">
+          &lt;span class="todo-count">
+            &lt;strong x-value="todos.done=false.length">0&lt;/strong> item left 
+          &lt;/span>
+          &lt;ul class="filters" x-attr="filter:{{filter}}">
+            &lt;li class="all"> &lt;a x-click="set(filter, '')">All&lt;/a> &lt;/li>
+            &lt;li class="active"> &lt;a x-click="set(filter, 'done=false')">Active&lt;/a> &lt;/li>
+            &lt;li class="completed"> &lt;a x-click="set(filter, 'done=true')">Completed&lt;/a> &lt;/li>
+          &lt;/ul> 
+          &lt;button class="clear-completed" x-click="remove(todos.done=true)">
+            Clear completed
+          &lt;/button>
+        &lt;/footer>
+  
+      &lt;/x-div>
+    </x-pre>
+  </body>
+</html>

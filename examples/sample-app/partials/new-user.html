@@ -23,12 +23,12 @@
     </p>
     <p>
       <label>Gender:</label> 
-      <input checked type="radio" name="gender" x-click="set(#save-user.payload.gender, Male)" /> Male
+      <input checked="checked" type="radio" name="gender" x-click="set(#save-user.payload.gender, Male)" /> Male
       <input type="radio" name="gender" x-click="set(#save-user.payload.gender, Female)" /> Female
     </p>
     <p>
       <label>Status:</label> 
-      <input checked type="checkbox" x-click="set(#save-user.payload.status, ::checked, Active, Inactive)" /> Active
+      <input checked="checked" type="checkbox" x-click="set(#save-user.payload.status, ::checked, Active, Inactive)" /> Active
     </p>
     <button x-click="fetch(#save-user)">Create</button>
     <button type="button" x-click="goto(/sample-app/list)">List</button>

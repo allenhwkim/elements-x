@@ -1,14 +1,22 @@
 <head>
   <script src="https://unpkg.com/elements-x"></script>
+  <style>
+    html, body {
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+      font-size: 16px;
+      width: 100%;
+      margin: 12px;
+      height: 100%;
+      color: #333;
+    }
+    input {height: 32px;}
+    .tldr { color: #999; }
+    .code { padding: 12px; }
+    .code:not(.visible) {display: none;}
+  </style>
 </head>
 
-<h3 class="tldr"> TL;DR, Not One-For-All, But All-For-One </h3>
-
-<style>
-  .tldr { color: #999; }
-  .code { padding: 12px; }
-  .code:not(.visible) {display: none;}
-</style>
+<h1>Autocomplete with elements-x</h1>
 
 <p>
   There are many open source one-for-all solutions in the Internet. 
@@ -160,7 +168,7 @@ Also, you need to have Javascript to handle events;
     <x-textfield id="pet-textfield">
       <span class="label">Pet Name</span>
       <input placeholder="Select favorite pet" id="pet-name" />
-      <b class="icon" aria-hidden="true">▼</b>
+      <!-- <b class="icon" aria-hidden="true">▼</b> -->
       <div class="ink-bar"></div>
     </x-textfield>
     <x-overlay id="pets" trigger="pet-name">

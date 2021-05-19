@@ -113,7 +113,7 @@ app-group-header .header .links {
   color: #fff;
   min-height: calc(100vh - 60px);
   transition: width 0.3s;
-  padding: 20px;
+  padding: 8px;
 }
 .app > .main .aside .route-item {
   padding: 10px 20px;

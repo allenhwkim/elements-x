@@ -16,7 +16,7 @@
 <h3>With A Marker / Popup</h3>
 <div class="example">
   <x-mapbox>
-    <x-marker lnglat="1600 pennsilvania ave, washington DC" center>
+    <x-marker lnglat="1600 pennsilvania ave, washington DC" center="">
       <h3>White House</h3> Trump once lived here.
     </x-marker>
   </x-mapbox>
@@ -35,7 +35,7 @@
     <b class="label">Search Map:</b>
     <input placeholder="Enter address" size="60" x-change="set(#marker[lnglat])" />
     <x-mapbox>
-      <x-marker id="marker" lnglat="Toronto, Canada" center>Looking For Here?</x-marker>
+      <x-marker id="marker" lnglat="Toronto, Canada" center="">Looking For Here?</x-marker>
     </x-mapbox>
   </x-div>
   <x-pre>

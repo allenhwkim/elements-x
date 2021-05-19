@@ -36,6 +36,7 @@ li p::before {
 }
 app-custom-css {
   display: none;
+  float: right;
   /* position: absolute;
   right: 48px; */
 }

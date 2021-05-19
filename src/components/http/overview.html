@@ -9,14 +9,24 @@ It makes http call:  GET, POST, PUT, DELETE, or PATCH. It also shows loading sig
 
 <h3>Attributes</h3>
 <ul>
-  <li><b>url</b>: Required, e.g. https://my.api.com/v1/users?q=foo.</li>
-  <li><b>method</b>: Default. "get". Method of http call, "get", "post", "put", "delete", or "patch".</li>
-  <li><b>auto</b>: Default false. When it's auto, it makes http call when initialized or its payload changes.</li>
-  <li><b>resptype</b>: Default "json". Indicates response type, it determines the parser of response.</li>
+  <li>
+    <b>url</b>: Required, e.g. https://my.api.com/v1/users?q=foo.
+  </li>
+  <li>
+    <b>method</b>: Default. "get". Method of http call, "get", "post", "put", "delete", or "patch".
+  </li>
+  <li>
+    <b>auto</b>: Default false. When it's auto, it makes http call when initialized or its payload changes.
+  </li>
+  <li>
+    <b>resptype</b>: Default "json". Indicates response type, it determines the parser of response.
+  </li>
   <li><b>resp-status-code</b>: Default undefined. 
     When it's given, it determines status code from the given expression. e.g. "code"
+  </li>
   <li><b>headers</b>: Default undefied. When it's given, the header is set for each call. 
-    <br/> e.g., headers="Authorization: Bearer r3f3f2d63f2f23" </li>
+    <br/> e.g., headers="Authorization: Bearer r3f3f2d63f2f23" 
+  </li>
   <li><b>payload</b>: Default undefined. When it's given, it is used to build body of http call.
     <br/> e.g., payload="gender=Male;status=Active
   </li>
@@ -30,7 +40,7 @@ It makes http call:  GET, POST, PUT, DELETE, or PATCH. It also shows loading sig
 
 <div class="example">
   <x-div debug="" trace="">
-    <x-http x-http-success="set(resp, event.detail)" url="/components/list/countries.json" auto></x-http>
+    <x-http x-http-success="set(resp, event.detail)" url="/components/list/countries.json" auto=""></x-http>
     <b>HTTP Response:</b>
     <pre id="message" x-value="resp" style="height: 300px; overflow: auto"></pre>
   </x-div>

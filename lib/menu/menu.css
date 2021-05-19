@@ -6,6 +6,8 @@ x-menu ul {
 }
 x-menu li {
   cursor: pointer;
+  margin: 0;
+  line-height: 24px;
 }
 x-menu .x-highlighted {
   background: #ccc;
@@ -41,6 +43,11 @@ x-menu li.x-has-list:not([aria-expanded])::before {
 /* with dropdown menu and ul/li */
 x-menu.dropdown li.x-has-list::before {
   display: none;
+}
+x-menu.dropdown li li.x-has-list::after {
+  content: '>';
+  display: block;
+  float: right;
 }
 x-menu.dropdown > ul {
   display: flex;

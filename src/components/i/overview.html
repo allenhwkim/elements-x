@@ -1,0 +1,46 @@
+<h2>x-i, Custom Formatter</h2>
+
+Format number, currency, or date
+  
+<h3>Number</h3>
+<div class="example">
+  Default: <x-i type="number" data-value="1234567.8901234"></x-i> 
+  <br/>
+  French: <x-i type="number" locale="fr-CA" max-decimal="3" data-value="1234567.8901234"></x-i>
+  <x-pre>
+    Default: &lt;x-i type="number" data-value="1234567.8901234">&lt;/x-i> 
+    French: &lt;x-i type="number" locale="fr-CA" max-decimal="3" data-value="1234567.8901234">&lt;/x-i>
+  </x-pre>
+</div>
+
+<h3>Currency</h3>
+<div class="example">
+  Default: <x-i type="currency" data-value="1234567.8901234"></x-i> 
+  <br/>
+  French: <x-i type="currency" locale="fr-CA" currency="CAD" data-value="1234567.8901234"></x-i>
+  <x-pre>
+    Default: &lt;x-i type="currency" data-value="1234567.8901234">&lt;/x-i> 
+    French: &lt;x-i type="currency" locale="fr-CA" currency="CAD" data-value="1234567.8901234">&lt;/x-i>
+  </x-pre>
+</div>
+
+<h3>Date</h3>
+<div class="example">
+  Default: <x-i type="date" data-value="2021-05-29 12:34:59"></x-i> 
+  <br/>
+  French: <x-i type="date" locale="fr-FR" data-value="2021-05-29 12:34:59"></x-i>
+  <br/>
+  Custom English: <x-i type="date" format="weekday month yyyy M d" data-value="2021-05-29 12:34:59"></x-i>
+  <br/>
+  Custom French: <x-i type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" data-value="2021-05-29 12:34:59"></x-i>
+  <x-pre>
+    Default:
+      &lt;x-i type="date" data-value="2021-05-29 12:34:59">&lt;/x-i> 
+    French:
+      &lt;x-i type="date" locale="fr-FR" data-value="2021-05-29 12:34:59">&lt;/x-i>
+    Custom English:
+      &lt;x-i type="date" format="weekday month yyyy M d" data-value="2021-05-29 12:34:59">&lt;/x-i>
+    Custom French:
+      &lt;x-i type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" data-value="2021-05-29 12:34:59"></x-i>
+  </x-pre>
+</div>

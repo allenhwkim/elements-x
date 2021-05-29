@@ -7,38 +7,38 @@
   </div>
   <div class="contents">
     <x-pre contents-for="js">
-      <b>import 'elements-x/dist/list';</b>
+      <b>import 'elements-x/dist/ul';</b>
 
       const myDiv = document.getElementById('my');
       myDiv.innerHTML = `
-        &lt;x-menu <b>menu-style</b>>
-          &lt;ul class="<b>dropdown-menu</b>">
+        &lt;x-ul class="<b>dropdown</b>">
+          &lt;ul>
             &lt;li>File&lt;/div>
             &lt;li>Edit&lt;/div>
             &lt;li>Format&lt;/div>
             &lt;li>View&lt;/div>
             &lt;li>Help&lt;/div>
           &lt;/ul>
-        &lt;/x-menu>
+        &lt;/x-ul>
       `;
     </x-pre>
     <x-pre contents-for="ng">
       import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
       import { BrowserModule } from '@angular/platform-browser';
-      <b>import 'elements-x/dist/list';</b>
+      <b>import 'elements-x/dist/ul';</b>
       
       @Component({
         selector: 'my-app',
         template: `
-          &lt;x-menu <b>menu-style</b>>
-            &lt;ul class="<b>dropdown-menu</b>">
+          &lt;x-ul>
+            &lt;ul>
               &lt;li>File&lt;/div>
               &lt;li>Edit&lt;/div>
               &lt;li>Format&lt;/div>
               &lt;li>View&lt;/div>
               &lt;li>Help&lt;/div>
             &lt;/ul>
-          &lt;/x-menu>
+          &lt;/x-ul>
         `
       })
       class AppComponent  {
@@ -56,15 +56,15 @@
     </x-pre>
     <x-pre contents-for="vue">
       &lt;template>
-        &lt;x-menu <b>menu-style</b>>
-          &lt;ul class="<b>dropdown-menu</b>">
+        &lt;x-ul>
+          &lt;ul>
             &lt;li>File&lt;/div>
             &lt;li>Edit&lt;/div>
             &lt;li>Format&lt;/div>
             &lt;li>View&lt;/div>
             &lt;li>Help&lt;/div>
           &lt;/ul>
-        &lt;/x-menu>
+        &lt;/x-ul>
       &lt;/template>
       
       &lt;script>
@@ -84,21 +84,21 @@
 
       export default function App() {
         componentDidMount() {
-          ReactDOM.findDOMNode(this).addEventListener('x-menuitem-selected', this.handleEvent);
+          ReactDOM.findDOMNode(this).addEventListener('x-selected', this.handleEvent);
         }
 
         handleEvent(event) { console.log(event); }
 
         return (
-          &lt;x-menu <b>menu-style</b>>
-            &lt;ul class="<b>dropdown-menu</b>">
+          &lt;x-ul>
+            &lt;ul>
               &lt;li>File&lt;/div>
               &lt;li>Edit&lt;/div>
               &lt;li>Format&lt;/div>
               &lt;li>View&lt;/div>
               &lt;li>Help&lt;/div>
             &lt;/ul>
-          &lt;/x-menu>
+          &lt;/x-ul>
         );
       }
     </x-pre>

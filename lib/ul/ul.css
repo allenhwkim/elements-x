@@ -1,77 +1,77 @@
-x-menu > ul {
+x-ul > ul {
   padding-left: 0;
 }
-x-menu ul {
+x-ul ul {
   list-style: none;
 }
-x-menu li {
+x-ul li {
   cursor: pointer;
   margin: 0;
   line-height: 24px;
 }
-x-menu .x-highlighted {
+x-ul .x-highlighted {
   background: #ccc;
 }
 
 /* with ul/li */
-x-menu li > ul {
+x-ul li > ul {
   border-left: 1px dashed black;
 }
-x-menu li.x-has-list[aria-expanded] {
+x-ul li.x-has-list[aria-expanded] {
   background: #f9f9f9;
 }
-x-menu li.x-has-list[aria-expanded].x-highlighted {
+x-ul li.x-has-list[aria-expanded].x-highlighted {
   background: #ccc;
 }
-x-menu li:not([aria-expanded]) > ul {
+x-ul li:not([aria-expanded]) > ul {
   display: none;
 }
- x-menu li.x-has-list[aria-expanded] > ul {
+ x-ul li.x-has-list[aria-expanded] > ul {
   background: #FFF;
 }
-x-menu li.x-has-list[aria-expanded]::before {
+x-ul li.x-has-list[aria-expanded]::before {
   content: '-';
   display: inline-block;
   width: 1em;
 }
-x-menu li.x-has-list:not([aria-expanded])::before {
+x-ul li.x-has-list:not([aria-expanded])::before {
   content: '+';
   display: inline-block;
   width: 1em;
 }
 
-/* with dropdown menu and ul/li */
-x-menu.dropdown li.x-has-list::before {
+/* dropdown style */
+x-ul.dropdown li.x-has-list::before {
   display: none;
 }
-x-menu.dropdown li li.x-has-list::after {
+x-ul.dropdown li li.x-has-list::after {
   content: '>';
   display: block;
   float: right;
 }
-x-menu.dropdown > ul {
+x-ul.dropdown > ul {
   display: flex;
   padding: 8px;
 }
-x-menu.dropdown ul {
+x-ul.dropdown ul {
   list-style: none;
   margin: 0;
   padding: 0;
   border: 1px solid #ccc;
 }
-x-menu.dropdown li {
+x-ul.dropdown li {
   position: relative;
   min-width: 80px;
   padding: 4px;
 }
-x-menu.dropdown li > ul {
+x-ul.dropdown li > ul {
   position: absolute;
   background: #FFF;
   box-shadow: 4px 4px 8px #ccc;
   z-index: 1;
   top: 100%;
 }
-x-menu.dropdown li > ul > li > ul {
+x-ul.dropdown li > ul > li > ul {
   left: 100%;
   top: 0;
 }

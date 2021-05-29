@@ -2,6 +2,10 @@
   .example { display: flex; align-items: flex-start; }
   .example > * { border: 1px solid #ccc; margin: 0 24px 0 0; padding: 12px;}
 </style>
+<h1> x-div, A Micro Framework</h1>
+
+&lt;x-div> can work as a micro framework that can handle simple data binding 
+and event handling based on the belief that most of DOM handling can be done without writing Javascript.
 
 <h2>Simple Data Binding Example</h2>
 
@@ -13,7 +17,7 @@
   <x-div name="Elements-X" debug="" trace="">
    <input x-value="name" x-input="set(name)"/>
     <p>Hello <b x-value="name"></b> </p>
-  </x-div>
+  </x-div>  
   <x-pre>
     &lt;x-div <b>name</b>="Elements-X">
       &lt;input <b>x-value</b>="name" <b>x-input</b>="set(name)"/>

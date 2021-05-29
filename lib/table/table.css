@@ -1,0 +1,82 @@
+x-table {
+  display: block;
+  width: 100%;
+}
+
+x-table header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  font-size: .8em;
+  align-items: baseline;
+}
+x-table footer {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+x-table table {
+  width: 100%;
+  border: 1px solid #dee2e6;
+  border-collapse: collapse;
+  font-size: .9rem;
+}
+
+x-table table > thead > tr > th {
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  border-top: 0;
+  padding-top: 1.1rem;
+  padding-bottom: 1rem;
+  vertical-align: bottom;
+  border: 1px solid #dee2e6;
+  border-width: 0 1px 2px 1px;
+  padding: .75rem;
+  font-weight: 400;
+  text-align: inherit;
+}
+x-table table > thead > tr > th:before {
+  position: absolute;
+  top: 8px;
+  display: block;
+  right: 1em;
+  content: '▲';
+  opacity: .3;
+  transform:scale(1.2, .7);
+}
+x-table table > thead > tr > th.asc:before {
+  opacity: 1;
+}
+x-table table > thead > tr > th:after {
+  position: absolute;
+  bottom: 8px;
+  display: block;
+  right: 1em;
+  content: '▼';
+  opacity: .3;
+  transform:scale(1.2, .7);
+}
+x-table table > thead > tr > th.desc:after {
+  opacity: 1;
+}
+
+x-table table > tbody > tr {
+  background: #FFF;
+}
+
+x-table table > tbody > tr:nth-of-type(odd) {
+  background-color: rgba(0,0,0,0.05);
+}
+
+x-table table > tbody > tr > td {
+  padding-top: 1.1rem;
+  padding-bottom: 1rem;
+  vertical-align: middle;
+  border: 1px solid #dee2e6;
+  border-width: 0 1px 1px 1px;
+  padding: 8px 12px;
+  font-weight: 400;
+  text-align: inherit;
+}

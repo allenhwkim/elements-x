@@ -214,7 +214,7 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
         </tbody>
       </table>
     </x-list>
-    <x-http id="get-countries" url="/components/list/countries.json" auto></x-http>
+    <x-http id="get-countries" url="/components/list/countries.json" auto=""></x-http>
   </div>
   <x-pre>
     &lt;x-list x-http="get-countries">
@@ -313,7 +313,7 @@ It only shows 10 countries at the begining, but when it scrolls, it shows more a
 
 <div class="example">
   <div style="width:100%">
-    <x-list limit="10" x-http="get-countries" infinite-scroll>
+    <x-list limit="10" x-http="get-countries" infinite-scroll="">
       <table width="100%">
         <thead>
           <tr><th>Name</th><th>code</th><th>Capital</th><th>Region</th><th>Population</th></tr>

@@ -1,0 +1,245 @@
+<style>
+  .message br {
+    display: none;
+  }
+  .message {
+    padding: 8px;
+    background: #666;
+    color: #FFF;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
+
+<h3>Features </h3>
+<ul class="default">
+  <li>Provide navigation using keyboard</li>
+  <li>Fire 'x-selected` evnet when a list item is selected</li>
+  <li>With 'selected' attribute, it highlights selected item</li>
+  <li>Accessibility features; aria-expanded / aria-has-popup</li>
+</ul>
+
+<div class="example">
+  <h2>Default</h2>
+  <x-ul id="default">
+    <ul>
+      <li> File </li>
+      <li> Edit </li>
+      <li> Format </li>
+      <li> View </li>
+      <li> Help </li>
+    </ul>
+  </x-ul>
+  <div class="message" id="message-default">
+    Select an list item from the list.
+  </div>
+  <script>
+    document.querySelector('#default').addEventListener('x-selected', evt => {
+      document.querySelector('#message-default').innerText = `selected "${evt.detail.outerHTML}"`;
+    });
+  </script>
+  <x-pre>
+    &lt;x-ul>
+      &lt;ul>
+        &lt;li> File &lt;/li>
+        &lt;li> Edit &lt;/li>
+        &lt;li> Format &lt;/li>
+        &lt;li> View &lt;/li>
+        &lt;li> Help &lt;/li>
+      &lt;/ul>
+    &lt;/x-ul>
+  </x-pre>
+</div>
+
+<div class="example">
+  <h2>Hierarchical List</h2>
+  <x-ul id="hierarchical" selected="new">
+    <ul>
+      <li> File
+        <ul>
+          <li id="new">New</li>
+          <li>Open
+            <ul>
+              <li> Recent Files 
+                <ul>
+                  <li>File A</li>
+                  <li>File B</li>
+                  <li>File C</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li> Edit
+        <ul>
+          <li> Commands
+            <ul>
+              <li> Recent Comnands
+                <ul>
+                  <li>Undo</li>
+                  <li>Redo</li>
+                  <li>Open File</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul>
+          <li disabled="disabled">Cut</li>
+          <li disabled="disabled">Copy</li>
+          <li disabled="disabled">Paste</li>
+        </ul>
+      </li>
+      <li> Format
+        <ul>
+          <li>Font</li>
+          <li>Text</li>
+        </ul>
+      </li>
+      <li> View
+        <ul>
+          <li>100%</li>
+          <li>Zoom In</li>
+          <li>Zoom Out</li>
+        </ul>
+      </li>
+      <li id="help">Help</li>
+    </ul>
+  </x-ul>
+  <div class="message" id="message-hierarchical">
+    Select an list item from the list.
+  </div>
+  <script>
+    document.querySelector('#hierarchical').addEventListener('x-selected', evt => {
+      document.querySelector('#message-hierarchical').innerText = `selected "${evt.detail.outerHTML}"`;
+    });
+  </script>
+
+  <x-pre>
+    &lt;x-list selected="new">
+      &lt;ul>
+        &lt;li> File
+          &lt;ul>
+            &lt;li id="new">New&lt;/li>
+            &lt;li>Open
+              &lt;ul>
+                &lt;li> Recent Files 
+                  &lt;ul>
+                    &lt;li>File A&lt;/li>
+                    &lt;li>File B&lt;/li>
+                    &lt;li>File C&lt;/li>
+                  &lt;/ul>
+                &lt;/li>
+              &lt;/ul>
+            &lt;/li>>
+          &lt;/ul>
+        &lt;/li>
+        &lt;li> Edit
+          &lt;ul>
+            &lt;li>Undo&lt;/li>
+            &lt;li id="redo">Redo&lt;/li>
+            &lt;li disabled="disabled">Cut&lt;/li>
+            &lt;li disabled="disabled">Copy&lt;/li>
+            &lt;li disabled="disabled">Paste&lt;/li>
+          &lt;/ul>
+        &lt;/li>
+        &lt;li> Format
+          &lt;ul>
+            &lt;li>Font&lt;/li>
+            &lt;li>Text&lt;/li>
+          &lt;/ul>
+        &lt;/li>
+        &lt;li> View
+          &lt;ul>
+            &lt;li>100%&lt;/li>
+            &lt;li>Zoom In&lt;/li>
+            &lt;li>Zoom Out&lt;/li>
+          &lt;/ul>
+        &lt;/li>
+        &lt;li id="help">Help&lt;/li>
+      &lt;/ul>
+    &lt;/x-list>>
+  </x-pre>
+</div>
+
+<div class="example">
+
+  <h2>Dropdown Style</h2>
+  <x-ul id="my-list" selected="redo" class="dropdown">
+    <ul>
+      <li> File
+        <ul>
+          <li id="new">New</li>
+          <li>Open
+            <ul>
+              <li> Recent Files 
+                <ul>
+                  <li>File A</li>
+                  <li>File B</li>
+                  <li>File C</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li> Edit
+        <ul>
+          <li> Commands
+            <ul>
+              <li> Recent Comnands
+                <ul>
+                  <li>Undo</li>
+                  <li>Redo</li>
+                  <li>Open File</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <ul>
+          <li disabled="disabled">Cut</li>
+          <li disabled="disabled">Copy</li>
+          <li disabled="disabled">Paste</li>
+        </ul>
+      </li>
+      <li> Format
+        <ul>
+          <li>Font</li>
+          <li>Text</li>
+        </ul>
+      </li>
+      <li> View
+        <ul>
+          <li>100%</li>
+          <li>Zoom In</li>
+          <li>Zoom Out</li>
+        </ul>
+      </li>
+      <li id="help">Help</li>
+    </ul>
+  </x-ul>
+  <div class="message" id="message-div">
+    Select a list item to display message here.
+  </div>
+  <br/>
+  <script>
+    document.querySelector('#my-list').addEventListener('x-selected', evt => {
+      document.querySelector('#message-div').innerText = `selected "${evt.detail.outerHTML}"`;
+    });
+  </script>
+
+  <x-pre>
+    &lt;x-ul id="my-list" class="dropdown" selected="redo">
+      ... The same as the above example ...
+    &lt;/x-ul>
+  </x-pre>
+</div>
+
+<h3>Attributes</h3>
+<li><b>selected</b>: the id of preselected list item, default null</li>
+
+<h3>Events</h3> 
+<li><b>x-selected</b>: Fired when a list enu item is selected by click or enter pressed</li>

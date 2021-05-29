@@ -1,0 +1,43 @@
+<h2>x-select; Custom Select</h2>
+
+<li> Close dropdown when ESC pressed </li>
+<li> Highlight the next item when down arrow pressed </li>
+<li> Highlight the previous item when up arrow pressed </li>
+<li> When a character pressed, highlight the item with with the text </li>
+  
+<div class="example">
+  <table width="100%">
+    <tr>
+      <th align="left">&lt;x-select></th>
+      <th align="left" width="60"> vs. </th>
+      <th align="left">&lt;select></th>
+    </tr>
+    <tr>
+      <td>
+        <x-select id="s1" onchange="document.querySelector('#v1').innerText=this.value;">
+          <option value=""> Select role...</option>
+          <option value="ds" selected="selected">UI/UX Designer</option>
+          <option value="fe">Frontend Engineer</option>
+          <option value="be">Backend Engineer</option>
+          <option value="qa">QA Engineer</option>
+          <option value="un" disabled="">Disabled</option>
+        </x-select>
+        <div>value: <span id="v1"></span></div>
+        <script>setTimeout(_ => document.querySelector('#v1').innerText = document.querySelector('#s1').value)</script>
+      </td>
+      <td></td>
+      <td valign="top">
+        <select name="foo" id="s2" onchange="document.querySelector('#v2').innerText=this.value;">
+          <option value=""> Select role...</option>
+          <option value="ds" selected="selected">UI/UX Designer</option>
+          <option value="fe">Frontend Engineer</option>
+          <option value="be">Backend Engineer</option>
+          <option value="qa">QA Engineer</option>
+          <option value="un" disabled="">Disabled</option>
+        </select>
+        <div>value: <span id="v2"></span></div>
+        <script>setTimeout(_ => document.querySelector('#v2').innerText = document.querySelector('#s2').value)</script>
+      </td>
+    </tr>
+  </table>
+</div>

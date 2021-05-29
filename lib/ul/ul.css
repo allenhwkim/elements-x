@@ -32,12 +32,12 @@ x-ul li:not([aria-expanded]) > ul {
 x-ul li.x-has-list[aria-expanded]::before {
   content: '-';
   display: inline-block;
-  width: 1em;
+  width: 16px;
 }
 x-ul li.x-has-list:not([aria-expanded])::before {
   content: '+';
   display: inline-block;
-  width: 1em;
+  width: 16px;
 }
 
 /* dropdown style */

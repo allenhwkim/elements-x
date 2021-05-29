@@ -27,9 +27,9 @@
   <x-button id="button1">Open Diaog</x-button>
   <x-dialog trigger="button1">
     <div>This is a dialog.</div>
-    <button>Button 1</button>
-    <button>Button 2</button>
-    <button>Button 3</button>
+    <x-button>Button 1</x-button>
+    <x-button>Button 2</x-button>
+    <x-button>Button 3</x-button>
   </x-dialog>
 
   <x-pre>
@@ -44,7 +44,7 @@
   <x-button id="button2">Open Non-closable Diaog</x-button>
   <x-dialog trigger="button2" closable="false">
     This is a non-closable dialog. <br/>
-    <button onclick="this.closest('x-dialog').close()">Close</button>
+    <x-button onclick="this.closest('x-dialog').close()">Close</x-button>
   </x-dialog>
   <x-pre>
     &lt;button id="button2">Open Non-closable Diaog&lt;/button>

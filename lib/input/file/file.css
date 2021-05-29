@@ -2,15 +2,11 @@ x-input[type=file]  .x-file-input {
   display: block;
   cursor: grab;
   background: #F5F5F5;
-  padding: 1em;
+  padding: 16px;
   border: 1px solid #F5F5F5;
   box-sizing: border-box;
 }
-x-input[type=file]  .x-file-input slot {
-  display: block;
-}
-x-input[type=file]  .x-file-input:hover,
-x-input[type=file].dragover .x-slot {
+x-input[type=file]  .x-file-input:hover {
   background: #FFF;
   border: 1px solid #CCC;
 }

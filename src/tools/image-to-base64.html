@@ -25,22 +25,28 @@
 </div>
 
 <style>
-  #file-selector slot {
+  #file-selector {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     padding: 12px;
+    background: #F5F5F5;
+    border: 1px solid #F5F5F5; 
   }
-  #file-selector slot div {
+  #file-selector:hover {
+    background: #FFF;
+  }
+  #file-selector div {
     padding: 16px;
     flex: 1;
     text-align: center;
   }
-  #file-selector slot label {
+  #file-selector label {
     background: #999;
     color: #FFF;
     padding: 16px;
     margin: 8px;
+    cursor: pointer;
   }
   #file-selector input {
     display: none;
@@ -54,10 +60,12 @@
     margin: 8px;
     height: 200px;
     opacity: .7;
+    font-size: 14px;
   }
   .base64-output {
     display: flex;
     justify-content: space-evenly;
+    font-size: 14px;
   }
 </style>
 

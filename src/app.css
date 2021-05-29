@@ -124,7 +124,7 @@ app-group-header .header .links {
   text-decoration: none;
 }
 .app > .main .aside .route-item.sub-item {
-  padding: 4px 40px;
+  padding: 4px 28px;
 }
 .app > .main .aside .route-item i {
   width: 22px;
@@ -159,7 +159,6 @@ app-group-header .header .links {
 .article-contents {
   margin-top: 20px;
   padding: 20px;
-  font-size: 18px;
   background: #fff;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
   margin-left: 100%;
@@ -177,7 +176,7 @@ app-group-header .header .links {
 }
 
 .usage {
-  margin-top: 1em;
+  margin-top: 16px;
 }
 .usage .contents {
   margin: 0;

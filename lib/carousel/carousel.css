@@ -29,8 +29,8 @@ x-carousel .x-shortcuts {
   justify-content: center;
 }
 x-carousel .x-shortcuts .x-button {
-  width: 1em; 
-  height: 1em;
+  width: 16px; 
+  height: 16px;
   border-radius: 50%;
   background: #FFF;
   opacity: .5;

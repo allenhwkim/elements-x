@@ -16,7 +16,7 @@ x-calendar .x-header  .x-month-year .x-years{
 x-calendar .x-header  .x-month-year .year {
   border: 0;
   font-weight: bold;
-  font-size: 1em;
+  font-size: 16px;
 }
 x-calendar .x-header  .x-month-year button {
   background: transparent;
@@ -42,7 +42,7 @@ x-calendar .x-weekday,
 x-calendar .x-date {
   border: 0;
   background: #FFF;
-  font-size: 1em;
+  font-size: 16px;
   line-height: 1.5em;
   box-sizing: border-box;
   width: calc(100%/7);

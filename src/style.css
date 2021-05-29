@@ -52,6 +52,9 @@ x-click {
   cursor: pointer;
   color: blue;
 }
+x-pre {
+  font-size: 16px;
+}
 
 .vcentered {
   display: flex;

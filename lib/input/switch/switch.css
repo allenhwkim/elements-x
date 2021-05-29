@@ -37,8 +37,8 @@ x-input[type=switch] > .x-on  { margin-top: 0; }
 x-input[type=switch] > .x-off { margin-top: calc(-1em + -2px); }
 
 x-input[type=switch] > * > .x-ball { 
-  width: 1em;
-  height: 1em;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background-color: var(--x-switch-color);
 }

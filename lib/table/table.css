@@ -41,7 +41,7 @@ x-table table > thead > tr > th:before {
   position: absolute;
   top: 8px;
   display: block;
-  right: 1em;
+  right: 16px;
   content: '▲';
   opacity: .3;
   transform:scale(1.2, .7);
@@ -53,7 +53,7 @@ x-table table > thead > tr > th:after {
   position: absolute;
   bottom: 8px;
   display: block;
-  right: 1em;
+  right: 16px;
   content: '▼';
   opacity: .3;
   transform:scale(1.2, .7);

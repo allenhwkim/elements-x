@@ -19,7 +19,8 @@ x-dialog .x-dialog {
   position: fixed;
   box-shadow: 8px 8px 16px #999;
   background-color: white;
-  padding: 8px;
+  border-radius: 4px;
+  padding: 12px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -31,10 +32,14 @@ x-dialog .x-dialog {
 x-dialog .x-dialog .x-close-button {
   position: absolute;
   top: 0;
+  cursor: pointer;
   right: 8px;
   border: 0;
   background: transparent;
   opacity: .5;
+}
+x-dialog .x-dialog .x-close-button:hover {
+  opacity: 1;
 }
 
 x-dialog.not-closable .x-dialog .x-close-button {

@@ -61,9 +61,9 @@ How it works?
   </x-div>
   <x-pre>
     &lt;x-div r="255" g="0" b="0">
-      R: &lt;input type="range" max="255" value="255" <b>x-change</b>="set(r)"/>
-      G: &lt;input type="range" max="255" value="0" <b>x-change</b>="set(g)"/>
-      B: &lt;input type="range" max="255" value="0" <b>x-change</b>="set(b)"/>
+      R: &lt;input type="range" max="255" value="255" <b>on-change</b>="set(r)"/>
+      G: &lt;input type="range" max="255" value="0" <b>on-change</b>="set(g)"/>
+      B: &lt;input type="range" max="255" value="0" <b>on-change</b>="set(b)"/>
       &lt;div <b>x-style</b>="background:rgb(<b>{{r}},{{g}},{{b}}</b>)">&lt;/div>
     &lt;/x-div>
   </x-pre>

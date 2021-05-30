@@ -5,7 +5,7 @@
 <h2>Pagination Element</h2>
 
 <script>
-document.addEventListener('x-page-selected', function(event) {
+document.addEventListener('x-select', function(event) {
   document.querySelector('.message').innerText
     = JSON.stringify(event.detail, null, '  ');
 });
@@ -24,11 +24,11 @@ The &lt;x-pagination> element enables the user to select a specific page from a 
 </x-pre>
 
 <p>
-  It fires 'x-page-selected' event when a page is selected, so that a page-related setion. e.g., list, can react to it.
+  It fires 'x-select' event when a page is selected, so that a page-related setion. e.g., list, can react to it.
 </p>
 
 <p>
-  The following example demonstrates customizable pagination section along with showing x-page-selected message detail.
+  The following example demonstrates customizable pagination section along with showing x-select message detail.
 </p>
 
 <hr/>
@@ -65,21 +65,9 @@ The &lt;x-pagination> element enables the user to select a specific page from a 
   <input type="range" value="4" max="100"
     oninput="this.nextElementSibling.innerText = this.value"
     onchange="document.querySelector('x-pagination').setAttribute('value', this.value);" /><b>4</b>
-
-  <br/>
-  <label> Display Type:</label>
-  <br/>
-  <input type="radio" value="1" checked="checked" name="text-type"
-    onclick="document.querySelector('x-pagination').setAttribute('text-type', this.value);"/> Page Number
-  <input type="radio" value="2" name="text-type"
-    onclick="document.querySelector('x-pagination').setAttribute('text-type', this.value);"/> Start Number 
-  <input type="radio" value="3"  name="text-type"
-    onclick="document.querySelector('x-pagination').setAttribute('text-type', this.value);"/> End Number
-  <input type="radio" value="4"  name="text-type"
-    onclick="document.querySelector('x-pagination').setAttribute('text-type', this.value);"/> Start Number - End Number
 </p>
 
-<b>x-page-selected event detail.</b>
+<b>x-select event detail.</b>
 <x-pre class="message">Empty</x-pre>
 
 <h3> Attributes </h3>
@@ -90,4 +78,4 @@ The &lt;x-pagination> element enables the user to select a specific page from a 
 <li><b>total-records</b>: number of total records.</li>
 
 <h3> Events </h3>
-<li><b>x-page-selected</b>: fired when a page is selected with value as page, offset, and limit</li>
+<li><b>x-select</b>: fired when a page is selected with value as page, offset, and limit</li>

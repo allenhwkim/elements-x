@@ -4,7 +4,7 @@
 
 <h2> List All Users</h2>
 <x-div>
-  <a x-click="goto(/sample-app/new)">New User</a>
+  <a on-click="goto(/sample-app/new)">New User</a>
   <div>
     <x-list x-value="resp.data" limit="20"
       x-pagination="my-pagination" style="max-height: initial">
@@ -23,15 +23,15 @@
               <td class="gender">{{gender}}</td>
               <td class="status">{{status}}</td>
               <td class="actions">
-                <button x-click="goto(/sample-app/show/{{id}})">View</button>
-                <button x-click="goto(/sample-app/edit/{{id}})">Edit</button>
+                <button on-click="goto(/sample-app/show/{{id}})">View</button>
+                <button on-click="goto(/sample-app/edit/{{id}})">Edit</button>
               </td>
             </tr>
           </template>
         </tbody>
       </table>
     </x-list>
-    <x-http id="my-http" payload="page=1" x-http-success="set(resp, event.detail)"
+    <x-http id="my-http" payload="page=1" on-success="set(resp, event.detail)"
       url="https://gorest.co.in/public-api/users" auto=""></x-http>
   </div>
   <br/>
@@ -39,6 +39,6 @@
     x-value="resp.meta.pagination.total"
     num-records-per-page="20"
     id="my-pagination" num-pages="9"
-    page-only="" x-page-selected="set(#my-http.payload.page, event.detail.page)">
+    page-only="" on-select="set(#my-http.payload.page, event.detail.page)">
   </x-pagination>
 </x-div>

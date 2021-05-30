@@ -32,7 +32,7 @@ class AppGroupHeader extends HTMLElement {
   }
 
   connectedCallback() {
-    document.addEventListener('x-route-change', throttle(
+    document.addEventListener('x-route', throttle(
       event => {
         const route = event.detail.state; 
         const path = route.urlPath || '' + route.pattern;

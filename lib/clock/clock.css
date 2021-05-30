@@ -8,6 +8,10 @@ x-clock .x-clock {
   width: 100%;
   height: 100%;
 }
+x-clock .x-clock .x-clock-hour-hand,
+x-clock .x-clock .x-clock-minute-hand {
+  cursor: pointer;
+}
 x-clock .x-clock #second-hand {
   display: none;
 }

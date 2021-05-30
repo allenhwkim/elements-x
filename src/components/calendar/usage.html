@@ -19,7 +19,7 @@
       
       @Component({
         selector: 'my-app',
-        template: '<b>&lt;x-calendar (x-date-selected)="handleEvent($event)">&lt;/x-calendar></b>'
+        template: '<b>&lt;x-calendar (x-select="handleEvent($event)">&lt;/x-calendar></b>'
       })
       class AppComponent  {
         handleEvnet(event) { console.log(event.detail); }
@@ -35,7 +35,7 @@
     </x-pre>
     <x-pre contents-for="vue">
       &lt;template>
-        <b>&lt;x-calendar v-on:x-date-selected="handleEvent">&lt;/x-calendar></b>
+        <b>&lt;x-calendar v-on:x-select="handleEvent">&lt;/x-calendar></b>
       &lt;/template>
       
       &lt;script>
@@ -55,7 +55,7 @@
 
       export default function App() {
         componentDidMount() {
-          ReactDOM.findDOMNode(this).addEventListener('x-date-selected', this.handleEvent);
+          ReactDOM.findDOMNode(this).addEventListener('x-select', this.handleEvent);
         }
 
         handleEvent(event) { console.log(event); }

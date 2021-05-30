@@ -15,12 +15,12 @@
       <header class="header">
         <input id="toggle-all" type="checkbox" class="toggle-all" /> 
         <label for="toggle-all">
-          <span class="check-all" x-click="set(todos.done=false.done, true)">❯</span>
-          <span class="uncheck-all" x-click="set(todos.done=true.done, false)">❯</span>
+          <span class="check-all" on-click="set(todos.done=false.done, true)">❯</span>
+          <span class="uncheck-all" on-click="set(todos.done=true.done, false)">❯</span>
         </label>
         <input autocomplete="off" 
           placeholder="What needs to be done?" class="new-todo" 
-          x-enter="add(todos, done=false, name=::value)" />
+          on-enter="add(todos, done=false, name=::value)" />
       </header>
 
       <section class="main">
@@ -28,10 +28,10 @@
           <template var-name="todo">
             <li id="{{id}}" class="todo {{completed if done}}">
               <input id="{{id}}-done" type="checkbox" class="toggle" checked="{{done}}"
-                x-click="set(todos.id={{id}}.done, ::checked)" />
+                on-click="set(todos.id={{id}}.done, ::checked)" />
               <label class="image" for="{{id}}-done"></label>
-              <input class="name" value="{{name}}" x-change="set(todos.id={{id}}.name)" /> 
-              <button class="destroy" x-click="remove(todos.id={{id}})"></button>
+              <input class="name" value="{{name}}" on-change="set(todos.id={{id}}.name)" /> 
+              <button class="destroy" on-click="remove(todos.id={{id}})"></button>
             </li>
           </template>
         </x-list>
@@ -42,11 +42,11 @@
           <strong x-value="todos.done=false.length">0</strong> item left 
         </span>
         <ul class="filters" x-attr="filter:{{filter}}">
-          <li class="all"> <a x-click="set(filter, '')">All</a> </li>
-          <li class="active"> <a x-click="set(filter, 'done=false')">Active</a> </li>
-          <li class="completed"> <a x-click="set(filter, 'done=true')">Completed</a> </li>
+          <li class="all"> <a on-click="set(filter, '')">All</a> </li>
+          <li class="active"> <a on-click="set(filter, 'done=false')">Active</a> </li>
+          <li class="completed"> <a on-click="set(filter, 'done=true')">Completed</a> </li>
         </ul> 
-        <button class="clear-completed" x-click="remove(todos.done=true)">
+        <button class="clear-completed" on-click="remove(todos.done=true)">
           Clear completed
         </button>
       </footer>
@@ -68,12 +68,12 @@
         &lt;header class="header">
           &lt;input id="toggle-all" type="checkbox" class="toggle-all" /> 
           &lt;label for="toggle-all">
-            &lt;span class="check-all" x-click="set(todos.done=false.done, true)">❯&lt;/span>
-            &lt;span class="uncheck-all" x-click="set(todos.done=true.done, false)">❯&lt;/span>
+            &lt;span class="check-all" on-click="set(todos.done=false.done, true)">❯&lt;/span>
+            &lt;span class="uncheck-all" on-click="set(todos.done=true.done, false)">❯&lt;/span>
           &lt;/label>
           &lt;input autocomplete="off" 
             placeholder="What needs to be done?" class="new-todo" 
-            x-enter="add(todos, done=false, name=::value)" />
+            on-enter="add(todos, done=false, name=::value)" />
         &lt;/header>
   
         &lt;section class="main">
@@ -81,10 +81,10 @@
             &lt;template var-name="todo">
               &lt;li id="{{id}}" class="todo {{completed if done}}">
                 &lt;input id="{{id}}-done" type="checkbox" class="toggle" checked="{{done}}"
-                  x-click="set(todos.id={{id}}.done, ::checked)" />
+                  on-click="set(todos.id={{id}}.done, ::checked)" />
                 &lt;label class="image" for="{{id}}-done">&lt;/label>
-                &lt;input class="name" value="{{name}}" x-change="set(todos.id={{id}}.name)" /> 
-                &lt;button class="destroy" x-click="remove(todos.id={{id}})">&lt;/button>
+                &lt;input class="name" value="{{name}}" on-change="set(todos.id={{id}}.name)" /> 
+                &lt;button class="destroy" on-click="remove(todos.id={{id}})">&lt;/button>
               &lt;/li>
             &lt;/template>
           &lt;/x-list>
@@ -95,11 +95,11 @@
             &lt;strong x-value="todos.done=false.length">0&lt;/strong> item left 
           &lt;/span>
           &lt;ul class="filters" x-attr="filter:{{filter}}">
-            &lt;li class="all"> &lt;a x-click="set(filter, '')">All&lt;/a> &lt;/li>
-            &lt;li class="active"> &lt;a x-click="set(filter, 'done=false')">Active&lt;/a> &lt;/li>
-            &lt;li class="completed"> &lt;a x-click="set(filter, 'done=true')">Completed&lt;/a> &lt;/li>
+            &lt;li class="all"> &lt;a on-click="set(filter, '')">All&lt;/a> &lt;/li>
+            &lt;li class="active"> &lt;a on-click="set(filter, 'done=false')">Active&lt;/a> &lt;/li>
+            &lt;li class="completed"> &lt;a on-click="set(filter, 'done=true')">Completed&lt;/a> &lt;/li>
           &lt;/ul> 
-          &lt;button class="clear-completed" x-click="remove(todos.done=true)">
+          &lt;button class="clear-completed" on-click="remove(todos.done=true)">
             Clear completed
           &lt;/button>
         &lt;/footer>

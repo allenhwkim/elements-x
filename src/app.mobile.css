@@ -2,9 +2,6 @@
   .app>.header .logo {
     display: none;
   }
-  .app>.header .header-nav {
-    font-size: 18px;
-  }
   .app>.main .aside {
     width: 60px;
   }

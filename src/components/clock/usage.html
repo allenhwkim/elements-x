@@ -22,7 +22,7 @@
       @Component({
         selector: 'my-app',
         template: `
-          <b>&lt;x-clock hour="10" minute="9" (x-time-selected)="setTime($event)">&lt;/x-clock></b>
+          <b>&lt;x-clock hour="10" minute="9" (x-select)="setTime($event)">&lt;/x-clock></b>
         `
       })
       class AppComponent  {}
@@ -39,7 +39,7 @@
     </x-pre>
     <x-pre contents-for="vue">
       &lt;template>
-        <b>&lt;x-clock hour="10" minute="9" v-on:x-time-selected="setTime">&lt;/x-clock></b>
+        <b>&lt;x-clock hour="10" minute="9" v-on:x-select="setTime">&lt;/x-clock></b>
       &lt;/template>
       
       &lt;script>

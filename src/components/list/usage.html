@@ -28,7 +28,7 @@
       @Component({
         selector: 'my-app',
         template: `
-          &lt;x-list (x-listitem-selected)="handleEvent($event)">
+          &lt;x-list (x-select)="handleEvent($event)">
             &lt;div>File&lt;/div>
             &lt;div>Edit&lt;/div>
             &lt;div>Format&lt;/div>
@@ -52,7 +52,7 @@
     </x-pre>
     <x-pre contents-for="vue">
       &lt;template>
-        &lt;x-list v-on:x-listitem-selected="handleEvent">
+        &lt;x-list v-on:x-select="handleEvent">
           &lt;div>File&lt;/div>
           &lt;div>Edit&lt;/div>
           &lt;div>Format&lt;/div>

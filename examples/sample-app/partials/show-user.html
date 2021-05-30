@@ -33,19 +33,19 @@ label {display: inline-block; width: 120px; font-weight: bold;}
   <x-http id="my-http" debug x-attr="user-id:route.params.id" auto
     resp-status-code="code"
     "optimize-css-assets-webpack-plugin": "^5.0.4",
-    x-http-success="set(resp, event.detail)"
-    x-http-error="set(#user-info[error], true)"
+    on-success="set(resp, event.detail)"
+    on-error="set(#user-info[error], true)"
     url="https://gorest.co.in/public-api/users/{{user-id}}">
   </x-http>
   <x-http id="delete-user" method="DELETE" debug x-attr="user-id:route.params.id"
     resp-status-code="code"
     headers="Authorization: Bearer ab59e108c5d279e83e51564c27aecd3282fd7c6e3af7bbb2fe23b3175c4d5c85"
-    x-http-success="goto(/sample-app/list)"
-    x-http-error="set(#delete-message.innerText, event.detail.data.message)"
+    on-success="goto(/sample-app/list)"
+    on-error="set(#delete-message.innerText, event.detail.data.message)"
     url="https://gorest.co.in/public-api/users/{{user-id}}">
   </x-http>
-  <button x-click="goto(/sample-app/edit/:id, route.params.id)">Edit</button>
-  <button x-click="fetch(#delete-user)">Delete</button>
-  <button x-click="goto(/sample-app/list)">List</button>
+  <button on-click="goto(/sample-app/edit/:id, route.params.id)">Edit</button>
+  <button on-click="fetch(#delete-user)">Delete</button>
+  <button on-click="goto(/sample-app/list)">List</button>
   <div id="delete-message"></div>
 </x-div>

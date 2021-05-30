@@ -84,7 +84,7 @@
 
       export default function App() {
         componentDidMount() {
-          ReactDOM.findDOMNode(this).addEventListener('x-selected', this.handleEvent);
+          ReactDOM.findDOMNode(this).addEventListener('x-select', this.handleEvent);
         }
 
         handleEvent(event) { console.log(event); }

@@ -217,7 +217,7 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
     <x-http id="get-countries" url="/components/list/countries.json" auto=""></x-http>
   </div>
   <x-pre>
-    &lt;x-list x-http="get-countries">
+    &lt;x-listget-countries">
       &lt;table>
         &lt;thead>
           &lt;tr>
@@ -394,15 +394,15 @@ It only shows 10 countries at the begining, but when it scrolls, it shows more a
     It requires "limit" to find how many records to show in a block
   </li> 
   <li><b>x-http</b>:
-    &lt;x-http> element id linked to &lt;x-list>. if given, &lt;x-list> will listen to 'x-http-success' event to get its list value
+    &lt;x-http> element id linked to &lt;x-list>. if given, &lt;x-list> will listen to 'x-success' event to get its list value
   </li>
   <li><b>x-pagination</b>:
-    &lt;x-pagination> element id linked to &lt;x-list>. if given,  &lt;x-list> will listen to 'x-page-selected' event 
+    &lt;x-pagination> element id linked to &lt;x-list>. if given,  &lt;x-list> will listen to 'x-select' event 
     to get its offset value
   </li>
 </ul>
 
 <h3>Events</h3> 
 <ul class="default">
-  <li><b>x-listitem-selected</b>: Fired when menu item is selected by click or enter pressed</li>
+  <li><b>x-select</b>: Fired when menu item is selected by click or enter pressed</li>
 </ul>

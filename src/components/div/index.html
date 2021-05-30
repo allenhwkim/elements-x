@@ -15,7 +15,7 @@ and event handling based on the belief that most of DOM handling can be done wit
 
 <div class="example">
   <x-div name="Elements-X" debug="" trace="">
-   <input x-value="name" x-input="set(name)"/>
+   <input x-value="name" on-input="set(name)"/>
     <p>Hello <b x-value="name"></b> </p>
   </x-div>  
   <x-pre>
@@ -54,9 +54,9 @@ How it works?
 
 <div class="example">
   <x-div r="255" g="0" b="0" style="width: 240px;">
-    R: <input type="range" max="255" value="255" x-change="set(r)"/><br/>
-    G: <input type="range" max="255" value="0" x-change="set(g)"/><br/>
-    B: <input type="range" max="255" value="0" x-change="set(b)"/><br/>
+    R: <input type="range" max="255" value="255" on-change="set(r)"/><br/>
+    G: <input type="range" max="255" value="0" on-change="set(g)"/><br/>
+    B: <input type="range" max="255" value="0" on-change="set(b)"/><br/>
     <div x-style="background:rgb({{r}},{{g}},{{b}}); height: 60px;"></div>
   </x-div>
   <x-pre>
@@ -83,11 +83,6 @@ How it works?
   </li>
 </ol>
 
-<x-div>
-  Next demo., <a href="/todo-app/">Todo List</a>, shows how to build a todo list only 
-  using &lt;x-div> and &lt;x-list> without using any Javascript.
-</x-div>
-
 <p>
   &lt;x-div> enables DOM changes by reacting to data changes and events
 </p>
@@ -102,22 +97,16 @@ How it works?
       <li>x-attr="&lt;attribute-expression&gt;"</li>
     </ul>
   </li>
-  <li>Reacts to x-* events which has command expression, e.g., x-click="set(color, ::value)"
+  <li>Reacts to x-* events which has command expression, e.g., on-click="set(color, ::value)"
     <ul>
-      <li>x-click="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-input="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-change="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-enter="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-http-success="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-http-error="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-listitem-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-menuitem-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-date-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-time-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-color-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-file-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-route-change="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
-      <li>x-page-selected="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>on-click="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>on-input="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>on-change="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>on-enter="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>on-success="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>on-error="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>on-select="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
+      <li>on-route="&lt;command>(&lt;target-expression&gt;, &lt;value-expression&gt;)"</li>
     </ul>
   </li>
 </ul>

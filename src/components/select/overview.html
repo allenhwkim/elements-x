@@ -24,10 +24,20 @@
         </x-select>
         <div>value: <span id="v1"></span></div>
         <script>setTimeout(_ => document.querySelector('#v1').innerText = document.querySelector('#s1').value)</script>
+        <x-pre>
+          &lt;x-select>
+            &lt;option value=""> Select role...&lt;/option>
+            &lt;option value="ds" selected="selected">UI/UX Designer&lt;/option>
+            &lt;option value="fe">Frontend Engineer&lt;/option>
+            &lt;option value="be">Backend Engineer&lt;/option>
+            &lt;option value="qa">QA Engineer&lt;/option>
+            &lt;option value="un" disabled="">Disabled&lt;/option>
+          &lt;/x-select>
+        </x-pre>
       </td>
       <td></td>
       <td valign="top">
-        <select name="foo" id="s2" onchange="document.querySelector('#v2').innerText=this.value;">
+        <select name="foo" style="height:36px" id="s2" onchange="document.querySelector('#v2').innerText=this.value;">
           <option value=""> Select role...</option>
           <option value="ds" selected="selected">UI/UX Designer</option>
           <option value="fe">Frontend Engineer</option>
@@ -37,7 +47,18 @@
         </select>
         <div>value: <span id="v2"></span></div>
         <script>setTimeout(_ => document.querySelector('#v2').innerText = document.querySelector('#s2').value)</script>
+        <x-pre>
+          &lt;select>
+            &lt;option value=""> Select role...&lt;/option>
+            &lt;option value="ds" selected="selected">UI/UX Designer&lt;/option>
+            &lt;option value="fe">Frontend Engineer&lt;/option>
+            &lt;option value="be">Backend Engineer&lt;/option>
+            &lt;option value="qa">QA Engineer&lt;/option>
+            &lt;option value="un" disabled="">Disabled&lt;/option>
+          &lt;/select>
+        </x-pre>
       </td>
     </tr>
   </table>
+
 </div>

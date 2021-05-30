@@ -25,6 +25,7 @@ x-button > button {
   align-items: center;
   line-height: var(--size);
   min-width: 60px;
+  color: inherit;
 }
 
 x-button:active { box-shadow: none; transform: translate(2px, 2px); }
@@ -36,6 +37,10 @@ x-button.icon {
   border-radius: 50%; 
   padding: 0; 
   min-width: none;
+}
+x-button.icon > button { 
+  height: 100%;
+  min-width: auto;
 }
 
 x-button.primary { background: var(--primary); color: #FFF; }

@@ -47,3 +47,33 @@ Format number, currency, or date
       &lt;x-i type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" data-value="2021-05-29 12:34:59"></x-i>
   </x-pre>
 </div>
+
+<h3> Attributes </h3>
+
+<li><b>type</b>: format type. number, currency, or date</li>
+<li><b>data-value</b>: value to format. e.g. 12345.67</li>
+<li><b>locale</b>: locale. default en-US, e.g. fr-CA (language-country)</li>
+<li><b>max-decimal</b>: max decimal point. Default 2. Used with type="number"</li>
+<li><b>currency</b>: currency. default. USD, e.g. USD, KRW, or CAD</li>
+<li><b>format</b>: date format. e.g, yyyy-MM-dd hh:mm:ss
+   Default. locale date format. for en-US, mm-dd-yy
+   <br/>
+   <blockquote>
+   yyyy: 4 digit year, e.g., 2021 <br/>
+   yy: 2 digit year, e.g., 21 <br/>
+   MM: 2 digit month, e.g., 05 <br/>
+   M: 1 or 2 digit month. e.g., 5, or 12 <br/>
+   dd: 2 digit day. e.g., 05, or 12 <br/>
+   d: 1 or digit day. e.g., 5, or 12 <br/>
+   hh: 2 digit hours. e.g., 05, or 23 <br/>
+   h: 1 or digit hours. e.g., 5, or 23 <br/>
+   mm: 2 digit minutes. e.g., 05, or 59 <br/>
+   m: 1 or digit minutes. e.g., 5, or 59 <br/>
+   ss: 2 digit seconds. e.g., 05, or 59 <br/>
+   s: 1 or digit seconds. e.g., 5, or 59 <br/>
+   Month: Month name. e.g. January <br/>
+   Mon: Month name in short format. e.g. Jan <br/>
+   Weekday: Weekday name. e.g. Wednesday <br/>
+   Week: Weekday name in short format. e.g. Wed <br/>
+   </blockquote>
+</li>

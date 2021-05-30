@@ -11,7 +11,7 @@ function initColors() {
   const colorPickerOverlay = document.querySelector('x-overlay[trigger=color-1]');
 
   // colorEl.addEventListener('change', setValues);
-  colorPickerOverlay.addEventListener('x-color-selected', setValues);
+  colorPickerOverlay.addEventListener('x-select', setValues);
   colorValueEl.addEventListener('input', showColorList);
   colorValueEl.addEventListener('change', setValues);
 
@@ -107,7 +107,7 @@ function setShades(color) {
  * color list auto complete
  */
 document.querySelector('#color-list-overlay')
-  .addEventListener('x-listitem-selected', event => {
+  .addEventListener('x-select', event => {
     setColor(event.detail.color.hex);
     document.querySelector('#color-list-overlay').close();
   });

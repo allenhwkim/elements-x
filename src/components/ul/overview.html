@@ -15,16 +15,16 @@
 <h3>Features </h3>
 <ul class="default">
   <li>Provide navigation using keyboard</li>
-  <li>Fire 'x-selected` evnet when a list item is selected</li>
+  <li>Fire 'x-select` evnet when a list item is selected</li>
   <li>With 'selected' attribute, it highlights selected item</li>
   <li>Accessibility features; aria-expanded / aria-has-popup</li>
 </ul>
 
 <div class="example">
   <h2>Default</h2>
-  <x-ul id="default">
+  <x-ul id="default" selected="file">
     <ul>
-      <li> File </li>
+      <li id="file"> File </li>
       <li> Edit </li>
       <li> Format </li>
       <li> View </li>
@@ -35,14 +35,14 @@
     Select an list item from the list.
   </div>
   <script>
-    document.querySelector('#default').addEventListener('x-selected', evt => {
+    document.querySelector('#default').addEventListener('x-select', evt => {
       document.querySelector('#message-default').innerText = `selected "${evt.detail.outerHTML}"`;
     });
   </script>
   <x-pre>
-    &lt;x-ul>
+    &lt;x-ul selected="file">
       &lt;ul>
-        &lt;li> File &lt;/li>
+        &lt;li id="file"> File &lt;/li>
         &lt;li> Edit &lt;/li>
         &lt;li> Format &lt;/li>
         &lt;li> View &lt;/li>
@@ -112,7 +112,7 @@
     Select an list item from the list.
   </div>
   <script>
-    document.querySelector('#hierarchical').addEventListener('x-selected', evt => {
+    document.querySelector('#hierarchical').addEventListener('x-select', evt => {
       document.querySelector('#message-hierarchical').innerText = `selected "${evt.detail.outerHTML}"`;
     });
   </script>
@@ -226,7 +226,7 @@
   </div>
   <br/>
   <script>
-    document.querySelector('#my-list').addEventListener('x-selected', evt => {
+    document.querySelector('#my-list').addEventListener('x-select', evt => {
       document.querySelector('#message-div').innerText = `selected "${evt.detail.outerHTML}"`;
     });
   </script>
@@ -242,4 +242,4 @@
 <li><b>selected</b>: the id of preselected list item, default null</li>
 
 <h3>Events</h3> 
-<li><b>x-selected</b>: Fired when a list enu item is selected by click or enter pressed</li>
+<li><b>x-select</b>: Fired when a list enu item is selected by click or enter pressed</li>

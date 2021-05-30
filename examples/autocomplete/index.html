@@ -245,7 +245,7 @@ Also, you need to have Javascript to handle events;
 
     // listen to autocomplete list selection, then update input field and more
     const listOverlay = $_('#country-list-overlay');
-    listOverlay.addEventListener('x-listitem-selected', event => {
+    listOverlay.addEventListener('x-select', event => {
       if (event.detail.country) {
         $_('#country-name').value = event.detail.country.name;
         $_('#country-object').innerHTML = JSON.stringify(event.detail.country, null, '  ');
@@ -288,7 +288,7 @@ Also, you need to have Javascript to handle events;
   
       // listen to autocomplete list selection, then update input field and more
       const listOverlay = $_('#country-list-overlay');
-      listOverlay.addEventListener('x-listitem-selected', event => {
+      listOverlay.addEventListener('x-select', event => {
         if (event.detail.country) {
           $_('#country-name').value = event.detail.country.name;
           $_('#country-object').innerHTML = JSON.stringify(event.detail.country, null, '  ');

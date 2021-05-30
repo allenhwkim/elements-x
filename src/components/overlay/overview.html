@@ -22,30 +22,39 @@
 </ul>
 
 <div class="example">
-  <button id="show-overlay">Show Overlay</button>
-  <x-overlay trigger="show-overlay">
+  <x-button>Show Overlay</x-button>
+  <x-overlay>
     <div style="padding: 24px;">
       <button>Hello</button>
       <button>Overlay</button>
     </div>
   </x-overlay>
   <x-pre>
-    &lt;button <b>id="show-overlay"</b>>Show Overlay&lt;/button>
-    <b>&lt;x-overlay trigger="show-overlay"></b>
+    &lt;button>Show Overlay&lt;/button>
+    <b>&lt;x-overlay></b>
       &lt;div style="padding: 24px;">
         &lt;button>Hello&lt;/button>
         &lt;button>Overlay&lt;/button>
       &lt;/div>
     <b>&lt;/x-overlay></b>
   </x-pre>
+</div>
 
-  <input id="my-input"/> <button>?</button>
-  <x-overlay trigger="my-input" trigger-actions="click,focus">
+<div class="example">
+  <x-input id="my-input" type="text" autocomplete="off"></x-input>
+  <x-overlay trigger="my-input">
     <div style="padding: 24px;">
       Hello My Overlay
     </div>
   </x-overlay>
-
+  <x-pre>
+    &lt;x-input id="my-input" type="text" autocomplete="off">&lt;/x-input>
+    &lt;x-overlay trigger="my-input">
+      &lt;div style="padding: 24px;">
+        Hello My Overlay
+      &lt;/div>
+    &lt;/x-overlay>
+  </x-pre>
 </div>
 
 <h2>Attributes</h2>

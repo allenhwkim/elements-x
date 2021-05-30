@@ -54,10 +54,10 @@
       or Copy and paste files here
     &lt;/x-input>
     &lt;script>
-      document.querySelector('#file-selector').addEventListener('<b>x-file-selected</b>', event => {
+      document.querySelector('#file-selector').addEventListener('<b>x-select</b>', event => {
         console.log(event.detail);
       });
-      document.querySelector('#file-selector').addEventListener('<b>x-file-error</b>', event => {
+      document.querySelector('#file-selector').addEventListener('<b>x-error</b>', event => {
         alert(event.detail);
       });
 
@@ -78,13 +78,13 @@
 <li><b>upload-fn</b>:  string, the uplod function name that returns xhr</li>
 
 <h3>Events</h3> 
-<li><b>x-file-selected</b>: fired when collected files are changed with the values of list of files</li>
-<li><b>x-file-progress</b>: fired when upload is in progress</li>
-<li><b>x-file-load</b>: fired when upload is done successfully</li>
-<li><b>x-file-error</b>: fired when upload is errored</li>
+<li><b>x-select</b>: fired when collected files are changed with the values of list of files</li>
+<li><b>x-progress</b>: fired when upload is in progress</li>
+<li><b>x-load</b>: fired when upload is done successfully</li>
+<li><b>x-error</b>: fired when upload is errored</li>
 
 <script>
-  document.querySelector('#file-selector').addEventListener('x-file-selected', event => {
+  document.querySelector('#file-selector').addEventListener('x-select', event => {
     console.log(event.detail);
   });
 

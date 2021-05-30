@@ -22,7 +22,7 @@
       @Component({
         selector: 'my-app',
         template: `
-          <b>&lt;x-color-picker (x-color-selected)="setColor($event)">&lt;/x-color-picker></b>
+          <b>&lt;x-color-picker (x-select)="setColor($event)">&lt;/x-color-picker></b>
         `
       })
       class AppComponent  {}
@@ -57,7 +57,7 @@
 
       export default function App() {
         componentDidMount() {
-          ReactDOM.findDOMNode(this).addEventListener('x-color-selected', this.handleEvent);
+          ReactDOM.findDOMNode(this).addEventListener('x-select', this.handleEvent);
         }
 
         handleEvent(event) { console.log(event); }

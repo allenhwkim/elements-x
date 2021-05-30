@@ -1,6 +1,6 @@
 {
   "name": "elements-x",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Collection of simple, customizable and extendible custom elements",
   "main": "dist/elements-x/index.js",
   "scripts": {

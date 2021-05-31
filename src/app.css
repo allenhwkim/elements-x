@@ -28,9 +28,6 @@ app-group-header .header .links {
 .app.collapsed .main .aside {
   width: 60px;
 }
-.app.collapsed .main .aside .route-item.sub-item {
-  padding: 4px 28px;
-}
 .app.collapsed .main .aside .route-item i {
   font-size: 20px;
 }
@@ -143,9 +140,6 @@ app-group-header .header .links {
   white-space: nowrap;
   border-top: 1px solid #666;
 }
-.app > .main .aside .route-item.sub-item {
-  padding: 4px 28px;
-}
 .app > .main .aside .route-item i {
   width: 22px;
   text-align: center;
@@ -163,16 +157,16 @@ app-group-header .header .links {
   opacity: 1;
   visibility: visible;
 }
-.app > .main .aside .route-item:hover, 
-.app > .main .aside .route-item.active {
-  outline: 0;
+.app > .main .aside .route-item:hover { 
   background: #30393d;
+}
+.app > .main .aside .route-item.active {
+  background: #DDD;
+  color: #333;
 }
 .app > .main .aside .group-header {
   position: relative;
   cursor: pointer;
-  background: #DDD;
-  color: #333;
   margin: 0 -8px;
   padding: 8px 8px 8px 12px;
   white-space: nowrap;
@@ -186,7 +180,6 @@ app-group-header .header .links {
   position: absolute;
   right: 8px;
   top: 8px;
-  background: #DDD;
 }
 .app > .main .aside .group-header:not(.expanded)::after {
   content: '∨';
@@ -199,6 +192,10 @@ app-group-header .header .links {
 .app > .main .aside .group-header + * {
   max-height: 500px;
 }
+.app > .main .aside .group-header + * > * {
+  padding: 8px 28px;
+}
+
 .app > .main .article {
   min-height: calc(100vh - 60px);
   width: calc(100% - 250px);

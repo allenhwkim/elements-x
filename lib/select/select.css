@@ -32,19 +32,22 @@ x-select:disabled .x-native {
 }
 
 .x-custom {
-  display: none;
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
-  border: 1px solid #6f6f6f;
+  border: 0px solid #6f6f6f;
   border-radius: 4px;
   background-color: #fff;
-  box-shadow: 0 0 4px #e9e1f8;
   z-index: 1;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s;
 }
 
 .x-native:focus ~ .x-custom {
-  display: block;
+  max-height: 500px;
+  border-width: 1px;
+  box-shadow: 0 0 4px #e9e1f8;
 }
 
 .x-custom > * {

@@ -113,7 +113,7 @@ app-group-header .header .links {
 .app > .main .aside .route-items {
   display: block;
   position: fixed;
-  top: 60px;
+  top: 52px;
   width: 250px;
   left: 0;
   padding: 8px;
@@ -141,6 +141,7 @@ app-group-header .header .links {
   color: #FFF; 
   text-decoration: none;
   white-space: nowrap;
+  border-top: 1px solid #666;
 }
 .app > .main .aside .route-item.sub-item {
   padding: 4px 28px;
@@ -153,23 +154,50 @@ app-group-header .header .links {
 .app > .main .aside .route-item b {
   font-weight: normal;
 }
+.app > .main .aside .route-item b sub {
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s;
+}
+.app > .main .aside .route-item:hover b sub {
+  opacity: 1;
+  visibility: visible;
+}
 .app > .main .aside .route-item:hover, 
 .app > .main .aside .route-item.active {
   outline: 0;
   background: #30393d;
 }
 .app > .main .aside .group-header {
+  position: relative;
   cursor: pointer;
   background: #DDD;
   color: #333;
-  margin: 0 -4px;
+  margin: 0 -8px;
   padding: 8px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.app > .main .aside .custom-elements:not(.expanded) {
-  display: none;
+.app > .main .aside .group-header::after {
+  content: '∧';
+  display: block;
+  font-weight: bold;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  background: #DDD;
+}
+.app > .main .aside .group-header:not(.expanded)::after {
+  content: '∨';
+}
+.app > .main .aside .group-header:not(.expanded) + * {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s;
+}
+.app > .main .aside .group-header + * {
+  max-height: 500px;
 }
 .app > .main .article {
   min-height: calc(100vh - 60px);

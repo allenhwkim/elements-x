@@ -172,6 +172,7 @@ app-group-header .header .links {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  border-top: 1px solid #666;
 }
 .app > .main .aside .group-header::after {
   content: '∧';
@@ -194,6 +195,7 @@ app-group-header .header .links {
 }
 .app > .main .aside .group-header + * > * {
   padding: 8px 28px;
+  background: #333;
 }
 
 .app > .main .article {

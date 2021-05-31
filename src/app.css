@@ -174,7 +174,7 @@ app-group-header .header .links {
   background: #DDD;
   color: #333;
   margin: 0 -8px;
-  padding: 8px;
+  padding: 8px 8px 8px 12px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;

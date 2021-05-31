@@ -1,0 +1,38 @@
+<h3>Usage</h3>
+call `addSnackbar(message, options)` function to display bottom appearing messages.
+e.g. addSnackbar('hello message')
+
+<h3> options </h3>
+
+<li>class: look-and-feel of snackbar. e.g., 'left', 'right', 'green' and 'red'</li>
+<li>duration: duration of message to be visisible in ms. e.g. 1000</li>
+
+<div class="example">
+  <p>
+    <button class="left green">Show Left green Snackbar</button>
+    <button class="default">Show Default Snackbar</button>
+    <button class="right red">Show Right red Snackbar</button> <br/>
+  </p>
+  <script>
+  document.querySelectorAll('button').forEach(el => {
+    el.addEventListener('click', _ => {
+      const msg = el.className + ' ' + Math.ceil(Math.random() * 10**12);
+      addSnackbar(msg, {class: el.className, duration: 1000})
+    });
+  });
+  </script>
+
+  <x-pre>
+    &lt;button class="left green">Show Left green Snackbar&lt;/button>
+    &lt;button class="default">Show Default Snackbar&lt;/button> 
+    &lt;button class="right red">Show Right red Snackbar&lt;/button>
+    &lt;script>
+    document.querySelectorAll('button').forEach(el => {
+      el.addEventListener('click', _ => {
+        const msg = el.className + ' ' + Math.ceil(Math.random() * 10**12);
+        addSnackbar(msg, {class: el.className, duration: 1000})
+      });
+    });
+    &lt;/script>
+  </x-pre>
+</div>

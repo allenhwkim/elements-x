@@ -1,0 +1,52 @@
+<h2>x-route, dynamic section change by URL</h2>
+
+<li> Provides push-state implemention without writing Javascript. </li>
+<li> When clicked, load different html to the given target. </li>
+<li> When url changed, load different html from the url. </li>
+<li> Fire 'x-route' event. </li>
+
+<style>
+.example.one {
+  display: flex;
+}
+x-route {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+  margin-right: 4px;
+}
+#route-demo {
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+  flex: 1;
+}
+</style>
+  
+<div class="example one">
+  <x-route target="route-demo">
+    <a href="/component/route/foo" src="/components/route/foo.html">foo.html</a>
+    <a href="/component/route/bar" src="/components/route/bar.html">bar.html</a>
+    <a href="/component/route/default" src="/components/route/default.html">default.html</a>
+  </x-route>
+  <div id="route-demo">
+    This will be updated by route
+  </div>
+</div>
+<x-pre>
+  &lt;x-route target="route-demo">
+    &lt;a href="/component/route/foo" src="/components/route/foo.html">foo.html&lt;/a>
+    &lt;a href="/component/route/bar" src="/components/route/bar.html">bar.html&lt;/a>
+    &lt;a href="/component/route/default" src="/components/route/default.html">default.html&lt;/a>
+  &lt;/x-route>
+  &lt;div id="route-demo">
+    This will be updated by route
+  &lt;/div>
+</x-pre>
+
+<p>
+  Any element within &lt;x-route> with "href" and "src" attribute sets route.
+  "href" is the url to be when clicked, and "src" is the html to load when clicked.
+</p>

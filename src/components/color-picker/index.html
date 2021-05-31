@@ -1,14 +1,29 @@
-<x-tabs>
-  <div class="tabs">
-    <div tab-for="overview">OVERVIEW</div>
-    <div tab-for="usage">USAGE</div>
-  </div>
-  <div class="tab-contents">
-    <div contents-for="overview">
-      <x-include src="/components/color-picker/overview.html"></x-include>
-    </div>
-    <div class="usage" contents-for="usage">
-      <x-include src="/components/color-picker/usage.html"></x-include>
-    </div>
-  </div>  
-</x-tabs>
+
+<app-custom-css>
+  .app x-color-picker {
+  }
+</app-custom-css>
+
+<h3>Features </h3>
+<ul class="default">
+  <li>Fill value of input field when target is provided</li>
+  <li>Fires 'x-select' event when color changed.</li>
+</ul>
+
+<div class="example">
+  <h3>Usage with input</h3>
+  
+  <input id="color2" />
+  <x-color-picker target="color2" width="400" height="300"></x-color-picker>
+  <x-pre>
+    &lt;input id="color"  width="400" height="300"/>
+    &lt;x-color-picker target="color">&lt;/x-color-picker>
+  </x-pre>
+</div>
+<h3>Attributes</h3>
+<li><b>width</b>: width of color pallette. e.g., 240</li>
+<li><b>height</b>: height of color pallette. e.g, 180</li>
+<li><b>trigger</b>: id of element to be updated when a color is selected</li>
+
+<h3>Events</h3>
+<li><b>x-select</b>: a custom event. selected color is in event.detail</li>

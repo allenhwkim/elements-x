@@ -1,14 +1,102 @@
-<x-tabs>
-  <div class="tabs">
-    <div tab-for="overview">OVERVIEW</div>
-    <div tab-for="usage">USAGE</div>
+<app-custom-css>
+  .app x-calendar .calendar {
+    width: 320px;
+    background: #eee;
+  }
+  .app x-calendar .calendar .x-weekday {
+    font-weight: bold;
+    background: #FFF;
+  }
+  .app x-calendar .x-date {
+    background: blue;
+    color: #FFF;
+  }
+</app-custom-css>
+
+<h3>Features</h3>
+<ul class="default">
+  <li>
+    Shows international language calendar
+    <p>English, Korean, Chinese, Arabic, Thai and more</p>
+  </li>
+  <li> 
+    Diaplay a calendar on a page flow or as a dropdown
+    <p>It can be used with a button or input tag</p>
+  </li>
+  <li> 
+    Highlights pre-selected date
+  </li>
+  <li> 
+    Limit the calendar months using min. and max. date
+  </li>
+  <li>
+    Customizable color and dates display
+    <p>
+      Try different styling by clicking "Overvide Default Style".
+    </p>
+  </li>
+</ul>
+
+<div class="example">
+  <h3> Open calendar with button</h3>
+  <x-button>Show Calendar</x-button>
+  <x-overlay>
+    <x-calendar target="date2"></x-calendar>
+  </x-overlay>
+  Selected: <span id="date2"></span>
+  <x-pre>
+    &lt;button>Show Calendar&lt;/button>
+    &lt;x-overlay>
+      &lt;<b>x-calendar</b>> target="date2"&lt;/<b>x-calendar</b>>
+    &lt;/x-overlay>
+  </x-pre>
+</div>
+
+<div class="example">
+  <h3> Calendar in a block</h3>
+  <script>function setCal1(locale) {
+    document.querySelector('#calendar1').setAttribute('locale',locale);
+  }</script>
+  <label onclick="setCal1('en-US')">
+    <x-radio><input type="radio" name="r1" checked="checked" /> English</x-radio>
+  </label>
+  <label onclick="setCal1('ko-KR')">
+    <x-radio><input type="radio" name="r1" /> Korean</x-radio>
+  </label>
+  <label onclick="setCal1('zh-CN-u-nu-hanidec')">
+    <x-radio><input type="radio" name="r1" /> Chinese</x-radio>
+  </label>
+  <label onclick="setCal1('ar-EG')">
+    <x-radio><input type="radio" name="r1" />Arabic/Egypt</x-radio>
+  </label>
+  <label onclick="setCal1('fa-AF')">
+    <x-radio><input type="radio" name="r1" />Dari/Afghanistan</x-radio>
+  </label>
+  <label onclick="setCal1('th-TH-n-nu-thai-ca-chinese')">
+    <x-radio><input type="radio" name="r1" />Thai</x-radio>
+  </label>
+  <br/>
+  <br/>
+  <div style="width:400px; border: 1px solid #ccc">
+    <x-calendar id="calendar1" target="date1" locale="en-US"></x-calendar>
   </div>
-  <div class="tab-contents">
-    <div contents-for="overview">
-      <x-include src="/components/calendar/overview.html"></x-include>
-    </div>
-    <div class="usage" contents-for="usage">
-      <x-include src="/components/calendar/usage.html"></x-include>
-    </div>
-  </div>  
-</x-tabs>
+  Selected: <span id="date1"></span>
+  <x-pre>
+    &lt;div style="width:400px; border: 1px solid #ccc">
+      &lt;x-calendar target="date1" locale="en-US">&lt;/x-calendar>
+    &lt;/div>
+    Selected: &lt;span id="date1">&lt;/span>
+  </x-pre>
+</div>
+
+<h2>Attributes</h2>
+<li><b>locale</b>: default 'en-US'</li>
+<li><b>date</b>: startig date. e.g. '2020-09-14'</li>
+<li><b>week-format</b>: Default 'short', 'long', 'short', or 'narrow'</li>
+<li><b>min-date</b>: lowest calendar date selectable. default. '1969-01-01'</li>
+<li><b>max-date</b>: lowest calendar date selectable. default. '2100-12-31'</li>
+<li><b>first-day-of-week</b>: Default 0, which is Sunday</li>
+<li><b>target</b>: id of element to be updated when a date is selected</li>
+
+<h2>Events</h2>
+<li><b>x-select</b>: fired when date is selected with value in Date type</li>

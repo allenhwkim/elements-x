@@ -1,0 +1,40 @@
+x-snackbar {
+  position: fixed;
+  bottom: 0;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+x-snackbar.left {
+  left: 0;
+  right: auto;
+  transform: none;
+}
+x-snackbar.right {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+x-snackbar.green > .x-message {
+  background: green;
+}
+x-snackbar.red > .x-message {
+  background: red;
+}
+
+x-snackbar > .x-message {
+  transition: all .3s;
+  background: #333;
+  color: #FFF;
+  margin: 4px;
+  padding: 8px;
+  border-radius: 4px;
+  animation: fadein .5s;
+  min-width: 200px;
+}
+
+@keyframes fadein {
+  from { opacity: 0; } 
+  to { opacity: 1; }
+}

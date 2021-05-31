@@ -1,14 +1,63 @@
-<x-tabs>
-  <div class="tabs">
-    <div tab-for="overview">OVERVIEW</div>
-    <div tab-for="usage">USAGE</div>
-  </div>
-  <div class="tab-contents">
-    <div contents-for="overview">
-      <x-include src="/components/dialog/overview.html"></x-include>
-    </div>
-    <div class="usage" contents-for="usage">
-      <x-include src="/components/dialog/usage.html"></x-include>
-    </div>
-  </div>  
-</x-tabs>
+<app-custom-css>
+.app x-dialog .x-blocker {
+  background: rgba(0, 0, 0, 0.6);
+}
+.app x-dialog .x-dialog {
+  background-color: blue;
+  border-radius: 8px;
+  color: #FFF;
+  padding: 24px;
+}
+.app x-dialog .x-dialog .x-close-button {
+  background: #FFF;
+  border-radius: 50%;
+  opacity: 1;
+  top: 8px;
+}
+</app-custom-css>
+
+<h3>Features </h3>
+<li> close dialog when background clicked</li>
+<li> when esc pressed close dialog</li>
+<li> when open, trap focus within it.</li>
+<li> when closed, focus back to trigger element</li>
+<li> fire event when opened or closed</li>
+
+<div class="example">
+  <x-button id="button1">Open Diaog</x-button>
+  <x-dialog trigger="button1">
+    <div>This is a dialog.</div>
+    <x-button>Button 1</x-button>
+    <x-button>Button 2</x-button>
+    <x-button>Button 3</x-button>
+  </x-dialog>
+
+  <x-pre>
+    &lt;button id="button1">Open Diaog&lt;/button>
+    &lt;x-dialog trigger="button1">
+      This is a dialog.
+    &lt;/x-dialog>
+  </x-pre>
+</div>
+
+<div class="example">
+  <x-button id="button2">Open Non-closable Diaog</x-button>
+  <x-dialog trigger="button2" closable="false">
+    This is a non-closable dialog. <br/>
+    <x-button onclick="this.closest('x-dialog').close()">Close</x-button>
+  </x-dialog>
+  <x-pre>
+    &lt;button id="button2">Open Non-closable Diaog&lt;/button>
+    &lt;x-dialog trigger="button2" closable="false">
+      This is a non-closable dialog. &lt;br/>
+      &lt;button onclick="this.closest('x-dialog').close()">Close&lt;/button>
+    &lt;/x-dialog>
+  </x-pre>
+</div>
+
+<h3>Attributes</h3>
+<li><b>closable</b>: Default true, if false, only closable by close function()</li>
+
+<h3>Events</h3>
+<li><b>x-dialog-close</b>: Fired when dialog close</li>
+<li><b>x-dialog-open</b>: Fired when dialog open</li>

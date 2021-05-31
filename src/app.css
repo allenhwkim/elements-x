@@ -107,13 +107,32 @@ app-group-header .header .links {
   word-break: break-word;
 }
 .app > .main .aside {
-  background: #3d474c;
   width: 250px;
-  color: #fff;
-  min-height: calc(100vh - 60px);
   transition: width 0.3s;
-  padding: 8px;
 }
+.app > .main .aside .route-items {
+  display: block;
+  position: fixed;
+  top: 60px;
+  width: 250px;
+  left: 0;
+  padding: 8px;
+  background: #3d474c;
+  color: #fff;
+  height: calc(100vh - 60px);
+  overflow: auto;
+}
+.app.collapsed > .main .aside .route-items {
+  width: 60px;
+  overflow-x: hidden;
+}
+.app > .main .aside .route-items::-webkit-scrollbar {
+  width:0px;
+}
+.app > .main .aside .route-items::-webkit-scrollbar-track-piece {
+  background-color:transparent;
+}
+
 .app > .main .aside .route-item {
   padding: 10px 20px;
   margin: 0 -20px;
@@ -121,6 +140,7 @@ app-group-header .header .links {
   align-items: center;
   color: #FFF; 
   text-decoration: none;
+  white-space: nowrap;
 }
 .app > .main .aside .route-item.sub-item {
   padding: 4px 28px;
@@ -138,9 +158,18 @@ app-group-header .header .links {
   outline: 0;
   background: #30393d;
 }
-.app > .main .aside .collapsed {
-  width: 60;
+.app > .main .aside .group-header {
+  cursor: pointer;
+  background: #DDD;
+  color: #333;
+  margin: 0 -4px;
+  padding: 8px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   overflow: hidden;
+}
+.app > .main .aside .custom-elements:not(.expanded) {
+  display: none;
 }
 .app > .main .article {
   min-height: calc(100vh - 60px);

@@ -49,7 +49,7 @@ It makes http call:  GET, POST, PUT, DELETE, or PATCH. It also shows loading sig
     &lt;/x-div>
   </x-pre>
 
-  <x-div debug="" trace="">
+  <x-div> <!-- debug="" trace="" -->
     <x-http on-success="set(resp, event.detail)" url="/components/list/countries.json" auto=""></x-http>
     <b>HTTP Response:</b>
     <pre x-value="resp" style="height: 300px; overflow: auto"></pre>

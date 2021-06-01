@@ -1,0 +1,70 @@
+<x-tabs>
+  <div class="tabs">
+    <div tab-for="js">Javascript</div>
+    <div tab-for="ng">Angular</div>
+    <div tab-for="vue">VueJs</div>
+    <div tab-for="react">React</div>
+  </div>
+  <div class="contents">
+    <x-pre contents-for="js">
+      &lt;script src="https://unpkg.com/elements-x/dist/textfield">&lt;/script>
+      &lt;x-textfield>
+        &lt;span class="label">Username&lt;/span>
+        &lt;input />
+      &lt;/x-textfield>
+    </x-pre>
+    <x-pre contents-for="ng">
+      import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+      import { BrowserModule } from '@angular/platform-browser';
+      <b>import 'elements-x/dist/textfield';</b>
+      
+      @Component({
+        selector: 'my-app',
+        template: `
+          &lt;x-textfield>
+            &lt;span class="label">Username&lt;/span>
+            &lt;input />
+          &lt;/x-textfield>
+        `
+      })
+      class AppComponent  {}
+      
+      @NgModule({
+        imports:      [ BrowserModule ],
+        declarations: [ AppComponent ],
+        bootstrap:    [ AppComponent ],
+        schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      })
+      export class AppModule {}
+    </x-pre>
+    <x-pre contents-for="vue">
+      &lt;template>
+        &lt;x-textfield>
+          &lt;span class="label">Username&lt;/span>
+          &lt;input />
+        &lt;/x-textfield>
+      &lt;/template>
+      
+      &lt;script>
+      <b>import 'elements-x/dist/textfield';</b>
+      
+      export default {
+        name: "App"
+      };
+      &lt;/script>
+    </x-pre>
+    <x-pre contents-for="react">
+      import React from "react";
+      <b>import 'elements-x/dist/button';</b>
+
+      export default function App() {
+        return (
+          &lt;x-textfield>
+            &lt;span class="label">Username&lt;/span>
+            &lt;input />
+          &lt;/x-textfield>
+        );
+      }
+    </x-pre>
+  </div>
+</x-tabs>

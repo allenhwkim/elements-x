@@ -41,18 +41,22 @@ const html = `
   </div>
   <script>
     setTimeout(_ => {
-      var editor = ace.edit("ace-editor");
-      editor.$blockScrolling = Infinity;
+      try {
+        var editor = ace.edit("ace-editor");
+        editor.$blockScrolling = Infinity;
 
-      editor.clearSelection();
-      editor.resize();
-  
-      editor.setOption('useWorker', false); // disable error highlighting
-      editor.setOption('maxLines', 200);
-      editor.setOption('mode', 'ace/mode/css');
-      editor.setOption('theme', 'ace/theme/github');
-      editor.setOption('fontSize', '16px');
-      window.aceEditor = editor;
+        editor.clearSelection();
+        editor.resize();
+    
+        editor.setOption('useWorker', false); // disable error highlighting
+        editor.setOption('maxLines', 200);
+        editor.setOption('mode', 'ace/mode/css');
+        editor.setOption('theme', 'ace/theme/github');
+        editor.setOption('fontSize', '16px');
+        window.aceEditor = editor;
+      } catch(e) {
+        // do nothing
+      }
     }, 1000);
   </script>
 `;

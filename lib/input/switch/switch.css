@@ -9,7 +9,7 @@ x-input[type=switch] {
   margin-right: .25em;
   white-space: nowrap;
   position: relative;
-  padding: 0 2px;
+  padding: 2px;
 }
 
 x-input[type=switch][aria-checked='true'] {

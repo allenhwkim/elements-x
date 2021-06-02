@@ -16,6 +16,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.com/"
   },
+  "preversion" : "npm run build",
   "pre-commit": [
     "eslint"
   ],

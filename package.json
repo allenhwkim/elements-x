@@ -1,6 +1,6 @@
 {
   "name": "elements-x",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "Collection of simple, customizable and extendible custom elements",
   "main": "dist/elements-x/index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.com/"
   },
-  "preversion" : "npm run build",
+  "preversion": "npm run build",
   "pre-commit": [
     "eslint"
   ],

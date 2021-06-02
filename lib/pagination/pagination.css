@@ -14,7 +14,11 @@ x-pagination .page {
   min-height: 28px;
   cursor: pointer;
   text-align: center;
-  font-size: .8em;
+  font-size: 14px;
+  color: inherit;
+}
+x-pagination .page:disabled {
+  color: #999;
 }
 x-pagination .prev.page::before {
   content : 'Prev';
@@ -26,7 +30,7 @@ x-pagination .next.page::before {
 x-pagination .pages > .page.selected {
   color: #FFF;
   background-color: #4285f4;
-  border-radius: .125rem;
+  border-radius: 4px;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
   transition: all .2s linear;
 }

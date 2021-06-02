@@ -24,6 +24,47 @@
 <li> fire event when opened or closed</li>
 
 <div class="example">
+  <h3> Open Dialog </h3>
+  You can open a dialog with a windows function "openDialog(message, options)"
+  <li>message: paragraph of dialog</li>
+  <li>options
+    <ul>
+      <li>buttons: Buttons to be on the bottom of dialog. key is text of the button 
+        and value is a function to be performed when a button is clicked.
+      </li>
+      <li>style: Custom style for dialog contents. e.g. {color: '#333'} </li>
+    </ul>
+  </li>
+  <script>
+    function confirm() {
+      openDialog('Do you want to continue', {
+        buttons: {
+          Yes: e => console.log('Yes button clicked', e),
+          No: e => console.log('Nos button clicked', e)
+        },
+        style: {border: '2px solid yellow', minWidth: '200px'}
+      });
+    }
+  </script>
+  <x-button onclick="confirm()">Open Dialog</x-button>
+  <x-pre>
+    &lt;script>
+      function confirm() {
+        openDialog('Do you want to continue', {
+          buttons: {
+            Yes: e => console.log('Yes button clicked', e),
+            No: e => console.log('Nos button clicked', e)
+          },
+          style: {border: '2px solid yellow', minWidth: '200px'}
+        });
+      }
+    &lt;/script>
+    &lt;x-button onclick="confirm()">Open Dialog&lt;/x-button>
+  </x-pre>
+</div>
+
+<div class="example">
+  <h3> Basic Dialog </h3>
   <x-button id="button1">Open Diaog</x-button>
   <x-dialog trigger="button1">
     <div>This is a dialog.</div>
@@ -41,6 +82,7 @@
 </div>
 
 <div class="example">
+  <h3> Non-Closable Dialog </h3>
   <x-button id="button2">Open Non-closable Diaog</x-button>
   <x-dialog trigger="button2" closable="false">
     This is a non-closable dialog. <br/>

@@ -27,7 +27,7 @@ x-dialog .x-dialog {
   animation: appear .3s;
   z-index: 1;
   min-width: 400px;
-  min-height: 200px;
+  min-height: 120px;
 }
 
 @keyframes appear {

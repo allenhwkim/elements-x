@@ -63,7 +63,7 @@ class AppGroupHeader extends HTMLElement {
       if (elName ) {
         this.querySelector('#component-name').innerText = elName; 
         this.querySelector('#github-code').setAttribute('href', 
-          `https://github.com/elements-x/elements-x/tree/master/src/lib/${elName}`);
+          `https://github.com/elements-x/elements-x/tree/master/lib/${elName}`);
         this.querySelector('#github-issue').setAttribute('href', 
           `https://github.com/elements-x/elements-x/issues?q=${elName}+in%3Atitle`);
       } else {

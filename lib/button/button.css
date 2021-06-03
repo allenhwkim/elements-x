@@ -16,6 +16,10 @@ x-button {
   text-align: center;
   border: 1px solid rgba(0,0,0,.12);
   box-shadow: 2px 2px 4px #CCC;
+  outline: none;
+}
+x-button:focus {
+  box-shadow: white 0 0 0 2px, #ff821f 0 0 0 4px;
 }
 
 x-button > button {

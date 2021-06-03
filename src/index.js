@@ -35,21 +35,36 @@ window.addEventListener('DOMContentLoaded', function() {
       gtag('config', 'G-5EB3NQZC8W');
     }, 1000);
   }
+  
+  /** 
+   * disabling facebook comments because of error in console
+   * ErrorUtils caught an error: Params: 113 [Caught in: Module "VisibilityListener"]
+   * enableFacebookComments();
+  */
 });
+ 
+function enableFacebookComments() {
+  const script = document.createElement('script');
+  script.setAttribute('async', '');
+  script.setAttribute('defer', '');
+  script.setAttribute('crossorigin', 'anonymous');
+  script.setAttribute('nonce', 'qRsDD5xh');
+  script.setAttribute('src', 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=254907754864724');
+  setTimeout(_ => document.body.appendChild(script), 2000);
 
-// facebook comments
-document.body.addEventListener('x-route', function() {
-  if (window.location.hostname.startsWith('localhost')) return;
+  document.body.addEventListener('x-route', function() {
+    if (window.location.hostname.startsWith('localhost')) return;
 
-  document.querySelector('.fb-comments').style.display = 'none'; // to avoid flicking
-  debounce(event => {
-    const iframe = document.querySelector('.fb-comments iframe'); 
-    if (iframe) {
-      const href = window.location.href.replace(window.location.search, '');
-      const iframeSrc = iframe.getAttribute('src')
-        .replace(/&href=[^&]+/, `&href=${encodeURIComponent(href)}`);
-      iframe.setAttribute('src', iframeSrc);
-    }
-    document.querySelector('.fb-comments').style.display = 'block';
-  }, 5000)();
-});
+    document.querySelector('.fb-comments').style.display = 'none'; // to avoid flicking
+    debounce(event => {
+      const iframe = document.querySelector('.fb-comments iframe'); 
+      if (iframe) {
+        const href = window.location.href.replace(window.location.search, '');
+        const iframeSrc = iframe.getAttribute('src')
+          .replace(/&href=[^&]+/, `&href=${encodeURIComponent(href)}`);
+        iframe.setAttribute('src', iframeSrc);
+      }
+      document.querySelector('.fb-comments').style.display = 'block';
+    }, 5000)();
+  });
+}

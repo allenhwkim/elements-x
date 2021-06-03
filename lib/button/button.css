@@ -26,6 +26,7 @@ x-button > button {
   line-height: var(--size);
   min-width: 60px;
   color: inherit;
+  cursor: pointer;  
 }
 
 x-button:active { box-shadow: none; transform: translate(2px, 2px); }

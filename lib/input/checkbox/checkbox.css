@@ -1,32 +1,21 @@
-x-input[type=checkbox] > input {
+x-input[type=checkbox] {
   --x-checkbox-size: 20px;
   --x-checkbox-border: #333;
   --x-checkbox-fill: #FFF;
   --x-checkbox-icon: '\2714';
   --x-checkbox-color: inherit;
   --x-checkbox-radius: 4px;
+  display: inline-block;
+}
+x-input[type=checkbox] > input {
   outline: none;
   position: relative;
   width: 1px;
   height: 1px;
-  display: inline-block;
+  display: block;
   margin: 0;
   margin-right: var(--x-checkbox-size);
   margin-bottom: var(--x-checkbox-size);
-  vertical-align: middle;
-}
-
-x-input[type=checkbox] > input:focus::after,
-x-input[type=checkbox] > input:hover::after {
-  content: '';
-  position: absolute;
-  left: -6px;
-  top: -6px;
-  height: calc(var(--x-checkbox-size) + 12px);
-  width: calc(var(--x-checkbox-size) + 12px);
-  border-radius: 50%;
-  background: rgba(0,0,0,.1);
-  z-index: -1;
 }
 
 x-input[type=checkbox] > input::before  {
@@ -42,6 +31,12 @@ x-input[type=checkbox] > input::before  {
   color: var(--x-checkbox-color);
   align-items: center;
   justify-content: center;
+}
+
+x-input[type=checkbox] > input:hover::before,
+x-input[type=checkbox] > input:focus::before  {
+  outline: none;
+  box-shadow: white 0 0 0 2px, #ff821f 0 0 0 4px;
 }
 
 x-input[type=checkbox] > input:disabled {

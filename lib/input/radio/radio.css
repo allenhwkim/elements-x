@@ -4,24 +4,12 @@ x-input[type=radio] > input {
   --x-radio-fill: red;
   --x-radio-icon: '\25CF';
   --x-radio-color: inherit;
-  width: 1px;
-  height: 1px;
+  width: 0;
+  height: 0;
   margin: 0 var(--x-radio-size) var(--x-radio-size) 0;
   box-sizing: border-box;
   position: relative;
   vertical-align: middle;
-}
-
-x-input[type=radio] > input:not(:disabled):focus::before,
-x-input[type=radio] > input:not(:disabled):hover::before {
-  content: '';
-  position: absolute;
-  left: -6px;
-  top: -6px;
-  height: calc(var(--x-radio-size) + 12px);
-  width: calc(var(--x-radio-size) + 12px);
-  border-radius: 50%;
-  background: rgba(0,0,0,.1);
 }
 
 x-input[type=radio] > input::after {
@@ -39,6 +27,12 @@ x-input[type=radio] > input::after {
   align-items: center;
   justify-content: center;
 }
+x-input[type=radio] > input:hover::after,
+x-input[type=radio] > input:focus::after  {
+  outline: none;
+  box-shadow: white 0 0 0 2px, #ff821f 0 0 0 4px;
+}
+
 
 x-input[type=radio] > input:checked::after {
   content: var(--x-radio-icon);

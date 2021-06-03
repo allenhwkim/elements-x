@@ -1,6 +1,3 @@
-var {color, colorEl, colorValueEl, msgEl} = initColors();
-setColor('#ff0000');
-
 function initColors() {
   // eslint-disable-next-line no-undef
   const color = new Color();
@@ -20,6 +17,9 @@ function initColors() {
 
   return {color, colorEl, colorValueEl, msgEl};
 }
+
+var {color, colorEl, colorValueEl, msgEl} = initColors();
+setColor('#ff0000');
 
 function setColor(hex) {
   colorEl.value = hex;

@@ -17,12 +17,14 @@ x-button {
   border: 1px solid rgba(0,0,0,.12);
   box-shadow: 2px 2px 4px #CCC;
   outline: none;
+  background-color: #FFF;
 }
 x-button:focus {
   box-shadow: white 0 0 0 2px, #ff821f 0 0 0 4px;
 }
 x-button > button {
   border: none;
+  background-color: inherit;
   background: none;
   display: flex;
   align-items: center;

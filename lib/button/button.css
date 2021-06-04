@@ -21,7 +21,6 @@ x-button {
 x-button:focus {
   box-shadow: white 0 0 0 2px, #ff821f 0 0 0 4px;
 }
-
 x-button > button {
   border: none;
   background: none;
@@ -60,6 +59,10 @@ x-button.no-bg.accent:hover { background-color: #F0F0F0; }
 
 x-button[disabled] { color: var(--disabled); pointer-events: none; }
 x-button.no-bg[disabled] { background: none; color: #BBB;}
+x-button > button:disabled {
+  background-color: inherit;
+  color: inherit;
+}
 
 x-button.clicked { pointer-events: none; }
 

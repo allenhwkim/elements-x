@@ -9,8 +9,9 @@ x-input[type=mask] .x-input {
   height: 32px;
   width: 200px;
   background: transparent;
+  padding: 0 4px;
   box-sizing: border-box;
-  border: 1px solid #333;
+  border: 1px solid #999;
   font-size: 14px;
 }
 

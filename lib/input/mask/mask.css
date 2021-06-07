@@ -1,0 +1,47 @@
+x-input[type=mask] {
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+}
+
+x-input[type=mask] .x-input {
+  font-family: monospace;
+  height: 32px;
+  width: 200px;
+  background: transparent;
+  box-sizing: border-box;
+  border: 1px solid #333;
+  font-size: 14px;
+}
+
+x-input[type=mask] .x-face,
+x-input[type=mask] .x-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* z-index: -1; */
+  pointer-events: none;
+  font-family: monospace;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  white-space: pre;
+  border: 1px solid transparent;
+  opacity: .3;
+
+  font-size: 13.33333px;
+  padding-left: 2px;
+  border-width: 1px;
+}
+x-input[type=mask][hide-input] .x-input {
+  color: transparent;
+  caret-color: #333;
+}
+x-input[type=mask][hide-input] .x-face {
+  opacity: 1;
+}
+x-input[type=mask]:not([hide-input]) .x-face {
+  display: none;
+}

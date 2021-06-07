@@ -1,0 +1,66 @@
+<div class="example">
+  <h2> Masked Input </h2>
+
+  <div class="example">
+    <h3>Number</h3>
+    <x-input mask="99999"></x-input>
+    <x-pre>
+      &lt;x-input mask="99999">&lt;/x-input>
+    </x-pre>
+  </div>
+
+  <div class="example">
+    <h3>Date</h3>
+    <x-input mask="YYYY/MM/DD"></x-input>
+    <x-pre>
+      &lt;x-input mask="YYYY/MM/DD"></x-input>
+    </x-pre>
+  </div>
+
+  <div class="example">
+    <h3>ID</h3>
+    <x-input mask="###-##-####"></x-input>
+    <x-pre>
+      &lt;x-input mask="###-##-####">&lt;/x-input>
+    </x-pre>
+  </div>
+
+  <div class="example">
+    <h3>Phone Number</h3>
+    <x-input mask="(999) 999-9999"></x-input>
+    <x-pre>
+      &lt;x-input mask="(999) 999-9999">&lt;/x-input>
+    </x-pre>
+  </div>
+
+  <div class="example">
+    <h3>Credit Card Number</h3>
+    <x-input mask="9999 9999 9999 9999"></x-input>
+    <x-pre>
+      &lt;x-input mask="9999 9999 9999 9999">&lt;/x-input>
+    </x-pre>
+  </div>
+
+  <div class="example">
+    <h3>Postal Code</h3>
+    <x-input mask="X9X 9X9"></x-input>
+    <x-pre>
+      &lt;x-input mask="X9X 9X9">&lt;/x-input>
+    </x-pre>
+  </div>
+
+  <div class="example">
+    <h3>Credit Card Number: Hide Number When Type</h3>
+    <x-input mask="____ ____ ____ ____" hide-input=""></x-input>
+    <x-pre>
+      &lt;x-input mask="____ ____ ____ ____" hide-input="">&lt;/x-input>
+    </x-pre>
+  </div>
+
+  <h2>Attributes</h2>
+  <li><b>mask</b>: mask characters. e.g. '(###) ###-####'</li>
+  <li><b>hide-input</b>: if given, it hides inputs with '*' sign </li>
+</div>
+
+
+

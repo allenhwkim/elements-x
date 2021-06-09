@@ -1,34 +1,77 @@
-<h2>URL Decoder/Encoder</h2>
-<button id="load-sample">Example</button>
+<h2>URL to encodedURL</h2>
+<form name="func" style="text-align: right; margin-bottom: 4px;">
+  <x-input name="func" value="encodeURI" type="radio" checked="chedked"></x-input> encodeURI
+  <x-input name="func" value="encodeURIComponent" type="radio"></x-input>  encodeURIComponent 
+</form>
 
-<div class="uri-encode-decode">
-  <textarea id="text"></textarea>
-  <x-button> encodeURI </x-button>
-  <x-button> decodeURI </x-button>
-  <x-button> encodeURIComponent </x-button>
-  <x-button> decodeURIComponent </x-button>
+<script>
+  function setAceEditor(selector, value, options) {
+    const editor = ace.edit(document.querySelector(selector));
+    editor.$blockScrolling = Infinity;
+    editor.clearSelection();
+    editor.resize()
+    const defaultOptions = { useWorker: false, wrap: 65, maxLines: 25 }
+    value && editor.setValue(value);
+    editor.setOptions({...defaultOptions, ...options});
+    return editor;
+  }
+
+  function formatted(str) {
+    const func = document.querySelector('form').func.value;
+    return window[func](str);
+  }
+
+  setTimeout( _ => {
+    const leftEditor = setAceEditor('#left');
+    const rightEditor = setAceEditor('#right');
+    const example = document.querySelector('#example').innerText.trim();
+    leftEditor.getSession().setValue(example);
+    rightEditor.getSession().setValue(formatted(example));
+    leftEditor.getSession().on('change', function() {
+      const value = leftEditor.getSession().getValue();
+      rightEditor.session.setValue(formatted(value));
+    });
+  })
+</script>
+
+<script type="text/html" id="example">
+  https://foo.com/#/foo?x=;,:@&bar=+$-_.!~*'()ABC abc 123
+</script>
+
+<div class="editor-title">
+  <span>URL</span>
+  <span>Encoded</span>
+</div>
+<div class="editor">
+  <div class="editor-container">
+    <textarea id="left" class="left"></textarea>
+  </div>
+  <div class="editor-container">
+    <textarea id="right" class="right"></textarea>
+  </div>
 </div>
 
 <style>
-  #text {
-    width: 800px;
-    height: 300px;
-    font-size: 14px;
+  .editor-title, .editor {
+    display: flex;
+  }
+  .editor-title > * {
+    width: 50%;
+    background: #CCC;
+    padding: 4px 8px;
+    border-bottom: 2px solid #666;
+  }
+  .editor-title > *:last-child {
+    border-left: 1px solid #666;
+  }
+  .editor > .editor-container {
+    height: calc(100vh - 260px);
+    position: relative;
+    width: 50%;
+    border: 1px solid #ccc;
+  }
+  .editor > .editor-container > * {
+    margin: 0;
   }
 </style>
 
-<script>
-  (function() {
-    document.querySelector('#load-sample').addEventListener('click', e => {
-      document.querySelector('#text').value = `https://foo.com/#/foo?x=;,:@&bar=+$-_.!~*'()ABC abc 123`;
-    })
-    document.querySelectorAll('.uri-encode-decode x-button').forEach(button => {
-      button.addEventListener('click', event => {
-        const funcName = event.target.innerText.trim();
-        const src = document.querySelector('#text').value;
-        document.querySelector('#text').value = window[funcName](src);
-      });
-    });
-    document.querySelector('#load-sample').click();
-  })();
-</script>

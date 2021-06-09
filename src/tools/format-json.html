@@ -1,56 +1,75 @@
-<h2>Format JSON</h2>
+<h2>Javascript to Formatted</h2>
 
-<div class="flex">
-  <div class="left">
-    <h3>Source</h3>
-    <textarea id="source"></textarea>
+<script>
+  function setAceEditor(selector, value, options) {
+    const editor = ace.edit(document.querySelector(selector));
+    editor.$blockScrolling = Infinity;
+    editor.clearSelection();
+    editor.resize()
+    const defaultOptions = { useWorker: false, wrap: 65, maxLines: 25 }
+    value && editor.setValue(value);
+    editor.setOptions({...defaultOptions, ...options});
+    return editor;
+  }
+
+  function formatted(str) {
+    try {
+      return prettier.format(str, {parser: 'json-stringify', plugins: prettierPlugins});
+    } catch(e) {
+      return str;
+    }
+  }
+
+  setTimeout( _ => {
+    const leftEditor = setAceEditor('#left');
+    const rightEditor = setAceEditor('#right');
+    const example = document.querySelector('#example').innerText.trim();
+    leftEditor.getSession().setValue(example);
+    rightEditor.getSession().setValue(formatted(example));
+    leftEditor.getSession().on('change', function() {
+      const value = leftEditor.getSession().getValue();
+      rightEditor.session.setValue(formatted(value));
+    });
+  })
+</script>
+
+<script type="text/html" id="example">
+{"foo": 1, "bar": 2}
+</script>
+
+<div class="editor-title">
+  <span>Javascript</span>
+  <span>Formatted</span>
+</div>
+<div class="editor">
+  <div class="editor-container">
+    <textarea id="left" class="left"></textarea>
   </div>
-
-  <div class="right">
-    <h3>Result</h3>
-    <div class="result" id="result" contenteditable="true"></div> 
+  <div class="editor-container">
+    <textarea id="right" class="right"></textarea>
   </div>
 </div>
 
-<x-button id="format">Format</x-button>
-
 <style>
- .flex {
-   display: flex; justify-content: space-between;
- }
- .flex .left, .flex .right {
-   flex: 1; margin: 0 8px;
- }
- .flex .left #source {
-   min-height: 320px; 
-   width: 100%; 
-   font-size: 14px;
- }
- .result {
-   font-family: monospace;
-   display: block;
-   border: 1px solid #ccc;
-   height: 320px;
-   white-space: pre-wrap;
-   overflow: auto;
-   font-size: 14px;
- }
+  .editor-title, .editor {
+    display: flex;
+  }
+  .editor-title > * {
+    width: 50%;
+    background: #CCC;
+    padding: 4px 8px;
+    border-bottom: 2px solid #666;
+  }
+  .editor-title > *:last-child {
+    border-left: 1px solid #666;
+  }
+  .editor > .editor-container {
+    height: calc(100vh - 260px);
+    position: relative;
+    width: 50%;
+    border: 1px solid #ccc;
+  }
+  .editor > .editor-container > * {
+    margin: 0;
+  }
 </style>
-
-<script>
-  (function(){
-    document.querySelector('#source').innerText = '{"foo": 1, "bar": 2}';
-    document.querySelector('#format').addEventListener('click', function() {
-      const jsonCode = document.querySelector('#source').value;
-      const resultEl = document.querySelector('#result');
-      try {
-        const parsed = JSON.parse(jsonCode);
-        resultEl.innerText = JSON.stringify(parsed, null, '  ');
-      } catch (e) {
-        resultEl.innerText = e;
-        throw e;  
-      }
-    });
-    document.querySelector('#format').click();
-  })();
-</script>

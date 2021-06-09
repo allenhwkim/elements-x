@@ -16,12 +16,12 @@
   .code .char { display: block; font-size: 32px;}
   .code .desc { position: absolute; display: none; background: #333; color: #FFF;}
   .code:hover .desc { display: block; left: 8px; top: 8px; white-space: nowrap; z-index: 1; }
-  .search-result { display: flex; flex-wrap: wrap;}
+  .search-result { display: flex; flex-wrap: wrap; padding: 0; }
 </style>
 
 <div class='search-section'>
   <form onsubmit="searchFunction(event)">
-    <input id="search-input" placeholder="search unicodes" />
+    <input id="search-input" placeholder="search unicodes" value="emoticon" />
     <button type="submit" id="search-btn">Search</button>
   </form>
   <ul class="search-result">
@@ -133,8 +133,8 @@
   var searchStr = Object.fromEntries(new URLSearchParams(location.search)).q;
   if (searchStr) {
     document.querySelector('#search-input').value = searchStr;
-    searchButtonEl.click();
   }
+  searchButtonEl.click();
 
   searchResultEl.addEventListener('click', event => {
     const codeEl = event.target.closest('.code');

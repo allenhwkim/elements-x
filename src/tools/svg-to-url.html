@@ -1,75 +1,89 @@
-<h2>URL-encoder for SVG</h2>
+<h2>SVG to CSS</h2>
 
-<div class="svg-url">
-  <div class="svg">
-    <span class="guide">
-      SVG <button id="example">Example</button>
-    </span>
-    <textarea id="svg"></textarea>
+<script>
+  function setAceEditor(selector, value, options) {
+    const editor = ace.edit(document.querySelector(selector));
+    editor.$blockScrolling = Infinity;
+    editor.clearSelection();
+    editor.resize()
+    const defaultOptions = { useWorker: false, wrap: 65, maxLines: 25 }
+    value && editor.setValue(value);
+    editor.setOptions({...defaultOptions, ...options});
+    return editor;
+  }
+
+  function formatted(str) {
+    const converted = `background-image: url("data:image/svg+xml,` +
+      str.replace('<svg>', `<svg xmlns="http://www.w3.org/2000/svg">`)
+        .replace(/"/g, '\'')
+        .replace(/</g, '%3C')
+        .replace(/>/g, '%3E') 
+        .replace(/\n/g, '') +
+      `");`;
+    try {
+      return prettier.format(converted, {parser: 'css', plugins: prettierPlugins});
+    } catch(e) {
+      return str;
+    }
+  }
+
+  setTimeout( _ => {
+    const leftEditor = setAceEditor('#svg');
+    const rightEditor = setAceEditor('#css');
+    const example = document.querySelector('#example').innerText.trim();
+    leftEditor.getSession().setValue(example);
+    rightEditor.getSession().setValue(formatted(example));
+    leftEditor.getSession().on('change', function() {
+      const value = leftEditor.getSession().getValue();
+      rightEditor.session.setValue(formatted(value));
+    });
+  })
+</script>
+
+<script type="text/html" id="example">
+<svg>
+  <circle r="50" cx="50" cy="50" fill="tomato" />
+  <circle r="41" cx="47" cy="50" fill="orange" />
+  <circle r="33" cx="48" cy="53" fill="gold" />
+  <circle r="25" cx="49" cy="51" fill="yellowgreen" />
+  <circle r="17" cx="52" cy="50" fill="lightseagreen" />
+  <circle r="9" cx="55" cy="48" fill="teal" />
+</svg> 
+</script>
+
+<div class="editor-title">
+  <span>SVG</span>
+  <span>CSS</span>
+</div>
+<div class="editor">
+  <div class="editor-container">
+    <textarea id="svg" class="left"></textarea>
   </div>
-  <div class="css">
-    <span class="guide"> CSS </span>
-    <textarea id="css"></textarea>
-  </div>
-  <div class="preview">
-    <span class="guide">Preview</span> 
-    <div id="preview"></div>
+  <div class="editor-container">
+    <textarea id="css" class="right"></textarea>
   </div>
 </div>
 
 <style>
-  .svg-url {
+  .editor-title, .editor {
     display: flex;
-    justify-content: space-evenly;
-    height: 400px;
   }
-  .svg-url .guide {
-    height: 30px;
-    display: inline-block;
-    line-height: 30px;
+  .editor-title > * {
+    width: 50%;
+    background: #CCC;
+    padding: 4px 8px;
+    border-bottom: 2px solid #666;
   }
-  .svg-url > div {
-    padding: 8px;
-    width: 400px;
+  .editor-title > *:last-child {
+    border-left: 1px solid #666;
   }
-  .svg-url #svg,
-  .svg-url #css,
-  .svg-url #preview {
-    width: 100%;
-    height: calc(100% - 1em);
+  .editor > .editor-container {
+    height: calc(100vh - 260px);
+    position: relative;
+    width: 50%;
     border: 1px solid #ccc;
-    font-family: monospace;
-    font-size: 14px;
+  }
+  .editor > .editor-container > * {
+    margin: 0;
   }
 </style>
-
-<script>
-  (function() {
-    document.querySelector('#example').addEventListener('click', event => {
-      document.querySelector('#svg').value =
-`<svg>
-  <circle r="50" cx="50" cy="50" fill="tomato"/>
-  <circle r="41" cx="47" cy="50" fill="orange"/>
-  <circle r="33" cx="48" cy="53" fill="gold"/>
-  <circle r="25" cx="49" cy="51" fill="yellowgreen"/>
-  <circle r="17" cx="52" cy="50" fill="lightseagreen"/>
-  <circle r="9" cx="55" cy="48" fill="teal"/>
-</svg>`;
-      document.querySelector('#svg').dispatchEvent(new Event('change', { bubbles: true }));
-    });
-
-    document.querySelector('#svg').addEventListener('change', event => {
-      const svg = event.target.value;
-      const css = `background-image: url("data:image/svg+xml,` +
-        svg.replace('<svg>', `<svg xmlns="http://www.w3.org/2000/svg">`)
-          .replace(/"/g, '\'')
-          .replace(/</g, '%3C')
-          .replace(/>/g, '%3E') 
-          .replace(/\n/g, '') +
-        `");`;
-      document.querySelector('#css').value = css;
-      document.querySelector('#preview').setAttribute('style', css);
-    });
-    document.querySelector('#example').click();
-  })();
-</script>

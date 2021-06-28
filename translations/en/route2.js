@@ -1,0 +1,2 @@
+export const route2 = {
+};

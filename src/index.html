@@ -22,7 +22,7 @@
     <script src="https://unpkg.com/prettier@2.3.1/parser-babel.js"></script>
   </head>
   <body>
-    <x-div class="app" ee-a11y-outline>
+    <div class="app" ee-a11y-outline>
       <header class="header">
         <section class="logo vcentered hcentered">
           <div class="title"> 
@@ -32,7 +32,8 @@
           </div>
         </section>
         <nav class="header-nav">
-          <span on-click="toggle(.app.collapsed)" class="hamburger vcentered hcentered">
+          <span onclick="document.querySelector('.app').classList.toggle('collapsed')"
+            class="hamburger vcentered hcentered">
             <i class="fa fa-bars"></i>
           </span>
           <div class="links">
@@ -44,6 +45,10 @@
               <a href="/component" src="/src/app-components-routes.html">Components</a>
               <a href="/tool" src="/src/app-tools-routes.html">Tools</a>
             </x-route>
+          </div>
+          <div class="languages">
+            <a class="en" href="javascript:setLang('en')">English</a>
+            <a class="kr" href="javascript:setLang('kr')">한글</a>
           </div>
           <div class="icons">
             <a href="https://github.com/elements-x/elements-x">
@@ -62,8 +67,12 @@
              data-width="100%" data-numposts="5"></div>
         </article>
       </div>
-    </x-div>
+    </div>
     <div id="fb-root"></div>
 
+    <script>
+      function setLang(lang) { localStorage.setItem('language', lang); location.reload(); }
+      document.body.setAttribute('lang', localStorage.getItem('language'));
+    </script>
   </body>
 </html>

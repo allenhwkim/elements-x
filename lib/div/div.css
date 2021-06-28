@@ -1,0 +1,8 @@
+x-div {display: block; }
+x-div a {cursor: pointer;} 
+/* 
+x-div form:invalid button:not([type]), 
+x-div form:invalid button[type=submit] { 
+  pointer-events: none; opacity: .5;
+} 
+*/

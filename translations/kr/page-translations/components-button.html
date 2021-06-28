@@ -1,0 +1,170 @@
+
+<app-custom-css>
+  .app x-button {
+    --primary: green;
+    --accent: orange;
+    --disabled: grey;
+    --size: 32px;
+  }
+</app-custom-css>
+
+<h3>HTML &lt;button>과 다른 점</h3>
+<ul class="default">
+  <li> 다양하고 색감있는 디자인.</li> 
+  <li> 로딩중임을 버튼안에 표시 가능합니다.
+    <p>
+      어떤 하부 엘리먼트에 'loading' 클래스가 설정되어 있으면 기본적으로 숨겨져 보이지 않습니다.
+      그러나 &lt;x-button> 클래스에  loading이 더해지면 보여지게 됩니다.
+      다시 &lt;x-button> 클래스에서 loading를 지우면 숨겨지게 됩니다.
+    </p>
+  </li>
+  <li> 버튼의 사이즈와 칼라를 웹사이트의 성격에 맞게 바꿀수 있습니다.
+    <p>
+      "기본스타일 변경"을 클릭하셔서 새로운 스타일을 경험하세요.
+    </p>
+  </li>
+</ul>
+
+<h3>기본스타일</h3>
+<div class="example">
+  <p>
+    <x-button> 디폴트 </x-button>
+    <x-button class="primary"> 프라이머리 </x-button>
+    <x-button class="accent"> 엑센트 </x-button>
+    <x-button disabled="disabled"> 비활성화 </x-button>
+  </p>
+  <pre language="html">
+    &lt;x-button> 디폴트 &lt;/x-button>
+    &lt;x-button class="<b>primary</b>"> 프라이머리 &lt;/x-button>
+    &lt;x-button class="<b>accent</b>"> 엑센트 &lt;/x-button>
+    &lt;x-button <b>disabled</b>> 비활성화 &lt;/x-button>
+  </pre>
+</div>
+
+<h3>Loading</h3>
+<p>
+  Any element with "loading" class is hidden in default.
+  If the button class contains "loading" the loading sign become visible.
+  While it is loading, users won't be able to click the button.
+</p>
+
+<p>
+Click the below buttons to see loading sign. 
+</p>
+<div class="example loading-section">
+  <x-button onclick="this.classList.toggle('loading')">
+    <img class="loading" height="24" src="assets/loading.gif" />
+    디폴트
+  </x-button>
+  <x-button class="primary" onclick="this.classList.toggle('loading')"> 
+    프라이머리
+    <img class="loading" height="24" src="assets/loading.gif" />
+  </x-button>
+  <x-button class="accent" onclick="this.classList.toggle('loading')" >
+    <img class="loading" height="24" src="assets/loading.gif" />
+    엑센트
+  </x-button>
+  <div>
+
+  <p>
+    <a href="javascript:void(0)" onclick="document.querySelectorAll('.loading-section x-button').forEach(el => el.classList.remove('loading'))">
+      Click here
+    </a> 
+    to remove all loading signs.
+  </p>
+
+  </div>
+  <pre language="html">
+  &lt;x-button class="loading"">
+    &lt;img class="loading" height="24" src="assets/loading.gif" />
+    디폴트
+  &lt;/x-button>
+  &lt;x-button class="primary loading"> 
+  프라이머리
+    &lt;img class="loading" height="24" src="assets/loading.gif" />
+  &lt;/x-button>
+  &lt;x-button class="accent loading">
+    &lt;img class="loading" height="24" src="assets/loading.gif" />
+    엑센트
+  &lt;/x-button>
+  </pre>
+</div>
+
+<h3>no-bg</h3>
+
+<p>
+Button with "no-bg" attribute won't have background color, switching to text color.
+</p>
+
+<div class="example custom">
+  <x-button class="no-bg"> 디폴트 </x-button>
+  <x-button class="primary no-bg"> 프라이머리 </x-button>
+  <x-button class="accent no-bg"> 엑센트 </x-button>
+  <x-button disabled="disabled" class="no-bg"> 비활성화 </x-button>
+  <pre language="html">
+  &lt;x-button class="<b>no-bg</b>"> 디폴트 &lt;/x-button>
+  &lt;x-button class="primary <b>no-bg</b>"> 프라이머리 &lt;/x-button>
+  &lt;x-button class="accent <b>no-bg</b>"> Accent &lt;/x-button>
+  &lt;x-button disabled class="<b>no-bg</b>"> 비활성화 &lt;/x-button>
+  </pre>
+</div>
+
+<h3>no-border</h3>
+
+<div class="example">
+  <x-button class="no-bg no-border"> 디폴트 </x-button>
+  <x-button class="primary no-bg no-border"> 프라이머리 </x-button>
+  <x-button class="accent no-bg no-border"> 엑센트 </x-button>
+  <x-button disabled="disabled" class="no-bg no-border"> 비활성화 </x-button>
+  <pre language="html">
+  &lt;x-button class="no-bg no-border"> 디폴트 &lt;/x-button>
+  &lt;x-button class="primary no-bg no-border"> Primary &lt;/x-button>
+  &lt;x-button class="accent no-bg no-border"> Accent &lt;/x-button>
+  &lt;x-button disabled class="no-bg no-border"> 비활성화 &lt;/x-button>
+  </pre>
+</div>
+
+<h3>no-shadow</h3>
+
+<p>
+Button with "no-shadow" class wont' have raised effect.
+</p>
+<div class="example">
+  <x-button class="no-bg no-border no-shadow"> 디폴트 </x-button>
+  <x-button class="primary no-bg no-border no-shadow"> 프라이머리 </x-button>
+  <x-button class="accent no-bg no-border no-shadow"> 엑센트 </x-button>
+  <x-button disabled="disabled" class="no-bg no-border no-shadow"> Disabled </x-button>
+  <pre language="html">
+  &lt;x-button class="no-bg no-border <b>no-shadow</b>"> 디폴트 &lt;/x-button>
+  &lt;x-button class="primary no-bg no-border <b>no-shadow</b>"> 프라이머리 &lt;/x-button>
+  &lt;x-button class="accent no-bg no-border <b>no-shadow</b>"> 엑센트 &lt;/x-button>
+  &lt;x-button disabled class="no-bg no-border <b>no-shadow</b>"> 비활성화 &lt;/x-button>
+  </pre>
+</div>
+
+<h3>Icon</h3>
+<p>
+  Button with "icon" class will have rounded shape instead of rectanble shape.
+</p>
+<div class="example">
+  <x-button class="icon">&#9829;</x-button>
+  <x-button class="icon primary">&#9829;</x-button>
+  <x-button class="icon accent">&#9829;</x-button>
+  <x-button class="icon" disabled="disabled">&#9829;</x-button> 디폴트
+  <br/>
+  <x-button class="icon no-bg ">&#9829;</x-button>
+  <x-button class="icon primary no-bg">&#9829;</x-button>
+  <x-button class="icon accent no-bg">&#9829;</x-button>
+  <x-button class="icon no-bg" disabled="disabled">&#9829;</x-button> no-bg
+  <br/>
+  <x-button class="icon no-bg no-border no-shadow">&#9829;</x-button>
+  <x-button class="icon primary no-bg no-border no-shadow">&#9829;</x-button>
+  <x-button class="icon accent no-bg no-border no-shadow">&#9829;</x-button>
+  <x-button class="icon no-bg no-border no-shadow" disabled="disabled">&#9829;</x-button> no-border
+  <pre language="html">
+  &lt;x-button class="<b>icon</b>">&#9829;&lt;/x-button>
+  &lt;x-button class="<b>icon</b> primary">&#9829;&lt;/x-button>
+  &lt;x-button class="<b>icon</b> accent">&#9829;&lt;/x-button>
+  &lt;x-button class="<b>icon</b>" disabled="disabled">&#9829;&lt;/x-button>
+  </pre>
+</div>

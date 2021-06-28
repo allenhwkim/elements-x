@@ -1,3 +1,6 @@
+body[lang=en] .en,
+body[lang=kr] .kr {font-weight: bold}
+
 li {
   margin: 8px 0;
 }
@@ -31,14 +34,12 @@ app-group-header .header .links {
 .app.collapsed .main .aside .route-item i {
   font-size: 20px;
 }
-.app.collapsed .main .aside .route-item b {
+.app.collapsed .main .aside .route-item b,
+.app.collapsed .main .aside .route-item:hover b {
   display: none;
 }
-.app.collapsed .main .aside .route-item:hover b {
-  display: initial;
-  position: absolute;
-  background: inherit;
-  padding: 0 4px 2px 2px;
+.app.collapsed .main .aside .group-header .text {
+  display: none;
 }
 
 .app > .header {
@@ -94,9 +95,16 @@ app-group-header .header .links {
   color: #FFF; 
   text-decoration: none;
 }
+.app > .header .header-nav .languages > * {
+  font-size: 16px;
+  color: #FFF;
+}
 .app > .header .header-nav .icons {
   padding: 24px;
   font-size: 26px;
+}
+.app > .header .header-nav .icons > *  {
+  color: #FFF;
 }
 
 .app > .main {

@@ -1,0 +1,75 @@
+<h3>Javascript</h3>
+<x-pre>
+  <b>import 'elements-x/dist/button';</b>
+
+  const myDiv = document.getElementById('my');
+  myDiv.innerHTML = `<b>&lt;x-button>Hello&lt;/x-button></b>`;
+  myDiv.addEventListener('click', function(event) {
+    console.log(event)
+  });
+</x-pre>
+
+<h3>Angular</h3>
+<x-pre contents-for="ng">
+  import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+  import { BrowserModule } from '@angular/platform-browser';
+  <b>import 'elements-x/dist/button';</b>
+  
+  @Component({
+    selector: 'my-app',
+    template: '<b>&lt;x-button>Hello&lt;/x-button></b>'
+  })
+  class AppComponent  {}
+  
+  @NgModule({
+    imports:      [ BrowserModule ],
+    declarations: [ AppComponent ],
+    bootstrap:    [ AppComponent ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  })
+  export class AppModule {
+    handleEvent(event) {
+      console.log(event);
+    }
+  }
+</x-pre>
+`
+<h3>Vue</h3>
+<x-pre contents-for="vue">
+  &lt;template>
+    <b>&lt;x-button v-on:click="handleEvent">Hello&lt;/x-button></b>
+  &lt;/template>
+  
+  &lt;script>
+  <b>import 'elements-x/dist/button';</b>
+  
+  export default {
+    name: "App",
+    methods: {
+      handleEvent: function(event) { console.log(event); }
+    }
+  };
+  &lt;/script>
+</x-pre>
+
+<h3>ReactJs</h3>
+<x-pre contents-for="react">
+  import React from "react";
+  <b>import 'elements-x/dist/button';</b>
+
+  export default function App() {
+    componentDidMount() {
+      ReactDOM.findDOMNode(this).addEventListener('click', this.handleEvent);
+    }
+
+    handleEvent(event) {
+      console.log(event); 
+    } 
+
+    return (
+      &lt;div>
+        <b>&lt;x-button>Hello&lt;/x-button></b> 
+      &lt;/div>
+    );
+  }
+</x-pre>

@@ -7,6 +7,10 @@ XMapbox.accessToken = 'pk.eyJ1IjoiYWxsZW5od2tpbSIsImEiOiJja21ydzdiZXUwYnprMnBwZj
 
 import './tags';
 import { debounce } from '../lib/common/util';
+import { Translation } from '../lib';
+import { setTranslationForRouteNInclude } from '../translations';
+
+setTranslationForRouteNInclude();
 
 // enable/disable outline for click and tab
 document.body.addEventListener('click', 
@@ -39,17 +43,18 @@ window.addEventListener('DOMContentLoaded', function() {
   /** 
    * disabling facebook comments because of error in console
    * ErrorUtils caught an error: Params: 113 [Caught in: Module "VisibilityListener"]
-   * enableFacebookComments();
-  */
+   */
+  enableFacebookComments();
 });
  
 function enableFacebookComments() {
+  const locale = Translation.getLanguage() === 'kr' ? 'ko_KR' : 'en_US';
   const script = document.createElement('script');
   script.setAttribute('async', '');
   script.setAttribute('defer', '');
   script.setAttribute('crossorigin', 'anonymous');
   script.setAttribute('nonce', 'qRsDD5xh');
-  script.setAttribute('src', 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v9.0&appId=254907754864724');
+  script.setAttribute('src', `https://connect.facebook.net/${locale}/sdk.js#xfbml=1&version=v9.0&appId=254907754864724`);
   setTimeout(_ => document.body.appendChild(script), 2000);
 
   document.body.addEventListener('x-route', function() {

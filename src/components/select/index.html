@@ -1,14 +1,64 @@
-<x-tabs>
-  <div class="tabs">
-    <div tab-for="overview">OVERVIEW</div>
-    <div tab-for="usage">USAGE</div>
-  </div>
-  <div class="tab-contents">
-    <div contents-for="overview">
-      <x-include src="/components/select/overview.html"></x-include>
-    </div>
-    <div class="usage" contents-for="usage">
-      <x-include src="/components/select/usage.html"></x-include>
-    </div>
-  </div>  
-</x-tabs>
+<h2>x-select; Custom Select</h2>
+
+<li> Close dropdown when ESC pressed </li>
+<li> Highlight the next item when down arrow pressed </li>
+<li> Highlight the previous item when up arrow pressed </li>
+<li> When a character pressed, highlight the item with with the text </li>
+  
+<div class="example">
+  <table width="100%">
+    <tr>
+      <th align="left">&lt;x-select></th>
+      <th align="left" width="60"> vs. </th>
+      <th align="left">&lt;select></th>
+    </tr>
+    <tr>
+      <td>
+        <x-select id="s1" onchange="document.querySelector('#v1').innerText=this.value;">
+          <option value=""> Select role...</option>
+          <option value="ds" selected="selected">UI/UX Designer</option>
+          <option value="fe">Frontend Engineer</option>
+          <option value="be">Backend Engineer</option>
+          <option value="qa">QA Engineer</option>
+          <option value="un" disabled="">Disabled</option>
+        </x-select>
+        <div>value: <span id="v1"></span></div>
+        <script>setTimeout(_ => document.querySelector('#v1').innerText = document.querySelector('#s1').value)</script>
+        <x-pre>
+          &lt;x-select>
+            &lt;option value=""> Select role...&lt;/option>
+            &lt;option value="ds" selected="selected">UI/UX Designer&lt;/option>
+            &lt;option value="fe">Frontend Engineer&lt;/option>
+            &lt;option value="be">Backend Engineer&lt;/option>
+            &lt;option value="qa">QA Engineer&lt;/option>
+            &lt;option value="un" disabled="">Disabled&lt;/option>
+          &lt;/x-select>
+        </x-pre>
+      </td>
+      <td></td>
+      <td valign="top">
+        <select name="foo" style="height:36px" id="s2" onchange="document.querySelector('#v2').innerText=this.value;">
+          <option value=""> Select role...</option>
+          <option value="ds" selected="selected">UI/UX Designer</option>
+          <option value="fe">Frontend Engineer</option>
+          <option value="be">Backend Engineer</option>
+          <option value="qa">QA Engineer</option>
+          <option value="un" disabled="">Disabled</option>
+        </select>
+        <div>value: <span id="v2"></span></div>
+        <script>setTimeout(_ => document.querySelector('#v2').innerText = document.querySelector('#s2').value)</script>
+        <x-pre>
+          &lt;select>
+            &lt;option value=""> Select role...&lt;/option>
+            &lt;option value="ds" selected="selected">UI/UX Designer&lt;/option>
+            &lt;option value="fe">Frontend Engineer&lt;/option>
+            &lt;option value="be">Backend Engineer&lt;/option>
+            &lt;option value="qa">QA Engineer&lt;/option>
+            &lt;option value="un" disabled="">Disabled&lt;/option>
+          &lt;/select>
+        </x-pre>
+      </td>
+    </tr>
+  </table>
+
+</div>

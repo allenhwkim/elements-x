@@ -6,7 +6,7 @@
     editor.$blockScrolling = Infinity;
     editor.clearSelection();
     editor.resize()
-    const defaultOptions = { useWorker: false, wrap: 65, maxLines: 25 }
+    const defaultOptions = { useWorker: false, wrap: 65, maxLines: 30 }
     value && editor.setValue(value);
     editor.setOptions({...defaultOptions, ...options});
     return editor;

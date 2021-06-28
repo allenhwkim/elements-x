@@ -1,0 +1,50 @@
+<h3>Framework-Independent Translation</h3>
+
+<script>
+  function setLang(lang) {
+    localStorage.setItem('language', lang);
+    location.reload();
+  }
+  const lang = localStorage.getItem('language');
+  document.body.setAttribute('lang', lang);
+  </script>
+  
+  <style>
+    body[lang=en] .en,
+    body[lang=kr] .kr {font-weight: bold}
+    pre {margin: 24px 0 0 0; font-size: 14px; padding: 8px 0; background: #eee; display: block;}
+  </style>
+  
+  Language:
+  <a class="en" href="javascript:setLang('en')">English</a>
+  <a class="kr" href="javascript:setLang('kr')">Korean</a>
+
+  <pre>&lt;t-9n>Hello&lt;/t-9n></pre>
+  <t-9n>Hello</t-9n>
+
+  <pre>&lt;t-9n name="Allen Kim">Hello {{name}}&lt;/t-9n></pre>
+  <t-9n name="Allen Kim">Hello {{name}}</t-9n>
+
+  <pre>&lt;t-9n mon="Jun" day="21st">Hello {{mon}} {{day}}&lt;/t-9n></pre>
+  <t-9n mon="Jun" day="21st">Hello {{mon}} {{day}}</t-9n>
+
+  <pre>&lt;t-9n>hello.new.translation&lt;/t-9n></pre>
+  <t-9n>hello.new.translation</t-9n>
+
+  <pre>&lt;t-9n>Error Case&lt;/t-9n></pre>
+  <t-9n>Error Case</t-9n>
+
+<pre>&lt;t-9n count="1" name="Allen">
+  &lt;span count="0">I have no apple, {{name}}.&lt;/span>
+  &lt;span count="1">I have one apple, {{name}}.&lt;/span>
+  &lt;span count="default">I have {{count}} apples, {{name}}.&lt;/span>
+&lt;/t-9n></pre>
+  Count: <a href="javascript:document.querySelector('t-9n[count]').setAttribute('count', 0)">0</a>
+  <a href="javascript:document.querySelector('t-9n[count]').setAttribute('count', 1)">1</a>
+  <a href="javascript:document.querySelector('t-9n[count]').setAttribute('count', 2)">2</a>
+  <br/>
+  <t-9n count="1" name="Allen">
+    <span count="0">I have no apple, {{name}}.</span>
+    <span count="1">I have one apple, {{name}}.</span>
+    <span count="default">I have {{count}} apples, {{name}}.</span>
+  </t-9n>

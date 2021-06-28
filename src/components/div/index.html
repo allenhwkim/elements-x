@@ -1,6 +1,7 @@
 <style>
   .example { display: flex; align-items: flex-start; }
   .example > * { border: 1px solid #ccc; margin: 0 24px 0 0; padding: 12px;}
+  #msg.toggled { background: #333; color: #FFF;}
 </style>
 <h1> x-div, A Micro Framework</h1>
 
@@ -68,6 +69,29 @@ and event handling based on the belief that most of DOM handling can be done wit
     &lt;/x-div>
   </x-pre>
 </div>
+
+<h2>More Example</h2>
+<div class="example">
+  <x-div>
+    <input placeholder="click or type" x-t9n="placeholder"
+      on-click="toggle(#msg.toggled)"
+      on-enter="set(#msg.innerText, ::value)"
+      on-keyup="set(#msg.innerText, event.keyCode)" />
+    <div id="msg"> Message Section </div>
+  </x-div>
+
+  <x-pre>
+    &lt;x-div>
+      &lt;input placeholder="click or type" 
+        on-click="toggle(#msg.toggled)"
+        on-enter="set(#msg.innerText, ::value)"
+        on-keyup="set(#msg.innerText, event.keyCode)" />
+      &lt;div id="msg"> Message Section &lt;/div>
+    &lt;/x-div>
+  </x-pre>
+</div>
+
+
 
 <h3>How it works?</h3>
 <ol>

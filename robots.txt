@@ -32,4 +32,3 @@ https://elements-x.com/tool/format-css
 https://elements-x.com/tool/format-json
 https://elements-x.com/tool/format-date
 https://elements-x.com/tool/format-number
-https://elements-x.com/sample-app/list

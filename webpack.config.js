@@ -21,7 +21,7 @@ module.exports = {
   devServer: {
     historyApiFallback: {
       rewrites: [
-        { from: /^\/examples\//, to: '/examples/' },
+        { from: /^\/translations\//, to: '/translations/' },
         { from: /^\//, to: '/index.html' }
       ]
     }
@@ -57,7 +57,7 @@ module.exports = {
         { from: './src/components', to: 'components' },
         { from: './src/tools', to: 'tools' },
         { from: './src/*.html' },
-        { from: './examples/**/*', to: 'examples' }
+        { from: './translations/**/*', to: 'translations' }
       ]
     }),
   ],

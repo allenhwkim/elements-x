@@ -1,0 +1,258 @@
+<style>
+  .example { display: flex; align-items: flex-start; }
+  .example > * { border: 1px solid #ccc; margin: 0 24px 0 0; padding: 12px;}
+  #msg.toggled { background: #333; color: #FFF;}
+</style>
+
+
+ 
+<h1> x-div, 마이크로 프레임워크</h1>
+
+대부분의 DOM변환은 간단한 데이타 바인딩과 이벤트처리만을 통해 가능합니다. 
+&lt;x-div> 는 이 간단한 데이타 바인딩과 이벤트처리를 엘리먼트에서 간단한 표현만으로 가능하게 함으로서 자바스크립트를 사용하지 않고서도 가능하게 합니다.
+
+<h2>간단한 데이타 바인딩 예제</h2>
+
+<p>
+  다음 예제는 간단한 데이타 바인딩과 이벤트처리의 예시를 보여줍니다.
+</p>
+
+<div class="example">
+  <x-div name="Elements-X"> <!-- debug="" trace="" -->
+   <input x-value="name" on-input="set(name)"/>
+    <p> 안녕 <b x-value="name"></b> </p>
+  </x-div>  
+  <x-pre>
+    &lt;x-div <b>name</b>="Elements-X">
+      &lt;input <b>x-value</b>="name" <b>on-input</b>="set(name)"/>
+      &lt;p>안녕 &lt;b <b>x-value</b>="name">&lt;/b> &lt;/p>
+    &lt;/x-div>
+  </x-pre>
+</div>
+
+<p>
+  위의 예제는 시작시 이름을 입력란과 메세지란에 보여줍니다. 
+  입력란 내용이 변경시, 메세지란의 내용도 같이 변경됩니다. 
+</p>
+
+<h3>어떻게 작동되나요? </h3>
+<ol>
+  <li>&lt;x-div>가 "name"을 "Elements-X"로 초기설정합니다. .</li>
+  <li>&lt;x-div>가 'x-value="name"'이라고 명시된 모든 엘리먼트를 찾습니다. 그리고 그 엘리먼트의 값을 "Elements-X"로 변경합니다.
+  </li>
+  <li>&lt;x-div>가 'input' 이벤트가 발생하는지를 지켜봅니다. 대부분의 이벤트는 버블업되므로 x-div에서 캐치할수 있습니다. </li>
+  <li>
+    'input' 이벤트가 발생하면, 'name'을 &lt;input>의 값으로 설정합니다.  그리고 &lt;x-div>가 #2번을 반복합니다. .
+  </li>
+</ol>
+
+
+<h2>간단한 스티일 바인딩 예제</h2>
+
+
+<p>
+  다음 예제는 3개의 입력란을 사용하여 색상을 선택하는 것을 보여줍니다. 
+  &lt;x-div> 는 3개의 변수(r/g/b)를 가지고 있고, 이 변수들은 &lt;div> 배경색상을 구성하는데 사용됩니다.
+</p>
+
+<div class="example">
+  <x-div r="255" g="0" b="0" style="width: 240px;">
+    R: <input type="range" max="255" value="255" on-change="set(r)"/><br/>
+    G: <input type="range" max="255" value="0" on-change="set(g)"/><br/>
+    B: <input type="range" max="255" value="0" on-change="set(b)"/><br/>
+    <div x-style="background:rgb({{r}},{{g}},{{b}}); height: 60px;"></div>
+  </x-div>
+  <x-pre>
+    &lt;x-div r="255" g="0" b="0">
+      R: &lt;input type="range" max="255" value="255" <b>on-change</b>="set(r)"/>
+      G: &lt;input type="range" max="255" value="0" <b>on-change</b>="set(g)"/>
+      B: &lt;input type="range" max="255" value="0" <b>on-change</b>="set(b)"/>
+      &lt;div <b>x-style</b>="background:rgb(<b>{{r}},{{g}},{{b}}</b>)">&lt;/div>
+    &lt;/x-div>
+  </x-pre>
+</div>
+
+<h3>어떻게 작동되나요? </h3>
+<ol>
+  <li>&lt;x-div>가 r/g/b 색상을 초기화 합니다.</li>
+  <li>&lt;x-div>가 "x-style"이 명시된 모든 엘리먼트를 찾아 그 엘리먼트의 스타일을 변경합니다.</li>
+  <li>&lt;x-div>가 'change'이벤트가 발생하는지 지켜봅니다.</li>
+  <li>'change' 이벹트가 발생하면 &lt;x-div>의 r/g/b값을 변경합니다. 그리고 2번을 한번더 수행합니다. 
+  </li>
+</ol>
+
+<h2> 더 많은 예시들 </h2>
+<div class="example">
+  <x-div>
+    <input placeholder="click or type" x-t9n="placeholder"
+      on-click="toggle(#msg.toggled)"
+      on-enter="set(#msg.innerText, ::value)"
+      on-keyup="set(#msg.innerText, event.keyCode)" />
+    <div id="msg"> 메세지 섹션 </div>
+  </x-div>
+션
+  <x-pre>
+    &lt;x-div>
+      &lt;input placeholder="click or type" 
+        on-click="toggle(#msg.toggled)"
+        on-enter="set(#msg.innerText, ::value)"
+        on-keyup="set(#msg.innerText, event.keyCode)" />
+      &lt;div id="msg"> 메세지 섹션 &lt;/div>
+    &lt;/x-div>
+  </x-pre>
+</div>
+
+<h2>
+  &lt;x-div> enables DOM changes by reacting to data changes and events
+</h2>
+
+<ul>
+  <li>Reacts to data change, and bind to element properties.  예 x-value="color",
+    x-style="color:rgb({{r}},{{g}},{{b}})"
+    <ul>
+      <li>x-value="<a href="#value-expression"><a href="#value-expression">&lt;value-expression&gt;</a></a>"</li>
+      <li>x-style="<a href="#style-expression">&lt;style-expression&gt;</a>"</li>
+      <li>x-class="<a href="#value-expression">&lt;value-expression&gt;</a>"</li>
+      <li>x-attr="<a href="#attribute-expression">&lt;attribute-expression&gt;</a>"</li>
+    </ul>
+  </li>
+  <li>Reacts to on-* events which has command expression,  예, on-click="set(color, ::value)"
+    <ul>
+      <li>on-click="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>on-input="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>on-change="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>on-enter="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>on-success="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>on-error="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>on-select="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>on-route="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>For Data Binding</h3>
+&lt;<a href="/component/div#style-expression">style-expression</a>&gt;<br/>
+&lt;<a href="/component/div#attribute-expression">attribute-expression</a>&gt;<br/>
+&lt;<a href="/component/div#value-expression">value-expression</a>&gt;<br/>
+
+<h3>For Event Handling</h3>
+&lt;<a href="/component/div#value-expression">value-expression</a>&gt;<br/>
+&lt;<a href="/component/div#commands">command</a>&gt;<br/>
+&lt;<a href="/component/div#target-expression">target-expression</a>&gt;<br/>
+
+<h3 id="value-expression">Value Expression</h3>
+<ul>
+  <li><b>Boolean expression</b><br/>
+    If `true`, true, if `false`, false.<br/>
+  </li>
+  <li><b>Boolean expression with = </b><br/>
+    If it has equal sign(=), comparison expression, it returns true/false by comparing two expression.
+    <br/> For example `resp.data.genter=Male`, it returns true or false value by comparing
+    `resp.data.gender` and `Male`.
+  </li>
+  <li><b>Element property expression</b><br/>
+    Starts with `::`. It returns the property value of the element.  예 `::id`, `::checked`, or `::value`
+  </li>
+  <li><b>Number expression</b><br/>
+    It returns integer or float number as deffined.  예 `123`, `123.456`
+  </li>
+  <li><b>DOM selector expression</b><br/>
+    It returns value property or innerText propety of the element searchable by selector expression.
+    The selector must starts with an id(#) or class expression(.)
+     예 #foo.bar, .my-klass#my-id, .my-klass.my-el
+  </li>
+  <li><b>String expression</b><br/>
+    It returns string value as it is. String value must have a space or a special character unless it's wrapped with a quotation.
+     예 'foo', foo bar, foo!bar 
+  </li>
+  <li><b>&lt;x-div&gt; property expression</b><br/>
+    It returns property value of &lt;x-div&gt;.
+    For example `myObj` returns the property value of `myObj` in  &lt;x-div&gt;. and 
+    `myObj.myKey` returns the property value of `myObj.myKey` in  &lt;x-div&gt;. 
+  </li>
+  <li><b>&lt;x-div&gt; array expression</b><br/>
+    This has equal sign(=) in it. It returns array that matches to expression.
+    For example `todos.done=false` returns all elements in  &lt;x-div&gt; `todos` which has property valye of `done` is `false`.
+  </li>
+</ul>
+
+<h2 id="style-expression">Style Expression</h2>
+inline-style expression with bindings(wrapped with '{{' and '}}').  예, 
+<ul>
+  <li>x-style="color:rgb({{r}},{{g}},{{b}})"</li>
+</ul>
+
+<h2 id="attribute-expression">Attribute Expression</h2>
+Attribute name and attribute value are separated by colon(:).  예,
+<ul>
+  <li>x-attr="filter:{{filter}}"</li>
+  <li>x-attr="user-id:route.params.id"</li>
+</ul>
+
+<h3 id="target-expression">Target Expression</h3>
+<ul>
+  <li>
+    <b>Element Attribute Expression</b>:<br/>
+    It must starts with sharp(#) or dot(.) and ends with array css selector.  예, #my-div[my-attr]
+  </li>
+  <li>
+    <b>Element Property Expression</b>:<br/>
+    It must starts with sharp(#) or dot(.) and ends with element property name followed by dot(.).
+    #my-div.my-checkbox.checked
+  </li>
+  <li>
+    <b>Element Expression</b>: CSS selector.  예,<br/>
+    #my-div
+  </li>
+  <li>
+    <b>&lt;x-div&gt; Property Expression</b>:  예, <br/>
+    <ul>
+      <li>todos</li>
+      <li>todos.done=false.done </li>
+    </ul>
+  </li>
+  <li>
+    <b>&lt;x-div&gt; Array Expression</b>:  예, todos.done=false.<br/>
+    
+    When it has comparison expression, equal sign(=), it represents all matching element of an array.
+    For `todos.done=false`, `todos` is a propety of &lt;x-div&gt;, which is an array type, and `done` is 
+    a property of array element, and `false` is possible value of `done`.
+  </li>
+</ul>
+
+<h3 id="commands">Commands</h3>
+<ul>
+  <li><b>add</b>: add(<a href="#target-expression">&lt;target-expression&gt;</a>, &lt;source-expression&gt;)<br/>
+    If target is an array, add value to its end of array.
+    If target is not defined, it sets a new property to &lt;x-div&gt;
+  </li>
+  <li><b>remove</b>:add(<a href="#target-expression">&lt;target-expression&gt;</a>, &lt;source-expression&gt;)<br/>
+    If target is a DOM element, removes the target from document.
+    If target is an array, removes the array elements from the array.
+    If target is a object property, delete the property from the object.
+  </li>
+  <li><b>goto</b>:goto(&lt;route-expression&gt;, param-valu, ...)<br/>
+     예 goto(/sample-app/show/:id, event.detail.data.id), goto(/sample-app/list)
+  </li>
+  <li><b>toggle</b>:toggle(&lt;css-selector&gt;)"<br/>
+    It add or remove the given class name or attribute of DOM element.
+     예, toggle(.app.collapsed)", toggle(#my-section[my-attr]) 
+  </li>
+  <li><b>fetch</b>:fetch(&lt;css-selector&gt;)<br/>
+    It runs `fetch` command of `x-http` element pointed by css selector.
+     예, fetch(#save-user)
+  </li>
+  <li><b>set</b>: set(<a href="#target-expression">&lt;target-expression&gt;</a>, &lt;source-expression&gt;);
+    <ul>
+      <li>set(resp, event.detail)</li>
+      <li>set(#my-http.payload.page, event.detail.page)</li>
+      <li>set(#save-user.payload.name, ::value)</li>
+      <li>set(#save-user.payload.gender, Female)</li>
+      <li>set(#save-user.payload.status, ::checked, Active, Inactive)</li>
+      <li>set(#delete-message.innerText, event.detail.data.message)</li>
+      <li>set(todos.done=false.done, true)</li>
+      <li>set(todos.id={{id}}.done, ::checked)</li>
+      <li>set(filter, 'done=false')</li>
+    </ul>
+  </li>
+</ul>

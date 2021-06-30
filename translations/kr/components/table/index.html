@@ -30,33 +30,33 @@ function goTo(event) {
 }
 </script>
 
-<h3>Features </h3>
+<h3>기능 </h3>
 <ul class="default">
-  <li>Filtering rows</li>
-  <li>Ordering by column name</li>
-  <li>Showing limited records by offset and limit</li>
+  <li> 필터링 기능 </li>
+  <li>정렬기능</li>
+  <li>offset과 주어진 수에 따라 제한해서 보여주는 기능 </li>
 </ul>
 
-<h3 id="list-by-data-n-template">List by data and template</h3>
-The following list displays <a target="_blank" href="/components/list/countries.json">country data</a>, 
-originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;alpha3Code;capital;subregion;population;flag;">https://restcountries.eu</a>
+<h3 id="list-by-data-n-template">예제</h3>
+다음의 <a target="_blank" href="/components/list/countries.json">나라명 데이타</a>는 
+<a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;alpha3Code;capital;subregion;population;flag;">https://restcountries.eu</a>에서 찾을수 있습니다. 
 
 <p>
-  You can generate list items automatically by providing template and data to value of the element.
+  템플릿과 데이타만을 제공함으로서 검색과 정렬, 그리고 필터링이 가능한 테이블을 만들수 있습니다. 
 </p>
 
 <div class="example">
-  <h2> Basic Example </h2>
+  <h2> 기본 예제  </h2>
   <x-http id="get-countries" url="/components/list/countries.json" auto=""></x-http>
   <x-table list-from="get-countries">
     <table>
       <thead>
-        <tr>
-          <th class="name">Name</th>
-          <th class="alpha3Code">code</th>
-          <th class="capital">Capital</th>
-          <th class="subregion">Region</th>
-          <th class="population">Population</th>
+        <tr> 
+          <th class="name">나라명</th>
+          <th class="alpha3Code">코드</th>
+          <th class="capital">수도</th>
+          <th class="subregion">지역</th>
+          <th class="population">인구수</th>
         </tr>
       </thead>
       <tbody>
@@ -68,13 +68,13 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
           <td class="population" style="text-align: right"><x-i type="number" data-value="{{population}}"></x-i></td>
         </tr>
         <tr class="empty">
-          <td colspan="5">No records found</td>
+          <td colspan="5">나라명을 찾을수 없습니다.  </td>
         </tr>
         <tr class="bottom">
-          <td colspan="5">Bottom of the list.</td>
+          <td colspan="5">리스트의 마지막입니다. </td>
         </tr>
         <tr class="error">
-          <td colspan="5">There is an error processing list.</td>
+          <td colspan="5">에러가 발생하였습니다.</td>
         </tr>
       </tbody>
     </table>
@@ -85,11 +85,11 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
       &lt;table>
         &lt;thead>
           &lt;tr>
-            &lt;th class="name">Name&lt;/th>
-            &lt;th class="alpha3Code">code&lt;/th>
-            &lt;th class="capital">Capital&lt;/th>
-            &lt;th class="subregion">Region&lt;/th>
-            &lt;th class="population">Population&lt;/th>
+            &lt;th class="name">나라명&lt;/th>
+            &lt;th class="alpha3Code">코드&lt;/th>
+            &lt;th class="capital">수도&lt;/th>
+            &lt;th class="subregion">지역&lt;/th>
+            &lt;th class="population">인구수&lt;/th>
           &lt;/tr>
         &lt;/thead>
         &lt;tbody>
@@ -101,10 +101,10 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
             &lt;td class="population" style="text-align: right">&lt;x-i type="number" data-value="{{population}}">&lt;/x-i>&lt;/td>
           &lt;/tr>
           &lt;tr class="empty">
-            &lt;td colspan="5">No records found&lt;/td>
+            &lt;td colspan="5">나라명을 찾을수 없습니다. &lt;/td>
           &lt;/tr>
           &lt;tr class="error">
-            &lt;td colspan="5">There is an error processing list.&lt;/td>
+            &lt;td colspan="5">에러가 발생하였습니다.&lt;/td>
           &lt;/tr>
         &lt;/tbody>
       &lt;/table>
@@ -112,19 +112,13 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
   </x-pre>
 </div>
 
-<h3>Attributes</h3>
+<h3>속성</h3>
 
 <ul class="default">
-  <li><b>order</b>:
-    Default null, order expression, e.g. "id desc"
-  </li>
-  <li><b>offset</b>:
-    Default 0. Starting offset number. if it is 10, the first list item is 11th records. Default is 0
-  </li>
-  <li><b>limit</b>:
-    Default 0, number of records to show. If 10, it only shows 10 records starting from offset.
-  </li>
-  <li><b>list-from</b>:
-    &lt;x-http> element id. if given, it listens to 'x-success' event to get its list value
+  <li><b>order</b>: 기본값 null, 정렬 표현식 예 "id desc" </li>
+  <li><b>offset</b>: 기본값 0, 시작열 번호, 10일 경우 첫번째 보여지는 열은 11번째 열입니다.  </li>
+  <li><b>limit</b>: 기본값 0, 보여질 열의 수, 10일 경우 시작열번호부터 10개을 열을 보여줍니다.  </li>
+  <li><b>list-from</b>: 
+    &lt;x-http> 엘리먼트 ID. 이것이 주어질 경우, 'x-success' 이벤트가 &lt;x-http>에서 발생하면 그 데이타값으로 리스트를 변경합니다.
   </li>
 </ul>

@@ -1,0 +1,48 @@
+<h3> 체크박스입력 향상된 버전</h3>
+
+<div id="checkbox">
+  <p>
+    크기, 테두리, 배경색, 아이콘과 아이콘 색상을 변경할 수 있습니다.
+  </p>
+
+  <div class="example">
+    기본적인 체크박스입력대신에, 향상된 &lt;x-input type="checkbox"> 를 사용해보세요
+    <p>
+      <x-input type="checkbox" ></x-input>
+      <x-input type="checkbox" checked="checked"></x-input>
+    </p>
+    <x-pre>
+      &lt;x-input type="checkbox" fill="blue" icon="✖">&lt;/x-input>
+    </x-pre>
+    <p>
+      <x-input fill="blue" icon="✖" type="checkbox"></x-input>
+      <x-input fill="blue" icon="✖" type="checkbox" checked="checked" ></x-input>
+    </p>
+    <x-pre>
+      &lt;x-input type="checkbox" fill="red" icon="★">&lt;/x-input>
+    </x-pre>
+    <p>
+      <x-input fill="red" icon="★" type="checkbox"></x-input>
+      <x-input fill="red" icon="★" type="checkbox" checked="checked" ></x-input>
+    </p>
+    <x-pre>
+      &lt;x-input type="checkbox" radius="50%" icon="☻">&lt;/x-input>
+    </x-pre>
+    <p>
+      <x-input radius="50%" icon="☻" type="checkbox"></x-input>
+      <x-input radius="50%" icon="☻" type="checkbox" checked="checked" ></x-input>
+    </p>
+    <x-pre>
+      &lt;x-input radius="50%" icon="☻" type="checkbox">&lt;/x-input>
+    </x-pre>
+
+  </div>
+
+  <h4>속성</h4>
+  <li><b>size</b>: 기본값 20px, 넓이와 높이</li>
+  <li><b>border</b>: 기본값 #333, 테두리색</li>
+  <li><b>fill</b>: 기본값 red, 배경색</li>
+  <li><b>icon</b>: 기본값 '\2714', 아이콘</li>
+  <li><b>color</b>: 기본값 inherit, 아이콘 색상</li>
+  <li><b>radius</b>: 기본값 4px, 테두리의 둥근 정도</li>
+</div>

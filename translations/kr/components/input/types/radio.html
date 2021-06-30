@@ -1,0 +1,39 @@
+<h3>레디오 입력 향상된 버전</h3>
+<div id="radio">
+  <p>
+    크기, 테두리, 배경색, 아이콘과 아이콘 색상을 변경할 수 있습니다.r
+  </p>
+
+  <div class="example">
+    기본적인 체크박스입력대신에, 향상된 &lt;x-input type="radio"> 를 사용해보세요>
+    <p>
+      <x-input type="radio" name="r1" value="1" checked="checked"></x-input> Yes
+      <x-input type="radio" name="r1" value="0"></x-input> No
+    </p>
+    <x-pre>
+      &lt;x-input type="radio" name="r1" value="0">&lt;/x-input> 
+    </x-pre>
+    <p>
+      <x-input type="radio" name="r2" value="1" fill="blue" icon="✖" checked="checked"></x-input> Yes
+      <x-input type="radio" name="r2" value="0" fill="blue" icon="✖" ></x-input> No
+    </p>
+    <x-pre>
+      &lt;x-input type="radio" name="r2" value="0" fill="blue" icon="✖" >&lt;/x-input>
+    </x-pre>
+    <p>
+      <x-input type="radio" name="r3" value="1" fill="red" icon="★" checked="checked"></x-input> Yes
+      <x-input type="radio" name="r3" value="0" fill="red" icon="★" ></x-input> No
+    </p>
+    <x-pre>
+      &lt;x-input type="radio" name="r3" value="0" fill="red" icon="★" >&lt;/x-input>
+    </x-pre>
+
+  </div>
+
+  <h4>속성</h4>
+  <li><b>size</b>: 기본값 20px, 넓이와 높이</li>
+  <li><b>border</b>: 기본값 #333, 테두리색</li>
+  <li><b>fill</b>: 기본값 red, 배경색</li>
+  <li><b>icon</b>: 기본값 '\25CF', ●, 원형 아이콘</li>
+  <li><b>color</b>: 기본값 inherit, 아이콘 색상</li>
+</div>

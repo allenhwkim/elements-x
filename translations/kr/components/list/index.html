@@ -1,0 +1,408 @@
+<app-custom-css>
+  .app x-list,
+  .app x-list ul {
+    display: block;
+    padding: 16px;
+    background: blue;
+    color: #FFF;
+    min-width: 200px;
+  }
+  .app x-list [aria-selected] {
+    background: blue;
+    color: #FFF; 
+  }
+  .app x-list li {
+    font-weight: bold;
+  }
+  .app x-list li.x-has-list[aria-expanded],
+  .app x-list li.x-has-list[aria-expanded] > ul,
+  .app x-list .dropdown-menu li > ul {
+    background: orange;
+  }
+  .app x-list .x-highlighted {
+    background: green;
+  }
+</app-custom-css>
+
+<style>
+  x-list {
+    min-width: 200px;
+    border: 1px solid #ccc;
+    padding: 4px;
+  }
+  x-overlay x-list {
+    min-width: initial;
+    border: initial;
+    padding: initial;
+  }
+  .app .example {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 12px 0;
+    flex-wrap: wrap;
+  }
+  .app .example x-pre {
+    min-width: calc(100% / 3);
+  }
+  .message br {
+    display: none;
+  }
+  .message {
+    height: 16px;
+    background: red;
+    color: #FFF;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 12px;
+  }
+  th { 
+    background: #ccc;
+    min-width: 60px;
+  }
+</style>
+<script>
+function goTo(event) {
+  const target = document.querySelector(event.target.getAttribute('href'));
+  target.scrollIntoView({behavior: 'smooth'});
+  event.preventDefault();
+}
+</script>
+
+<h3>기능 </h3>
+<ul class="default">
+  <li>Navigation through list itmes using keyboard.</li>
+  <li>Dispatching 'x-listitem-selcted` event when a list item selected.</li>
+  <li>Showing matching records only when linked with input.</li>
+  <li>Filtering by keys and values</li>
+  <li>Ordering by key</li>
+  <li>Showing limited records by offset and limit</li>
+</ul>
+
+<br/><a href="#list-navigable" onclick="goTo(event)">List, navigable</a>
+<br/><a href="#list-filtered" onclick="goTo(event)">List, filtered</a>
+<br/><a href="#list-as-dropdown" onclick="goTo(event)">List as dropdown</a> 
+<br/><a href="#list-by-data-n-template" onclick="goTo(event)">List by data and template</a>
+<br/><a href="#list-paginated" onclick="goTo(event)">List, paginated</a>
+<br/><a href="#list-infinite-scrolling" onclick="goTo(event)">List, infinite scrolling</a>
+
+<h3 id="list-navigable">List, navigable</h3>
+You can navigate list items using keyboard arrow buttons.
+If 'selected' attribute is given with id of list item, it will be highlighted when initialized.
+If 'target' attribute is given with id an element, the selected item will be shown as text.
+
+<div class="example">
+    
+  <div>
+    <x-list selected="fish" target="selected-pet">
+      <div>Cat</div>
+      <div>Dog</div>
+      <div id="fish">Fish</div>
+      <div>Bird</div>
+    </x-list>
+    <div class="message">
+      <span id="selected-pet"></span><span> is selected</span> 
+    </div>
+  </div>
+
+  <x-pre>
+    &lt;x-list selected="fish" target="selected-pet">
+      &lt;div>Cat&lt;/div>
+      &lt;div>Dog&lt;/div>
+      &lt;div id="fish">Fish&lt;/div>
+      &lt;div>Bird&lt;/div>
+    &lt;/x-list>
+    &lt;div class="message">
+      &lt;span> Selected &lt;/span> &lt;span id="selected-pet">&lt;/span>
+    &lt;/div>
+  </x-pre>
+</div>
+
+<h3 id="list-filtered">List, fitered </h3>
+<p>
+  You can link to input element to display only related items.
+</p>
+<div class="example">
+  <div>
+    <input id="pets" placeholder="Search pet" />
+    <x-list select-first="true" search-input="pets">
+      <div>Cats</div>
+      <div>Dogs</div>
+      <div>Birds</div>
+      <div>Rabbits</div>
+      <div>Guinea pigs</div>
+      <div>Fish</div>
+    </x-list>
+  </div>
+
+  <x-pre>
+    &lt;input <b>id="pets"</b> placeholder="Search pet">
+    &lt;x-list select-first="true" <b>search-input="pets"</b>>
+      &lt;div>Cats&lt;/div>
+      &lt;div>Dogs&lt;/div>
+      &lt;div>Birds&lt;/div>
+      &lt;div>Rabbits&lt;/div>
+      &lt;div>Guinea pigs&lt;/div>
+      &lt;div>Fish&lt;/div>
+    &lt;/x-list>
+  </x-pre>
+</div>
+
+<h3 id="list-as-dropdown">List as dropdown </h3>
+<p>
+  You can display x-list as an overlay with x-overlay 
+</p>
+
+<div class="example">
+
+  <div>
+    <input id="pets-2" placeholder="Search pet" />
+    <x-overlay>
+      <x-list select-first="true" search-input="pets-2">
+        <div value="meow">Cats</div>
+        <div>Dogs</div>
+        <div>Birds</div>
+        <div>Rabbits</div>
+        <div>Guinea pigs</div>
+        <div>Fish</div>
+      </x-list>
+    </x-overlay>
+  </div>
+
+  <x-pre>
+    &lt;input id="pets-2" placeholder="Search pet">
+    &lt;x-overlay trigger="pets-2">
+      &lt;x-list select-first="true" search-input="pets-2">
+        &lt;div>Cats&lt;/div>
+        &lt;div>Dogs&lt;/div>
+        &lt;div>Birds&lt;/div>
+        &lt;div>Rabbits&lt;/div>
+        &lt;div>Guinea pigs&lt;/div>
+        &lt;div>Fish&lt;/div>
+      &lt;/x-list>
+    &lt;/x-overlay>>
+  </x-pre>
+</div>
+
+<h3 id="list-by-data-n-template">List by data and template</h3>
+The following list displays <a target="_blank" href="/components/list/countries.json">country data</a>, 
+originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;alpha3Code;capital;subregion;population;flag;">https://restcountries.eu</a>
+
+<p>
+  You can generate list items automatically by providing template and data to value of the element.
+</p>
+<div class="example">
+  <div>
+    <x-list x-http="get-countries"
+      style="overflow: hidden"
+      onclick="this.style.overflow='auto'">
+      <table>
+        <thead>
+          <tr><th>Name</th><th>code</th><th>Capital</th><th>Region</th><th>Population</th></tr>
+        </thead>
+        <tbody>
+          <template>
+            <tr>
+              <td class="name"><img class="flag" src="{{flag}}" width="40" height="30"/>{{name}}</td>
+              <td class="code">{{alpha3Code}}</td>
+              <td class="capital">{{capital}}</td>
+              <td class="region">{{subregion}}</td>
+              <td class="population">{{population}}</td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </x-list>
+    <x-http id="get-countries" url="/components/list/countries.json" auto=""></x-http>
+  </div>
+  <x-pre>
+    &lt;x-listget-countries">
+      &lt;table>
+        &lt;thead>
+          &lt;tr>
+            &lt;th>Name&lt;/th>&lt;th>code&lt;/th>&lt;th>Capital&lt;/th>
+            &lt;th>Region&lt;/th>&lt;th>Population&lt;/th>
+          &lt;/tr>
+        &lt;/thead>
+        &lt;tbody>
+          &lt;template>
+            &lt;tr>
+              &lt;td class="name">
+                &lt;img class="flag" src="{{flag}}" width="40" height="30"/>{{name}}
+              &lt;/td>
+              &lt;td class="code">{{alpha3Code}}&lt;/td>
+              &lt;td class="capital">{{capital}}&lt;/td>
+              &lt;td class="region">{{subregion}}&lt;/td>
+              &lt;td class="population">{{population}}&lt;/td>
+            &lt;/tr>
+          &lt;/template>
+        &lt;/tbody>
+      &lt;/table>
+    &lt;/x-list>
+    &lt;x-http id="get-countries" url="/components/list/countries.json" auto>&lt;/x-http>
+  </x-pre>
+</div>
+
+<h3 id="list-paginated">List, paginated</h3>
+The following list displays <a target="_blank" href="/components/list/countries.json">country data</a> with pagination. 
+
+<p>
+  Pagination is simpley achieved by two attributes, offset and limit. 
+  for this example, pagination data is provied by &lt;x-pagination> element.
+</p>
+<div class="example">
+  <div style="width:100%">
+    <x-list id="paginated-countries" limit="6" x-http="get-countries" x-pagination="country-pages">
+      <table width="100%">
+        <thead>
+          <tr><th>Name</th><th>code</th><th>Capital</th><th>Region</th><th>Population</th></tr>
+        </thead>
+        <tbody>
+          <template>
+            <tr>
+              <td class="name"><img class="flag" src="{{flag}}" width="40" height="30"/> {{name}} </td>
+              <td class="code">{{alpha3Code}}</td>
+              <td class="capital">{{capital}}</td>
+              <td class="region">{{subregion}}</td>
+              <td class="population">{{population}}</td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </x-list>
+    <x-pagination id="country-pages"></x-pagination>
+  </div>
+  
+  <x-pre>
+    &lt;x-list limit="6" x-http="get-countries" x-pagination="country-pages">
+      &lt;table width="100%">
+        &lt;thead>
+          &lt;tr>
+            &lt;th>Name&lt;/th>&lt;th>code&lt;/th>&lt;th>Capital&lt;/th>&lt;th>Region&lt;/th>&lt;th>Population&lt;/th>
+          &lt;/tr>
+        &lt;/thead>
+        &lt;tbody>
+          &lt;template>
+            &lt;tr>
+              &lt;td class="name">
+                &lt;img class="flag" src="{{flag}}" width="40" height="30"/>{{name}}
+              &lt;/td>
+              &lt;td class="code">{{alpha3Code}}&lt;/td>
+              &lt;td class="capital">{{capital}}&lt;/td>
+              &lt;td class="region">{{subregion}}&lt;/td>
+              &lt;td class="population">{{population}}&lt;/td>
+            &lt;/tr>
+          &lt;/template>
+        &lt;/tbody>
+      &lt;/table>
+    &lt;/x-list>
+    &lt;x-pagination id="country-pages">&lt;/x-pagination>
+    &lt;x-http id="get-countries" url="/components/list/countries.json" auto>&lt;/x-http>
+  </x-pre>
+</div>
+
+<h3 id="list-infinite-scrolling">List, infinite scrolling</h3>
+The following list displays <a target="_blank" href="/components/list/countries.json">country data</a> with infinite scrolling. 
+It only shows 10 countries at the begining, but when it scrolls, it shows more and more countries.
+
+<p>
+  Infinite scrolling is simpley achieved by adding 'infinite-scroll' attribute. 
+  However infite scrolling will not work with `x-pagination` because the list is controlled by x-pagination element.
+</p>
+
+<div class="example">
+  <div style="width:100%">
+    <x-list limit="10" x-http="get-countries" infinite-scroll="">
+      <table width="100%">
+        <thead>
+          <tr><th>Name</th><th>code</th><th>Capital</th><th>Region</th><th>Population</th></tr>
+        </thead>
+        <tbody>
+          <template>
+            <tr>
+              <td class="name"><img class="flag" src="{{flag}}" width="40" height="30"/> {{name}} </td>
+              <td class="code">{{alpha3Code}}</td>
+              <td class="capital">{{capital}}</td>
+              <td class="region">{{subregion}}</td>
+              <td class="population">{{population}}</td>
+            </tr>
+          </template>
+          <template class="empty">
+            <tr>
+              <td colspan="5" align="center">Bottom of data</td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </x-list>
+  </div>
+
+  <x-pre>
+    &lt;x-list limit="10" x-http="get-countries" <b>infinite-scroll</b>>
+      &lt;table width="100%">
+        &lt;thead>
+          &lt;tr>&lt;th>Name&lt;/th>&lt;th>code&lt;/th>&lt;th>Capital&lt;/th>&lt;th>Region&lt;/th>&lt;th>Population&lt;/th>&lt;/tr>
+        &lt;/thead>
+        &lt;tbody>
+          &lt;template>
+            &lt;tr>
+              &lt;td class="name">
+                &lt;img class="flag" src="{{flag}}" width="40" height="30"/> {{name}} 
+              &lt;/td>
+              &lt;td class="code">{{alpha3Code}}&lt;/td>
+              &lt;td class="capital">{{capital}}&lt;/td>
+              &lt;td class="region">{{subregion}}&lt;/td>
+              &lt;td class="population">{{population}}&lt;/td>
+            &lt;/tr>
+          &lt;/template>
+          &lt;template class="empty">
+            &lt;tr>
+              &lt;td colspan="5" align="center">Bottom of data&lt;/td>
+            &lt;/tr>
+          &lt;/template>
+        &lt;/tbody>
+      &lt;/table>
+    &lt;/x-list>
+    &lt;x-http id="get-countries" url="/components/list/countries.json" auto>&lt;/x-http>
+  </x-pre>
+</div>
+
+
+<h3>속성</h3>
+
+<ul class="default">
+  <li><b>select-first</b>: Default false, select the first item when initialized
+  </li>
+  <li><b>selected</b>:  
+    Default null, element id of preselected menu item
+  </li>
+  <li><b>filter</b>:'
+    Default null, filter expression,  예 "done=false;key=value"
+  </li>
+  <li><b>order</b>:
+    Default null, order expression,  예 "id desc"
+  </li>
+  <li><b>offset</b>:
+    Default 0. Starting offset number. if it is 10, the first list item is 11th records. Default is 0
+  </li>
+  <li><b>limit</b>:
+    Default 0, number of records to show. If 10, it only shows 10 records starting from offset.
+  </li>
+  <li><b>infinite-scroll</b>: 
+    when it is true and scrolled to bottom, it appends a &lt;x-list> with next block of records automatically.<br/>
+    It requires "limit" to find how many records to show in a block
+  </li> 
+  <li><b>x-http</b>:
+    &lt;x-http> element id linked to &lt;x-list>. if given, &lt;x-list> will listen to 'x-success' event to get its list value
+  </li>
+  <li><b>x-pagination</b>:
+    &lt;x-pagination> element id linked to &lt;x-list>. if given,  &lt;x-list> will listen to 'x-select' event 
+    to get its offset value
+  </li>
+</ul>
+
+<h3>이벤트</h3> 
+<ul class="default">
+  <li><b>x-select</b>: Fired when menu item is selected by click or enter pressed</li>
+</ul>

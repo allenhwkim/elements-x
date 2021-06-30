@@ -1,4 +1,4 @@
-export const route1 = {
+export const translation = {
   Hello: '안녕하세요',
   'Hello {{name}}': '안녕하세요 <b>{{name}}</b>',
   'Hello {{mon}} {{day}}': '안녕하세요 {{mon}} {{day}}',

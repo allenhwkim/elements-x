@@ -1,0 +1,82 @@
+
+<app-custom-css>
+  .tabs-example x-tabs .tabs {
+    border-bottom: 2px solid #999;
+  }
+  
+  .tabs-example x-tabs .tabs [tab-for] {
+    align-items: center;
+    min-width: 120px;
+    background: #666;
+    color: #FFF;
+  }
+  
+  .tabs-example x-tabs .tabs [tab-for][aria-selected] {
+    background: orange;
+    color: #FFF;
+    border-bottoM: 2px solid #FFF;
+  }
+  
+  .tabs-example x-tabs .tabs  .underline-bar {
+    display: none;
+  }
+</app-custom-css>
+
+<h3>기능</h3>
+<ul class="default">
+  
+   
+  
+  
+  
+  
+  
+  <li>탭 인덱스와 탭콘텐츠로 잘 정리된 구성을 표현할수 있습니다.</li>
+  <li>탭 인덱스가 선택될때마다 자동으로 탭콘텐츠가 바뀝니다.</li>
+  <li>'selected'가 주어지면 선택된 탭콘텐츠로 초기화됩니다. </li>
+  <li>'disabled'가 주어진 탭은 선택할수 없습니다. </li>
+  <li>'inkbar'가 주어지면 탭이 에니메이션으로 탭을 선택합니다. .</li>
+  <li>
+    탭인덱스와 탭콘텐츠의 디자인을 바꿀수 있습니다. 
+    <p>"Overvide Default Style"을 클릭하여 디자인을 바꿔보세요. </p>
+  </li>
+
+</ul>
+
+<div class="tabs-example">
+  <h2>예제</h2>
+  <x-tabs selected="js">
+    <div class="tabs">
+      <div tab-for="html">HTML</div>
+      <div tab-for="na" disabled="disabled">비활성화</div>
+      <div tab-for="js">자바스크립트</div>
+      <div class="ink-bar"></div>
+    </div>
+    <div class="tab-contents">
+      <div contents-for="html">HTML 콘텐츠</div>
+      <div contents-for="js">자바스크립트 콘텐츠</div>
+      <div contents-for="na">비활성화 콘텐츠</div>
+    </div>
+  </x-tabs>
+
+  <p></p>
+  <x-pre>
+    &lt;x-tabs selected="js">
+      &lt;div class="tabs">
+        &lt;div tab-for="html">HTML&lt;/div>
+        &lt;div tab-for="na" disabled="disabled">비활성화&lt;/div>
+        &lt;div tab-for="js">자바스크립트&lt;/div>
+        &lt;div class="ink-bar">&lt;/div>
+      &lt;/div>
+      &lt;div class="tab-contents">
+        &lt;div contents-for="html">HTML 콘텐츠&lt;/div>
+        &lt;div contents-for="js">자바스크립트 콘텐츠&lt;/div>
+        &lt;div contents-for="na">비활성화 콘텐츠&lt;/div>
+      &lt;/div>
+    &lt;/x-tabs>
+  </x-pre>
+
+  <h2>속성</h2>
+  <li><b>selected</b>: 초기화시 선택될 탭</li>
+   
+</div>

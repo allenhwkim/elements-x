@@ -12,16 +12,16 @@
   }
 </style>
 
-<h3>Features </h3>
+<h3>기능 </h3>
 <ul class="default">
-  <li>Provide navigation using keyboard</li>
-  <li>Fire 'x-select` evnet when a list item is selected</li>
+  <li>키보드를 이용한 네비게이션 기능 제공</li>
+  <li>리스트 아이템이 선택된 경우 'x-select'를 발생합니다.</li>
   <li>With 'selected' attribute, it highlights selected item</li>
-  <li>Accessibility features; aria-expanded / aria-has-popup</li>
+  <li>엑세스빌러티 기능 포함;  aria-expanded / aria-has-popup </li>
 </ul>
 
 <div class="example">
-  <h2>Default</h2>
+  <h2>기본 예제 </h2>
   <x-ul id="default" selected="file">
     <ul>
       <li id="file"> File </li>
@@ -32,7 +32,7 @@
     </ul>
   </x-ul>
   <div class="message" id="message-default">
-    Select an list item from the list.
+    리스트에서 하나의 아이템을 선택하세요
   </div>
   <script>
     document.querySelector('#default').addEventListener('x-select', evt => {
@@ -53,7 +53,7 @@
 </div>
 
 <div class="example">
-  <h2>Hierarchical List</h2>
+  <h2>계층화된 리스트 예제 </h2>
   <x-ul id="hierarchical" selected="new">
     <ul>
       <li> File
@@ -109,7 +109,7 @@
     </ul>
   </x-ul>
   <div class="message" id="message-hierarchical">
-    Select an list item from the list.
+    리스트에서 하나의 아이템을 선택하세요.
   </div>
   <script>
     document.querySelector('#hierarchical').addEventListener('x-select', evt => {
@@ -166,7 +166,7 @@
 
 <div class="example">
 
-  <h2>Dropdown Style</h2>
+  <h2>계층화된 리스트, 드롭다운 스타일</h2>
   <x-ul id="my-list" selected="redo" class="dropdown">
     <ul>
       <li> File
@@ -222,7 +222,7 @@
     </ul>
   </x-ul>
   <div class="message" id="message-div">
-    Select a list item to display message here.
+    리스트에서 하나의 아이템을 선택하시면 선택된 항목이 표시됩니다. 
   </div>
   <br/>
   <script>
@@ -233,13 +233,13 @@
 
   <x-pre>
     &lt;x-ul id="my-list" class="dropdown" selected="redo">
-      ... The same as the above example ...
+      ...  위의 항목과 동일합니다. ...
     &lt;/x-ul>
   </x-pre>
 </div>
 
-<h3>Attributes</h3>
-<li><b>selected</b>: the id of preselected list item, default null</li>
+<h3>속성</h3>
+<li><b>selected</b>: 선택된 리스트 아이템의 id, 기본값 null</li>
 
-<h3>Events</h3> 
-<li><b>x-select</b>: Fired when a list item is selected by click or enter pressed</li>
+<h3>이벤트</h3> 
+<li><b>x-select</b>: 리스트가 선택되었을 경우 발생하는 이벤트</li>

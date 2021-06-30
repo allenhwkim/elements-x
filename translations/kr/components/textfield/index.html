@@ -1,0 +1,61 @@
+
+<app-custom-css>
+  .app x-textfield {
+    background: #eee;
+  }
+  .app x-textfield input, .input {
+    background: #eee;
+  }
+  .app x-textfield .icon {
+    color: blue;
+  }
+
+</app-custom-css>
+
+<div class="example">
+
+  <p></p>
+  <x-textfield>
+    <span class="label">Username</span>
+    <input placeholder="Enter your email here" value="allenkim" />
+  </x-textfield>
+  <x-pre>
+    &lt;x-textfield>
+      &lt;span class="label">Username&lt;/span>
+      &lt;input placeholder="Enter your email here" />
+    &lt;/x-textfield>
+  </x-pre>
+
+  <p></p>
+  <x-textfield>
+    <span class="label">Username</span>
+    <div contenteditable="true" class="input" style="width: 200px"></div>
+    <i class="far icon fa-envelope" aria-hidden="true"></i>
+    <div class="ink-bar"></div>
+  </x-textfield>
+  <x-pre>
+    &lt;x-textfield>
+      &lt;span class="label">Username&lt;/span>
+      &lt;div contenteditable" class="input" style="width: 200px">&lt;/div>
+      &lt;i class="far icon fa-envelope" aria-hidden="true">&lt;/i>
+      &lt;div class="ink-bar">&lt;/div>
+    &lt;/x-textfield>
+  </x-pre>
+  
+  <p></p>
+  <x-textfield>
+    <i class="far icon fa-credit-card" aria-hidden="true"></i>
+    <span class="label">Username</span>
+    <input class="input"  placeholder="Enter your email here" />
+    <div class="ink-bar"></div>
+  </x-textfield>
+  <x-pre>
+    &lt;x-textfield>
+      &lt;i class="far icon fa-credit-card" aria-hidden="true">&lt;/i>
+      &lt;span class="label">Username&lt;/span>
+      &lt;input class="input"  placeholder="Enter your email here" />
+      &lt;div class="ink-bar">&lt;/div>
+    &lt;/x-textfield>
+  </x-pre>
+  
+</div>

@@ -1,0 +1,78 @@
+<h2>x-data, 데이타 출력형태 변환</h2>
+
+데이타를 숫자, 날짜, 통화형식으로 변환시킵니다.
+  
+<h3>숫자</h3>
+<div class="example">
+  기본값: <x-data type="number" value="1234567.8901234"></x-data> 
+  <br/>
+  불어: <x-data type="number" locale="fr-CA" max-decimal="3" value="1234567.8901234"></x-data>
+  <x-pre>
+    기본값: &lt;x-data type="number" value="1234567.8901234">&lt;/x-data> 
+    불어: &lt;x-data type="number" locale="fr-CA" max-decimal="3" value="1234567.8901234">&lt;/x-data>
+  </x-pre>
+</div>
+
+<h3>통화</h3>
+<div class="example">
+  기본값: <x-data type="currency" value="1234567.8901234"></x-data> 
+  <br/>
+  불어: <x-data type="currency" locale="fr-CA" currency="CAD" value="1234567.8901234"></x-data>
+  <br/>
+  한국어: <x-data type="currency" locale="ko-KR" currency="KRW" value="1234567.8901234"></x-data>
+  <x-pre>
+    기본값: &lt;x-data type="currency" value="1234567.8901234">&lt;/x-data> 
+    불어: &lt;x-data type="currency" locale="fr-CA" currency="CAD" value="1234567.8901234">&lt;/x-data>
+    한국어: &lt;x-data type="currency" locale="ko-KR" currency="KRW" value="1234567.8901234">&lt;/x-data>
+  </x-pre>
+</div>
+
+<h3>날짜</h3>
+<div class="example">
+  기본값: <x-data type="date" value="2021-05-29 12:34:59"></x-data> 
+  <br/>
+  불어: <x-data type="date" locale="fr-FR" value="2021-05-29 12:34:59"></x-data>
+  <br/>
+  맞춤형 영어: <x-data type="date" format="weekday month yyyy M d" value="2021-05-29 12:34:59"></x-data>
+  <br/>
+  맞춤형 불어: <x-data type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" value="2021-05-29 12:34:59"></x-data>
+  <x-pre>
+    기본값:
+      &lt;x-data type="date" value="2021-05-29 12:34:59">&lt;/x-data> 
+    불어:
+      &lt;x-data type="date" locale="fr-FR" value="2021-05-29 12:34:59">&lt;/x-data>
+    맞춤형 영어:
+      &lt;x-data type="date" format="weekday month yyyy M d" value="2021-05-29 12:34:59">&lt;/x-data>
+    맞춤형 불어:
+      &lt;x-data type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" value="2021-05-29 12:34:59"></x-data>
+  </x-pre>
+</div>
+
+<h3> 속성 </h3>
+
+<li><b>type</b>: 출력 형태. 숫자, 통화, 혹은 날짜</li>
+<li><b>data-value</b>: 날짜값 예 12345.67</li>
+<li><b>locale</b>: 언어, 기본t en-US, 예 fr-CA (언어-국가)</li>
+<li><b>max-decimal</b>: 최고 소숫점이하 값. 기본값 2. type="number" 일때 사용</li>
+<li><b>currency</b>: 통화. 기본값. USD, 예 USD, KRW, 혹은 CAD</li>
+<li><b>format</b>: 날짜 출력형. 예 yyyy-MM-dd hh:mm:ss
+   기본값. locale이 en-US 일경우, mm-dd-yy
+  <ul>
+    <li>yyyy: 4 자리 년도, 예, 2021 </li>
+    <li>yy: 2 자리 년도, 예, 21 </li>
+    <li>MM: 2 자리 월, 예, 05 </li>
+    <li>M: 1 혹은 2 자리 월. 예, 5, 혹은 12 </li>
+    <li>dd: 2 자리 날짜. 예, 05, 혹은 12 </li>
+    <li>d: 1 혹은 자리 날짜. 예, 5, 혹은 12 </li>
+    <li>hh: 2 자리 시각. 예, 05, 혹은 23 </li>
+    <li>h: 1 혹은 2 자리 시각. 예, 5, 혹은 23 </li>
+    <li>mm: 2 자리 분. 예, 05, 혹은 59 </li>
+    <li>m: 1 혹은 2 자리 분. 예, 5, 혹은 59 </li>
+    <li>ss: 2 자리 초. 예, 05, 혹은 59 </li>
+    <li>s: 1 혹은 2 자리 초. 예, 5, 혹은 59 </li>
+    <li>Month: 월 이름. 예 January </li>
+    <li>Mon: 짧은 형태 월 이름 예 Jan </li>
+    <li>Weekday: 주 이름. 예 Wednesday </li>
+    <li>Week: 짧은 형태 주 이름. 예 Wed </li>
+  </ul>
+</li>

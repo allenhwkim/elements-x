@@ -21,7 +21,7 @@ function getPageTranslations(param) { // string or route;
 function setTranslationForRouteNInclude() {
   // When a full page translation is given, replace route.src
   XRoute.beforeFetchCallback = function(route) { 
-    console.log('route before fetch', route);
+    // console.log('route before fetch', route);
     setRouteTranslations(route);
 
     const page = getPageTranslations(route);

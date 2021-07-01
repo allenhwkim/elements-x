@@ -285,6 +285,7 @@ app-group-header .header .links {
   }
   .app.toggled .aside .route-items {
     width: 250px;
+    height: 100%;
   }
   .app .main .article {
     width: 100%;

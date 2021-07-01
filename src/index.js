@@ -52,6 +52,9 @@ window.addEventListener('DOMContentLoaded', function() {
 });
  
 function enableFacebookComments() {
+  if (window.location.hostname.startsWith('localhost')) return;
+  if (window.innerWidth < 768) return;
+
   const locale = Translation.getLanguage() === 'kr' ? 'ko_KR' : 'en_US';
   const script = document.createElement('script');
   script.setAttribute('async', '');
@@ -62,8 +65,6 @@ function enableFacebookComments() {
   setTimeout(_ => document.body.appendChild(script), 2000);
 
   document.body.addEventListener('x-route', function() {
-    if (window.location.hostname.startsWith('localhost')) return;
-
     document.querySelector('.fb-comments').style.display = 'none'; // to avoid flicking
     debounce(event => {
       const iframe = document.querySelector('.fb-comments iframe'); 

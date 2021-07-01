@@ -79,6 +79,7 @@ app-group-header .header .links {
 .app > .header .header-nav .languages > * {
   font-size: 16px;
   color: #FFF;
+  white-space: nowrap;
 }
 .app > .header .header-nav .icons {
   padding: 24px;

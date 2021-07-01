@@ -260,6 +260,10 @@ app-group-header .header .links {
   .app .main {
     display: block;
   }
+  .app .header .header-nav .links {
+    padding: 0 12px;
+    white-space: nowrap;
+  }
   .app .main .aside {
     position: fixed;
     width: 100%;

@@ -6,7 +6,7 @@
     <a class="route-item" href="/component/button" src="/components/button">
       <i class="fas fa-square"></i><b>button <sub>custom style</sub></b>
     </a>
-    <div class="group-header expanded" onclick="this.classList.toggle('expanded')">
+    <div class="group-header expanded" onclick="this.classList.toggle('expanded');event.stopPropagation();">
       <i class="fas fa-pen-square"></i> &nbsp;<span class="text"> input</span>
     </div>
     <div class="input-elements">
@@ -53,7 +53,7 @@
     <a class="route-item" href="/component/div" src="/components/div">
       <i class="fas fa-vector-square"></i><b>div <sub> micro framework</sub></b>
     </a>
-    <div class="group-header" onclick="this.classList.toggle('expanded')">
+    <div class="group-header" onclick="this.classList.toggle('expanded'); event.stopPropagation();">
       <i class="fas fa-dice-d6"></i> &nbsp; 
       <span class="text">Custom Elements </span>
     </div>

@@ -3,7 +3,8 @@ x-tabs .tabs {
   display: flex;
   position: relative;
   cursor: pointer;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 x-tabs .tabs [tab-for] {

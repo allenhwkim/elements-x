@@ -22,25 +22,6 @@ app-group-header .header .links {
   color: #666;
 }
 
-.app.collapsed .header .logo {
-  width: 0;
-}
-.app.collapsed .header .logo .title {
-  display: none;
-}
-.app.collapsed .main .aside {
-  width: 60px;
-}
-.app.collapsed .main .aside .route-item i {
-  font-size: 20px;
-}
-.app.collapsed .main .aside .route-item b,
-.app.collapsed .main .aside .route-item:hover b {
-  display: none;
-}
-.app.collapsed .main .aside .group-header .text {
-  display: none;
-}
 
 .app > .header {
   height: 60px;
@@ -113,7 +94,7 @@ app-group-header .header .links {
 }
 .app > .main .aside {
   width: 250px;
-  transition: width 0.3s;
+  transition: width 0.2s;
 }
 .app > .main .aside .route-items {
   display: block;
@@ -126,16 +107,6 @@ app-group-header .header .links {
   color: #fff;
   height: calc(100vh - 60px);
   overflow: auto;
-}
-.app.collapsed > .main .aside .route-items {
-  width: 60px;
-  overflow-x: hidden;
-}
-.app > .main .aside .route-items::-webkit-scrollbar {
-  width:0px;
-}
-.app > .main .aside .route-items::-webkit-scrollbar-track-piece {
-  background-color:transparent;
 }
 
 .app > .main .aside .route-item {
@@ -245,4 +216,83 @@ app-group-header .header .links {
   margin: 0;
   padding: 0;
   box-shadow: none;
+}
+
+@media only screen and (min-width: 768px) { 
+  .app .main .aside {
+    pointer-events: none;
+  }
+  .app .main .aside .route-items {
+    pointer-events: initial;
+  }
+  .app.toggled .main .aside .route-items {
+    width: 60px;
+    overflow-x: hidden;
+  }
+  .app > .main .aside .route-items::-webkit-scrollbar {
+    width:0px;
+  }
+  .app > .main .aside .route-items::-webkit-scrollbar-track-piece {
+    background-color:transparent;
+  }
+  .app.toggled .header .logo {
+    width: 0;
+  }
+  .app.toggled .header .logo .title {
+    display: none;
+  }
+  .app.toggled .main .aside {
+    width: 60px;
+  }
+  .app.toggled .main .aside .route-item i {
+    font-size: 20px;
+  }
+  .app.toggled .main .aside .route-item b,
+  .app.toggled .main .aside .route-item:hover b {
+    display: none;
+  }
+  .app.toggled .main .aside .group-header .text {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) { 
+  .app .main {
+    display: block;
+  }
+  .app .main .aside {
+    position: fixed;
+    width: 100%;
+    background: rgba(0,0,0, .5);
+    height: 100vh;
+    top: 52px;
+    width: 0;
+    visibility: hidden;
+    z-index: 1;
+  }
+  .app.toggled .main .aside {
+    visibility: visible;
+    width: 100%;
+  }
+  .app .main .aside .route-items {
+    width: 0;
+    transition: width .2s;
+  }
+  .app.toggled .aside .route-items {
+    width: 250px;
+  }
+  .app .main .article {
+    width: 100%;
+    padding: 0;
+  }
+  .app .header .logo {
+    width: 0;
+  }
+  .app .header .logo .title {
+    display: none;
+  }
+  .app .main .aside .route-item i {
+    font-size: 20px;
+  }
+
 }

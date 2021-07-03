@@ -32,10 +32,10 @@ The &lt;x-pagination> element enables the user to select a specific page from a 
 <hr/>
 <p>
   <x-pagination
+    current-page="100"
     num-records-per-page="10"
     num-pages="5"
-    total-records="1000"
-    value="4">
+    total-records="1000">
   </x-pagination>
 </p>
 <hr/>
@@ -62,7 +62,7 @@ The &lt;x-pagination> element enables the user to select a specific page from a 
   <label> Current page number:</label>
   <input type="range" value="4" max="100"
     oninput="this.nextElementSibling.innerText = this.value"
-    onchange="document.querySelector('x-pagination').setAttribute('value', this.value);" /><b>4</b>
+    onchange="document.querySelector('x-pagination').setAttribute('current-page', this.value);" /><b>4</b>
 </p>
 
 <b>x-select event detail.</b>
@@ -70,7 +70,7 @@ The &lt;x-pagination> element enables the user to select a specific page from a 
 
 <h3> Attributes </h3>
 
-<li><b>value</b>: page number</li>
+<li><b>current-page</b>: current-page number</li>
 <li><b>num-records-per-page</b>: number of records per page</li>
 <li><b>num-pages</b>: number of page buttons to display.</li>
 <li><b>total-records</b>: number of total records.</li>

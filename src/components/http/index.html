@@ -42,16 +42,21 @@ It makes http call:  GET, POST, PUT, DELETE, or PATCH. It also shows loading sig
   <h2> Example </h2>
   <x-pre>
     &lt;x-div>
-      &lt;x-http  url="/components/list/countries.json" auto
+      &lt;h3>HTTP Response:&lt;/h3>
+      &lt;x-button on-click="fetch(#fetch)"">Fetch&lt;/x-button> 
+      &lt;x-button on-click="set(resp, '')">Reset&lt;/x-button>
+      &lt;x-http id="fetch" url="/components/list/countries.json"
         on-success="set(resp, event.detail)">&lt;/x-http>
-      &lt;b>HTTP Response:&lt;/b>
       &lt;pre x-value="resp" style="height: 300px; overflow: auto">&lt;/pre>
     &lt;/x-div>
   </x-pre>
 
   <x-div> <!-- debug="" trace="" -->
-    <x-http on-success="set(resp, event.detail)" url="/components/list/countries.json" auto=""></x-http>
-    <b>HTTP Response:</b>
+    <h3>HTTP Response:</h3>
+    <x-button on-click="fetch(#fetch)">Fetch</x-button> 
+    <x-button on-click="set(resp, '')">Reset</x-button>
+    <x-http id="fetch" on-success="set(resp, event.detail)" url="/components/list/countries.json"></x-http>
+
     <pre x-value="resp" style="height: 300px; overflow: auto"></pre>
   </x-div>
 

@@ -9,10 +9,9 @@ x-tooltip {
 
 x-tooltip .x-overlay {
   display: block;
-  background: #3D474B;
+  background: #FFF;
   border: 1px solid #ccc;
   padding: 8px;
-  color: #FFF;
   box-shadow: 4px 4px 8px #ccc;
   animation: appear .3s;
 }
@@ -42,7 +41,7 @@ x-tooltip .x-arrow.up .x-icon {
 x-tooltip .x-arrow.up .x-icon::after {
   border-left: 11px solid transparent;
   border-right: 11px solid transparent;
-  border-bottom: 11px solid #3D474B;
+  border-bottom: 11px solid #FFF;
   top: 2px;
 }
 
@@ -55,6 +54,6 @@ x-tooltip .x-arrow.down .x-icon {
 x-tooltip .x-arrow.down .x-icon::after {
   border-left: 11px solid transparent;
   border-right: 11px solid transparent;
-  border-top: 11px solid #3D474B;
+  border-top: 11px solid #FFF;
   bottom: 2px;
 }

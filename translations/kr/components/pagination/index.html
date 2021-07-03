@@ -55,13 +55,13 @@ The &lt;x-pagination> element enables the user to select a specific page from a 
 
   <br/>
   <label>보여줄 페이지의 갯수 :</label>
-  <input type="range" value="1000" max="5000"
+  <input type="range" current-page="100" max="5000"
     oninput="this.nextElementSibling.innerText = this.value"
     onchange="document.querySelector('x-pagination').setAttribute('total-records', this.value);" /><b>1000</b>
 
   <br/>
   <label> 현재 페이지 번호 :</label>
-  <input type="range" value="4" max="100"
+  <input type="range" current-pagee="100" max="100"
     oninput="this.nextElementSibling.innerText = this.value"
     onchange="document.querySelector('x-pagination').setAttribute('value', this.value);" /><b>4</b>
 </p>
@@ -71,7 +71,7 @@ The &lt;x-pagination> element enables the user to select a specific page from a 
 
 <h3> 속성  </h3>
 
-<li><b>value</b>: 현재 페이지 번호 </li>
+<li><b>current-page</b>: 현재 페이지 번호 </li>
 <li><b>num-records-per-page</b>:  전체 레코드의 수</li>
 <li><b>num-pages</b>: 보여줄 페이지의 갯수</li>
 <li><b>total-records</b>: 보여줄 페이지의 갯수</li>

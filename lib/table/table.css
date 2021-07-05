@@ -3,6 +3,13 @@ x-table {
   width: 100%;
 }
 
+x-table.no-header header {
+  display: none;
+}
+x-table.no-footer footer {
+  display: none;
+}
+
 x-table header,
 table.x-table header {
   display: flex;

@@ -65,7 +65,7 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
           <td class="alpha3Code">{{alpha3Code}}</td>
           <td class="capital">{{capital}}</td>
           <td class="subregion">{{subregion}}</td>
-          <td class="population" style="text-align: right"><x-i type="number" data-value="{{population}}"></x-i></td>
+          <td class="population" style="text-align: right"><x-data type="number" value="{{population}}"></x-data></td>
         </tr>
         <tr class="empty">
           <td colspan="5">No records found</td>
@@ -98,7 +98,7 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
             &lt;td class="alpha3Code">{{alpha3Code}}&lt;/td>
             &lt;td class="capital">{{capital}}&lt;/td>
             &lt;td class="subregion">{{subregion}}&lt;/td>
-            &lt;td class="population" style="text-align: right">&lt;x-i type="number" data-value="{{population}}">&lt;/x-i>&lt;/td>
+            &lt;td class="population" style="text-align: right">&lt;x-data type="number" value="{{population}}">&lt;/x-data>&lt;/td>
           &lt;/tr>
           &lt;tr class="empty">
             &lt;td colspan="5">No records found&lt;/td>
@@ -110,6 +110,88 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
       &lt;/table>
     &lt;/x-table>
   </x-pre>
+</div>
+
+<div class="example">
+
+  <x-table class="no-header no-footer">
+    <table>
+      <thead>
+        <tr>
+          <th class="name">Name</th>
+          <th class="alpha3Code">code</th>
+          <th class="capital">Capital</th>
+          <th class="subregion">Region</th>
+          <th class="population">Population</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">Name1</td>
+          <td class="alpha3Code">alpha3Code 1</td>
+          <td class="capital">capital 1</td>
+          <td class="subregion">subregion</td>
+          <td class="population" style="text-align: right">1</td>
+        </tr>
+        <tr>
+          <td class="name">Name2</td>
+          <td class="alpha3Code">alpha3Code 2</td>
+          <td class="capital">capital 2</td>
+          <td class="subregion">subregion</td>
+          <td class="population" style="text-align: right">2</td>
+        </tr>
+        <tr>
+          <td class="name">Name3</td>
+          <td class="alpha3Code">alpha3Code  3</td>
+          <td class="capital">capital 3</td>
+          <td class="subregion">subregion</td>
+          <td class="population" style="text-align: right">3</td>
+        </tr>
+        <tr>
+          <td class="name">Name4</td>
+          <td class="alpha3Code">alpha3Code 4</td>
+          <td class="capital">capital 4</td>
+          <td class="subregion">subregion</td>
+          <td class="population" style="text-align: right">4</td>
+        </tr>
+        <tr>
+          <td class="name">Name5</td>
+          <td class="alpha3Code">alpha3Code 5</td>
+          <td class="capital">capital 5</td>
+          <td class="subregion">subregion</td>
+          <td class="population" style="text-align: right">5</td>
+        </tr>
+        <tr>
+          <td class="name">Name1</td>
+          <td class="alpha3Code">alpha3Code 1</td>
+          <td class="capital">capital 1</td>
+          <td class="subregion">subregion</td>
+          <td class="population" style="text-align: right">1</td>
+        </tr>
+        <tr>
+          <td class="name">Name2</td>
+          <td class="alpha3Code">alpha3Code 2</td>
+          <td class="capital">capital 2</td>
+          <td class="subregion">subregion</td>
+          <td class="population" style="text-align: right">2</td>
+        </tr>
+        <tr>
+          <td class="name">Name3</td>
+          <td class="alpha3Code">alpha3Code  3</td>
+          <td class="capital">capital 3</td>
+          <td class="subregion">subregion</td>
+          <td class="population" style="text-align: right">3</td>
+        </tr>
+        <tr>
+          <td class="name">Name4</td>
+          <td class="alpha3Code">alpha3Code 4</td>
+          <td class="capital">capital 4</td>
+          <td class="subregion">subregion</td>
+          <td class="population" style="text-align: right">4</td>
+        </tr>
+      </tbody>
+    </table>
+  </x-table>
 </div>
 
 <h3>Attributes</h3>

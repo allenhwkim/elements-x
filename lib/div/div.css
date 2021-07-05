@@ -1,4 +1,4 @@
-x-div {display: block; }
+x-div {display: block; padding: 12px; }
 x-div a {cursor: pointer;} 
 /* 
 x-div form:invalid button:not([type]), 

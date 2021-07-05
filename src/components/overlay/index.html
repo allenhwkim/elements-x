@@ -1,3 +1,5 @@
+<app-group-header title="Overlay" path="/overlay"></app-group-header>
+
 <app-custom-css>
 .app x-overlay .x-overlay {
   background: blue;
@@ -57,12 +59,29 @@
   </x-pre>
 </div>
 
-<h2>Attributes</h2>
-<li><b>trigger</b>: id of element to activate this overlay</li>
-<li><b>show-arrow</b>: Default false, for tooltip, show arrow </li>
-<li><b>trigger-actions</b>: Default click, actions to open overlay </li>
-<li><b>close-actions</b>: Default blur, actions to close overlay </li>
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>trigger</td><td>String</td><td>N/A</td><td>Optional</td><td>id of element to activate this overlay</td></tr>
+        <tr><td>opened</td><td>N/A</td><td>N/A</td><td>Optional</td><td>when defined, it opens when initialized</td></tr>
+        <tr><td>show-arrow</td><td>Boolean</td><td>true</td><td>Optional</td><td>DescriDefault false, for tooltip, show arrowption</td></tr>
+        <tr><td>trigger-actions</td><td>String</td><td>click</td><td>Optional</td><td>actions to open overlay</td></tr>
+        <tr><td>close-actions</td><td>String</td><td>blur</td><td>Optional</td><td>actions to close overlay</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
 
-<h2>Events</h2>
-<li><b>x-overlay-open</b>: Fired when overlay opened with reason</li>
-<li><b>x-overlay-close</b>: Fired when overlay closed with reason</li>
+<div class="events" title="Events">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>x-overlay-open</td><td>CustomElement</td><td>N/A</td><td>Fired when overlay opened with reason</td></tr>
+        <tr><td>x-overlay-close</td><td>CustomElement</td><td>N/A</td><td>Fired when overlay closed with reason</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

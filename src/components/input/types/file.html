@@ -1,3 +1,5 @@
+<app-group-header title="File Selector" path="/input"></app-group-header>
+
 <h3>Features </h3>
 <ul class="default">
   <li> To collect files, user can drag and drop a file or multiple files. </li>
@@ -74,15 +76,6 @@
   </x-pre>
 </div>
 
-<h3>Attributes</h3>
-<li><b>upload-fn</b>:  string, the uplod function name that returns xhr</li>
-
-<h3>Events</h3> 
-<li><b>x-select</b>: fired when collected files are changed with the values of list of files</li>
-<li><b>x-progress</b>: fired when upload is in progress</li>
-<li><b>x-load</b>: fired when upload is done successfully</li>
-<li><b>x-error</b>: fired when upload is errored</li>
-
 <script>
   document.querySelector('#file-selector').addEventListener('x-select', event => {
     console.log(event.detail);
@@ -99,3 +92,37 @@
     return xhr;
   }
 </script>
+
+<h3>Attributes</h3>
+<li><b>upload-fn</b>:  string, the uplod function name that returns xhr</li>
+
+<h3>Events</h3> 
+<li><b>x-select</b>: fired when collected files are changed with the values of list of files</li>
+<li><b>x-progress</b>: fired when upload is in progress</li>
+<li><b>x-load</b>: fired when upload is done successfully</li>
+<li><b>x-error</b>: fired when upload is errored</li>
+
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>upload-fn</td><td>string</td><td>N/A</td><td>Optional</td><td>the uplod function name that returns xhr</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
+
+<div class="events" title="Events">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>x-select</td><td>CustomEvent</td><td>selected file</td><td>fired when collected files are changed with the values of list of files</td></tr>
+        <tr><td>x-progress</td><td>CustomEvent</td><td></td><td>fired when upload is in progress</td></tr>
+        <tr><td>x-load</td><td>CustomEvent</td><td></td><td>fired when upload is done successfully</td></tr>
+        <tr><td>x-error</td><td>CustomEvent</td><td></td><td>fired when upload is errored</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

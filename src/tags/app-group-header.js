@@ -1,86 +1,53 @@
-import {throttle} from '../../lib/common/util';
-
-const componentsHeaderHTML = `
+const template = `
   <style>
-  .header > .links > a { display: inline-block;}
+  .header { display: flex; align-items: center; justify-content: space-between; }
+  .header > .links > a { color: inherit;}
   </style>
-  <div class="header vcentered">
-    <h2 class="name" id="component-name">Component</h2>
+  <div class="header">
+    <h1 class="title" id="component-name">{{TITLE}}</h1>
     <div class="links">
-      <a target="_blank" id="github-code" href="https://github.com/components-x/components-x">
+      <a target="_blank" id="github-code" href="https://github.com/elements-x/elements-x/tree/master/lib{{PATH}}">
         <x-button class="no-border no-shadow icon" title="code">
           <i class="fab fa-js-square"></i>
         </x-button>
       </a>
-      <a target="_blank" id="github-issue" href="https://github.com/components-x/components-x/issues">
+      <a target="_blank" id="github-issue" href="https://github.com/elements-x/elements-x/issues">
         <x-button class="no-border no-shadow icon" title="issues">
           <i class="fas fa-comments"></i>
         </x-button>
       </a>
     </div>
-  </div>`;
-const toolsHeaderHTML = 'tools header';
+  </div>
+  
+  <h2>Install &amp; Import</h2>
+  <x-pre>
+  $ npm install elements-x --save-dev
+  </x-pre>
+  <x-pre class="import">
+  import 'elements-x{{PATH}}';
+  </x-pre>
+  `;
 
 class AppGroupHeader extends HTMLElement {
-  // adoptedCallback() {}
-  // static get observedAttributes() { return ['src']; }
-  // attributeChangedCallback(name, oldValue, newValue) { }
+  // static get observedAttributes() { return ['title', 'path']; }
 
-  constructor(...args) {
-    const self = super(...args);
-    return self;
-  }
+  // attributeChangedCallback(name, oldValue, newValue) {
+  //   if (name === 'title') {
+  //     html = html.replace(/{{TITLE}}/g, newValue);
+  //     this.innerHTML = html;
+  //   } else if (name === 'path') {
+  //     html = html.replace(/{{PATH}}/g, newValue || '');
+  //     this.innerHTML = html;
+  //   }
+  // }
 
   connectedCallback() {
-    document.addEventListener('x-route', throttle(
-      event => {
-        const route = event.detail.state; 
-        const path = route.urlPath || '' + route.pattern;
-        const groupName = path.match(/^\/[^/]*/)[0];
-
-        if (groupName.indexOf('components')) {
-          this._setComponentHeader(route);
-        } else if (groupName.indexOf('tools')) {
-          this._setToolsHeader(route);
-        } else {
-          this._setComponentHeader({name: ''});
-        }
-        this._prevGroupName = groupName;
-        setTimeout(_ => window.scrollTo(0, 0)); // go to top;
-      }, 500)
-    );
-  }
-
-  _setComponentHeader(route) {
-    this.innerHTML = componentsHeaderHTML;
-  
-    const path = route.urlPath || '' + route.pattern;
-    const componentRoute = path.indexOf('/component') !== -1;
-
-    if (componentRoute && route.urlPath) {
-      const elName = route.urlPath.replace('/component/','').split('/')[0];
-      // const elName = route.name.toLowerCase();
-      if (elName ) {
-        this.querySelector('#component-name').innerText = elName; 
-        this.querySelector('#github-code').setAttribute('href', 
-          `https://github.com/elements-x/elements-x/tree/master/lib/${elName}`);
-        this.querySelector('#github-issue').setAttribute('href', 
-          `https://github.com/elements-x/elements-x/issues?q=${elName}+in%3Atitle`);
-      } else {
-        this.querySelector('#component-name').innerText = 'Components'; 
-        this.querySelector('#github-code').setAttribute('href', 
-          'https://github.com/elements-x/elements-x');
-        this.querySelector('#github-issue').setAttribute('href', 
-          'https://github.com/elements-x/elements-x/issues');
-      }
-      this.style.display = 'block';
-    } else {
-      this.style.display = 'none';
-    }
-  }
-
-  _setToolsHeader(route) {
-    this.innerHTML = toolsHeaderHTML;
+    this.title = this.getAttribute('title');
+    this.path = this.getAttribute('path') || '';
+    let html = template;
+    html = html.replace(/{{TITLE}}/g, this.title);
+    html = html.replace(/{{PATH}}/g, this.path);
+    this.innerHTML = html;
   }
 }
 

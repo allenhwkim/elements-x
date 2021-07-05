@@ -1,4 +1,5 @@
-<h2>x-route, dynamic section change by URL</h2>
+<app-group-header title="x-route, dynamic html change by URL path" path="/route"></app-group-header>
+<h2></h2>
 
 <li> Provides push-state implemention without writing Javascript. </li>
 <li> When clicked, load different html to the given target. </li>
@@ -50,3 +51,31 @@ x-route {
   Any element within &lt;x-route> with "href" and "src" attribute sets route.
   "href" is the url to be when clicked, and "src" is the html to load when clicked.
 </p>
+
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>target</td><td>String</td><td>N/A</td><td>Required</td>
+          <td>CSS selector expression of element that needs to be updated when route changes</td>
+        </tr>
+        <tr><td>src</td><td>URL</td><td>N/A</td><td>Required</td>
+          <td>Child element attribute, indicates which url need to be downloaded when route is active</td></tr>
+        <tr><td>href</td><td>URL</td><td>N/A</td><td>Required</td>
+          <td>Child element attribute, indicates which url need to listen to trigger route change</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
+
+<div class="events" title="Events">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>x-route</td><td>CustomEvent</td><td>Route</td><td>Fired when route changes</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

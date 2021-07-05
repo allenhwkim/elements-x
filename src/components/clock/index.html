@@ -1,3 +1,4 @@
+<app-group-header title="Clock" path="/clock"></app-group-header>
 
 <app-custom-css>
   .app x-clock { width: 200px; height: 200px; }
@@ -34,9 +35,26 @@
   <x-pre> &lt;x-clock run="true">&lt;/x-clock> </x-pre>
 </div>
 
-<h3>Attributes</h3>
-<li><b>hour</b>: 0 to 24</li>
-<li><b>minute</b>: 0 to 59</li>
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>hour</td><td>Number</td><td>Current Hour</td><td>Optional</td><td>0 to 24</td></tr>
+        <tr><td>minute</td><td>Number</td><td>Current Minute</td><td>Optional</td><td>0 to 59</td></tr>
+        <tr><td>run</td><td>Boolean</td><td>false</td><td>Optional</td><td>If true, a second hands shows and runs clock</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
 
-<h3>Events</h3>
-<li><b>x-select</b>: a custom event. selected time is in event.detail</li>
+<div class="events" title="Events">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>x-select</td><td>CustomEvent</td><td>Time</td><td>Selected Time</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

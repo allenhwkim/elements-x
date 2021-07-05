@@ -1,3 +1,5 @@
+<app-group-header title="Color Selector" path="/input"></app-group-header>
+
 <h3>Open color selector for input field</h3>
 
 <div class="example">
@@ -20,3 +22,27 @@
 
 <h3>Events</h3>
 <li><b>x-select</b>: a custom event. selected color is in event.detail</li>
+
+
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>width</td><td>Number</td><td>N/A</td><td>Optional</td><td>width of color pallette</td></tr>
+        <tr><td>height</td><td>Number</td><td>N/A</td><td>Optional</td><td>height of color pallette</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
+
+<div class="events" title="Events">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>x-select</td><td>CustomEvent</td><td>selected color</td><td>Fired when selected</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

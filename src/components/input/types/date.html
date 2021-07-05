@@ -1,3 +1,5 @@
+<app-group-header title="Date Selector" path="/input"></app-group-header>
+
 <div id="date">
   <h3> Open calendar for Input Field</h3>
   <x-input type="date" text-field=""></x-input>
@@ -22,4 +24,30 @@
 
   <h2>Events</h2>
   <li><b>x-select</b>: fired when date is selected with value in Date type</li>
+</div>
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>locale</td><td>string</td><td>en-US</td><td>Optional</td><td>language/country</td></tr>
+        <tr><td>date</td><td>Date</td><td>Current Date</td><td>Optional</td><td>startig date. e.g. '2020-09-14'</td></tr>
+        <tr><td>week-format</td><td>string</td><td>short</td><td>Optional</td><td>'short', 'long', 'short', or 'narrow'</td></tr>
+        <tr><td>min-date</td><td>Date</td><td>1969-01-01</td><td>Optional</td><td>lowest calendar date selectable</td></tr>
+        <tr><td>max-date</td><td>Date</td><td>2100-12-31</td><td>Optional</td><td>lowest calendar date selectable</td></tr>
+        <tr><td>first-day-of-week</td><td>Number</td><td>0</td><td>Optional</td><td>The start day of week</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
+
+<div class="events" title="Events">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>x-select</td><td>CustomEvent</td><td>Date</td><td>fired when date is selected</td></tr>
+      </tbody>
+    </table>
+  </x-table>
 </div>

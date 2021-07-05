@@ -1,4 +1,12 @@
-<h3>Javascript</h3>
+<h2>1. Install</h2>
+<x-pre>
+  $ npm install elements-x --save-dev
+</x-pre>
+
+<h2>2. Import and Use it</h2>
+import the component you need, then use it in your html.
+
+<h3>Javascript Example</h3>
 <x-pre>
   <b>import 'elements-x/dist/button';</b>
 
@@ -9,7 +17,7 @@
   });
 </x-pre>
 
-<h3>Angular</h3>
+<h3>Angular Example</h3>
 <x-pre contents-for="ng">
   import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   import { BrowserModule } from '@angular/platform-browser';
@@ -34,7 +42,7 @@
   }
 </x-pre>
 `
-<h3>Vue</h3>
+<h3>Vue Example</h3>
 <x-pre contents-for="vue">
   &lt;template>
     <b>&lt;x-button v-on:click="handleEvent">Hello&lt;/x-button></b>

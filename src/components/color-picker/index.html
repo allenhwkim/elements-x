@@ -1,3 +1,4 @@
+<app-group-header title="Color Picker" path="/color-picker"></app-group-header>
 
 <app-custom-css>
   .app x-color-picker {
@@ -20,10 +21,27 @@
     &lt;x-color-picker target="color">&lt;/x-color-picker>
   </x-pre>
 </div>
-<h3>Attributes</h3>
-<li><b>width</b>: width of color pallette. e.g., 240</li>
-<li><b>height</b>: height of color pallette. e.g, 180</li>
-<li><b>trigger</b>: id of element to be updated when a color is selected</li>
 
-<h3>Events</h3>
-<li><b>x-select</b>: a custom event. selected color is in event.detail</li>
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>width</td><td>Number</td><td>N/A</td><td>Optional</td><td>width of color pallette</td></tr>
+        <tr><td>height</td><td>Number</td><td>N/A</td><td>Optional</td><td> height of color pallette</td></tr>
+        <tr><td>trigger</td><td>String</td><td>Default</td><td>Optional</td><td>id of element to be updated when a color is selected</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
+
+<div class="events" title="Events">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>x-select</td><td>CustomEvent</td><td>selected color</td><td>Fired when color is selected</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

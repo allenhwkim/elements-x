@@ -1,3 +1,5 @@
+<app-group-header title="Tooltip" path="/tooltip"></app-group-header>
+
 <app-custom-css>
   .app x-tooltip .x-overlay {
     background: blue;
@@ -41,3 +43,17 @@
 
 <h2>Attributes</h2>
 <li><b>trigger</b>: id of element to activate this tooltip</li>
+
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>trigger</td><td>String</td><td>N/A</td><td>Required</td>
+          <td>id of element to activate this tooltip</td></tr>
+        <tr><td>opened</td><td>N/A</td><td>N/A</td><td>Required</td>
+          <td>when specified, tooltip will be visible when initialized</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

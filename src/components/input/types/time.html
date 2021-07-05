@@ -1,4 +1,5 @@
-<div id="date">
+<app-group-header title="Time Selector" path="/input"></app-group-header>
+
   <h3> Time selector for Input Field</h3>
   <x-input type="time" text-field=""></x-input>
   <x-pre>
@@ -9,12 +10,25 @@
     &lt;x-input type="time" hour="10" minute="15" run="true">&lt;/x-input>
   </x-pre>
 
-  <h2>Attributes</h2>
-  <li><b>hour</b>: 0 to 24</li>
-  <li><b>minute</b>: 0 to 59</li>
-  <li><b>run</b>: default false, if true, it runs the clock</li>
-
-  <h2>Events</h2>
-  <li><b>x-select</b>: a custom event. selected time is in event.detail</li>
-
-</div>
+  <div class="attributes" title="Attributes">
+    <x-table class="no-header no-footer">
+      <table>
+        <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>hour</td><td>Number</td><td>Current Hour</td><td>Optional</td><td>0 to 24</td></tr>
+          <tr><td>minute</td><td>Number</td><td>Current Minute</td><td>Optional</td><td>0 to 59</td></tr>
+        </tbody>
+      </table>
+    </x-table>
+  </div>
+  
+  <div class="events" title="Events">
+    <x-table class="no-header no-footer">
+      <table>
+        <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>x-select</td><td>CustomEvent</td><td>Time</td><td>Selected Time</td></tr>
+        </tbody>
+      </table>
+    </x-table>
+  </div>

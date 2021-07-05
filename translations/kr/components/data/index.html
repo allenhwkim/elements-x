@@ -1,50 +1,50 @@
-<h2>x-data, 데이타 출력형태 변환</h2>
+<h2>x-format, 데이타 출력형태 변환</h2>
 
 데이타를 숫자, 날짜, 통화형식으로 변환시킵니다.
   
 <h3>숫자</h3>
 <div class="example">
-  기본값: <x-data type="number" value="1234567.8901234"></x-data> 
+  기본값: <x-format type="number" value="1234567.8901234"></x-format> 
   <br/>
-  불어: <x-data type="number" locale="fr-CA" max-decimal="3" value="1234567.8901234"></x-data>
+  불어: <x-format type="number" locale="fr-CA" max-decimal="3" value="1234567.8901234"></x-format>
   <x-pre>
-    기본값: &lt;x-data type="number" value="1234567.8901234">&lt;/x-data> 
-    불어: &lt;x-data type="number" locale="fr-CA" max-decimal="3" value="1234567.8901234">&lt;/x-data>
+    기본값: &lt;x-format type="number" value="1234567.8901234">&lt;/x-format> 
+    불어: &lt;x-format type="number" locale="fr-CA" max-decimal="3" value="1234567.8901234">&lt;/x-format>
   </x-pre>
 </div>
 
 <h3>통화</h3>
 <div class="example">
-  기본값: <x-data type="currency" value="1234567.8901234"></x-data> 
+  기본값: <x-format type="currency" value="1234567.8901234"></x-format> 
   <br/>
-  불어: <x-data type="currency" locale="fr-CA" currency="CAD" value="1234567.8901234"></x-data>
+  불어: <x-format type="currency" locale="fr-CA" currency="CAD" value="1234567.8901234"></x-format>
   <br/>
-  한국어: <x-data type="currency" locale="ko-KR" currency="KRW" value="1234567.8901234"></x-data>
+  한국어: <x-format type="currency" locale="ko-KR" currency="KRW" value="1234567.8901234"></x-format>
   <x-pre>
-    기본값: &lt;x-data type="currency" value="1234567.8901234">&lt;/x-data> 
-    불어: &lt;x-data type="currency" locale="fr-CA" currency="CAD" value="1234567.8901234">&lt;/x-data>
-    한국어: &lt;x-data type="currency" locale="ko-KR" currency="KRW" value="1234567.8901234">&lt;/x-data>
+    기본값: &lt;x-format type="currency" value="1234567.8901234">&lt;/x-format> 
+    불어: &lt;x-format type="currency" locale="fr-CA" currency="CAD" value="1234567.8901234">&lt;/x-format>
+    한국어: &lt;x-format type="currency" locale="ko-KR" currency="KRW" value="1234567.8901234">&lt;/x-format>
   </x-pre>
 </div>
 
 <h3>날짜</h3>
 <div class="example">
-  기본값: <x-data type="date" value="2021-05-29 12:34:59"></x-data> 
+  기본값: <x-format type="date" value="2021-05-29 12:34:59"></x-format> 
   <br/>
-  불어: <x-data type="date" locale="fr-FR" value="2021-05-29 12:34:59"></x-data>
+  불어: <x-format type="date" locale="fr-FR" value="2021-05-29 12:34:59"></x-format>
   <br/>
-  맞춤형 영어: <x-data type="date" format="weekday month yyyy M d" value="2021-05-29 12:34:59"></x-data>
+  맞춤형 영어: <x-format type="date" format="weekday month yyyy M d" value="2021-05-29 12:34:59"></x-format>
   <br/>
-  맞춤형 불어: <x-data type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" value="2021-05-29 12:34:59"></x-data>
+  맞춤형 불어: <x-format type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" value="2021-05-29 12:34:59"></x-format>
   <x-pre>
     기본값:
-      &lt;x-data type="date" value="2021-05-29 12:34:59">&lt;/x-data> 
+      &lt;x-format type="date" value="2021-05-29 12:34:59">&lt;/x-format> 
     불어:
-      &lt;x-data type="date" locale="fr-FR" value="2021-05-29 12:34:59">&lt;/x-data>
+      &lt;x-format type="date" locale="fr-FR" value="2021-05-29 12:34:59">&lt;/x-format>
     맞춤형 영어:
-      &lt;x-data type="date" format="weekday month yyyy M d" value="2021-05-29 12:34:59">&lt;/x-data>
+      &lt;x-format type="date" format="weekday month yyyy M d" value="2021-05-29 12:34:59">&lt;/x-format>
     맞춤형 불어:
-      &lt;x-data type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" value="2021-05-29 12:34:59"></x-data>
+      &lt;x-format type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" value="2021-05-29 12:34:59"></x-format>
   </x-pre>
 </div>
 

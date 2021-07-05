@@ -1,3 +1,5 @@
+<app-group-header title="Switch button" path="/input"></app-group-header>
+
 <h3>Features</h3>
 <ul class="default">
   <li>Modifiable On/Off Text</li>
@@ -39,9 +41,17 @@
 
 </div>
 
-<h3>Attributes</h3>
-<li><b>color</b>: Default red, color of the switch button</li>
-<li><b>on</b>: Default ' ', text value when status is on</li>
-<li><b>off</b>: Default ' ', text value when status is off</li>
-<li><b>status</b>: Default 'off', switch status, 'on' or 'off'</li>
-<li><b>disabled</b>: disabled when provided </li>
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>color</td><td>Color</td><td>red</td><td>Optional</td><td>color of the switch button</td></tr>
+        <tr><td>on</td><td>String</td><td>' '</td><td>Optional</td><td>text value when status is on</td></tr>
+        <tr><td>off</td><td>String</td><td>' '</td><td>Optional</td><td>text value when status is off</td></tr>
+        <tr><td>status</td><td>String</td><td>off</td><td>Optional</td><td>switch status, 'on' or 'off'</td></tr>
+        <tr><td>disabled</td><td>String</td><td></td><td>Optional</td><td>disabled when provided</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

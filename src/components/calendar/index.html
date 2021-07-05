@@ -1,3 +1,5 @@
+<app-group-header title="Calendar" path="/calendar"></app-group-header>
+
 <app-custom-css>
   .app x-calendar .calendar {
     width: 320px;
@@ -89,14 +91,30 @@
   </x-pre>
 </div>
 
-<h2>Attributes</h2>
-<li><b>locale</b>: default 'en-US'</li>
-<li><b>date</b>: startig date. e.g. '2020-09-14'</li>
-<li><b>week-format</b>: Default 'short', 'long', 'short', or 'narrow'</li>
-<li><b>min-date</b>: lowest calendar date selectable. default. '1969-01-01'</li>
-<li><b>max-date</b>: lowest calendar date selectable. default. '2100-12-31'</li>
-<li><b>first-day-of-week</b>: Default 0, which is Sunday</li>
-<li><b>target</b>: id of element to be updated when a date is selected</li>
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>locale</td><td>string</td><td>en-US</td><td>Optional</td><td>language/country</td></tr>
+        <tr><td>date</td><td>Date</td><td>Current Date</td><td>Optional</td><td>startig date. e.g. '2020-09-14'</td></tr>
+        <tr><td>week-format</td><td>string</td><td>short</td><td>Optional</td><td>'short', 'long', 'short', or 'narrow'</td></tr>
+        <tr><td>min-date</td><td>Date</td><td>1969-01-01</td><td>Optional</td><td>lowest calendar date selectable</td></tr>
+        <tr><td>max-date</td><td>Date</td><td>2100-12-31</td><td>Optional</td><td>lowest calendar date selectable</td></tr>
+        <tr><td>first-day-of-week</td><td>Number</td><td>0</td><td>Optional</td><td>The start day of week</td></tr>
+        <tr><td>target</td><td>string</td><td>N/A</td><td>Optional</td><td>id of element to be updated when a date is selected</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
 
-<h2>Events</h2>
-<li><b>x-select</b>: fired when date is selected with value in Date type</li>
+<div class="events" title="Events">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>x-select</td><td>CustomEvent</td><td>Date</td><td>fired when date is selected</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

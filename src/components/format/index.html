@@ -1,0 +1,104 @@
+<app-group-header title="Formatter" path="/format"></app-group-header>
+
+Format number, currency, or date
+  
+<h3>Number</h3>
+<div class="example">
+  Default: <x-format type="number"></x-format> 
+  <br/>
+  English: <x-format type="number" value="1234567.8901234"></x-format> 
+  <br/>
+  French: <x-format type="number" locale="fr-CA" max-decimal="3" value="1234567.8901234"></x-format>
+  <x-pre>
+    Default: &lt;x-format type="number">&lt;/x-format> 
+    English: &lt;x-format type="number" value="1234567.8901234">&lt;/x-format> 
+    French: &lt;x-format type="number" locale="fr-CA" max-decimal="3" value="1234567.8901234">&lt;/x-format>
+  </x-pre>
+</div>
+
+<h3>Currency</h3>
+<div class="example">
+  Default: <x-format type="currency"></x-format> 
+  <br/>
+  English: <x-format type="currency" value="1234567.8901234"></x-format> 
+  <br/>
+  French: <x-format type="currency" locale="fr-CA" currency="CAD" value="1234567.8901234"></x-format>
+  <br/>
+  Korean: <x-format type="currency" locale="ko-KR" currency="KRW" value="1234567.8901234"></x-format>
+  <x-pre>
+    Default: &lt;x-format type="currency">&lt;/x-format> 
+    English: &lt;x-format type="currency" value="1234567.8901234">&lt;/x-format> 
+    French: &lt;x-format type="currency" locale="fr-CA" currency="CAD" value="1234567.8901234">&lt;/x-format>
+    Korean: &lt;x-format type="currency" locale="ko-KR" currency="KRW" value="1234567.8901234">&lt;/x-format>
+  </x-pre>
+</div>
+
+<h3>Date</h3>
+<div class="example">
+  Default: <x-format type="date"></x-format> 
+  <br/>
+  English: <x-format type="date" value="2021-05-29 12:34:59"></x-format> 
+  <br/>
+  French: <x-format type="date" locale="fr-FR" value="2021-05-29 12:34:59"></x-format>
+  <br/>
+  Custom English: <x-format type="date" format="weekday month yyyy M d" value="2021-05-29 12:34:59"></x-format>
+  <br/>
+  Custom French: <x-format type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" value="2021-05-29 12:34:59"></x-format>
+  <x-pre>
+    Default:
+      &lt;x-format type="date">&lt;/x-format> 
+    English:
+      &lt;x-format type="date" value="2021-05-29 12:34:59">&lt;/x-format> 
+    French:
+      &lt;x-format type="date" locale="fr-FR" value="2021-05-29 12:34:59">&lt;/x-format>
+    Custom English:
+      &lt;x-format type="date" format="weekday month yyyy M d" value="2021-05-29 12:34:59">&lt;/x-format>
+    Custom French:
+      &lt;x-format type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" value="2021-05-29 12:34:59"></x-format>
+  </x-pre>
+</div>
+
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>type</td><td>String</td><td>N/A</td><td>Required</td><td>format type. number, currency, or date</td></tr>
+        <tr><td>value</td><td>String</td><td>0 or Current Time</td><td>Optional</td><td>value to format. e.g. 12345.67</td></tr>
+        <tr><td>locale</td><td>String</td><td>en-US</td><td>Optional</td><td>language-country. e.g. fr-CA</td></tr>
+        <tr><td>max-decimal</td><td>Number</td><td>2</td><td>Optional</td><td>max decimal point. Used with type="number"</td></tr>
+        <tr><td>currency</td><td>String</td><td>USD</td><td>Optional</td><td>currency. e.g. USD, KRW, or CAD. Used with type="currency"</td></tr>
+        <tr><td>format</td><td>String</td><td>locale date format. for en-US, mm-dd-yy</td><td>Optional</td><td>
+          date format *
+         </td></tr>
+      </tbody>
+    </table>
+  </x-table>
+
+  <h3>Date Formats</h3>
+  <x-table limit="20" class="no-header no-footer">
+    <table>
+      <thead>
+        <tr><th>Format</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>yyyy</td><td> 4 digit year, e.g., 2021 </td></tr>
+        <tr><td>yy</td><td> 2 digit year, e.g., 21 </td></tr>
+        <tr><td>MM</td><td> 2 digit montd, e.g., 05 </td></tr>
+        <tr><td>M</td><td> 1 or 2 digit montd. e.g., 5, or 12 </td></tr>
+        <tr><td>dd</td><td> 2 digit day. e.g., 05, or 12 </td></tr>
+        <tr><td>d</td><td> 1 or 2 digit day. e.g., 5, or 12 </td></tr>
+        <tr><td>hh</td><td> 2 digit hours. e.g., 05, or 23 </td></tr>
+        <tr><td>h</td><td> 1 or 2 digit hours. e.g., 5, or 23 </td></tr>
+        <tr><td>mm</td><td> 2 digit minutes. e.g., 05, or 59 </td></tr>
+        <tr><td>m</td><td> 1 or 2 digit minutes. e.g., 5, or 59 </td></tr>
+        <tr><td>ss</td><td> 2 digit seconds. e.g., 05, or 59 </td></tr>
+        <tr><td>s</td><td> 1 or 2 digit seconds. e.g., 5, or 59 </td></tr>
+        <tr><td>Montd</td><td> Montd name. e.g. January </td></tr>
+        <tr><td>Mon</td><td> Montd name in short format. e.g. Jan </td></tr>
+        <tr><td>Weekday</td><td> Weekday name. e.g. Wednesday </td></tr>
+        <tr><td>Week</td><td> Weekday name in short format. e.g. Wed </td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

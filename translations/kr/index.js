@@ -21,7 +21,7 @@ export const pageTranslations = {
   '/components/clock': `${path}/components/clock`,
   '/components/color-picker': `${path}/components/color-picker`,
   '/components/select': `${path}/components/select`,
-  '/components/data': `${path}/components/data`,
+  '/components/format': `${path}/components/format`,
   '/components/table': `${path}/components/table`,
   '/components/ul': `${path}/components/ul`,
   '/components/div': `${path}/components/div`,

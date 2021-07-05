@@ -1,4 +1,4 @@
-<h3>Mapbox</h3>
+<app-group-header title="Mapbox" path="/mapbox"></app-group-header>
 
 <ul class="default">
   <li> Show a necessary map with simple HTML. </li> 
@@ -51,4 +51,35 @@
   </x-pre>
 </div>
 
+<h3>x-mapbox</h3>
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>zoom</td><td>Number</td><td>15</td><td>Optional</td><td>Zoom level of the map</td></tr>
+        <tr><td>center</td><td>LngLat</td><td>0,0</td><td>Optional</td><td>Center Lng/Lat of the map</td></tr>
+        <tr><td>access-token</td><td>String</td><td>N/A</td><td>Required*</td><td>
+          Mapbox access token.
+          Unless it's provided by "XMapbox.accessToken='value'", this value is requird.
+          It's encouraged to us Javascript to provide accessToken.
+        </td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
 
+<h3>x-marker</h3>
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>center</td><td>Boolean</td><td>false</td><td>Optional</td>
+          <td>If provided, marker will be on the center of the map</td>
+        </tr>
+        <tr><td>lnglat</td><td>LngLat</td><td>N/A</td><td>Required</td><td>Lng/Lat of this marker</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

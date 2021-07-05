@@ -5,24 +5,6 @@ li {
   margin: 8px 0;
 }
 
-app-group-header .header {
-  display: flex;
-  height: 56px;
-  padding: 0 20px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
-  background: #fff;
-}
-app-group-header .header h2 {
-  margin: 0;
-}
-app-group-header .header .links {
-  flex: 1;
-  text-align: right;
-  font-size: 1.5em;
-  color: #666;
-}
-
-
 .app > .header {
   height: 60px;
   display: flex;
@@ -217,6 +199,22 @@ app-group-header .header .links {
   margin: 0;
   padding: 0;
   box-shadow: none;
+}
+
+.attributes::before, .events::before, .classes::before {
+  content: attr(title);
+  display: block;
+  padding: 8px 12px;
+  background: #343535;
+  color: #FFF;
+  margin-top: 1em;
+}
+.attributes thead tr, .events thead tr, .classes thead tr {
+  background: #656565;
+  color: #FFF;
+}
+.attributes thead tr th, .events thead tr th, .classes thead tr th {
+  padding: 8px 12px;
 }
 
 @media only screen and (min-width: 768px) { 

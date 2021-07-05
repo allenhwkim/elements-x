@@ -1,3 +1,5 @@
+<app-group-header title="Table; sortable, searchable, and paginated" path="/table"></app-group-header>
+
 <h3>Features </h3>
 <ul class="default">
   <li>Filtering rows</li>
@@ -112,7 +114,7 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
           <td class="alpha3Code">{{alpha3Code}}</td>
           <td class="capital">{{capital}}</td>
           <td class="subregion">{{subregion}}</td>
-          <td class="population" style="text-align: right"><x-data type="number" value="{{population}}"></x-data></td>
+          <td class="population" style="text-align: right"><x-format type="number" value="{{population}}"></x-format></td>
         </tr>
         <tr class="empty">
           <td colspan="5">No records found</td>
@@ -145,7 +147,7 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
             &lt;td class="alpha3Code">{{alpha3Code}}&lt;/td>
             &lt;td class="capital">{{capital}}&lt;/td>
             &lt;td class="subregion">{{subregion}}&lt;/td>
-            &lt;td class="population" style="text-align: right">&lt;x-data type="number" value="{{population}}">&lt;/x-data>&lt;/td>
+            &lt;td class="population" style="text-align: right">&lt;x-format type="number" value="{{population}}">&lt;/x-format>&lt;/td>
           &lt;/tr>
           &lt;tr class="empty">
             &lt;td colspan="5">No records found&lt;/td>
@@ -175,3 +177,20 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
     &lt;x-http> element id. if given, it listens to 'x-success' event to get its list value
   </li>
 </ul>
+
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>order</td><td>String</td><td>null</td><td>Optional</td><td>order expression, e.g. "id desc"</td></tr>
+        <tr><td>offset</td><td>Number</td><td>0</td><td>Optional</td>
+          <td>Starting offset number. if it is 10, the first list item is 11th records.</td></tr>
+        <tr><td>limit</td><td>Number</td><td>10</td><td>Optional</td>
+          <td>umber of records to show. If 10, it only shows 10 records starting from offset.</td></tr>
+        <tr><td>list-from</td><td>String</td><td>N/A</td><td>Optional</td>
+          <td>&lt;x-http> element id. if given, it listens to 'x-success' event to get its list value</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

@@ -7,7 +7,11 @@
 <div class="editor">
   <div class="editor-container" style="text-align: center">
     <br/>
-    <input type="file" id="left" /><br/>
+    <x-input type="file" id="left">
+      Drag / Drop image hovere
+      <br />
+      Or, Copy / Paste image here
+    </x-input><br/>
     <br/>
     <img class="preview" style="max-width: 100%" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAXCAYAAADpwXTaAAABTElEQVQ4jcXVsU9TURTH8U9JF1lQBl0YGNlwYyGG917i4MJCGtilibsJKzsJGyaUzUXjQhjqUGlLSFiYiP4JTlaTWhcGhjL0Vpv63uurkfBLTt7Need88zvnDrcUrcXrOMQTxXWDFzhttZu/k2XUsIv36E+AvMIqznCMBJfDnzN4HEBd/JwQ18HVXjBRj6NkaRSmgKM0vcZHfIqjZGE45rieYjGcv+MiA9bHS5ygEUfJszTYFlbC+WsOjMHIG2iingbbyWn+4c8FjOoBltNgeXqHX5gfy8/iIA02h0c5wM/h20Wv1W6Ko+RhFuwIzwu4bKAymkiDVVJyhTQzueSeYGljfvAfd7Yt/zaH6hZx1gsxte58Z/uIM+preDMN7C3OM+q/TOvsKsTUGu6s9C/NIyoxcNbBpmJvwF+Ko6QU+jtlVA1ep8zFFtA3VG8BsT9JOkm37OIAAAAASUVORK5CYII=" />
   </div>
@@ -27,8 +31,8 @@ function getBase64(file) {
     const url = reader.readAsDataURL(file);
   })
 }
-document.querySelector('#left').addEventListener('change', event => {
-  getBase64(event.target.files[0]).then(base64 => {
+document.querySelector('#left').addEventListener('x-select', event => {
+  getBase64(event.detail[0]).then(base64 => {
     document.querySelector('#right').innerText = base64;
     document.querySelector('.preview').setAttribute('src', base64);
   })

@@ -31,7 +31,7 @@ function setTranslationForRouteNInclude() {
   // XRoute.afterFetchCallback = function(html) { return html; };
 
   XInclude.beforeFetchCallback = function(src) { 
-    console.log('x-include before fetch', src);
+    // console.log('x-include before fetch', src);
     const page = getPageTranslations(src);
     return page;
   };

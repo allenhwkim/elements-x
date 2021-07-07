@@ -15,9 +15,14 @@
   function formatted(str) {
     const converted = `background-image: url("data:image/svg+xml,` +
       str.replace('<svg>', `<svg xmlns="http://www.w3.org/2000/svg">`)
+        .replace('<svg ', `<svg xmlns="http://www.w3.org/2000/svg" `)
+        .replace('xmlns="http://www.w3.org/2000/svg" '.repeat(2), `xmlns="http://www.w3.org/2000/svg" `)
+        .replace(/>\s+</g, '><')
+        .replace(/\s+/g, ' ')
         .replace(/"/g, '\'')
         .replace(/</g, '%3C')
         .replace(/>/g, '%3E') 
+        .replace(/#/g, '%23') 
         .replace(/\n/g, '') +
       `");`;
     try {
@@ -33,21 +38,26 @@
     const example = document.querySelector('#example').innerText.trim();
     leftEditor.getSession().setValue(example);
     rightEditor.getSession().setValue(formatted(example));
+
+    document.querySelector('.preview').setAttribute('style', formatted(example));
+
     leftEditor.getSession().on('change', function() {
       const value = leftEditor.getSession().getValue();
       rightEditor.session.setValue(formatted(value));
+      document.querySelector('.preview').setAttribute('style', formatted(value));
     });
   })
 </script>
 
 <script type="text/html" id="example">
-<svg>
-  <circle r="50" cx="50" cy="50" fill="tomato" />
-  <circle r="41" cx="47" cy="50" fill="orange" />
-  <circle r="33" cx="48" cy="53" fill="gold" />
-  <circle r="25" cx="49" cy="51" fill="yellowgreen" />
-  <circle r="17" cx="52" cy="50" fill="lightseagreen" />
-  <circle r="9" cx="55" cy="48" fill="teal" />
+<svg viewBox="0 0 100 100" style="width: 40px; height: 40px;">
+  <circle cx="50" cy="50" r="35" fill="none" 
+    stroke="#e15b64" stroke-width="10" stroke-dasharray="165 57">
+    <animateTransform attributeName="transform" type="rotate" 
+      repeatCount="indefinite" dur="1s"
+      values="0 50 50;360 50 50" keyTimes="0;1">
+    </animateTransform>
+  </circle>
 </svg> 
 </script>
 
@@ -63,6 +73,8 @@
     <textarea id="css" class="right"></textarea>
   </div>
 </div>
+
+<div class="preview"></div>
 
 <style>
   .editor-title, .editor {
@@ -85,5 +97,13 @@
   }
   .editor > .editor-container > * {
     margin: 0;
+  }
+  .preview {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 </style>

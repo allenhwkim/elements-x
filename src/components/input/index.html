@@ -48,5 +48,5 @@
 <script>
   var type = location.pathname.split('/').splice(-1)[0];
   var selectedTab = document.querySelector(`x-tabs [tab-for="${type}"]`);
-  selectedTab?.click();
+  setTimeout(_ => selectedTab?.click(), 300);
 </script>

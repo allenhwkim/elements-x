@@ -6,6 +6,9 @@
     <a class="route-item" href="/component/button" src="/components/button">
       <i class="fas fa-square"></i><b>button <sub>custom style</sub></b>
     </a>
+    <a class="route-item" href="/component/div" src="/components/div">
+      <i class="fas fa-vector-square"></i><b>div <sub> micro framework</sub></b>
+    </a>
     <div class="group-header expanded" onclick="this.classList.toggle('expanded');event.stopPropagation();">
       <i class="fas fa-pen-square"></i> &nbsp;<span class="text"> input</span>
     </div>
@@ -38,6 +41,9 @@
         <i class="fas fa-mask"></i> <b>mask <sub>Masked Input</sub></b>
       </a>
     </div>
+    <a class="route-item" href="/component/pre" src="/components/pre">
+      <i class="fas fa-code"></i><b>pre</b>
+    </a>
     <a class="route-item" href="/component/select" src="/components/select">
       <i class="far fa-caret-square-down"></i> <b>select <sub>better dropdown</sub></b>
     </a>
@@ -47,19 +53,25 @@
     <a class="route-item"  href="/component/ul" src="/components/ul">
       <i class="fas fa-sitemap"></i><b>ul <sub>navigable list</sub> </b>
     </a>
-    <a class="route-item" href="/component/div" src="/components/div">
-      <i class="fas fa-vector-square"></i><b>div <sub> micro framework</sub></b>
-    </a>
     <div class="group-header expanded" onclick="this.classList.toggle('expanded'); event.stopPropagation();">
       <i class="fas fa-dice-d6"></i> &nbsp; 
       <span class="text">Custom Elements </span>
     </div>
     <div class="custom-elements">
+      <a class="route-item" href="/component/accordion" src="/components/accordion">
+        <i class="fas fa-angle-up"></i><b>accordion</b>
+      </a>
+      <a class="route-item" href="/component/barcode" src="/components/barcode">
+        <i class="fas fa-barcode"></i><b>barcode</b>
+      </a>
       <a class="route-item"  href="/component/calendar" src="/components/calendar">
         <i class="fas fa-calendar"></i><b>calendar</b>
       </a>
       <a class="route-item"  href="/component/carousel" src="/components/carousel">
         <i class="fas fa-film"></i><b>carousel</b>
+      </a>
+      <a class="route-item" href="/component/clipboard" src="/components/clipboard">
+        <i class="fas fa-clipboard"></i><b>clipboard</b>
       </a>
       <a class="route-item"  href="/component/clock" src="/components/clock">
         <i class="fas fa-clock"></i><b>clock</b>
@@ -67,8 +79,23 @@
       <a class="route-item"  href="/component/color-picker" src="/components/color-picker">
         <i class="fas fa-palette"></i><b>color-picker</b>
       </a>
+      <a class="route-item"  href="/component/dialog" src="/components/dialog">
+        <i class="fas fa-window-maximize"></i><b>dialog</b>
+      </a>
+      <a class="route-item" href="/component/flag" src="/components/flag">
+        <i class="fas fa-flag"></i><b>flag</b>
+      </a>
       <a class="route-item"  href="/component/format" src="/components/format">
         <i class="fas fa-won-sign"></i><b>format <sub>number, currency, date</sub> </b>
+      </a>
+      <a class="route-item"  href="/component/http" src="/components/http">
+        <i class="fas fa-globe"></i><b>http</b>
+      </a>
+      <a class="route-item" href="/component/iframe" src="/components/iframe">
+        <i class="far fa-square"></i><b>iframe</b>
+      </a>
+      <a class="route-item" href="/component/include" src="/components/include">
+        <i class="fas fa-download"></i><b>include</b>
       </a>
       <a style="display: none" class="route-item" href="/component/list" src="/components/list">
         <i class="fas fa-list"></i><b>list</b>
@@ -76,48 +103,33 @@
       <a class="route-item"  href="/component/mapbox" src="/components/mapbox">
         <i class="fas fa-map-marked-alt"></i><b>mapbox</b>
       </a>
-      <a class="route-item"  href="/component/tabs" src="/components/tabs">
-        <i class="fas fa-box"></i><b>tabs</b>
-      </a>
-      <a class="route-item"  href="/component/tooltip" src="/components/tooltip">
-        <i class="fas fa-info-circle"></i><b>tooltip</b>
-      </a>
-      <a class="route-item"  href="/component/dialog" src="/components/dialog">
-        <i class="fas fa-window-maximize"></i><b>dialog</b>
-      </a>
       <a class="route-item" href="/component/overlay" src="/components/overlay">
         <i class="fas fa-layer-group"></i><b>overlay</b>
       </a>
       <a class="route-item" href="/component/pagination" src="/components/pagination">
         <i class="fas fa-angle-double-left"></i><b>pagination</b>
       </a>
-      <a class="route-item"  href="/component/http" src="/components/http">
-        <i class="fas fa-globe"></i><b>http</b>
-      </a>
       <a class="route-item" href="/component/route" src="/components/route">
         <i class="fas fa-route"></i><b>route</b>
+      </a>
+      <a class="route-item" href="/component/qrcode" src="/components/qrcode">
+        <i class="fas fa-qrcode"></i><b>qrcode</b>
       </a>
       <a class="route-item" href="/component/snackbar" src="/components/snackbar">
         <i class="fas fa-bell"></i><b>snackbar</b>
       </a>
+      <a class="route-item"  href="/component/tabs" src="/components/tabs">
+        <i class="fas fa-box"></i><b>tabs</b>
+      </a>
+      <a class="route-item"  href="/component/tooltip" src="/components/tooltip">
+        <i class="fas fa-info-circle"></i><b>tooltip</b>
+      </a>
       <a class="route-item" href="/component/translation" src="/components/translation">
-        <i class="fas fa-globe"></i><b>translation</b>
+        <i class="fas fa-language"></i><b>translation</b>
+      </a>
+      <a class="route-item" href="/component/typing-effect" src="/components/typing-effect">
+        <i class="fas fa-keyboard"></i><b>typing-effect</b>
       </a>
     </div>
   </div>
 </x-route>
-<!-- <hr />
-  Examples 
-<hr />
-<a class="route-item"  href="/examples/autocomplete">
-  <b>Autocomplete</b>
-</a>
-<a class="route-item"  href="/examples/how-to-build-my-own">
-  <b>Build My Own Elements-X</b>
-</a>
-<a class="route-item"  href="/examples/todo-app/" >
-  <b>Todo App.</b>
-</a>
-<a class="route-item"  href="/examples/sample-app/">
-  <b>Sample App.</b>
-</a> -->

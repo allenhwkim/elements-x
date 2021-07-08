@@ -1,0 +1,44 @@
+<app-group-header title="Pre Tag Extended" path="/pre"></app-group-header>
+
+<h3>Features</h3>
+<ul class="default">
+  <li>Remove leading whitespaces for a &lt;pre> tag</li> 
+  <li>Less font-size</li> 
+  <li>Set background to grey color</li> 
+</ul>
+
+<h3>Example</h3>
+<div class="example">
+  <table>
+    <tr><th width="40%">After</th><th width="40%">Before</th></tr>
+    <tr>
+      <td>
+        <x-pre>
+          foo: {
+            bar: {
+              baz: 1
+            }
+          }
+        </x-pre>
+      </td>
+      <td>
+        <pre>
+          foo: {
+            bar: {
+              baz: 1
+            }
+          }
+        </pre>
+      </td>
+    </tr>
+  </table>
+</div>
+<x-pre>
+  &lt;x-pre>
+    foo: {
+      bar: {
+        baz: 1
+      }
+    }
+  &lt;/x-pre>
+</x-pre>

@@ -1,0 +1,25 @@
+<app-group-header title="QRcode" path="/qrcode"></app-group-header>
+
+<h3>Feature</h3>
+<ul class="default">
+  <li>QR code generator</li> 
+</ul>
+
+<h3>Default</h3>
+<div class="example">
+  <x-qrcode value="https://www.google.com"></x-qrcode>
+  <x-pre>
+    &lt;x-qrcode  value="https://www.google.com">&lt;/x-qrode>>
+  </x-pre>
+</div>
+
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>value</td><td>String</td><td>N/A</td><td>Required</td><td>QR code value</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

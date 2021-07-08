@@ -1,0 +1,46 @@
+x-clipboard {
+  position: relative;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+x-clipboard:before, x-clipboard:after {
+  left: 50%;
+  top: 100%;
+  opacity: 0;
+  transform: translate(-50%, 0);
+  transition: all 0.18s ease-out 0.18s;
+  position: absolute;
+  z-index: 10;
+}
+
+x-clipboard:before {
+  background: no-repeat url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20width%3D%2236px%22%20height%3D%2212px%22%3E%3Cpath%20fill%3D%22rgba(17, 17, 17, 0.9)%22%20transform%3D%22rotate(180 18 6)%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E");
+  background-size: 100% auto;
+  width: 18px;
+  height: 6px;
+  margin-top: 5px;
+  content: '';
+}
+
+x-clipboard:after {
+  margin-top: 11px;
+  pointer-events: none;
+  font-family: sans-serif;
+  background: rgba(33,37,41,0.9);
+  border-radius: 4px;
+  color: #fff;
+  content: attr(label);
+  padding: 8px 12px;
+  white-space: nowrap;
+}
+
+x-clipboard:hover:before, 
+x-clipboard:hover:after {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+x-clipboard:hover {
+  color: #f76707;
+}

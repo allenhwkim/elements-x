@@ -1,0 +1,59 @@
+x-accordion {
+  display: block;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  border-top-left-radius: calc(.25rem - 1px);
+  border-top-right-radius: calc(.25rem - 1px);
+}
+x-accordion + x-accordion {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+x-accordion > .accordion-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out, box-shadow .15s ease-in-out,border-radius .15s ease;
+}
+x-accordion.expanded > .accordion-button {
+    color: #0c63e4;
+    background-color: #e7f1ff;
+    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+}
+
+x-accordion > .accordion-button::after {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: auto;
+    content: "";
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-size: 1.25rem;
+    transition: transform .2s ease-in-out;
+}
+x-accordion.expanded > .accordion-button::after {
+    transform: rotate(-180deg);
+}
+
+x-accordion.expanded > .accordion-button + * {
+  max-height: 1000px;
+  padding: 1rem 1.25rem;
+  transition: max-height 0.5s ease-in-out;
+}
+
+x-accordion > .accordion-button + * {
+  display: block;
+  padding: 0 1.25rem;
+  overflow-y: hidden; 
+  max-height: 0;
+}

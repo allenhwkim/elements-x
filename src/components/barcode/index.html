@@ -1,0 +1,29 @@
+<app-group-header title="Barcode" path="/barcode"></app-group-header>
+
+<h3>Feature</h3>
+<ul class="default">
+  <li>Barcode generator</li> 
+  <li>Uses jsbarcode, https://github.com/lindell/JsBarcode</li> 
+</ul>
+
+<h3>Default</h3>
+<div class="example">
+  <x-barcode value="123456789012" format="upc"></x-barcode>
+  <x-pre>
+    &lt;x-barcode value="123456789012" format="upc">&lt;/x-barcode>>
+  </x-pre>
+</div>
+
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>value</td><td>String</td><td>N/A</td><td>Required</td><td>Barcode value</td></tr>
+        <tr><td>format</td><td>String</td><td>code128</td><td>Optional</td><td>
+          Barcode format, code128, ean, code39, itf, msi, pharmacode, codabar, or upc
+        </td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

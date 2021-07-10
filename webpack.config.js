@@ -50,8 +50,9 @@ module.exports = {
     new MiniCssExtractPlugin({filename: '[name].[chunkhash].css'}),
     new CopyWebpackPlugin({
       patterns: [
-        { from: './robots.txt' },
+        { from: './src/robots.txt' },
         { from: './src/_redirects' },
+        { from: './src/ads.txt' },
         { from: './src/assets', to: 'assets' },
         { from: './src/components', to: 'components' },
         { from: './src/tools', to: 'tools' },

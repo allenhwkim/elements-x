@@ -1,6 +1,12 @@
+var color;
+setTimeout(_ => {
+  color = new Color(); // eslint-disable-line no-undef
+  setColor('#ff0000');
+}, 500);
+
+var {colorEl, colorValueEl, msgEl} = initColors();
+
 function initColors() {
-  // eslint-disable-next-line no-undef
-  const color = new Color();
 
   const colorEl = document.querySelector('#color-1');
   const colorValueEl = document.querySelector('#color-value');
@@ -15,11 +21,14 @@ function initColors() {
   document.querySelectorAll('.action-btns').forEach(el =>el.addEventListener('click', modify));
   document.querySelectorAll('.pallette').forEach(el => el.addEventListener('click', setValues));
 
-  return {color, colorEl, colorValueEl, msgEl};
-}
+  // color list auto complete
+  document.querySelector('#color-list-overlay').addEventListener('x-select', event => {
+    setColor(event.detail.color.hex);
+    document.querySelector('#color-list-overlay').close();
+  });
 
-var {color, colorEl, colorValueEl, msgEl} = initColors();
-setColor('#ff0000');
+  return {colorEl, colorValueEl, msgEl};
+}
 
 function setColor(hex) {
   colorEl.value = hex;
@@ -102,15 +111,6 @@ function setShades(color) {
     appendColor(shades2El, color.lighten(`${i}%`));
   }
 }
-
-/**
- * color list auto complete
- */
-document.querySelector('#color-list-overlay')
-  .addEventListener('x-select', event => {
-    setColor(event.detail.color.hex);
-    document.querySelector('#color-list-overlay').close();
-  });
 
 function showColorList(event) {
   const search = event.target.value;

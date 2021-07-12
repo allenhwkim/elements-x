@@ -43,7 +43,7 @@ HTTP 콜(GET / POST / PUT / DELETE / PATCH)을 실행합니다.
   <h2> 예제  </h2>
   <x-pre>
     &lt;x-div>
-      &lt;x-http  url="/components/list/countries.json" auto
+      &lt;x-http  url="/components/table/countries.json" auto
         on-success="set(resp, event.detail)">&lt;/x-http>
       &lt;b>HTTP Response:&lt;/b>
       &lt;pre x-value="resp" style="height: 300px; overflow: auto">&lt;/pre>
@@ -51,7 +51,7 @@ HTTP 콜(GET / POST / PUT / DELETE / PATCH)을 실행합니다.
   </x-pre>
 
   <x-div> <!-- debug="" trace="" -->
-    <x-http on-success="set(resp, event.detail)" url="/components/list/countries.json" auto=""></x-http>
+    <x-http on-success="set(resp, event.detail)" url="/components/table/countries.json" auto=""></x-http>
     <b>HTTP Response:</b>
     <pre x-value="resp" style="height: 300px; overflow: auto"></pre>
   </x-div>

@@ -217,6 +217,20 @@ li {
 .attributes thead tr th, .events thead tr th, .classes thead tr th {
   padding: 8px 12px;
 }
+.attributes th::before, .events th::before, .classes th::before,
+.attributes th::after, .events::after, .classes::after {
+  color: transparent;
+}
+.attributes th.asc::before, .events th.asc::before, .classes th.asc::before {
+  color: #FFF;
+}
+.attributes th.desc:after, .events th.desc::after, .classes th.desc::after {
+  color: #FFF;
+}
+.attributes tbody tr td:first-child, .events tbody tr td:first-child, .classes tbody tr td:first-child {
+  background:  #656565;
+  color: #FFF;
+}
 
 @media only screen and (min-width: 768px) { 
   .app .main .aside {

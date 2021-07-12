@@ -6,7 +6,7 @@
 </ul>
 
 <h3 id="list-by-data-n-template">예제</h3>
-다음의 <a target="_blank" href="/components/list/countries.json">나라명 데이타</a>는 
+다음의 <a target="_blank" href="/components/table/countries.json">나라명 데이타</a>는 
 <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;alpha3Code;capital;subregion;population;flag;">https://restcountries.eu</a>에서 찾을수 있습니다. 
 
 <p>
@@ -15,7 +15,7 @@
 
 <div class="example">
   <h2> 기본 예제  </h2>
-  <x-http id="get-countries" url="/components/list/countries.json" auto=""></x-http>
+  <x-http id="get-countries" url="/components/table/countries.json" auto=""></x-http>
   <x-table list-from="get-countries">
     <table>
       <thead>
@@ -48,7 +48,7 @@
     </table>
   </x-table>
   <x-pre>
-    &lt;x-http id="get-countries" url="/components/list/countries.json" auto="">&lt;/x-http>
+    &lt;x-http id="get-countries" url="/components/table/countries.json" auto="">&lt;/x-http>
     &lt;x-table list-from="get-countries">
       &lt;table>
         &lt;thead>

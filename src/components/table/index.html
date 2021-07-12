@@ -8,7 +8,7 @@
 </ul>
 
 <h3 id="list-by-data-n-template">List by data and template</h3>
-The following list displays <a target="_blank" href="/components/list/countries.json">country data</a>, 
+The following list displays <a target="_blank" href="/components/table/countries.json">country data</a>, 
 originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2Code;alpha3Code;capital;subregion;population;flag;">https://restcountries.eu</a>
 
 <p>
@@ -96,7 +96,7 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
 
 <div class="example">
   <h2> Table With HTTP Data Example </h2>
-  <x-http id="get-countries" url="/components/list/countries.json" auto=""></x-http>
+  <x-http id="get-countries" url="/components/table/countries.json" auto=""></x-http>
   <x-table list-from="get-countries">
     <table>
       <thead>
@@ -129,7 +129,7 @@ originated form <a href="https://restcountries.eu/rest/v2/all?fields=name;alpha2
     </table>
   </x-table>
   <x-pre>
-    &lt;x-http id="get-countries" url="/components/list/countries.json" auto="">&lt;/x-http>
+    &lt;x-http id="get-countries" url="/components/table/countries.json" auto="">&lt;/x-http>
     &lt;x-table list-from="get-countries">
       &lt;table>
         &lt;thead>

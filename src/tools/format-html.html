@@ -1,40 +1,15 @@
-<h2>HTML to Formatted</h2>
+<h2>HTML Online Formatter</h2>
 
 <script>
-  function setAceEditor(selector, value, options) {
-    const editor = ace.edit(document.querySelector(selector));
-    editor.$blockScrolling = Infinity;
-    editor.clearSelection();
-    editor.resize()
-    const defaultOptions = { useWorker: false, wrap: 65, maxLines: 25 }
-    value && editor.setValue(value);
-    editor.setOptions({...defaultOptions, ...options});
-    return editor;
+  function setLeft(event) {
+    const html = '<html><head></head><body></body></html>';
+    event.detail.setValue(html);
+    document.querySelector('.right').value = html;
   }
-
-  function formatted(str) {
-    try {
-      return prettier.format(str, {parser: 'html', plugins: prettierPlugins});
-    } catch(e) {
-      return str;
-    }
+  function setRight(event) {
+    const str = event.target.value;
+    setTimeout(_ => document.querySelector('.right').value = str);
   }
-
-  setTimeout( _ => {
-    const leftEditor = setAceEditor('#left');
-    const rightEditor = setAceEditor('#right');
-    const example = document.querySelector('#example').innerText.trim();
-    leftEditor.getSession().setValue(example);
-     rightEditor.getSession().setValue(formatted(example));
-    leftEditor.getSession().on('change', function() {
-      const value = leftEditor.getSession().getValue();
-      rightEditor.session.setValue(formatted(value));
-    });
-  })
-</script>
-
-<script type="text/html" id="example">
-<html><head></head><body></body></html>
 </script>
 
 <div class="editor-title">
@@ -43,33 +18,13 @@
 </div>
 <div class="editor">
   <div class="editor-container">
-    <textarea id="left" class="left"></textarea>
+    <x-ace class="left" language="html"
+      onload="setLeft(event)"
+      onchange="setRight(event)">
+    </x-ace>
   </div>
   <div class="editor-container">
-    <textarea id="right" class="right"></textarea>
+    <x-highlightjs class="right" language="html" prettier="">
+    </x-highlightjs>
   </div>
 </div>
-
-<style>
-  .editor-title, .editor {
-    display: flex;
-  }
-  .editor-title > * {
-    width: 50%;
-    background: #CCC;
-    padding: 4px 8px;
-    border-bottom: 2px solid #666;
-  }
-  .editor-title > *:last-child {
-    border-left: 1px solid #666;
-  }
-  .editor > .editor-container {
-    height: calc(100vh - 260px);
-    position: relative;
-    width: 50%;
-    border: 1px solid #ccc;
-  }
-  .editor > .editor-container > * {
-    margin: 0;
-  }
-</style>

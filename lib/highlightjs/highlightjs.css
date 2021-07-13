@@ -1,0 +1,11 @@
+x-highlightjs {
+  white-space: pre;
+}
+x-highlightjs.parsed {
+  white-space: initial;
+}
+x-highlightjs > .x-highlight {
+  font-family: monospace;
+  white-space: pre;
+  padding: 8px 12px;
+}

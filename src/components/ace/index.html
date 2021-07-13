@@ -1,0 +1,58 @@
+<app-group-header title="ACE Editor" path="/ace"></app-group-header>
+
+<h3>Feature</h3>
+<ul class="default">
+  <li>Convert a section to ACE Editor, https://ace.c9.io/</li> 
+  <li>Customizable theme and language</li> 
+  <li>Fires 'load', and 'change' events</li> 
+</ul>
+
+<h3>Example</h3>
+<div class="example">
+  <x-ace style="height: 200px"
+    onchange="console.log(event.detail)" onload="console.log(event.detail)">
+    function foo(items) {
+      var x = "All this is syntax highlighted";
+      return x;
+    }
+  </x-ace>
+
+  <x-pre>
+    &lt;x-ace onchange="console.log(event.detail)" onload="console.log(event.detail)">
+      function foo(items) {
+        var x = "All this is syntax highlighted";
+        return x;
+      }
+    &lt;/x-ace>>
+  </x-pre>
+</div>
+
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>theme</td><td>String</td><td>monokai</td><td>Optional</td>
+          <td>Editor theme, https://cloud9-sdk.readme.io/docs/themes</td>
+        </tr>
+        <tr>
+          <td>language</td><td>String</td><td>javascript</td><td>Optional</td>
+          <td>https://cloud9-sdk.readme.io/docs/language-mode e.g. javascript, css, html</td>
+        </tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
+
+<div class="events" title="Events">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>load</td><td>CustomEvent</td><td>ACE editor instance</td><td>Fired when starts</td></tr>
+        <tr><td>change</td><td>CustomEvent</td><td>text data</td><td>Fired when content changes</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

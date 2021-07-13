@@ -1,0 +1,63 @@
+<app-group-header title="Syntax Highlighter" path="/highlightjs"></app-group-header>
+
+<h3>Feature</h3>
+<ul class="default">
+  <li>Convert a section to a syntax highlighted view, https://highlightjs.org/</li> 
+  <li>Customizable theme</li> 
+  <li>Prettify code with 'prettier' option</li> 
+  <li>Fires 'load' event</li> 
+</ul>
+
+<h3>Example</h3>
+<div class="example">
+  <x-highlightjs theme="monokai" prettier=""
+    onload="console.log('load',  event.detail)">
+    addEventListener('load', () => {
+      const code = document.querySelector('#code');
+      const worker = new Worker('worker.js');
+      worker.onmessage = (event) => { code.innerHTML = event.data; };
+      worker.postMessage(code.textContent);
+    });
+  </x-highlightjs>
+
+  <x-pre>
+    &lt;x-highlightjs theme="monokai" prettier
+      onload="console.log('load',  event.detail)">
+      addEventListener('load', () => {
+        const code = document.querySelector('#code');
+        const worker = new Worker('worker.js');
+        worker.onmessage = (event) => { code.innerHTML = event.data; };
+        worker.postMessage(code.textContent);
+      });
+    &lt;/x-highlightjs>
+  </x-pre>
+</div>
+
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>theme</td><td>String</td><td>monokai</td><td>Optional</td>
+          <td>Viewer theme, https://highlightjs.org/static/demo/</td>
+        </tr>
+        <tr>
+          <td>prettier</td><td>N/A</td><td>N/A</td><td>Optional</td>
+          <td>If given, it prettify code with Prettier, https://prettier.io/docs/en/index.html</td>
+        </tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
+
+<div class="events" title="Events">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>load</td><td>CustomEvent</td><td>Highlighted HTML element</td><td>Fired when starts</td></tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

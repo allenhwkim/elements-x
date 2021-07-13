@@ -228,8 +228,40 @@ li {
   color: #FFF;
 }
 .attributes tbody tr td:first-child, .events tbody tr td:first-child, .classes tbody tr td:first-child {
-  background:  #656565;
-  color: #FFF;
+  font-weight: bold;
+}
+
+/* tools editor styling */
+.editor-title, .editor {
+  display: flex;
+}
+.editor-title > * {
+  width: 50%;
+  background: #CCC;
+  padding: 4px 8px;
+  border-bottom: 2px solid #666;
+}
+.editor-title > *:last-child {
+  border-left: 1px solid #666;
+}
+.editor > .editor-container {
+  height: calc(100vh - 260px);
+  position: relative;
+  width: 50%;
+  border: 1px solid #ccc;
+}
+.editor > .editor-container > * {
+  margin: 0;
+  font-size: 14px;
+  padding: 
+}
+.editor > .editor-container > .right > .x-highlight {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
 }
 
 @media only screen and (min-width: 768px) { 

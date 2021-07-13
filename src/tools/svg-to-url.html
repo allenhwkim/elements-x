@@ -1,17 +1,6 @@
-<h2>SVG to CSS</h2>
+<h2>SVG to CSS Converter</h2>
 
 <script>
-  function setAceEditor(selector, value, options) {
-    const editor = ace.edit(document.querySelector(selector));
-    editor.$blockScrolling = Infinity;
-    editor.clearSelection();
-    editor.resize()
-    const defaultOptions = { useWorker: false, wrap: 65, maxLines: 30 }
-    value && editor.setValue(value);
-    editor.setOptions({...defaultOptions, ...options});
-    return editor;
-  }
-
   function formatted(str) {
     const converted = `background-image: url("data:image/svg+xml,` +
       str.replace('<svg>', `<svg xmlns="http://www.w3.org/2000/svg">`)
@@ -32,33 +21,17 @@
     }
   }
 
-  setTimeout( _ => {
-    const leftEditor = setAceEditor('#svg');
-    const rightEditor = setAceEditor('#css');
-    const example = document.querySelector('#example').innerText.trim();
-    leftEditor.getSession().setValue(example);
-    rightEditor.getSession().setValue(formatted(example));
-
-    document.querySelector('.preview').setAttribute('style', formatted(example));
-
-    leftEditor.getSession().on('change', function() {
-      const value = leftEditor.getSession().getValue();
-      rightEditor.session.setValue(formatted(value));
-      document.querySelector('.preview').setAttribute('style', formatted(value));
+  function setRight(event) {
+    const str = event.target.value;
+    setTimeout(_ => {
+      document.querySelector('.right').innerText = formatted(str)
+      document.querySelector('.right').setAttribute('style', formatted(str));
     });
-  })
+  }
 </script>
 
-<script type="text/html" id="example">
-<svg viewBox="0 0 100 100" style="width: 40px; height: 40px;">
-  <circle cx="50" cy="50" r="35" fill="none" 
-    stroke="#e15b64" stroke-width="10" stroke-dasharray="165 57">
-    <animateTransform attributeName="transform" type="rotate" 
-      repeatCount="indefinite" dur="1s"
-      values="0 50 50;360 50 50" keyTimes="0;1">
-    </animateTransform>
-  </circle>
-</svg> 
+
+<script>
 </script>
 
 <div class="editor-title">
@@ -67,43 +40,32 @@
 </div>
 <div class="editor">
   <div class="editor-container">
-    <textarea id="svg" class="left"></textarea>
+    <x-ace class="left" language="html"
+      onload="setRight(event)"
+      onchange="setRight(event)">
+      <svg class="default" viewBox="0 0 100 100" style="width: 40px; height: 40px;">
+        <circle cx="50" cy="50" r="35" fill="none" 
+          stroke="#e15b64" stroke-width="10" stroke-dasharray="165 57">
+          <animateTransform attributeName="transform" type="rotate" 
+            repeatCount="indefinite" dur="1s"
+            values="0 50 50;360 50 50" keyTimes="0;1">
+          </animateTransform>
+        </circle>
+      </svg>
+    </x-ace>
   </div>
   <div class="editor-container">
-    <textarea id="css" class="right"></textarea>
+    <x-pre class="right" style="height: 100%"></x-pre>
   </div>
 </div>
 
 <div class="preview"></div>
-
 <style>
-  .editor-title, .editor {
-    display: flex;
-  }
-  .editor-title > * {
-    width: 50%;
-    background: #CCC;
-    padding: 4px 8px;
-    border-bottom: 2px solid #666;
-  }
-  .editor-title > *:last-child {
-    border-left: 1px solid #666;
-  }
-  .editor > .editor-container {
-    height: calc(100vh - 260px);
-    position: relative;
-    width: 50%;
-    border: 1px solid #ccc;
-  }
-  .editor > .editor-container > * {
-    margin: 0;
-  }
-  .preview {
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-position: center center;
+  .right {
+    height: 100%;
+    background-position: bottom right;
     background-repeat: no-repeat;
+    background-size: 25% 25%;
   }
 </style>
+

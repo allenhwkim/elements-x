@@ -24,7 +24,7 @@ const template = `
   $ npm install elements-x --save-dev
   </x-pre>
   <x-pre class="import">
-  import 'elements-x{{PATH}}';
+  import 'elements-x/dist{{PATH}}';
   </x-pre>
   `;
 

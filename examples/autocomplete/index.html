@@ -95,8 +95,8 @@ Also, you need to have Javascript to handle events;
     HTML Code:
     <x-pre>
       &lt;input placeholder="Select pet types" <b>id="simple-input"</b> />
-      &lt;x-overlay id="simple-list" <b>trigger="simple-input"</b>>
-        &lt;x-list select-first="false" <b>search-input="simple-input"</b>>
+      &lt;x-overlay id="simple-list" <b>trigger="simple-input"</b>
+        &lt;x-list select-first="false" <b>search-input="simple-input"</b>
           &lt;div>Cats&lt;/div>
           &lt;div>Dogs&lt;/div>
           &lt;div>Birds&lt;/div>
@@ -136,8 +136,8 @@ Also, you need to have Javascript to handle events;
     <x-pre>
       &lt;div class="autocomplete">
         &lt;input placeholder="Select favorite pet" <b>id="my-input"</b> />
-        &lt;x-overlay id="my-list" <b>trigger="my-input"</b>>
-          &lt;x-list select-first="false" <b>search-input="my-input"</b>>
+        &lt;x-overlay id="my-list" <b>trigger="my-input"</b>
+          &lt;x-list select-first="false" <b>search-input="my-input"</b>
             &lt;div>Cats&lt;/div>
             &lt;div>Dogs&lt;/div>
             &lt;div>Birds&lt;/div>
@@ -192,8 +192,8 @@ Also, you need to have Javascript to handle events;
         &lt;b class="icon" aria-hidden="true">▼&lt;/b>
         &lt;div class="ink-bar">&lt;/div>
       &lt;/x-textfield>
-      &lt;x-overlay id="pets" <b>trigger="pet-name"</b>>
-        &lt;x-list select-first="false" <b>search-input="pet-name"</b>>
+      &lt;x-overlay id="pets" <b>trigger="pet-name"</b>
+        &lt;x-list select-first="false" <b>search-input="pet-name"</b>
           &lt;div>Cats&lt;/div>
           &lt;div>Dogs&lt;/div>
           &lt;div>Birds&lt;/div>
@@ -260,7 +260,7 @@ Also, you need to have Javascript to handle events;
     <x-pre>
       &lt;input id="<b>country-name"</b> placeholder="Enter country name" />
       &lt;x-overlay id="<b>country-list-overlay"</b> trigger="country-name">
-        &lt;x-list id="<b>country-list"</b>>
+        &lt;x-list id="<b>country-list"</b>
           &lt;div>Search a country.&lt;/div>
           &lt;template var-name="<b>country</b>">
             &lt;div>&lt;b>{{alpha3Code}}&lt;/b> {{name}}&lt;/div>

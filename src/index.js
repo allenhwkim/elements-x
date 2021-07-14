@@ -49,6 +49,10 @@ window.addEventListener('DOMContentLoaded', function() {
    * ErrorUtils caught an error: Params: 113 [Caught in: Module "VisibilityListener"]
    */
   enableFacebookComments();
+  document.body.addEventListener('x-route', function(event) {
+    const title = event.detail.state.urlPath.replace(/\//g, ' ');
+    document.title = 'Custom ' + title;
+  });
 });
  
 function enableFacebookComments() {

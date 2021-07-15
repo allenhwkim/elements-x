@@ -19,12 +19,12 @@ and event handling based on the belief that most of DOM handling can be done wit
 
 <div class="example">
   <x-div name="Elements-X"> <!-- debug="" trace="" -->
-   <input x-value="name" on-input="set(name)"/>
+   <input x-value="name" xon-input="set(name)"/>
     <p>Hello <b x-value="name"></b> </p>
   </x-div>  
   <x-pre>
     &lt;x-div <b>name</b>="Elements-X">
-      &lt;input <b>x-value</b>="name" <b>on-input</b>="set(name)"/>
+      &lt;input <b>x-value</b>="name" <b>xon-input</b>="set(name)"/>
       &lt;p>Hello &lt;b <b>x-value</b>="name">&lt;/b> &lt;/p>
     &lt;/x-div>
   </x-pre>
@@ -58,16 +58,16 @@ and event handling based on the belief that most of DOM handling can be done wit
 
 <div class="example">
   <x-div r="255" g="0" b="0" style="width: 240px;">
-    R: <input type="range" max="255" value="255" on-change="set(r)"/><br/>
-    G: <input type="range" max="255" value="0" on-change="set(g)"/><br/>
-    B: <input type="range" max="255" value="0" on-change="set(b)"/><br/>
+    R: <input type="range" max="255" value="255" xon-change="set(r)"/><br/>
+    G: <input type="range" max="255" value="0" xon-change="set(g)"/><br/>
+    B: <input type="range" max="255" value="0" xon-change="set(b)"/><br/>
     <div x-style="background:rgb({{r}},{{g}},{{b}}); height: 60px;"></div>
   </x-div>
   <x-pre>
     &lt;x-div r="255" g="0" b="0">
-      R: &lt;input type="range" max="255" value="255" <b>on-change</b>="set(r)"/>
-      G: &lt;input type="range" max="255" value="0" <b>on-change</b>="set(g)"/>
-      B: &lt;input type="range" max="255" value="0" <b>on-change</b>="set(b)"/>
+      R: &lt;input type="range" max="255" value="255" <b>xon-change</b>="set(r)"/>
+      G: &lt;input type="range" max="255" value="0" <b>xon-change</b>="set(g)"/>
+      B: &lt;input type="range" max="255" value="0" <b>xon-change</b>="set(b)"/>
       &lt;div <b>x-style</b>="background:rgb(<b>{{r}},{{g}},{{b}}</b>)">&lt;/div>
     &lt;/x-div>
   </x-pre>
@@ -77,18 +77,18 @@ and event handling based on the belief that most of DOM handling can be done wit
 <div class="example">
   <x-div>
     <input placeholder="click or type" x-t9n="placeholder"
-      on-click="toggle(#msg.toggled)"
-      on-enter="set(#msg.innerText, ::value)"
-      on-keyup="set(#msg.innerText, event.keyCode)" />
+      xon-click="toggle(#msg.toggled)"
+      xon-enter="set(#msg.innerText, ::value)"
+      xon-keyup="set(#msg.innerText, event.keyCode)" />
     <div id="msg"> Message Section </div>
   </x-div>
 
   <x-pre>
     &lt;x-div>
       &lt;input placeholder="click or type" 
-        on-click="toggle(#msg.toggled)"
-        on-enter="set(#msg.innerText, ::value)"
-        on-keyup="set(#msg.innerText, event.keyCode)" />
+        xon-click="toggle(#msg.toggled)"
+        xon-enter="set(#msg.innerText, ::value)"
+        xon-keyup="set(#msg.innerText, event.keyCode)" />
       &lt;div id="msg"> Message Section &lt;/div>
     &lt;/x-div>
   </x-pre>
@@ -124,14 +124,14 @@ and event handling based on the belief that most of DOM handling can be done wit
   </li>
   <li>Reacts to on-* events which has command expression, e.g., on-click="set(color, ::value)"
     <ul>
-      <li>on-click="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
-      <li>on-input="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
-      <li>on-change="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
-      <li>on-enter="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
-      <li>on-success="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
-      <li>on-error="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
-      <li>on-select="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
-      <li>on-route="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>xon-click="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>xon-input="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>xon-change="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>xon-enter="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>xon-success="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>xon-error="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>xon-select="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
+      <li>xon-route="<a href="#command">&lt;command&gt;</a>(<a href="#target-expression">&lt;target-expression&gt;</a>, <a href="#value-expression">&lt;value-expression&gt;</a>)"</li>
     </ul>
   </li>
 </ul>

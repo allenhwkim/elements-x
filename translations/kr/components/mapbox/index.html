@@ -33,7 +33,7 @@
 <div class="example">
   <x-div>
     <b class="label">지도에서 찾으세요:</b>
-    <input placeholder="주소를 입력하세요" size="60" on-change="set(#marker[lnglat])" />
+    <input placeholder="주소를 입력하세요" size="60" xon-change="set(#marker[lnglat])" />
     <x-mapbox>
       <x-marker id="marker" lnglat="Toronto, Canada" center="">여기 찾으세요?</x-marker>
     </x-mapbox>
@@ -41,7 +41,7 @@
   <x-pre>
     &lt;x-div>
       &lt;b class="label">지도에서 찾으세요:&lt;/b>
-      &lt;input placeholder="주소를 입력하세요" on-change="set(#marker[lnglat])" />
+      &lt;input placeholder="주소를 입력하세요" xon-change="set(#marker[lnglat])" />
       &lt;x-mapbox>
         &lt;x-marker id="marker" lnglat="Toronto, Canada" center>
         여기 찾으세요?

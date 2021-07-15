@@ -33,7 +33,7 @@
 <div class="example">
   <x-div>
     <b class="label">Search Map:</b>
-    <input placeholder="Enter address" size="60" on-change="set(#marker[lnglat])" />
+    <input placeholder="Enter address" size="60" xon-change="set(#marker[lnglat])" />
     <x-mapbox>
       <x-marker id="marker" lnglat="Toronto, Canada" center="">Looking For Here?</x-marker>
     </x-mapbox>
@@ -41,7 +41,7 @@
   <x-pre>
     &lt;x-div>
       &lt;b class="label">Search Map:&lt;/b>
-      &lt;input placeholder="Enter address" on-change="set(#marker[lnglat])" />
+      &lt;input placeholder="Enter address" xon-change="set(#marker[lnglat])" />
       &lt;x-mapbox>
         &lt;x-marker id="marker" lnglat="Toronto, Canada" center>
           Looking For Here?

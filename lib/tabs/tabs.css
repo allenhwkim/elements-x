@@ -16,7 +16,7 @@ x-tabs .tabs [tab-for] {
   justify-content: center;
   align-items: center;
   white-space: nowrap;
-  min-width: 160px;
+  /* min-width: 160px; */
   outline: 0;
 }
 

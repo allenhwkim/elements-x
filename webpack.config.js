@@ -44,9 +44,6 @@ module.exports = {
     new BundleAnalyzerPlugin({analyzerMode: 'static', openAnalyzer: false}),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({template: 'src/index.html', chunks: ['main'], filename: 'index.html' }),
-    // new HtmlWebpackPlugin({template: 'sample-app/index.html', chunks: ['sample-app'], filename: 'sample-app/index.html'}),
-    // new HtmlWebpackPlugin({template: 'todo-app/index.html', chunks: ['todo-app'], filename: 'todo-app/index.html'}),
-    // new MiniCssExtractPlugin({ linkType: 'text/css', }),
     new MiniCssExtractPlugin({filename: '[name].[chunkhash].css'}),
     new CopyWebpackPlugin({
       patterns: [

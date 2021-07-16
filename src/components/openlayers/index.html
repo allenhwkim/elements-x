@@ -1,0 +1,96 @@
+<app-group-header title="Openlayers" path="/openlayers"></app-group-header>
+<style>
+  x-openlayers { height: 300px;}
+</style>
+
+<ul class="default">
+  <li> Show a necessary map with simple HTML. </li> 
+  <li> Show a marker with popup. </li>
+  <li> It does not require a access token. </li>
+</ul>
+
+<h3>Default
+  Example
+  <a class="try-it" target="_" href="//stackblitz.com/edit/x-openlayers?file=index.html">Try it</a>
+</h3> 
+<div class="example">
+  <x-openlayers center="Hangang Bridge"></x-openlayers>
+  <x-pre>
+    &lt;x-openlayers center="Hangang Bridge">&lt;/x-openlayers>
+  </x-pre>
+</div>
+
+<h3>With A Marker</h3>
+<div class="example">
+  <x-openlayers zoom="15" satellite="">
+    <x-ol-marker position="Hangang Bridge" center="" src="/assets/pinegg.png">
+      <b>HanGang Bridge</b><p>View is nice here</p>
+    </x-ol-marker>
+  </x-openlayers>
+  <x-pre>
+    &lt;x-openlayers zoom="15" satellite="">
+      &lt;x-ol-marker position="Hangang Bridge" center="" src="/assets/pinegg.png">
+        &lt;b>HanGang Bridge&lt;/b>&lt;p>View is nice here&lt;/p>
+      &lt;/x-ol-marker>
+    &lt;/x-openlayers>
+  </x-pre>
+</div>
+
+<h3>Search Map With Input</h3>
+<div class="example">
+  <x-div>
+    <b class="label">Search Map:</b>
+    <input placeholder="Enter address" size="60" xon-change="set(#marker[position])" />
+      <x-openlayers zoom="15" satellite="">
+        <x-ol-marker id="marker" position="Hangang Bridge" center="">
+          <b>Looking for</b><p>here?</p>
+        </x-ol-marker>
+      </x-openlayers>
+  </x-div>
+  <x-pre>
+    &lt;x-div>
+      &lt;b class="label">Search Map:&lt;/b>
+      &lt;input placeholder="Enter address" size="60" xon-change="set(#marker[position])" />
+        &lt;x-openlayers zoom="15" satellite="">
+          &lt;x-ol-marker id="marker" position="Hangang Bridge" center="">
+            &lt;b>Looking for&lt;/b>&lt;p>here?&lt;/p>
+          &lt;/x-ol-marker>
+        &lt;/x-openlayers>
+    &lt;/x-div>
+  </x-pre>
+</div>
+
+<h3>x-openlayers</h3>
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>zoom</td><td>Number</td><td>15</td><td>Optional</td><td>Zoom level of the map</td></tr>
+        <tr><td>center</td><td>LngLat</td><td>0,0</td><td>Optional</td>
+          <td>Center Lng/Lat of the map, or an adderss. e.g. Incheon International Airport</td>
+        </tr>
+        <tr><td>satellite</td><td>N/A</td><td>N/A</td><td>Optional</td>
+          <td>If given, satellite layer will be visible when initialized</td>
+        </tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
+
+<h3>x-ol-marker</h3>
+<div class="attributes" title="Attributes">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>position</td><td>LngLat</td><td>N/A</td><td>Required</td>
+          <td>Center Lng/Lat of the map, or an adderss. e.g. Incheon International Airport</td>
+        </tr>
+        <tr><td>center</td><td>N/A</td><td>N/A</td><td>Optional</td>
+          <td>If given, this marker will be center of the map</td>
+        </tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>

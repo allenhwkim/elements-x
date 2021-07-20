@@ -311,25 +311,33 @@ li {
 }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) { 
-  .app .main {
-    display: block; /* overfiding display: flex; */
-  }
-  .app .main .article {
-    width: 100%;
-    padding: 0;
-  }
   .app .header .logo {
     display: none;
+  }
+  .app .header .header-nav .links {
+    /* smaller header fonts, padding */
+    padding: 0 12px;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+  .app .main {
+    /* overfiding display: flex; */
+    display: block; 
   }
   .app > .main .sidebar {
     top: 52px;
   }
   .app .main .sidebar .route-item i {
+    /* bigger icons for mobile device */
     font-size: 20px;
   }
-  .app .header .header-nav .links {
-    padding: 0 12px;
-    font-size: 18px;
-    white-space: nowrap;
+  .app .main .article {
+    width: 100%;
+    padding: 0;
+  }
+  .app .main .sidebar.x-visible  + .article { 
+    /* not to scroll when menu is visible */
+    height: 100%;
+    overflow: hidden;
   }
 }

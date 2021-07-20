@@ -8,10 +8,11 @@
     height: 100vh !important;
     padding: 0;
     background: rgba(0,0,0, .5);
+    display: none;
     z-index: 99999;
   }
-  x-sidebar.x-hidden {
-    display: none;
+  x-sidebar.x-visible {
+    display: block;
   }
   x-sidebar .x-blocker {
     position: absolute;

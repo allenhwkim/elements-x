@@ -73,13 +73,13 @@ li {
   display: flex;
   word-break: break-word;
 }
-.app > .main .aside {
+.app > .main .sidebar {
   width: 250px;
   transition: width 0.2s;
 }
-.app > .main .aside .route-items {
+.app > .main .sidebar .route-items {
   display: block;
-  position: fixed;
+  /* position: fixed; */
   top: 52px;
   width: 250px;
   left: 0;
@@ -90,7 +90,7 @@ li {
   overflow: auto;
 }
 
-.app > .main .aside .route-item {
+.app > .main .sidebar .route-item {
   padding: 10px 20px;
   margin: 0 -20px;
   display: flex;
@@ -100,31 +100,31 @@ li {
   white-space: nowrap;
   border-top: 1px solid #666;
 }
-.app > .main .aside .route-item i {
+.app > .main .sidebar .route-item i {
   width: 22px;
   text-align: center;
   margin-right: 8px;
 }
-.app > .main .aside .route-item b {
+.app > .main .sidebar .route-item b {
   font-weight: normal;
 }
-.app > .main .aside .route-item b sub {
+.app > .main .sidebar .route-item b sub {
   visibility: hidden;
   opacity: 0;
   transition: all .3s;
 }
-.app > .main .aside .route-item:hover b sub {
+.app > .main .sidebar .route-item:hover b sub {
   opacity: 1;
   visibility: visible;
 }
-.app > .main .aside .route-item:hover { 
+.app > .main .sidebar .route-item:hover { 
   background: #30393d;
 }
-.app > .main .aside .route-item.active {
+.app > .main .sidebar .route-item.active {
   background: #DDD;
   color: #333;
 }
-.app > .main .aside .group-header {
+.app > .main .sidebar .group-header {
   position: relative;
   cursor: pointer;
   margin: 0 -8px;
@@ -134,7 +134,7 @@ li {
   overflow: hidden;
   border-top: 1px solid #666;
 }
-.app > .main .aside .group-header::after {
+.app > .main .sidebar .group-header::after {
   content: '∧';
   display: block;
   font-weight: bold;
@@ -142,18 +142,18 @@ li {
   right: 8px;
   top: 8px;
 }
-.app > .main .aside .group-header:not(.expanded)::after {
+.app > .main .sidebar .group-header:not(.expanded)::after {
   content: '∨';
 }
-.app > .main .aside .group-header:not(.expanded) + * {
+.app > .main .sidebar .group-header:not(.expanded) + * {
   max-height: 0;
   overflow: hidden;
   transition: max-height .3s;
 }
-.app > .main .aside .group-header + * {
+.app > .main .sidebar .group-header + * {
   max-height: 500px;
 }
-.app > .main .aside .group-header + * > * {
+.app > .main .sidebar .group-header + * > * {
   padding: 8px 28px;
   background: #333;
 }
@@ -267,20 +267,20 @@ li {
 
 
 @media only screen and (min-width: 768px) { 
-  .app .main .aside {
+  .app .main .sidebar {
     pointer-events: none;
   }
-  .app .main .aside .route-items {
+  .app .main .sidebar .route-items {
     pointer-events: initial;
   }
-  .app.toggled .main .aside .route-items {
+  .app.toggled .main .sidebar .route-items {
     width: 60px;
     overflow-x: hidden;
   }
-  .app > .main .aside .route-items::-webkit-scrollbar {
+  .app > .main .sidebar .route-items::-webkit-scrollbar {
     width:0px;
   }
-  .app > .main .aside .route-items::-webkit-scrollbar-track-piece {
+  .app > .main .sidebar .route-items::-webkit-scrollbar-track-piece {
     background-color:transparent;
   }
   .app.toggled .header .logo {
@@ -289,63 +289,47 @@ li {
   .app.toggled .header .logo .title {
     display: none;
   }
-  .app.toggled .main .aside {
+  .app.toggled .main .sidebar {
     width: 60px;
   }
-  .app.toggled .main .aside .route-item i {
+  .app.toggled .main .sidebar .route-item i {
     font-size: 20px;
   }
-  .app.toggled .main .aside .route-item b,
-  .app.toggled .main .aside .route-item:hover b {
+  .app.toggled .main .sidebar .route-item b,
+  .app.toggled .main .sidebar .route-item:hover b {
     display: none;
   }
-  .app.toggled .main .aside .group-header .text {
+  .app.toggled .main .sidebar .group-header .text {
     display: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .app x-sidebar .x-content {
+    width: 250px;
   }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 767px) { 
   .app .main {
-    display: block;
-  }
-  .app .header .header-nav .links {
-    padding: 0 12px;
-    white-space: nowrap;
-  }
-  .app .main .aside {
-    position: fixed;
-    width: 100%;
-    background: rgba(0,0,0, .5);
-    height: 100vh;
-    top: 52px;
-    width: 0;
-    visibility: hidden;
-    z-index: 1;
-  }
-  .app.toggled .main .aside {
-    visibility: visible;
-    width: 100%;
-  }
-  .app .main .aside .route-items {
-    width: 0;
-    transition: width .2s;
-  }
-  .app.toggled .aside .route-items {
-    width: 250px;
-    height: 100%;
+    display: block; /* overfiding display: flex; */
   }
   .app .main .article {
     width: 100%;
     padding: 0;
   }
   .app .header .logo {
-    width: 0;
-  }
-  .app .header .logo .title {
     display: none;
   }
-  .app .main .aside .route-item i {
+  .app > .main .sidebar {
+    top: 52px;
+  }
+  .app .main .sidebar .route-item i {
     font-size: 20px;
   }
-
+  .app .header .header-nav .links {
+    padding: 0 12px;
+    font-size: 18px;
+    white-space: nowrap;
+  }
 }

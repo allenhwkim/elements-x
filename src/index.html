@@ -47,7 +47,7 @@
           </div>
         </section>
         <nav class="header-nav">
-          <span onclick="document.querySelector('.app').classList.toggle('toggled')"
+          <span onclick="toggleSidebar()"
             class="hamburger vcentered hcentered">
             <i class="fa fa-bars"></i>
           </span>
@@ -71,9 +71,14 @@
       </header>
     
       <div class="main">
+        <!--
         <aside class="aside" id="side-bar">
           <x-include src="/src/sidebar.html"></x-include>
         </aside>
+        -->
+        <x-sidebar class="sidebar">
+          <x-include src="/src/sidebar.html"></x-include>
+        </x-sidebar>
         <article class="article">
           <section class="article-contents" id="article-contents"></section>
 
@@ -96,6 +101,10 @@
     <script>
       function setLang(lang) { localStorage.setItem('language', lang); location.reload(); }
       document.body.setAttribute('lang', localStorage.getItem('language'));
+      function toggleSidebar() {
+        document.querySelector('.app').classList.toggle('toggled');
+        document.querySelector('.app .sidebar').classList.toggle('x-hidden');
+      }
     </script>
     
   </body>

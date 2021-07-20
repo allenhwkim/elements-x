@@ -73,21 +73,14 @@ li {
   display: flex;
   word-break: break-word;
 }
-.app > .main .sidebar {
-  width: 250px;
-  transition: width 0.2s;
-}
 .app > .main .sidebar .route-items {
-  display: block;
-  /* position: fixed; */
-  top: 52px;
-  width: 250px;
-  left: 0;
   padding: 8px;
-  background: #3d474c;
-  color: #fff;
+  position: fixed;
   height: calc(100vh - 60px);
   overflow: auto;
+  background-color: #3d474c;
+  color: #fff;
+  width: 250px;
 }
 
 .app > .main .sidebar .route-item {
@@ -95,7 +88,6 @@ li {
   margin: 0 -20px;
   display: flex;
   align-items: center;
-  color: #FFF; 
   text-decoration: none;
   white-space: nowrap;
   border-top: 1px solid #666;
@@ -159,8 +151,8 @@ li {
 }
 
 .app > .main .article {
-  min-height: calc(100vh - 60px);
-  width: calc(100% - 250px);
+  /* min-height: calc(100vh - 60px); */
+  /* width: calc(100% - 250px); */
   padding: 20px;
   flex: 1;
   background: #f5f5f5;
@@ -301,12 +293,6 @@ li {
   }
   .app.toggled .main .sidebar .group-header .text {
     display: none;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .app x-sidebar .x-content {
-    width: 250px;
   }
 }
 

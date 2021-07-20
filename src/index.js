@@ -37,13 +37,6 @@ window.addEventListener('DOMContentLoaded', function() {
     }, 1000);
   }
 
-  // if mobile browser, hide aside menu when clicked
-  document.querySelector('#side-bar').addEventListener('click', _ => {
-    if (window.innerWidth < 768) {
-      document.querySelector('.app').classList.toggle('toggled');
-    }
-  });
-  
   /** 
    * disabling facebook comments because of error in console
    * ErrorUtils caught an error: Params: 113 [Caught in: Module "VisibilityListener"]

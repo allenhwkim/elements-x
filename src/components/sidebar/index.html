@@ -1,19 +1,20 @@
 <app-group-header title="Sidebar" path="/sidebar"></app-group-header>
 <style>
-.example.sidebar {
+.example.my-sidebar {
   height: 320px;
   display: flex;
 }
-.example.sidebar .main {
+.example.my-sidebar .main {
   padding: 12px;
   border: 1px solid #ccc;
   flex: 1;
 }
-.example.sidebar x-sidebar{
-  width: 200px;
+.example.my-sidebar x-sidebar {
   height: 100%;
-  padding: 12px;
   border: 1px solid #ccc;
+}
+.example.my-sidebar x-sidebar .x-content {
+  padding: 12px;
 }
 </style>
 
@@ -29,15 +30,15 @@
   <a class="try-it" target="_" href="//stackblitz.com/edit/x-sidebar?file=index.html">Try it</a>
 </h3> 
 
-<div class="example sidebar">
-  <x-sidebar>
+<div class="example my-sidebar">
+  <x-sidebar width="250">
     <h2>aside</h2>
     <a href="javascript:history.pushState({}, 1, location.pathname+'?page=1')">State 1</a><br/>
     <a href="javascript:history.pushState({}, 2, location.pathname+'?page=2')">State 2</a><br/>
     <a href="javascript:history.pushState({}, 3, location.pathname+'?page=3')">State 3</a><br/>
   </x-sidebar>
   <div class="main">
-    <button class="fas fa-bars" onclick="document.querySelector('x-sidebar').toggle()"></button>
+    <button class="fas fa-bars" onclick="document.querySelector('.my-sidebar x-sidebar').toggle()"></button>
     <div class="content">
       <h2> Main </h2>
       <p>Change window size to mobile size to experience x-sidebar.</p>

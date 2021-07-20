@@ -1,13 +1,33 @@
-<h2>
+<style>
+  .route-item {display: block; margin: 1em 0;}
+</style>
+<h1>
   Collection of useful tools for web development.
-</h2>
+</h1> 
 
-<ul>
-  <li>SVG URL Encoding: format svg for url or css</li>
-  <li>URI Encoding: Encode URI for URL</li>
-  <li>Image To Base64: Convert image to base64 string for url or css</li>
-  <li>Format HTML: reformat html using prettier</li>
-  <li>Format CSS: reformat css or scss using prettier</li>
-  <li>Format JSON: reformat JSON using JSON.stringify function</li>
-  <li>Unicodes: useful unicodes for html and css</li>
-</ul>
+<x-route target="article-contents">
+  <a class="route-item" href="/tool/svg-to-url" src="/tools/svg-to-url.html">
+    <b>SVG URL Encoding</b>: Format svg to css base64
+  </a>
+  <a class="route-item" href="/tool/url-encode" src="/tools/url-encode.html">
+    <b>URL Encoding/Decoding</b>: Encode/Decode URI for URL
+  </a>
+  <a class="route-item" href="/tool/img-to-base64" src="/tools/image-to-base64.html">
+    <b>Image To Base64</b>: Convert image to base64 string for url or css
+  </a>
+  <a class="route-item" href="/tool/format-html" src="/tools/format-html.html">
+    <b>Format HTML</b>: Reformat html using Prettier
+  </a>
+  <a class="route-item" href="/tool/format-css" src="/tools/format-css.html">
+    <b>Format CSS</b>: Reformat css using Prettier
+  </a>
+  <a class="route-item" href="/tool/format-json" src="/tools/format-json.html">
+    <b>Format JSON</b>: Reformat JSON using Prettier
+  </a>
+  <a class="route-item" href="/tool/unicodes" src="/tools/unicodes.html">
+    <b>Unicodes</b>: Useful Unicodes for html and CSS
+  </a>
+  <a class="route-item" href="/tool/color-pallette" src="/tools/color-pallette">
+    <b>Color Pallette</b>: Find relevant color codes
+  </a>
+</x-route>

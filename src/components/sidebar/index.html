@@ -1,0 +1,56 @@
+<app-group-header title="Sidebar" path="/sidebar"></app-group-header>
+<style>
+.example.sidebar {
+  height: 320px;
+  display: flex;
+}
+.example.sidebar .main {
+  padding: 12px;
+  border: 1px solid #ccc;
+  flex: 1;
+}
+.example.sidebar x-sidebar{
+  width: 200px;
+  height: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+}
+</style>
+
+<h3>Features</h3>
+<li>Showing sidebar with a blocker ONLY for a mobile device(less than 768px)</li>
+<li>When the blocker clicked, it closes sidebsar</li>
+<li>Disable page scrolling when sidebar is visible</li>
+<li>Listening to swipe action. When left-swipe, it closes. When right-swipe, it opens</li>
+<li>Listening to URL change. When changes, it closes sidebar</li>
+
+<h3>
+  Example
+  <a class="try-it" target="_" href="//stackblitz.com/edit/x-sidebar?file=index.html">Try it</a>
+</h3> 
+
+<div class="example sidebar">
+  <x-sidebar>
+    <h2>aside</h2>
+    <a href="javascript:history.pushState({}, 1, location.pathname+'?page=1')">State 1</a><br/>
+    <a href="javascript:history.pushState({}, 2, location.pathname+'?page=2')">State 2</a><br/>
+    <a href="javascript:history.pushState({}, 3, location.pathname+'?page=3')">State 3</a><br/>
+  </x-sidebar>
+  <div class="main">
+    <button class="fas fa-bars" onclick="document.querySelector('x-sidebar').toggle()"></button>
+    <div class="content">
+      <h2> Main </h2>
+      <p>Change window size to mobile size to experience x-sidebar.</p>
+      <p>In desktop mode, width greater than 786px, it works as shown with no change happening.</p>
+    </div>
+  </div>
+</div>
+
+<x-pre>
+  &lt;x-sidebar>
+    &lt;h2>aside&lt;/h2>
+    &lt;a href="javascript:history.pushState({}, 1, location.pathname+'?page=1')">State 1&lt;/a>&lt;br/>
+    &lt;a href="javascript:history.pushState({}, 2, location.pathname+'?page=2')">State 2&lt;/a>&lt;br/>
+    &lt;a href="javascript:history.pushState({}, 3, location.pathname+'?page=3')">State 3&lt;/a>&lt;br/>
+  &lt;/x-sidebar>
+</x-pre>

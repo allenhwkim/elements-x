@@ -26,9 +26,6 @@ li {
   text-transform: uppercase;
   transition: width 0.3s;
 }
-.app > .header .logo img {
-  height: 60px;
-}
 .app > .header .header-nav {
   display: flex;
   align-items: center;

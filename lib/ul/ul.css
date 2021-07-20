@@ -61,7 +61,7 @@ x-ul.dropdown ul {
 }
 x-ul.dropdown li {
   position: relative;
-  min-width: 80px;
+  min-width: 72px;
   padding: 4px;
 }
 x-ul.dropdown li > ul {

@@ -96,3 +96,20 @@ x-table table > thead > tr > th:after {
 x-table table > thead > tr > th.desc:after {
   opacity: 1;
 }
+
+@media screen and (max-width: 720px) {
+  x-table thead {
+    display: none;
+  }
+  x-table td {
+    display: flex;
+  }
+  
+  x-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 120px;
+    min-width: 120px;
+    text-align: left;
+  }
+}

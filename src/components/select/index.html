@@ -1,10 +1,18 @@
 <app-group-header title="x-select; Custom Select" path="/select"></app-group-header>
+<style>
+  @media screen and (max-width: 767px) {
+    .example tr th:not(:first-child),
+    .example tr td:not(:first-child) {
+      display: none;
+    }
+  }
+</style>
 
 <li> Close dropdown when ESC pressed </li>
 <li> Highlight the next item when down arrow pressed </li>
 <li> Highlight the previous item when up arrow pressed </li>
 <li> When a character pressed, highlight the item with with the text </li>
- 
+
 <h3>
   Example
   <a class="try-it" target="_" href="//stackblitz.com/edit/x-select?file=index.html">Try it</a>

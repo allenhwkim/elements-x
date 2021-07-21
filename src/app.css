@@ -26,6 +26,17 @@ li {
   text-transform: uppercase;
   transition: width 0.3s;
 }
+.app > .header .logo:not(.x-visible) {
+  width: 0;
+}
+.app > .header .logo img {
+  left: 0;
+  position: relative;
+  transition: left 0.3s;
+}
+.app > .header .logo:not(.x-visible) img {
+  left: 400px;
+}
 .app > .header .header-nav {
   display: flex;
   align-items: center;
@@ -257,41 +268,29 @@ li {
   padding-left: 1em;
 }
 
-
 @media only screen and (min-width: 768px) { 
-  .app .main .sidebar {
-    pointer-events: none;
-  }
-  .app .main .sidebar .route-items {
-    pointer-events: initial;
-  }
-  .app.toggled .main .sidebar .route-items {
-    width: 60px;
-    overflow-x: hidden;
-  }
   .app > .main .sidebar .route-items::-webkit-scrollbar {
     width:0px;
   }
   .app > .main .sidebar .route-items::-webkit-scrollbar-track-piece {
     background-color:transparent;
   }
-  .app.toggled .header .logo {
-    width: 0;
-  }
-  .app.toggled .header .logo .title {
-    display: none;
-  }
-  .app.toggled .main .sidebar {
+  .app .main .sidebar:not(.x-visible) .route-items {
     width: 60px;
+    overflow-x: hidden;
   }
-  .app.toggled .main .sidebar .route-item i {
+  .app .main .sidebar:not(.x-visible) {
+    width: 60px;
+    font-size: initial;
+  }
+  .app.main .sidebar:not(.x-visible) .route-item i {
     font-size: 20px;
   }
-  .app.toggled .main .sidebar .route-item b,
-  .app.toggled .main .sidebar .route-item:hover b {
+  .app .main .sidebar:not(.x-visible) .route-item b,
+  .app .main .sidebar:not(.x-visible) .route-item:hover b {
     display: none;
   }
-  .app.toggled .main .sidebar .group-header .text {
+  .app .main .sidebar:not(.x-visible) .group-header .text {
     display: none;
   }
 }

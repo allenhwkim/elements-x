@@ -38,16 +38,14 @@ x-sidebar {
   }
 }
 
-
 @media only screen and (min-width: 768px) {
-
-  x-sidebar:not(.x-visible) { /* mobile first, visible state */
+  x-sidebar.x-visible {
     transition: width 0.2s;
     width: var(--x-sidebar-width);
     font-size: initial;
     overflow: auto;
   }
-  x-sidebar.x-visible { /* mobile first, not-visible state  */
+  x-sidebar:not(.x-visible) {
     padding: 0;
     overflow: hidden;
     font-size: 0px;

@@ -39,7 +39,7 @@
   <body>
     <div class="app">
       <header class="header">
-        <section class="logo vcentered hcentered">
+        <section class="logo vcentered hcentered x-visible">
           <div class="title"> 
             <a href="/">
               <img src="assets/logo.png" height="60" />
@@ -102,7 +102,7 @@
       function setLang(lang) { localStorage.setItem('language', lang); location.reload(); }
       document.body.setAttribute('lang', localStorage.getItem('language'));
       function toggleSidebar() {
-        document.querySelector('.app').classList.toggle('toggled');
+        document.querySelector('.app .header .logo').classList.toggle('x-visible');
         document.querySelector('.app .sidebar').classList.toggle('x-visible');
       }
     </script>

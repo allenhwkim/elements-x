@@ -1,5 +1,7 @@
-x-overlay x-calendar {
+x-calendar {
   display: block;
+}
+x-overlay x-calendar {
   width: 320px;
 }
 x-calendar .x-header {

@@ -9,6 +9,11 @@ x-ul li {
   margin: 0;
   line-height: 24px;
 }
+x-ul li:not(.x-has-list)::before {
+  content: '•';
+  display: inline-block;
+  width: 16px;
+}
 x-ul .x-highlighted {
   background: #ccc;
 }

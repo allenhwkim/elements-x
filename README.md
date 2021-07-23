@@ -48,6 +48,7 @@
 * [qrcode](https://elements-x.com/component/qrcode)
 * [route](https://elements-x.com/component/route)
 * [select](https://elements-x.com/component/select)
+* [sidebar](https://elements-x.com/component/sidebar)
 * [snackbar](https://elements-x.com/component/snackbar)
 * [table](https://elements-x.com/component/table)
 * [tabs](https://elements-x.com/component/tabs)

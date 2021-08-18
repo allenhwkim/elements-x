@@ -19,7 +19,7 @@
 <h3> 마커와 팝업창 예제</h3>
 <div class="example">
   <x-mapbox>
-    <x-marker lnglat="1600 pennsilvania ave, washington DC" center="">
+    <x-marker lnglat="1600 pennsilvania ave, washington DC" center>
       <h3>백악관</h3> 트럼프가 여기 살았었습니다. 
     </x-marker>
   </x-mapbox>
@@ -38,7 +38,7 @@
     <b class="label">지도에서 찾으세요:</b>
     <input placeholder="주소를 입력하세요" size="60" xon-change="set(#marker[lnglat])" />
     <x-mapbox>
-      <x-marker id="marker" lnglat="Toronto, Canada" center="">여기 찾으세요?</x-marker>
+      <x-marker id="marker" lnglat="Toronto, Canada" center>여기 찾으세요?</x-marker>
     </x-mapbox>
   </x-div>
   <x-pre>

@@ -53,7 +53,7 @@ HTTP 콜(GET / POST / PUT / DELETE / PATCH)을 실행합니다.
   </x-pre>
 
   <x-div> <!-- debug="" trace="" -->
-    <x-http xon-success="set(resp, event.detail)" url="/components/table/countries.json" auto=""></x-http>
+    <x-http xon-success="set(resp, event.detail)" url="/components/table/countries.json" auto></x-http>
     <b>HTTP Response:</b>
     <pre x-value="resp" style="height: 300px; overflow: auto"></pre>
   </x-div>

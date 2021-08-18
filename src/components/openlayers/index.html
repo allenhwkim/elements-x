@@ -22,14 +22,14 @@
 
 <h3>With A Marker</h3>
 <div class="example">
-  <x-openlayers zoom="15" satellite="">
-    <x-ol-marker position="Hangang Bridge" center="" src="/assets/pinegg.png">
+  <x-openlayers zoom="15" satellite>
+    <x-ol-marker position="Hangang Bridge" center src="/assets/pinegg.png">
       <b>HanGang Bridge</b><p>View is nice here</p>
     </x-ol-marker>
   </x-openlayers>
   <x-pre>
-    &lt;x-openlayers zoom="15" satellite="">
-      &lt;x-ol-marker position="Hangang Bridge" center="" src="/assets/pinegg.png">
+    &lt;x-openlayers zoom="15" satellite>
+      &lt;x-ol-marker position="Hangang Bridge" center src="/assets/pinegg.png">
         &lt;b>HanGang Bridge&lt;/b>&lt;p>View is nice here&lt;/p>
       &lt;/x-ol-marker>
     &lt;/x-openlayers>
@@ -41,8 +41,8 @@
   <x-div>
     <b class="label">Search Map:</b>
     <input placeholder="Enter address" size="60" xon-change="set(#marker[position])" />
-      <x-openlayers zoom="15" satellite="">
-        <x-ol-marker id="marker" position="Hangang Bridge" center="">
+      <x-openlayers zoom="15" satellite>
+        <x-ol-marker id="marker" position="Hangang Bridge" center>
           <b>Looking for</b><p>here?</p>
         </x-ol-marker>
       </x-openlayers>
@@ -51,8 +51,8 @@
     &lt;x-div>
       &lt;b class="label">Search Map:&lt;/b>
       &lt;input placeholder="Enter address" size="60" xon-change="set(#marker[position])" />
-        &lt;x-openlayers zoom="15" satellite="">
-          &lt;x-ol-marker id="marker" position="Hangang Bridge" center="">
+        &lt;x-openlayers zoom="15" satellite>
+          &lt;x-ol-marker id="marker" position="Hangang Bridge" center>
             &lt;b>Looking for&lt;/b>&lt;p>here?&lt;/p>
           &lt;/x-ol-marker>
         &lt;/x-openlayers>

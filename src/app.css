@@ -267,6 +267,9 @@ li {
   font-size: 14px;
   padding-left: 1em;
 }
+.adsbygoogle {
+  overflow: hidden;
+}
 
 @media only screen and (min-width: 768px) { 
   .app > .main .sidebar .route-items::-webkit-scrollbar {

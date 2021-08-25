@@ -3,6 +3,17 @@
 This is used to remove listeners automatically when this element is destroyed.
 It's useful when you add a listeners to a document-level or window-level.
 
+<p>
+  To Test this page, click document. Then move to other page, 
+  then click the document again. Because a click listener is added to document, 
+  it's supposed to show 'doc licked' in console.
+</p>
+
+<p>
+  However, you won't see the message in console because the listener is 
+  removed by &lt;x-listeners> when it is dosconnected.
+</p>
+
 <x-listeners debug></x-listeners>
 <script>
   function clickHandler(event) { console.log('doc clicked'); }

@@ -1,0 +1,21 @@
+<h3>x-listeners</h3>
+
+This is used to remove listeners automatically when this element is destroyed.
+It's useful when you add a listeners to a document-level or window-level.
+
+<x-listeners debug></x-listeners>
+<script>
+  function clickHandler(event) { console.log('doc clicked'); }
+  document.addEventListener('click', clickHandler);
+  document.querySelector('x-listeners').handleGlobalListener(document, 'click', clickHandler);
+</script>
+
+<x-pre>
+  // HTML
+  &lt;x-listeners debug>&lt;/x-listeners>
+
+  // Javascript
+  function clickHandler(event) { console.log('doc clicked'); }
+  document.addEventListener('click', clickHandler);
+  document.querySelector('x-listeners').handleGlobalListener(document, 'click', clickHandler);
+</x-pre>

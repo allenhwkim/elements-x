@@ -1,7 +1,7 @@
 <app-group-header title="Pagination" path="/patination"></app-group-header>
 
 <script>
-document.addEventListener('x-select', function(event) {
+document.querySelector('x-pagination').addEventListener('x-select', function(event) {
   document.querySelector('.message').innerText
     = JSON.stringify(event.detail, null, '  ');
 });

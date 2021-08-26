@@ -12,8 +12,7 @@
   <a class="try-it" target="_" href="//stackblitz.com/edit/x-highlightjs?file=index.html">Try it</a>
 </h3> 
 <div class="example">
-  <x-highlightjs theme="monokai" prettier
-    onload="console.log('load',  event.detail)">
+  <x-highlightjs theme="monokai">
     addEventListener('load', () => {
       const code = document.querySelector('#code');
       const worker = new Worker('worker.js');
@@ -22,9 +21,9 @@
     });
   </x-highlightjs>
 
-  <x-pre>
-    &lt;x-highlightjs theme="monokai" prettier
-      onload="console.log('load',  event.detail)">
+  <h4>HTML</h4>
+  <x-highlightjs language="html">
+    &lt;x-highlightjs theme="monokai">
       addEventListener('load', () => {
         const code = document.querySelector('#code');
         const worker = new Worker('worker.js');
@@ -32,7 +31,7 @@
         worker.postMessage(code.textContent);
       });
     &lt;/x-highlightjs>
-  </x-pre>
+  </x-highlightjs>
 </div>
 
 <div class="attributes" title="Attributes">
@@ -43,6 +42,13 @@
         <tr>
           <td>theme</td><td>String</td><td>monokai</td><td>Optional</td>
           <td>Viewer theme, https://highlightjs.org/static/demo/</td>
+        </tr>
+        <tr>
+          <td>language</td><td>String</td><td>javascript</td><td>Optional</td>
+          <td>
+            Formatting language; 'css', 'html', 'babel', 'angular', 'markdown',
+            'typescript', 'yaml', or 'javascript'
+          </td>
         </tr>
         <tr>
           <td>prettier</td><td>N/A</td><td>N/A</td><td>Optional</td>

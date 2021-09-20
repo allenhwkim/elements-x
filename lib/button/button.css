@@ -65,6 +65,7 @@ x-button.no-bg:hover { background-color: #F0F0F0; }
 x-button.no-bg.primary:hover { background-color: #F0F0F0; }
 x-button.no-bg.accent:hover { background-color: #F0F0F0; }
 
+x-button[tabindex="-1"][disabled] { background-color: #FFF; }
 x-button[disabled] { color: var(--disabled); pointer-events: none; }
 x-button.no-bg[disabled] { background: none; color: #BBB;}
 x-button.icon:disabled > button:disabled {

@@ -8,4 +8,6 @@ x-highlightjs > .x-highlight {
   font-family: monospace;
   white-space: pre;
   padding: 8px 12px;
+  overflow: auto; 
+  font-size: 14px; 
 }

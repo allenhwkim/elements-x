@@ -1,4 +1,5 @@
-x-ul > ul {
+x-ul > ul,
+x-ul > * > ul {
   padding-left: 0;
 }
 x-ul ul {
@@ -7,7 +8,7 @@ x-ul ul {
 x-ul li {
   cursor: pointer;
   margin: 0;
-  line-height: 24px;
+  line-height: 28px;
 }
 x-ul li:not(.x-has-list)::before {
   content: '•';
@@ -28,19 +29,22 @@ x-ul li.x-has-list[aria-expanded] {
 x-ul li.x-has-list[aria-expanded].x-highlighted {
   background: #ccc;
 }
-x-ul li:not([aria-expanded]) > ul {
+x-ul li:not([aria-expanded]) > ul,
+x-ul li:not([aria-expanded]) > * > ul {
   display: none;
 }
- x-ul li.x-has-list[aria-expanded] > ul {
+x-ul li.x-has-list[aria-expanded] > ul,
+x-ul li.x-has-list[aria-expanded] > * > ul {
   background: #FFF;
+  padding-left: 16px;
 }
 x-ul li.x-has-list[aria-expanded]::before {
-  content: '-';
+  content: '⊟';
   display: inline-block;
   width: 16px;
 }
 x-ul li.x-has-list:not([aria-expanded])::before {
-  content: '+';
+  content: '⊞';
   display: inline-block;
   width: 16px;
 }

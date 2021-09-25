@@ -58,7 +58,7 @@ x-button.icon > button:disabled {
 x-button.primary { background: var(--primary); color: #FFF; }
 x-button.accent { background: var(--accent); color: #FFF;}
 
-x-button.no-bg { background: #FFF; }
+x-button.no-bg { background: transparent; }
 x-button.no-bg.primary { background: none; color: var(--primary);}
 x-button.no-bg.accent { background: none; color: var(--accent); }
 x-button.no-bg:hover { background-color: #F0F0F0; }

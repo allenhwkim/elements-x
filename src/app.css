@@ -202,7 +202,10 @@ li {
   box-shadow: none;
 }
 
-.attributes::before, .events::before, .classes::before {
+.properties::before, 
+.attributes::before, 
+.events::before, 
+.classes::before {
   content: attr(title);
   display: block;
   padding: 8px 12px;
@@ -210,24 +213,24 @@ li {
   color: #FFF;
   margin-top: 1em;
 }
-.attributes thead tr, .events thead tr, .classes thead tr {
+.attributes thead tr, .events thead tr, .classes thead tr, .properties thead tr {
   background: #656565;
   color: #FFF;
 }
-.attributes thead tr th, .events thead tr th, .classes thead tr th {
+.attributes thead tr th, .events thead tr th, .classes thead tr th,  .properties thead tr th {
   padding: 8px 12px;
 }
-.attributes th::before, .events th::before, .classes th::before,
-.attributes th::after, .events::after, .classes::after {
+.attributes th::before, .events th::before, .classes th::before, .properties th::before,
+.attributes th::after, .events th::after, .classes th::after, .properties th::after {
   color: transparent;
 }
-.attributes th.asc::before, .events th.asc::before, .classes th.asc::before {
+.attributes th.asc::before, .events th.asc::before, .classes th.asc::before, .properties th.asc::before {
   color: #FFF;
 }
-.attributes th.desc:after, .events th.desc::after, .classes th.desc::after {
+.attributes th.desc:after, .events th.desc::after, .classes th.desc::after, .properties th.desc::after {
   color: #FFF;
 }
-.attributes tbody tr td:first-child, .events tbody tr td:first-child, .classes tbody tr td:first-child {
+.attributes tbody tr td:first-child, .events tbody tr td:first-child, .classes tbody tr td:first-child , .properties tbody tr td:first-child{
   font-weight: bold;
 }
 

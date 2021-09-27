@@ -1,9 +1,12 @@
 x-select {
   --height: 36px;
-  display: inline-block;
+  display: none;
   position: relative;
   white-space: nowrap;
   height: var(--height);
+}
+x-select.x-init {
+  display: inline-block;
 }
 
 x-select .x-native {

@@ -10,6 +10,8 @@ import { debounce } from '../lib/common/util';
 import { Translation } from '../lib';
 import { setTranslationForRouteNInclude } from '../translations';
 
+window.$ = document.querySelector.bind(document);
+
 setTranslationForRouteNInclude();
 
 // enable/disable outline for click and tab

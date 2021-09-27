@@ -13,7 +13,11 @@
 </h3>
 
 <div class="example">
-  <x-ace style="height: 200px"
+  <p>
+    <x-button onclick="$('#ace-editor').disabled = !$('#ace-editor').disabled">Toggle Disabled</x-button>
+    <x-button onclick="$('#ace-editor').readonly = !$('#ace-editor').readonly">Toggle Readonly</x-button>
+  </p>
+  <x-ace id="ace-editor" style="height: 200px"
     onchange="console.log(event.detail)" onload="console.log(event.detail)">
     function foo(items) {
       var x = "All this is syntax highlighted";
@@ -30,6 +34,29 @@
     &lt;/x-ace>
   </x-pre>
 </div>
+
+<div class="properties" title="Properties">
+  <x-table class="no-header no-footer">
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>value</td><td>String</td><td>N/A</td><td>Optional</td>
+          <td>Editor text value</td>
+        </tr>
+        <tr>
+          <td>readonly</td><td>Boolean</td><td>false</td><td>Optional</td>
+          <td>If set to true, users can't edit text</td>
+        </tr>
+        <tr>
+          <td>disabled</td><td>Boolean</td><td>false</td><td>Optional</td>
+          <td>If set to true, users can't edit text and de-emphasized</td>
+        </tr>
+      </tbody>
+    </table>
+  </x-table>
+</div>
+
 
 <div class="attributes" title="Attributes">
   <x-table class="no-header no-footer">

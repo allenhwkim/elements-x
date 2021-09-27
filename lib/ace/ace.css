@@ -4,6 +4,13 @@ x-ace {
   min-height: 80px;
   height: 100%;
 }
+x-ace.disabled {
+  opacity: .5;
+  pointer-events: none;
+}
+x-ace.readonly {
+  pointer-events: none;
+}
 x-ace > .editor {
   display: block;
   position: absolute;

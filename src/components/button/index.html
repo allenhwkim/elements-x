@@ -25,113 +25,14 @@
     <x-button class="primary"> Primary </x-button>
     <x-button class="accent"> Accent </x-button>
     <x-button disabled="disabled"> Disabled </x-button>
+    <x-button class="no-style"> No Style </x-button>
   </p>
   <pre language="html">
     &lt;x-button> Default &lt;/x-button>
     &lt;x-button class="<b>primary</b>"> Primary &lt;/x-button>
     &lt;x-button class="<b>accent</b>"> Accent &lt;/x-button>
     &lt;x-button <b>disabled</b> Disabled &lt;/x-button>
-  </pre>
-</div>
-
-<h3>Loading</h3>
-<p>
-  Any element with "loading" class is hidden in default.
-  If the button class contains "loading" the loading sign become visible.
-  While it is loading, users won't be able to click the button.
-</p>
-
-<p>
-Click the below buttons to see loading sign. 
-</p>
-<div class="example loading-section">
-  <x-button onclick="this.classList.toggle('loading')">
-    <img class="loading" height="24" src="assets/loading.gif" />
-    Default
-  </x-button>
-  <x-button class="primary" onclick="this.classList.toggle('loading')"> 
-    Primary
-    <img class="loading" height="24" src="assets/loading.gif" />
-  </x-button>
-  <x-button class="accent" onclick="this.classList.toggle('loading')" >
-    <img class="loading" height="24" src="assets/loading.gif" />
-    Accent
-  </x-button>
-  <div>
-
-  <p>
-    <a href="javascript:void(0)" onclick="document.querySelectorAll('.loading-section x-button').forEach(el => el.classList.remove('loading'))">
-      Click here
-    </a> 
-    to remove all loading signs.
-  </p>
-
-  </div>
-  <pre language="html">
-  &lt;x-button class="loading"">
-    &lt;img class="loading" height="24" src="assets/loading.gif" />
-    Default
-  &lt;/x-button>
-  &lt;x-button class="primary loading"> 
-    Primary
-    &lt;img class="loading" height="24" src="assets/loading.gif" />
-  &lt;/x-button>
-  &lt;x-button class="accent loading">
-    &lt;img class="loading" height="24" src="assets/loading.gif" />
-    Accent
-  &lt;/x-button>
-  </pre>
-</div>
-
-<h3>no-bg</h3>
-
-<p>
-Button with "no-bg" attribute won't have background color, switching to text color.
-</p>
-
-<div class="example custom">
-  <x-button class="no-bg"> Default </x-button>
-  <x-button class="primary no-bg"> Primary </x-button>
-  <x-button class="accent no-bg"> Accent </x-button>
-  <x-button disabled="disabled" class="no-bg"> Disabled </x-button>
-  <pre language="html">
-  &lt;x-button class="<b>no-bg</b>"> Default &lt;/x-button>
-  &lt;x-button class="primary <b>no-bg</b>"> Primary &lt;/x-button>
-  &lt;x-button class="accent <b>no-bg</b>"> Accent &lt;/x-button>
-  &lt;x-button disabled class="<b>no-bg</b>"> Disabled &lt;/x-button>
-  </pre>
-</div>
-
-<h3>no-border</h3>
-
-<div class="example">
-  <x-button class="no-bg no-border"> Default </x-button>
-  <x-button class="primary no-bg no-border"> Primary </x-button>
-  <x-button class="accent no-bg no-border"> Accent </x-button>
-  <x-button disabled="disabled" class="no-bg no-border"> Disabled </x-button>
-  <pre language="html">
-  &lt;x-button class="no-bg no-border"> Default &lt;/x-button>
-  &lt;x-button class="primary no-bg no-border"> Primary &lt;/x-button>
-  &lt;x-button class="accent no-bg no-border"> Accent &lt;/x-button>
-  &lt;x-button disabled class="no-bg no-border"> Disabled &lt;/x-button>
-  </pre>
-</div>
-
-<h3>no-shadow</h3>
-
-<p>
-Button with "no-shadow" class wont' have raised effect.
-</p>
-<div class="example">
-  <x-button class="no-bg no-border no-shadow"> Default </x-button>
-  <x-button class="primary no-bg no-border no-shadow"> Primary </x-button>
-  <x-button class="accent no-bg no-border no-shadow"> Accent </x-button>
-  <x-button disabled="disabled" class="no-bg no-border no-shadow"> Disabled </x-button>
-  <pre language="html">
-  &lt;x-button class="no-bg no-border <b>no-shadow</b>"> Default &lt;/x-button>
-  &lt;x-button class="primary no-bg no-border <b>no-shadow</b>"> Primary &lt;/x-button>
-  &lt;x-button class="accent no-bg no-border <b>no-shadow</b>"> Accent &lt;/x-button>
-  &lt;x-button disabled class="no-bg no-border <b>no-shadow</b>"> Disabled &lt;/x-button>
+    &lt;x-button class="<b>no-style</b>"> No Style &lt;/x-button>
   </pre>
 </div>
 
@@ -143,49 +44,16 @@ Button with "no-shadow" class wont' have raised effect.
   <x-button class="icon">&#9829;</x-button>
   <x-button class="icon primary">&#9829;</x-button>
   <x-button class="icon accent">&#9829;</x-button>
-  <x-button class="icon" disabled="disabled">&#9829;</x-button> Default
-  <br/>
-  <x-button class="icon no-bg ">&#9829;</x-button>
-  <x-button class="icon primary no-bg">&#9829;</x-button>
-  <x-button class="icon accent no-bg">&#9829;</x-button>
-  <x-button class="icon no-bg" disabled="disabled">&#9829;</x-button> no-bg
-  <br/>
-  <x-button class="icon no-bg no-border no-shadow">&#9829;</x-button>
-  <x-button class="icon primary no-bg no-border no-shadow">&#9829;</x-button>
-  <x-button class="icon accent no-bg no-border no-shadow">&#9829;</x-button>
-  <x-button class="icon no-bg no-border no-shadow" disabled="disabled">&#9829;</x-button> no-border
+  <x-button class="icon" disabled="disabled">&#9829;</x-button>
+  <x-button class="icon no-style">&#9829;</x-button>
   <pre language="html">
   &lt;x-button class="<b>icon</b>">&#9829;&lt;/x-button>
   &lt;x-button class="<b>icon</b> primary">&#9829;&lt;/x-button>
   &lt;x-button class="<b>icon</b> accent">&#9829;&lt;/x-button>
   &lt;x-button class="<b>icon</b>" disabled="disabled">&#9829;&lt;/x-button>
+  &lt;x-button class="<b>no-style</b>">&#9829;&lt;/x-button>
   </pre>
 </div>
-
-<!--
-<div class="attributes" title="Attributes">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>Name</td><td>Type</td><td>Default</td><td>Optional</td><td>Description</td></tr>
-        <tr><td>Name</td><td>Type</td><td>Default</td><td>Optional</td><td>Description</td></tr>
-      </tbody>
-    </table>
-  </x-table>
-</div>
-
-<div class="events" title="Events">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>Name</td><td>Type</td><td>Data</td><td>Description</td></tr>
-      </tbody>
-    </table>
-  </x-table>
-</div>
--->
 
 <div class="classes" title="Classes">
   <x-table class="no-header no-footer">

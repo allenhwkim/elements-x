@@ -45,55 +45,6 @@
   </pre>
 </div>
 
-<h3>Loading</h3>
-<p>
-  Any element with "loading" class is hidden in default.
-  If the button class contains "loading" the loading sign become visible.
-  While it is loading, users won't be able to click the button.
-</p>
-
-<p>
-Click the below buttons to see loading sign. 
-</p>
-<div class="example loading-section">
-  <x-button onclick="this.classList.toggle('loading')">
-    <img class="loading" height="24" src="assets/loading.gif" />
-    디폴트
-  </x-button>
-  <x-button class="primary" onclick="this.classList.toggle('loading')"> 
-    프라이머리
-    <img class="loading" height="24" src="assets/loading.gif" />
-  </x-button>
-  <x-button class="accent" onclick="this.classList.toggle('loading')" >
-    <img class="loading" height="24" src="assets/loading.gif" />
-    엑센트
-  </x-button>
-  <div>
-
-  <p>
-    <a href="javascript:void(0)" onclick="document.querySelectorAll('.loading-section x-button').forEach(el => el.classList.remove('loading'))">
-      Click here
-    </a> 
-    to remove all loading signs.
-  </p>
-
-  </div>
-  <pre language="html">
-  &lt;x-button class="loading"">
-    &lt;img class="loading" height="24" src="assets/loading.gif" />
-    디폴트
-  &lt;/x-button>
-  &lt;x-button class="primary loading"> 
-  프라이머리
-    &lt;img class="loading" height="24" src="assets/loading.gif" />
-  &lt;/x-button>
-  &lt;x-button class="accent loading">
-    &lt;img class="loading" height="24" src="assets/loading.gif" />
-    엑센트
-  &lt;/x-button>
-  </pre>
-</div>
-
 <h3>no-bg</h3>
 
 <p>

@@ -18,63 +18,48 @@ x-button {
   box-shadow: 2px 2px 4px #CCC;
   outline: none;
   background-color: #FFF;
+  line-height: var(--size);
+  min-width: 60px;
+  color: inherit;
+  cursor: pointer;
 }
 x-button:focus {
   box-shadow: white 0 0 0 2px, #ff821f 0 0 0 4px;
 }
 x-button > button {
   border: none;
-  background-color: inherit;
   background: none;
-  display: flex;
+  background-color: inherit;
   align-items: center;
-  line-height: var(--size);
-  min-width: 60px;
+  min-width: inherit;
+  cursor: inherit;  
+  line-height: inherit;
   color: inherit;
-  cursor: pointer;  
+  padding: inherit;
 }
-
-x-button:active { box-shadow: none; transform: translate(2px, 2px); }
-x-button.no-shadow { box-shadow: none; }
-x-button.no-border { border: none; }
 x-button.icon { 
   width: var(--size);
   height: var(--size);
+  min-width: var(--size);
   border-radius: 50%; 
   padding: 0; 
-  min-width: none;
 }
 x-button.icon > button { 
-  height: 100%;
-  min-width: var(--size);
-  line-height: initial;
-  justify-content: center;
-  padding: 0;
-}
-x-button.icon > button:disabled {
-  min-width: var(--size);
+  border-radius: inherit; 
 }
 
 x-button.primary { background: var(--primary); color: #FFF; }
 x-button.accent { background: var(--accent); color: #FFF;}
-
-x-button.no-bg { background: transparent; }
-x-button.no-bg.primary { background: none; color: var(--primary);}
-x-button.no-bg.accent { background: none; color: var(--accent); }
-x-button.no-bg:hover { background-color: #F0F0F0; }
-x-button.no-bg.primary:hover { background-color: #F0F0F0; }
-x-button.no-bg.accent:hover { background-color: #F0F0F0; }
-
+x-button:active { box-shadow: none; transform: translate(2px, 2px); }
 x-button[tabindex="-1"][disabled] { background-color: #FFF; }
 x-button[disabled] { color: var(--disabled); pointer-events: none; }
-x-button.no-bg[disabled] { background: none; color: #BBB;}
-x-button.icon:disabled > button:disabled {
-  background-color: inherit;
-  color: inherit;
+
+x-button.no-style {
+  border: none;
+  background: transparent;
+  min-width: revert;
+  line-height: revert;
+  box-shadow: revert;
+  outline: revert;
+  padding: revert;
 }
-
-x-button.clicked { pointer-events: none; }
-
-x-button.loading { pointer-events: none; }
-x-button:not(.loading) .loading { display: none; }
-x-button.loading .loading { display: initial; }

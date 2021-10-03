@@ -48,39 +48,3 @@ x-ul li.x-has-list:not([aria-expanded])::before {
   display: inline-block;
   width: 16px;
 }
-
-/* dropdown style */
-x-ul.dropdown li.x-has-list::before {
-  display: none;
-}
-x-ul.dropdown li li.x-has-list::after {
-  content: '>';
-  display: block;
-  float: right;
-}
-x-ul.dropdown > ul {
-  display: flex;
-  padding: 8px;
-}
-x-ul.dropdown ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #ccc;
-}
-x-ul.dropdown li {
-  position: relative;
-  min-width: 72px;
-  padding: 4px;
-}
-x-ul.dropdown li > ul {
-  position: absolute;
-  background: #FFF;
-  box-shadow: 4px 4px 8px #ccc;
-  z-index: 1;
-  top: 100%;
-}
-x-ul.dropdown li > ul > li > ul {
-  left: 100%;
-  top: 0;
-}

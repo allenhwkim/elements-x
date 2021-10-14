@@ -4,7 +4,7 @@ const glob = require('glob');
 const {getHtmlToInject} = require('bombi/lib/util');
 
 function replace(replacements) {
-  return function replace(buildResult, buildOptions) {
+  return function replace(buildOptions, buildResult) {
     const fs = buildOptions.write ? orgfs : memfs;
     replacements.forEach( repl => {
       glob.sync(`${buildOptions.outdir}/${repl.match}`).forEach(file => {

@@ -4,7 +4,7 @@ const path = require('path');
 const http = require('http');
 const { konsole } = require('../lib/util.js');
 
-module.exports = function runStaticServer(esbuildResult, options) {
+module.exports = function runStaticServer(options, esbuildResult) {
   const fs = options.write ? orgfs : memfs;
 
   http.createServer(function (req, res) {

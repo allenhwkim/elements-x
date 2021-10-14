@@ -27,7 +27,7 @@ function copyFromTo(from, to, {tofs}) {
 
 // copy files or directories to a given directory
 module.exports = function copy(fromTos) {
-  return function copy(esbuildResult, options) {
+  return function copy(options, esbuildResult) {
     const tofs  = options.write ? orgfs : memfs;
     fromTos = typeof fromTos === 'string' ? [fromTos] : fromTos;
     fromTos.forEach(strExpr => {

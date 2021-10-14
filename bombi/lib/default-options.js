@@ -12,6 +12,7 @@ const build = {
   write: true,
   sourcemap: 'external',
   // belows are custom options for build
+  preBuilds: [],
   postBuilds: []
 };
 
@@ -31,6 +32,7 @@ const serve = {
   notFoundHandler: {
     '^/(component|tool)': 'index.html'
   },
+  preBuilds: [],
   postBuilds: [
     copy('src/**/* dist'),
     injectBuild,

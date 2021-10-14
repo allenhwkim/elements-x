@@ -1,6 +1,6 @@
 const glob = require('glob');
 const open  = require('open');
-const esbuild  = require('esbuild');
+const { rimraf } = require('bombi/lib/util');
 
 const { 
   minifyHtmlPlugin, 
@@ -19,6 +19,7 @@ const config = {};
 config.build = {
   entryPoints: ['src/main.js'],
   plugins: [minifyCssPlugin, minifyHtmlPlugin],
+  preBuilds: [ function clear() {rimraf('dist')} ], 
   postBuilds: [ 
     copy('src/assets src/components src/tools src/*.html src/*.css public/* dist'),
     injectBuild,
@@ -53,19 +54,15 @@ config.lib = {
   format: 'esm',
   sourcemap: false,
   loader: { '.html': 'text', '.css': 'text' },
-  postBuilds: [ 
-    copy('lib/index.js dist'),
-    _ => esbuild.build({
-      entryPoints: ['lib/index.js'],
-      entryNames: 'elements-x.min',
-      bundle: true,
-      minify: true,
-      sourcemap: 'external',
-      outdir: 'dist',
-      legalComments: 'none',
-      plugins: [minifyCssPlugin, minifyHtmlPlugin]
-    })
-  ],
+  preBuilds: [ _ =>  rimraf(options.outdir) ], 
+  postBuilds: [copy('lib/index.js dist')],
+};
+
+config.libmin = {
+  entryPoints: ['lib/index.js'],
+  entryNames: 'elements-x.min',
+  legalComments: 'none',
+  plugins: [minifyCssPlugin, minifyHtmlPlugin]
 };
 
 module.exports = config;

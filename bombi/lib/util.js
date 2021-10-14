@@ -7,6 +7,7 @@ function getEsbuildOptions(allOptions) {
     'config',    // config file path
     'port',      // serve port number, default 8080
     'notFoundHandler', // 404 handler
+    'preBuilds',       // pre build actions, e.g. clear
     'postBuilds',      // post build actions, e.g. copy, replace, rename, delete
   ];
   const esbuildOptions = {};

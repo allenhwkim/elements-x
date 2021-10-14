@@ -3,9 +3,9 @@ const memfs = require('memfs');
 const path = require('path');
 const {getHtmlToInject} = require('bombi/lib/util');
 
-module.exports  = function injectBuild(buildResult, buildOptions) {
+module.exports  = function injectBuild(buildOptions, buildResult) {
   const fs = buildOptions.write ? orgfs : memfs;
-  const htmlToInject = getHtmlToInject(buildResult, buildOptions);
+  const htmlToInject = getHtmlToInject(buildResult);
   const wsHtml = buildOptions.port ? `\n<script>setTimeout(_ => {` +
         `var ws = new WebSocket('ws://localhost:${buildOptions.port + 1}');` +
         `ws.onmessage = e => window.location.reload();` +

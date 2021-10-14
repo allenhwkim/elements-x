@@ -5,7 +5,8 @@
   "scripts": {
     "start": "bojagi serve",
     "build": "bojagi lib && bojagi libmin",
-    "build:demo": "bojagi build"
+    "build:demo": "bojagi build",
+    "prepublishOnly" : "npm run build"
   },
   "repository": {
     "type": "git",

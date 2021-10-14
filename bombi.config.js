@@ -54,7 +54,7 @@ config.lib = {
   format: 'esm',
   sourcemap: false,
   loader: { '.html': 'text', '.css': 'text' },
-  preBuilds: [ _ =>  rimraf(options.outdir) ], 
+  preBuilds: [ _ =>  rimraf('dist') ], 
   postBuilds: [copy('lib/index.js dist')],
 };
 

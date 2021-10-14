@@ -27,5 +27,8 @@
   },
   "devDependencies": {
     "bombi": "file:bombi"
+  },
+  "dependencies": {
+    "rxjs": "^7.4.0"
   }
 }

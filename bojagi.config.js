@@ -1,11 +1,11 @@
 const glob = require('glob');
 const open  = require('open');
-const { rimraf } = require('bombi/lib/util');
+const { rimraf } = require('bojagi/lib/util');
 
 const { 
   minifyHtmlPlugin, 
   minifyCssPlugin 
-} = require('./bombi/esbuild-plugins');
+} = require('./bojagi/esbuild-plugins');
 const {
   copy, 
   injectBuild, 
@@ -13,7 +13,7 @@ const {
   runWebsocketServer, 
   runStaticServer, 
   watchAndReload
-} = require('bombi/post-builds');
+} = require('bojagi/post-builds');
 
 const config = {};
 config.build = {

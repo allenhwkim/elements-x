@@ -3,9 +3,9 @@
   "version": "2.0.0",
   "description": "Collection of simple, customizable and extendible custom elements",
   "scripts": {
-    "start": "bombi serve",
-    "build": "bombi lib && bombi libmin",
-    "build:demo": "bombi build"
+    "start": "bojagi serve",
+    "build": "bojagi lib && bojagi libmin",
+    "build:demo": "bojagi build"
   },
   "repository": {
     "type": "git",
@@ -25,10 +25,10 @@
       "require": "./dist/elements-x.umd.js"
     }
   },
-  "devDependencies": {
-    "bombi": "file:bombi"
-  },
   "dependencies": {
     "rxjs": "^7.4.0"
+  },
+  "devDependencies": {
+    "bojagi": "^0.1.1"
   }
 }

@@ -5,7 +5,7 @@ const { rimraf } = require('bojagi/lib/util');
 const { 
   minifyHtmlPlugin, 
   minifyCssPlugin 
-} = require('./bojagi/esbuild-plugins');
+} = require('bojagi/esbuild-plugins');
 const {
   copy, 
   injectBuild, 

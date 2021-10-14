@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- BUILD_DATE -->
     <base href="/">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,17 +16,20 @@
     <link rel="manifest" href="assets/site.webmanifest">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    <!--
     <script data-ad-client="ca-pub-4555199270235339" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55808470-3">
-    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-55808470-3"></script>
     <script>
+      // Global site tag (gtag.js) - Google Analytics -
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'UA-55808470-3');
     </script>
+    -->
+
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="app">
@@ -45,8 +49,8 @@
           <div class="links">
             <!-- side bar update -->
             <x-route target="article-contents">
-              <a href="/component" src="/src/app-components-intro.html">Components</a>
-              <a href="/tool" src="/src/app-tools-intro.html">Tools</a>
+              <a href="/component" src="app-components-intro.html">Components</a>
+              <a href="/tool" src="app-tools-intro.html">Tools</a>
             </x-route>
           </div>
           <div class="languages">
@@ -62,25 +66,19 @@
       </header>
     
       <div class="main">
-        <!--
-        <aside class="aside" id="side-bar">
-          <x-include src="/src/sidebar.html"></x-include>
-        </aside>
-        -->
         <x-sidebar class="sidebar" width="250">
-          <x-include src="/src/sidebar.html"></x-include>
+          <x-include src="sidebar.html"></x-include>
         </x-sidebar>
         <article class="article">
           <section class="article-contents" id="article-contents"></section>
 
           <!-- Google Ads -->
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
           <ins class="adsbygoogle" style="display:block"
               data-ad-client="ca-pub-4555199270235339"
               data-ad-slot="7879450596"
               data-ad-format="auto"
               data-full-width-responsive="true"></ins>
-          <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
+          <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script> 
 
           <!-- Facebook Comments -->
           <div class="fb-comments" data-href="https://elements-x.com" data-width="100%" data-numposts="5"></div>
@@ -97,6 +95,5 @@
         document.querySelector('.app .sidebar').classList.toggle('x-visible');
       }
     </script>
-    
   </body>
 </html>

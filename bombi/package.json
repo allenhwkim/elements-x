@@ -1,0 +1,33 @@
+{
+  "name": "bombi",
+  "version": "0.1.0",
+  "description": "A static site bundler and a development server using esbuild and node-static",
+  "main": "lib/index.js",
+  "bin": {
+    "bombi": "./lib/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bundler",
+    "webpack",
+    "esbuild",
+    "static",
+    "html",
+    "javascript",
+    "es6"
+  ],
+  "author": "allenhwkim@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "chokidar": "^3.5.2",
+    "esbuild": "^0.13.4",
+    "glob": "^7.2.0",
+    "html-minifier": "^4.0.0",
+    "memfs": "^3.3.0",
+    "open": "^8.2.1",
+    "ws": "^8.2.3",
+    "yargs": "^17.2.1"
+  }
+}

@@ -36,6 +36,15 @@ li p::before {
   position: absolute;
   left: -12px;
 }
+body[lang=en] .en,
+body[lang=kr] .kr {
+  font-weight: bold
+}
+
+li {
+  margin: 8px 0;
+}
+
 app-custom-css {
   display: none;
   float: right;
@@ -65,4 +74,332 @@ x-pre {
 .hcentered {
   display: flex;
   justify-content: center;
+}
+
+.app > .header {
+  height: 60px;
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  color: #fff;
+}
+.app > .header .logo {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background: #3185db;
+  width: 250px;
+  height: 60px; 
+  font-size: 24px;
+  letter-spacing: 2px;
+  line-height: 22px;
+  text-transform: uppercase;
+  transition: width 0.3s;
+}
+.app > .header .logo:not(.x-visible) {
+  width: 0;
+}
+.app > .header .logo img {
+  left: 0;
+  position: relative;
+  transition: left 0.3s;
+}
+.app > .header .logo:not(.x-visible) img {
+  left: 400px;
+}
+.app > .header .header-nav {
+  display: flex;
+  align-items: center;
+  background: #389bff;
+  flex: 1;
+  color: #fff;
+  font-size: 20px;
+}
+.app > .header .header-nav .hamburger {
+  width: 60px;
+  cursor: pointer;
+  height: 60px;
+  color: #333;
+  border-right: 1px solid rgba(0, 0, 0, 0.14);
+}
+.app > .header .header-nav .hamburger:hover {
+  background: #4aa2ff;
+}
+.app > .header .header-nav .hamburger .fa-bars {
+  pointer-events: none;
+}
+.app > .header .header-nav .links {
+  flex: 1;
+  padding: 0 24px;
+}
+.app > .header .header-nav .links a {
+  margin-right: 12px;
+  color: #FFF; 
+  text-decoration: none;
+}
+.app > .header .header-nav .languages > * {
+  font-size: 16px;
+  color: #FFF;
+  white-space: nowrap;
+}
+.app > .header .header-nav .icons {
+  padding: 0 24px;
+  font-size: 26px;
+}
+.app > .header .header-nav .icons > *  {
+  color: #FFF;
+}
+
+.app > .main {
+  display: flex;
+  word-break: break-word;
+}
+.app > .main .sidebar .route-items {
+  padding: 8px;
+  position: fixed;
+  height: calc(100vh - 60px);
+  overflow: auto;
+  background-color: #3d474c;
+  color: #fff;
+  width: 250px;
+}
+
+.app > .main .sidebar .route-item {
+  padding: 10px 20px;
+  margin: 0 -20px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  white-space: nowrap;
+  border-top: 1px solid #666;
+}
+.app > .main .sidebar .route-item i {
+  width: 22px;
+  text-align: center;
+  margin-right: 8px;
+}
+.app > .main .sidebar .route-item b {
+  font-weight: normal;
+}
+.app > .main .sidebar .route-item b sub {
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s;
+}
+.app > .main .sidebar .route-item:hover b sub {
+  opacity: 1;
+  visibility: visible;
+}
+.app > .main .sidebar .route-item:hover { 
+  background: #30393d;
+}
+.app > .main .sidebar .route-item.active {
+  background: #DDD;
+  color: #333;
+}
+.app > .main .sidebar .group-header {
+  position: relative;
+  cursor: pointer;
+  margin: 0 -8px;
+  padding: 8px 8px 8px 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  border-top: 1px solid #666;
+}
+.app > .main .sidebar .group-header::after {
+  content: '∧';
+  display: block;
+  font-weight: bold;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+.app > .main .sidebar .group-header:not(.expanded)::after {
+  content: '∨';
+}
+.app > .main .sidebar .group-header:not(.expanded) + * {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s;
+}
+.app > .main .sidebar .group-header + * {
+  max-height: 500px;
+}
+.app > .main .sidebar .group-header + * > * {
+  padding: 8px 28px;
+  background: #333;
+}
+
+.app > .main .article {
+  min-height: calc(100vh - 60px);
+  width: calc(100% - 250px);
+  padding: 20px;
+  flex: 1;
+  background: #f5f5f5;
+}
+.app > .main pre[ee-prism] {
+  padding: 8px 8px 8px 16px;
+  background: #3d474b;
+  color: #fff;
+}
+
+.article-contents {
+  margin-top: 20px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
+  margin-left: 100%;
+}
+.article-contents.slide-in {
+  margin-left: 0%;
+  transition: all .1s;
+}
+
+.article-contents pre {
+  overflow: auto;
+}
+.article-contents a {
+  color: #00e;
+}
+
+.usage {
+  margin-top: 16px;
+}
+.usage .contents {
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.properties::before, 
+.attributes::before, 
+.events::before, 
+.classes::before {
+  content: attr(title);
+  display: block;
+  padding: 8px 12px;
+  background: #343535;
+  color: #FFF;
+  margin-top: 1em;
+}
+.attributes thead tr, .events thead tr, .classes thead tr, .properties thead tr {
+  background: #656565;
+  color: #FFF;
+}
+.attributes thead tr th, .events thead tr th, .classes thead tr th,  .properties thead tr th {
+  padding: 8px 12px;
+}
+.attributes th::before, .events th::before, .classes th::before, .properties th::before,
+.attributes th::after, .events th::after, .classes th::after, .properties th::after {
+  color: transparent;
+}
+.attributes th.asc::before, .events th.asc::before, .classes th.asc::before, .properties th.asc::before {
+  color: #FFF;
+}
+.attributes th.desc:after, .events th.desc::after, .classes th.desc::after, .properties th.desc::after {
+  color: #FFF;
+}
+.attributes tbody tr td:first-child, .events tbody tr td:first-child, .classes tbody tr td:first-child , .properties tbody tr td:first-child{
+  font-weight: bold;
+}
+
+/* tools editor styling */
+.editor-title, .editor {
+  display: flex;
+}
+.editor-title > * {
+  width: 50%;
+  background: #CCC;
+  padding: 4px 8px;
+  border-bottom: 2px solid #666;
+}
+.editor-title > *:last-child {
+  border-left: 1px solid #666;
+}
+.editor > .editor-container {
+  height: calc(100vh - 260px);
+  position: relative;
+  width: 50%;
+  border: 1px solid #ccc;
+}
+.editor > .editor-container > * {
+  margin: 0;
+  font-size: 14px;
+  padding: 
+}
+.editor > .editor-container > .right > .x-highlight {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+}
+.try-it {
+  font-size: 14px;
+  padding-left: 1em;
+}
+.adsbygoogle {
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 768px) { 
+  .app > .main .sidebar .route-items::-webkit-scrollbar {
+    width:0px;
+  }
+  .app > .main .sidebar .route-items::-webkit-scrollbar-track-piece {
+    background-color:transparent;
+  }
+  .app .main .sidebar:not(.x-visible) .route-items {
+    width: 60px;
+    overflow-x: hidden;
+  }
+  .app .main .sidebar:not(.x-visible) {
+    width: 60px;
+    font-size: initial;
+  }
+  .app.main .sidebar:not(.x-visible) .route-item i {
+    font-size: 20px;
+  }
+  .app .main .sidebar:not(.x-visible) .route-item b,
+  .app .main .sidebar:not(.x-visible) .route-item:hover b {
+    display: none;
+  }
+  .app .main .sidebar:not(.x-visible) .group-header .text {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px) { 
+  .app .header .logo {
+    display: none;
+  }
+  .app .header .header-nav .links {
+    /* smaller header fonts, padding */
+    padding: 0 12px;
+    font-size: 18px;
+    white-space: nowrap;
+  }
+  .app .main {
+    /* overfiding display: flex; */
+    display: block; 
+  }
+  .app > .main .sidebar {
+    top: 52px;
+  }
+  .app .main .sidebar .route-item i {
+    /* bigger icons for mobile device */
+    font-size: 20px;
+  }
+  .app .main .article {
+    width: 100%;
+    padding: 0;
+  }
+  .app .main .sidebar.x-visible  + .article { 
+    /* not to scroll when menu is visible */
+    height: 100%;
+    overflow: hidden;
+  }
 }

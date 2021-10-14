@@ -1,0 +1,52 @@
+<style>
+  .header.type {
+    text-transform: uppercase;
+    border: 1px solid #ccc;
+    margin-top: 32px;
+    border-width: 2px 0;
+    padding: 8px;
+    margin: 32px 0 16px;
+    background: #eee;
+    font-size: 24px;
+  }
+  .toc {
+    font-weight: 600;
+  }
+  .types .tabs [tab-for] {
+    min-width: auto;
+  }
+  .example {
+    margin-bottom: 48px;
+  }
+</style>
+
+<x-tabs class="types">
+  <div class="tabs">
+    <div tab-for="text"><t-9n>Text</t-9n></div>
+    <div tab-for="date"><t-9n>Date</t-9n></div>
+    <div tab-for="time"><t-9n>Time</t-9n></div>
+    <div tab-for="checkbox"><t-9n>Checkbox</t-9n></div>
+    <div tab-for="radio"><t-9n>Radio</t-9n></div>
+    <div tab-for="color"><t-9n>Color</t-9n></div>
+    <div tab-for="file"><t-9n>File</t-9n></div>
+    <div tab-for="switch"><t-9n>Switch</t-9n></div>
+    <div tab-for="mask"><t-9n>Mask</t-9n></div>
+  </div>
+  <div class="tab-contents">
+    <x-include contents-for="checkbox" src="components/input/checkbox.html"></x-include>
+    <x-include contents-for="radio" src="components/input/radio.html"></x-include>
+    <x-include contents-for="date" src="components/input/date.html"></x-include>
+    <x-include contents-for="time" src="components/input/time.html"></x-include>
+    <x-include contents-for="color" src="components/input/color.html"></x-include>
+    <x-include contents-for="file" src="components/input/file.html"></x-include>
+    <x-include contents-for="switch" src="components/input/switch.html"></x-include>
+    <x-include contents-for="text" src="components/input/text.html"></x-include>
+    <x-include contents-for="mask" src="components/input/mask.html"></x-include>
+  </div>
+</x-tabs>
+
+<script>
+  var type = location.pathname.split('/').splice(-1)[0];
+  var selectedTab = document.querySelector(`x-tabs [tab-for="${type}"]`);
+  setTimeout(_ => selectedTab?.click(), 300);
+</script>

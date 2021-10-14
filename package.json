@@ -1,70 +1,31 @@
 {
   "name": "elements-x",
-  "version": "1.16.1",
+  "version": "2.0.0",
   "description": "Collection of simple, customizable and extendible custom elements",
-  "main": "dist/elements-x/index.js",
   "scripts": {
-    "build": "rm -rf dist && npm run build:lib && npm run build:demo",
-    "build:demo": "webpack --mode=production",
-    "build:lib": "webpack --config lib/webpack.config.js --mode=production",
-    "start": "webpack serve --mode=development",
-    "eslint": "eslint src lib --fix && git add"
+    "start": "bombi serve",
+    "build": "bombi lib",
+    "build:demo": "bombi build"
   },
-  "workspaces": [
-    "lib"
-  ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.com/"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elements-x/elements-x.git"
   },
-  "preversion": "npm run build",
-  "pre-commit": [
-    "eslint"
-  ],
-  "files": [
-    "dist"
-  ],
+  "bugs": {
+    "url": "https://github.com/elements-x/elements-x/issues"
+  },
+  "homepage": "https://github.com/elements-x/elements-x#readme",
   "author": "allenhwkim@gmail.com",
   "license": "MIT",
+  "main": "./dist/elements-x.umd.js",
+  "module": "./dist/elements-x.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/elements-x.es.js",
+      "require": "./dist/elements-x.umd.js"
+    }
+  },
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
-    "@fortawesome/fontawesome-free": "^5.15.2",
-    "autoprefixer": "^10.2.4",
-    "babel-loader": "^8.2.2",
-    "brace": "^0.11.1",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^7.0.0",
-    "cross-env": "^7.0.3",
-    "css": "^3.0.0",
-    "css-loader": "^5.0.1",
-    "eslint": "^7.19.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-unused-imports": "^1.0.1",
-    "file-loader": "^6.2.0",
-    "html-loader": "^1.3.2",
-    "html-webpack-plugin": "^5.0.0",
-    "jsbarcode": "^3.11.4",
-    "mini-css-extract-plugin": "^1.3.5",
-    "node-fetch": "^2.6.1",
-    "npm-check-updates": "^11.1.1",
-    "path-browserify": "^1.0.1",
-    "pkg-dir": "^5.0.0",
-    "postcss-loader": "^5.0.0",
-    "pre-commit": "^1.2.2",
-    "prerender-spa-plugin": "^3.4.0",
-    "prettier": "^2.2.1",
-    "qrcode": "^1.4.4",
-    "raw-loader": "^4.0.2",
-    "rxjs": "^7.3.1",
-    "sass-loader": "^10.1.1",
-    "style-loader": "^2.0.0",
-    "terser-webpack-plugin": "^5.1.1",
-    "to-string-loader": "^1.1.6",
-    "webpack": "^5.20.0",
-    "webpack-bundle-analyzer": "^4.4.0",
-    "webpack-cli": "^4.5.0",
-    "webpack-dev-server": "^3.11.2",
-    "webpack-merge": "^5.7.3"
+    "bombi": "file:bombi"
   }
 }

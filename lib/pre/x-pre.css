@@ -1,0 +1,8 @@
+x-pre { 
+  display: block;
+  font-family: monospace;
+  white-space: pre-wrap;
+  background: #eee;
+  padding: 12px;
+  margin: 8px 0;
+}

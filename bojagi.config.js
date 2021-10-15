@@ -47,17 +47,19 @@ const entryPoints = glob.sync('lib/*/index.js').reduce( (ret, el) => {
   ret[el.split('/')[1]] = el;
   return ret;
 }, {});
+// this is for commonjs. e.g. import {XButton} from 'elements-x/button';
 config.lib = {
   entryPoints,
   entryNames: '[name]',
   minify: false,
-  format: 'esm',
+  target: ['es2019'],
   sourcemap: false,
   loader: { '.html': 'text', '.css': 'text' },
   preBuilds: [ _ =>  rimraf('dist') ], 
   postBuilds: [copy('lib/index.js dist')],
 };
 
+// this is for browser
 config.libmin = {
   entryPoints: ['lib/index.js'],
   entryNames: 'elements-x.min',

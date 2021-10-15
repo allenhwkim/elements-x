@@ -19,12 +19,7 @@
   "author": "allenhwkim@gmail.com",
   "license": "MIT",
   "main": "./dist/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/elements-x.es.js",
-      "require": "./dist/elements-x.umd.js"
-    }
-  },
+  "files": ["dist"],
   "devDependencies": {
     "rxjs": "^7.4.0",
     "bojagi": "^0.1.1"

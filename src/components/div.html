@@ -61,14 +61,14 @@ and event handling based on the belief that most of DOM handling can be done wit
     R: <input type="range" max="255" value="255" xon-change="set(r)"/><br/>
     G: <input type="range" max="255" value="0" xon-change="set(g)"/><br/>
     B: <input type="range" max="255" value="0" xon-change="set(b)"/><br/>
-    <div x-style="background:rgb({{r}},{{g}},{{b}}); height: 60px;"></div>
+    <div x-style="background:rgb([[r]],[[g]],[[b]]); height: 60px;"></div>
   </x-div>
   <x-pre>
     &lt;x-div r="255" g="0" b="0">
       R: &lt;input type="range" max="255" value="255" <b>xon-change</b>="set(r)"/>
       G: &lt;input type="range" max="255" value="0" <b>xon-change</b>="set(g)"/>
       B: &lt;input type="range" max="255" value="0" <b>xon-change</b>="set(b)"/>
-      &lt;div <b>x-style</b>="background:rgb(<b>{{r}},{{g}},{{b}}</b>)">&lt;/div>
+      &lt;div <b>x-style</b>="background:rgb(<b>[[r]],[[g]],[[b]]</b>)">&lt;/div>
     &lt;/x-div>
   </x-pre>
 </div>
@@ -114,7 +114,7 @@ and event handling based on the belief that most of DOM handling can be done wit
 
 <ul>
   <li>Reacts to data change, and bind to element properties. e.g. x-value="color",
-    x-style="color:rgb({{r}},{{g}},{{b}})"
+    x-style="color:rgb([[r]],[[g]],[[b]])"
     <ul>
       <li>x-value="<a href="#value-expression"><a href="#value-expression">&lt;value-expression&gt;</a></a>"</li>
       <li>x-style="<a href="#style-expression">&lt;style-expression&gt;</a>"</li>
@@ -183,15 +183,15 @@ and event handling based on the belief that most of DOM handling can be done wit
 </ul>
 
 <h2 id="style-expression">Style Expression</h2>
-inline-style expression with bindings(wrapped with '{{' and '}}'). e.g., 
+inline-style expression with bindings(wrapped with '[[' and ']]'). e.g., 
 <ul>
-  <li>x-style="color:rgb({{r}},{{g}},{{b}})"</li>
+  <li>x-style="color:rgb([[r]],[[g]],[[b]])"</li>
 </ul>
 
 <h2 id="attribute-expression">Attribute Expression</h2>
 Attribute name and attribute value are separated by colon(:). e.g.,
 <ul>
-  <li>x-attr="filter:{{filter}}"</li>
+  <li>x-attr="filter:[[filter]]"</li>
   <li>x-attr="user-id:route.params.id"</li>
 </ul>
 
@@ -257,7 +257,7 @@ Attribute name and attribute value are separated by colon(:). e.g.,
       <li>set(#save-user.payload.status, ::checked, Active, Inactive)</li>
       <li>set(#delete-message.innerText, event.detail.data.message)</li>
       <li>set(todos.done=false.done, true)</li>
-      <li>set(todos.id={{id}}.done, ::checked)</li>
+      <li>set(todos.id=[[id]].done, ::checked)</li>
       <li>set(filter, 'done=false')</li>
     </ul>
   </li>

@@ -3,30 +3,31 @@
 
 [![Watch the video](https://i.imgur.com/fUSS9yc.png)](https://www.youtube.com/watch?v=5ejYrMoEbQo&ab_channel=AllenKim)
 
-## How to use
+## Use with npm install
+```
+$ npm install elements-x --save
+```
+To use all custom elements
+```
+import { defineElementsX } from "elements-x";
+defineElementsX();
+```
+To use a single custom elements
+```
+import { XButton } from "elements-x";
+XButton.define();
+```
+
+## Use with script tag
 * Add script to head 
   ```
-  <script src="https://unpkg.com/elements-x"><script>
-  ```
-* Write your html elements.
-  ```
-  <x-button class="primary">My Button</x-button>
+  <script src="https://unpkg.com/elements-x/dist/elements-x.min.js"><script>
   ```
 
 ## Components
 * [accordion](https://elements-x.com/component/accordion)
 * [ace](https://elements-x.com/component/ace)
-* [barcode](https://elements-x.com/component/barcode)
-* [button](https://elements-x.com/component/button)
-* [calendar](https://elements-x.com/component/calendar)
-* [carousel](https://elements-x.com/component/carousel)
-* [clipboard](https://elements-x.com/component/clipboard)
-* [clock](https://elements-x.com/component/clock)
-* [color-picker](https://elements-x.com/component/color-picker)
-* [dialog](https://elements-x.com/component/dialog)
-* [div](https://elements-x.com/component/div)
-* [flag](https://elements-x.com/component/flag)
-* [format](https://elements-x.com/component/format)
+* [barcode](https://elements-x.com/component/barcode) * [button](https://elements-x.com/component/button) * [calendar](https://elements-x.com/component/calendar) * [carousel](https://elements-x.com/component/carousel) * [clipboard](https://elements-x.com/component/clipboard) * [clock](https://elements-x.com/component/clock) * [color-picker](https://elements-x.com/component/color-picker) * [dialog](https://elements-x.com/component/dialog) * [div](https://elements-x.com/component/div) * [flag](https://elements-x.com/component/flag) * [format](https://elements-x.com/component/format)
 * [highlightjs](https://elements-x.com/component/highlightjs)
 * [http](https://elements-x.com/component/http)
 * [iframe](https://elements-x.com/component/iframe)
@@ -57,20 +58,6 @@
 * [translation](https://elements-x.com/component/translation)
 * [typing-effect](https://elements-x.com/component/typing-effect)
 * [ul](https://elements-x.com/component/ul)
-
-## Usage with npm
-* Install package
-  ```
-  $ npm install elements-x --save-dev
-  ```
-* Import package
-  ```
-  import “elements-x”;
-  ```
-* Write your html elements. 
-  ```
-  <x-button class="primary">My Button</x-button>
-  ```
 
 ## How Is It Different?
 * It’s custom-elements, which works like html tags

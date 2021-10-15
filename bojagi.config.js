@@ -30,7 +30,6 @@ config.build = {
 config.serve = {
   entryPoints: ['src/main.js'],
   loader: { '.html': 'text', '.css': 'text' },
-  entryNames: '[name]',
   // 
   postBuilds: [
     copy('src/assets src/components src/tools src/*.html src/*.css public/* dist'),
@@ -39,7 +38,7 @@ config.serve = {
     runStaticServer,
     runWebsocketServer,
     watchAndReload(['src', 'lib']),
-    function openBrowser() { open(`http://localhost:8080`); }
+    // function openBrowser() { open(`http://localhost:8080`); }
   ]
 };
 

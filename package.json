@@ -1,12 +1,12 @@
 {
   "name": "elements-x",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Collection of simple, customizable and extendible custom elements",
   "scripts": {
     "start": "bojagi serve",
     "build": "bojagi lib && bojagi libmin",
     "build:demo": "bojagi build",
-    "prepublishOnly" : "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,9 @@
   "author": "allenhwkim@gmail.com",
   "license": "MIT",
   "main": "./dist/index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "rxjs": "^7.4.0",
     "bojagi": "^0.1.1"

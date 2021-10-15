@@ -52,6 +52,7 @@ config.lib = {
   entryPoints,
   entryNames: '[name]',
   minify: false,
+  format: 'esm',
   target: ['es2019'],
   sourcemap: false,
   loader: { '.html': 'text', '.css': 'text' },

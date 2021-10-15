@@ -24,6 +24,6 @@
   ],
   "devDependencies": {
     "rxjs": "^7.4.0",
-    "bojagi": "^0.1.1"
+    "bojagi": "0.1.2"
   }
 }

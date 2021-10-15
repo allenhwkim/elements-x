@@ -18,18 +18,15 @@
   "homepage": "https://github.com/elements-x/elements-x#readme",
   "author": "allenhwkim@gmail.com",
   "license": "MIT",
-  "main": "./dist/elements-x.umd.js",
-  "module": "./dist/elements-x.es.js",
+  "main": "./dist/elements-x.min.js",
   "exports": {
     ".": {
       "import": "./dist/elements-x.es.js",
       "require": "./dist/elements-x.umd.js"
     }
   },
-  "dependencies": {
-    "rxjs": "^7.4.0"
-  },
   "devDependencies": {
+    "rxjs": "^7.4.0",
     "bojagi": "^0.1.1"
   }
 }

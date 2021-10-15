@@ -18,7 +18,7 @@
   "homepage": "https://github.com/elements-x/elements-x#readme",
   "author": "allenhwkim@gmail.com",
   "license": "MIT",
-  "main": "./dist/elements-x.min.js",
+  "main": "./dist/index.js",
   "exports": {
     ".": {
       "import": "./dist/elements-x.es.js",

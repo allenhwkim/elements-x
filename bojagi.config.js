@@ -1,5 +1,4 @@
 const glob = require('glob');
-const open  = require('open');
 const { rimraf } = require('bojagi/lib/util');
 
 const { 
@@ -37,8 +36,7 @@ config.serve = {
     replace([{match: 'index.html', regex: /BUILD_DATE/, replace: new Date()}]),
     runStaticServer,
     runWebsocketServer,
-    watchAndReload(['src', 'lib']),
-    // function openBrowser() { open(`http://localhost:8080`); }
+    watchAndReload(['src', 'lib'])
   ]
 };
 
@@ -46,7 +44,7 @@ const entryPoints = glob.sync('lib/*/index.js').reduce( (ret, el) => {
   ret[el.split('/')[1]] = el;
   return ret;
 }, {});
-// this is for commonjs. e.g. import {XButton} from 'elements-x/button';
+// this is a build for commonjs. e.g. import {XButton} from 'elements-x/button';
 config.lib = {
   entryPoints,
   entryNames: '[name]',
@@ -59,7 +57,7 @@ config.lib = {
   postBuilds: [copy('lib/index.js dist')],
 };
 
-// this is for browser
+// this is a build for browser-only
 config.libmin = {
   entryPoints: ['lib/index.js'],
   entryNames: 'elements-x.min',

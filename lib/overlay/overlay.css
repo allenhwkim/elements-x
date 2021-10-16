@@ -1,6 +1,7 @@
 x-overlay {
   position: absolute;
   z-index: 999;
+  display: none;
 }
 
 x-overlay .x-overlay {

@@ -54,7 +54,7 @@ config.lib = {
   sourcemap: false,
   loader: { '.html': 'text', '.css': 'text' },
   preBuilds: [ _ =>  rimraf('dist') ], 
-  postBuilds: [copy('lib/index.js dist')],
+  postBuilds: [copy('lib/index.js lib/common/util.js dist')],
 };
 
 // this is a build for browser-only

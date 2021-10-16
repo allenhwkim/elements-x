@@ -22,7 +22,11 @@ x-accordion > .accordion-button {
     border: 0;
     border-radius: 0;
     overflow-anchor: none;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out, box-shadow .15s ease-in-out,border-radius .15s ease;
+    transition: color .15s ease-in-out,
+      background-color .15s ease-in-out,
+      border-color .15s ease-in-out, 
+      box-shadow .15s ease-in-out,
+      border-radius .15s ease;
 }
 x-accordion.expanded > .accordion-button {
     color: #0c63e4;
@@ -48,7 +52,7 @@ x-accordion.expanded > .accordion-button::after {
 x-accordion.expanded > .accordion-button + * {
   max-height: 1000px;
   padding: 1rem 1.25rem;
-  transition: max-height 0.5s ease-in-out;
+  transition: max-height .2s ease-in-out;
 }
 
 x-accordion > .accordion-button + * {

@@ -44,7 +44,7 @@ x-select:disabled .x-native {
   z-index: 1;
   max-height: 0;
   overflow: hidden;
-  transition: max-height .3s;
+  transition: max-height .2s;
 }
 
 .x-native:focus ~ .x-custom {

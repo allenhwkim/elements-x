@@ -3,6 +3,7 @@ x-ace {
   position: relative;
   min-height: 80px;
   height: 100%;
+  white-space: pre-wrap;
 }
 x-ace.disabled {
   opacity: .5;

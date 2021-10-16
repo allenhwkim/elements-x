@@ -1,12 +1,10 @@
-import { XMapbox, XTranslation, debounce, defineElementsX, addSnackbar, openDialog } from '../lib';
+import { XMapbox, XTranslation, defineAll, addSnackbar, openDialog } from '../lib';
+import { debounce } from '../lib/common/util';
 import { setTranslationForRouteNInclude } from './translations';
 
-defineElementsX(); // define all custom elements
 window.addSnackbar = addSnackbar;
 window.openDialog = openDialog;
-
-import {defineCustomElements} from './custom-elements';
-defineCustomElements();
+defineAll();
 
 XMapbox.accessToken = 'pk.eyJ1IjoiYWxsZW5od2tpbSIsImEiOiJja21ydzdiZXUwYnprMnBwZjBoaml1MjJvIn0.YFuQaFPaHsd-NQhU002DCw';
 

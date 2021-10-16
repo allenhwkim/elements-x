@@ -30,7 +30,6 @@ XButton.define();
 * [barcode](https://elements-x.com/component/barcode) * [button](https://elements-x.com/component/button) * [calendar](https://elements-x.com/component/calendar) * [carousel](https://elements-x.com/component/carousel) * [clipboard](https://elements-x.com/component/clipboard) * [clock](https://elements-x.com/component/clock) * [color-picker](https://elements-x.com/component/color-picker) * [dialog](https://elements-x.com/component/dialog) * [div](https://elements-x.com/component/div) * [flag](https://elements-x.com/component/flag) * [format](https://elements-x.com/component/format)
 * [highlightjs](https://elements-x.com/component/highlightjs)
 * [http](https://elements-x.com/component/http)
-* [iframe](https://elements-x.com/component/iframe)
 * [include](https://elements-x.com/component/include)
 * input 
   * [text](https://elements-x.com/component/input/text)
@@ -46,7 +45,6 @@ XButton.define();
 * [openlayers](https://elements-x.com/component/openlayers)
 * [overlay](https://elements-x.com/component/overlay)
 * [pagination](https://elements-x.com/component/pagination)
-* [pre](https://elements-x.com/component/pre)
 * [qrcode](https://elements-x.com/component/qrcode)
 * [route](https://elements-x.com/component/route)
 * [select](https://elements-x.com/component/select)

@@ -12,7 +12,6 @@ https://elements-x.com/component/input/color
 https://elements-x.com/component/input/file
 https://elements-x.com/component/input/switch
 https://elements-x.com/component/input/mask
-https://elements-x.com/component/pre
 https://elements-x.com/component/select
 https://elements-x.com/component/table
 https://elements-x.com/component/ul
@@ -25,7 +24,6 @@ https://elements-x.com/component/color-picker
 https://elements-x.com/component/dialog
 https://elements-x.com/component/format
 https://elements-x.com/component/http
-https://elements-x.com/component/iframe
 https://elements-x.com/component/include
 https://elements-x.com/component/mapbox
 https://elements-x.com/component/overlay

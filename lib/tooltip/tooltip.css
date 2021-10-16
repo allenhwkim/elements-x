@@ -1,5 +1,6 @@
 x-tooltip {
   position: absolute;
+  display: none;
 }
 
 @keyframes appear {

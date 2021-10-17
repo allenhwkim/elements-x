@@ -59,8 +59,8 @@ config.lib = {
 
 // this is a build for browser-only
 config.libmin = {
-  entryPoints: ['lib/index.js'],
-  entryNames: 'elements-x.min',
+  entryPoints: ['lib/elements-x.min.js'],
+  entryNames: '[name]',
   legalComments: 'none',
   plugins: [minifyCssPlugin, minifyHtmlPlugin]
 };

@@ -8,7 +8,8 @@ import the component you need, then use it in your html.
 
 <h3>Javascript Example</h3>
 <x-pre>
-  <b>import 'elements-x/dist/button';</b>
+  <b>import {XButton} 'elements-x/button';</b>
+  <b>XButton.define()</b>
 
   const myDiv = document.getElementById('my');
   myDiv.innerHTML = `<b>&lt;x-button>Hello&lt;/x-button></b>`;
@@ -21,7 +22,8 @@ import the component you need, then use it in your html.
 <x-pre contents-for="ng">
   import { NgModule, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   import { BrowserModule } from '@angular/platform-browser';
-  <b>import 'elements-x/dist/button';</b>
+  <b>import {XButton} 'elements-x/button';</b>
+  <b>XButton.define()</b>
   
   @Component({
     selector: 'my-app',
@@ -49,7 +51,8 @@ import the component you need, then use it in your html.
   &lt;/template>
   
   &lt;script>
-  <b>import 'elements-x/dist/button';</b>
+  <b>import {XButton} 'elements-x/button';</b>
+  <b>XButton.define()</b>>
   
   export default {
     name: "App",
@@ -63,7 +66,8 @@ import the component you need, then use it in your html.
 <h3>ReactJs</h3>
 <x-pre contents-for="react">
   import React from "react";
-  <b>import 'elements-x/dist/button';</b>
+  <b>import {XButton} 'elements-x/button';</b>
+  <b>XButton.define()</b>
 
   export default function App() {
     componentDidMount() {

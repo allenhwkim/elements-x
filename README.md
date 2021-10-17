@@ -9,8 +9,8 @@ $ npm install elements-x --save
 ```
 To use all custom elements
 ```
-import { defineElementsX } from "elements-x";
-defineElementsX();
+import { defineAll() } from "elements-x";
+defineAll();
 ```
 To use a single custom elements
 ```
@@ -21,7 +21,7 @@ XButton.define();
 ## Use with script tag
 * Add script to head 
   ```
-  <script src="https://unpkg.com/elements-x/dist/elements-x.min.js"><script>
+  <script src="//unpkg.com/elements-x/dist/elements-x.min.js"></script>
   ```
 
 ## Components

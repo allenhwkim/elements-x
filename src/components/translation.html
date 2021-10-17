@@ -26,32 +26,32 @@
   <a class="en" href="javascript:setLang('en')">English</a>
   <a class="kr" href="javascript:setLang('kr')">Korean</a>
 
-  <pre>&lt;t-9n>Hello&lt;/t-9n></pre>
-  <t-9n>Hello</t-9n>
+  <pre>&lt;x-t9n>Hello&lt;/x-t9n></pre>
+  <x-t9n>Hello</x-t9n>
 
-  <pre>&lt;t-9n name="Allen Kim">Hello {{name}}&lt;/t-9n></pre>
-  <t-9n name="Allen Kim">Hello {{name}}</t-9n>
+  <pre>&lt;x-t9n name="Allen Kim">Hello {{name}}&lt;/x-t9n></pre>
+  <x-t9n name="Allen Kim">Hello {{name}}</x-t9n>
 
-  <pre>&lt;t-9n mon="Jun" day="21st">Hello {{mon}} {{day}}&lt;/t-9n></pre>
-  <t-9n mon="Jun" day="21st">Hello {{mon}} {{day}}</t-9n>
+  <pre>&lt;x-t9n mon="Jun" day="21st">Hello {{mon}} {{day}}&lt;/x-t9n></pre>
+  <x-t9n mon="Jun" day="21st">Hello {{mon}} {{day}}</x-t9n>
 
-  <pre>&lt;t-9n>hello.new.translation&lt;/t-9n></pre>
-  <t-9n>hello.new.translation</t-9n>
+  <pre>&lt;x-t9n>hello.new.translation&lt;/x-t9n></pre>
+  <x-t9n>hello.new.translation</x-t9n>
 
-  <pre>&lt;t-9n>Error Case&lt;/t-9n></pre>
-  <t-9n>Error Case</t-9n>
+  <pre>&lt;x-t9n>Error Case&lt;/x-t9n></pre>
+  <x-t9n>Error Case</x-t9n>
 
-<pre>&lt;t-9n count="1" name="Allen">
+<pre>&lt;x-t9n count="1" name="Allen">
   &lt;span count="0">I have no apple, {{name}}.&lt;/span>
   &lt;span count="1">I have one apple, {{name}}.&lt;/span>
   &lt;span count="default">I have {{count}} apples, {{name}}.&lt;/span>
-&lt;/t-9n></pre>
-  Count: <a href="javascript:document.querySelector('t-9n[count]').setAttribute('count', 0)">0</a>
-  <a href="javascript:document.querySelector('t-9n[count]').setAttribute('count', 1)">1</a>
-  <a href="javascript:document.querySelector('t-9n[count]').setAttribute('count', 2)">2</a>
+&lt;/x-t9n></pre>
+  Count: <a href="javascript:document.querySelector('x-t9n[count]').setAttribute('count', 0)">0</a>
+  <a href="javascript:document.querySelector('x-t9n[count]').setAttribute('count', 1)">1</a>
+  <a href="javascript:document.querySelector('x-t9n[count]').setAttribute('count', 2)">2</a>
   <br/>
-  <t-9n count="1" name="Allen">
+  <x-t9n count="1" name="Allen">
     <span count="0">I have no apple, {{name}}.</span>
     <span count="1">I have one apple, {{name}}.</span>
     <span count="default">I have {{count}} apples, {{name}}.</span>
-  </t-9n>
+  </x-t9n>

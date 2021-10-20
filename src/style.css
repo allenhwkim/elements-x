@@ -341,6 +341,10 @@ x-pre {
   font-size: 14px;
   padding-left: 1em;
 }
+.try-it:not(:last-child):after {
+  content: '|';
+  margin-left: 1em;
+}
 .adsbygoogle {
   overflow: hidden;
 }

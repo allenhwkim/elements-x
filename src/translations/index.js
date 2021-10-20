@@ -15,13 +15,14 @@ function getPageTranslations(param) { // string or route;
   const src = typeof param === 'string' ? param : param.src; 
   const lang = XTranslation.getLanguage();
   const allLang = {en, kr};
+  console.log({src});
   return allLang[lang]?.pageTranslations?.[src];
 }
 
 function setTranslationForRouteNInclude() {
   // When a full page translation is given, replace route.src
   XRoute.beforeFetchCallback = function(route) { 
-    // console.log('route before fetch', route);
+    console.log('route before fetch', route);
     setRouteTranslations(route);
 
     const page = getPageTranslations(route);
@@ -31,7 +32,7 @@ function setTranslationForRouteNInclude() {
   // XRoute.afterFetchCallback = function(html) { return html; };
 
   XInclude.beforeFetchCallback = function(src) { 
-    // console.log('x-include before fetch', src);
+    console.log('x-include before fetch', src);
     const page = getPageTranslations(src);
     return page;
   };

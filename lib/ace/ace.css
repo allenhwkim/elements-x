@@ -4,6 +4,7 @@ x-ace {
   min-height: 80px;
   height: 100%;
   white-space: pre-wrap;
+  width: 100%;
 }
 x-ace.disabled {
   opacity: .5;

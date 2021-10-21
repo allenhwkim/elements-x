@@ -19,7 +19,11 @@
     <x-button onclick="$('#ace-editor').readonly = !$('#ace-editor').readonly">Toggle Readonly</x-button>
   </p>
   <x-ace id="ace-editor" style="height: 200px"
-    onchange="console.log(event.detail)" onload="console.log(event.detail)">
+    onpaste="console.log(event.detail)" 
+    oncopy="console.log(event.detail)" 
+    onblur="console.log(event.detail)" 
+    onchange="console.log(event.detail)" 
+    onload="console.log(event.detail)">
     function foo(items) {
       var x = "All this is syntax highlighted";
       return x;
@@ -27,7 +31,12 @@
   </x-ace>
 
   <x-pre>
-    &lt;x-ace onchange="console.log(event.detail)" onload="console.log(event.detail)">
+    &lt;x-ace 
+      onpaste="console.log(event.detail)" 
+      oncopy="console.log(event.detail)" 
+      onblur="console.log(event.detail)" 
+      onchange="console.log(event.detail)" 
+      onload="console.log(event.detail)">
       function foo(items) {
         var x = "All this is syntax highlighted";
         return x;
@@ -83,7 +92,11 @@
       <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
       <tbody>
         <tr><td>load</td><td>CustomEvent</td><td>ACE editor instance</td><td>Fired when starts</td></tr>
-        <tr><td>change</td><td>CustomEvent</td><td>text data</td><td>Fired when content changes</td></tr>
+        <tr><td>change</td><td>CustomEvent</td><td>Object with detail</td><td>Fired when content changes</td></tr>
+        <tr><td>blur</td><td>CustomEvent</td><td></td>Focus Event<td>Fired when out of focus</td></tr>
+        <tr><td>copy</td><td>CustomEvent</td><td>Object with detail</td><td>Fired when contents copied</td></tr>
+        <tr><td>focus</td><td>CustomEvent</td><td>Focus Event</td><td>Fired when focused</td></tr>
+        <tr><td>paste</td><td>CustomEvent</td><td>Object with detail</td><td>Fired when contents pasted</td></tr>
       </tbody>
     </table>
   </x-table>

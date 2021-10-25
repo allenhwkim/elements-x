@@ -36,8 +36,6 @@ x-input[type=radio] > input:focus::after  {
 
 x-input[type=radio] > input:checked::after {
   content: var(--x-radio-icon);
-  font-size: calc(var(--x-radio-size) / 1.5);
-  line-height: var(--x-radio-size);
 }
 
 x-input[type=radio] > input:disabled::after {

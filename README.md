@@ -51,7 +51,6 @@ XButton.define();
   * [file](https://elements-x.com/component/input/file)
   * [switch](https://elements-x.com/component/input/switch)
   * [mask](https://elements-x.com/component/input/mask)
-* [mapbox](https://elements-x.com/component/mapbox)
 * [openlayers](https://elements-x.com/component/openlayers)
 * [overlay](https://elements-x.com/component/overlay)
 * [pagination](https://elements-x.com/component/pagination)

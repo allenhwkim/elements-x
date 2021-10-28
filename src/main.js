@@ -1,12 +1,10 @@
-import { XMapbox, XTranslation, defineAll, addSnackbar, openDialog } from '../lib';
+import { XTranslation, defineAll, addSnackbar, openDialog } from '../lib';
 import { debounce } from '../lib/common/util';
 import { setTranslationForRouteNInclude } from './translations';
 
 window.addSnackbar = addSnackbar;
 window.openDialog = openDialog;
 defineAll();
-
-XMapbox.accessToken = 'pk.eyJ1IjoiYWxsZW5od2tpbSIsImEiOiJja21ydzdiZXUwYnprMnBwZjBoaml1MjJvIn0.YFuQaFPaHsd-NQhU002DCw';
 
 window.$ = document.querySelector.bind(document);
 

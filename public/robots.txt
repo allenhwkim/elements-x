@@ -25,7 +25,7 @@ https://elements-x.com/component/dialog
 https://elements-x.com/component/format
 https://elements-x.com/component/http
 https://elements-x.com/component/include
-https://elements-x.com/component/mapbox
+https://elements-x.com/component/openlayers
 https://elements-x.com/component/overlay
 https://elements-x.com/component/pagination
 https://elements-x.com/component/route

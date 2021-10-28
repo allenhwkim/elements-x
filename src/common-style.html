@@ -2,12 +2,12 @@
   .x { font-family: monospace; font-style: italic; background: #F5F5F5; }
 </style>
 
-<h2 class="x-h2">css classes</h2>
+<h3 class="x-h3">CSS Classes</h3>
 <p>elements-x provides a set of css classes for your page.</p>
 
 <ul>
-  <li><b>h</b>eaing</li> 1, 2, 3, and 4
-  <li><b>s</b>hadow</li> 1, 2, and 3
+  <li><b>h</b>eaing 1, 2, 3, and 4</li>
+  <li><b>s</b>hadow 1, 2, and 3</li>
   <li><b>m</b>argin</li>
   <li><b>b</b>order</li>
   <li><b>p</b>adding</li>
@@ -15,15 +15,7 @@
   <li><b>c</b>entered</li>
 </ul>
 
-<p>
-You will have elements-x common styles when you run `defineAll()` function.
-</p>
-<x-pre>
-  import { defineAll } 'elements-x';
-  defineAll();
-</x-pre>
-
-<h3 class="x-h3"> Heading </h3>
+<h4 class="x-h4"> Heading </h4>
 <p>
 use `x-h1`, `x-h2`, `x-h3` or `x-h4` class to show it as a header.
 </p>
@@ -43,34 +35,34 @@ use `x-h1`, `x-h2`, `x-h3` or `x-h4` class to show it as a header.
   </div>
 </div>
 
-<h3> Margin </h3>
+<h4 class="x-h4"> Margin <sup>x-m</sup> </h4>
 <p>use `x-m` class to set margin, default 1em.</p>
 <div class="x x-m">
   This section has margin, 1em.<br/>
   &lt;div class="x-m">&lt;div>
 </div>
 
-<h3> Border </h3>
+<h4 class="x-h4"> Border <sup>x-b</sup> </h4>
 <p>use `x-b` class to add a border.</p>
 <div class="x x-b">
   This section has border, 1px solid #F5F5F5.<br/>
   &lt;div class="x-b">&lt;div>
 </div>
 
-<h3> Padding </h3>
+<h4 class="x-h4"> Padding <sup>x-p</sup> </h4>
 <p>use `x-p` class to add padding, 1em.</p>
 <div class="x x-p">
   This section has padding.<br/>
   &lt;div class="x-p">&lt;div>
 </div>
 
-<h3> Background </h3>
+<h4 class="x-h4"> Background <sup>x-g</sup> </h4>
 <div class="x x-g">
   This section has background, #EEE.<br/>
   &lt;div class="x-g">&lt;div>
 </div>
 
-<h3> Combined border, padding and background </h3>
+<h4 class="x-h4"> Combined border, padding and background </h4>
 <p>use `x-mbpg` class to set margin, border, padding and background.</p>
 <div class="x x-mbpg">
   This section has margin, border, padding and background.<br/>
@@ -97,7 +89,7 @@ use `x-h1`, `x-h2`, `x-h3` or `x-h4` class to show it as a header.
   &lt;div class="x-bp">&lt;div>
 </div>
 
-<h3> Elevation </h3>
+<h4 class="x-h4"> Elevation <sup>x-s?</sup></h4>
 <p>use `x-s1`, `x-s2`, or `x-s3` class to set elevation.</p>
 <div class="x-c" style="gap: 2em">
   <div class="x x-s1 x-bpg">
@@ -111,13 +103,13 @@ use `x-h1`, `x-h2`, `x-h3` or `x-h4` class to show it as a header.
   </div>
 </div>
 
-<h3> Centered </h3>
+<h4 class="x-h4"> Centered <sup>x-c</sup></h4>
 <p>use `x-c` class to center contents vertically and horizontally.</p>
 <div class="x x-c x-bg" style="height: 100px">
   &lt;div class="x-c">&lt;div>
 </div>
 
-<h3>Overriding Default Settings </h3>
+<h4 class="x-h4">Overriding Default Settings </h4>
 <p>Set the following variables to override the default settings</p>
 <x-pre>
   body {

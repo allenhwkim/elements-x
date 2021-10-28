@@ -1,6 +1,6 @@
 {
   "name": "elements-x",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Collection of simple, customizable and extendible custom elements",
   "scripts": {
     "start": "bojagi serve",

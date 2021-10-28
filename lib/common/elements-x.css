@@ -33,4 +33,4 @@ body {
 .x-s3 { box-shadow: rgb(0 0 0 / 2%) 0px 0px 1px, rgb(0 0 0 / 3%) 0px 2px 5px, rgb(0 0 0 / 4%) 0px 3px 7px, rgb(0 0 0 / 4%) 0px 7px 10px; }
 
 /* center */
-.x-c { display: flex; justify-content: center; align-items: center; }
+.x-c { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }

@@ -47,6 +47,10 @@ const entryPoints = glob.sync('lib/*/index.js').reduce( (ret, el) => {
   ret[el.split('/')[1]] = el;
   return ret;
 }, {});
+entryPoints['ol-marker'] = 'lib/openlayers/x-ol-marker.js';
+entryPoints['t9n'] = 'lib/translation/translation-element.js';
+entryPoints['t9n-attr'] = 'lib/translation/translation-attr.element.js';
+
 // this is a build for commonjs. e.g. import {XButton} from 'elements-x/button';
 config.lib = {
   entryPoints,

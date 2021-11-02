@@ -20,7 +20,7 @@ config.build = {
   plugins: [minifyCssPlugin, minifyHtmlPlugin],
   preBuilds: [ function clear() {rimraf('dist')} ], 
   postBuilds: [ 
-    copy('src/assets src/components src/tools src/*.html src/*.css public/* dist'),
+    copy('src/assets src/components src/tools src/*.html src/*.css src/css-hints public/* dist'),
     injectBuild,
     replace([{match: 'index.html', regex: /BUILD_DATE/, replace: new Date()}]),
   ]

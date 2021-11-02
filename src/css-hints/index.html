@@ -1,0 +1,646 @@
+<style>
+  .tip {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .tip > *:first-child {
+    padding: 0 5em;
+  }
+  .x-h3 ~ p { 
+    width: 360px; 
+    text-align: center;
+  }
+
+  x-pre { min-width: 400px; flex: 1}
+</style>
+
+<h2 class="x-h2">CSS Hints</h2>
+
+<h3 class="x-h3">box-shadow</h3>
+<p>repeating full circle inside</p>
+<div class="tip">
+  <div>
+    <div class="bs-1"></div>
+    <style>
+      .bs-1 {
+        background: blue;
+        border-radius: 50%;
+        width: 200px; height: 200px;
+        border: 40px solid red;
+        box-shadow: inset 0 0 0 40px yellow;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>repeating full circle outside</p>
+<div class="tip">
+  <div>
+    <div class="bs-2"></div>
+    <style>
+      .bs-2 {
+        margin: 0 50px;
+        background: blue;
+        border-radius: 50%;
+        width: 100px; height: 100px;
+        box-shadow: 
+          10px 0 0 10px yellow,
+          0 20px 0 20px red,
+          0 0 0 40px green;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<h3 class="x-h3">border-radius</h3>
+<p>half-circle</p>
+<div class="tip">
+  <div>
+    <div class="br-1"></div>
+    <style>
+      .br-1 {
+        background: blue;
+        width: 200px; 
+        height: 100px;
+        border-radius: 300px 300px 0 0;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>quater-circle</p>
+<div class="tip">
+  <div>
+    <div class="br-2"></div>
+    <style>
+      .br-2 {
+        margin-left: 100px;
+        background: blue;
+        width: 100px; 
+        height: 100px;
+        border-radius: 0 100% 0 0;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>dome, arc</p>
+<div class="tip">
+  <div>
+    <div class="br-3"></div>
+    <style>
+      .br-3 {
+        background: blue;
+        width: 200px; 
+        height: 200px;
+        border-radius: 300px 300px 0 0;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>half-circle left</p>
+<div class="tip">
+  <div>
+    <div class="br-4"></div>
+    <style>
+      .br-4 {
+        background: blue;
+        width: 100px; 
+        height: 200px;
+        border-radius: 300px 0 0 300px;
+      }
+    </style>
+  </div>
+  <x-pre style="margin-left: 100px;"></x-pre>
+</div>
+
+<p>half-circle right with border</p>
+<div class="tip">
+  <div>
+    <div class="br-5"></div>
+    <style>
+      .br-5 {
+        margin-left: 100px;
+        background: blue;
+        width: 100px;
+        height: 200px;
+        border-radius: 0 200px 200px 0;
+        border: 20px solid red;
+        border-width: 20px 20px 20px 0;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>dome, border, margnetic-shape</p>
+<div class="tip">
+  <div>
+    <div class="br-6"></div>
+    <style>
+      .br-6 {
+        background: blue;
+        width: 200px;
+        height: 200px;
+        border-radius: 200px 0 0 200px;
+        border: 40px solid red;
+        border-width: 40px 0 40px 40px;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>half-circle, bowl-shape</p>
+<div class="tip">
+  <div>
+    <div class="br-7"></div>
+    <style>
+      .br-7 {
+        background: blue;
+        width: 200px;
+        height: 100px;
+        border-radius: 0 0 200px 200px;
+        border: 20px solid red;
+        border-width: 0 20px 20px 20px;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>leaf-shape</p>
+<div class="tip">
+  <div>
+    <div class="br-8"></div>
+    <style>
+      .br-8 {
+        background: blue;
+        width: 200px; 
+        height: 200px;
+        border-radius: 50% 0 50% 0; 
+        /* transform: translateX(2em) rotate(45deg); */
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>water-drop</p>
+<div class="tip">
+  <div>
+    <div class="br-9"></div>
+    <style>
+      .br-9 {
+        background: blue;
+        width: 200px;
+        height: 200px;
+        border-radius: 50% 0 50% 50%; 
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<h3 class="x-h3">conic-gradient</h3>
+
+<p>half-split-circle backgrond horizontally</p>
+<div class="tip">
+  <div>
+    <div class="cg-1"></div>
+    <style>
+      .cg-1 {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: conic-gradient(red 25%,blue 0 75%, red 0);
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>half-split-circle background vertically</p>
+<div class="tip">
+  <div>
+    <div class="cg-2"></div>
+    <style>
+      .cg-2 {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: conic-gradient(red 0, blue 0 50%, red 0)
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>quarter-split-circle slices background. pizza cut</p>
+<div class="tip">
+  <div>
+    <div class="cg-3"></div>
+    <style>
+      .cg-3 {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: conic-gradient(red 25%,green 0 50%,blue 0 75%, yellow 0);
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<h3 class="x-h3">radial-gradient</h3>
+
+<p>inner-circle background</p>
+<div class="tip">
+  <div>
+    <div class="rg-1"></div>
+    <style>
+      .rg-1 {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: radial-gradient(blue 25%, yellow 0 50%, red 0 75%);
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>inner circle background, starting from left-side</p>
+<div class="tip">
+  <div>
+    <div class="rg-2"></div>
+    <style>
+      .rg-2 {
+        width: 200px;
+        height: 200px;
+        background-image: radial-gradient(
+          circle at 0%, blue 40px, yellow 0 80px, red 0 120px, green 0 160px
+        );
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+        
+<p>repeating quarer-circle background</p>
+<div class="tip">
+  <div>
+    <div class="rg-3"></div>
+    <style>
+      .rg-3 {
+        width: 200px;
+        height: 200px;
+        background-image: radial-gradient(
+          50px circle at 50px 50px, blue 100%, transparent 0
+        );
+        background-size: 50px 50px;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>repeating full-circle background</p>
+<div class="tip">
+  <div>
+    <div class="rg-4"></div>
+    <style>
+      .rg-4 {
+        width: 200px;
+        height: 200px;
+        background-image: radial-gradient(
+            50px circle at 25px 25px, blue 50%, transparent 0 
+          );
+        background-size: 50px 50px;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<h3 class="x-h3"> linear-gradient </h3>
+
+<p>split rectangle diagonally with different colors</p>
+<div class="tip">
+  <div>
+    <div class="lg-1"></div>
+    <style>
+      .lg-1 {
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(to bottom right, red, red 50%, blue 0);
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>split box horizontally with different colors</p>
+<div class="tip">
+  <div>
+    <div class="lg-2"></div>
+    <style>
+      .lg-2 {
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(
+            to bottom, black 33.33%, red 33.33%, red 66.66%, yellow 0
+          );
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>split box vertically with different colors</p>
+<div class="tip">
+  <div>
+    <div class="lg-3"></div>
+    <style>
+      .lg-3 {
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(
+            to right, blue 33.33%, white 33.33%, white 66.66%, red 0
+          );
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<h3 class="x-h3">repeating-linear-gradient</h3>
+
+<div class="tip">
+  <div>
+    <div class="rlg-1"></div>
+    <style>
+      .rlg-1 {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: repeating-linear-gradient(
+            to bottom, red, red 20px, white 20px, white 30px
+          );
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<div class="tip">
+  <div>
+    <div class="rlg-2"></div>
+    <style>
+      .rlg-2 {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: repeating-linear-gradient(
+            to bottom right, red, red 20px, white 20px, white 30px
+          );
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<h3 class="x-h3">clip-path</h3>
+
+<p>right-angle triangle background</p>
+<div class="tip">
+  <div>
+    <div class="cp-1"></div>
+    <style>
+      .cp-1 {
+        width: 200px;
+        height: 200px;
+        background: url(//picsum.photos/200/200);
+        clip-path: polygon(100% 0, 0 100%, 0 0);
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>triangle background</p>
+<div class="tip">
+  <div>
+    <div class="cp-2"></div>
+    <style>
+      .cp-2 {
+        width: 200px;
+        height: 200px;
+        background: url(//picsum.photos/200/200);
+        clip-path: polygon(50% 0, 0 100%, 100% 100%);
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>quater-circle background</p>
+<div class="tip">
+  <div>
+    <div class="cp-3"></div>
+    <style>
+      .cp-3 {
+        width: 200px;
+        height: 200px;
+        background: url(//picsum.photos/200/200);
+        clip-path: circle(100% at 0 100%);
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<p>half-circle background</p>
+<div class="tip">
+  <div>
+    <div class="cp-4"></div>
+    <style>
+      .cp-4 {
+        width: 100px;
+        height: 200px;
+        background: url(//picsum.photos/200/200);
+        clip-path: circle(50% at 100% 50%);
+      }
+    </style>
+  </div>
+  <x-pre style="margin-left: 100px"></x-pre>
+</div>
+
+<h3 class="x-h3">background-clip</h3>
+
+<p>text with image background</p>
+<div class="tip">
+  <div>
+    <div class="bc-1">HI</div>
+    <style>
+      .bc-1 {
+        width: 200px;
+        height: 200px;
+        font-size: 200px;
+        font-family: Impact, sans-serif;
+        background: url(//picsum.photos/200/200);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        -webkit-text-stroke: 2px #000;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+<h3 class="x-h3">svg stroke-dasharray</h3>
+
+<p>animate text outline</p>
+<div class="tip">
+  <div>
+    <svg stroke="#000" fill="#FFF" stroke-width="2" class="svg-1">
+      <text x="0" y="200">HI</text>
+    </svg>
+    <style>
+      .svg-1 {
+        width: 200px;
+        height: 200px;
+      }
+      .svg-1 text {
+        font-family: Impact;
+        font-size: 200px;
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: dash 5s linear infinite;
+      }
+    
+      @keyframes dash {
+        to { stroke-dashoffset: 0; }
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+
+<h3 class="x-h3">mix-blend-mode</h3>
+
+<p>text with video background</p>
+<div class="tip">
+  <div>
+    <div class="mbm-1">
+      <video class="video" autoplay="" loop="" width="100%" preload="true" muted="true">
+        <source src="//sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" />
+      </video>
+      <div class="text">HI</div>
+    </div>
+    <style>
+      .mbm-1 {
+        width: 200px;
+        height: 200px;
+        position: relative;
+      }
+
+      .mbm-1 .text { 
+        position: absolute;
+        inset: 0 0 0 0;
+        font-family: Impact;
+        font-size: 200px;
+
+        color: #000;
+        background-color: #FFF;
+        mix-blend-mode: screen; /* black -> org, white -> white */
+        /* mix-blend-mode: multiply; // black -> black, white -> org */
+      }
+
+      .mbm-1 .video { 
+        position: absolute;
+        inset: 0 0 0 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>
+
+
+<h3 class="x-h3">Custom</h3>
+
+<p>Korean Flag</p>
+<div class="tip">
+  <div style="padding:0;display: flex;flex-wrap: wrap; gap: 10px; width: 320px">
+    <div class="custom-1"></div>
+    <div class="custom-2 three"></div>
+    <div class="custom-2 four"></div>
+    <div class="custom-2 five"></div>
+    <div class="custom-2 six"></div>
+    <style>
+      .custom-1 {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: linear-gradient(red 0 50%, blue 0 50%);
+        position: relative;
+        transform: rotate(25deg);
+        margin: 3em;
+      }
+      .custom-1:before {
+        content: '';
+        position: absolute;
+        top: 50px;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: red;
+        box-shadow: 100px 0 0 blue;
+      }
+      .custom-2 {
+        width: 150px;
+        height: 100px;
+        background: repeating-linear-gradient(
+          #000,#000 23.33px, #FFF 0 38.33px
+        );
+        display: flex;
+        justify-content: center;
+        position: relative;
+      }
+      .custom-2.four, .custom-2.five {
+        opacity: .6;
+      }
+      .custom-2:not(.three):after {
+        content: '';
+        background: #FFF;
+        width: 15px;
+        height: 24px;
+        position: absolute;
+      }
+      .custom-2.four:after {
+        top: 38px;
+      }
+      .custom-2.five:after {
+        box-shadow: 0 76px 0 #FFF;
+      }
+      .custom-2.six:after {
+        box-shadow: 0 38px 0 #FFF, 0 76px 0 #FFF;
+      }
+    </style>
+  </div>
+  <x-pre></x-pre>
+</div>

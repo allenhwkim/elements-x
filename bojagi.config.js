@@ -30,11 +30,11 @@ config.serve = {
   entryPoints: ['src/main.js'],
   loader: { '.html': 'text', '.css': 'text' },
   notFoundHandler: {
-    '^/(component|tool)': 'index.html'
+    '^/(component|tool|css)': 'index.html'
   },
   // 
   postBuilds: [
-    copy('src/assets src/components src/tools src/translations src/*.html src/*.css public/* dist'),
+    copy('src/assets src/components src/tools src/translations src/*.html src/*.css src/css-hints public/* dist'),
     injectBuild,
     replace([{match: 'index.html', regex: /BUILD_DATE/, replace: new Date()}]),
     runStaticServer,

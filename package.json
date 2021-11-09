@@ -23,7 +23,8 @@
     "dist"
   ],
   "devDependencies": {
-    "bojagi": "^0.1.4",
+    "bojagi": "^0.2.5",
+    "rimraf": "^3.0.2",
     "rxjs": "^7.4.0"
   }
 }

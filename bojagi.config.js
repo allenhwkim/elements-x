@@ -1,18 +1,7 @@
 const glob = require('glob');
-const { rimraf } = require('bojagi/lib/util');
-
-const { 
-  minifyHtmlPlugin, 
-  minifyCssPlugin 
-} = require('bojagi/esbuild-plugins');
-const {
-  copy, 
-  injectBuild, 
-  replace, 
-  runWebsocketServer, 
-  runStaticServer, 
-  watchAndReload
-} = require('bojagi/post-builds');
+const { rimraf } = require('rimraf');
+const { minifyHtmlPlugin, minifyCssPlugin } = require('bojagi/esbuild-plugins');
+const { copy, injectEsbuildResult, runStaticServer, watchAndReload } = require('bojagi/post-builds');
 
 const config = {};
 config.build = {
@@ -20,26 +9,28 @@ config.build = {
   plugins: [minifyCssPlugin, minifyHtmlPlugin],
   preBuilds: [ function clear() {rimraf('dist')} ], 
   postBuilds: [ 
-    copy('src/assets src/components src/tools src/*.html src/*.css src/css-hints public/* dist'),
-    injectBuild,
-    replace([{match: 'index.html', regex: /BUILD_DATE/, replace: new Date()}]),
+    copy('src/**/!(*.js) public/* dist', {
+      replacements: [ {match: /index\.html/, find: /BUILD_DATE/, replace:  new Date()} ]
+    }),
+    injectEsbuildResult(),
   ]
 };
 
 config.serve = {
   entryPoints: ['src/main.js'],
   loader: { '.html': 'text', '.css': 'text' },
-  notFoundHandler: {
-    '^/(component|tool|css)': 'index.html'
-  },
-  // 
   postBuilds: [
-    copy('src/assets src/components src/tools src/translations src/*.html src/*.css src/css-hints public/* dist'),
-    injectBuild,
-    replace([{match: 'index.html', regex: /BUILD_DATE/, replace: new Date()}]),
-    runStaticServer,
-    runWebsocketServer,
-    watchAndReload(['src', 'lib'])
+    copy('src/**/!(*.js) public/* dist', {
+      fs: require('memfs'), 
+      replacements: [ {match: /index\.html/, find: /BUILD_DATE/, replace:  new Date()} ]
+    }),
+    injectEsbuildResult(),
+    runStaticServer('dist', {
+      fs: require('memfs'), 
+      port: 9100, 
+      notFound: {match: /^\/(component|tool|css)/, serve: 'index.html'}
+    }),
+    watchAndReload(['src', 'lib'], 9110) 
   ]
 };
 

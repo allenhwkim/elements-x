@@ -1,5 +1,5 @@
 const glob = require('glob');
-const { rimraf } = require('rimraf');
+const rimraf = require('rimraf').sync;
 const { minifyHtmlPlugin, minifyCssPlugin } = require('bojagi/esbuild-plugins');
 const { copy, injectEsbuildResult, runStaticServer, watchAndReload } = require('bojagi/post-builds');
 
@@ -46,6 +46,10 @@ entryPoints['t9n-attr'] = 'lib/translation/translation-attr.element.js';
 config.lib = {
   entryPoints,
   entryNames: '[name]',
+  outdir: 'dist',
+  bundle: true,
+  metafile: true,
+  write: true,
   minify: false,
   format: 'esm',
   target: ['es2019'],
@@ -60,6 +64,12 @@ config.libmin = {
   entryPoints: ['lib/elements-x.min.js'],
   entryNames: '[name]',
   legalComments: 'none',
+  outdir: 'dist',
+  bundle: true,
+  minify: true,
+  metafile: true,
+  write: true,
+  sourcemap: 'external',
   plugins: [minifyCssPlugin, minifyHtmlPlugin]
 };
 

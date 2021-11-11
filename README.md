@@ -9,7 +9,7 @@ $ npm install elements-x --save
 ```
 To use all custom elements
 ```
-import { defineAll() } from "elements-x";
+import { defineAll } from "elements-x";
 defineAll();
 ```
 To use a single custom elements

@@ -3,9 +3,9 @@
   "version": "2.1.11",
   "description": "Collection of simple, customizable and extendible custom elements",
   "scripts": {
-    "start": "bojagi serve",
-    "build": "bojagi lib && bojagi libmin",
-    "build:demo": "bojagi build",
+    "start": "esbuild-x serve",
+    "build": "esbuild-x lib && esbuild-x libmin",
+    "build:demo": "esbuild-x build",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -23,7 +23,8 @@
     "dist"
   ],
   "devDependencies": {
-    "bojagi": "^0.2.5",
+    "esbuild-x": "^0.3.3",
+    "open": "^8.4.0",
     "rimraf": "^3.0.2",
     "rxjs": "^7.4.0"
   }

@@ -1,7 +1,10 @@
 const glob = require('glob');
+const open = require('open');
 const rimraf = require('rimraf').sync;
-const { minifyHtmlPlugin, minifyCssPlugin } = require('bojagi/esbuild-plugins');
-const { copy, injectEsbuildResult, runStaticServer, watchAndReload } = require('bojagi/post-builds');
+const esbuildX = require('esbuild-x');
+
+const { minifyHtmlPlugin, minifyCssPlugin } = esbuildX.plugins;
+const { copy, injectEsbuildResult, runStaticServer, watchAndReload } = esbuildX.postBuilds;
 
 const config = {};
 config.build = {
@@ -9,9 +12,7 @@ config.build = {
   plugins: [minifyCssPlugin, minifyHtmlPlugin],
   preBuilds: [ function clear() {rimraf('dist')} ], 
   postBuilds: [ 
-    copy('src/**/!(*.js) public/* dist', {
-      replacements: [ {match: /index\.html/, find: /BUILD_DATE/, replace:  new Date()} ]
-    }),
+    copy('src/**/!(*.js) public/* dist'),
     injectEsbuildResult(),
   ]
 };
@@ -20,17 +21,11 @@ config.serve = {
   entryPoints: ['src/main.js'],
   loader: { '.html': 'text', '.css': 'text' },
   postBuilds: [
-    copy('src/**/!(*.js) public/* dist', {
-      fs: require('memfs'), 
-      replacements: [ {match: /index\.html/, find: /BUILD_DATE/, replace:  new Date()} ]
-    }),
+    copy('src/**/!(*.js) public/* dist'),
     injectEsbuildResult(),
-    runStaticServer('dist', {
-      fs: require('memfs'), 
-      port: 9100, 
-      notFound: {match: /^\/(component|tool|css)/, serve: 'index.html'}
-    }),
-    watchAndReload(['src', 'lib'], 9110) 
+    runStaticServer('dist'),
+    watchAndReload(['src', 'lib'], 9110),
+    _ => open('http://localhost:9100/')
   ]
 };
 
@@ -55,7 +50,7 @@ config.lib = {
   target: ['es2019'],
   sourcemap: false,
   loader: { '.html': 'text', '.css': 'text' },
-  preBuilds: [ _ =>  rimraf('dist') ], 
+  preBuilds: [ _ => rimraf('dist') ], 
   postBuilds: [copy('lib/index.js lib/common/util.js dist')],
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "elements-x",
-  "version": "2.1.11",
+  "version": "2.2.0",
   "description": "Collection of simple, customizable and extendible custom elements",
   "scripts": {
     "start": "./build/serve.js --open --port=9200",

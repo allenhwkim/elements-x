@@ -1,35 +1,49 @@
+x-calendar.x-overlay--show {
+  width: 320px;
+  padding: 0 4px;
+}
 x-calendar {
   display: block;
 }
-x-overlay x-calendar {
-  width: 320px;
-}
+/**
+ * header section 
+ */
 x-calendar .x-header {
   display: flex;
   padding: 12px 8px;
   font-weight: bold;
+  justify-content: center;
 }
 x-calendar .x-header  .x-month-year {
+  display: flex;
   flex: 1;
+  align-items: center;
+  position: relative;
 }
-x-calendar .x-header  .x-month-year .x-years{
-  border: none;
-}
-x-calendar .x-header  .x-month-year .year {
+x-calendar .x-header  .x-month-year input.x-select {
   border: 0;
   font-weight: bold;
-  font-size: 16px;
+  width: 5em;
+  background-color: transparent;
 }
-x-calendar .x-header  .x-month-year button {
-  background: transparent;
-  border: 0;
-}
-x-calendar .x-header  .x-buttons button {
+x-calendar .x-header button {
   background: transparent;
   border: none;
-  cursor: pointer;
+  box-shadow: none;
+}
+x-calendar .x-header button.x-prev.icon:before { /* allowing overriding the icon */
+  content: '◀';
+}
+x-calendar .x-header button.x-today.icon:before { /* allowing overriding the icon */
+  content: '●';
+}
+x-calendar .x-header button.x-next.icon:before { /* allowing overriding the icon */
+  content: '▶';
 }
 
+/**
+ * weekdays section, e.g, mon,tue,wed 
+ */
 x-calendar .x-week-days-container {
   display: flex;
   flex-wrap: wrap;
@@ -37,32 +51,55 @@ x-calendar .x-week-days-container {
 }
  x-calendar .x-week-days-container .x-weekday {
   background: #CCC;
+  width: calc(100%/7);
+  text-align: center;
+  border: 1px solid #FFF;
+  border-width: 0 1px;
+  padding: 4px;
 }
 
+/**
+ * month days section
+ */
 x-calendar .x-days-container { 
   display: flex;
   flex-wrap: wrap;
   padding: 0 4px 12px 4px;
 }
 
-x-calendar .x-weekday,
-x-calendar .x-date {
-  border: 0;
-  background: #FFF;
-  font-size: 16px;
+x-calendar .x-days-container .x-weekday,
+x-calendar .x-days-container .x-date {
   line-height: 1.5em;
   box-sizing: border-box;
   width: calc(100%/7);
   text-align: center;
+  margin: 0;
 }
-x-calendar .x-date span {
-  display: inline-block;
-  padding: 0 4px;
+x-calendar .x-days-container .x-date button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
-x-calendar .x-date:not(.x-same-month) { color: #ccc }
-x-calendar .x-date:not([disabled]) { cursor: pointer }
-
-x-calendar .x-date.x-select span,
-x-calendar .x-date:not([disabled]):hover span {
-  background: #ccc;
+x-calendar .x-days-container .x-date button:focus {
+  background-color: unset;
+  color: unset;
+  box-shadow:#3751B5 0 0 0 2px;
 }
+x-calendar .x-days-container .x-date button:disabled {
+  color: unset;
+  opacity: .7;
+}
+x-calendar .x-days-container .x-date button.x-select {
+  background-color: #D13101;
+  color: #FFF;
+}
+x-calendar .x-days-container .x-date button.x-current-date {
+  background-color: #EEE;
+}
+x-calendar .x-days-container .x-date button:not(.x-select).x-holiday {
+  color: #D13101;
+  font-weight: bold;
+}
+x-calendar .x-days-container .x-date[data-tooltip] {
+  border-bottom: 1px dotted transparent;
+} 

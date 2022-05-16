@@ -1,4 +1,3 @@
-<app-group-header title="Button" path="/button"></app-group-header>
 <h3>How it is different from html &lt;button></h3>
 <ul class="default">
   <li> Better look-and-feel.</li> 
@@ -16,23 +15,23 @@
 
 <h3>
   Default
-  <a class="try-it" target="_" href="//stackblitz.com/edit/elements-x-button?file=index.html">Try with static html</a>
-  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-hdbyk?file=/src/app/app.module.ts&initialpath=/button">Try with Angular</a>
+  <a class="try-it" target="_" href="//stackblitz.com/edit/elements-x-button?file=index.html"> static html</a>
+  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-hdbyk?file=/src/app/app.module.ts&initialpath=/button"> Angular</a>
 </h3>
 <div class="example">
   <p>
-    <x-button> Default </x-button>
-    <x-button class="primary"> Primary </x-button>
-    <x-button class="accent"> Accent </x-button>
-    <x-button disabled="disabled"> Disabled </x-button>
-    <x-button class="no-style"> No Style </x-button>
+    <button x=""> Default </button>
+    <button x="" class="primary"> Primary </button>
+    <button x="" class="accent"> Accent </button>
+    <button x="" disabled="disabled"> Disabled </button>
+    <button x="" class="no-style"> No Style </button>
   </p>
   <pre language="html">
-    &lt;x-button> Default &lt;/x-button>
-    &lt;x-button class="<b>primary</b>"> Primary &lt;/x-button>
-    &lt;x-button class="<b>accent</b>"> Accent &lt;/x-button>
-    &lt;x-button <b>disabled</b> Disabled &lt;/x-button>
-    &lt;x-button class="<b>no-style</b>"> No Style &lt;/x-button>
+    &lt;button x> Default &lt;/button>
+    &lt;button x class="<b>primary</b>"> Primary &lt;/button>
+    &lt;button x class="<b>accent</b>"> Accent &lt;/button>
+    &lt;button x <b>disabled</b> Disabled &lt;/button>
+    &lt;button x class="<b>no-style</b>"> No Style &lt;/button>
   </pre>
 </div>
 
@@ -41,33 +40,32 @@
   Button with "icon" class will have rounded shape instead of rectanble shape.
 </p>
 <div class="example">
-  <x-button class="icon">&#9829;</x-button>
-  <x-button class="icon primary">&#9829;</x-button>
-  <x-button class="icon accent">&#9829;</x-button>
-  <x-button class="icon" disabled="disabled">&#9829;</x-button>
-  <x-button class="icon no-style">&#9829;</x-button>
+  <button x="" class="icon">&#9829;</button>
+  <button x="" class="icon primary">&#9829;</button>
+  <button x="" class="icon accent">&#9829;</button>
+  <button x="" class="icon" disabled="disabled">&#9829;</button>
+  <button x="" class="icon no-style">&#9829;</button>
   <pre language="html">
-  &lt;x-button class="<b>icon</b>">&#9829;&lt;/x-button>
-  &lt;x-button class="<b>icon</b> primary">&#9829;&lt;/x-button>
-  &lt;x-button class="<b>icon</b> accent">&#9829;&lt;/x-button>
-  &lt;x-button class="<b>icon</b>" disabled="disabled">&#9829;&lt;/x-button>
-  &lt;x-button class="<b>no-style</b>">&#9829;&lt;/x-button>
+  &lt;button x class="<b>icon</b>">&#9829;&lt;/button>
+  &lt;button x class="<b>icon</b> primary">&#9829;&lt;/button>
+  &lt;button x class="<b>icon</b> accent">&#9829;&lt;/button>
+  &lt;button x class="<b>icon</b>" disabled="disabled">&#9829;&lt;/button>
+  &lt;button x class="<b>no-style</b>">&#9829;&lt;/button>
   </pre>
 </div>
 
 <div class="classes" title="Classes">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>primary</td><td> primary styling, background blue, color white</td></tr>
-        <tr><td>accent</td><td> accent styling, background red, color white</td></tr>
-        <tr><td>loading</td><td> It does not hide elelement with class with 'loading'</td></tr>
-        <tr><td>no-bg</td><td> Shows transparent background color and changes color to black</td></tr>
-        <tr><td>no-border</td><td> Shows transparent border </td></tr>
-        <tr><td>no-shadow</td><td> Does not show shadow </td></tr>
-        <tr><td>icon</td><td> Button with "icon" class will have rounded shape instead of rectanble shape </td></tr>
-      </tbody>
-    </table>
-  </x-table>
+  <h3>Classes</h3>
+  <table x="">
+    <thead><tr><th>Name</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>primary</td><td> primary styling, background blue, color white</td></tr>
+      <tr><td>accent</td><td> accent styling, background red, color white</td></tr>
+      <tr><td>loading</td><td> It does not hide elelement with class with 'loading'</td></tr>
+      <tr><td>no-bg</td><td> Shows transparent background color and changes color to black</td></tr>
+      <tr><td>no-border</td><td> Shows transparent border </td></tr>
+      <tr><td>no-shadow</td><td> Does not show shadow </td></tr>
+      <tr><td>icon</td><td> Button with "icon" class will have rounded shape instead of rectanble shape </td></tr>
+    </tbody>
+  </table>
 </div>

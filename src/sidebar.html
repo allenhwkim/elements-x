@@ -1,142 +1,56 @@
 <x-route class="route-items" target="article-contents" main-route>
   <div pattern="/" src="app-components-intro.html"></div> 
   <div pattern="/component" src="app-components-intro.html"></div> 
-  <a class="route-item" href="/component/usage" src="usage.html">Usage</a>
-  <a class="route-item" href="/component/common-style" src="common-style.html">CSS classes</a>
   <div>
-    <a class="route-item" href="/component/button" src="components/button.html">
-      <i class="fas fa-square"></i><b>button <sub>custom style</sub></b>
-    </a>
-    <a class="route-item" href="/component/div" src="components/div.html">
-      <i class="fas fa-vector-square"></i><b>div <sub> micro framework</sub></b>
-    </a>
+    <a class="route-item" href="/component/usage" src="usage.html">Usage</a>
+    <a class="route-item" href="/component/common-style" src="common-style.html">CSS classes</a>
+    <a class="route-item" href="/component/button" src="components/button.html">button</a>
     <div class="group-header expanded" onclick="this.classList.toggle('expanded');event.stopPropagation();">
-      <i class="fas fa-pen-square"></i> &nbsp;<span class="text"> input</span>
+      <span class="text"> input</span>
     </div>
     <div class="input-elements">
-      <a class="route-item sub-item" href="/component/input/text" src="components/input.html">
-        <i class="fas fa-i-cursor"></i> <b>text <sub>w/ label</sub></b>
-      </a>
-      <a class="route-item sub-item" href="/component/input/date" src="components/input.html">
-        <i class="fas fa-calendar"></i> <b>date <sub>calendar</sub></b>
-      </a>
-      <a class="route-item sub-item" href="/component/input/time" src="components/input.html">
-        <i class="fas fa-clock"></i> <b>time <sub>modifiable clock</sub></b>
-      </a>
-      <a class="route-item sub-item" href="/component/input/checkbox" src="components/input.html">
-        <i class="far fa-check-square"></i> <b>checkbox <sub>custom style</sub></b>
-      </a>
-      <a class="route-item sub-item" href="/component/input/radio" src="components/input.html">
-        <i class="fas fa-dot-circle"></i> <b>radio <sub>custom style</sub></b>
-      </a>
-      <a class="route-item sub-item" href="/component/input/color" src="components/input.html">
-        <i class="fas fa-palette"></i> <b>color <sub>custom style</sub></b>
-      </a>
-      <a class="route-item sub-item" href="/component/input/file" src="components/input.html">
-        <i class="fas fa-upload"></i> <b>file <sub>drop/paste/preview</sub></b>
-      </a>
-      <a class="route-item sub-item" href="/component/input/switch" src="components/input.html">
-        <i class="fas fa-toggle-on"></i> <b>switch <sub>Modifiable On/Off</sub></b>
-      </a>
-      <a class="route-item sub-item" href="/component/input/mask" src="components/input.html">
-        <i class="fas fa-mask"></i> <b>mask <sub>Masked Input</sub></b>
-      </a>
+      <a class="route-item sub-item" href="/component/input/text" src="components/input.html">text</a>
+      <a class="route-item sub-item" href="/component/input/date" src="components/input.html">date</a>
+      <a class="route-item sub-item" href="/component/input/time" src="components/input.html">time</a>
+      <a class="route-item sub-item" href="/component/input/checkbox" src="components/input.html">checkbox</a>
+      <a class="route-item sub-item" href="/component/input/radio" src="components/input.html">radio</a>
+      <a class="route-item sub-item" href="/component/input/color" src="components/input.html">color</a>
+      <a class="route-item sub-item" href="/component/input/file" src="components/input.html">file</a>
+      <a class="route-item sub-item" href="/component/input/switch" src="components/input.html">switch</a>
+      <a class="route-item sub-item" href="/component/input/mask" src="components/input.html">mask</a>
     </div>
-    <a class="route-item" href="/component/pre" src="components/pre.html">
-      <i class="fas fa-code"></i><b>pre</b>
-    </a>
-    <a class="route-item" href="/component/select" src="components/select.html">
-      <i class="far fa-caret-square-down"></i> <b>select <sub>better dropdown</sub></b>
-    </a>
-    <a class="route-item" href="/component/table" src="components/table.html">
-      <i class="fas fa-table"></i><b>table <sub>interactive data</sub> </b>
-    </a>
-    <a class="route-item"  href="/component/ul" src="components/ul.html">
-      <i class="fas fa-sitemap"></i><b>ul <sub>navigable list</sub> </b>
-    </a>
+    <a class="route-item" href="/component/select" src="components/select.html">select</a>
+    <a class="route-item" href="/component/table" src="components/table.html">table</a>
+    <a class="route-item"  href="/component/ul" src="components/ul.html">ul </a>
     <div class="group-header expanded" onclick="this.classList.toggle('expanded'); event.stopPropagation();">
-      <i class="fas fa-dice-d6"></i> &nbsp; 
       <span class="text">Custom Elements </span>
     </div>
     <div class="custom-elements">
-      <a class="route-item" href="/component/ace" src="components/ace.html">
-        <i class="fas fa-edit"></i><b>ACE Editor</b>
-      </a>
-      <a class="route-item" href="/component/accordion" src="components/accordion.html">
-        <i class="fas fa-angle-up"></i><b>accordion</b>
-      </a>
-      <a class="route-item" href="/component/barcode" src="components/barcode.html">
-        <i class="fas fa-barcode"></i><b>barcode</b>
-      </a>
-      <a class="route-item"  href="/component/calendar" src="components/calendar.html">
-        <i class="fas fa-calendar"></i><b>calendar</b>
-      </a>
-      <a class="route-item"  href="/component/carousel" src="components/carousel.html">
-        <i class="fas fa-film"></i><b>carousel</b>
-      </a>
-      <a class="route-item" href="/component/clipboard" src="components/clipboard.html">
-        <i class="fas fa-clipboard"></i><b>clipboard</b>
-      </a>
-      <a class="route-item"  href="/component/clock" src="components/clock.html">
-        <i class="fas fa-clock"></i><b>clock</b>
-      </a>
-      <a class="route-item"  href="/component/color-picker" src="components/color-picker.html">
-        <i class="fas fa-palette"></i><b>color-picker</b>
-      </a>
-      <a class="route-item"  href="/component/dialog" src="components/dialog.html">
-        <i class="fas fa-window-maximize"></i><b>dialog</b>
-      </a>
-      <a class="route-item" href="/component/flag" src="components/flag.html">
-        <i class="fas fa-flag"></i><b>flag</b>
-      </a>
-      <a class="route-item"  href="/component/format" src="components/format.html">
-        <i class="fas fa-won-sign"></i><b>format <sub>number, currency, date</sub> </b>
-      </a>
-      <a class="route-item"  href="/component/http" src="components/http.html">
-        <i class="fas fa-globe"></i><b>http</b>
-      </a>
-      <a class="route-item" href="/component/highlightjs" src="components/highlightjs.html">
-        <i class="fas fa-highlighter"></i><b>highlightjs</b>
-      </a>
-      <a class="route-item" href="/component/include" src="components/include.html">
-        <i class="fas fa-download"></i><b>include</b>
-      </a>
-      <a class="route-item" href="/component/listeners" src="components/listeners.html">
-        <i class="fas fa-eye"></i><b>listeners</b>
-      </a>
-      <a class="route-item"  href="/component/openlayers" src="components/openlayers.html">
-        <i class="fas fa-map-marked"></i><b>openlayers</b>
-      </a>
-      <a class="route-item" href="/component/overlay" src="components/overlay.html">
-        <i class="fas fa-layer-group"></i><b>overlay</b>
-      </a>
-      <a class="route-item" href="/component/pagination" src="components/pagination.html">
-        <i class="fas fa-angle-double-left"></i><b>pagination</b>
-      </a>
-      <a class="route-item" href="/component/route" src="components/route.html">
-        <i class="fas fa-route"></i><b>route</b>
-      </a>
-      <a class="route-item" href="/component/qrcode" src="components/qrcode.html">
-        <i class="fas fa-qrcode"></i><b>qrcode</b>
-      </a>
-      <a class="route-item" href="/component/sidebar" src="components/sidebar.html">
-        <i class="fas fa-bars"></i><b>sidebar</b>
-      </a>
-      <a class="route-item" href="/component/snackbar" src="components/snackbar.html">
-        <i class="fas fa-bell"></i><b>snackbar</b>
-      </a>
-      <a class="route-item"  href="/component/tabs" src="components/tabs.html">
-        <i class="fas fa-box"></i><b>tabs</b>
-      </a>
-      <a class="route-item"  href="/component/tooltip" src="components/tooltip.html">
-        <i class="fas fa-info-circle"></i><b>tooltip</b>
-      </a>
-      <a class="route-item" href="/component/translation" src="components/translation.html">
-        <i class="fas fa-language"></i><b>translation</b>
-      </a>
-      <a class="route-item" href="/component/typing-effect" src="components/typing-effect.html">
-        <i class="fas fa-keyboard"></i><b>typing-effect</b>
-      </a>
+      <a class="route-item" href="/component/ace" src="components/ace.html">ACE Editor</a>
+      <a class="route-item" href="/component/accordion" src="components/accordion.html">accordion</a>
+      <a class="route-item" href="/component/barcode" src="components/barcode.html">barcode</a>
+      <a class="route-item"  href="/component/calendar" src="components/calendar.html">calendar</a>
+      <a class="route-item"  href="/component/carousel" src="components/carousel.html">carousel</a>
+      <a class="route-item" href="/component/clipboard" src="components/clipboard.html">clipboard</a>
+      <a class="route-item"  href="/component/clock" src="components/clock.html">clock</a>
+      <a class="route-item"  href="/component/color-picker" src="components/color-picker.html">color-picker</a>
+      <a class="route-item" href="/component/flag" src="components/flag.html">flag</a>
+      <a class="route-item"  href="/component/format" src="components/format.html">format</a>
+      <a class="route-item" href="/component/highlightjs" src="components/highlightjs.html">highlightjs</a>
+      <a class="route-item" href="/component/include" src="components/include.html">include</a>
+      <a class="route-item" href="/component/listeners" src="components/listeners.html">listeners</a>
+      <a class="route-item"  href="/component/openlayers" src="components/openlayers.html">openlayers</a>
+      <a class="route-item" href="/component/overlay" src="components/overlay.html">overlay</a>
+      <a class="route-item" href="/component/pagination" src="components/pagination.html">pagination</a>
+      <a class="route-item" href="/component/route" src="components/route.html">route</a>
+      <a class="route-item" href="/component/qrcode" src="components/qrcode.html">qrcode</a>
+      <a class="route-item"  href="/component/tabs" src="components/tabs.html">tabs</a>
+      <a class="route-item"  href="/component/tooltip" src="components/tooltip.html">tooltip</a>
+      <a class="route-item" href="/component/typing-effect" src="components/typing-effect.html">typing-effect</a>
+      <a class="route-item func" href="/component/alert" src="components/alert.html">smartform.showAlert()</a>
+      <a class="route-item func" href="/component/message" src="components/message.html">smartform.showMessage()</a>
+      <a class="route-item func" href="/component/overlay" src="components/overlay.html">smartform.showOverlay()</a>
+      <a class="route-item func" href="/component/format" src="components/format.html">smartform.format()</a>
     </div>
     <div href="/tool/svg-to-url" src="/tools/svg-to-url.html"></div>
     <div href="/tool/url-encode" src="/tools/url-encode.html"></div>

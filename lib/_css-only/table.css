@@ -1,0 +1,48 @@
+table[x] {
+  max-width: 100%;
+  border-collapse: collapse;
+  font-size: .9rem;
+}
+
+table[x] > thead > tr {
+  background: #656565;
+  color: #FFF;
+}
+
+table[x] > thead > tr > th {
+  padding: 8px 12px;
+  white-space: nowrap;
+  position: relative;
+  border-top: 0;
+  vertical-align: bottom;
+  border: 1px solid #dee2e6;
+  border-width: 0 1px apx 1px;
+  padding: 0.75rem;
+  font-weight: 400;
+  text-align: inherit;
+}
+table[x] > thead > tr > th:first-child {
+  border-left: 1px solid #656565;
+}
+table[x] > thead > tr > th:last-child {
+  border-right: 1px solid #656565;
+}
+table[x] > tbody > tr {
+  background-color: #FFF;
+}
+
+table[x] > tbody > tr:nth-of-type(odd) {
+  background-color: #0000000d;
+}
+
+table[x] > tbody > tr > td {
+  vertical-align: middle;
+  border: 1px solid #dee2e6;
+  border-width: 0 1px 1px 1px;
+  padding: 8px 12px;
+  font-weight: 400;
+  text-align: inherit;
+}
+table[x] > tbody > tr > td:first-child {
+  white-space: nowrap;
+}

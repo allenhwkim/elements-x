@@ -32,12 +32,9 @@ and independent from any framework.
       <li><a href="/component/clipboard">clipboard</a></li>
       <li><a href="/component/clock">clock</a></li>
       <li><a href="/component/color-picker">color-picker</a></li>
-      <li><a href="/component/dialog">dialog</a></li>
-      <li><a href="/component/div">div</a></li>
       <li><a href="/component/flag">flag</a></li>
       <li><a href="/component/format">format</a></li>
       <li><a href="/component/highlightjs">highlightjs</a></li>
-      <li><a href="/component/http">http</a></li>
       <li><a href="/component/include">include</a></li>
       <li aria-expanded>input
         <ul>
@@ -60,12 +57,9 @@ and independent from any framework.
       <li><a href="/component/qrcode">qrcode</a></li>
       <li><a href="/component/route">route</a></li>
       <li><a href="/component/select">select</a></li>
-      <li><a href="/component/sidebar">sidebar</a></li>
-      <li><a href="/component/snackbar">snackbar</a></li>
       <li><a href="/component/table">table</a></li>
       <li><a href="/component/tabs">tabs</a></li>
       <li><a href="/component/tooltip">tooltip</a></li>
-      <li><a href="/component/translation">translation</a></li>
       <li><a href="/component/typing-effect">typing-effect</a></li>
       <li><a href="/component/ul">ul</a></li>
     </ul>
@@ -103,17 +97,15 @@ and independent from any framework.
 <h2>Updates</h2>
 <ul class="default">
   <li>ver. 1.14, 2021-08-25, x-listeners</li>
-  <li>ver. 1.13, 2021-07-20, x-sidebar</li>
   <li>ver. 1.12, 2021-07-16, x-openlayers</li>
   <li>ver. 1.10, 2021-07-13, x-ace, x-highlightjs</li>
   <li>ver. 1.9, 2021-07-08, x-accordion, x-barcode, x-clipboard, x-flag, x-qrcode, x-typing-effect</li>
   <li>ver. 1.8, 2021-06-15, x-mask, x-table, x-ul</li>
-  <li>ver. 1.7, 2021-05-31, x-route, x-snackbar</li>
+  <li>ver. 1.7, 2021-05-31, x-route</li>
   <li>ver. 1.6, 2021-05-30, x-ul, x-i, x-select</li>
   <li>ver. 1.5, 2021-05-01, x-input with type 8 types</li>
   <li>ver. 1.3, 2021-03-23, Utility functions are now public; setHTML, addCss, removeCss</li>
   <li>ver. 1.2, 2021-03-13, Infinite scrolling with &lt;x-list></li>
-  <li>ver. 1.1, 2021-02-16, &lt;x-menu>, &lt;x-div> </li>
   <li>ver. 1.0, 2021-02-04, upgrade to NodeJs 15, npm 7, Webpack 5</li>
   <li>ver. 0.7, 2021-01-29, Update x-list to handle with template / value</li>
   <li>ver. 0.6, 2021-01-28, Added x-color-picker</li>
@@ -121,11 +113,6 @@ and independent from any framework.
   <li>ver. 0.4, 2021-01-20, Added autocomplete page</li>
   <li>ver. 0.2, 2020-11-20, First Release</li>
 </ul>
-
-<iframe class="youtube-intro" src="https://www.youtube.com/embed/nni_WqNVfzM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
-<!-- <video controls width="100%" onplay="this.playbackRate = 2;" poster="assets/video-poster.png">
-  <source src="assets/intro.mov" />
-</video> -->
 
 <p>
 By extending functionality of &lt;div> and &lt;ul>, it can even work as a minimal framework
@@ -140,7 +127,7 @@ most of DOM handling scripts can be wrapped into custom elements.
       <x-pre>&lt;script src="https://unpkg.com/elements-x"&gt;&lt;script&gt;</x-pre>
     </li>
     <li>Write your html elements.
-      <x-pre>&lt;x-button class="primary"&gt;My Button&lt;/x-button&gt;</x-pre>
+      <x-pre>&lt;button x class="primary"&gt;My Button&lt;/button&gt;</x-pre>
     </li>
   </ul>
 
@@ -153,7 +140,7 @@ most of DOM handling scripts can be wrapped into custom elements.
       <x-pre>import “elements-x”;</x-pre>
     </li>
     <li>Write your html elements.
-      <x-pre>&lt;x-button class="primary"&gt;My Button&lt;/x-button&gt;</x-pre>
+      <x-pre>&lt;button x class="primary"&gt;My Button&lt;/button&gt;</x-pre>
     </li>
   </ul>
 

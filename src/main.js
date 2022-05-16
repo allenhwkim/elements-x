@@ -1,14 +1,9 @@
-import { XTranslation, defineAll, addSnackbar, openDialog } from '../lib';
+import { elementsX } from '../lib';
 import { debounce } from '../lib/common/util';
-import { setTranslationForRouteNInclude } from './translations';
 
-window.addSnackbar = addSnackbar;
-window.openDialog = openDialog;
-defineAll();
+elementsX.defineAll();
 
 window.$ = document.querySelector.bind(document);
-
-setTranslationForRouteNInclude();
 
 // enable/disable outline for click and tab
 document.body.addEventListener('click', 
@@ -35,41 +30,10 @@ window.addEventListener('DOMContentLoaded', function() {
     }, 1000);
   }
 
-  /** 
-   * disabling facebook comments because of error in console
-   * ErrorUtils caught an error: Params: 113 [Caught in: Module "VisibilityListener"]
-   */
-  enableFacebookComments();
   document.body.addEventListener('x-route', function(event) {
+    $('.sidebar').classList.remove('x-visible');
     const title = event.detail.state.urlPath?.replace(/\//g, ' ');
     document.title = 'Custom ' + (title || 'Elements');
   });
 });
  
-function enableFacebookComments() {
-  if (window.location.hostname.startsWith('localhost')) return;
-  if (window.innerWidth < 768) return;
-
-  const locale = XTranslation.getLanguage() === 'kr' ? 'ko_KR' : 'en_US';
-  const script = document.createElement('script');
-  script.setAttribute('async', '');
-  script.setAttribute('defer', '');
-  script.setAttribute('crossorigin', 'anonymous');
-  script.setAttribute('nonce', 'qRsDD5xh');
-  script.setAttribute('src', `https://connect.facebook.net/${locale}/sdk.js#xfbml=1&version=v9.0&appId=254907754864724`);
-  setTimeout(_ => document.body.appendChild(script), 2000);
-
-  document.body.addEventListener('x-route', function() {
-    $('.fb-comments').style.display = 'none'; // to avoid flicking
-    debounce(event => {
-      const iframe = $('.fb-comments iframe'); 
-      if (iframe) {
-        const href = window.location.href.replace(window.location.search, '');
-        const iframeSrc = iframe.getAttribute('src')
-          .replace(/&href=[^&]+/, `&href=${encodeURIComponent(href)}`);
-        iframe.setAttribute('src', iframeSrc);
-      }
-      $('.fb-comments').style.display = 'block';
-    }, 5000)();
-  });
-}

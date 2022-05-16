@@ -11,22 +11,20 @@ x-tabs .tabs [tab-for] {
   margin: 1px 2px 0 0;
   padding: 12px;
   position: relative;
-  opacity: .7;
+  opacity: .8;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   white-space: nowrap;
-  /* min-width: 160px; */
-  outline: 0;
 }
 
-x-tabs .tabs [tab-for][aria-selected] {
+x-tabs .tabs [tab-for][selected] {
   background: #FFF;
   opacity: 1;
 }
 
 x-tabs .tabs [tab-for][disabled] {
-  opacity: .5;
+  opacity: .7;
   pointer-events: none;
 }
 
@@ -47,6 +45,6 @@ x-tabs .tab-contents [contents-for] {
   display: none;
 }
 
-x-tabs .tab-contents [contents-for][aria-selected] {
+x-tabs .tab-contents [contents-for][selected] {
   display: block;
 }

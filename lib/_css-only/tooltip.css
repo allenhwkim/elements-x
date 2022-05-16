@@ -1,0 +1,38 @@
+@keyframes appear {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+[data-tooltip] {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #333;
+}
+
+[data-tooltip]:hover::before{
+  content: attr(data-tooltip);
+  min-width: 120px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 6px;
+  position: absolute;
+  z-index: 1;
+  top: calc(100% + 12px);
+  left: 50%;
+  margin-left: -60px;
+  animation: appear .3s;
+}
+
+[data-tooltip]:hover::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -6px;
+  border-width: 6px;
+  z-index: 1;
+  border-style: solid;
+  border-color: transparent transparent #333 transparent;
+}

@@ -1,0 +1,73 @@
+button[x] {
+  --primary: #3751B5;
+  --accent: #D13101;
+  --disabled: #FFF;
+  --size: 1.1;
+  display: inline-block;
+  margin: 0px 4px;
+  border-radius: 4px;
+  padding: 5px 15px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  vertical-align: bottom;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: 1px 1px 2px #CCC;
+  min-width: 60px;
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  min-height: 36px;
+}
+button[x]:focus {
+  box-shadow: white 0 0 0 2px, #3751B5 0 0 0 4px;
+}
+button[x]:disabled,
+button[x].primary:disabled,
+button[x].accent:disabled {
+  color: var(--disabled); 
+  pointer-events: none; 
+  background-color: #868585;
+}
+button[x].no-style:disabled {
+  color: #868585; 
+}
+button[x]:not(:disabled):not(.no-style):hover,
+button[x]:not(:disabled):not(.no-style):focus {
+  background-color: #3f57a8;
+  color: #FFF;
+}
+button[x]:active { 
+  box-shadow: none; 
+  transform: translate(1px, 1px); 
+  background-color: #3f57a8;
+  color: #FFF;
+}
+button[x].icon { 
+  min-width: 32px;
+  min-height: 32px;
+  border-radius: 50%; 
+  padding: 0; 
+}
+button[x].icon > button { 
+  border-radius: inherit; 
+}
+
+button[x].primary { 
+  background: var(--primary); 
+  color: #FFF; 
+}
+button[x].accent {
+  background: var(--accent);
+  color: #FFF;
+}
+button[x][tabindex="-1"]:disabled {
+  background-color: #FFF; 
+}
+
+button[x].no-style {
+  border: none;
+  background: transparent;
+  min-width: revert;
+  box-shadow: revert;
+  padding: revert;
+  min-height: revert;
+}

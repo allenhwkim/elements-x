@@ -1,4 +1,3 @@
-<app-group-header title="Pagination" path="/patination"></app-group-header>
 
 <script>
 document.querySelector('x-pagination').addEventListener('x-select', function(event) {
@@ -29,8 +28,8 @@ The &lt;x-pagination> element enables the user to select a specific page from a 
 
 <h3>
   Example
-  <a class="try-it" target="_" href="//stackblitz.com/edit/x-pagination?file=index.html">Try with static html</a>
-  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-custom-bd5c7?file=/src/app/components/pagination.component.ts&initialpath=/pagination">Try with Angular</a>
+  <a class="try-it" target="_" href="//stackblitz.com/edit/x-pagination?file=index.html"> static html</a>
+  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-custom-bd5c7?file=/src/app/components/pagination.component.ts&initialpath=/pagination"> Angular</a>
 </h3> 
 
 <hr/>
@@ -73,26 +72,24 @@ The &lt;x-pagination> element enables the user to select a specific page from a 
 <x-pre class="message">Empty</x-pre>
 
 <div class="attributes" title="Attributes">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>current-page</td><td>Number</td><td>1</td><td>Optional</td><td> current-page number</td></tr>
-        <tr><td>num-records-per-page</td><td>Number</td><td>10</td><td>Optional</td><td>number of records per page</td></tr>
-        <tr><td>num-pages</td><td>Number</td><td>Default</td><td>5</td><td>number of page buttons to display</td></tr>
-        <tr><td>total-records</td><td>Number</td><td>Default</td><td>100</td><td> number of total records</td></tr>
-      </tbody>
-    </table>
-  </x-table>
+  <h3>Attributes</h3>
+  <table x="">
+    <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>current-page</td><td>Number</td><td>1</td><td>Optional</td><td> current-page number</td></tr>
+      <tr><td>num-records-per-page</td><td>Number</td><td>10</td><td>Optional</td><td>number of records per page</td></tr>
+      <tr><td>num-pages</td><td>Number</td><td>Default</td><td>5</td><td>number of page buttons to display</td></tr>
+      <tr><td>total-records</td><td>Number</td><td>Default</td><td>100</td><td> number of total records</td></tr>
+    </tbody>
+  </table>
 </div>
 
 <div class="events" title="Events">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>x-select</td><td>Custom Event</td><td>page, offset, and limit</td><td>Fired when a page is selected</td></tr>
-      </tbody>
-    </table>
-  </x-table>
+  <h3>Events</h3>
+  <table x="">
+    <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>x-select</td><td>Custom Event</td><td>page, offset, and limit</td><td>Fired when a page is selected</td></tr>
+    </tbody>
+  </table>
 </div>

@@ -1,82 +1,55 @@
+input.x-select {
+  width: 200px;
+  height: 32px;
+  padding: 0 20px 0 4px;
+  border: 1px solid #CCC;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z' fill='%23666' /><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: 50%;
+  border-radius: 4px;
+}
+
+input.x-select[disabled] {
+  opacity: .7;
+}
+
+input.x-select:focus + x-select {
+  position: absolute;
+  display: block; /* referential, set by js */
+}
+
 x-select {
-  --height: 36px;
   display: none;
-  position: relative;
+  opacity: 0;
+  padding: 6px;
+  border:1px solid #ccc;
+  position: absolute;
+  min-width: 200px;
+  max-height: 200px;
   white-space: nowrap;
-  height: var(--height);
+  background: #FFF;
+  overflow: auto;
+  z-index: 1;
 }
-x-select.x-init {
-  display: inline-block;
-}
-
-x-select .x-native {
-  padding: 0 8px;
-  border-radius: 4px;
-  width: 100%;
-  height: var(--height);
-  display: inline-block;
-  box-sizing: border-box;
-  background: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right center;
-  padding-right: 24px;
-  appearance:none; /* to remove default arrow replaceing with bg image */
-}
-
-.x-native:focus {
-  outline: none;
-  box-shadow: white 0 0 0 2px, #ff821f 0 0 0 4px;
-}
-
-x-select:disabled .x-native {
-  background: url("data:image/svg+xml;utf8,<svg fill='grey' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right center;
-}
-
-.x-native > option {
+x-select > .hidden {
   display: none;
 }
 
-.x-custom {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  border: 0px solid #6f6f6f;
-  border-radius: 4px;
-  background-color: #fff;
-  z-index: 1;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .2s;
+x-select > .x-highlighted,
+x-select > :hover {
+  background: #529FFF;
+  color: #FFF;
+}
+x-select > * {
+ padding: 2px 4px;
+ line-height: 28px;
+ border-radius: 2px;
+}
+x-select > :nth-child(odd):not(.x-highlighted):not(:hover) {
+  background: #F9f9f9;
+}
+x-select > .x-selected:before {
+  content: '✓ ';
 }
 
-.x-native:focus ~ .x-custom {
-  max-height: 500px;
-  border-width: 1px;
-  box-shadow: 0 0 4px #e9e1f8;
-}
-
-.x-custom > * {
-  position: relative;
-  padding: 8px;
-  padding-left: 25px;
-  border-bottom: 1px solid #d3d3d3;
-}
-
-.x-custom > *:last-child {
-  border-bottom: none;
-}
-
-.x-custom > *.selected::before {
-  content: "✓";
-  position: absolute;
-  left: 8px;
-}
-
-.x-custom > *.active, 
-.x-custom > *:not([disabled]):hover {
-  background-color: #865bd7;
-  color: white;
-  cursor: default;
-}
-
-.x-custom > *[disabled] {
-  opacity: .5;
-}

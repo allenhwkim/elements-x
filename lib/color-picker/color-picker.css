@@ -1,22 +1,67 @@
 x-color-picker {
+  --width: 240px;
+  --height: 160px;
+  --size: 32px;
   position: relative;
-  display: block;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  vertical-align: bottom;
 }
 
-x-color-picker > .circle {
+x-color-picker .trigger {
+  width: var(--size);
+  height: var(--size);
+  border: 1px solid #CCC; 
+}
+
+x-color-picker .dropdown {
+  position: absolute;
+  left: 0;
+  display: none;
+  width: var(--width);
+  height: var(--height);
+  box-shadow: 1px 1px 4px #999;
+  z-index: 1;
+  overflow: hidden;
+}
+x-color-picker:focus .dropdown {
+  display: block;
+  position: relative;
+}
+x-color-picker.left .dropdown {
+  left: calc((var(--width) - var(--size)) * -1);
+}
+
+x-color-picker .dropdown > .canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+x-color-picker .dropdown > .circle {
+  position: absolute;
+  top:0;
+  left: 0;
+  display: none;
   border: 2px solid;
   border-radius: 50%;
   width: 12px;
   height: 12px;
-  position: absolute;
-  top:0;
-  left: 0;
   pointer-events: none;
   box-sizing: border-box;
 }
+x-color-picker.active .dropdown > .circle {
+  display: block;
+}
 
-x-color-picker > .desc {
+x-color-picker .dropdown > .desc {
   font-size: 14px;
-  text-align: center;
+  position: absolute;
+  bottom: 0;
+  color: #FFF;
+  pointer-events: none;
+  padding-left: 12px;
   width: 100%;
+  text-align: center;
 }

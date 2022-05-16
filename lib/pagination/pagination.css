@@ -1,6 +1,8 @@
-x-pagination {
+s-pagination {
   display: block;
-  text-align: center;
+}
+x-pagination.navitation .prev {
+  display: inline-block;
 }
 
 x-pagination > .pages {
@@ -18,18 +20,28 @@ x-pagination .page {
   color: inherit;
 }
 x-pagination .page:disabled {
-  color: #999;
+  display: none;
 }
+
 x-pagination .prev.page::before {
-  content : 'Prev';
+  content : '◀';
 }
+
 x-pagination .next.page::before {
-  content : 'Next';
+  content : '▶';
+}
+
+x-pagination .first.page::before {
+  content : '◀◀';
+}
+
+x-pagination .last.page::before {
+  content : '▶▶';
 }
 
 x-pagination .pages > .page.selected {
   color: #FFF;
-  background-color: #4285f4;
+  background-color: #0B51C1;
   border-radius: 4px;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
   transition: all .2s linear;

@@ -1,4 +1,7 @@
 x-input[type=date] {
-  position: relative;
   display: inline-block;
+}
+
+x-input[type=data] x-calendar {
+
 }

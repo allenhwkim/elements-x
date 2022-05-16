@@ -1,0 +1,65 @@
+body.x-alert-no-scroll {
+  overflow: hidden;
+}
+
+x-alert {
+  display: block;
+}
+
+x-alert > .x-blocker {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+x-alert .x-contents {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 8px 8px 16px #999;
+  background-color: white;
+  border-radius: 4px;
+  padding: 16px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: appear .3s;
+  z-index: 1;
+  min-width: 450px;
+  min-height: 140px;
+}
+
+@keyframes appear {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+x-alert .x-contents .x-close-button {
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+  right: 0;
+  top: 2px;
+  border: 0;
+  background: transparent;
+  opacity: .7;
+}
+x-alert .x-contents .title {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+x-alert .x-contents .buttons {
+  text-align: right;
+}
+x-alert .x-contents .x-close-button:hover {
+  opacity: 1;
+}
+
+x-alert.not-closable .x-contents .x-close-button {
+  display: none;
+}

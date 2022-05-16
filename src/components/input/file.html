@@ -1,8 +1,6 @@
-<app-group-header title="File Selector" path="/input"></app-group-header>
-
 <h3>Features  
-  <a class="try-it" target="_" href="//stackblitz.com/edit/x-input-file?file=index.html">Try with static html</a>
-  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-hdbyk?file=/src/app/components/input.component.ts&initialpath=/input">Try with Angular</a>
+  <a class="try-it" target="_" href="//stackblitz.com/edit/x-input-file?file=index.html"> static html</a>
+  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-hdbyk?file=/src/app/components/input.component.ts&initialpath=/input"> Angular</a>
 </h3>
 <ul class="default">
   <li> To collect files, user can drag and drop a file or multiple files. </li>
@@ -106,26 +104,24 @@
 <li><b>x-error</b>: fired when upload is errored</li>
 
 <div class="attributes" title="Attributes">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>upload-fn</td><td>string</td><td>N/A</td><td>Optional</td><td>the uplod function name that returns xhr</td></tr>
-      </tbody>
-    </table>
-  </x-table>
+  <h3>Attributes</h3>
+  <table x="">
+    <thead><tr><th>Name</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>upload-fn</td><td>the uplod function name that returns xhr</td></tr>
+    </tbody>
+  </table>
 </div>
 
 <div class="events" title="Events">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>x-select</td><td>CustomEvent</td><td>selected file</td><td>fired when collected files are changed with the values of list of files</td></tr>
-        <tr><td>x-progress</td><td>CustomEvent</td><td></td><td>fired when upload is in progress</td></tr>
-        <tr><td>x-load</td><td>CustomEvent</td><td></td><td>fired when upload is done successfully</td></tr>
-        <tr><td>x-error</td><td>CustomEvent</td><td></td><td>fired when upload is errored</td></tr>
-      </tbody>
-    </table>
-  </x-table>
+  <h3>Events</h3>
+  <table x="">
+    <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>x-select</td><td>CustomEvent</td><td>selected file</td><td>fired when collected files are changed with the values of list of files</td></tr>
+      <tr><td>x-progress</td><td>CustomEvent</td><td></td><td>fired when upload is in progress</td></tr>
+      <tr><td>x-load</td><td>CustomEvent</td><td></td><td>fired when upload is done successfully</td></tr>
+      <tr><td>x-error</td><td>CustomEvent</td><td></td><td>fired when upload is errored</td></tr>
+    </tbody>
+  </table>
 </div>

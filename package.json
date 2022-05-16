@@ -1,11 +1,11 @@
 {
   "name": "elements-x",
-  "version": "2.1.11",
+  "version": "2.2.0",
   "description": "Collection of simple, customizable and extendible custom elements",
   "scripts": {
-    "start": "esbuild-x serve",
-    "build": "esbuild-x lib && esbuild-x libmin",
-    "build:demo": "esbuild-x build",
+    "start": "./build/serve.js --open --port=9200",
+    "build": "./build/lib.js",
+    "build:demo": "./build/demo.js",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -23,9 +23,16 @@
     "dist"
   ],
   "devDependencies": {
-    "esbuild-x": "^0.3.3",
+    "chokidar": "^3.5.3",
+    "esbuild": "^0.14.39",
+    "html-minifier": "^4.0.0",
+    "http-server": "^14.1.0",
+    "kill-port": "^1.6.1",
+    "marked": "^4.0.15",
+    "memfs": "^3.4.1",
     "open": "^8.4.0",
     "rimraf": "^3.0.2",
-    "rxjs": "^7.4.0"
+    "rxjs": "^7.4.0",
+    "yargs": "^17.5.1"
   }
 }

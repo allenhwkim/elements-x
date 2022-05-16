@@ -1,98 +1,123 @@
-<app-group-header title="Pagination" path="/patination"></app-group-header>
-
-<script>
-document.querySelector('x-pagination').addEventListener('x-select', function(event) {
-  document.querySelector('.message').innerText
-    = JSON.stringify(event.detail, null, '  ');
-});
-</script>
-
+<h2>Pagination</h2>
 <p>
-The &lt;x-pagination> element enables the user to select a specific page from a range of pages that are composed by total records,  number of records per page, and the current page number.
-</p>
-
-<x-pre>
-  &lt;x-pagination value="4"
-    num-records-per-page="10"
-    num-pages="5"
-    total-records="1000">
-  &lt;/x-pagination>
-</x-pre>
-
-<p>
-  It fires 'x-select' event when a page is selected, so that a page-related setion. e.g., list, can react to it.
+  It enables the user to select a specific page from a range of 
+  pages that are composed by total records, number of records per page, and the current row number.
 </p>
 
 <p>
-  The following example demonstrates customizable pagination section along with showing x-select message detail.
+  It fires 'select' event when a page is selected, so that a page-related setion. e.g., list, can react to it.
 </p>
 
-<h3>
-  Example
-  <a class="try-it" target="_" href="//stackblitz.com/edit/x-pagination?file=index.html">Try with static html</a>
-  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-custom-bd5c7?file=/src/app/components/pagination.component.ts&initialpath=/pagination">Try with Angular</a>
-</h3> 
-
-<hr/>
-<p>
-  <x-pagination
-    current-page="100"
-    num-records-per-page="10"
-    num-pages="5"
-    total-records="1000">
-  </x-pagination>
-</p>
-<hr/>
-
-<p>
-  <label> Number of records per page:</label>
-  <input type="range" value="10" max="100" step="10"
-    oninput="this.nextElementSibling.innerText = this.value"
-    onchange="document.querySelector('x-pagination').setAttribute('num-records-per-page', this.value);" /><b>10</b>
-
-  <br/>
-  <label> Number of pages to show:</label>
-  <input type="range" value="5" max="9" min="1" step="2"
-    oninput="this.nextElementSibling.innerText = this.value"
-    onchange="document.querySelector('x-pagination').setAttribute('num-pages', this.value);" /><b>5</b>
-
-  <br/>
-  <label> Total number of records:</label>
-  <input type="range" value="1000" max="5000"
-    oninput="this.nextElementSibling.innerText = this.value"
-    onchange="document.querySelector('x-pagination').setAttribute('total-records', this.value);" /><b>1000</b>
-
-  <br/>
-  <label> Current page number:</label>
-  <input type="range" value="4" max="100"
-    oninput="this.nextElementSibling.innerText = this.value"
-    onchange="document.querySelector('x-pagination').setAttribute('current-page', this.value);" /><b>4</b>
-</p>
-
-<b>x-select event detail.</b>
-<x-pre class="message">Empty</x-pre>
-
-<div class="attributes" title="Attributes">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>current-page</td><td>Number</td><td>1</td><td>Optional</td><td> current-page number</td></tr>
-        <tr><td>num-records-per-page</td><td>Number</td><td>10</td><td>Optional</td><td>number of records per page</td></tr>
-        <tr><td>num-pages</td><td>Number</td><td>Default</td><td>5</td><td>number of page buttons to display</td></tr>
-        <tr><td>total-records</td><td>Number</td><td>Default</td><td>100</td><td> number of total records</td></tr>
-      </tbody>
-    </table>
-  </x-table>
+<h3>Default</h3>
+<div class="example default">
+  <x-pagination onselect="console.log(event.detail)"></x-pagination>
+  <x-pre language="html">
+    &lt;x-pagination onselect="console.log(event.detail)">&lt;/x-pagination>
+  </x-pre>
 </div>
 
-<div class="events" title="Events">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>x-select</td><td>Custom Event</td><td>page, offset, and limit</td><td>Fired when a page is selected</td></tr>
-      </tbody>
-    </table>
-  </x-table>
+<h3>Responsive To Attribute Change</h3>
+<p>
+  It reacts to attribute value changes
+</p>
+
+<div class="example responsive">
+  <x-pagination id="pg1" index="0" total="9999" num-per-page="10" num-pages="5"></x-pagination>
+  <div class="x-flex">
+    <div style="padding: 12px">
+      <div>Select Index</div>
+      <x-select id="pg1-index" value="0" size="7.5" read-only>
+        <option>0</option> <option>1000</option> <option>5000</option>
+      </x-select>
+    </div>
+    <div style="padding: 12px">
+      <div>Select Number Per Page.</div>
+      <x-select id="pg1-num-per-page" value="10" size="10" read-only>
+        <option>10</option> <option>100</option> <option>1000</option>
+      </x-select>
+    </div>
+    <div style="padding: 12px">
+      <div>Select Number of Pages To Show.</div>
+      <x-select id="pg1-num-pages" value="5" read-only>
+        <option>3</option> <option>5</option> <option>9</option>
+      </x-select>
+    </div>
+  </div>
+
+  <script>
+    $('#pg1-index').addEventListener('change', e => $('#pg1').setAttribute('index', e.target.value));
+    $('#pg1-num-per-page').addEventListener('change', e => $('#pg1').setAttribute('num-per-page', e.target.value));
+    $('#pg1-num-pages').addEventListener('change', e => $('#pg1').setAttribute('num-pages', e.target.value));
+  </script>
 </div>
+<x-highlightjs language="html">
+  &lt;x-pagination id="pg1" index="0" total="9999" num-per-page="10" num-pages="5">&lt;/x-pagination>
+  &lt;div class="x-flex">
+    &lt;div style="padding: 12px">
+      &lt;div>Select Index&lt;/div>
+      &lt;x-select id="pg1-index" value="0" size="7.5" read-only>
+        &lt;option>0&lt;/option> &lt;option>1000&lt;/option> &lt;option>5000&lt;/option>
+      &lt;/x-select>
+    &lt;/div>
+    &lt;div style="padding: 12px">
+      &lt;div>Select Number Per Page.&lt;/div>
+      &lt;x-select id="pg1-num-per-page" value="10" size="10" read-only>
+        &lt;option>10&lt;/option> &lt;option>100&lt;/option> &lt;option>1000&lt;/option>
+      &lt;/x-select>
+    &lt;/div>
+    &lt;div style="padding: 12px">
+      &lt;div>Select Number of Pages To Show.&lt;/div>
+      &lt;x-select id="pg1-num-pages" value="5" read-only>
+        &lt;option>3&lt;/option> &lt;option>5&lt;/option> &lt;option>9&lt;/option>
+      &lt;/x-select>
+    &lt;/div>
+  &lt;/div>
+
+  &lt;script>
+    $('#pg1-index').addEventListener('change', e => $('#pg1').setAttribute('index', e.target.value));
+    $('#pg1-num-per-page').addEventListener('change', e => $('#pg1').setAttribute('num-per-page', e.target.value));
+    $('#pg1-num-pages').addEventListener('change', e => $('#pg1').setAttribute('num-pages', e.target.value));
+  &lt;/script>
+</x-highlightjs>
+
+
+<h3>Attributes</h3>
+<table x="">
+  <thead>
+    <tr>
+      <th>Name</th>  <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>index</td>
+      <td>Defalt 0, Current index of records. Used to determine the current page.</td>
+    </tr>
+    <tr>
+      <td>num-per-page</td> 
+      <td>Default 10, number of records per page</td>
+    </tr>
+    <tr>
+      <td>num-pages</td>
+      <td>Default 5, number of page buttons to display</td>
+    </tr>
+    <tr>
+      <td>total</td> 
+      <td>Default 100, number of total records</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Events</h3>
+<table x="">
+  <thead>
+    <tr>
+      <th>Name</th> <th>Type</th> <th>Data</th> <th>Description</th> </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>select</td> <td>Custom Event</td> <td>index, total, and numPerPage</td> 
+      <td>Fired when a page is selected</td> 
+    </tr>
+  </tbody>
+</table>

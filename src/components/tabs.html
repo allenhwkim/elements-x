@@ -1,27 +1,4 @@
-<app-group-header title="Tabs" path="/tabs"></app-group-header>
 
-<app-custom-css>
-  .tabs-example x-tabs .tabs {
-    border-bottom: 2px solid #999;
-  }
-  
-  .tabs-example x-tabs .tabs [tab-for] {
-    align-items: center;
-    min-width: 120px;
-    background: #666;
-    color: #FFF;
-  }
-  
-  .tabs-example x-tabs .tabs [tab-for][aria-selected] {
-    background: orange;
-    color: #FFF;
-    border-bottoM: 2px solid #FFF;
-  }
-  
-  .tabs-example x-tabs .tabs  .underline-bar {
-    display: none;
-  }
-</app-custom-css>
 
 <h3>Features</h3>
 <ul class="default">
@@ -40,8 +17,8 @@
 <div class="tabs-example">
   <h3>
     Example
-    <a class="try-it" target="_" href="//stackblitz.com/edit/elements-x-tabs">Try with static html</a>
-    <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-custom-bd5c7?file=/src/app/components/tabs.component.ts&initialpath=/tabs">Try with Angular</a>
+    <a class="try-it" target="_" href="//stackblitz.com/edit/elements-x-tabs"> static html</a>
+    <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-custom-bd5c7?file=/src/app/components/tabs.component.ts&initialpath=/tabs"> Angular</a>
   </h3> 
   <x-tabs selected="js">
     <div class="tabs">
@@ -80,28 +57,26 @@
 </div>
 
 <div class="attributes" title="Attributes">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>selected</td><td>String</td><td>N/A</td><td>Optional</td><td>A tab specified by this is pre-selected</td></tr>
-        <tr><td>disabled</td><td>N/A</td><td>N/A</td><td>Optional</td><td>When it's given, the tab won't be selectable</td></tr>
-        <tr><td>tab-for</td><td>String</td><td>N/A</td><td>Required</td><td>Indicates tab section</td></tr>
-        <tr><td>contents-for</td><td>String</td><td>N/A</td><td>Required</td><td>Indicates contents section</td></tr>
-      </tbody>
-    </table>
-  </x-table>
+  <h3>Attributes</h3>
+  <table x="">
+    <thead><tr><th>Name</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>selected</td><td>A tab specified by this is pre-selected</td></tr>
+      <tr><td>disabled</td><td>When it's given, the tab won't be selectable</td></tr>
+      <tr><td>tab-for</td><td>Required,  Indicates tab section</td></tr>
+      <tr><td>contents-for</td><td>Required, Indicates contents section</td></tr>
+    </tbody>
+  </table>
 </div>
 
 <div class="classes" title="Classes">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>tabs</td><td> Indicates tab section</td></tr>
-        <tr><td>tab-contents</td><td> Indicates contants- section</td></tr>
-        <tr><td>ink-bar</td><td> Tab underline indicator. </td></tr>
-      </tbody>
-    </table>
-  </x-table>
+  <h3>Classes</h3>
+  <table x="">
+    <thead><tr><th>Name</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>tabs</td><td> Indicates tab section</td></tr>
+      <tr><td>tab-contents</td><td> Indicates contants- section</td></tr>
+      <tr><td>ink-bar</td><td> Tab underline indicator. </td></tr>
+    </tbody>
+  </table>
 </div>

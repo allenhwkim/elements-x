@@ -1,103 +1,166 @@
-<app-group-header title="ACE Editor" path="/ace"></app-group-header>
+<style>
+  x-ace { margin-right: 12px; border: 1px solid #CCC;}
+  .x-flex {display: flex;}
+  .x-flex x-ace { height: 120px;}
+</style>
 
-<h3>Feature</h3>
-<ul class="default">
-  <li>Convert a section to ACE Editor, https://ace.c9.io/</li> 
-  <li>Customizable theme and language</li> 
-  <li>Fires 'load', and 'change' events</li> 
+<h2>ACE Editor</h2>  
+
+<h3>Features </h3>
+<ul>
+  <li> Convert a section to ACE Editor, https://ace.c9.io/</li>
+  <li> Customizable theme and language</li>
+  <li> Fires Events, 'load','blur', 'change', 'copy', 'focus', and 'paste'</li>
 </ul>
 
-<h3>
-  Example
-  <a class="try-it" target="_" href="//stackblitz.com/edit/elements-x-ace?file=index.html">Try with VanillaJS</a>
-  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-custom-bd5c7?file=/src/app/components/ace.component.ts&initialpath=/ace">Try with Angular</a>
-</h3>
-
-<div class="example">
-  <p>
-    <x-button onclick="$('#ace-editor').disabled = !$('#ace-editor').disabled">Toggle Disabled</x-button>
-    <x-button onclick="$('#ace-editor').readonly = !$('#ace-editor').readonly">Toggle Readonly</x-button>
-  </p>
-  <x-ace id="ace-editor" style="height: 200px"
-    onpaste="console.log(event.detail)" 
-    oncopy="console.log(event.detail)" 
-    onblur="console.log(event.detail)" 
-    onchange="console.log(event.detail)" 
-    onload="console.log(event.detail)">
+<h4>Default</h4>
+<x-pre>
+  &lt;x-ace theme="chrome">
+    function foo(items) {
+      var x = "All this is syntax highlighted";
+      return x;
+    }
+  &lt;/x-ace>
+</x-pre>
+<div class="example default x-flex">
+  <x-ace theme="chrome">
     function foo(items) {
       var x = "All this is syntax highlighted";
       return x;
     }
   </x-ace>
+  <x-ace theme="monokai">
+    function foo(items) {
+      var x = "All this is syntax highlighted";
+      return x;
+    }
+  </x-ace>
+</div>
 
-  <x-pre>
-    &lt;x-ace 
-      onpaste="console.log(event.detail)" 
-      oncopy="console.log(event.detail)" 
-      onblur="console.log(event.detail)" 
-      onchange="console.log(event.detail)" 
-      onload="console.log(event.detail)">
-      function foo(items) {
-        var x = "All this is syntax highlighted";
-        return x;
+<h4>With Gutter</h4>
+<x-pre>
+  &lt;x-ace theme="chrome" gutter>
+    function foo(items) {
+      var x = "All this is syntax highlighted";
+      return x;
+    }
+  &lt;/x-ace>
+</x-pre>
+<b></b>
+<div class="example gutter x-flex">
+  <x-ace theme="chrome" gutter>
+    function foo(items) {
+      var x = "All this is syntax highlighted";
+      return x;
+    }
+  </x-ace>
+  <x-ace theme="monokai" gutter>
+    function foo(items) {
+      var x = "All this is syntax highlighted";
+      return x;
+    }
+  </x-ace>
+</div>
+
+<h4>Different Modes</h4>
+<x-pre>
+  &lt;x-ace theme="chrome" mode="text" gutter wrap-mode>
+    Text Mode
+     - Hello Ace Editor
+  &lt;/x-ace> 
+</x-pre>
+<div class="example x-flex modes">
+  <x-ace theme="chrome" mode="text" gutter wrap-mode>
+    Text Mode
+     - Hello Ace Editor
+  </x-ace>
+  <x-ace theme="chrome" mode="html" gutter wrap-mode>
+    &lt;h3>HTML Mode&lt;/h3>
+    &lt;div>
+      &lt;b>Hello Ace Editor&lt;/b>
+    &lt;/div>
+  </x-ace>
+  <x-ace theme="chrome" mode="javascript" gutter wrap-mode>
+    // JavaScript Mode
+    function foo(items) {
+      var x = "All this is syntax highlighted";
+      return x;
+    }
+  </x-ace>
+</div>
+
+<br/>
+<div class="example x-flex modes">
+  <x-ace theme="chrome" mode="markdown" gutter wrap-mode>
+    ** Markdown Mode
+    - Hello Ace Editor
+  </x-ace>
+  <x-ace theme="chrome" mode="scss" gutter wrap-mode>
+    /* SCSS Mode */
+    .hello {
+      .ace.editor {
+        color: red;
       }
-    &lt;/x-ace>
-  </x-pre>
+    }
+  </x-ace>
+  <x-ace theme="chrome" mode="json" gutter wrap-mode>
+    {
+      "json": "mode",
+      "hello": "Ace Editor"
+    }
+  </x-ace>
 </div>
 
-<div class="properties" title="Properties">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>value</td><td>String</td><td>N/A</td><td>Optional</td>
-          <td>Editor text value</td>
-        </tr>
-        <tr>
-          <td>readonly</td><td>Boolean</td><td>false</td><td>Optional</td>
-          <td>If set to true, users can't edit text</td>
-        </tr>
-        <tr>
-          <td>disabled</td><td>Boolean</td><td>false</td><td>Optional</td>
-          <td>If set to true, users can't edit text and de-emphasized</td>
-        </tr>
-      </tbody>
-    </table>
-  </x-table>
-</div>
+<h3>Attributes</h3>
+<table x="">
+  <thead>
+    <tr>
+      <th>Name</th>  <th>Description</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>mode</td> 
+      <td>default javascript, https://cloud9-sdk.readme.io/docs/language-mode e.g. javascript, css, html, text, markdown, json, or scss</td>
+    </tr>
+    <tr>
+      <td>theme</td> 
+      <td>default monokai, Editor theme, https://cloud9-sdk.readme.io/docs/themes</td>
+    </tr>
+    <tr>
+      <td>gutter</td><td>Show gutter</td>
+    </tr>
+    <tr>
+      <td>wrap-mode</td> <td>Text wrap mode</td>
+    </tr>
+  </tbody>
+</table>
 
-
-<div class="attributes" title="Attributes">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>theme</td><td>String</td><td>monokai</td><td>Optional</td>
-          <td>Editor theme, https://cloud9-sdk.readme.io/docs/themes</td>
-        </tr>
-        <tr>
-          <td>language</td><td>String</td><td>javascript</td><td>Optional</td>
-          <td>https://cloud9-sdk.readme.io/docs/language-mode e.g. javascript, css, html</td>
-        </tr>
-      </tbody>
-    </table>
-  </x-table>
-</div>
-
-<div class="events" title="Events">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>load</td><td>CustomEvent</td><td>ACE editor instance</td><td>Fired when starts</td></tr>
-        <tr><td>change</td><td>CustomEvent</td><td>Object with detail</td><td>Fired when content changes</td></tr>
-        <tr><td>blur</td><td>CustomEvent</td><td></td>Focus Event<td>Fired when out of focus</td></tr>
-        <tr><td>copy</td><td>CustomEvent</td><td>Object with detail</td><td>Fired when contents copied</td></tr>
-        <tr><td>focus</td><td>CustomEvent</td><td>Focus Event</td><td>Fired when focused</td></tr>
-        <tr><td>paste</td><td>CustomEvent</td><td>Object with detail</td><td>Fired when contents pasted</td></tr>
-      </tbody>
-    </table>
-  </x-table>
-</div>
+<h3>Events</h3>
+<table x="">
+  <thead>
+    <tr>
+      <th>Name</th> <th>Type</th> <th>Data</th> <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>blur</td> <td>CustomEvent</td> <td></td> <td>Fired when out of focus</td>
+    </tr>
+    <tr>
+      <td>change</td> <td>CustomEvent</td> <td>Object with detail</td> <td>Fired when content changes</td>
+    </tr>
+    <tr>
+      <td>copy</td> <td>CustomEvent</td> <td>Object with detail</td> <td>Fired when contents copied</td>
+    </tr>
+    <tr>
+      <td>focus</td> <td>CustomEvent</td> <td>Focus Event</td> <td>Fired when focused</td>
+    </tr>
+    <tr>
+      <td>load</td> <td>CustomEvent</td> <td>ACE editor instance</td> <td>Fired when starts</td>
+    </tr>
+    <tr>
+      <td>paste</td> <td>CustomEvent</td> <td>Object with detail</td> <td>Fired when contents pasted</td>
+    </tr>
+  </tbody>
+</table>

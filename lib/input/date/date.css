@@ -1,4 +1,6 @@
 x-input[type=date] {
-  position: relative;
   display: inline-block;
+}
+x-input[type=date] x-calendar.x-overlay.x-show {
+  padding: 0;
 }

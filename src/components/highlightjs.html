@@ -1,4 +1,3 @@
-<app-group-header title="Syntax Highlighter" path="/highlightjs"></app-group-header>
 
 <h3>Feature</h3>
 <ul class="default">
@@ -9,8 +8,8 @@
 </ul>
 
 <h3>Example
-  <a class="try-it" target="_" href="//stackblitz.com/edit/x-highlightjs?file=index.html">Try with static html</a>
-  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-custom-bd5c7?file=/src/app/components/highlightjs.component.ts&initialpath=/highlightjs">Try with Angular</a>
+  <a class="try-it" target="_" href="//stackblitz.com/edit/x-highlightjs?file=index.html"> static html</a>
+  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-custom-bd5c7?file=/src/app/components/highlightjs.component.ts&initialpath=/highlightjs"> Angular</a>
 </h3> 
 <p>
   When you use a framework like Angular and see no line breaks, 
@@ -42,48 +41,45 @@
 </div>
 
 <div class="properties" title="Properties">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>value</td><td>String</td><td>N/A</td><td>Text contents to syntax-highlight</td></tr>
-      </tbody>
-    </table>
-  </x-table>
+  <h3>Properties</h3>
+  <table x="">
+    <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>value</td><td>String</td><td>N/A</td><td>Text contents to syntax-highlight</td></tr>
+    </tbody>
+  </table>
 </div>
 
 <div class="attributes" title="Attributes">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr>
-          <td>theme</td><td>String</td><td>monokai</td><td>Optional</td>
-          <td>Viewer theme, https://highlightjs.org/static/demo/</td>
-        </tr>
-        <tr>
-          <td>language</td><td>String</td><td>javascript</td><td>Optional</td>
-          <td>
-            Formatting language; 'css', 'html', 'babel', 'angular', 'markdown',
-            'typescript', 'yaml', or 'javascript'
-          </td>
-        </tr>
-        <tr>
-          <td>prettier</td><td>N/A</td><td>N/A</td><td>Optional</td>
-          <td>If given, it prettify code with Prettier, https://prettier.io/docs/en/index.html</td>
-        </tr>
-      </tbody>
-    </table>
-  </x-table>
+  <h3>Attributes</h3>
+  <table x="">
+    <thead><tr><th>Name</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>theme</td>
+        <td>Deault 'monokai', Viewer theme, https://highlightjs.org/static/demo/</td>
+      </tr>
+      <tr>
+        <td>language</td>
+        <td> Default 'javascript',
+          Formatting language; 'css', 'html', 'babel', 'angular', 'markdown',
+          'typescript', 'yaml', or 'javascript'
+        </td>
+      </tr>
+      <tr>
+        <td>prettier</td>
+        <td>If given, it prettify code with Prettier, https://prettier.io/docs/en/index.html</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <div class="events" title="Events">
-  <x-table class="no-header no-footer">
-    <table>
-      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td>load</td><td>CustomEvent</td><td>Highlighted HTML element</td><td>Fired when starts</td></tr>
-      </tbody>
-    </table>
-  </x-table>
+  <h3>Events</h3>
+  <table x="">
+    <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>load</td><td>CustomEvent</td><td>Highlighted HTML element</td><td>Fired when starts</td></tr>
+    </tbody>
+  </table>
 </div>

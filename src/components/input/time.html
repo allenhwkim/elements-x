@@ -1,8 +1,7 @@
-<app-group-header title="Time Selector" path="/input"></app-group-header>
 
   <h3> Time selector for Input Field 
-    <a class="try-it" target="_" href="//stackblitz.com/edit/x-input-time?file=index.html">Try with static html</a>
-    <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-hdbyk?file=/src/app/components/input.component.ts&initialpath=/input">Try with Angular</a>
+    <a class="try-it" target="_" href="//stackblitz.com/edit/x-input-time?file=index.html"> static html</a>
+    <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-hdbyk?file=/src/app/components/input.component.ts&initialpath=/input"> Angular</a>
  </h3>
   <x-pre>
     &lt;x-input type="time">&lt;/x-input>
@@ -13,24 +12,22 @@
   </x-pre>
 
   <div class="attributes" title="Attributes">
-    <x-table class="no-header no-footer">
-      <table>
-        <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td>hour</td><td>Number</td><td>Current Hour</td><td>Optional</td><td>0 to 24</td></tr>
-          <tr><td>minute</td><td>Number</td><td>Current Minute</td><td>Optional</td><td>0 to 59</td></tr>
-        </tbody>
-      </table>
-    </x-table>
+    <h3>Attributes</h3>
+    <table x="">
+      <thead><tr><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>hour</td><td>0 to 24</td></tr>
+        <tr><td>minute</td><td>0 to 59</td></tr>
+      </tbody>
+    </table>
   </div>
   
   <div class="events" title="Events">
-    <x-table class="no-header no-footer">
-      <table>
-        <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
-        <tbody>
-          <tr><td>x-select</td><td>CustomEvent</td><td>Time</td><td>Selected Time</td></tr>
-        </tbody>
-      </table>
-    </x-table>
+    <h3>Events</h3>
+    <table x="">
+      <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>x-select</td><td>CustomEvent</td><td>Time</td><td>Selected Time</td></tr>
+      </tbody>
+    </table>
   </div>

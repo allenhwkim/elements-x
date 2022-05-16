@@ -6,13 +6,6 @@ x-ace {
   white-space: pre-wrap;
   width: 100%;
 }
-x-ace.disabled {
-  opacity: .5;
-  pointer-events: none;
-}
-x-ace.readonly {
-  pointer-events: none;
-}
 x-ace > .editor {
   display: block;
   position: absolute;
@@ -21,4 +14,21 @@ x-ace > .editor {
   bottom: 0;
   left: 0;
   margin: 0;
+}
+
+/* Ace Editor Accessibility Fixes */
+x-ace > .editor.ace-chrome .ace_variable {
+  color: #22616D;
+}
+x-ace > .editor.ace-chrome .ace_type {
+  color: #3747D2;
+}
+x-ace > .editor.ace-chrome .ace_variable.ace_parameter {
+  color: #874903;
+}
+x-ace > .editor.ace-monokai .ace_keyword {
+  color: #FC92B9;
+}
+x-ace > .editor.ace-monokai .ace_gutter-cell {
+  color: #BEBFBB;
 }

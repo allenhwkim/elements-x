@@ -1,0 +1,42 @@
+<h2>Message</h2>
+
+<div class="example">
+
+  <p>
+    Show a slowly disappearing message with <code>elementsX.showMessage(message, options)</code>
+  </p>
+  <x-pre>
+    elementsX.showMessage('My Message' + new Date());
+  </x-pre>
+
+  <button x="" onclick="elementsX.showMessage('My Message' + new Date())">Show Message 1</button>
+
+  <p>
+    To control the time of the message disappearing, pass <code>duration</code> in options.
+  </p>
+  <x-pre>
+    elementsX.showMessage('My Message' + new Date(), {type: 'success', duration: 1000});
+  </x-pre>
+
+  <button x="" onclick="elementsX.showMessage('My Message' + new Date(), {type: 'success', duration: 1000})">Show Message 2</button>
+
+  <p>
+    To control type of the message, pass <code>type</code> in options as 'success' or 'error'.
+  </p>
+  <x-pre>
+    elementsX.showMessage('My Message' + new Date(), {type: 'error', duration: 1000});
+  </x-pre>
+
+  <button x="" onclick="elementsX.showMessage('My Message' + new Date(), {type: 'error', duration: 1000})">Show Message 3</button>
+
+  <h3>Options</h3>
+  <div class="classes" title="Classes">
+    <table x="">
+      <thead><tr><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>duration</td><td> Optional, Default 5000ms. After this period, message will disappear</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

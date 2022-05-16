@@ -1,49 +1,29 @@
-
-
-<h2>Features</h2>
-<ul class="default">
-  <li> open tooltip when trigger element hovered, clicked, or focused </li>
-  <li> close tooltip when document clicked, mouseleave, or blur</li>
-  <li> when esc pressed, close tooltip</li>
-  <li> when open, trap focus within inside tooltip.</li>
-  <li> position tooltip underneath or over the trigger element</li>
-</ul>
-
-<h3>
-  Example
-  <a class="try-it" target="_" href="//stackblitz.com/edit/elements-x-tooltip"> static html</a>
-  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-custom-bd5c7?file=/src/app/components/tooltip.component.ts&initialpath=/tooltip"> Angular</a>
-</h3> 
+<h2>Tooltip</h2>
 
 <div class="example">
-  <a href="javascript:void(0)" tabindex="0" id="show-tooltip">Show tooltip</a>
-  <x-tooltip trigger="show-tooltip" opened="">
-    <p>Hello Tooltip</p>
-    <button x="">button 1</button>
-    <button x="">button 2</button>
-  </x-tooltip>
-  <x-pre> 
-    &lt;a href="javascript:void(0)" tabindex="0" id="show-tooltip">Show tooltip&lt;/a>
-    &lt;x-tooltip trigger="show-tooltip">
-      &lt;p>Hello Tooltip&lt;/p>
-      &lt;button>button 1&lt;/button>&lt;br/>
-      &lt;button>button 2&lt;/button>&lt;br/>
-    </x-tooltip>
+
+  <p>
+    Shows a help section on mouseover or focus.
+  </p>
+
+  <span data-tooltip="This is a tooltip">
+    Help
+  </span>
+
+  <x-pre>
+    &lt;span data-tooltip="This is a tooltip">
+      Help
+    &lt;/span>
   </x-pre>
-</div>
 
-<h2>Attributes</h2>
-<li><b>trigger</b>: id of element to activate this tooltip</li>
-
-<div class="attributes" title="Attributes">
   <h3>Attributes</h3>
-  <table x="">
-    <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
-    <tbody>
-      <tr><td>trigger</td><td>String</td><td>N/A</td><td>Required</td>
-        <td>id of element to activate this tooltip</td></tr>
-      <tr><td>opened</td><td>N/A</td><td>N/A</td><td>Required</td>
-        <td>when specified, tooltip will be visible when initialized</td></tr>
-    </tbody>
-  </table>
+  <div class="attributes" title="Attributes">
+    <table x="">
+      <thead><tr><th>Name</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>data-tooltip</td><td> Tooltip text</td></tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>

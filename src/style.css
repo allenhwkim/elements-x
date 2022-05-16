@@ -115,6 +115,7 @@ x-pre {
   height: 60px;
   color: #333;
   border-right: 1px solid rgba(0, 0, 0, 0.14);
+  display: none;
 }
 .app > .header .header-nav .hamburger:hover {
   background: #4aa2ff;
@@ -326,6 +327,9 @@ x-pre {
     padding: 0 12px;
     font-size: 18px;
     white-space: nowrap;
+  }
+  .app > .header .header-nav .hamburger {
+    display: flex;
   }
 
   @keyframes slide-in {

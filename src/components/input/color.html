@@ -4,15 +4,22 @@
   <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-hdbyk?file=/src/app/components/input.component.ts&initialpath=/input"> Angular</a>
 </h3>
 
-<div class="example">
+<div class="example default">
   <x-input type="color" value="#F00"></x-input>
   <x-pre>
     &lt;x-input type="color">&lt;/x-input>
   </x-pre>
 </div>
 
-<div class="example">
-  <x-input type="color" text-field label="Select color"></x-input>
+<div class="example text-field">
+  <x-input type="color" value="#F00" text-field label="Select color"></x-input>
+  <x-pre>
+    &lt;x-input type="color" text-field>&lt;/x-input>
+  </x-pre>
+</div>
+
+<div class="example disabled">
+  <x-input type="color" value="#F00" text-field label="Select color" disabled></x-input>
   <x-pre>
     &lt;x-input type="color" text-field>&lt;/x-input>
   </x-pre>

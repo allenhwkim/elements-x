@@ -1,101 +1,211 @@
+<style>
+  x-format {white-space: nowrap}
+  pre {white-space: pre-wrap}
+</style>
 
-Format number, currency, or date
-  
-<h3>Number
-  <a class="try-it" target="_" href="//stackblitz.com/edit/x-format?file=index.html"> static html</a>
-  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-custom-bd5c7?file=/src/app/components/format.component.ts&initialpath=/format"> Angular</a>
-</h3> 
-<div class="example">
-  Default: <x-format type="number"></x-format> 
-  <br/>
-  English: <x-format type="number" value="1234567.8901234"></x-format> 
-  <br/>
-  French: <x-format type="number" locale="fr-CA" max-decimal="3" value="1234567.8901234"></x-format>
-  <x-pre>
-    Default: &lt;x-format type="number">&lt;/x-format> 
-    English: &lt;x-format type="number" value="1234567.8901234">&lt;/x-format> 
-    French: &lt;x-format type="number" locale="fr-CA" max-decimal="3" value="1234567.8901234">&lt;/x-format>
-  </x-pre>
-</div>
+<h2>Format Number, Date, or Currency</h2>  
+
+<h3>Number</h3>
+<table x="" class="example number">
+  <thead>
+    <tr><th>Description</th><th>Expression</th><th>Code</th></tr>
+  </thead>
+  <tbody>
+    <tr class="default">
+      <td>Default English</td>
+      <td><x-format>1234567.89</x-format></td>
+      <td><pre>&lt;x-format>1234567.89&lt;/x-format></pre></td>
+    </tr>
+    <tr class="french">
+      <td>French</td>
+      <td><x-format locale="fr-CA">1234567.89</x-format></td>
+      <td><pre>&lt;x-format locale="fr-CA">1234567.89&lt;/x-format></pre></td>
+    </tr>
+    <tr class="german">
+      <td>German</td>
+      <td><x-format locale="de-DE">1234567.89</x-format></td>
+      <td><pre>&lt;x-format locale="de-DE">1234567.89&lt;/x-format></pre></td>
+    </tr>
+    <tr class="arabic">
+      <td>Arabic</td>
+      <td><x-format locale="ar-EG">1234567.89</x-format></td>
+      <td><pre>&lt;x-format locale="ar-EG">1234567.89&lt;/x-format></pre></td>
+    </tr>
+    <tr class="india">
+      <td>Indian</td>
+      <td><x-format locale="en-IN">1234567.89</x-format></td>
+      <td><pre>&lt;x-format locale="en-IN">11234567.89234&lt;/x-format></pre></td>
+    </tr>
+    <tr class="chinese">
+      <td>Chinese</td>
+      <td><x-format locale="zh-Hanx-CN-u-nu-hanidec">1234567.89</x-format></td>
+      <td><pre>&lt;x-format locale="zh-Hanx-CN-u-nu-hanidec">1234567.89&lt;/x-format></pre></td>
+    </tr>
+    <tr class="indonesian">
+      <td>Indonesian</td>
+      <td><x-format locale="in">1234567.89</x-format></td>
+      <td><pre>&lt;x-format locale="in">1234567.89&lt;/x-format></pre></td>
+    </tr>
+  </tbody>
+</table>
 
 <h3>Currency</h3>
-<div class="example">
-  Default: <x-format type="currency"></x-format> 
-  <br/>
-  English: <x-format type="currency" value="1234567.8901234"></x-format> 
-  <br/>
-  French: <x-format type="currency" locale="fr-CA" currency="CAD" value="1234567.8901234"></x-format>
-  <br/>
-  Korean: <x-format type="currency" locale="ko-KR" currency="KRW" value="1234567.8901234"></x-format>
-  <x-pre>
-    Default: &lt;x-format type="currency">&lt;/x-format> 
-    English: &lt;x-format type="currency" value="1234567.8901234">&lt;/x-format> 
-    French: &lt;x-format type="currency" locale="fr-CA" currency="CAD" value="1234567.8901234">&lt;/x-format>
-    Korean: &lt;x-format type="currency" locale="ko-KR" currency="KRW" value="1234567.8901234">&lt;/x-format>
-  </x-pre>
-</div>
+<table x="" class="example currency">
+  <thead>
+    <tr><th>Description</th><th>Expression</th><th>Code</th></tr>
+  </thead>
+  <tbody>
+    <tr class="default">
+      <td>Default</td>
+      <td><x-format type="currency">1234567.89</x-format></td>
+      <td><pre>&lt;x-format type="currency">1234567.89&lt;/x-format></pre></td>
+    </tr>
+    <tr class="CAD">
+      <td>Canadian Dollar</td>
+      <td><x-format type="currency" locale="fr-CA" currency="CAD">1234567.89</x-format></td>
+      <td><pre>&lt;x-format type="currency" locale="fr-ca" currency="CAD">1234567.89&lt;/x-format></pre>
+        <span></span></td>
+    </tr>
+    <tr class="KRW">
+      <td>Korean Won</td>
+      <td><x-format type="currency" locale="ko-KR" currency="KRW">1234567.89</x-format></td>
+      <td><pre>&lt;x-format type="currency" locale="ko-KR" currency="KRW">1234567.89&lt;/x-format></pre></td>
+    </tr>
+    <tr class="INR">
+      <td>Indian Rupees</td>
+      <td><x-format type="currency" locale="en-IN" currency="INR">1234567.89</x-format></td>
+      <td><pre>&lt;x-format type="currency" locale="en-IN" currency="INR">1234567.89&lt;/x-format></pre></td>
+    </tr>
+    <tr class="EUR">
+      <td>Euro</td>
+      <td><x-format type="currency" locale="de-DE" currency="EUR">1234567.89</x-format></td>
+      <td><pre>&lt;x-format type="currency" locale="de-DE" currency="EUR">1234567.89&lt;/x-format></pre></td>
+    </tr>
+  </tbody>
+</table>
 
 <h3>Date</h3>
+For the date format values, refer to <a href="#date-formats">Date Formats</a>.
+<table x="" class="example date">
+  <thead>
+    <tr><th>Description</th><th>Expression</th><th>Code</th></tr>
+  </thead>
+  <tbody>
+    <tr class="default">
+      <td>Default</td>
+      <td><x-format type="date">2021-05-29 12:34:59</x-format></td>
+      <td><pre>&lt;x-format type="date">2021-05-29 12:34:59&lt;/x-format></pre></td>
+    </tr>
+    <tr class="french">
+      <td>French</td>
+      <td><x-format type="date" locale="fr-FR">2021-05-29 12:34:59</x-format></td>
+      <td><pre>&lt;x-format type="date" locale="fr-FR">2021-05-29 12:34:59&lt;/x-format></pre></td>
+    </tr>
+    <tr class="custom">
+      <td>Custom</td>
+      <td><x-format type="date" format="weekday month yyyy M d">2021-05-29 12:34:59</x-format></td>
+      <td>
+        <pre>&lt;x-format type="date" format="weekday month yyyy M d">2021-05-29 12:34:59&lt;/x-format></pre>
+      </td>
+    </tr>
+    <tr class="custom-french">
+      <td>Custom French</td>
+      <td>
+        <x-format type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss">2021-05-29 12:34:59</x-format>
+      </td>
+      <td>
+        <pre>&lt;x-format type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss">2021-05-29 12:34:59&lt;/x-format></pre>
+      </td>
+    </tr>
+    <tr class="custom-korean">
+      <td>Custom Korean</td>
+      <td>
+        <x-format type="date" locale="ko-KR" format="yyyy년 mon d일 weekday h시 m분 s초">2021-05-29 12:34:59</x-format>
+      </td>
+      <td>
+        <pre>&lt;x-format type="date" locale="ko-KR" format="yyyy년 mon d일 weekday h시 m분 s초">2021-05-29 12:34:59&lt;/x-format></pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<a id="func"></a>
+<h3> format() function </h3>
+<p>
+  To use it with Javascript, do <code>smartform.format(value, type, options)</code>
+</p>
+<ul>
+  <li>type: 'currency', 'date', or 'number'</li>
+  <li>options: 
+    <ul>
+      <li>locale: Optional, default 'en-US', e.g. 'en-US', 'ko-KR', 'en-FR', or 'en-IN'</li>
+      <li>maxDecimal: Optional, default 2, e.g, 3, 1, or 0 </li>
+      <li>currency: Optional, default 'USD', e.g., 'KRW', 'INR' </li>
+      <li>format: Optional, default 'yyyy-MM-dd'</li>
+    </ul>
+  </li>
+</ul>
 <div class="example">
-  Default: <x-format type="date"></x-format> 
-  <br/>
-  English: <x-format type="date" value="2021-05-29 12:34:59"></x-format> 
-  <br/>
-  French: <x-format type="date" locale="fr-FR" value="2021-05-29 12:34:59"></x-format>
-  <br/>
-  Custom English: <x-format type="date" format="weekday month yyyy M d" value="2021-05-29 12:34:59"></x-format>
-  <br/>
-  Custom French: <x-format type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" value="2021-05-29 12:34:59"></x-format>
   <x-pre>
-    Default:
-      &lt;x-format type="date">&lt;/x-format> 
-    English:
-      &lt;x-format type="date" value="2021-05-29 12:34:59">&lt;/x-format> 
-    French:
-      &lt;x-format type="date" locale="fr-FR" value="2021-05-29 12:34:59">&lt;/x-format>
-    Custom English:
-      &lt;x-format type="date" format="weekday month yyyy M d" value="2021-05-29 12:34:59">&lt;/x-format>
-    Custom French:
-      &lt;x-format type="date" locale="fr-CA" format="week mon yyyy MM dd hh:mm:ss" value="2021-05-29 12:34:59"></x-format>
+    import { smartform } from '@smartform/smartform';
+    smartform.format(1234567.89, 'currency', {locale: 'fr-CA', currency: 'CAD'});
   </x-pre>
 </div>
 
-<div class="attributes" title="Attributes">
-  <h3>Attributes</h3>
-  <table x="">
-    <thead><tr><th>Name</th><th>Description</th></tr></thead>
-    <tbody>
-      <tr><td>type</td><td>format type. number, currency, or date</td></tr>
-      <tr><td>value</td><td>value to format. e.g. 12345.67</td></tr>
-      <tr><td>locale</td><td>language-country. e.g. fr-CA</td></tr>
-      <tr><td>max-decimal</td><td>Default 2, max decimal point. Used with type="number"</td></tr>
-      <tr><td>currency</td><td>Default USD, currency. e.g. USD, KRW, or CAD. Used with type="currency"</td></tr>
-      <tr><td>format</td><td>date format *, locale date format. for en-US, mm-dd-yy </td></tr>
-    </tbody>
-  </table>
-</div>
+<h3>Attributes</h3>
+<table x="">
+  <thead>
+    <tr> <th>Name</th> <th>Default</th> <th>Optional</th> <th>Description</th> </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>type</td> <td>N/A</td> <td>Required</td>
+      <td>format type. number, currency, or date</td>
+    </tr>
+    <tr>
+      <td>locale</td> <td>en-US</td> <td>Optional</td>
+      <td>language-country. e.g. fr-CA</td>
+    </tr>
+    <tr>
+      <td>max-decimal</td> <td>2</td> <td>Optional</td>
+      <td>max decimal point. Used with <code>type="number"</code></td>
+    </tr>
+    <tr>
+      <td>currency</td> <td>USD</td> <td>Optional</td>
+      <td>currency. e.g. USD, KRW, or CAD. Used with <code>type="currency"</code></td>
+    </tr>
+    <tr>
+      <td>format</td> <td>locale date format. for en-US, mm-dd-yy</td> <td>Optional</td>
+      <td>
+        Refer to the <a href="#date-formats">Date Formats</a>.
+        Used with <code>type="date"</code>
+      </td>
+    </tr>
+  </tbody>  
+</table>
 
+<a id="date-formats"></a>
 <h3>Date Formats</h3>
 <table x="">
   <thead>
     <tr><th>Format</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td>yyyy</td><td> 4 digit year, e.g., 2021 </td></tr>
-    <tr><td>yy</td><td> 2 digit year, e.g., 21 </td></tr>
-    <tr><td>MM</td><td> 2 digit montd, e.g., 05 </td></tr>
-    <tr><td>M</td><td> 1 or 2 digit montd. e.g., 5, or 12 </td></tr>
-    <tr><td>dd</td><td> 2 digit day. e.g., 05, or 12 </td></tr>
-    <tr><td>d</td><td> 1 or 2 digit day. e.g., 5, or 12 </td></tr>
-    <tr><td>hh</td><td> 2 digit hours. e.g., 05, or 23 </td></tr>
-    <tr><td>h</td><td> 1 or 2 digit hours. e.g., 5, or 23 </td></tr>
-    <tr><td>mm</td><td> 2 digit minutes. e.g., 05, or 59 </td></tr>
-    <tr><td>m</td><td> 1 or 2 digit minutes. e.g., 5, or 59 </td></tr>
-    <tr><td>ss</td><td> 2 digit seconds. e.g., 05, or 59 </td></tr>
-    <tr><td>s</td><td> 1 or 2 digit seconds. e.g., 5, or 59 </td></tr>
-    <tr><td>Montd</td><td> Montd name. e.g. January </td></tr>
-    <tr><td>Mon</td><td> Montd name in short format. e.g. Jan </td></tr>
-    <tr><td>Weekday</td><td> Weekday name. e.g. Wednesday </td></tr>
-    <tr><td>Week</td><td> Weekday name in short format. e.g. Wed </td></tr>
+    <tr> <td>yyyy</td> <td>4 digit year, e.g., 2021</td> </tr>
+    <tr> <td>yy</td> <td>2 digit year, e.g., 21</td> </tr>
+    <tr> <td>MM</td> <td>2 digit montd, e.g., 05</td> </tr>
+    <tr> <td>M</td> <td>1 or 2 digit month. e.g., 5, or 12</td> </tr>
+    <tr> <td>dd</td> <td>2 digit day. e.g., 05, or 12</td> </tr>
+    <tr> <td>d</td> <td>1 or 2 digit day. e.g., 5, or 12</td> </tr>
+    <tr> <td>hh</td> <td>2 digit hours. e.g., 05, or 23</td> </tr>
+    <tr> <td>h</td> <td>1 or 2 digit hours. e.g., 5, or 23</td> </tr>
+    <tr> <td>mm</td> <td>2 digit minutes. e.g., 05, or 59</td> </tr>
+    <tr> <td>m</td> <td>1 or 2 digit minutes. e.g., 5, or 59</td> </tr>
+    <tr> <td>ss</td> <td>2 digit seconds. e.g., 05, or 59</td> </tr>
+    <tr> <td>s</td> <td>1 or 2 digit seconds. e.g., 5, or 59</td> </tr>
+    <tr> <td>Month</td> <td>Month name. e.g. January</td> </tr>
+    <tr> <td>Mon</td> <td>Month name in short format. e.g. Jan</td> </tr>
+    <tr> <td>Weekday</td> <td>Weekday name. e.g. Wednesday</td> </tr>
+    <tr> <td>Week</td> <td>Weekday name in short format. e.g. Wed</td> </tr>
   </tbody>
 </table>

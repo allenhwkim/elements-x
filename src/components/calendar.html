@@ -1,108 +1,94 @@
+<h2>Calendar</h2>  
 
-<h3>Features</h3>
-<ul class="default">
-  <li>
-    Shows international language calendar
-    <p>English, Korean, Chinese, Arabic, Thai and more</p>
-  </li>
-  <li> 
-    Diaplay a calendar on a page flow or as a dropdown
-    <p>It can be used with a button or input tag</p>
-  </li>
-  <li> 
-    Highlights pre-selected date
-  </li>
-  <li> 
-    Limit the calendar months using min. and max. date
-  </li>
-  <li>
-    Customizable color and dates display
-    <p>
-      Try different styling by clicking "Overvide Default Style".
-    </p>
-  </li>
+<h3>Features </h3>
+<ul>
+  <li> Multiple language expression with <code>locale</code> attribute. e.g., en, ko, or thai etc</li>
+  <li> Fire events when a date is selected and unselected</li>
+  <li> Updatable start day of week. Saturday, Sunday, or Monday </li>
+  <li> Holiday display using <code>SDate.Holidays</code></li>
+  <li> Controllable date select with <code>isSelectable(date)</code> function </li>
 </ul>
 
-<h3>
-  Example
-  <a class="try-it" target="_" href="//stackblitz.com/edit/x-calendar?file=index.html"> static html</a>
-  <a class="try-it" target="_" href="https://codesandbox.io/s/ng-elements-x-custom-bd5c7?file=/src/app/components/calendar.component.ts&initialpath=/calendar"> Angular</a>
-</h3>
-
-<div class="example">
-  <h3> Open calendar with button</h3>
-  <button x="">Show Calendar</button>
-  <x-overlay>
-    <x-calendar target="date2"></x-calendar>
-  </x-overlay>
-  Selected: <span id="date2"></span>
-  <x-pre>
-    &lt;button>Show Calendar&lt;/button>
-    &lt;x-overlay>
-      &lt;<b>x-calendar</b> target="date2"&lt;/<b>x-calendar</b>
-    &lt;/x-overlay>
-  </x-pre>
+<div class="example default" style="display: flex">
+  <x-calendar id="cal1" multiple></x-calendar>
+  <x-calendar id="cal2" multiple locale="ko" first-day-of-week="1"></x-calendar>
+  <x-calendar id="cal3" multiple locale="zh"></x-calendar>
 </div>
-
-<div class="example">
-  <h3> Calendar in a block</h3>
-  <script>function setCal1(locale) {
-    document.querySelector('#calendar1').setAttribute('locale',locale);
-  }</script>
-  <label onclick="setCal1('en-US')">
-    <x-radio><input type="radio" name="r1" checked="checked" /> English</x-radio>
-  </label>
-  <label onclick="setCal1('ko-KR')">
-    <x-radio><input type="radio" name="r1" /> Korean</x-radio>
-  </label>
-  <label onclick="setCal1('zh-CN-u-nu-hanidec')">
-    <x-radio><input type="radio" name="r1" /> Chinese</x-radio>
-  </label>
-  <label onclick="setCal1('ar-EG')">
-    <x-radio><input type="radio" name="r1" />Arabic/Egypt</x-radio>
-  </label>
-  <label onclick="setCal1('fa-AF')">
-    <x-radio><input type="radio" name="r1" />Dari/Afghanistan</x-radio>
-  </label>
-  <label onclick="setCal1('th-TH-n-nu-thai-ca-chinese')">
-    <x-radio><input type="radio" name="r1" />Thai</x-radio>
-  </label>
-  <br/>
-  <br/>
-  <div style="max-width:600px; border: 1px solid #ccc">
-    <x-calendar id="calendar1" target="date1" locale="en-US"></x-calendar>
-  </div>
-  Selected: <span id="date1"></span>
-  <x-pre>
-    &lt;div style="max-width:600px; border: 1px solid #ccc">
-      &lt;x-calendar target="date1" locale="en-US">&lt;/x-calendar>
-    &lt;/div>
-    Selected: &lt;span id="date1">&lt;/span>
-  </x-pre>
+<div>
+  Selected Dates: <span id="datex-selected"></span>
 </div>
+<x-pre>
+  &lt;x-calendar id="cal2" date="2022-04-01" multiple locale="ko" first-day-of-week="1">&lt;/x-calendar>
+</x-pre>
+<script>
+  function getDisplayable(dates) {
+    return '[' + dates.map(el => el.toISOString().slice(0, 10)).join(', ') + ']';
+  }
+  let datesSelected = [new Date('2022-04-15'), new Date('2022-04-16'), new Date('2022-04-17')];
+  $('#cal2').datesSelected = datesSelected;
+  $('#datex-selected').innerHTML = getDisplayable(datesSelected);
+  $('.example').addEventListener('select', function(e) {
+    datesSelected.push(e.detail);
+    $('#datex-selected').innerHTML = getDisplayable(datesSelected);
+  });
+  $('.example').addEventListener('deselect', function(event) {
+    datesSelected = datesSelected.filter(el => el.toISOString().slice(0, 10) !== event.detail.toISOString().slice(0, 10));
+    $('#datex-selected').innerHTML = getDisplayable(datesSelected);
+  });
+</script>
 
+<p>
+  To show holidays on calendar, provide <code>XCalanedar.HOLIDAYS</code> as like the following.
+</p>
+<x-highlightjs>
+  import {XCalendar} from '@formhero/smartform-elements';
+  XCalendar.HOLIDAYS = [
+    {date: '2022-01-01', name: 'New Years\'s Day', Type: 'Statutory Holiday'},
+    {date: '2022-01-03', name: 'New Years\'s Day(in lieu)', Type: 'Government Holiday'},
+    {date: '2022-02-21', name: 'Family Day', Type: 'Regional Holiday'},
+    ...
+  ];
+</x-highlightjs>
+
+<p>
+  To control selectable dates, provide <code>XCalendar.IS_SELECTABLE(date)</code> function.
+  In default, all dates are selectable.
+</p>
+<x-highlightjs>
+  import {XCalendar} from '@formhero/smartform-elements';
+  XCalendar.IS_SELECTABLE = function(date) {
+    const isHoliday = XCalendar.HOLIDAYS.find(h => h.date === date.toISOString().slice(0,10));
+    const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+    return !isHoliday &amp;&amp; !isWeekend;
+  }
+</x-highlightjs>
+
+<h3>Attributes</h3>
 <div class="attributes" title="Attributes">
-  <h3>Attributes</h3>
   <table x="">
-    <thead><tr><th>Name</th><th>Type</th><th>Default</th><th>Optional</th><th>Description</th></tr></thead>
+    <thead>
+      <tr> <th>Name</th> <th>Default</th> <th>Optional</th> <th>Description</th> </tr>
+    </thead>
     <tbody>
-      <tr><td>locale</td><td>string</td><td>en-US</td><td>Optional</td><td>language/country</td></tr>
-      <tr><td>date</td><td>Date</td><td>Current Date</td><td>Optional</td><td>startig date. e.g. '2020-09-14'</td></tr>
-      <tr><td>week-format</td><td>string</td><td>short</td><td>Optional</td><td>'short', 'long', 'short', or 'narrow'</td></tr>
-      <tr><td>min-date</td><td>Date</td><td>1969-01-01</td><td>Optional</td><td>lowest calendar date selectable</td></tr>
-      <tr><td>max-date</td><td>Date</td><td>2100-12-31</td><td>Optional</td><td>lowest calendar date selectable</td></tr>
-      <tr><td>first-day-of-week</td><td>Number</td><td>0</td><td>Optional</td><td>The start day of week</td></tr>
-      <tr><td>target</td><td>string</td><td>N/A</td><td>Optional</td><td>id of element to be updated when a date is selected</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="events" title="Events">
-  <h3>Events</h3>
-  <table x="">
-    <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
-    <tbody>
-      <tr><td>x-select</td><td>CustomEvent</td><td>Date</td><td>fired when date is selected</td></tr>
+      <tr> <td>date</td> <td>Current Date</td> <td>Optional</td> <td>startig date. e.g. '2020-09-14'</td> </tr>
+      <tr> <td>first-day-of-week</td> <td>0</td> <td>Optional</td> <td>The start day of week</td> </tr>
+      <tr> <td>locale</td> <td>en-US</td> <td>Optional</td> <td>language/country</td> </tr>
+      <tr> <td>multiple</td> <td>N/A</td> <td>Optional</td> <td>If provided, It allows to select multiple dates</td> </tr>
+      <tr> 
+        <td>month-format</td> <td>long</td> <td>Optional</td> 
+        <td>
+          format of month, default is 'long'". e.g., 
+          "numeric" (e.g., 1)
+          "2-digit" (e.g., 01)
+          "long" (e.g., January)
+          "short" (e.g., Jan)
+          "narrow" (e.g., J)
+        </td> 
+      </tr>
+      <tr> 
+        <td>week-format</td> <td>short</td> <td>Optional</td> 
+        <td> format of week, default is 'short'". "long"(Monday), "short"(Mon), "narrow"(M)</td> 
+      </tr>
     </tbody>
   </table>
 </div>

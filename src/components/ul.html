@@ -16,7 +16,7 @@
 <h3>Features </h3>
 <ul class="default">
   <li>Provide navigation using keyboard</li>
-  <li>Fire 'x-select` evnet when a list item is selected</li>
+  <li>Fire 'select` evnet when a list item is selected</li>
   <li>With 'selected' attribute, it highlights selected item</li>
   <li>Accessibility features; aria-expanded / aria-has-popup</li>
 </ul>
@@ -42,7 +42,7 @@
     Select an list item from the list.
   </div>
   <script>
-    document.querySelector('#default').addEventListener('x-select', evt => {
+    document.querySelector('#default').addEventListener('select', evt => {
       document.querySelector('#message-default').innerText = `selected "${evt.detail.outerHTML}"`;
     });
   </script>
@@ -119,7 +119,7 @@
     Select an list item from the list.
   </div>
   <script>
-    document.querySelector('#hierarchical').addEventListener('x-select', evt => {
+    document.querySelector('#hierarchical').addEventListener('select', evt => {
       document.querySelector('#message-hierarchical').innerText = `selected "${evt.detail.outerHTML}"`;
     });
   </script>
@@ -186,7 +186,7 @@
   <table x="">
     <thead><tr><th>Name</th><th>Type</th><th>Data</th><th>Description</th></tr></thead>
     <tbody>
-      <tr><td>x-select</td><td>CustomEvent</td><td>selected element</td>
+      <tr><td>select</td><td>CustomEvent</td><td>selected element</td>
         <td>Fired when a list item is selected by click or enter pressed</td></tr>
     </tbody>
   </table>

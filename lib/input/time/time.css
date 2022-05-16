@@ -1,4 +1,6 @@
 x-input[type=time] {
-  position: relative;
   display: inline-block;
 }
+/* x-input[type=time] x-clock.x-overlay.x-show {
+  padding: 0;
+} */

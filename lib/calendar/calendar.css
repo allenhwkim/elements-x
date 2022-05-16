@@ -1,5 +1,5 @@
-x-calendar.x-overlay--show {
-  width: 320px;
+x-calendar.x-overlay.x-show {
+  width: 280px;
   padding: 0 4px;
 }
 x-calendar {
@@ -79,6 +79,8 @@ x-calendar .x-days-container .x-date button {
   background: transparent;
   border: none;
   box-shadow: none;
+  min-width: 24px;
+  min-height: 24px;
 }
 x-calendar .x-days-container .x-date button:focus {
   background-color: unset;

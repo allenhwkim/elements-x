@@ -2,3 +2,7 @@ x-input[type=color] {
   position: relative;
   display: inline-block;
 }
+x-input[type=color][disabled] x-color-picker {
+  opacity: .5;
+  pointer-events: none;
+}

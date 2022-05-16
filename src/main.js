@@ -3,6 +3,7 @@ import { debounce } from '../lib/common/util';
 
 elementsX.defineAll();
 
+window.elementsX = elementsX;
 window.$ = document.querySelector.bind(document);
 
 // enable/disable outline for click and tab

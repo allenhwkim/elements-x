@@ -15,7 +15,8 @@
   <h3>Usage with input</h3>
   
   <input id="color2" />
-  <x-color-picker target="color2" width="400" height="300"></x-color-picker>
+  <x-color-picker target="color2" width="400" height="300"
+    onselect="$('#color2').value =event.detail.hex;$('#color2').focus()"></x-color-picker>
   <x-pre>
     &lt;input id="color"  width="400" height="300"/>
     &lt;x-color-picker target="color">&lt;/x-color-picker>

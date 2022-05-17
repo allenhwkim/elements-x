@@ -56,3 +56,4 @@ XCalendar.define();
 * It’s custom-elements, which works like html tags
 * NOT dependent to any framework; Angular, React, nor, VueJS
 * Customizable look-and-feel
+

@@ -7,7 +7,7 @@ const { copy, injectEsbuildResult, runStaticServer, watchAndReload, readmeToHtml
 const preBuilds = [];
 
 const postBuilds = [
-  copy(['src/**/* dist', 'public/**/* dist/public']),
+  copy(['src/**/* dist', 'public/* dist']),
   readmeToHtml('README.md', 'dist/readme.html'),
   injectEsbuildResult()
 ];

@@ -7,7 +7,7 @@ const { copy, injectEsbuildResult, runStaticServer, watchAndReload, readmeToHtml
 const preBuilds = [];
 
 const postBuilds = [
-  copy(['src/**/* dist', 'cypress/reports dist']),
+  copy(['src/**/* dist', 'public/**/* dist/public']),
   readmeToHtml('README.md', 'dist/readme.html'),
   injectEsbuildResult()
 ];

@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true, 
+    "target": "es2016",
+    "module": "commonjs",
+    "jsx": "react",
+    "skipLibCheck": true,  /* Skip type checking all .d.ts files. */
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "noImplicitAny": false
+  }
+}

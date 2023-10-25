@@ -1,0 +1,26 @@
+{
+  "name": "formflow",
+  "version": "0.2.7",
+  "description": "form-flow",
+  "workspaces": [
+    "elements",
+    "dashboard"
+  ],
+  "scripts": {
+    "start": "npm start -w dashboard",
+    "start:elements": "npm start -w elements",
+    "build": "npm run build -w dashboard -w elements",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm run build"
+  },
+  "overrides": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.9.5"
+  },
+  "files": [
+    "dist"
+  ],
+  "author": "Allen Kim<allenhwkim@gmail.com>",
+  "license": "MIT"
+}

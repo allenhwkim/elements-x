@@ -1,0 +1,83 @@
+import { Canvas, Meta, Story } from '@storybook/blocks';
+import * as FormDiagramStories from './form-diagram.stories';
+
+<Meta of={FormDiagramStories} />
+
+This makes use of react component, FormflowChart, expanding its functionality by getting data, image and instance.
+
+<Canvas of={FormDiagramStories.Primary} />
+
+### Functions
+<table>
+  <tbody>
+    <tr>
+      <th>name</th> <th>description</th>
+    </tr>
+    <tr>
+      <td>setData(data: {'{'}nodes:Node[], edges: Edge[]{'}'}) => void</td> 
+      <td>Set nodes and edges of the flow chart</td> 
+    </tr>
+    <tr>
+      <td>getData() => {'{'}nodes:Node[], edges: Edge[]{'}'} </td> 
+      <td>Returns the current nodes and edges</td> 
+    </tr>
+    <tr>
+      <td>getImage() => Promise{'<'}Base64{'>'}</td> 
+      <td>Returns image data of the current flow chart</td> 
+    </tr>
+    <tr>
+      <td>getInstance() => ReactflowInstance</td> 
+      <td>Returns the Reactflow instance</td> 
+    </tr>
+  </tbody>
+</table>
+
+### Event
+<table>
+  <tbody>
+    <tr>
+      <th>name</th> <th>description</th>
+    </tr>
+    <tr>
+      <td>reactflow</td> 
+      <td>
+        There are three types of details for this event.
+        <ul>
+          <li>{
+            JSON.stringify({
+              type: 'reactflow',
+              detail: {
+                action: "'selected'", 
+                type: "'node'",
+                node: 'Node', 
+                nodes: 'Node[]', 
+                edges: 'Edge[]'
+              }
+            }, null, '  ')
+          }</li>
+          <li>{
+            JSON.stringify({
+              type: 'reactflow',
+              detail: {
+                action: "'selected'", 
+                type: "'edge'",
+                edge: 'Edge', 
+                nodes: 'Node[]', 
+                edges: 'Edge[]'
+              }
+            }, null, '  ')
+          }</li>
+          <li>{
+            JSON.stringify({
+              type: 'reactflow',
+              detail: {
+                action: "'init'", 
+                event: "ReactFlowInstance"
+              }
+            }, null, '  ')
+          }</li>
+        </ul>
+      </td> 
+    </tr>
+  </tbody>
+</table>

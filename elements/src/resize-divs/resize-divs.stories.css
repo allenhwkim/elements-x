@@ -1,0 +1,9 @@
+resize-divs {
+  border: 1px dashed #CCC;
+}
+resize-divs > :not(.resize-bar) {
+  padding: 1em;
+}
+resize-divs[width] > :not(.resize-bar) {
+  width: 33%;
+}

@@ -1,4 +1,4 @@
-import { addCss, localDate, removeCss } from '../../lib';
+import { addCss, localDate, removeCss } from '../util';
 import css from './calendar.css';
 import { rebuildCalendar } from './rebuild-calendar';
 
@@ -6,7 +6,6 @@ function changeHandler(this:any, event) { // Do not use arrow function here if '
   const year = event.target.value;
   const [month, day] = [this.currentDate.getMonth(), this.currentDate.getDate()];
   this.currentDate = new Date(year, month, day);
-  console.log('xxxxxxxxxxx')
 }
 
 function clickHandler(this: any, e: any) {
@@ -21,23 +20,9 @@ function clickHandler(this: any, e: any) {
   } else if (e.target.id.match(/x-[0-9-]+$/)) { // date button
     const dateEl = e.target;
     const date = new Date(dateEl.id.slice(2));
-    const preSelected = dateEl.classList.contains('x-select');
-    if (preSelected) {
-      dateEl.classList.remove('x-select');
-      this.datesSelected = this.datesSelected.filter(el => {
-        return el.toISOString().substring(0,10) !== date.toISOString().substring(0,10);
-      });
-      dateEl.dispatchEvent(new CustomEvent('deselect', { bubbles: true, detail: localDate(date)}));
-    } else {
-      if (this._props.multiple) {
-        this.datesSelected.push(date);
-      } else {
-        this.querySelector('.x-days-container .x-select')?.classList.remove('x-select');
-        this.datesSelected = [date];
-      }
-      dateEl.classList.add('x-select');
-      dateEl.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: localDate(date)}));
-    }
+    this.querySelector('.x-date .x-select')?.classList.remove('x-select');
+    dateEl.classList.add('x-select');
+    this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: localDate(date)}));
   }
 }
 
@@ -46,11 +31,11 @@ const html = `
     <div class="x-header">
       <div class="x-month-year">
         <span id="x-month" class="x-month"></span>
-        <select id="x-years" class="x-years" read-only></select>
+        <select id="x-years" class="x-years" aria-label="year" read-only></select>
       </div>
-      <button id="x-prev-month" class="x-prev" arial-label="previous month"></button>
-      <button id="x-today" class="x-today" arial-label="today"></button>
-      <button id="x-next-month" class="x-next" arial-label="next month"></button>
+      <button id="x-prev-month" class="x-prev" title="previous month"></button>
+      <button id="x-today" class="x-today" title="today"></button>
+      <button id="x-next-month" class="x-next" title="next month"></button>
     </div>
     <div class="x-week-days-container"></div>
     <div class="x-days-container">
@@ -65,7 +50,7 @@ export class Calendar extends HTMLElement {
   static IS_SELECTABLE = date => true;
 
   static get observedAttributes() {
-    return ['multiple', 'date', 'month-format', 'week-format', 'locale', 'fist-day-of-week'];
+    return ['date', 'month-format', 'week-format', 'locale', 'first-day-of-week'];
   }
 
   _currentDate = new Date();
@@ -77,8 +62,7 @@ export class Calendar extends HTMLElement {
     return this._currentDate;
   }
 
-  _props = {
-    multiple: false,
+  props = {
     date: new Date(),
     monthFormat: 'long',  // long(June), short(Jun), narrow(J)
     weekFormat: 'long',  // long(Monday), short(Mon), narrow(M)
@@ -100,12 +84,17 @@ export class Calendar extends HTMLElement {
 
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
     if (this.isConnected && oldValue !== newValue) {
-      (name === 'multiple') && (this._props.multiple = newValue !== 'false');
-      (name === 'date') && (this._props.date = new Date(newValue), this.currentDate = this._props.date);
-      (name === 'month-format') && (this._props.monthFormat = newValue);
-      (name === 'week-format') && (this._props.weekFormat = newValue);
-      (name === 'locale') && (this._props.locale = newValue);
-      (name === 'first-day-of-week') && (this._props.firstDayOfWeek = +newValue);
+      if (name === 'date') {
+        console.log({name, newValue})
+        this.props.date = 
+          newValue.match(/^[0-9]+/) ? new Date(+newValue):
+          typeof newValue === 'string' ? new Date(newValue): 
+          newValue;
+        this.currentDate = this.props.date;
+      } else {
+        var propsKey = name.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+        this.props[propsKey] = newValue;
+      }
       this.#updateDOM();
     }
   }

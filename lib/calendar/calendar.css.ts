@@ -4,14 +4,6 @@ export default `
     border: 1px solid #ccc
   }
 
-  x-calendar.small {
-    width: 260px
-  }
-
-  x-calendar.small .x-date:has(.x-holiday):after {
-    display: none
-  }
-
   x-calendar .x-header {
     display: flex;
     padding: 12px 8px;
@@ -59,7 +51,9 @@ export default `
     text-align: center;
     border: 1px solid #fff;
     border-width: 0 1px;
-    padding: 4px
+    padding: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   x-calendar .x-days-container {

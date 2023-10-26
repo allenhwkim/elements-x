@@ -5,14 +5,15 @@ export function rebuildCalendar(el) {
   const $ = selector => el.querySelector(selector);
 
   if (el.classList.contains('small')) {
-    el._props.monthFormat = 'short';
-    el._props.weekFormat = 'short';
+    el.props.monthFormat = 'short';
+    el.props.weekFormat = 'short';
   }
-  const {weekFormat, monthFormat, locale, firstDayOfWeek, multiple} =  el._props;
+  const {weekFormat, monthFormat, locale, firstDayOfWeek} =  el.props;
   const currentDate = el.currentDate;
 
   el.datesSelected ||= [];
 
+  console.log({currentDate, firstDayOfWeek})
   const dates = getCalendarDays(currentDate, firstDayOfWeek);
 
   // set month string
@@ -72,6 +73,7 @@ export function rebuildCalendar(el) {
 
 // Returns the first day of calendar starting from the last month ending days
 function getCalendarStartDay(date, firstDayOfWeek): Date {
+  firstDayOfWeek = +firstDayOfWeek;
   console.log({date, firstDayOfWeek})
   const DAY_MS = 60 * 60 * 24 * 1000;
   const [year, month] = [date.getFullYear(), date.getMonth()];

@@ -1,14 +1,15 @@
 import morphdom from 'morphdom/dist/morphdom-esm';
-import {loadScript, waitFor} from '../../lib';
+import {loadScript, waitFor} from '../util';
 declare const window: any;
 
 export class BarCode extends HTMLElement {
   static get observedAttributes() {
-    return ['value', 'format'];
+    return ['value', 'format', 'width', 'height'];
   }
 
   props = {
     width: 1,
+    height: 100,
     background: '#FFFFFF',
     lineColor: '#000000',
     margin: 10,
@@ -42,16 +43,24 @@ export class BarCode extends HTMLElement {
   }
 
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
-    (oldValue !== newValue) && this.#updateDOM();
+    if (oldValue !== newValue) {
+      var propsKey = name.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+      this.props[propsKey] = newValue;
+      this.#updateDOM();
+    }
   }
 
   async render() { 
     if (window.JsBarcode) {
-      const value = this.getAttribute('value') || '123456789012'; 
-      const format = this.getAttribute('format') || 'code128';
-      const svgEl = document.createElement('svg');
-      window.JsBarcode(svgEl, value, {...this.props, format});
-      return svgEl.outerHTML;
+      try {
+        const value = this.getAttribute('value') || '123456789012'; 
+        const svgEl = document.createElement('svg');
+        console.log(this.props)
+        window.JsBarcode(svgEl, value, this.props);
+        return svgEl.outerHTML;
+      } catch (e) {
+        return 'Invalid barcode format and value, e.g., certain format requires a certain numerical value.'
+      }
     }
   }
 

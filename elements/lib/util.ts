@@ -88,3 +88,22 @@ export function hash(str: string) {
   hash = hash > 0 ? hash : hash *= -1
   return 'h' + hash.toString(36);
 }
+
+/**
+ * returns a date without timezone consideration. Used to ignore timezone.
+ * @param date Date type
+ * @returns a date without timezone consideration
+ */
+export function localDate(date): Date {
+  if (!date) {
+    const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+    date = new Date(Date.now() - tzoffset);
+  } else if (typeof date === 'string') {
+    date = new Date(date);
+  }
+  const str = date.toISOString().slice(0, -1).replace(/[^0-9]/g, '');
+  const [year, month, day] = [str.substr(0,4), str.substr(4,2), str.substr(6,2)];
+
+  const localDate = new Date(+year, +month - 1, +day, 2, 0, 0);
+  return localDate;
+}

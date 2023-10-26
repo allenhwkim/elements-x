@@ -3,6 +3,7 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       'combo-box': any;
+      'x-calendar': any;
       'form-controller': any;
       'form-stepper': any;
       'form-designer': any;

@@ -1,7 +1,7 @@
 {
-  "name": "formflow",
-  "version": "0.2.7",
-  "description": "form-flow",
+  "name": "elements-x",
+  "version": "0.3.0",
+  "description": "collection of custom elements",
   "workspaces": [
     "elements",
     "dashboard"

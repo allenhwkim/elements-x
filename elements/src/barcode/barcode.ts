@@ -41,10 +41,6 @@ export class BarCode extends HTMLElement {
     this.#updateDOM();
   }
 
-  disconnectedCallback() {
-    //removeCss(this.tagName);
-  }
-
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
     (oldValue !== newValue) && this.#updateDOM();
   }

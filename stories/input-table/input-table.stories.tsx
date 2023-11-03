@@ -12,18 +12,30 @@ const meta: Meta = {
     const wrapperEl = document.createElement('div');
     const el = document.createElement(elName) as any;
     const msgEl = document.createElement('div');
-    args.keys && el.setAttribute('keys', args.value);
+    if (args.value) {
+      try {
+        if (typeof args.value === 'string') {
+          const valFunc = new Function(`return ${args.value};`);
+          el.value = valFunc();
+        } else {
+          el.value = args.value;
+        }
+      } catch(e) {
+        console.error('Error, x-input-table, invalid value', e);
+      }
+    }
     wrapperEl.appendChild(el);
     wrapperEl.appendChild(msgEl);
     wrapperEl.addEventListener('update', (e: any) => {
-      msgEl.innerText = `'update' event: ${JSON.stringify(e.detail)}`
+      msgEl.innerText = `'update' event: ${JSON.stringify(el.value)}`
     });
     return wrapperEl as any;
   },
+
   argTypes: {
-    keys: { 
-      description: `Keys of each input. If given, return as an object. If not given, return as an array`, 
-      control: { type: 'text' },
+    value: { 
+      description: `value of input table. e.g. ['a','b','c'], [{a: 1, b:2, c:3}] `, 
+      control: { type: 'object' },
     },
   },
 };
@@ -31,5 +43,16 @@ const meta: Meta = {
 
 export default meta;
 
-export const Primary = { args: {}};
-export const Object = { args: {keys: 'key1, key2, key3'}};
+export const Primary = {};
+export const Object = { args: {value: [
+  {key1: '', key2: '', key3: ''}
+]}};
+export const StringsWithValue = { args: {value: [
+  'pre', 
+  'filled', 
+  'strings'
+]}};
+export const ObjectsWithValue = { args: {value: [
+  {key1: 'pre', key2: 'filled', key3: 'values'}, 
+  {key1: '', key2: '', key3:''}
+]}};

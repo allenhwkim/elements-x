@@ -1,44 +1,56 @@
 
-// todo
-// 1. when change, set this._value and fire 'change' event
-// 2. when value is set, reset html by value
+// 1. when input values change, set this._value and fire 'update' event
+// 2. when value property is set, reset html
 export class InputTable extends HTMLElement {
+  _orgValue: any = undefined;
   _value: any = undefined;
-  keys;
 
   get value() { return this._value }
-  set value(val) {
-    this._value = val;
-    this.innerHTML = '';
-    this.value.forEach(value => this.addNewRow(this, value));
+  set value(val) { 
+    if (Array.isArray(val)) {
+      this._orgValue = val;
+      this._value = val;
+      this.innerHTML = '';
+      this.value.forEach(value => this.addNewRow(this, value));
+    } else {
+      console.error('Error on x-input-table', 'Value must be an array of string or object');
+    }
+  }
+
+  get keys() { // returns keys for each row
+    const valLen = this._orgValue?.length;
+    const valType = typeof (valLen ? this._orgValue[0] : 'string');
+    const keys = (valType === 'object') && Object.keys(this._orgValue[0]);
+    // console.log('this.keys', this.value[0], {valLen, valType, keys})
+    return keys;
   }
 
   connectedCallback() {
-    const values = (this.value || (this.keys ? [{}] : ['']));
-    values.forEach(value => {
-      this.addNewRow(this, value);
-    });
-    this.registerEventListener();
+    if (this.isConnected) {
+      const keys = this.keys;
+      const emptyObj = keys ? keys.reduce((acc, key) => (acc[key] = '', acc), {}) : '';
+      const rows = (this.value?.length ? this.value : [emptyObj]);
+      console.log('connectedCallback addNewRow() calling', {rows});
+      (!this.value?.length) && rows.forEach(row => { this.addNewRow(this, row); });
+      this.registerEventListener();
+    }
   }
 
   registerEventListener() {
     this.addEventListener('change', event => {
-      // console.log('change event', {event});
-      this._value;
-      const detail = this.getValue();
-      this.dispatchEvent(new CustomEvent('update', {detail, bubbles: true}));
-      console.log({detail})
+      this._value = this.getValue(); // do not set to this.value, causing reset of html
+      this.dispatchEvent(new CustomEvent('update', {detail: this.value, bubbles: true}));
     });
+
     this.addEventListener('keydown', event => {
       const inputEl = (event.target as any);
-      const isLastEl = inputEl.classList.contains('x-last');
-      const isFirstEl = inputEl.classList.contains('x-first');
       const rowEl = inputEl.closest('.x-row');
       const numRows = this.querySelectorAll('.x-row').length;
-      if (event.code === 'Enter' && isLastEl) {
+      const allInputEmpty = Array.from(rowEl.querySelectorAll('input')).every((el:any) => !el.value);
+      if (event.code === 'Enter') {
         this.addNewRow(rowEl); // add an empty row
         event.preventDefault();
-      } else if (event.code === 'Backspace' && isFirstEl && numRows > 1 && !inputEl.value) {
+      } else if (event.code === 'Backspace' && numRows > 1 && allInputEmpty) {
         this.delRow(rowEl);
         event.preventDefault();
       }
@@ -50,38 +62,37 @@ export class InputTable extends HTMLElement {
     const rows = Array.from(this.querySelectorAll('.x-row'));
     rows.forEach(row => {
       const inputs = Array.from(row.querySelectorAll('input'));
-      if (inputs.length === 1) {
+      if (inputs.length === 1) { // string array
         const value = inputs[0].value;
         value && values.push(inputs[0].value);
-      } else {
+      } else { // object array
         const obj = {};
         inputs.forEach(input => {
           const [key, value] = [input.dataset.key as string, input.value];
           value && (obj[key] = value);
         });
-        values.push(obj);
+        Object.keys(obj).length && values.push(obj);
       }
     });
     return values;
   }
 
-  addNewRow(rowEl, value?) {
-    const keys = this.keys?.split(',').map(el => el.trim());
+  addNewRow(rowEl, value?) { // HTMLElement, {foo: 1, bar: 2}
+    console.log('addNewRow called', this.keys);
+    const keys = this.keys;
     const nextRowEl = document.createElement('div');
     nextRowEl.className='x-row';
     if (keys) {
-      keys.forEach((key, ndx) => {
-        const firstLast = ndx === 0 ? ' x-first' : ndx === keys.length -1 ? ' x-last': '';
+      keys.forEach(key => {
         const inputEl = document.createElement('input');
-        inputEl.className = `${key}${firstLast}`;
+        inputEl.className = `${key}`;
         inputEl.setAttribute('data-key', key);
         inputEl.setAttribute('placeholder', key);
-        value && (inputEl.value = value);
+        value && (inputEl.value = value[key]);
         nextRowEl.appendChild(inputEl);
       });
     } else {
       const inputEl = document.createElement('input');
-      inputEl.className = `x-first x-last`;
       value && (inputEl.value = value);
       nextRowEl.appendChild(inputEl);
     }

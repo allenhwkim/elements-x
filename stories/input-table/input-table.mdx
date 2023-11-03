@@ -6,17 +6,18 @@ import * as InputTable from './input-table.stories';
 
 # Input Table
 
-Multiple input as an array or an object.
+Multiple input as an array or an object.  
+Press 'Enter' to add a new row, and 'Backspace' on empty row to delete a row.
 
 <Canvas of={InputTable.Primary}/>
 
 <Controls />
 
-Array string input
-[______]
-[______]
-[______]
-Array object input as table
-[______] [______] [______] [______]  
-[______] [______] [______] [______]  
-[______] [______] [______] [______]  
+### Object
+<Canvas of={InputTable.Object}/>
+
+### Strings with value
+<Canvas of={InputTable.StringsWithValue}/>
+
+### Objects with value
+<Canvas of={InputTable.ObjectsWithValue}/>

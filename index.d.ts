@@ -3,7 +3,8 @@ import { Node, Edge } from 'reactflow';
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'combo-box': any;
+      'x-barcode': any;
+      'x-combobox': any;
       'x-calendar': any;
       'form-controller': any;
       'form-stepper': any;
@@ -13,7 +14,6 @@ declare global {
       'resize-divs': any;
       'resize-handle': any;
       'json-viewer': any;
-      'bar-code': any;
       'file-select': any;
       'list-select': any;
       'ol-map': any;

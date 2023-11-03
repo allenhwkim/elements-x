@@ -107,3 +107,9 @@ export function localDate(date): Date {
   const localDate = new Date(+year, +month - 1, +day, 2, 0, 0);
   return localDate;
 }
+
+export function getFunction(str) {
+  const params = str.match(/function.*?\((.*?)\)/)[1].split(',').map(el => el.trim());
+  const funcBody = str.match(/\{([\s\S]+)\}$/m)[1];
+  return new Function(...params, funcBody);
+}

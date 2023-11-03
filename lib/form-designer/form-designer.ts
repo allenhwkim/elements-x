@@ -1,5 +1,5 @@
 import  grapesjs from 'grapesjs';
-import { addCss, removeCss } from '../../lib';
+import { addCss, removeCss } from '../../lib/util';
 
 import { initGrapesJs } from './init-grapejs';
 import themeCSS from './theme.css';

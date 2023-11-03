@@ -1,0 +1,46 @@
+{/* Calendar.mdx */}
+
+import { Meta, Controls, Canvas } from '@storybook/blocks';
+import * as CalendarStories from './calendar.stories';
+
+# Calendar 
+
+Display a month calendar by the given date.
+
+## Global functions
+1. **Calendar.GET_DAY_INFO()** : Function that returns a day info. The following function returns holidays and birthdays.
+  ```javascript
+  Calendar.GET_DAY_INFO = function(date) {
+    const monthDay = [date.getMonth()+1, date.getDate()].join('-');
+    switch(monthDay) {
+      case '1-1': return {type: 'Statuory holiday', name: 'New years day'}
+      case '12-25': return {type: 'Statuory holiday', name: 'Christmas'}
+      case '10-20': return {type: 'Birthday', name: 'John Birthday'}
+    }
+  } 
+  ```
+2. **Calendar.IS_SELECTABLE()** : Function that returns if a date is selectable or not. 
+  You can use this function to control for max/min date. The following example makes holidays not selectable. 
+  ```
+  Calendar.IS_SELECTABLE= function(date) {
+    const dayInfo = Calendar.GET_DAY_INFO(date);
+    return dayInfo?.type !== 'Statuory holiday';
+  }
+  ``` 
+
+<Meta of={CalendarStories} name="Calendar" />
+
+<Canvas of={CalendarStories.Primary} date='2023-12-25'/>
+
+<Controls />
+
+<h2 className="h6 sb-unstyled fw-light">STORIES</h2>
+
+### Simple
+<Canvas of={CalendarStories.Simple} />
+
+### Korean
+<Canvas of={CalendarStories.Korean} />
+
+### Chinese
+<Canvas of={CalendarStories.Chinese} />

@@ -7,7 +7,9 @@
     "start": "storybook dev -p 6006",
     "build": "npm run build:storybook && npm run build:lib",
     "build:lib": "tsup src/index.ts --out-dir=../dist/elements/lib",
-    "build:storybook": "storybook build -o ../dist/elements"
+    "build:storybook": "storybook build -o ../dist/elements",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
@@ -21,10 +23,9 @@
     "@storybook/addon-mdx-gfm": "^7.3.2",
     "@storybook/addons": "^7.3.2",
     "@storybook/blocks": "^7.3.2",
+    "@storybook/html": "^7.6.0-alpha.2",
+    "@storybook/html-vite": "^7.6.0-alpha.2",
     "@storybook/jest": "0.2.1",
-    "@storybook/react": "^7.3.2",
-    "@storybook/react-vite": "^7.3.2",
-    "@storybook/react-webpack5": "^7.3.2",
     "@storybook/testing-library": "0.2.0",
     "@storybook/theming": "^7.3.2",
     "@types/body-scroll-lock": "^3.1.0",

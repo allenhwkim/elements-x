@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-import { FormDesigner, defineAll } from "../index";
-defineAll();
+import { FormDesigner } from "../index";
 
 export default {
   title: 'form-designer',

@@ -1,4 +1,4 @@
-import { addCss, getReactProp, removeCss } from "../../lib";
+import { addCss, getReactProp, removeCss } from "../../lib/util";
 const css = `
   json-viewer ul.format-json ul { border-left: 1px dashed black; padding-left: 2rem;  margin-left: -12px;}
   json-viewer ul.format-json li { cursor: initial; }

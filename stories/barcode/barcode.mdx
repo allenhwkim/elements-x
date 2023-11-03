@@ -1,0 +1,34 @@
+{/* Barcode.mdx */}
+
+import { Meta, Controls, Canvas } from '@storybook/blocks';
+import * as BarcodeStories from './barcode.stories';
+
+<Meta of={BarcodeStories} />
+
+# Barcode 
+
+Create a barcode from the given format and value.
+
+<Canvas of={BarcodeStories.CODE39} />
+
+<Controls />
+
+#### STORIES
+### CODE128
+<Canvas of={BarcodeStories.CODE128} />
+### EAN13
+<Canvas of={BarcodeStories.EAN13} />
+### UPC
+<Canvas of={BarcodeStories.UPC} />
+### EAN8
+<Canvas of={BarcodeStories.EAN8} />
+### EAN5
+<Canvas of={BarcodeStories.EAN5} />
+### EAN2
+<Canvas of={BarcodeStories.EAN2} />
+### ITF14
+<Canvas of={BarcodeStories.ITF14} />
+### MSI
+<Canvas of={BarcodeStories.MSI} />
+### codabar
+<Canvas of={BarcodeStories.codabar} />

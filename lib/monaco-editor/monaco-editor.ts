@@ -1,4 +1,4 @@
-import { loadScript, waitFor, getReactProp, addCss, removeCss } from '../../lib';
+import { loadScript, waitFor, getReactProp, addCss, removeCss } from '../../lib/util';
 import { getSchemaProperties } from './get-schema-properties.mjs';
 
 declare const window: any;

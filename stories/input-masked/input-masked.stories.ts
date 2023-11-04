@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/html';
 import { InputMasked } from './input-masked';
 
 const elName = 'x-input-masked';
@@ -7,7 +7,7 @@ const className = InputMasked;
 !customElements.get(elName) && customElements.define(elName, className);
 
 const meta: Meta = { 
-  title: 'InputMasked',
+  title: 'Input (for masked entry)',
   render: (args) => {
     const divEl = document.createElement('div');
     const el = document.createElement(elName) as any;

@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/html';
 import { InputTable } from './input-table';
 
 const elName = 'x-input-table';
@@ -7,7 +7,7 @@ const className = InputTable;
 !customElements.get(elName) && customElements.define(elName, className);
 
 const meta: Meta = { 
-  title: 'InputTable',
+  title: 'Input Table',
   render: (args) => {
     const wrapperEl = document.createElement('div');
     const el = document.createElement(elName) as any;

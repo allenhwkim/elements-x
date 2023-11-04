@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { MonacoEditor } from '../index';
-import { fixIndent } from '../../lib';
+import { fixIndent } from '../../lib/util';
 import { useEffect, useRef } from 'react';
 
 declare const window: any;

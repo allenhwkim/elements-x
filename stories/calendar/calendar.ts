@@ -1,4 +1,3 @@
-import { S } from '@storybook/react/dist/types-0a347bb9';
 import { addCss, localDate, removeCss } from '../../lib/util';
 import css from './calendar.css';
 import { rebuildCalendar } from './rebuild-calendar';

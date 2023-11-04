@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/html';
 import { InputFile } from './input-file';
 
 const elName = 'x-input-file';
@@ -7,7 +7,7 @@ const className = InputFile;
 !customElements.get(elName) && customElements.define(elName, className);
 
 const meta: Meta = { 
-  title: 'InputFile',
+  title: 'Input (for files)',
   render: (args) => {
     const el = document.createElement(elName) as any;
     if (args.message) {

@@ -1,28 +1,23 @@
-import { addCss, getReactProp, removeCss } from "../../lib/util";
-const css = `
-  json-viewer ul.format-json ul { border-left: 1px dashed black; padding-left: 2rem;  margin-left: -12px;}
-  json-viewer ul.format-json li { cursor: initial; }
-  json-viewer ul.format-json li small { opacity: .7; }
-  json-viewer ul.format-json li:has(> ul.hidden) { list-style: '⊞ ' }
-  json-viewer ul.format-json li:has(> ul) { list-style: '⊟ '; cursor: pointer; }
-  json-viewer ul.format-json li:has(> ul) sup { display: none; }
-  json-viewer ul.format-json li:has(> ul.hidden) sup { display: initial; opacity: .8; }
-  json-viewer ul.format-json.hidden { display: none; }
-`;
+import morphdom from 'morphdom/dist/morphdom-esm';
+import { addCss, removeCss } from "../../lib/util";
+import css from './json-viewer.css';
 
 export class JsonViewer extends HTMLElement {
   static get observedAttributes() { return ['level']; }
+
   #data = undefined;
   get data() { return this.#data;}
   set data(val) {
     this.#data = val;
-    this.render();
+    this.#updateDOM();
   }
 
   connectedCallback() {
-    addCss(this.tagName, css);
-    this.#data = getReactProp(this as any, 'data') || this.data;
-    this.render();
+    if (this.isConnected) {
+      addCss(this.tagName, css);
+      this.#data = this.data;
+      this.#updateDOM();
+    }
   }
 
   disconnectedCallback() {
@@ -30,18 +25,17 @@ export class JsonViewer extends HTMLElement {
   }
 
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
-    (oldValue !== newValue) && this.render();
+    (oldValue !== newValue) && this.#updateDOM();
   }
 
   render() {
     this.innerHTML = '';
-    this.writeDOM(this, this.data); // recursively call
+    return this.getNewDOM(this, this.data); // recursively call
   }
 
-  writeDOM(el: HTMLElement, data: any, level=0) {
+  getNewDOM(el: HTMLElement, data: any, level=0) {
     const ul = document.createElement('ul');
     const attrLevel = +(this.getAttribute('level') as string);
-    ul.classList.add('format-json');
     (level >= attrLevel) && (ul.classList.add('hidden'));
 
     if (typeof data === 'object') { // array is an object
@@ -66,7 +60,7 @@ export class JsonViewer extends HTMLElement {
         el.appendChild(ul);
 
         if (typeof data[key] === 'object') {
-          this.writeDOM(li, data[key], ++level);
+          this.getNewDOM(li, data[key], ++level);
         } else if (typeof data[key] === 'function') {
           item.innerHTML = `${key}: function`;
         } else if (typeof data[key] === 'string') {
@@ -76,5 +70,20 @@ export class JsonViewer extends HTMLElement {
         }
       }
     }
+    return ul;
   }
+
+  // called when attribute/props changes and connectedCallback
+  // run as debounced since it's called from many places and often
+  #timer: any;
+  #updateDOM() { 
+    clearTimeout(this.#timer);
+    this.#timer = setTimeout(async () => { 
+      const newDOM = this.render();
+      const updated = document.createElement('div');
+      updated.appendChild(newDOM);
+      morphdom(this, updated, { childrenOnly: true }); 
+    }, 50);
+  }
+
 }

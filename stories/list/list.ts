@@ -1,13 +1,14 @@
-import { addCss, removeCss } from '../../lib';
-import css from './list-select.css';
+import { addCss, removeCss } from '../../lib/util';
+import css from './list.css';
 
-export class ListSelect extends HTMLElement {
+export class List extends HTMLElement {
   static get observedAttributes() { return ['selected']; }
 
   connectedCallback() {
     addCss(this.tagName, css);
     this.addEventListener('keydown', e => this.keydownHandler(e));
     this.addEventListener('click', e => this.clickHandler(e));
+    this.render();
   }
 
   disconnectedCallback() {
@@ -43,6 +44,7 @@ export class ListSelect extends HTMLElement {
       visibles[curIndex]?.classList.remove('x-highlighted');
       visibles[nxtIndex]?.classList.add('x-highlighted');
     }
+    console.log(event.code, highlightNextEl);
 
     if (['Enter', 'Space'].includes(event.code)) {
       this.toggleChildList();
@@ -72,6 +74,7 @@ export class ListSelect extends HTMLElement {
     const isMenuStyle = this.querySelector('ul.menu')
     const ulEl = this.querySelector('ul') as HTMLElement;
     const liEl = ulEl.querySelector('#'+ selected || 'unknown') as HTMLElement;
+    console.log({liEl})
     if (!isMenuStyle && liEl) {
       liEl.classList.add('x-highlighted');
       let expandable = (liEl.parentElement as any).closest('ul');

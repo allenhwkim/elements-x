@@ -1,0 +1,23 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+
+import * as TableStories from './table.stories';
+
+<Meta of={TableStories} />
+
+# Input Table
+
+Input as a table format.  
+Press 'Enter' to add a new row, and 'Backspace' on empty row to delete a row.
+
+<Canvas of={TableStories.Primary}/>
+
+<Controls />
+
+### Object
+<Canvas of={TableStories.Object}/>
+
+### Strings with value
+<Canvas of={TableStories.StringsWithValue}/>
+
+### Objects with value
+<Canvas of={TableStories.ObjectsWithValue}/>

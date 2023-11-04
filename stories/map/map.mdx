@@ -1,0 +1,13 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+
+import * as MapStories from './map.stories';
+
+<Meta of={MapStories} />
+
+# Map
+
+Openlayer map
+
+<Canvas of={MapStories.Primary}/>
+
+<Controls />

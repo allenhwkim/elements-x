@@ -1,0 +1,28 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+
+import * as MaskedStories from './masked.stories';
+
+<Meta of={MaskedStories} />
+
+# Masked input
+
+Input masked only accept data which follows the mask format.
+
+<Canvas of={MaskedStories.Primary}/>
+
+<Controls />
+
+<h2 className="h6 sb-unstyled fw-light">STORIES</h2>
+
+### Zip code
+<Canvas of={MaskedStories.ZipCode}/>
+### ID
+<Canvas of={MaskedStories.ID}/>
+### Phone number
+<Canvas of={MaskedStories.PhoneNumber}/>
+### Postal code
+<Canvas of={MaskedStories.PostalCode}/>
+### Credit card
+<Canvas of={MaskedStories.CreditCard}/>
+### Health card
+<Canvas of={MaskedStories.HealthCard}/>

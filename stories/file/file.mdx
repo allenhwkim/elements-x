@@ -1,0 +1,19 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+
+import * as FileStories from './file.stories';
+
+<Meta of={FileStories} />
+
+# File Input
+
+`<input type="file" />` alternative.
+This will enable you to select a file and display preview of the file.
+
+<Canvas of={FileStories.Primary}/>
+
+<Controls />
+
+<h2 className="h6 sb-unstyled fw-light">STORIES</h2>
+
+### Message 
+<Canvas of={FileStories.Message}/>

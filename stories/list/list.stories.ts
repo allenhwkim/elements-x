@@ -7,7 +7,7 @@ const className = List;
 !customElements.get(elName) && customElements.define(elName, className);
 
 const meta: Meta = { 
-  title: 'List selectable',
+  title: 'List',
   render: (args) => {
     const el = document.createElement(elName) as any;
     (args.html) &&  (el.innerHTML = args.html);

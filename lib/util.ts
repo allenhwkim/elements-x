@@ -71,7 +71,7 @@ export function debounce(func: Function, wait = 500) {
   };
 }
 
-export function getReactProp(el: HTMLElement, propName: string) {
+export function getReactProp(el: any, propName: string) {
   const reactPropKey = Object.keys(el).find( key => key.startsWith('__reactProps$')) // react 17+
   return reactPropKey ? el[reactPropKey][propName] : el[propName];
 }

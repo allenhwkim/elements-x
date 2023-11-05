@@ -1,0 +1,44 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+
+import * as ResizeStories from './resize.stories';
+
+<style>{`
+  x-resize:is([width], [height]) {
+    border: 1px dashed #CCC;
+  }
+  x-resize:is([width], [height]) > :not(.resize-bar) {
+    padding: 1em;
+  }
+  x-resize[width] > :not(.resize-bar) {
+    width: 33%;
+  }
+  div.has-handles {
+    position: absolute;
+    width: 400px;
+    height: 100px;
+    top: 90px;
+    left: 50px;
+    border: 1px dashed #ccc;
+  }
+  #story--resize--handle-inner {
+    position: relative;
+    height: 400px;
+  }
+`}</style>
+
+<Meta of={ResizeStories} />
+# Resize 
+
+Resize divs
+
+<Canvas of={ResizeStories.Width}/>
+
+<Controls />
+
+<h2 className="h6 sb-unstyled fw-light">STORIES</h2>
+
+### Resize height
+<Canvas of={ResizeStories.Height}/>
+
+### Resize handles
+<Canvas of={ResizeStories.Handle}/>

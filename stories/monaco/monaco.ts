@@ -1,7 +1,7 @@
 import { loadScript, waitFor, getReactProp, addCss, removeCss } from '../../lib/util';
-import { getJsonSchemaProperties } from './get-json-schema-properties.js';
+import { getJsonSchemaProperties } from './get-json-schema-properties';
 const css = `
-  x-monaco-editor {
+  x-monaco {
     display: block;  
     min-height: 200px;
   }

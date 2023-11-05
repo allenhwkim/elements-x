@@ -1,14 +1,14 @@
 import type { Meta } from '@storybook/html';
-import { MonacoEditor } from './monaco-editor';
+import { MonacoEditor } from './monaco';
 import { fixIndent } from '../../lib/util'
 
-const elName = 'x-monaco-editor';
+const elName = 'x-monaco';
 const className = MonacoEditor;
 
 !customElements.get(elName) && customElements.define(elName, className);
 
 const meta: Meta = { 
-  title: 'Monaco editor',
+  title: 'Monaco (code editor)',
   render: (args) => {
     const wrapperEl = document.createElement('div');
     const el = document.createElement(elName) as any;

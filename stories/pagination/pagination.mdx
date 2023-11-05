@@ -1,0 +1,18 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+
+import * as PaginationStories from './pagination.stories';
+
+<Meta of={PaginationStories} />
+
+# Pagination
+
+Pagination links by the given rows and rows per page.
+
+<Canvas of={PaginationStories.Primary}/>
+
+<Controls />
+
+<h2 className="h6 sb-unstyled fw-light">STORIES</h2>
+
+### Custom 
+<Canvas of={PaginationStories.Custom}/>

@@ -1,5 +1,5 @@
 import morphdom from 'morphdom/dist/morphdom-esm';
-import { hash } from "../../lib";
+import { hash } from "../../lib/util";
 import { XChecks } from "./x-checks";
 
 export class XBind extends HTMLElement {

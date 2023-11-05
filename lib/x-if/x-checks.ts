@@ -1,4 +1,4 @@
-import { hash } from "../../lib";
+import { hash } from "../../lib/util";
 
 const XChecks = {
   __checks: {},

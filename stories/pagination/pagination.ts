@@ -1,9 +1,9 @@
 import morphdom from 'morphdom/dist/morphdom-esm';
-import { addCss, removeCss } from '../../lib';
+import { addCss, removeCss } from '../../lib/util';
 import css from './pagination.css';
 
 export class Pagination extends HTMLElement {
-  static get observedAttributes() { return ['total', 'page', 'numPerPage', 'numPages']; }
+  static get observedAttributes() { return ['total', 'page', 'numPerPage', 'numPageLinks']; }
 
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
     (oldValue !== newValue) && this.#updateDOM();
@@ -47,10 +47,10 @@ export class Pagination extends HTMLElement {
     }
   }
 
-  getPages({total, numPerPage, index, numPages}) {
+  getPages({total, numPerPage, index, numPageLinks}) {
     const totalPages = Math.ceil(total / numPerPage);
     const currentPage = (index + numPerPage) / numPerPage;
-    const numNeighbor = (numPages - 1) / 2;
+    const numNeighbor = (numPageLinks - 1) / 2;
 
     let middlePage = currentPage;
     if ((numNeighbor*2 - currentPage) >= 1) { // currentPage is a low number
@@ -81,11 +81,11 @@ export class Pagination extends HTMLElement {
       }
     }
 
-    (attrs.numPages % 2 === 0) && attrs.numPages++; // make it odd number to find a center
-    const {total=100, page=1, numPerPage=10, numPages=5} = attrs;
+    (attrs.numPageLinks % 2 === 0) && attrs.numPageLinks++; // make it odd number to find a center
+    const {total=100, page=1, numPerPage=10, numPageLinks=5} = attrs;
     const index = this.index || (page - 1) * numPerPage;
 
-    const pages = this.getPages({total, index, numPerPage, numPages});
+    const pages = this.getPages({total, index, numPerPage, numPageLinks});
     const [pages0, pagesX] = [pages[0], pages.slice(-1)[0]];
     const pages0Index = (pages0 -1) * numPerPage;
     const pagesXIndex =  (pagesX -1) * numPerPage;

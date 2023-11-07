@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Json } from './json';
+import { Json } from '../../lib/json/json';
 import type { Meta } from '@storybook/react';
 
 const elName = 'x-json';

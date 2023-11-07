@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/html';
-import { QRCode } from './qrcode';
+import { QRCode } from '../../lib/qrcode/qrcode';
 
 const elName = 'x-qrcode';
 const className = QRCode;

@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/html';
-import {List} from './list';
+import {List} from '../../lib/list/list';
 
 const elName = 'x-list';
 const className = List;

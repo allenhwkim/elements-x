@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/html';
-import { File } from './file';
+import { File } from '../../lib/file/file';
 
 const elName = 'x-file';
 const className = File;

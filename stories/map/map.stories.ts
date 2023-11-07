@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/html';
-import {Map} from './map';
+import {Map} from '../../lib/map/map';
 import { debounce } from '../../lib/util';
 
 const elName = 'x-map';

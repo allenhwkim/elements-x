@@ -1,6 +1,6 @@
 
 import type { Meta } from '@storybook/html';
-import { Resize } from './resize';
+import { Resize } from '../../lib/resize/resize';
 import { fixIndent } from '../../lib/util';
 
 const elName = 'x-resize';

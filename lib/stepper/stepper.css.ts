@@ -1,0 +1,92 @@
+export default /* css */ `
+  x-stepper-controller .stepper.form {
+    min-height: 120px;
+  }
+
+  x-stepper {
+    --fs-label-size: 32px;
+    --fs-width: 100px;
+    display: flex;
+  }
+  
+  x-stepper .form-step {
+    flex: 1; /* stretch width */
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  x-stepper .form-step .stepper-link {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    width: var(--fs-width);
+    cursor: pointer
+  }
+
+  x-stepper .form-step .stepper-link .stepper-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--fs-label-size);
+    height: var(--fs-label-size);
+    font-size: 16px;
+    border: 1px solid;
+    border-radius: 50%;
+    border-color: #b2b2b2;
+    color: #1a1a1a;
+    background-color: #fff;
+  }
+
+  x-stepper .form-step.incomplete .stepper-link {
+    cursor: auto;
+  }
+
+  x-stepper .form-step.active .stepper-link {
+    font-weight: 600;
+  }
+
+  x-stepper .form-step:is(.complete, .active, .skipped, .error) .connection-line {
+    background-color: #90caf9;
+  }
+
+  x-stepper .form-step:not(.active).complete .stepper-link .stepper-label:after {
+    content: '✓';
+    position: absolute;
+    background: inherit;
+  }
+
+  x-stepper .form-step:is(.complete, .active, .skipped) .stepper-link .stepper-label {
+    color: #FFF;
+    border-color: #1976d2;
+    background-color: #1976d2;
+  }
+
+  x-stepper .form-step:is(.error) .stepper-link .stepper-label {
+    color: #FFF;
+    border-color: #d27519;
+    background-color: #d27519;
+  }
+
+  x-stepper .form-step .stepper-link .stepper-title {
+    text-align: center;
+    line-height: 20px;
+  }
+
+  x-stepper .form-step .stepper-link .stepper-desc {
+    color: grey;
+    text-align: center;
+    width: 200px;
+    font-size: small;
+  }
+
+  x-stepper .form-step .connection-line {
+    position: absolute;
+    width: calc(100% - var(--fs-label-size) - 8px);
+    background-color: #EEE;
+    height: 4px;
+    right: calc(50% + var(--fs-label-size) / 2 + 4px);
+    top: calc( var(--fs-label-size) / 2);
+  }
+`;

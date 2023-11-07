@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import { ComboBox } from './combobox';
+import { ComboBox } from '../../lib/combobox/combobox';
 import { getFunction } from '../../lib/util';
 
 const elName = 'x-combobox';

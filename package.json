@@ -1,7 +1,7 @@
 {
-  "name": "@formflow/elements",
+  "name": "elements-x",
   "version": "0.1.0",
-  "description": "custom elements for form-flow application",
+  "description": "collection of custom elements",
   "main": "dist/index.js",
   "scripts": {
     "start": "storybook dev -p 6006",

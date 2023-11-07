@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/html';
-import { MonacoEditor } from './monaco';
+import { MonacoEditor } from '../../lib/monaco/monaco';
 import { fixIndent } from '../../lib/util'
 
 const elName = 'x-monaco';

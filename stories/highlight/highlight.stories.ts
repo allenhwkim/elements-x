@@ -1,6 +1,5 @@
 import type { Meta } from '@storybook/html';
-import { Highlight } from './highlight';
-import themeCss from '../../lib/form-designer/theme.css';
+import { Highlight } from '../../lib/highlight/highlight';
 import { fixIndent } from '../../lib/util';
 
 const elName = 'x-highlight';

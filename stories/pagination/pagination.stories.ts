@@ -1,6 +1,6 @@
 
 import type { Meta } from '@storybook/html';
-import { Pagination } from './pagination';
+import { Pagination } from '../../lib/pagination/pagination';
 
 const elName = 'x-pagination';
 const className = Pagination;

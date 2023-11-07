@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/html';
-import {Calendar} from './calendar';
+import {Calendar} from '../../lib/calendar/calendar';
 
 Calendar.GET_DAY_INFO = function(date) {
   const monthDay = [date.getMonth()+1, date.getDate()].join('-');

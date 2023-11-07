@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/html';
-import {BarCode} from './barcode';
+import {BarCode} from '../../lib/barcode/barcode';
 
 !customElements.get('x-barcode') && customElements.define('x-barcode', BarCode);
 

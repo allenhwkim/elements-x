@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/html';
-import { Masked } from './masked';
+import { Masked } from '../../lib/masked/masked';
 
 const elName = 'x-masked';
 const className = Masked;

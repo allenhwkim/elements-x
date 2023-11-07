@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/html';
-import { Table } from './table';
+import { Table } from '../../lib/table/table';
 
 const elName = 'x-table';
 const className = Table;

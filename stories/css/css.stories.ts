@@ -7,7 +7,7 @@ if (!document.querySelector(`style[x-css]`)) {
 }
 
 const meta: Meta = { 
-  title: 'Default style',
+  title: 'With class \'x\'',
   tags: ['autodocs'],
   render: (args) => {
     const el = document.createElement('div') as any;
@@ -145,6 +145,58 @@ export const Table = {
           </tr>
         </tbody>
       </table>
+    `)
+  }
+};
+
+
+export const PlainInput = { 
+  args: { 
+    html: fixIndent(`
+      <label>
+        <input type="text" value="Hello Textfield" placeholder="">
+      </label>
+      <label>
+        <input type="text" placeholder="Enter your first name">
+      </label>
+      <label>
+        <input type="text" value="Disabled" placeholder="Enter your first name" disabled>
+      </label>
+    `)
+  }
+};
+
+export const TextfieldWithMovingLabel = { 
+  args: { 
+    html: fixIndent(`
+      <label x textfield>
+        <span class="label">First name</span>
+        <input type="text" value="Hello Textfield" placeholder="">
+      </label>
+      <label x textfield>
+        <span class="label">First name</span>
+        <input type="text" placeholder="Enter your first name">
+      </label>
+      <label x textfield>
+        <span class="label">First name</span>
+        <input type="text" value="Disabled" placeholder="Enter your first name" disabled>
+      </label>
+    `)
+  }
+};
+
+export const TextfieldWithoutMovingLabel = { 
+  args: { 
+    html: fixIndent(`
+      <label x textfield>
+        <input type="text" value="Hello Textfield" placeholder="">
+      </label>
+      <label x textfield>
+        <input type="text" placeholder="Enter your first name">
+      </label>
+      <label x textfield>
+        <input type="text" placeholder="Enter your first name" value="disabled" disabled>
+      </label>
     `)
   }
 };

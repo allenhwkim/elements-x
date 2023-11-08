@@ -1,0 +1,51 @@
+export default /*html*/ `
+<div class="x-clock">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 220 220">
+    <style> text { font-family: Courier New; font-weight: bold; user-select: none; } </style>
+
+    <g transform="translate(110,110)">
+      <!-- tick -->
+      <g>
+        <circle r="108" class="x-clock-circle" fill="none" stroke-width="4" stroke="gray" />
+        <circle r="97" class="x-clock-1-minute" fill="none" stroke-width="11" stroke="black" 
+          stroke-dasharray="4 46.789082" transform="rotate(-1.5)" />
+        <circle r="100" class="x-clock-5-minute"  fill="none" stroke-width="5" stroke="black"
+          stroke-dasharray="2 8.471976" transform="rotate(-.873)" />
+      </g>
+
+      <!-- hands -->
+      <g id="hands" transform="rotate(180)">
+        <circle class="x-clock-center" r="7" fill="#333" />
+        <g id="hour-hand" tabindex="0">
+          <line  class="x-clock-hour-hand" stroke-width="5" y2="70" stroke-linecap="round" stroke="#333"  />
+        </g>
+        <g id="minute-hand" tabindex="0">
+          <line class="x-clock-minute-hand" stroke-width="5" y2="85" stroke-linecap="round" stroke="#666" />
+        </g>
+        <g id="second-hand">
+          <line class="x-clock-second-hand" stroke-width="2" y2="95" stroke="#999" />
+        </g>
+      </g>
+      <!-- numbers -->
+      <g id="numbers" class="x-clock-numbers">
+        <text x="35" y="-65">1</text>
+        <text x="65" y="-35">2</text>
+        <text x="75" y="5">3</text>
+        <text x="65" y="45">4</text>
+        <text x="35" y="75">5</text>
+        <text x="-5"  y="85">6</text>
+        <text x="-45" y="75">7</text>
+        <text x="-75" y="45">8</text>
+        <text x="-85" y="5">9</text>
+        <text x="-75" y="-35">10</text>
+        <text x="-50" y="-65">11</text>
+        <text x="-10" y="-75">12</text>
+      </g>
+
+      <g id="digital"  class="x-clock-digital">
+        <text id="digital-text" x="-40" y="30"></text>
+      </g>
+    </g>
+  </svg>
+  <slot></slot>
+</div>`;

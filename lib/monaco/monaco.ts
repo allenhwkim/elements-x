@@ -1,11 +1,6 @@
 import { loadScript, waitFor, getReactProp, addCss, removeCss } from '../util';
 import { getJsonSchemaProperties } from './get-json-schema-properties';
-const css = `
-  x-monaco {
-    display: block;  
-    min-height: 200px;
-  }
-`;
+const css = `x-monaco { display: block;  min-height: 200px; }`;
 
 declare const window: any;
 

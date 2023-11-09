@@ -1,5 +1,6 @@
 import { addCss, removeCss } from '../../lib/util';
-import css from './list.css';
+import * as cssM from './list.css?inline';
+const css = cssM.default;
 
 export class List extends HTMLElement {
   static get observedAttributes() { return ['selected']; }

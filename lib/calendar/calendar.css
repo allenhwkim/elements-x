@@ -1,4 +1,3 @@
-export default `
   x-calendar {
     display: inline-block;
     border: 1px solid #ccc
@@ -131,4 +130,3 @@ export default `
     color: #fff;
     border-radius: 50%
   }
-`

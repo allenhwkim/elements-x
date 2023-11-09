@@ -1,6 +1,7 @@
 import morphdom from 'morphdom/dist/morphdom-esm';
 import { addCss, removeCss } from '../util';
-import css from './pagination.css';
+import * as cssM from './pagination.css?inline';
+const css = cssM.default;
 
 export class Pagination extends HTMLElement {
   static get observedAttributes() { return ['total', 'page', 'numPerPage', 'numPageLinks']; }

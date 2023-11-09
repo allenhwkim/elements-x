@@ -1,5 +1,6 @@
 import { addCss, removeCss, debounce, getReactProp } from '../util';
-import css from './combobox.css';
+import * as cssM from './combobox.css?inline';
+const css = cssM.default;
 
 export class ComboBox extends HTMLElement {
   src;

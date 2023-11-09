@@ -1,6 +1,9 @@
 import { addCss, localDate, removeCss } from '../../lib/util';
-import css from './calendar.css';
+import * as cssM from './calendar.css?inline';
+import html from './calendar.html?raw';
 import { rebuildCalendar } from './rebuild-calendar';
+
+const css = cssM.default;
 
 function yearChanged(this:any, event) { // Do not use arrow function here if 'this' is used
   const year = event.target.value;
@@ -25,22 +28,6 @@ function clickHandler(this: any, e: any) {
     this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: localDate(date)}));
   }
 }
-
-const html = `
-  <div class="calendar">
-    <div class="x-header">
-      <div class="x-month-year">
-        <span id="x-month" class="x-month"></span>
-        <select id="x-years" class="x-years" aria-label="year" read-only></select>
-      </div>
-      <button id="x-prev-month" class="x-prev" title="previous month"></button>
-      <button id="x-today" class="x-today" title="today"></button>
-      <button id="x-next-month" class="x-next" title="next month"></button>
-    </div>
-    <div class="x-week-days-container"></div>
-    <div class="x-days-container">
-    </div>
-  </div>`
 
 export class Calendar extends HTMLElement {
   static GET_DAY_INFO = date => null;

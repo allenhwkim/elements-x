@@ -1,6 +1,7 @@
 import morphdom from 'morphdom/dist/morphdom-esm';
 import { addCss, removeCss } from '../util';
-import css from './stepper.css';
+import * as cssM from './stepper.css?inline';
+const css = cssM.default;
 
 import { StepperController } from './stepper-controller';
 import { StepperStorage } from './stepper-storage';

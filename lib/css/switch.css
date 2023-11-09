@@ -1,0 +1,23 @@
+input[x][type=checkbox][role=switch] {
+  appearance: none;
+  position: relative;
+  color: inherit;
+  font-size: inherit;
+  width: 2em;
+  height: 20px;
+  box-sizing: border-box;
+  border: 1px solid #333;
+  border-radius: 20px;
+  vertical-align: text-bottom;
+  margin: auto;
+  background-image: radial-gradient(circle at 33%, #333 8px, white 0 20px)
+}
+
+input[x][type=checkbox][role=switch]:checked {
+  background-image: radial-gradient(circle at 70%, #FFF 8px, #3751B5 0 20px);
+  border: 1px solid #3751b5
+}
+
+input[x][type=checkbox][role=switch]:disabled {
+  opacity: .4
+}

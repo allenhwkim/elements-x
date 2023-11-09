@@ -2,14 +2,12 @@
   "name": "elements-x",
   "version": "0.1.0",
   "description": "collection of custom elements",
-  "main": "dist/index.js",
+  "main": "dist/lib/index.umd.js",
   "scripts": {
     "start": "storybook dev -p 6006",
-    "build": "npm run build:storybook && npm run build:lib",
-    "build:lib": "tsup src/index.ts --out-dir=../dist/elements/lib",
-    "build:storybook": "storybook build -o ../dist/elements",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build": "npm run build:sb && npm run build:lib",
+    "build:lib": "vite build --outDir dist/lib",
+    "build:sb": "storybook build -o dist"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
@@ -51,9 +49,8 @@
     "storybook": "^7.3.2",
     "style-loader": "^3.3.2",
     "ts-node": "^10.9.1",
-    "tsup": "^6.5.0",
     "typescript": "^4.9.3",
-    "vite": "^4.2.0"
+    "vite": "^4.5.0"
   },
   "license": "MIT"
 }

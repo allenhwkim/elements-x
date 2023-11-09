@@ -1,5 +1,6 @@
 import { addCss, removeCss } from '../util';
-import css from './masked.css';
+import * as cssM from './masked.css?inline';
+const css = cssM.default;
 
 export class Masked extends HTMLElement {
   MASK_EXPR = {

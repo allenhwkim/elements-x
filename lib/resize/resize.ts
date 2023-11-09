@@ -1,6 +1,7 @@
 import { addCss, removeCss } from '../util';
 import { TouchSwipe } from '../touch-swipe';
-import css from './resize.css';
+import * as cssM from './resize.css?inline';
+const css = cssM.default;
 
 export class Resize extends HTMLElement {
   private isHandle: boolean = false;

@@ -1,11 +1,6 @@
 import { addCss, loadScript, removeCss, waitFor } from '../../lib/util';
 
-const css = `
-  x-map {
-    display: block; 
-    height: 300px;
-  }
-`;
+const css = `x-map { display: block; height: 300px; }`;
 
 export class Map extends HTMLElement {
   static get observedAttributes() { return ['center', 'zoom']; }

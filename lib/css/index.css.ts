@@ -1,11 +1,18 @@
-import button from './button.css';
-import checkbox from './checkbox.css';
-import radio from './radio.css';
-import _switch from './switch.css';
-import table from './table.css';
-import textfield from './textfield.css';
-import tooltip from './tooltip.css';
+import * as buttonM from './button.css?inline';
+import * as checkboxM from './checkbox.css?inline';
+import * as radioM from './radio.css?inline';
+import * as switchM from './switch.css?inline';
+import * as tableM from './table.css?inline';
+import * as textfieldM from './textfield.css?inline';
+import * as tooltipM from './tooltip.css?inline';
 
-const css = button + checkbox + radio + _switch + table + textfield + tooltip;
+const css = 
+  buttonM.default + 
+  checkboxM.default + 
+  radioM.default + 
+  switchM.default + 
+  tableM.default + 
+  textfieldM.default + 
+  tooltipM.default;
 
 export default css;

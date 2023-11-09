@@ -1,5 +1,6 @@
 import { addCss, removeCss } from '../util';
-import css from './sidebar.css';
+import * as cssM from './sidebar.css?inline';
+const css = cssM.default;
 
 export class SideBar extends HTMLElement {
   documentClickListener: any;

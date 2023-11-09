@@ -1,7 +1,8 @@
 
 import { addCss, removeCss } from '../../lib/util';
-import css from './clock.css';
 import html from './clock.html';
+import * as cssM from './clock.css?inline';
+const css = cssM.default;
 
 function getTime(timezone: string, time: Date) {
   const str = new Intl.DateTimeFormat('en-GB', { dateStyle: 'short', timeStyle: 'short', timeZone: timezone}).format(time);

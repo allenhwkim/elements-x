@@ -1,7 +1,8 @@
 
 import morphdom from 'morphdom/dist/morphdom-esm';
 import { addCss, removeCss } from '../../lib/util';
-import css from './file.css';
+import * as cssM from './file.css?inline';
+const css = cssM.default;
 
 export class File extends HTMLElement {
   files: any[] = [];

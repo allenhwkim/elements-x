@@ -12,12 +12,12 @@ export class StepperStorage {
 
   static getItem(key: string) {
     const storage = StepperStorage.storage;
-    if (key.match(/^([a-z0-9]+)\[['"]?(.*?)['"]?\]$/i)) { // array format e.g., formFlows["foo"]
+    if (key.match(/^([a-z0-9]+)\[['"]?(.*?)['"]?\]$/i)) { // array format e.g., groupName["foo"]
       const [_, groupKey, itemKey] = key.match(/^([a-z0-9]+)\[['"]?(.*?)['"]?\]$/i) as string[];
       const storageData = storage.getItem(groupKey);
       const storageObj = JSON.parse(storageData);
       return storageObj?.[itemKey];
-    } else if (key.match(/^([a-z0-9]+)\.([a-z0-9]+)/i)) { // key format formFlows.foo
+    } else if (key.match(/^([a-z0-9]+)\.([a-z0-9]+)/i)) { // key format groupName.foo
       const [groupKey, itemKey] = key.split('.');
       const storageData = storage.getItem(groupKey);
       const storageObj = JSON.parse(storageData);
@@ -31,14 +31,14 @@ export class StepperStorage {
 
   static setItem(key:string, data: any) {
     const storage = StepperStorage.storage;
-    if (key.match(/^([a-z0-9]+)\[['"]?(.*?)['"]?\]$/i)) { // array format e.g., formFlows["foo"]
+    if (key.match(/^([a-z0-9]+)\[['"]?(.*?)['"]?\]$/i)) { // array format e.g., groupName["foo"]
       const [_, groupKey, itemKey] = key.match(/^([a-z0-9]+)\[['"]?(.*?)['"]?\]$/i) as string[];
       const storageData = storage.getItem(groupKey);
       const storageObj = JSON.parse(storageData) || [];
       storageObj[itemKey] = data;
       fireEvent(groupKey, storageObj);
       return storage.setItem(groupKey, JSON.stringify(storageObj));
-    } else if (key.match(/^([a-z0-9]+)\.([a-z0-9]+)/i)) { // key format formFlows.foo
+    } else if (key.match(/^([a-z0-9]+)\.([a-z0-9]+)/i)) { // key format groupName.foo
       const [groupKey, itemKey] = key.split('.');
       const storageData = storage.getItem(groupKey);
       const storageObj = storageData ? JSON.parse(storageData) : {};
@@ -53,14 +53,14 @@ export class StepperStorage {
 
   static removeItem(key: string) {
     const storage = StepperStorage.storage;
-    if (key.match(/^([a-z0-9]+)\[['"]?(.*?)['"]?\]$/i)) { // array format e.g., formFlows["foo"]
+    if (key.match(/^([a-z0-9]+)\[['"]?(.*?)['"]?\]$/i)) { // array format e.g., groupName["foo"]
       const [_, groupKey, itemKey] = key.match(/^([a-z0-9]+)\[['"]?(.*?)['"]?\]$/i) as string[];
       const storageData = storage.getItem(groupKey);
       const storageObj = JSON.parse(storageData) || [];
       storageObj.splice(itemKey, 1);
       fireEvent(groupKey, storageObj);
       return storage.setItem(groupKey, JSON.stringify(storageObj));
-    } else if (key.match(/^([a-z0-9]+)\.([a-z0-9]+)/i)) { // key format formFlows.foo
+    } else if (key.match(/^([a-z0-9]+)\.([a-z0-9]+)/i)) { // key format groupName.foo
       const [groupKey, itemKey] = key.split('.');
       const storageData = storage.getItem(groupKey);
       const storageObj = JSON.parse(storageData);

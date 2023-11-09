@@ -47,7 +47,7 @@ export default create({
   booleanSelectedBg: '#FFFFFF',
 
   // Brand
-  brandTitle: 'Formflow custom elements',
+  brandTitle: 'Elements-X',
   brandUrl: '/',
   brandTarget: '_self',
 });

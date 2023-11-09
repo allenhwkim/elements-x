@@ -38,7 +38,7 @@ export class StepperController extends HTMLElement {
     if (this.currentForm.type === 'thankyou') {
       return 'complete';
     } else {
-      const userData = StepperStorage.getItem('currentFormflow.userData');
+      const userData = StepperStorage.getItem('stepper.userData');
       return userData?.[formId] ? 'complete' : 'incomplete'; // user has visited this formName already and saved data 
     }
   }
@@ -104,9 +104,9 @@ export class StepperController extends HTMLElement {
         } else { // save user data
           const formEl = this.getFormEl();
           const formElData = Object.fromEntries(new FormData(formEl).entries()) || {};
-          const userData = StepperStorage.getItem('currentFormflow.userData') || {};
+          const userData = StepperStorage.getItem('stepper.userData') || {};
           userData[this.currentFormId] = formElData;
-          StepperStorage.setItem('currentFormflow.userData', userData);
+          StepperStorage.setItem('stepper.userData', userData);
           this.initForm('next');
         }
       }
@@ -114,7 +114,7 @@ export class StepperController extends HTMLElement {
   }
   
   resetForm() {
-    StepperStorage.removeItem('currentFormflow.userData'); 
+    StepperStorage.removeItem('stepper.userData'); 
     this.initForm('auto');
   }
 
@@ -152,14 +152,14 @@ export class StepperController extends HTMLElement {
           .then(resp => formEl.innerHTML = resp)
           .catch(error => formEl.innerHTML = error)
       } else if (typeof html === 'function') {
-        const userData = StepperStorage.getItem('currentFormflow.userData');
+        const userData = StepperStorage.getItem('stepper.userData');
         formEl.innerHTML = html(userData);
       } else {
         formEl.innerHTML = html as string;
       }
 
       const currentFormUserData = 
-        StepperStorage.getItem('currentFormflow.userData')?.[this.currentFormId] || {};
+        StepperStorage.getItem('stepper.userData')?.[this.currentFormId] || {};
       for (var key in currentFormUserData) {
         const el = formEl.elements[key as any] as HTMLInputElement;
         const value = currentFormUserData[key];
@@ -203,10 +203,9 @@ export class StepperController extends HTMLElement {
   }
 
   async submitForm(): Promise<any> {
-    const formUserData: IUserData = StepperStorage.getItem('currentFormflow.userData') || {};
-    console.log('xxxxxxxxxxxxx', this.submitFunc)
+    const formUserData: IUserData = StepperStorage.getItem('stepper.userData') || {};
     const response = await this.submitFunc(formUserData);
-    StepperStorage.removeItem('currentFormflow.userData');
+    StepperStorage.removeItem('stepper.userData');
     return response;
   }
 }

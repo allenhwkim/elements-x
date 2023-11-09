@@ -21,7 +21,7 @@ export class Clock extends HTMLElement {
       (name === 'hour') && this.time.setHours(+newValue);
       (name === 'minute') && this.time.setMinutes(+newValue);
       (name === 'run') && (this.run = true);
-      if (name = 'timezone') {
+      if (name === 'timezone') {
         const str = new Intl.DateTimeFormat('en-GB', { 
           dateStyle: 'short', 
           timeStyle: 'short', 

@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/html';
 import {List} from '../../lib/list/list';
+import { fixIndent } from '../../lib/util';
 
 const elName = 'x-list';
 const className = List;
@@ -38,7 +39,7 @@ const meta: Meta = {
 export default meta;
 
 export const Primary = { args: { 
-  html: `
+  html: fixIndent(`
     <ul>
       <li> File
         <ul>
@@ -80,12 +81,12 @@ export const Primary = { args: {
       </li>
       <li id="help">Help</li>
     </ul>
-  `,
+  `),
   selected: 'file-a'
 }};
 
 export const MenuStyle = { args: { 
-  html: `
+  html: fixIndent(`
     <ul class="menu">
       <li> File
         <ul>
@@ -127,6 +128,6 @@ export const MenuStyle = { args: {
       </li>
       <li id="help">Help</li>
     </ul>
-  `,
+  `),
   selected: 'file-a'
 }};

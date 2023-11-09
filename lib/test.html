@@ -1,0 +1,124 @@
+<!-- this is copied to dist/lib/test.html when build -->
+<head>
+  <script src="index.umd.js"></script>
+</head>
+
+<h1>elements-x</h1>
+
+<h2>x-barcode</h2>
+<x-barcode value="Example1234" format="CODE128"></x-barcode>
+
+<h2>x-calendar</h2>
+<x-calendar style="width: 600px"></x-calendar>
+
+<h2>x-clock</h2>
+<x-clock run></x-clock>
+
+<h2>x-combobox</h2>
+<x-combobox>
+  <input placeholder="Choose one value" autocomplete="off" value="Hello World">
+  <ul>
+    <li>Choose One</li>
+    <li>Hello</li>
+    <li>Hello World</li>
+  </ul>
+</x-combobox>
+
+<h2>x-file</h2>
+<x-file></x-file>
+
+<h2>x-list</h2>
+<x-list style="display: block;width: 400px" selected="file-a">
+  <ul>
+    <li>Files
+      <ul>
+        <li id="file-a" class="x-highlighted">File A</li>
+        <li>File B</li>
+        <li>File C</li>
+      </ul>
+    </li>
+  </ul>
+</x-list>
+
+<h2>x-map</h2>
+<x-map center="Brampton Ontario, Canada" style="width:50%"></x-map>
+
+<h2>x-masked</h2>
+<x-masked mask="yyyy-mm-dd"><input value="202312"></x-masked>
+
+<h2>x-pagination</h2>
+<x-pagination total="500" page="8" num-per-page="20"></x-pagination>
+
+<h2>x-qrcode</h2>
+<x-qrcode value="https://elements-x.com/?path=/docs/qr-code--primary"></x-qrcode>
+
+<h2>x-resize</h2>
+<x-resize width="">
+  <div>Section 1</div>
+  <div>Section 2</div>
+  <div>Section 3</div>
+</x-resize>
+
+<h2>x-textfield</h2>
+<label x textfield>
+  <span class="label">First name</span>
+  <input type="text" value="Hello Textfield" placeholder="">
+</label>
+
+<h2>Buttons</h2>
+<div>
+  <button x> Default </button>
+  <button x class="primary"> Primary </button>
+  <button x class="accent"> Accent </button>
+  <button x disabled=""> Disabled </button>
+  <button x class="no-style"> No Style </button>
+  <button x class="no-style" disabled=""> No Style </button>
+</div>
+
+<h2>Icons</h2>
+<div>
+  <button x class="icon">♥</button>
+  <button x class="icon primary">♥</button>
+  <button x class="icon accent">♥</button>
+  <button x class="icon" disabled="">♥</button>
+  <button x class="no-style">♥</button>
+  <button x class="no-style" disabled="">♥</button>
+</div>
+
+<h2>Tooltips</h2>
+<div>
+  <span x data-tooltip-left="This is a left tooltip">Help</span>
+  <span x data-tooltip="This is a tooltip">Help</span>
+  <span x data-tooltip="This is a tooltip with focus" tabindex="0">Help</span>
+</div>
+
+<h2>Checkbox</h2>
+<label>
+  <input x type="checkbox" checked=""> Hello Checkbox
+</label>
+
+<h2>Radio</h2>
+<label>
+  <input x type="radio" name="yes" checked="">Yes
+</label>
+<label>
+  <input x type="radio" name="yes">No
+</label>
+
+<h2>Switch</h2>
+<label>
+  <input x type="checkbox" role="switch" id="ms1">
+  <span>Custom Setting 1</span>
+</label>
+
+<h2>Table</h2>
+<table x>
+  <tbody>
+    <tr>
+      <th>Name</th> <th>Type</th> <th>Data</th> <th>Description</th>
+    </tr>
+    <tr>
+      <td>blur</td> <td>CustomEvent</td> <td></td> <td>Fired when out of focus</td>
+    </tr>
+  </tbody>
+</table>

@@ -54,7 +54,7 @@ export class BarCode extends HTMLElement {
   }
 
   async connectedCallback() {
-    loadScript('//unpkg.com/jsbarcode/dist/JsBarcode.all.min.js');
+    loadScript('https://unpkg.com/jsbarcode/dist/JsBarcode.all.min.js');
     await waitFor('window.JsBarcode');
     this.#updateDOM();
   }
@@ -72,7 +72,6 @@ export class BarCode extends HTMLElement {
       try {
         const value = this.getAttribute('value') || '123456789012'; 
         const svgEl = document.createElement('svg');
-        console.log(this.props)
         window.JsBarcode(svgEl, value, this.props);
         return svgEl.outerHTML;
       } catch (e) {

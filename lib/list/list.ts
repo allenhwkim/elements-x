@@ -67,23 +67,26 @@ export class List extends HTMLElement {
 
   init() {
     const ulEl = this.querySelector('ul') as HTMLElement;
-    !ulEl.getAttribute('tabindex') && ulEl.setAttribute('tabindex', '0');
-    ulEl.querySelectorAll('li > ul, li > * > ul').forEach(el => el.setAttribute('hidden', ''));
+    if (ulEl) {
+      !ulEl.getAttribute('tabindex') && ulEl.setAttribute('tabindex', '0');
+      ulEl.querySelectorAll('li > ul, li > * > ul').forEach(el => el.setAttribute('hidden', ''));
+    }
   }
 
   initHighlightAndSelect(selected) {
     const isMenuStyle = this.querySelector('ul.menu')
     const ulEl = this.querySelector('ul') as HTMLElement;
-    const liEl = ulEl.querySelector('#'+ selected || 'unknown') as HTMLElement;
-    console.log({liEl})
-    if (!isMenuStyle && liEl) {
-      liEl.classList.add('x-highlighted');
-      let expandable = (liEl.parentElement as any).closest('ul');
-      while(expandable && ulEl.contains(expandable)) { 
-        expandable.removeAttribute('hidden');
-        expandable = expandable.parentElement?.closest('ul');
+    if (ulEl) {
+      const liEl = ulEl.querySelector('#'+ selected || 'unknown') as HTMLElement;
+      if (!isMenuStyle && liEl) {
+        liEl.classList.add('x-highlighted');
+        let expandable = (liEl.parentElement as any).closest('ul');
+        while(expandable && ulEl.contains(expandable)) { 
+          expandable.removeAttribute('hidden');
+          expandable = expandable.parentElement?.closest('ul');
+        }
+        this.fireSelect();
       }
-      this.fireSelect();
     }
   }
 

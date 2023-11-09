@@ -1,5 +1,6 @@
 import { BarCode } from './barcode/barcode';
 import { Calendar } from './calendar/calendar';
+import { Clock } from './clock/clock';
 import { ComboBox } from './combobox/combobox';
 import { File } from './file/file';
 import { Highlight } from './highlight/highlight';
@@ -22,7 +23,7 @@ if (!document.querySelector(`style[x-css]`)) {
 }
 
 const X = {
-  BarCode, Calendar, ComboBox, File, Highlight, Json, List, Map, Masked, 
+  BarCode, Clock, Calendar, ComboBox, File, Highlight, Json, List, Map, Masked, 
   MonacoEditor, Pagination, QRCode, Resize, SideBar, Stepper, Table 
 };
 

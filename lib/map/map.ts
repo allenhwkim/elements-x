@@ -11,7 +11,7 @@ export class Map extends HTMLElement {
   }
 
   async connectedCallback() {
-    loadScript('//cdn.jsdelivr.net/npm/ol@v7.2.2/dist/ol.js', '//cdn.jsdelivr.net/npm/ol@v7.2.2/ol.css');
+    loadScript('https://cdn.jsdelivr.net/npm/ol@v7.2.2/dist/ol.js', 'https://cdn.jsdelivr.net/npm/ol@v7.2.2/ol.css');
     addCss(this.tagName, css);
     await waitFor('window.ol');
     this.#map = new window['ol'].Map({ target: this });

@@ -12,22 +12,25 @@ export class ComboBox extends HTMLElement {
 
   connectedCallback() { 
     addCss(this.tagName, css);
-    const inputEl = this.querySelector('input');
-    const ulEl = this.querySelector('ul');
+    setTimeout(() => this.init())
+  }
+
+  init() { 
+    const inputEl = this.querySelector('input') as any;
+    const ulEl = this.querySelector('ul') as any;
     const srcFunc = this.src;
-    // const srcFunc = this[attrPropName] || globalThis[attrPropName] || getReactProp(this as any, 'src');
     if (srcFunc && ulEl) {
       this.srcTemplate = ulEl.children[0]?.outerHTML;
       ulEl.innerHTML = '';
     }
     
-    if (!inputEl || (!(inputEl.readOnly || inputEl.disabled) && !ulEl)) {
-      this.textContent = 'error: requires <input> and <ul>';
+    const isDisabled = inputEl.readOnly || inputEl.disabled;
+    if (!inputEl) {
+      this.textContent = 'error: requires <input>';
       return;
-    }
-
-    if (!(inputEl && ulEl)) {
-      return; // readonly or disabled ones
+    } else if (!isDisabled && !ulEl) {
+      this.textContent = 'error: requires <ul>';
+      return;
     }
 
     inputEl.addEventListener('focus', () => this.highlightValue(ulEl, inputEl.value))
@@ -46,7 +49,7 @@ export class ComboBox extends HTMLElement {
         else if (event.key === 'Escape') { inputEl.blur(); }
         else if (event.key === 'Enter') { 
           this.querySelector('.x-selected')?.classList.remove('x-selected');
-          this.selectHandler(event, inputEl, highlightedEl);
+          (this as any).selectHandler(event, inputEl, highlightedEl);
         }
         event.preventDefault();
         event.stopPropagation();
@@ -69,26 +72,8 @@ export class ComboBox extends HTMLElement {
     ulEl.addEventListener('mousedown', (event) => { 
       const highlightedEl = ulEl.querySelector(`.x-highlighted:not(.hidden)`);
       ulEl.querySelector('.x-selected')?.classList.remove('x-selected');
-      this.selectHandler(event, inputEl, highlightedEl)
+      (this as any).selectHandler(event, inputEl, highlightedEl)
     });
-  }
-
-  /* action when an dropdown list is selected */
-  selectHandler(event: any, inputEl: HTMLInputElement, highlightedEl: any) {
-    const liEl = event.target.closest('ul') && event.target.closest('li');
-    if (event instanceof MouseEvent && liEl) { // <li> mouse clicked
-      const value = liEl.dataset.value !== undefined ?  liEl.dataset.value : liEl.innerText;
-      const detail = liEl.data || value;
-      liEl.dispatchEvent(new CustomEvent('select', {bubbles: true, detail}));
-      inputEl.value = value;
-      inputEl.blur();
-    } else if (event instanceof KeyboardEvent && highlightedEl) { // keyboard enter
-      const value = highlightedEl.dataset.value !== undefined ?  highlightedEl.dataset.value : highlightedEl.innerText;
-      const detail = highlightedEl.data || value;
-      highlightedEl.dispatchEvent(new CustomEvent('select', {bubbles: true, detail}));
-      inputEl.value = value;
-      inputEl.blur();
-    }
   }
 
   /**

@@ -1,14 +1,18 @@
 {
   "name": "elements-x",
-  "version": "0.1.0",
+  "version": "3.0.0",
   "description": "collection of custom elements",
   "main": "dist/lib/index.umd.js",
   "scripts": {
     "start": "storybook dev -p 6006",
     "build": "npm run build:sb && npm run build:lib",
     "build:lib": "vite build --outDir dist/lib",
-    "build:sb": "storybook build -o dist"
+    "build:sb": "storybook build -o dist",
+    "prepublishOnly": "npm run build"
   },
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
     "@babel/core": "^7.20.5",
     "@elements-x/core": "^0.2.1",

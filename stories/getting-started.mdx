@@ -1,15 +1,31 @@
 import { Meta } from "@storybook/blocks";
 
 <Meta title="Getting started" />
-
-# Getting Started
-
-```
-Hello world
-```
-
-Hello world
-
 <style>{`
   .sbdocs-content p { font-size: 16px !important; }
 `}</style>
+
+<img src="/logo.png" alt="image" width="600" />
+<br/>
+<a href="https://github.com/allenhwkim/elements-x">Github</a>
+
+Elements-x is a custom-built custom elements, like html tags, independent from frameworks(Angular, React, Vue or any), 
+and look-and-feel of components are customizable by overriding css.
+
+## npm usage 
+1. Install elements-x, `$ npm install elements-X -D`
+2. Import into your code to define all custom elements, `import 'elements-x`
+3. Use it like html tags, e.g. `<x-clock run></x-clock>`
+
+<iframe src="https://stackblitz.com/edit/elements-x?embed=1&view=preview" width="600" height="300"></iframe>
+
+## browser usage
+```
+<head>
+  <script src="https://unpkg.com/elements-x"></script>
+</head>
+<body>
+  <x-clock run></x-clock>
+</body>
+```
+[Example](https://unpkg.com/elements-x/dist/lib/test.html)

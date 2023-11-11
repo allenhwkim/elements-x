@@ -47,7 +47,7 @@ export default create({
   booleanSelectedBg: '#FFFFFF',
 
   // Brand
-  brandTitle: 'Elements-X',
+  brandTitle: '<img src="/logo.png" alt="image"/>',
   brandUrl: '/',
   brandTarget: '_self',
 });

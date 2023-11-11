@@ -7,7 +7,7 @@ if (!document.querySelector(`style[x-css]`)) {
 }
 
 const meta: Meta = { 
-  title: 'With class \'x\'',
+  title: 'Default styles',
   tags: ['autodocs'],
   render: (args) => {
     const el = document.createElement('div') as any;

@@ -19,7 +19,6 @@ const meta: Meta = {
     divEl.appendChild(msgEl);
     divEl.addEventListener('select', (event: any) => {
       msgEl.innerText = `'select' event: ${JSON.stringify(event.detail)}. Check console for details`
-      console.log(`'select' event`, event.detail);
     });
     return divEl as any;
   },

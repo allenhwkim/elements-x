@@ -26,7 +26,6 @@ export class SideBar extends HTMLElement {
   }
 
   toggle(event) {
-    console.log({event});
     this.classList.toggle('visible');
     const detail = this.classList.contains('visible') ? 'open' : 'close';
     this.dispatchEvent(new CustomEvent('sidebar', {bubbles: true,  detail}));
@@ -36,7 +35,6 @@ export class SideBar extends HTMLElement {
     const clickInSidebar = event.target.closest('x-sidebar');
     const isToggleButton = event.target.closest('.x-sidebar-toggle');
     const isCloseButton = event.target.closest('.x-sidebar-close');
-    console.log('docClickHandler', event, isCloseButton)
     if (clickInSidebar) {
       // todo
     } else if (isToggleButton) {

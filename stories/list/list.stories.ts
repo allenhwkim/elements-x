@@ -19,7 +19,6 @@ const meta: Meta = {
     wrapperEl.appendChild(msgEl);
     wrapperEl.addEventListener('select', (event: any) => {
       msgEl.innerText = `'select' event: ${JSON.stringify(event.detail.innerText)}. Check console for more.`;
-      console.log(`'select' event`, event.detail);
     });
     return wrapperEl as any;
   },

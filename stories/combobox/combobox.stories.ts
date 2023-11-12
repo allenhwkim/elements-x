@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/html';
 import { ComboBox } from '../../lib/combobox/combobox';
 import { getFunction } from '../../lib/util';
 
@@ -15,7 +15,6 @@ const meta: Meta = {
       el.insertAdjacentHTML('beforeend', args.html);
     }
     if (args.src) {
-      console.log('args.src', args.src);
       el.src = getFunction(args.src);
     }
     if (args.width) {

@@ -36,7 +36,6 @@ const meta: Meta = {
     const userDataEl = ctrlEl.querySelector('.user-data') as any;
   
     ctrlEl.addEventListener('stepper-storage', (event: any) => {
-      console.log('stepper-storage', event);
       userDataEl.innerText = JSON.stringify(event.detail.data, null, '  ')
     });
 

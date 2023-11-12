@@ -45,7 +45,6 @@ export class List extends HTMLElement {
       visibles[curIndex]?.classList.remove('x-highlighted');
       visibles[nxtIndex]?.classList.add('x-highlighted');
     }
-    console.log(event.code, highlightNextEl);
 
     if (['Enter', 'Space'].includes(event.code)) {
       this.toggleChildList();

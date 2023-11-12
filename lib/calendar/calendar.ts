@@ -25,7 +25,7 @@ function clickHandler(this: any, e: any) {
     this.querySelector('.x-date .x-select')?.classList.remove('x-select');
     dateEl.classList.add('x-select');
     this.dateSelected = date;
-    this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: localDate(date)}));
+    this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: localDate(date, this.props.locale)}));
   }
 }
 
@@ -33,7 +33,7 @@ export class Calendar extends HTMLElement {
   static GET_DAY_INFO = date => null;
   static IS_SELECTABLE = date => true;
   static get observedAttributes() {
-    return ['date', 'month-format', 'week-format', 'locale', 'first-day-of-week'];
+    return ['date', 'month-format', 'week-format', 'locale', 'first-day-of-week', 'locale'];
   }
 
   dateSelected: Date | undefined;
@@ -51,7 +51,7 @@ export class Calendar extends HTMLElement {
     date: undefined as any, // start date of calendar
     monthFormat: 'long',  // long(June), short(Jun), narrow(J)
     weekFormat: 'long',  // long(Monday), short(Mon), narrow(M)
-    locale: 'en', // en-US, ja, ko, zh-CN
+    locale: Intl.NumberFormat().resolvedOptions().locale, // en-US, ja, ko, zh-CN
     firstDayOfWeek: 0,// 0(Sunday), 1(Monday)
   };
 

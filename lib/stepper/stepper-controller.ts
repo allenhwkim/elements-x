@@ -84,7 +84,6 @@ export class StepperController extends HTMLElement {
   
   clickListener = async (event: any) => {
     const buttonEl = event.target.closest('.form-review, .form-submit, .form-prev, .form-next, .form-reset');
-    console.log({buttonEl});
     if (buttonEl) {
       if (buttonEl.classList.contains('form-reset')) {
         this.resetForm(); 

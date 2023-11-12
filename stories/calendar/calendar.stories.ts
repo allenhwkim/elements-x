@@ -39,7 +39,9 @@ const meta: Meta = {
     const msgEl = document.createElement('div') as any;
     divEl.appendChild(createElement(args));
     divEl.appendChild(msgEl);
-    divEl.addEventListener('select', (event) => msgEl.innerText = `'select' event: ${event.detail.toDateString()}`);
+    divEl.addEventListener('select', (event) => {
+      msgEl.innerText = `'select' event: ${event.detail.toString()}`;
+    })
     return divEl;
   },
   args: {},

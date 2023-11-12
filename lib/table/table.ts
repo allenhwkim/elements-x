@@ -21,7 +21,6 @@ export class Table extends HTMLElement {
     const valLen = this._orgValue?.length;
     const valType = typeof (valLen ? this._orgValue[0] : 'string');
     const keys = (valType === 'object') && Object.keys(this._orgValue[0]);
-    // console.log('this.keys', this.value[0], {valLen, valType, keys})
     return keys;
   }
 
@@ -30,7 +29,6 @@ export class Table extends HTMLElement {
       const keys = this.keys;
       const emptyObj = keys ? keys.reduce((acc, key) => (acc[key] = '', acc), {}) : '';
       const rows = (this.value?.length ? this.value : [emptyObj]);
-      console.log('connectedCallback addNewRow() calling', {rows});
       (!this.value?.length) && rows.forEach(row => { this.addNewRow(this, row); });
       this.registerEventListener();
     }
@@ -78,7 +76,6 @@ export class Table extends HTMLElement {
   }
 
   addNewRow(rowEl, value?) { // HTMLElement, {foo: 1, bar: 2}
-    console.log('addNewRow called', this.keys);
     const keys = this.keys;
     const nextRowEl = document.createElement('div');
     nextRowEl.className='x-row';

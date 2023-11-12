@@ -14,7 +14,6 @@ const meta: Meta = {
     clearTimeout(timer);
     const el = document.createElement(elName) as any;
     timer = setTimeout(async () => { 
-      console.log('xxxxxxxxxxxxxxxxxx', args);
       (args.center) &&  (el.setAttribute('center', args.center));
       (args.zoom) &&  (el.setAttribute('zoom', args.zoom));
     }, 500);

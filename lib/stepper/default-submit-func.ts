@@ -13,8 +13,8 @@ export const DEFAULT_SUBMIT_FUNC: ISubmitFunc = async function(userData: IUserDa
     }
     return response.json()
   })
-  .then(resp => console.log('submit succesful'))
+  .then(resp => console.info('submit to https://httpbin.org/post succesful'))
   .catch(error => { 
-    console.log(error);
+    console.error(error);
   })
 }

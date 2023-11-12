@@ -94,7 +94,7 @@ export function hash(str: string) {
  * @param date Date type
  * @returns a date without timezone consideration
  */
-export function localDate(date): Date {
+export function localDate(date, locale): Date {
   if (!date) {
     const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
     date = new Date(Date.now() - tzoffset);
@@ -105,6 +105,7 @@ export function localDate(date): Date {
   const [year, month, day] = [str.substr(0,4), str.substr(4,2), str.substr(6,2)];
 
   const localDate = new Date(+year, +month - 1, +day, 2, 0, 0);
+  localDate.toString = () => new Intl.DateTimeFormat(locale).format(localDate);
   return localDate;
 }
 

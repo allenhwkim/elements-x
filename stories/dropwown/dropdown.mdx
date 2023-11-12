@@ -1,0 +1,26 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as DropdownStories from './dropdown.stories';
+
+
+<Meta of={DropdownStories} />
+<style>{`
+  #story--dropdown--primary.sb-story { min-height: 200px; }
+  #story--dropdown--select-list.sb-story { min-height: 200px; }
+  #story--dropdown--select-date.sb-story { min-height: 300px; }
+`}</style>
+
+# Dropdown
+
+Display dropdown for an input(or button)
+
+<Canvas of={DropdownStories.Primary}/>
+
+{/* <Controls /> */}
+
+<h2 className="h6 sb-unstyled fw-light">STORIES</h2>
+
+### Select List 
+<Canvas of={DropdownStories.SelectList}/>
+
+### Select Date
+<Canvas of={DropdownStories.SelectDate}/>

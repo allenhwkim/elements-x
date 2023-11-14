@@ -1,6 +1,6 @@
 {
   "name": "elements-x",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "collection of custom elements",
   "main": "dist/lib/index.umd.js",
   "scripts": {

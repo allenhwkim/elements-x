@@ -4,7 +4,7 @@ const css = `x-monaco { display: block;  min-height: 200px; }`;
 
 declare const window: any;
 
-export class MonacoEditor extends HTMLElement {
+export class Monaco extends HTMLElement {
   monacoEditor: any;
   language: string = 'javascript';
   schemas: any;

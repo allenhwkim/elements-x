@@ -9,7 +9,7 @@ import { Json } from './json/json';
 import { List } from './list/list';
 import { Map } from './map/map';
 import { Masked } from './masked/masked';
-import { MonacoEditor } from './monaco/monaco';
+import { Monaco } from './monaco/monaco';
 import { Pagination } from './pagination/pagination';
 import { QRCode } from './qrcode/qrcode';
 import { Resize } from './resize/resize';
@@ -25,7 +25,7 @@ if (!document.querySelector(`style[x-css]`)) {
 
 const X = {
   BarCode, Clock, Calendar, ComboBox, Dropdown, File, Highlight, Json, List, 
-  Map, Masked, MonacoEditor, Pagination, QRCode, Resize, SideBar, Stepper, Table 
+  Map, Masked, Monaco, Pagination, QRCode, Resize, SideBar, Stepper, Table 
 };
 
 if ((window as any).X !== false) { // custom define

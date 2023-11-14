@@ -23,7 +23,8 @@ export class Monaco extends HTMLElement {
     this.monacoEditor = window.monaco.editor.create(this, {
       language: this.language,
       theme: this.getAttribute('theme'),
-      automaticLayout: true
+      automaticLayout: true,
+      minimap: { enabled: false },
     });
     this.monacoEditor.setValue(this.value);
     (this.language === 'json' && this.schemas) && this.setSchemas();

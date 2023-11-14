@@ -1,9 +1,9 @@
 import type { Meta } from '@storybook/html';
-import { MonacoEditor } from '../../lib/monaco/monaco';
+import { Monaco } from '../../lib/monaco/monaco';
 import { fixIndent } from '../../lib/util'
 
 const elName = 'x-monaco';
-const className = MonacoEditor;
+const className = Monaco;
 
 !customElements.get(elName) && customElements.define(elName, className);
 

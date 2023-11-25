@@ -18,6 +18,16 @@ button[x] {
   cursor: pointer
 }
 
+button[x].small {
+  padding: 0 4px;
+  min-width: 20px;
+  min-height: 20px;
+  height: 16px;
+  line-height: 1rem;
+  font-size: revert;
+  vertical-align: baseline;
+}
+
 button[x]:active {
   box-shadow: none;
   transform: translate(1px, 1px);

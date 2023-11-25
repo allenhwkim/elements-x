@@ -3,6 +3,7 @@ input[x][type=radio] {
   height: 20px;
   box-sizing: border-box;
   position: relative;
+  margin-right: .4rem;
   vertical-align: text-bottom
 }
 

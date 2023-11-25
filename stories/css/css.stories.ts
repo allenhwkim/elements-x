@@ -32,7 +32,15 @@ export const Button = {
       <button x class="accent"> Accent </button>
       <button x disabled> Disabled </button>
       <button x class="no-style"> No Style </button>
-      <button x class="no-style" disabled=""> No Style </button>
+      <button x class="no-style" disabled> No Style </button>
+
+      <br/> Smaller buttons <br/>
+      <button x class="small"> Default </button>
+      <button x class="primary small"> Primary </button>
+      <button x class="accent small"> Accent </button>
+      <button x disabled class="small"> Disabled </button>
+      <button x class="no-style small"> No Style </button>
+      <button x class="no-style small" disabled> No Style </button>
     `)
   }
 };
@@ -43,9 +51,18 @@ export const Icon = {
     <button x class="icon">♥</button>
     <button x class="icon primary">♥</button>
     <button x class="icon accent">♥</button>
-    <button x class="icon" disabled="">♥</button>
+    <button x class="icon" disabled>♥</button>
     <button x class="no-style">♥</button>
-    <button x class="no-style" disabled="">♥</button>
+    <button x class="no-style" disabled>♥</button>
+    <br/>
+    Smaller icons
+    <br/>
+    <button x class="icon small">?</button>
+    <button x class="icon primary small">?</button>
+    <button x class="icon accent small">?</button>
+    <button x class="icon small" disabled>?</button>
+    <button x class="no-style" small>?</button>
+    <button x class="no-style small" disabled>?</button>
     `)
   }
 };

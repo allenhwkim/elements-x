@@ -39,14 +39,6 @@ export class Dropdown extends HTMLElement {
 
     this.style.minWidth = `${this.dataTargetEl.clientWidth}px`;
 
-    if (!this.dataTargetEl.parentElement.isSameNode(this.parentElement)) {
-      alert('[dropdown] dropdown element and position element must be in the same parent element');
-      return;
-    } else if (!this.isInPositionedEl(this)) {
-      alert('[dropdown] dropdown element must be in a positioned element');
-      return;
-    }
-
     this.dataTargetEl.addEventListener('focus', e => {
       !this.hiding && this.showDropdown();  // prevent loop when hideDropdown with focusing back
     });
@@ -60,6 +52,14 @@ export class Dropdown extends HTMLElement {
         setTimeout(() => this.cancelBlur = false);
       }
     });
+
+    setTimeout(() => {
+      if (!this.dataTargetEl.parentElement.isSameNode(this.parentElement)) {
+        console.error('[dropdown] dropdown element and position element must be in the same parent element');
+      } else if (!this.isInPositionedEl(this)) {
+        console.error('[dropdown] dropdown element must be in a positioned element');
+      }
+    }, 100);
 
     if (this.hasFocusableEls) {
       this.trapFocusListener = getTrapFocusKeydownListener(this);

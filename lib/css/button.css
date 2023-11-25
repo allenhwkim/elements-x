@@ -18,7 +18,7 @@ button[x] {
   cursor: pointer
 }
 
-button[x].small {
+button[x].small, button[x].icon.small {
   padding: 0 4px;
   min-width: 20px;
   min-height: 20px;

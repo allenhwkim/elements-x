@@ -22,12 +22,10 @@ export class Clock extends HTMLElement {
       (name === 'minute') && this.time.setMinutes(+newValue);
       (name === 'run') && (this.run = true);
       if (name === 'timezone') {
-        const str = new Intl.DateTimeFormat('en-GB', { 
-          dateStyle: 'short', 
-          timeStyle: 'short', 
-          timeZone: newValue
-        }).format(new Date());
-        this.time = new Date(str);
+        const now = new Date();
+        const dateStr = new Intl.DateTimeFormat('fr-CA', {dateStyle: 'short', timeZone: newValue}).format(now);
+        const timeStr = new Intl.DateTimeFormat('en-US', {timeStyle: 'medium', timeZone: newValue}).format(now);
+        this.time = new Date(`${dateStr} ${timeStr}`);
       }
       this.#updateDOM();
     }
@@ -87,7 +85,7 @@ export class Clock extends HTMLElement {
       time.setSeconds(time.getSeconds() + 1);
       const secDeg =  6 * time.getSeconds(); // 1 min 6 deg
       secondHand.setAttribute('transform',`rotate(${secDeg})`);
-      if (secDeg === 360) {
+      if (secDeg === 0) {
         const minDeg = 6 * time.getMinutes(); 
         minuteHand.setAttribute('transform',`rotate(${minDeg})`);
       }

@@ -69,11 +69,13 @@ export class ComboBox extends HTMLElement {
 
     // mousedown -> inputEl.blur(), hide dropdown -> input:focus, show dropdown, 
     // do not call selectHandler with click event, but only with mousedown
-    ulEl.addEventListener('mousedown', (event) => { 
-      const highlightedEl = ulEl.querySelector(`.x-highlighted:not(.hidden)`);
-      ulEl.querySelector('.x-selected')?.classList.remove('x-selected');
-      (this as any).selectHandler(event, inputEl, highlightedEl)
-    });
+    if (ulEl) { // readonly or disabled does not have ulEl
+      ulEl.addEventListener('mousedown', (event) => { 
+        const highlightedEl = ulEl.querySelector(`.x-highlighted:not(.hidden)`);
+        ulEl.querySelector('.x-selected')?.classList.remove('x-selected');
+        (this as any).selectHandler(event, inputEl, highlightedEl)
+      });
+    }
   }
 
   /**

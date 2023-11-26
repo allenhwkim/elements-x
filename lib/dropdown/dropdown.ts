@@ -121,14 +121,13 @@ export class Dropdown extends HTMLElement {
   }
 
   hideHandler = (event: any) => { // need to bind to this
-    const mousedownInDropdown = this.contains(event.target as Node);
-    const mousedownInDataTarget = this.dataTargetEl.contains(event.target as Node);
-
     if (event.type === 'keydown' && (event as KeyboardEvent).key === 'Escape') {
       this.hideDropdown(true);
     } else if (event.type === 'resize') {
       this.hideDropdown();
     } else if (event.type === 'mousedown') {
+      const mousedownInDropdown = this.contains(event.target as Node);
+      const mousedownInDataTarget = this.dataTargetEl.contains(event.target as Node);
       if (mousedownInDropdown || mousedownInDataTarget) { // input el click, or dropdown click
         this.cancelBlur = true; 
         setTimeout(() => this.cancelBlur = false);

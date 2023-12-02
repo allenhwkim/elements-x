@@ -6,51 +6,47 @@ x-file {
   box-sizing: border-box;
 }
 
-x-file .x-file-input {
+x-file label {
   cursor: pointer;
 }
 
-x-file .x-file-input input {
+x-file input {
   display: none;
 }
 
-x-file .x-file-list {
+x-file > .list { /* file list */
   color: #666;
 }
 
-x-file .x-file-list .x-file { /* file info */
+x-file > .list > * { /* file info */
   display: flex;
   padding: 4px;
   position: relative;
   justify-content: space-between;
+  white-space: nowrap;
 }
 
-x-file .x-file-list .x-file:first-child {
+x-file > .list > *:first-child {
   border-top: 1px solid #ccc;
 }
 
-x-file .x-file-list .x-file:not(:last-child) {
+x-file > .list > *:not(:last-child) {
   border-bottom: 1px solid #ccc;
 }
 
-x-file .x-file-list .x-file .x-name {
+x-file > .list > * :is(.name, .detail) {
   width: 50%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-x-file .x-file-list .x-file .x-preview {
-  width: calc(50% - 40px);
+x-file > .list > * .detail {
+  text-align: right;
 }
-x-file .x-file-list .x-file .x-preview img {
+
+x-file > .list > * img {
   width: auto;
   height: 1.5em;
   margin: 0 4px;
-}
-
-x-file .x-file-list .x-file .x-buttons * {
-  border: 0;
-  background: transparent;
-  cursor: pointer;
 }

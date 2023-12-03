@@ -4,6 +4,7 @@ const css = cssM.default;
 
 export class List extends HTMLElement {
   static get observedAttributes() { return ['selected']; }
+  value: HTMLElement | undefined;
 
   connectedCallback() {
     addCss(this.tagName, css);
@@ -107,5 +108,6 @@ export class List extends HTMLElement {
     const highlightedEl = this.querySelector('.x-highlighted') as HTMLElement;
     const event = new CustomEvent('select', { bubbles: true, composed: true, detail: highlightedEl });
     highlightedEl.dispatchEvent(event);
+    this.value = highlightedEl;
   }
 }

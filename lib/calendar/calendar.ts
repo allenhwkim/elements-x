@@ -28,10 +28,18 @@ function clickHandler(this: any, e: any) {
   } else if (e.target.id.match(/x-[0-9-]+$/)) { // date button
     const dateEl = e.target;
     const date = localDate(dateEl.id.slice(2), navigator.language);
-    this.querySelector('.x-date .x-select')?.classList.remove('x-select');
-    dateEl.classList.add('x-select');
-    this.dateSelected = date;
-    this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: localDate(date, this.props.locale)}));
+    const selectedEl = this.querySelector('.x-date .x-select');
+    if (selectedEl?.isEqualNode(dateEl)) {
+      dateEl.classList.remove('x-select');
+      this.dateSelected = undefined;
+      this.props.required && this.classList.add('error', 'required');
+    } else {
+      selectedEl?.classList.remove('x-select');
+      dateEl.classList.add('x-select');
+      this.dateSelected = date;
+      this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: localDate(date, this.props.locale)}));
+      this.classList.remove('error', 'required');
+    }
   }
 }
 
@@ -39,11 +47,11 @@ export class Calendar extends HTMLElement {
   static GET_DAY_INFO = date => null;
   static IS_SELECTABLE = date => true;
   static get observedAttributes() {
-    return ['date', 'month-format', 'week-format', 'locale', 'first-day-of-week', 'locale'];
+    return ['date', 'month-format', 'week-format', 'locale', 'first-day-of-week', 'locale', 'required'];
   }
 
   get value() {
-    return localDate(this.dateSelected || this.calendarDate, navigator.language);
+    return localDate(this.dateSelected, navigator.language);
   }
 
   dateSelected: Date | undefined;
@@ -82,10 +90,12 @@ export class Calendar extends HTMLElement {
     if (oldValue !== newValue) {
       if (name === 'date') {
         this.props.date = 
-          newValue.match(/^[0-9]+$/) ? new Date(+newValue):
-          typeof newValue === 'string' ? new Date(newValue): 
-          newValue;
+          newValue.match(/^[0-9]+$/) ? localDate(new Date(+newValue), navigator.language):
+          typeof newValue === 'string' ? localDate(new Date(newValue), navigator.language): 
+          localDate(newValue, navigator.language);
         this.calendarDate = this.props.date;
+      } else if (name === 'required') {
+        this.props[name] = newValue !== null;
       } else {
         var propsKey = name.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
         this.props[propsKey] = newValue;

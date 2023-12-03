@@ -4,8 +4,9 @@ export function rebuildCalendar(el) {
   const IS_SELECTABLE = el.constructor.IS_SELECTABLE;
   const $ = selector => el.querySelector(selector);
 
-  const {weekFormat, monthFormat, locale, firstDayOfWeek} =  el.props;
+  const { weekFormat, monthFormat, locale, firstDayOfWeek} =  el;
   const calendarDate = el.calendarDate;
+  console.log({weekFormat, monthFormat, locale, firstDayOfWeek});
 
   const dates = getCalendarDays(calendarDate, firstDayOfWeek);
 

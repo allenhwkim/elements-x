@@ -32,13 +32,14 @@ function clickHandler(this: any, e: any) {
     if (selectedEl?.isEqualNode(dateEl)) {
       dateEl.classList.remove('x-select');
       this.dateSelected = undefined;
-      this.props.required && this.classList.add('error', 'required');
+      this.required && this.classList.add('error', 'required');
+      this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: undefined}));
     } else {
       selectedEl?.classList.remove('x-select');
       dateEl.classList.add('x-select');
       this.dateSelected = date;
-      this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: localDate(date, this.props.locale)}));
       this.classList.remove('error', 'required');
+      this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: localDate(date, this.locale)}));
     }
   }
 }
@@ -55,6 +56,12 @@ export class Calendar extends HTMLElement {
   }
 
   dateSelected: Date | undefined;
+  date: any = undefined; // start date of calendar
+  weekFormat = 'long';  // long(Monday), short(Mon), narrow(M)
+  monthFormat = 'long';  // long(June), short(Jun), narrow(J)
+  locale = navigator.language; // en-US, ja, ko, zh-CN
+  firstDayOfWeek = 0; // 0(Sunday), 1(Monday)
+  required = false;
 
   _calendarDate = localDate(today(), navigator.language);
   set calendarDate(val) {
@@ -65,13 +72,6 @@ export class Calendar extends HTMLElement {
     return this._calendarDate;
   }
 
-  props = {
-    date: undefined as any, // start date of calendar
-    monthFormat: 'long',  // long(June), short(Jun), narrow(J)
-    weekFormat: 'long',  // long(Monday), short(Mon), narrow(M)
-    locale: Intl.NumberFormat().resolvedOptions().locale, // en-US, ja, ko, zh-CN
-    firstDayOfWeek: 0,// 0(Sunday), 1(Monday)
-  };
 
   disConnnectedCallback() {
     removeCss(this.tagName);
@@ -80,25 +80,26 @@ export class Calendar extends HTMLElement {
   connectedCallback() { 
     addCss(this.tagName, css);
     this.innerHTML = html;
-    this.dateSelected = this.props.date;
+    this.dateSelected = this.date;
     rebuildCalendar(this);
     this.addEventListener('change', yearChanged);
     this.addEventListener('click', clickHandler);
+    console.log('xxxxxxxxxxxx connectedCallback')
   }
 
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
     if (oldValue !== newValue) {
       if (name === 'date') {
-        this.props.date = 
+        this.date = 
           newValue.match(/^[0-9]+$/) ? localDate(new Date(+newValue), navigator.language):
           typeof newValue === 'string' ? localDate(new Date(newValue), navigator.language): 
           localDate(newValue, navigator.language);
-        this.calendarDate = this.props.date;
+        this.calendarDate = this.date;
       } else if (name === 'required') {
-        this.props[name] = newValue !== null;
+        this.required = newValue !== null;
       } else {
-        var propsKey = name.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
-        this.props[propsKey] = newValue;
+        var propName = name.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+        this[propName] = newValue;
       }
       this.#updateDOM();
     }

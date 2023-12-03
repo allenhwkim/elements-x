@@ -16,14 +16,17 @@ Calendar.IS_SELECTABLE = function(date) {
 }
 
 const elName = 'x-calendar';
-const elAttributes = ['date', 'month-format', 'week-format', 'locale', 'first-day-of-week'];
-
 !customElements.get(elName) && customElements.define(elName, Calendar);
 function createElement(args) {
   const el = document.createElement(elName) as any;
   for (var key in args) {
-    const val = key === 'date' ? new Date(args[key]).toISOString().slice(0,10):  args[key];
-    elAttributes.includes(key) ?  el.setAttribute(key, val) : (el.props[key] = val);
+    (key === 'date') && el.setAttribute('date', new Intl.DateTimeFormat(
+      'fr-CA',{ month:'2-digit',day:'2-digit', year:'numeric'}).format(args.date));
+    (key === 'weekFormat') && el.setAttribute('week-format', args[key]);
+    (key === 'monthFormat') && el.setAttribute('month-format', args[key]);
+    (key === 'locale') && el.setAttribute('locale', args[key]);
+    (key === 'firstDayOfWeek') && el.setAttribute('first-day-of-week', args[key]);
+    (key === 'required') && el.setAttribute('required', '');
   }
   args.width && (el.style.width = `${args.width}px`);
   return el;
@@ -40,7 +43,7 @@ const meta: Meta = {
     divEl.appendChild(createElement(args));
     divEl.appendChild(msgEl);
     divEl.addEventListener('select', (event) => {
-      msgEl.innerText = `'select' event: ${event.detail.toString()}`;
+      msgEl.innerText = `'select' event: ${event.detail?.toString()}`;
     })
     return divEl;
   },
@@ -53,32 +56,33 @@ const meta: Meta = {
       table: { defaultValue: { summary: 'today' } },
     },
     monthFormat: { 
-      default: 'long', 
       description: 'Month display format, e.g., long(June), short(Jun), narrow(J)', 
       control: { type: 'radio' },
       options: ['long', 'short', 'narrow'],
       table: { defaultValue: { summary: 'long' } },
     },
     weekFormat: { 
-      default: 'long', 
       description: 'Weekday display format, e.g., long(Monday), short(Mon), narrow(M)', 
       control: { type: 'radio' },
       options: ['long', 'short', 'narrow'],
       table: { defaultValue: { summary: 'long' } },
     },
     locale: { 
-      default: 'en', 
       description: 'Language of calendar', 
       control: { type: 'radio' },
       options: ['en', 'ja', 'ko', 'zh-CN'],
       table: { defaultValue: { summary: 'en' } },
     },
     firstDayOfWeek: {
-      default: 0, 
       description: 'Start day of week. 0(Sunday), 1(Monday), 6(Saturday)', 
       control: { type: 'radio' },
       options: [0, 1, 6],
       table: { defaultValue: { summary: 0 } },
+    },
+    required: {
+      description: 'Required', 
+      control: { type: 'boolean' },
+      table: { defaultValue: { summary: false } },
     },
   },
 };

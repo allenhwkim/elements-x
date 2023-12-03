@@ -4,6 +4,13 @@ import { Meta, Controls, Canvas } from '@storybook/blocks';
 import * as CalendarStories from './calendar.stories';
 
 # Calendar 
+<style> {`
+  .error.required ~ *::after {
+    display: block;
+    content: 'date is required';
+    color: red;
+  }
+`}</style>
 
 Display a month calendar by the given date.
 

@@ -91,7 +91,7 @@ export default meta;
 type Story = StoryObj;
 
 // More on writing stories with args: https://storybook.js.org/docs/html/writing-stories/args
-export const Primary: Story = {};
-export const Simple: Story = { args: { locale: 'en', monthFormat: 'short', weekFormat: 'narrow', width: 200 } };
-export const Korean: Story = { args: { locale: 'ko', date: new Date().setMonth(11), firstDayOfWeek: 6, width: 400 } };
-export const Chinese: Story = { args: { locale: 'zh-CN', date: new Date().setMonth(0), weekFormat: 'short', width: 400 } };
+export const Primary: Story = { args: { required: true}};
+export const Simple: Story = { args: { required: true, locale: 'en', monthFormat: 'short', weekFormat: 'narrow', width: 200 } };
+export const Korean: Story = { args: { required: true, locale: 'ko', date: new Date().setMonth(11), firstDayOfWeek: 6, width: 400 } };
+export const Chinese: Story = { args: { required: true, locale: 'zh-CN', date: new Date().setMonth(0), weekFormat: 'short', width: 400 } };

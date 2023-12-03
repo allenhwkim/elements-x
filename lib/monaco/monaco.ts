@@ -9,6 +9,7 @@ export class Monaco extends HTMLElement {
   language: string = 'javascript';
   schemas: any;
   value: string = '';
+  required = false;
 
   async connectedCallback() {
     addCss(this.tagName, css);
@@ -17,6 +18,7 @@ export class Monaco extends HTMLElement {
     this.language = this.getAttribute('language') || this.dataset.language || 'javascript';
     this.schemas ||= getReactProp(this, 'schemas');
     this.value ||= getReactProp(this, 'value');
+    this.required = this.getAttribute('required') !== null;
 
     await this.loadLibrary(); // enable window.monaco
 
@@ -42,13 +44,16 @@ export class Monaco extends HTMLElement {
     const errors = modelMarkers.map(el => `Line ${el.endLineNumber}: ${el.message}`).join('\n');
     if (errors.length) {
       this.dispatchEvent( new CustomEvent('error', {detail: errors, bubbles: true}) );
-    } 
+    }
 
     const editorValue = this.monacoEditor.getValue();
     if (this.value !== editorValue) {
       this.value = editorValue;
       const customEvent = new CustomEvent('change', {detail: editorValue, bubbles: true});
       this.dispatchEvent( customEvent );
+      if (this.required) {
+        this.value ? this.classList.remove('error', 'required') : this.classList.add('error', 'required');
+      }
     }
   }
 

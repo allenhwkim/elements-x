@@ -2,6 +2,13 @@ import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
 
 import * as EditorStories from './monaco.stories';
 
+<style>{`
+  .error.required + *::after {
+    display: block;
+    content: 'Value is required';
+    color: red;
+  }
+`}</style>
 <Meta of={EditorStories} />
 
 # Monaco Editor 

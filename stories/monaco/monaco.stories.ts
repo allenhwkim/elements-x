@@ -18,9 +18,15 @@ const meta: Meta = {
     args.theme && el.setAttribute('theme', args.theme);
     args.value && (el.value = args.value);
     args.schemas && (el.schemas = args.schemas);
+    args.required && el.setAttribute('required', '');
     wrapperEl.append(el, msgEl, errEl);
-    wrapperEl.addEventListener('change', (e:any) =>  msgEl.innerHTML = `event 'change':<pre>${e.detail}</pre>`);
-    wrapperEl.addEventListener('error', (e:any) =>  errEl.innerHTML = `event 'error':<pre>${e.detail}</pre>`);
+    wrapperEl.addEventListener('change', (e:any) => {
+      msgEl.innerHTML = `event 'change':<pre>${e.detail}</pre>`;
+      errEl.innerHTML = '';
+    });
+    wrapperEl.addEventListener('error', (e:any) => setTimeout(() => { // wait til change done
+      errEl.innerHTML = `event 'error':<pre>${e.detail}</pre>`;
+    }));
     return wrapperEl as any;
   },
   args: {},
@@ -45,6 +51,10 @@ const meta: Meta = {
       description: 'JSON schema, only optional when language is \'json\'', 
       control: 'object',
     },
+    required: { 
+      description: 'Required', 
+      control: 'boolean',
+    },
   },
 };
 
@@ -52,6 +62,7 @@ export default meta;
 
 export const Primary = { 
   args: { 
+    required: true,
     value: fixIndent(`
       function foo(items) {
         var x = "All this is syntax highlighted";
@@ -61,6 +72,7 @@ export const Primary = {
     language: 'javascript'
   }
 };
+
 export const JsonEditor = { 
   args: { 
     value: fixIndent(`

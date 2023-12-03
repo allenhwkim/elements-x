@@ -4,6 +4,7 @@
 export class Table extends HTMLElement {
   _orgValue: any = undefined;
   _value: any = undefined;
+  required = false;
 
   get value() { return this._value }
   set value(val) { 
@@ -28,11 +29,13 @@ export class Table extends HTMLElement {
     const keys = this.keys;
     const emptyObj = keys ? keys.reduce((acc, key) => (acc[key] = '', acc), {}) : '';
     const rows = (this.value?.length ? this.value : [emptyObj]);
+    this.required = this.getAttribute('required') !== null;
     (!this.value?.length) && rows.forEach(row => { this.addNewRow(this, row); });
 
     this.addEventListener('change', event => {
       this._value = this.getValue(); // do not set to this.value, causing reset of html
       this.dispatchEvent(new CustomEvent('update', {detail: this.value, bubbles: true}));
+      this.#setRequiredError();
     });
 
     this.addEventListener('keydown', event => {
@@ -47,7 +50,14 @@ export class Table extends HTMLElement {
         this.delRow(rowEl);
         event.preventDefault();
       }
+      this.#setRequiredError();
     })
+  }
+
+  #setRequiredError() {
+    if (this.required) {
+      this.value?.length > 0 ? this.classList.remove('error', 'required') : this.classList.add('error', 'required');
+    }
   }
 
   getValue() {

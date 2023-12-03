@@ -11,7 +11,7 @@ const meta: Meta = {
   render: (args) => {
     const wrapperEl = document.createElement('div');
     const el = document.createElement(elName) as any;
-    const msgEl = document.createElement('div');
+    (args.required) && el.setAttribute('required', '');
     if (args.value) {
       try {
         if (typeof args.value === 'string') {
@@ -25,10 +25,14 @@ const meta: Meta = {
       }
     }
     wrapperEl.appendChild(el);
+
+    const msgEl = document.createElement('div');
     wrapperEl.appendChild(msgEl);
+
     wrapperEl.addEventListener('update', (e: any) => {
       msgEl.innerText = `'update' event: ${JSON.stringify(el.value)}`
     });
+
     return wrapperEl as any;
   },
 
@@ -37,22 +41,44 @@ const meta: Meta = {
       description: `value of input table. e.g. ['a','b','c'], [{a: 1, b:2, c:3}] `, 
       control: { type: 'object' },
     },
+    required: { 
+      description: `Required`, 
+      control: { type: 'boolean' },
+    },
   },
 };
 
 
 export default meta;
 
-export const Primary = {};
-export const Object = { args: {value: [
-  {key1: '', key2: '', key3: ''}
-]}};
-export const StringsWithValue = { args: {value: [
-  'pre', 
-  'filled', 
-  'strings'
-]}};
-export const ObjectsWithValue = { args: {value: [
-  {key1: 'pre', key2: 'filled', key3: 'values'}, 
-  {key1: '', key2: '', key3:''}
-]}};
+export const Primary = {
+  args: {
+    required: true
+  }
+};
+
+export const Object = {
+  args: {
+    required: true,
+    value: [
+      { key1: '', key2: '', key3: '' }
+    ]
+  }
+};
+
+export const StringsWithValue = {
+  args: {
+    required: true,
+    value: [ 'pre', 'filled', 'strings' ]
+  }
+};
+
+export const ObjectsWithValue = {
+  args: {
+    required: true,
+    value: [
+      { key1: 'pre', key2: 'filled', key3: 'values' },
+      { key1: '', key2: '', key3: '' }
+    ]
+  }
+};

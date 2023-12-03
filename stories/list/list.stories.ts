@@ -13,6 +13,7 @@ const meta: Meta = {
     const el = document.createElement(elName) as any;
     (args.html) &&  (el.innerHTML = args.html);
     (args.selected) &&  (el.setAttribute('selected', args.selected));
+    (args.required) &&  (el.setAttribute('required', args.required));
     const wrapperEl = document.createElement('div');
     const msgEl = document.createElement('div');
     wrapperEl.appendChild(el);
@@ -32,6 +33,10 @@ const meta: Meta = {
     selected: {
       description: 'Id of selected list item', 
       control: { type: 'text' },
+    },
+    required: {
+      description: 'Required', 
+      control: { type: 'boolean' },
     }
   },
 }
@@ -39,6 +44,8 @@ const meta: Meta = {
 export default meta;
 
 export const Primary = { args: { 
+  selected: 'file-a',
+  required: true,
   html: fixIndent(`
     <ul>
       <li> File
@@ -82,52 +89,4 @@ export const Primary = { args: {
       <li id="help">Help</li>
     </ul>
   `),
-  selected: 'file-a'
-}};
-
-export const MenuStyle = { args: { 
-  html: fixIndent(`
-    <ul class="menu">
-      <li> File
-        <ul>
-          <li id="new">New</li>
-          <li>Open
-            <ul>
-              <li> Recent Files 
-                <ul>
-                  <li id="file-a">File A</li>
-                  <li>File B</li>
-                  <li>File C</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li> Edit
-        <ul>
-          <li>Undo</li>
-          <li id="redo">Redo</li>
-          <li className="disabled">Cut</li>
-          <li className="disabled">Copy</li>
-          <li className="disabled">Paste</li>
-        </ul>
-      </li>
-      <li> Format
-        <ul>
-          <li>Font</li>
-          <li>Text</li>
-        </ul>
-      </li>
-      <li> View
-        <ul>
-          <li>100%</li>
-          <li>Zoom In</li>
-          <li>Zoom Out</li>
-        </ul>
-      </li>
-      <li id="help">Help</li>
-    </ul>
-  `),
-  selected: 'file-a'
 }};

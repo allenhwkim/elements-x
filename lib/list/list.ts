@@ -3,8 +3,10 @@ import * as cssM from './list.css?inline';
 const css = cssM.default;
 
 export class List extends HTMLElement {
-  static get observedAttributes() { return ['selected']; }
   value: HTMLElement | undefined;
+  required: boolean = false;
+
+  static get observedAttributes() { return ['selected', 'required']; }
 
   connectedCallback() {
     addCss(this.tagName, css);
@@ -18,6 +20,7 @@ export class List extends HTMLElement {
   }
 
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
+    (name === 'required') && (this.required = newValue !== null);
     (oldValue !== newValue) && this.render();
   }
 
@@ -30,9 +33,9 @@ export class List extends HTMLElement {
   clickHandler(event: any) {
     const liEl = event.target?.closest('li');
     if (liEl) {
-      this.highlightEl(liEl);
-      this.toggleChildList();
-      this.fireSelect();
+      this.toggleChildList(event.target.closest('li'));
+      const highlightedEl = this.highlightEl(liEl);
+      this.fireSelect(highlightedEl);
     }
   }
 
@@ -48,8 +51,9 @@ export class List extends HTMLElement {
     }
 
     if (['Enter', 'Space'].includes(event.code)) {
-      this.toggleChildList();
-      (event.code === 'Enter') && this.fireSelect();
+      this.toggleChildList(event.target.closest('li'));
+      const highlightedEl = this.querySelector('.x-highlighted');
+      (event.code === 'Enter') && this.fireSelect(highlightedEl);
     } else if (event.code === 'ArrowUp') {
       highlightNextEl(-1);
     } else if (event.code === 'ArrowDown') {
@@ -85,29 +89,37 @@ export class List extends HTMLElement {
           expandable.removeAttribute('hidden');
           expandable = expandable.parentElement?.closest('ul');
         }
-        this.fireSelect();
+        const highlightedEl = this.querySelector('.x-highlighted');
+        this.fireSelect(highlightedEl);
       }
     }
   }
 
-  highlightEl(el: any) {
+  highlightEl(el: any): HTMLLIElement | undefined {
     this.querySelector('.x-highlighted')?.classList.remove('x-highlighted');
-    el.classList.add('x-highlighted');
+    if (el.querySelector('ul')) {
+      return undefined; 
+    } else {
+      el.classList.add('x-highlighted');
+      return el;
+    }
   }
 
-  toggleChildList() {
-    const highlightedEl = this.querySelector('.x-highlighted');
-    const child = highlightedEl?.querySelector('ul');
+  toggleChildList(el) {
+    const child = el?.querySelector('ul');
     if (child) {
       child.getAttribute('hidden') !== null ?
         child.removeAttribute('hidden') : child.setAttribute('hidden', '');
     }
   }
 
-  fireSelect() {
-    const highlightedEl = this.querySelector('.x-highlighted') as HTMLElement;
-    const event = new CustomEvent('select', { bubbles: true, composed: true, detail: highlightedEl });
-    highlightedEl.dispatchEvent(event);
-    this.value = highlightedEl;
+  fireSelect(selectedEl) {
+    const event = new CustomEvent('select', { bubbles: true, composed: true, detail: selectedEl });
+    selectedEl?.dispatchEvent(event);
+    this.value = selectedEl;
+    console.log('..........', this.required, this.value);
+    if (this.required) {
+      this.value ? this.classList.remove('error', 'required') : this.classList.add('error', 'required');
+    }
   }
 }

@@ -25,16 +25,11 @@ export class Table extends HTMLElement {
   }
 
   connectedCallback() {
-    if (this.isConnected) {
-      const keys = this.keys;
-      const emptyObj = keys ? keys.reduce((acc, key) => (acc[key] = '', acc), {}) : '';
-      const rows = (this.value?.length ? this.value : [emptyObj]);
-      (!this.value?.length) && rows.forEach(row => { this.addNewRow(this, row); });
-      this.registerEventListener();
-    }
-  }
+    const keys = this.keys;
+    const emptyObj = keys ? keys.reduce((acc, key) => (acc[key] = '', acc), {}) : '';
+    const rows = (this.value?.length ? this.value : [emptyObj]);
+    (!this.value?.length) && rows.forEach(row => { this.addNewRow(this, row); });
 
-  registerEventListener() {
     this.addEventListener('change', event => {
       this._value = this.getValue(); // do not set to this.value, causing reset of html
       this.dispatchEvent(new CustomEvent('update', {detail: this.value, bubbles: true}));

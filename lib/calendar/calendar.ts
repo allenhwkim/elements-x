@@ -11,6 +11,12 @@ function yearChanged(this:any, event) { // Do not use arrow function here if 'th
   this.calendarDate = new Date(year, month, day);
 }
 
+function today() {
+  return new Intl.DateTimeFormat(
+    'fr-CA',{ month:'2-digit',day:'2-digit', year:'numeric'}
+  ).format(new Date());
+}
+
 function clickHandler(this: any, e: any) {
   const date = this.calendarDate;
   if (e.target.id === 'x-prev-month') { // ◀ button
@@ -18,10 +24,10 @@ function clickHandler(this: any, e: any) {
   } else if (e.target.id === 'x-next-month') { // ▶ button
     this.calendarDate = (date.setMonth(date.getMonth() + 1), date);
   } else if (e.target.id === 'x-today') { // ● button
-    this.calendarDate = new Date();
+    this.calendarDate = localDate(today(), navigator.language);
   } else if (e.target.id.match(/x-[0-9-]+$/)) { // date button
     const dateEl = e.target;
-    const date = new Date(dateEl.id.slice(2));
+    const date = localDate(dateEl.id.slice(2), navigator.language);
     this.querySelector('.x-date .x-select')?.classList.remove('x-select');
     dateEl.classList.add('x-select');
     this.dateSelected = date;
@@ -36,9 +42,13 @@ export class Calendar extends HTMLElement {
     return ['date', 'month-format', 'week-format', 'locale', 'first-day-of-week', 'locale'];
   }
 
+  get value() {
+    return localDate(this.dateSelected || this.calendarDate, navigator.language);
+  }
+
   dateSelected: Date | undefined;
 
-  _calendarDate = new Date();
+  _calendarDate = localDate(today(), navigator.language);
   set calendarDate(val) {
     this._calendarDate = val;
     this.#updateDOM();

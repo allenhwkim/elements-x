@@ -4,10 +4,6 @@ export function rebuildCalendar(el) {
   const IS_SELECTABLE = el.constructor.IS_SELECTABLE;
   const $ = selector => el.querySelector(selector);
 
-  if (el.classList.contains('small')) {
-    el.props.monthFormat = 'short';
-    el.props.weekFormat = 'short';
-  }
   const {weekFormat, monthFormat, locale, firstDayOfWeek} =  el.props;
   const calendarDate = el.calendarDate;
 
@@ -54,7 +50,10 @@ export function rebuildCalendar(el) {
       buttonEl.classList.add('x-select');
     }
     
-    if (date.toISOString().slice(0,10) === new Date().toISOString().slice(0,10)) {
+    const today = new Intl.DateTimeFormat(
+        'fr-CA',{ month:'2-digit',day:'2-digit', year:'numeric'}
+      ).format(new Date()); // yyyy-mm-dd e.g, 2023-12-31
+    if (date.toISOString().slice(0,10) === today) {
       buttonEl.classList.add('x-today');
     }
 

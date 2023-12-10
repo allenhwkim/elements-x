@@ -10,13 +10,19 @@ import { StepperController } from './stepper/stepper-controller';
 
 const X = { BarCode, Clock, Highlight, Json, Monaco, QRCode, Stepper, Formflow };
 
-for (var key in X) {
-  const elName = `x-${key.toLowerCase()}`;
-  !customElements.get(elName) && customElements.define(elName, X[key]);
-}
-!customElements.get('x-stepper-controller') &&
-  customElements.define('x-stepper-controller', StepperController);
-
-window && ((window as any).X = {...(window as any).X, ...X});
-
 export default {...X};
+
+if (window) {
+  ((window as any).X = {...(window as any).X, ...X});
+
+  // let users override code by not defining custom elements
+  if (!(window as any).X?.override) { 
+    for (var key in X) {
+      const elName = `x-${key.toLowerCase()}`;
+      !customElements.get(elName) && customElements.define(elName, X[key]);
+    }
+    !customElements.get('x-stepper-controller') &&
+      customElements.define('x-stepper-controller', StepperController);
+  }
+}
+

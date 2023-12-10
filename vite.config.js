@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 export default defineConfig({
   build: {
@@ -14,11 +13,5 @@ export default defineConfig({
       },
       formats: ["es", "cjs"],
     },
-  },
-  plugins: [
-    viteStaticCopy({
-      targets: [ 
-        { src: 'lib/test.html', dest: '.' } ]
-    })
-  ]
+  }
 }) ;

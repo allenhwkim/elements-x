@@ -24,15 +24,15 @@
 /* To import all elements and define custom elements */
 import 'elements-x';
 
-/* To import all core elements and define custom elements */
+/* To import and define all core elements */
 import 'elements-x/dist/lib/core.umd.js'; 
 
-/* To import all extended elements and define custom elements */
+/* To import and define all extended elements */
 import 'elements-x/dist/lib/extended.umd.js'; 
 
-/* To import only one element, and manually define a custom element */
+/* To import and define only one element */
 window.X = {override: true};
-import { Calendar } from 'elements-x/dist/lib/core';
+import { Calendar } from 'elements-x';
 // import { Calendar } from './my-own-calendar';
 customElements.define('x-calendar', Calendar);
 ```

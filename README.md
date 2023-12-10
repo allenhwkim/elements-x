@@ -19,3 +19,13 @@
 </body>
 ```
 
+## To override the existing code, and manually define custom elements
+```
+window.X = {override: true};
+...
+import { MyClock } from './my-lib/clock'; // instead of 'elements-x';
+window.customElements.define('x-clock', MyClock);
+...
+  <x-clock run></x-clock>
+```
+

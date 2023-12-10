@@ -8,11 +8,17 @@ import { QRCode } from './qrcode/qrcode';
 import { Stepper } from './stepper/stepper';
 import { StepperController } from './stepper/stepper-controller';
 
-const X = { BarCode, Clock, Highlight, Json, Monaco, QRCode, Stepper, Formflow };
-
-export default {...X};
+export {
+  BarCode, Clock, Highlight, Json, 
+  Monaco, QRCode, Stepper, Formflow 
+};
 
 if (window) {
+  const X = { 
+    BarCode, Clock, Highlight, Json, 
+    Monaco, QRCode, Stepper, Formflow 
+  };
+
   ((window as any).X = {...(window as any).X, ...X});
 
   // let users override code by not defining custom elements

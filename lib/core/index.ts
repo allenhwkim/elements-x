@@ -15,15 +15,18 @@ if (!document.querySelector(`style[x-css]`)) {
   document.head.insertAdjacentHTML('beforeend', `<style x-css>${css}</style>`);
 }
 
-const X = {
+export {
   Calendar, ComboBox, Dropdown, File, 
   List, Map, Masked, Pagination, 
   Resize, SideBar, Table
-}
-
-export default {...X};
+};
 
 if (window) {
+  const X = {
+    Calendar, ComboBox, Dropdown, File, 
+    List, Map, Masked, Pagination, 
+    Resize, SideBar, Table
+  };
   (window as any).X = {...(window as any).X, ...X};
 
   // let users override code by not defining custom elements

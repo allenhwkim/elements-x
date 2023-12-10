@@ -1,17 +1,20 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig({
-  build: {
-    emptyOutDir: false,
-    outDir: "dist",
-    // sourcemap: true,
-    lib: {
-      entry: {
-        index: "./lib/index.ts",
-        core: "./lib/core/index.ts",
-        extended: "./lib/extended/index.ts",
-      },
-      formats: ["es", "cjs"],
+export default defineConfig(({mode}) => {
+  const dir = process.env.DIR;
+
+  return { 
+    define: {
+      // vite + react uses process.env, although vite says import.meta.env
+      'process.env': process.env 
     },
+    build: {
+      emptyOutDir: false,
+      lib: {
+        entry: dir !== 'index' ? `./lib/${dir}/index.ts` : './lib/index.ts',
+        name: dir || 'index',
+        fileName: dir
+      }
+    }
   }
-}) ;
+});

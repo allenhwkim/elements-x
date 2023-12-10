@@ -117,7 +117,6 @@ export class List extends HTMLElement {
     const event = new CustomEvent('select', { bubbles: true, composed: true, detail: selectedEl });
     selectedEl?.dispatchEvent(event);
     this.value = selectedEl;
-    console.log('..........', this.required, this.value);
     if (this.required) {
       this.value ? this.classList.remove('error', 'required') : this.classList.add('error', 'required');
     }

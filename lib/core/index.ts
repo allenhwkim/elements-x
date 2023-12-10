@@ -11,17 +11,11 @@ import { Resize } from './resize/resize';
 import { SideBar } from './sidebar/sidebar';
 import { Table } from './table/table';
 
-if (!document.querySelector(`style[x-css]`)) {
-  document.head.insertAdjacentHTML('beforeend', `<style x-css>${css}</style>`);
-}
-
-export {
-  Calendar, ComboBox, Dropdown, File, 
-  List, Map, Masked, Pagination, 
-  Resize, SideBar, Table
-};
-
 if (window) {
+  if (!document.querySelector(`style[x-css]`)) {
+    document.head.insertAdjacentHTML('beforeend', `<style x-css>${css}</style>`);
+  }
+
   const X = {
     Calendar, ComboBox, Dropdown, File, 
     List, Map, Masked, Pagination, 
@@ -37,3 +31,9 @@ if (window) {
     }
   }
 }
+
+export {
+  Calendar, ComboBox, Dropdown, File, 
+  List, Map, Masked, Pagination, 
+  Resize, SideBar, Table
+};

@@ -1,5 +1,7 @@
 import type { StoryObj, Meta } from '@storybook/html';
-import {BarCode} from '../../../lib/extended/barcode/barcode';
+// import {BarCode} from '../../../lib/extended/barcode/barcode';
+import '../../../lib';
+const BarCode:any = () => {};
 
 !customElements.get('x-barcode') && customElements.define('x-barcode', BarCode);
 

@@ -5,18 +5,22 @@
   "files": [
     "dist/lib"
   ],
-  "main": "./dist/lib/index.js",
+  "main": "./dist/lib/index.umd.js",
   "module": "./dist/lib/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/lib/index.js",
+      "import": "./dist/lib/index.umd.js",
       "require": "./dist/lib/index.mjs"
     }
   },
   "scripts": {
     "start": "rm -rf node_modules/.cache/storybook && storybook dev -p 6006",
-    "build": "npm run build:sb && npm run build:lib",
-    "build:lib": "vite build --outDir dist/lib && cp lib/test.html dist/lib",
+    "build": "npm run build:sb && npm run build:lib && npm run build:lib:core && npm run build:lib:extended",
+    "build:lib": "npm run build:lib:index && npm run build:lib:core && npm run build:lib:extended && npm run build:lib:copy",
+    "build:lib:index": "DIR=index vite build --outDir dist/lib",
+    "build:lib:core": "DIR=core vite build --outDir dist/lib",
+    "build:lib:extended": "DIR=extended vite build --outDir dist/lib",
+    "build:lib:copy": "cp lib/test.html dist/lib",
     "build:sb": "storybook build -o dist",
     "prepublishOnly": "npm run build"
   },

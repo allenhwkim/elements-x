@@ -12,20 +12,52 @@
 [Example](https://unpkg.com/elements-x/dist/lib/test.html)
 ```
 <head>
-  <script src="https://unpkg.com/elements-x"></script>
+  <script type="module" src="https://unpkg.com/elements-x"></script> 
 </head>
 <body>
-  <x-clock run></x-clock>
+  <x-calendar></x-calendar>
 </body>
 ```
 
-## To override the existing code, and manually define custom elements
+## Import
 ```
+/* To import all elements and define custom elements */
+import 'elements-x';
+
+/* To import all core elements and define custom elements */
+import 'elements-x/dist/lib/core.umd.js'; 
+
+/* To import all extended elements and define custom elements */
+import 'elements-x/dist/lib/extended.umd.js'; 
+
+/* To import only one element, and manually define a custom element */
 window.X = {override: true};
-...
-import { MyClock } from './my-lib/clock'; // instead of 'elements-x';
-window.customElements.define('x-clock', MyClock);
-...
-  <x-clock run></x-clock>
+import { Calendar } from 'elements-x/dist/lib/core';
+// import { Calendar } from './my-own-calendar';
+customElements.define('x-calendar', Calendar);
 ```
+
+## Core elements
+ * Calendar
+ * ComboBox (Input with dropdown)
+ * Dropdown (Display as dropdown underneath of input or button)
+ * File
+ * List (Show hierarchy and select from it)
+ * Map (Openlayer map)
+ * Masked (Input with mask)
+ * Pagination 
+ * Resize
+ * SideBar
+ * Table (array of inputs, or table-structured inputs)
+
+## Extended elements
+ * BarCode
+ * Clock
+ * Highlight (Code syntax prettifier)
+ * Json (Collapsible JSON viewer) 
+ * Monaco (Code editor)
+ * QRCode
+ * Stepper(form stepper)
+ * Formflow (Form flow diagram with Reactflow)
+ * Formdesigner (A page designer with GrapesJs)
 

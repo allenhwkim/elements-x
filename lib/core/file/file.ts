@@ -37,7 +37,6 @@ export class File extends HTMLElement {
     const htmls: string[] = [];
     files.forEach( (file, ndx) => {
       const type = file.type || file.dataURL.match(/data:(.*?);/)?.[1];
-      console.log({file})
       const imgPreview = !type.match(/^image/) ? '' : `<img class="x-preview" src="${file.dataURL}" 
         onclick="w=window.open(),i=new Image();i.src='${file.dataURL}';w.document.write(i.outerHTML);" />`;
       htmls.push(fixIndent(`

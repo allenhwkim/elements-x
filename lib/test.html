@@ -1,6 +1,7 @@
 <!-- when built, this is copied to dist/lib/test.html for lib users -->
 <head>
-  <script src="https://unpkg.com/elements-x"></script>
+  script type="module" src="https://unpkg.com/elements-x"></script 
+  <!-- <script type="module" src="../dist/lib/index.umd.js"></script>  -->
 </head>
 
 <h1>elements-x</h1>
@@ -15,14 +16,17 @@
 <x-clock run></x-clock>
 
 <h2>x-combobox</h2>
-<x-combobox>
-  <input placeholder="Choose one value" autocomplete="off" value="Hello World">
-  <ul>
-    <li>Choose One</li>
-    <li>Hello</li>
-    <li>Hello World</li>
-  </ul>
-</x-combobox>
+<label> 
+  Name:
+  <x-combobox>
+    <input id="name" placeholder="Choose one value" autocomplete="off" value="Hello World">
+    <ul>
+      <li>Choose One</li>
+      <li>Hello</li>
+      <li>Hello World</li>
+    </ul>
+  </x-combobox>
+</label>
 
 <h2>x-file</h2>
 <x-file></x-file>
@@ -44,7 +48,12 @@
 <x-map center="Brampton Ontario, Canada" style="width:50%"></x-map>
 
 <h2>x-masked</h2>
-<x-masked mask="yyyy-mm-dd"><input value="202312"></x-masked>
+  <label>
+    DOB: 
+    <x-masked mask="yyyy-mm-dd">
+      <input value="202312">
+    </x-masked>
+  </label>
 
 <h2>x-pagination</h2>
 <x-pagination total="500" page="8" num-per-page="20"></x-pagination>

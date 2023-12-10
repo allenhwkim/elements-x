@@ -6,7 +6,6 @@ export function rebuildCalendar(el) {
 
   const { weekFormat, monthFormat, locale, firstDayOfWeek} =  el;
   const calendarDate = el.calendarDate;
-  console.log({weekFormat, monthFormat, locale, firstDayOfWeek});
 
   const dates = getCalendarDays(calendarDate, firstDayOfWeek);
 

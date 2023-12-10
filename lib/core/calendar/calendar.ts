@@ -84,7 +84,6 @@ export class Calendar extends HTMLElement {
     rebuildCalendar(this);
     this.addEventListener('change', yearChanged);
     this.addEventListener('click', clickHandler);
-    console.log('xxxxxxxxxxxx connectedCallback')
   }
 
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {

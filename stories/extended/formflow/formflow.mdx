@@ -1,0 +1,65 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+
+import * as Stories from './formflow.stories';
+
+<Meta of={Stories} />
+
+# Formflow
+
+Formflow diagram
+
+<Canvas of={Stories.Primary}/>
+
+### Functions
+<table class="w-100">
+  <tbody>
+    <tr>
+      <th>name</th> <th>description</th>
+    </tr>
+    <tr>
+      <td>getData() =&gt; {'{'}nodes, edges{'}'} </td> 
+      <td>Returns the current nodes and edges</td> 
+    </tr>
+    <tr>
+      <td>async getImage() =&gt; Base64</td> 
+      <td>Returns image data of the current flow chart</td> 
+    </tr>
+    <tr>
+      <td>getInstance() =&lt; ReactflowInstance</td> 
+      <td>Returns the Reactflow instance</td> 
+    </tr>
+    <tr>
+      <td>setData({'{'}nodes, edges{'}'}) =&gt; void</td> 
+      <td>Set nodes and edges of the flow chart</td> 
+    </tr>
+  </tbody>
+</table>
+
+### Event
+<table class="w-100">
+  <tbody>
+    <tr>
+      <th>name</th> <th>description</th>
+    </tr>
+    <tr>
+      <td>reactflow</td> 
+      <td>
+        There are three types of details for this event.
+        <ul>
+          <li>{ JSON.stringify({
+            type: 'reactflow', detail: { 
+              action: "'selected'", type: "'node'", node: 'Node', nodes: 'Node[]', edges: 'Edge[]' 
+          }})}</li>
+          <li>{ JSON.stringify({
+            type: 'reactflow', detail: {
+              action: "'selected'", type: "'edge'", edge: 'Edge', nodes: 'Node[]', edges: 'Edge[]' 
+          }})}</li>
+          <li>{ JSON.stringify({
+            type: 'reactflow', detail: {
+              action: "'init'", event: "ReactFlowInstance"
+          }})}</li>
+        </ul>
+      </td> 
+    </tr>
+  </tbody>
+</table> 

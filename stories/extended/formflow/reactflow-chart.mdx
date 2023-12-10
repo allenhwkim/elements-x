@@ -1,0 +1,24 @@
+import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
+import * as ReactflowChartStories from './reactflow-chart.stories';
+
+<Meta of={ReactflowChartStories} />
+
+# ReactflowChart
+The React component used by formflow.
+It provides functionality of interactivity with nodes and edges.
+
+It accepts the following as props.
+ * `nodes`:  Nodes of Reactflow chart.
+ * `edges`:  Edges of Reactflow chart.
+ * `onNodClick(node, nodes, edges)` function.  
+   e.g. `(node, nodes, edges) => console.log(node)`
+ * `onEdgeClick(edge, nodes, edges)` function.  
+   e.g. `(edge, nodes, edges) => console.log(edge)`
+ * `onInit(reactFlowInstance)` function.  
+   e.g. `instance => console.log(instance)`
+ * `showImage(blob)` function.  
+   e.g. `blob => console.log(blob)`
+
+<Canvas of={ReactflowChartStories.Primary} />
+
+<Controls />

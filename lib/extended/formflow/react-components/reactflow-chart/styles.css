@@ -1,0 +1,4 @@
+/* a11y fix */
+.react-flow__panel.react-flow__attribution a { 
+  background: #FFF;
+}

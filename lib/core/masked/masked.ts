@@ -19,17 +19,20 @@ export class Masked extends HTMLElement {
   connectedCallback() {
     addCss(this.tagName, css);
 
-    const inputEl = this.querySelector('input');
-    if (!inputEl) {
-      this.innerHTML = 'error: requires <input> element';
-      return;
-    }
-    inputEl.insertAdjacentElement('afterend', document.createElement('div'));
-    this.render();
+    setTimeout(() => { // delaying for this.querySelector
+      const inputEl = this.querySelector('input');
+      if (!inputEl) {
+        this.innerHTML = 'error: requires &lt;input &gt; element';
+        console.error('[error] <x-mask>', this.innerHTML);
+        return;
+      }
+      inputEl.insertAdjacentElement('afterend', document.createElement('div'));
+      this.render();
 
-    inputEl.addEventListener('keydown', this.handleKeyDown.bind(this)); // determint to accept char input or not
-    inputEl.addEventListener('input', this.setMaskElText.bind(this)); // change maskEl display
-    inputEl.addEventListener('paste',this.handlePaste.bind(this));
+      inputEl.addEventListener('keydown', this.handleKeyDown.bind(this)); // determint to accept char input or not
+      inputEl.addEventListener('input', this.setMaskElText.bind(this)); // change maskEl display
+      inputEl.addEventListener('paste',this.handlePaste.bind(this));
+    });
   }
 
   disconnectedCallback() {

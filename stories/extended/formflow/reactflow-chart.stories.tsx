@@ -5,7 +5,7 @@ import { ReactflowChart } from '../../../lib/extended/formflow/react-components/
 import { DEFAULT_CHART } from '../../../lib/extended/formflow/default-chart';
 
 const meta: Meta = { 
-  title: 'Custom/Formflow/Reactflow',
+  title: 'Extended/Reactflow',
   render: (args) => {
     const containerEl = document.createElement('div');
     const custEl = document.createElement('div');

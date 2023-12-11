@@ -1,6 +1,6 @@
 `<x-stepper current-step="form1" data="forms"></x-stepper>`
 
-Must display steps by the forms data
+Must display stepNames by the forms data
 
 A step shows its status
 * x-error: formdata found and getErrors() returns errors.
@@ -12,6 +12,6 @@ A step shows its status
 Inputs : 
  - forms
  - submitFunc
- - steps
+ - stepNames
 
 https://codesandbox.io/s/stepper-html-css-g5tqs8?file=/src/style2.scss

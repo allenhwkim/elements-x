@@ -7,9 +7,9 @@ interface ISubmitFunc {
 }
 
 export interface IForm {
-  type: 'form' | 'review' | 'thankyou';
+  type: 'form' | 'review' | 'thankyou' | 'submit';
   defaultValues?: {[key:string]: string},
-  title: string; // step name below circle
+  title?: string; // step name below circle
   subTitle?: string; // small text below title
   skippable?: boolean;
   html: string | ((userData?) => string);

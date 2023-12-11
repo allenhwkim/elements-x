@@ -1,4 +1,4 @@
-import grapesjs from 'grapesjs';
+import grapesjs, {Editor} from 'grapesjs';
 import { showSidePanel } from './custom-commands';
 import { componentBlocks, formBlocks, containerBlocks, formControlBlocks }  from './blocks';
 import { componentTypes } from './components';
@@ -50,13 +50,14 @@ export function initGrapesJs(elId: string) {
     },
     canvas: {
       scripts: [ 
+        '/dist/lib/index.umd.js', // for development
+        // 'https://unpkg.com/elements-x', // for production
         'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js',
       ],
       styles: [
         'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css',
-        '/custom-elements.css',
-      ],
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
+    ],
     },
     panels: {
       defaults: [
@@ -73,9 +74,9 @@ export function initGrapesJs(elId: string) {
         { id: 'show-styles', ...showSidePanel('.styles-container') }, 
         { id: 'show-traits', ...showSidePanel('.traits-container') },
         { id: 'show-blocks', ...showSidePanel('.blocks-container') },
-        { id: 'set-device-desktop', run(editor: grapesjs.Editor) { editor.setDevice('Desktop')} },
-        { id: 'set-device-mobile', run(editor: grapesjs.Editor) { editor.setDevice('Mobile')} },
-      ]
+        { id: 'set-device-desktop', run(editor: Editor) { editor.setDevice('Desktop')} },
+        { id: 'set-device-mobile', run(editor: Editor) { editor.setDevice('Mobile')} },
+      ] as any
     }
   });
   

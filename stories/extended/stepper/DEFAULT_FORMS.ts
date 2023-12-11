@@ -1,7 +1,7 @@
-import { IForms } from "./types";
+import { IForms } from '../../../lib/extended/stepper/types';
 
 export const DEFAULT_FORMS: IForms = {
-  name: {
+  form1: {
     type: 'form',
     title: 'Name',
     html: () => `
@@ -21,26 +21,20 @@ export const DEFAULT_FORMS: IForms = {
       return null;
     } 
   }, 
-  address: {
+  form2: {
     type: 'form',
     title: 'Contact',
     skippable: true,
     html: () => `Optional: <br/>  Address: <input name="address" />`,
   }, 
-  review: {
+  form3: {
     type: 'review',
     title: 'Review',
-    html: (userData) => `
-      <h1> Review </h1>
-      <p> Name : ${userData.name.first} ${userData.name.last} </p>
-      <p> Address : ${userData.address.address} </p>
-      <p> option : ${userData.name['my-radio']} </p>
-      <p> check : ${userData.name['my-check']} </p>
-    `
+    html: () => `Optional: <br/>  Address: <input name="address" />`,
   }, 
-  thankyou: {
-    type: 'thankyou',
+  form4: {
+    type: 'submit',
     title: 'Thankyou',
-    html: () => `Thankyou page.`,
+    html: () => `This is a review page.`,
   }
 };

@@ -1,4 +1,4 @@
-import { ISubmitFunc, IUserData } from "./types";
+import { ISubmitFunc, IUserData } from "../../../lib/extended/stepper/types";
 
 export const DEFAULT_SUBMIT_FUNC: ISubmitFunc = async function(userData: IUserData) {
   const payload = typeof userData === 'string' ? userData : JSON.stringify(userData);

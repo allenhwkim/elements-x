@@ -4,7 +4,6 @@ import * as cssM from './stepper.css?inline';
 const css = cssM.default;
 
 import { StepperController } from './stepper-controller';
-import { StepperStorage } from './stepper-storage';
 import { ISubmitFunc } from './types';
 
 export class Stepper extends HTMLElement {
@@ -17,7 +16,7 @@ export class Stepper extends HTMLElement {
   set forms(arg) {
     if (this.StepperController) {
       this.StepperController.forms = arg;
-      this.StepperController.steps = Object.keys(arg);
+      this.StepperController.stepNames = Object.keys(arg);
       this.StepperController.initForm();
       this.render();
     }
@@ -30,13 +29,13 @@ export class Stepper extends HTMLElement {
     this.StepperController.submitFunc = this.submitFunc;
   }
 
-  _steps = [];
-  get steps() {
-    return this.StepperController.steps;
+  _stepNames = [];
+  get stepNames() {
+    return this.StepperController.stepNames;
   }
 
-  set steps(arg) {
-    this.StepperController.steps = Object.keys(arg);
+  set stepNames(arg) {
+    this.StepperController.stepNames = Object.keys(arg);
     this.StepperController.initForm();
     this.render();
   }
@@ -53,7 +52,7 @@ export class Stepper extends HTMLElement {
 
     if (this.forms) { // data-form attribute
       this.StepperController.forms = this.forms;
-      this.StepperController.steps = Object.keys(this.forms);
+      this.StepperController.stepNames = Object.keys(this.forms);
       this.StepperController.submitFunc = this.submitFunc;
     }
 
@@ -85,7 +84,7 @@ export class Stepper extends HTMLElement {
     this.innerHTML = '';
     const formCtrl = this.StepperController;
     let html = ``;
-    formCtrl.steps.forEach( (formId: string, index: number) => {
+    formCtrl.stepNames.forEach( (formId: string, index: number) => {
       const activeClass = formId === formCtrl.currentFormId ? ' active' : '';
       const formProp = formCtrl.forms[formId];
       const formType = formProp.type ? ` ${formProp.type}` : '';

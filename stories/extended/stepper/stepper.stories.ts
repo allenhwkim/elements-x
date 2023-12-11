@@ -1,11 +1,9 @@
 import type { Meta } from '@storybook/html';
 import { Stepper } from '../../../lib/extended/stepper/stepper';
 import { StepperController } from '../../../lib/extended/stepper/stepper-controller';
-import { DEFAULT_FORMS } from '../../../lib/extended/stepper/default-forms';
-import { DEFAULT_SUBMIT_FUNC } from "../../../lib/extended/stepper/default-submit-func"; // Shares the same FormController
-import { StepperStorage } from "../../../lib/extended/stepper/stepper-storage"; // Shares the same FormController
+import { DEFAULT_FORMS } from './DEFAULT_FORMS';
+import { DEFAULT_SUBMIT_FUNC } from './DEFAULT_SUBMIT_FUNC'; // Shares the same FormController
 import { fixIndent } from '../../../lib/util';
-import { IUserData } from '../../../lib/extended/stepper/types';
 
 const elName = 'x-stepper';
 const className = Stepper;

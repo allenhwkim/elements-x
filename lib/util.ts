@@ -29,7 +29,7 @@ export function loadScript(...urls) {
   })
 };
 
-export function waitFor(expr: string, timeout: number = 3000): Promise<any> {
+export function waitFor(expr: string, timeout: number = 10000): Promise<any> {
   let waited = 0;
   return new Promise(function(resolve, reject) {
     const func = new Function(`return ${expr}`);

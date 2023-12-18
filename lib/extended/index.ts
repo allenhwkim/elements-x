@@ -8,6 +8,7 @@ import { Monaco } from './monaco/monaco';
 import { QRCode } from './qrcode/qrcode';
 import { Stepper } from './stepper/stepper';
 import { StepperController } from './stepper/stepper-controller';
+import { StepperStorage } from './stepper/stepper-storage';
 
 if (window) {
   // let users override code by not defining custom elements
@@ -31,6 +32,7 @@ if (window) {
 
 export {
   BarCode, Clock, Highlight, Json, 
-  Monaco, QRCode, Stepper, 
+  Monaco, QRCode, 
   Formflow, FormDesigner,
+  Stepper, StepperStorage,
 };

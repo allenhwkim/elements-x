@@ -9,6 +9,7 @@ import { QRCode } from './qrcode/qrcode';
 import { Stepper } from './stepper/stepper';
 import { StepperController } from './stepper/stepper-controller';
 import { StepperStorage } from './stepper/stepper-storage';
+import { Sidebar } from './sidebar/sidebar';
 
 if (window) {
   // let users override code by not defining custom elements
@@ -33,6 +34,6 @@ if (window) {
 export {
   BarCode, Clock, Highlight, Json, 
   Monaco, QRCode, 
-  Formflow, FormDesigner,
+  Formflow, FormDesigner, Sidebar,
   Stepper, StepperStorage,
 };

@@ -1,50 +1,50 @@
-  x-calendar {
+  .x.calendar {
     display: inline-block;
     border: 1px solid #ccc
   }
 
-  x-calendar .x-header {
+  .x.calendar .header {
     display: flex;
     padding: 12px 8px;
     font-weight: bold;
     justify-content: center
   }
 
-  x-calendar .x-header button {
+  .x.calendar .header button {
     background: rgba(0,0,0,0);
     border: none;
     box-shadow: none;
   }
 
-  x-calendar .x-header button.x-prev:before {
+  .x.calendar .header button.prev:before {
     content: "◀"
   }
 
-  x-calendar .x-header button.x-today:before {
+  .x.calendar .header button.today:before {
     content: "●"
   }
 
-  x-calendar .x-header button.x-next:before {
+  .x.calendar .header button.next:before {
     content: "▶"
   }
 
-  x-calendar .x-header .x-month-year {
+  .x.calendar .header .month-year {
     display: flex;
     flex: 1;
     align-items: center;
     position: relative
   }
 
-  x-calendar .x-header .x-month-year .x-years {
+  .x.calendar .header .month-year .years {
     margin-left: 12px
   }
 
-  x-calendar .x-week-days-container {
+  .x.calendar .week-days-container {
     display: flex;
     padding: 0 4px
   }
 
-  x-calendar .x-week-days-container .x-weekday {
+  .x.calendar .week-days-container .weekday {
     background: #ccc;
     width: 14.2857142857%;
     text-align: center;
@@ -55,13 +55,13 @@
     text-overflow: ellipsis;
   }
 
-  x-calendar .x-days-container {
+  .x.calendar .days-container {
     display: flex;
     flex-wrap: wrap;
     padding: 0 4px 12px 4px
   }
 
-  x-calendar .x-days-container .x-date {
+  .x.calendar .days-container .date {
     line-height: 1.5em;
     box-sizing: border-box;
     width: 14.2857142857%;
@@ -70,11 +70,11 @@
     position: relative;
   }
 
-  x-calendar .x-days-container .x-date[data-tooltip] {
+  .x.calendar .days-container .date[data-tooltip] {
     border-bottom: 1px dotted rgba(0,0,0,0)
   }
 
-  x-calendar .x-days-container .x-date:has(.x-holiday):after {
+  .x.calendar .days-container .date:has(.holiday):after {
     content: attr(data-tooltip);
     position: absolute;
     color: #d13101;
@@ -86,7 +86,7 @@
     white-space: nowrap;
   }
 
-  x-calendar .x-days-container .x-date button {
+  .x.calendar .days-container .date button {
     background: rgba(0,0,0,0);
     border: none;
     box-shadow: none;
@@ -95,37 +95,37 @@
     padding: 0;
   }
 
-  x-calendar .x-days-container .x-date button:focus {
+  .x.calendar .days-container .date button:focus {
     background-color: unset;
     color: unset;
-    box-shadow: #3751b5 0 0 0 2px
+    box-shadow: #3751b5 0 0 0 2px;
     outline: none;
   }
 
-  x-calendar .x-days-container .x-date button:disabled {
+  .x.calendar .days-container .date button:disabled {
     color: unset;
     opacity: .7
   }
 
-  x-calendar .x-days-container .x-date button:not(.x-select).x-holiday {
+  .x.calendar .days-container .date button:not(.select).holiday {
     color: #d13101;
     font-weight: bold
   }
 
-  x-calendar .x-days-container .x-date button .x-holiday:after {
+  .x.calendar .days-container .date button .holiday:after {
     position: absolute;
     content: attr(data-tooltip);
     font-size: small;
     color: #d13101
   }
 
-  x-calendar .x-days-container .x-date button.x-today {
+  .x.calendar .days-container .date button.today {
     background-color: #eee;
     color: #333;
     border-radius: 50%
   }
 
-  x-calendar .x-days-container .x-date button.x-select {
+  .x.calendar .days-container .date button.select {
     background-color: #d13101;
     color: #fff;
     border-radius: 50%

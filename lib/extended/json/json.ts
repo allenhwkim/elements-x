@@ -1,6 +1,6 @@
 import morphdom from 'morphdom/dist/morphdom-esm';
 import { addCss, removeCss } from "../../util";
-import css from './json.css';
+import * as cssM from './json.css?inline';
 
 export class Json extends HTMLElement {
   static get observedAttributes() { return ['level']; }
@@ -13,8 +13,9 @@ export class Json extends HTMLElement {
   }
 
   connectedCallback() {
+    this.classList.add('x', 'json');
     if (this.isConnected) {
-      addCss(this.tagName, css);
+      addCss(this.tagName, cssM.default);
       this.#data = this.data;
       this.#updateDOM();
     }

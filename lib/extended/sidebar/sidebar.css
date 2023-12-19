@@ -1,4 +1,4 @@
-x-sidebar {
+.x.sidebar {
   min-width: 200px;
   padding: 12px;
   background-color: #fff;
@@ -11,10 +11,12 @@ x-sidebar {
   transition: all 0.5s ease;
   box-shadow: 0 4px 10px 0 #333;
 }
-x-sidebar.visible {
+
+.x.sidebar.visible {
   left: 0;
 }
-x-sidebar .close {
+
+.x.sidebar .close {
   border: none;
   position: absolute;
   right: 0;

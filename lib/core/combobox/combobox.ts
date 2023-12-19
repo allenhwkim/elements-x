@@ -12,6 +12,7 @@ export class ComboBox extends HTMLElement {
 
   connectedCallback() { 
     addCss(this.tagName, css);
+    this.classList.add('x', 'combobox');
     setTimeout(() => this.init())
   }
 
@@ -37,18 +38,17 @@ export class ComboBox extends HTMLElement {
 
     // remove highlighted part when input focused out to remove duplicated highlighting.
     inputEl.addEventListener('blur', function(event) { 
-      const highlightedEl = ulEl.querySelector('x-highlighted');
-      highlightedEl?.classList.remove('x-highlighted');
+      const highlightedEl = ulEl.querySelector('.highlighted');
+      highlightedEl?.classList.remove('highlighted');
     });
 
     inputEl.addEventListener('keydown', (event: any) => {
-      const highlightedEl = this.querySelector('.x-highlighted:not(.hidden)');
+      const highlightedEl = this.querySelector('.highlighted:not(.hidden)');
       if (['ArrowDown', 'ArrowUp', 'Enter', 'Escape'].includes(event.key)) {
         if      (event.key === 'ArrowDown') { this.highlightNext( ulEl, 1); }
         else if (event.key === 'ArrowUp') { this.highlightNext( ulEl, -1); } 
         else if (event.key === 'Escape') { inputEl.blur(); }
         else if (event.key === 'Enter') { 
-          this.querySelector('.x-selected')?.classList.remove('x-selected');
           (this as any).selectHandler(event, inputEl, highlightedEl);
         }
         event.preventDefault();
@@ -71,26 +71,37 @@ export class ComboBox extends HTMLElement {
     // do not call selectHandler with click event, but only with mousedown
     if (ulEl) { // readonly or disabled does not have ulEl
       ulEl.addEventListener('mousedown', (event) => { 
-        const highlightedEl = ulEl.querySelector(`.x-highlighted:not(.hidden)`);
-        ulEl.querySelector('.x-selected')?.classList.remove('x-selected');
+        const highlightedEl = ulEl.querySelector(`.highlighted:not(.hidden)`);
         (this as any).selectHandler(event, inputEl, highlightedEl)
       });
     }
+  }
+
+  selectHandler(event, inputEl) {
+    const ulEl = this.querySelector('ul');
+    ulEl?.querySelector('.selected')?.classList.remove('selected');
+    ulEl?.querySelector('.highlighted')?.classList.remove('highlighted');
+
+    const selected = event.target.closest('li');
+    const value = selected.dataset?.value || selected.innerText;
+    inputEl.value = value;
+    selected.classList.add('highlighted', 'selected');
+    this.dispatchEvent(new CustomEvent('select', {bubbles: true, detail: value}));
   }
 
   /**
    * Find an element that has attribute 'value' is the same as the given value from the list element.
    */
   highlightValue(listEl: any, value: string) {
-    const highlightedEl = listEl.querySelector('.x-highlighted:not(.hidden)')
+    const highlightedEl = listEl.querySelector('.highlighted:not(.hidden)')
 
     const nextHighlight = [...listEl.children].find((liEl) => {
       return (liEl.dataset.value === value) || (liEl.innerText === value);
     })
 
     if (nextHighlight) {
-      highlightedEl?.classList.remove('x-highlighted', 'x-selected');
-      nextHighlight.classList.add('x-highlighted', 'x-selected');
+      highlightedEl?.classList.remove('highlighted', 'selected');
+      nextHighlight.classList.add('highlighted', 'selected');
       this.scrollIfNeeded(listEl, nextHighlight);
     }
   }
@@ -111,7 +122,7 @@ export class ComboBox extends HTMLElement {
       listEl.insertAdjacentHTML('beforeend', html);
       (listEl.lastElementChild).data = row;
     })
-    listEl.children[0]?.classList.add('x-highlighted');
+    listEl.children[0]?.classList.add('highlighted');
   }
 
   /**
@@ -123,21 +134,21 @@ export class ComboBox extends HTMLElement {
     const matches = [...listEl.children].filter((el) => {
       const re = new RegExp(search.replace(/\\/g, '\\\\'), 'i');
       const match = el.innerText.match(re);
-      el.classList.remove('x-highlighted');
+      el.classList.remove('highlighted');
       el.removeAttribute('hidden');
       if (!match) {
         el.setAttribute('hidden', '');
       }
       return match;
     });
-    matches[0]?.classList.add('x-highlighted');
+    matches[0]?.classList.add('highlighted');
   }
 
   /**
    * Find the current highlighted class, and move highting to the next element
    */
   highlightNext(listEl: any, inc=1) {
-    const highlightedEl = listEl.querySelector('.x-highlighted:not(.hidden)');
+    const highlightedEl = listEl.querySelector('.highlighted:not(.hidden)');
     const notDisaledOrHidden = [...listEl.children].filter(liEl => {
       const notDisabled = !liEl.classList.contains('disabled');
       const notHidden = !liEl.classList.contains('hidden');
@@ -150,8 +161,8 @@ export class ComboBox extends HTMLElement {
 
     const nextHighlight = notDisaledOrHidden[(curIndex + total + inc) % total];
 
-    highlightedEl?.classList.remove('x-highlighted');
-    nextHighlight.classList.add('x-highlighted');
+    highlightedEl?.classList.remove('highlighted');
+    nextHighlight.classList.add('highlighted');
     this.scrollIfNeeded(listEl, nextHighlight);
   }
 

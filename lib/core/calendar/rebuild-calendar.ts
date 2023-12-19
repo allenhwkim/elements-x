@@ -10,29 +10,28 @@ export function rebuildCalendar(el) {
   const dates = getCalendarDays(calendarDate, firstDayOfWeek);
 
   // set month string
-  $('.x-month-year #x-month').innerText = calendarDate.toLocaleDateString(locale, {month: monthFormat});
+  $('.month-year #month').innerText = calendarDate.toLocaleDateString(locale, {month: monthFormat});
 
   // set years selectable
-  $('.x-month-year #x-years').innerHTML= '';
+  $('.month-year #years').innerHTML= '';
   getAvailYears(calendarDate).forEach(year => {
-    $('.x-month-year #x-years').insertAdjacentHTML('beforeend', `<option value="${year}">${year}</option>`);
+    $('.month-year #years').insertAdjacentHTML('beforeend', `<option value="${year}">${year}</option>`);
   });
-  $('.x-month-year #x-years').value = calendarDate.getFullYear().toString();
+  $('.month-year #years').value = calendarDate.getFullYear().toString();
   
   // use first seven days to set weekdays, sun...sat
-  $('.x-week-days-container').innerHTML = '';
+  $('.week-days-container').innerHTML = '';
   dates.slice(0, 7)
     .map(el => el.toLocaleDateString(locale, {weekday: weekFormat}))
-    .forEach(el => $('.x-week-days-container').insertAdjacentHTML('beforeend', `<div class="x-weekday">${el}`) );
+    .forEach(el => $('.week-days-container').insertAdjacentHTML('beforeend', `<div class="weekday">${el}`) );
 
   // set days
-  $('.x-days-container').innerHTML = '';
+  $('.days-container').innerHTML = '';
   dates.forEach(date => {
     const dateEl = document.createElement('div');
-    dateEl.classList.add('x-date');
+    dateEl.classList.add('date');
 
     const buttonEl = document.createElement('button');
-    buttonEl.setAttribute('x', '');
     buttonEl.classList.add('icon');
     buttonEl.innerText = new Intl.NumberFormat(locale).format(date.getDate());
     buttonEl.setAttribute('id', 'x-' + date.toISOString().substr(0, 10));
@@ -47,23 +46,23 @@ export function rebuildCalendar(el) {
     }
 
     if (el.dateSelected?.toISOString().slice(0,10) === date.toISOString().slice(0,10)) {
-      buttonEl.classList.add('x-select');
+      buttonEl.classList.add('select');
     }
     
     const today = new Intl.DateTimeFormat(
         'fr-CA',{ month:'2-digit',day:'2-digit', year:'numeric'}
       ).format(new Date()); // yyyy-mm-dd e.g, 2023-12-31
     if (date.toISOString().slice(0,10) === today) {
-      buttonEl.classList.add('x-today');
+      buttonEl.classList.add('today');
     }
 
     const dayInfo = GET_DAY_INFO(date);
     if (dayInfo) {
-      buttonEl.classList.add('x-holiday');
+      buttonEl.classList.add('holiday');
       dateEl.setAttribute('data-tooltip', dayInfo.name);
     }
 
-    $('.x-days-container').appendChild(dateEl);
+    $('.days-container').appendChild(dateEl);
   });
 }
 

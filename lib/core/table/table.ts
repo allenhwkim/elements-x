@@ -14,7 +14,7 @@ export class Table extends HTMLElement {
       this.innerHTML = '';
       this.value.forEach(value => this.addNewRow(this, value));
     } else {
-      console.error('Error on x-table', 'Value must be an array of string or object');
+      console.error('Error on .x.table', 'Value must be an array of string or object');
     }
   }
 
@@ -40,8 +40,8 @@ export class Table extends HTMLElement {
 
     this.addEventListener('keydown', event => {
       const inputEl = (event.target as any);
-      const rowEl = inputEl.closest('.x-row');
-      const numRows = this.querySelectorAll('.x-row').length;
+      const rowEl = inputEl.closest('.table-row');
+      const numRows = this.querySelectorAll('.table-row').length;
       const allInputEmpty = Array.from(rowEl.querySelectorAll('input')).every((el:any) => !el.value);
       if (event.code === 'Enter') {
         this.addNewRow(rowEl); // add an empty row
@@ -62,7 +62,7 @@ export class Table extends HTMLElement {
 
   getValue() {
     const values: any[] = [];
-    const rows = Array.from(this.querySelectorAll('.x-row'));
+    const rows = Array.from(this.querySelectorAll('.table-row'));
     rows.forEach(row => {
       const inputs = Array.from(row.querySelectorAll('input'));
       if (inputs.length === 1) { // string array
@@ -83,7 +83,7 @@ export class Table extends HTMLElement {
   addNewRow(rowEl, value?) { // HTMLElement, {foo: 1, bar: 2}
     const keys = this.keys;
     const nextRowEl = document.createElement('div');
-    nextRowEl.className='x-row';
+    nextRowEl.className='table-row';
     if (keys) {
       keys.forEach(key => {
         const inputEl = document.createElement('input');

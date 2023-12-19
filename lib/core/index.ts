@@ -8,7 +8,6 @@ import { Map } from './map/map';
 import { Masked } from './masked/masked';
 import { Pagination } from './pagination/pagination';
 import { Resize } from './resize/resize';
-import { SideBar } from './sidebar/sidebar';
 import { Table } from './table/table';
 
 if (window) {
@@ -19,7 +18,7 @@ if (window) {
   const X = {
     Calendar, ComboBox, Dropdown, File, 
     List, Map, Masked, Pagination, 
-    Resize, SideBar, Table
+    Resize, Table
   };
   (window as any).X = {...(window as any).X, ...X};
 
@@ -35,5 +34,5 @@ if (window) {
 export {
   Calendar, ComboBox, Dropdown, File, 
   List, Map, Masked, Pagination, 
-  Resize, SideBar, Table
+  Resize, Table
 };

@@ -1,6 +1,6 @@
 
 import { addCss, removeCss } from '../../util';
-import html from './clock.html';
+import html from './clock.html?raw';
 import * as cssM from './clock.css?inline';
 const css = cssM.default;
 
@@ -37,6 +37,7 @@ export class Clock extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
+    this.classList.add('x', 'clock');
     this.innerHTML = html;
     this.#updateDOM();
   }
@@ -56,8 +57,8 @@ export class Clock extends HTMLElement {
     const hourDeg = ((hour % 12) * 60) / 2; 
     const minDeg = (min/60) * (360/12); // 1 hour 30 deg
     const deg = hourDeg + minDeg;
-    const hourHand = this.querySelector('#hour-hand') as HTMLElement;
-    const digitalText = this.querySelector('#digital-text') as HTMLElement;
+    const hourHand = this.querySelector('.hour-hand') as HTMLElement;
+    const digitalText = this.querySelector('.digital-text') as HTMLElement;
     const displayTime =
       time.toLocaleTimeString('en-US', {hour12: 0, hourCycle: 'h23'} as any).replace(/^24/,'00');
 
@@ -68,7 +69,7 @@ export class Clock extends HTMLElement {
   updateMinuteHand(time: Date) {
     const min = time.getMinutes();
     const deg =  360/60 * min; // 1 min 6 deg
-    const minuteHand = this.querySelector('#minute-hand') as HTMLElement;
+    const minuteHand = this.querySelector('.minute-hand') as HTMLElement;
 
     minuteHand.setAttribute('transform',`rotate(${deg})`);
   }
@@ -76,9 +77,9 @@ export class Clock extends HTMLElement {
   runClock(time: Date) {
     if (!this.run) return;
 
-    const minuteHand = this.querySelector('#minute-hand') as any;
-    const secondHand = this.querySelector('#second-hand') as any;
-    const digitalText = this.querySelector('#digital-text') as any;
+    const minuteHand = this.querySelector('.minute-hand') as any;
+    const secondHand = this.querySelector('.second-hand') as any;
+    const digitalText = this.querySelector('.digital-text') as any;
     secondHand.setAttribute('transform',`rotate(${360/60 * time.getSeconds()})`);
 
     setInterval(_ => {

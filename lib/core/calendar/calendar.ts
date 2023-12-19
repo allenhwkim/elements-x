@@ -19,24 +19,24 @@ function today() {
 
 function clickHandler(this: any, e: any) {
   const date = this.calendarDate;
-  if (e.target.id === 'x-prev-month') { // ◀ button
+  if (e.target.id === 'prev-month') { // ◀ button
     this.calendarDate = (date.setDate(0), date);
-  } else if (e.target.id === 'x-next-month') { // ▶ button
+  } else if (e.target.id === 'next-month') { // ▶ button
     this.calendarDate = (date.setMonth(date.getMonth() + 1), date);
-  } else if (e.target.id === 'x-today') { // ● button
+  } else if (e.target.id === 'today') { // ● button
     this.calendarDate = localDate(today(), navigator.language);
   } else if (e.target.id.match(/x-[0-9-]+$/)) { // date button
     const dateEl = e.target;
     const date = localDate(dateEl.id.slice(2), navigator.language);
-    const selectedEl = this.querySelector('.x-date .x-select');
+    const selectedEl = this.querySelector('.date .select');
     if (selectedEl?.isEqualNode(dateEl)) {
-      dateEl.classList.remove('x-select');
+      dateEl.classList.remove('select');
       this.dateSelected = undefined;
       this.required && this.classList.add('error', 'required');
       this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: undefined}));
     } else {
-      selectedEl?.classList.remove('x-select');
-      dateEl.classList.add('x-select');
+      selectedEl?.classList.remove('select');
+      dateEl.classList.add('select');
       this.dateSelected = date;
       this.classList.remove('error', 'required');
       this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: localDate(date, this.locale)}));
@@ -79,6 +79,7 @@ export class Calendar extends HTMLElement {
 
   connectedCallback() { 
     addCss(this.tagName, css);
+    this.classList.add('x', 'calendar');
     this.innerHTML = html;
     this.dateSelected = this.date;
     rebuildCalendar(this);

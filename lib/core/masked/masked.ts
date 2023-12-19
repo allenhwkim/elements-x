@@ -18,12 +18,13 @@ export class Masked extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
+    this.classList.add('x', 'masked');
 
     setTimeout(() => { // delaying for this.querySelector
       const inputEl = this.querySelector('input');
       if (!inputEl) {
         this.innerHTML = 'error: requires &lt;input &gt; element';
-        console.error('[error] <x-mask>', this.innerHTML);
+        console.error('[error] .x.mask', this.innerHTML);
         return;
       }
       inputEl.insertAdjacentElement('afterend', document.createElement('div'));

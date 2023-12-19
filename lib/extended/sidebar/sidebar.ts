@@ -4,27 +4,23 @@ const css = cssM.default;
 
 export class Sidebar extends HTMLElement {
   documentKlickListener: any;
+  closeSelector = '.close';
+  toggleSelector = '.sidebar.toggle';
 
   connectedCallback() {
     addCss(this.tagName, css);
-    this.classList.add('sidebar')
+    this.classList.add('x', 'sidebar');
     this.documentKlickListener = this.documentClickHandler.bind(this);
 
-    const closeBtn = this.querySelector('.close');
-    if (closeBtn) {
-      closeBtn.addEventListener('click', e => this.toggle(e));
-    } else {
-      this.insertAdjacentHTML('afterbegin', '<button class="close">x</button>');
-      this.querySelector('.close')?.addEventListener('click', e => this.toggle(e));
-    }
+    const closeBtn = this.querySelector(this.closeSelector);
+    const toggleBtn =  document.querySelector(this.toggleSelector);
 
-    const toggleBtn =  document.querySelector('.sidebar.toggle');
+    closeBtn?.addEventListener('click', e => this.toggle(e));
     toggleBtn?.addEventListener('click', e => this.toggle(e))
 
-    this.addEventListener('click', function(this:any, event: any) {
-      if (!event.target.closest('.close')) {
-        this.dispatchEvent(new CustomEvent('select', {bubbles: true, detail: event.target}));
-      }
+    this.addEventListener('click', (event: any) => {
+      if (event.target.closest(this.closeSelector)) return;
+      this.dispatchEvent(new CustomEvent('select', {bubbles: true, detail: event.target}));
     });
 
     document.addEventListener('click', this.documentKlickListener);
@@ -42,7 +38,7 @@ export class Sidebar extends HTMLElement {
   }
   
   documentClickHandler(event) {
-    const clickInSidebar = event.target.closest('x-sidebar, .sidebar.toggle');
+    const clickInSidebar = event.target.closest(`${this.tagName.toLowerCase()}, ${this.toggleSelector}`);
     if (!clickInSidebar && this.classList.contains('visible')) {
       this.toggle(event);
       event.preventDefault();

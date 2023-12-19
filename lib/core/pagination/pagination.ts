@@ -12,6 +12,7 @@ export class Pagination extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
+    this.classList.add('x', 'pagination');
     this.addEventListener('click', this.clickListener.bind(this));
     this.#updateDOM();
   }

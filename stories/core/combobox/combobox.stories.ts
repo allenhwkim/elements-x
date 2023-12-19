@@ -50,7 +50,7 @@ export const Primary = {
         <li data-value="1">Hello</li>
         <li>Hello World</li>
         <li>Foo</li>
-        <li className="disabled">Disabled</li>
+        <li class="disabled">Disabled</li>
         <li>Foo Bar</li>
       </ul>
     `.trim()

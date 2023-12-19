@@ -1,4 +1,4 @@
-x-clock {
+.x.clock {
   display: inline-block;
   /* position: relative; //This affects offsetX/Y. Don't */
   width: 160px;
@@ -7,15 +7,11 @@ x-clock {
   vertical-align: top;
 }
 
-x-clock .x-clock {
-  width: 100%;
-  height: 100%;
-}
 
-x-clock .x-clock .x-clock-second-hand {
+.x.clock .second-hand {
   display: none;
 }
 
-x-clock[run] .x-clock .x-clock-second-hand {
+.x.clock[run] .second-hand {
   display: initial;
 }

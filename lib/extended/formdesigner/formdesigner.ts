@@ -38,6 +38,7 @@ export class FormDesigner extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, themeCSS + stylesCSS);
+    this.classList.add('x', 'form-designer');
 
     this.innerHTML = html;
     this.editor = initGrapesJs('#gjs');

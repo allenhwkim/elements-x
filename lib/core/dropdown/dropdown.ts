@@ -30,6 +30,7 @@ export class Dropdown extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
+    this.classList.add('x', 'dropdown');
     !this.dataTargetEl && (this.dataTargetEl = this.previousElementSibling);
 
     setTimeout(() => { // contents render slowly

@@ -47,8 +47,9 @@ export class Stepper extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
+    this.classList.add('x', 'stepper');
 
-    this.StepperController = this.closest('x-stepper-controller') as StepperController;
+    this.StepperController = this.closest('.x.stepper-controller') as StepperController;
 
     if (this.forms) { // data-form attribute
       this.StepperController.forms = this.forms;

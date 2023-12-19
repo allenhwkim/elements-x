@@ -1,11 +1,11 @@
-x-list {outline: none;}
-x-list ul { margin: 0; padding-left: 1rem; background: #FFF;}
-x-list li { list-style: none; cursor: pointer; position: relative;}
-x-list li.disabled { opacity: .7; cursor: initial; }
-x-list li:has(> ul) { list-style: '⊟ ';}
-x-list li:has(> ul[hidden]) { list-style: '⊞ '; }
-x-list li:has(> ul)::before { content: ' '; position: absolute; top: 18px; left: -12px; bottom: 6px; border-left: 1px dashed #999;}
-x-list li:has(> ul) sup { display: none; }
-x-list li:has(> ul[hidden]) sup { display: initial; opacity: .8; }
-x-list li:not(:has(> ul)) { list-style: none; position: relative;} 
-x-list .x-highlighted { background: #ccc; }
+.x.list {outline: none;}
+.x.list ul { margin: 0; padding-left: 1rem; background: #FFF;}
+.x.list li { list-style: none; cursor: pointer; position: relative;}
+.x.list li.disabled { opacity: .7; cursor: initial; }
+.x.list li:has(> ul) { list-style: '⊟ ';}
+.x.list li:has(> ul[hidden]) { list-style: '⊞ '; }
+.x.list li:has(> ul)::before { content: ' '; position: absolute; top: 18px; left: -12px; bottom: 6px; border-left: 1px dashed #999;}
+.x.list li:has(> ul) sup { display: none; }
+.x.list li:has(> ul[hidden]) sup { display: initial; opacity: .8; }
+.x.list li:not(:has(> ul)) { list-style: none; position: relative;} 
+.x.list .x-highlighted { background: #ccc; }

@@ -32,6 +32,7 @@ export class StepperController extends HTMLElement {
   }
 
   connectedCallback() {
+    this.classList.add('x', 'stepper-controller');
     StepperStorage.baseEl = this;
     this.addEventListener('stepper-goto', (event: any) => this.initForm(event.detail));
     this.addEventListener('click', this.clickListener);

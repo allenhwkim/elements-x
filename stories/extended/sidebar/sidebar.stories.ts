@@ -12,11 +12,12 @@ const meta: Meta = {
   render: (args) => {
     const wrapperEl = document.createElement('div')
     const msgEl = document.createElement('div');
+    msgEl.style.textAlign = 'center';
 
     const sidebarEl = document.createElement(elName);
     sidebarEl.addEventListener('select', (e: any) => {
       console.log(e, e.detail);
-      msgEl.innerText = JSON.stringify(e.detail?.innerText || e.detail);
+      msgEl.innerHTML = 'x-sidebar select event: <br/>' + (e.detail?.innerText || e.detail);
     })
     sidebarEl.insertAdjacentHTML('beforeend', fixIndent(`
       <ul>

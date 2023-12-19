@@ -50,8 +50,7 @@ export function initGrapesJs(elId: string) {
     },
     canvas: {
       scripts: [ 
-        '/dist/lib/index.umd.js', // for development
-        // 'https://unpkg.com/elements-x', // for production
+        'https://unpkg.com/elements-x',
         'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js',
       ],
       styles: [

@@ -16,7 +16,7 @@ if (window) {
   if (!window['X']?.override) { 
     const X = { 
       BarCode, Clock, Highlight, Json, 
-      Monaco, QRCode, Stepper, 
+      Monaco, QRCode, Stepper, Sidebar, 
       Formflow, FormDesigner,
     };
 

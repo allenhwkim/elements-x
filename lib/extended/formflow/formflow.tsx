@@ -5,6 +5,13 @@ import { Node, Edge, ReactFlowInstance, ReactFlowJsonObject } from 'reactflow';
 import { toPng } from 'html-to-image';
 import { ReactflowChart } from './react-components/reactflow-chart/reactflow-chart';
 import { DEFAULT_CHART } from './default-chart';
+import * as edgeCss from './react-components/custom-edges/styles.css?inline';
+import * as nodeCss from './react-components/custom-nodes/styles.css?inline';
+import * as chartCss from './react-components/reactflow-chart/styles.css?inline';
+import * as reactflowCss from '../../../node_modules/reactflow/dist/style.css?inline';
+import { addCss, removeCss } from '../../util';
+
+const css = '' + reactflowCss.default + edgeCss.default + nodeCss.default + chartCss.default;
 
 export class Formflow extends HTMLElement {
   root: any;
@@ -15,10 +22,13 @@ export class Formflow extends HTMLElement {
   }
 
   connectedCallback() {
+    addCss(this.tagName, css);
+    this.classList.add('x', 'formflow');
     this.mount(); // sets this.root and this.reactflowInstance
   }
   
   disconnectedCallback() {
+    removeCss(this.tagName);
     setTimeout( () => this.root.unmount());
   }
 

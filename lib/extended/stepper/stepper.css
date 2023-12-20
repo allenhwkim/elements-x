@@ -46,7 +46,7 @@
   font-weight: 600;
 }
 
-.x.stepper .form-step:not(.disabled).is(.complete, .active, .skipped, .error) .connection-line {
+.x.stepper .form-step:not(.disabled):is(.complete, .active, .skipped, .error) .connection-line {
   background-color: #90caf9;
 }
 

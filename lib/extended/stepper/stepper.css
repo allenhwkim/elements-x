@@ -46,7 +46,7 @@
   font-weight: 600;
 }
 
-.x.stepper .form-step:is(.complete, .active, .skipped, .error) .connection-line {
+.x.stepper .form-step:not(.disabled).is(.complete, .active, .skipped, .error) .connection-line {
   background-color: #90caf9;
 }
 
@@ -56,10 +56,14 @@
   background: inherit;
 }
 
-.x.stepper .form-step:is(.complete, .active, .skipped) .stepper-link .stepper-label {
+.x.stepper .form-step:not(.disabled):is(.complete, .active, .skipped) .stepper-link .stepper-label {
   color: #FFF;
   border-color: #1976d2;
   background-color: #1976d2;
+}
+
+.x.stepper .form-step.disabled .stepper-link {
+  cursor: default;
 }
 
 .x.stepper .form-step:is(.error) .stepper-link .stepper-label {

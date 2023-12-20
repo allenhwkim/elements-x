@@ -13,7 +13,7 @@ export interface IForm {
   subTitle?: string; // small text below title
   skippable?: boolean;
   html: string | ((userData?) => string);
-  getErrors?: (formElData: any) => string[] | null;
+  getErrors?: (formElData: any) => string[] | undefined;
 }
 
 export interface IForms {

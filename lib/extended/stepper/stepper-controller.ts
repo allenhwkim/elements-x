@@ -41,11 +41,13 @@ export class StepperController extends HTMLElement {
   getFormEl = () => this.querySelector('form.stepper.form') as HTMLFormElement;
   getButtonsEl = () => this.querySelector('.stepper.buttons') as HTMLElement;
 
-  getStatus(formId: string): 'complete' | 'incomplete'  { 
+  getStatus(formId: string): 'complete' | 'incomplete' | 'disabled'  { 
     const formIdNdx = this.stepNames.indexOf(formId);
     const currentNdx = this.stepNames.indexOf(this.currentFormId);
 
-    if (currentNdx > formIdNdx) { // make all previous steps complete
+    if (currentNdx === (this.stepNames.length-1)) { // if last step, disable all steps
+      return 'disabled';
+    } else if (currentNdx > formIdNdx) { // make all previous steps complete
       return 'complete';
     } else {
       const userData = StepperStorage.getItem('stepper.userData');
@@ -74,7 +76,8 @@ export class StepperController extends HTMLElement {
       const getErrorFunc = (this.forms[this.currentFormId] as IForm).getErrors;
       getErrorFunc && (customUserErrors = getErrorFunc(formElData) as string[]);
     }
-    return [...nativeErrors, ...customUserErrors];
+
+    return [...nativeErrors, ...(customUserErrors||[])];
   }
 
   isReviewable(): boolean {
@@ -96,18 +99,22 @@ export class StepperController extends HTMLElement {
   }
   
   clickListener = async (event: any) => {
-    const buttonEl = event.target.closest('.form-review, .form-submit, .form-prev, .form-next, .form-reset');
+    const buttonEl = event.target.closest(
+      '.stepper-prev-btn, .stepper-next-btn, ' +
+      '.stepper-review-btn, .stepper-submit-btn, ' +
+      '.stepper-reset-btn'
+    );
     if (buttonEl) {
-      if (buttonEl.classList.contains('form-reset')) {
+      if (buttonEl.classList.contains('stepper-reset-btn')) {
         this.resetForm(); 
-      } else if (buttonEl.classList.contains('form-review')) {
+      } else if (buttonEl.classList.contains('stepper-review-btn')) {
         this.initForm('review'); 
-      } else if (buttonEl.classList.contains('form-submit')) {
+      } else if (buttonEl.classList.contains('stepper-submit-btn')) {
         await this.submitForm();
-        this.initForm('thankyou'); // submit and show thankyou message
-      } else if (buttonEl.classList.contains('form-prev')) {
+        this.initForm('submit'); // submit and show thankyou message
+      } else if (buttonEl.classList.contains('stepper-prev-btn')) {
         this.initForm('prev'); 
-      } else if (buttonEl.classList.contains('form-next')) { 
+      } else if (buttonEl.classList.contains('stepper-next-btn')) { 
         const errors = this.getErrors();
         const errorsEl = this.querySelector('.stepper.errors') as HTMLElement;
         if (errorsEl && errors.length) {
@@ -136,11 +143,11 @@ export class StepperController extends HTMLElement {
     let nextStepIndex = 0;
     if (target === 'auto') {
       nextStepIndex = Math.max(this.stepNames.findIndex(formName => this.getStatus(formName) !== 'complete'), 0);
-    } else if (['review', 'thankyou', 'prev', 'next'].includes(target)) {
+    } else if (['review', 'submit', 'prev', 'next'].includes(target)) {
       if (target === 'review') {
         nextStepIndex = this.stepNames.findIndex(formName => (this.forms[formName] as IForm)?.type === 'review');
-      } else if (target === 'thankyou') {
-        nextStepIndex = this.stepNames.findIndex(formName => (this.forms[formName] as IForm)?.type === 'thankyou');
+      } else if (target === 'submit') {
+        nextStepIndex = this.stepNames.findIndex(formName => (this.forms[formName] as IForm)?.type === 'submit');
       } else if (target === 'prev') {
         nextStepIndex = (this.currentStepIndex - 1) % this.stepNames.length;
       } else if (target === 'next') {
@@ -190,21 +197,24 @@ export class StepperController extends HTMLElement {
   }  
 
   initButtonsEl(): void { // set buttons text and availability
-    const reviewButtonEl = this.getButtonsEl().querySelector('.review');
-    const submitButtonEl = this.getButtonsEl().querySelector('.submit');
-    const prevButtonEl = this.getButtonsEl().querySelector('.prev') as HTMLButtonElement;
-    const nextButtonEl = this.getButtonsEl().querySelector('.next') as HTMLButtonElement;
+    const reviewButtonEl = this.getButtonsEl().querySelector('.stepper-review-btn');
+    const submitButtonEl = this.getButtonsEl().querySelector('.stepper-submit-btn');
+    const prevButtonEl = this.getButtonsEl().querySelector('.stepper-prev-btn') as HTMLButtonElement;
+    const nextButtonEl = this.getButtonsEl().querySelector('.stepper-next-btn') as HTMLButtonElement;
 
-    // 0-1-2-3-current -> enabled,  current-1-2-3-review -> disabled
     if (prevButtonEl) {
-      prevButtonEl.disabled = !(this.currentStepIndex > 0) || this.currentForm.type === 'thankyou';
+      prevButtonEl.disabled = !(this.currentStepIndex > 0) || (this.currentForm.type === 'submit');
     }
-    // 0-1-2-3-current -> disabled, current-1-2-3-review -> enabled
-    nextButtonEl && (nextButtonEl.disabled = !(this.currentStepIndex !== this.stepNames.length - 1));
+
+    if (nextButtonEl) {
+      nextButtonEl.disabled = !(this.currentStepIndex !== this.stepNames.length - 1);
+    }
+
     if (reviewButtonEl) { // do not set inline style here. Grapejs not handling well by setting it outside
-      const shouldShow = this.isReviewable() && (['review', 'thankyou'].indexOf(this.currentForm.type) === -1);
+      const shouldShow = this.isReviewable() && (['review', 'submit'].indexOf(this.currentForm.type) === -1);
       shouldShow ? reviewButtonEl.removeAttribute('hidden') : reviewButtonEl.setAttribute('hidden', '');
     }
+
     if (submitButtonEl) {
       const toShowSubmitBtn = this.currentForm.type === 'review';
       if (toShowSubmitBtn) {

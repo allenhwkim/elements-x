@@ -63,8 +63,8 @@ export class Stepper extends HTMLElement {
       const formStepEl = (event.target as any).closest('.form-step');
       const visitable = !formStepEl.classList.contains('incomplete');
       const formName = formLinkEl.dataset?.name;
-      const isThankyouStatus = this.StepperController.currentForm.type === 'thankyou';
-      if (formName && visitable && !isThankyouStatus) {
+      const submitted = this.StepperController.currentForm.type === 'submit';
+      if (formName && visitable && !submitted) {
         const customEvent = new CustomEvent('stepper-goto', {bubbles: true, detail: formName}) as any;
         event.target?.dispatchEvent(customEvent);
       }

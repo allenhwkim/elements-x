@@ -22,11 +22,11 @@ const meta: Meta = {
       <div class="stepper errors" style="padding: 16px"> Error goes here </div>
       <form class="stepper form" style="border: 1px dashed; padding: 16px"> Form goes here </form>
       <div class="stepper buttons" style="border: 1px dashed; padding: 16px">
-        <button class="form-prev">Prev</button>
-        <button class="form-next">Next</button>
-        <button class="form-review">Review</button>
-        <button class="form-submit">Submit</button>
-        <button class="form-reset">Reset</button>
+        <button class="stepper-prev-btn">Prev</button>
+        <button class="stepper-next-btn">Next</button>
+        <button class="stepper-review-btn">Review</button>
+        <button class="stepper-submit-btn">Submit</button>
+        <button class="stepper-reset-btn">Reset</button>
       </div>
       <pre class="user-data"></pre>
     `));

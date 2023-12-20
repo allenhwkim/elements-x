@@ -12,10 +12,22 @@ const themeCSS = themeCssM.default;
 const stylesCSS = stylesCssM.default;
 
 export class FormDesigner extends HTMLElement {
-  forms: IForms | undefined;
-  html: string = '';
-  stepNames: string[] | undefined;
-  step: string = '';
+  _forms: IForms | undefined;
+  get forms() { return this._forms; }
+  set forms(val) {
+    this._forms = val;
+    this.#setForms(val);
+  }
+
+  _html= '';
+  get html() { return this._html; }
+  set html(val) {
+    this._html = val;
+    this.#setHtml(val);
+  }
+
+  stepNames: string[] | undefined; // e.g. ['address', 'review', 'thankyou']
+  step: string = ''; // e.g. 'adderss'
   editor: grapesjs.Editor = undefined as any;
   editorLoaded = false;
 
@@ -35,21 +47,16 @@ export class FormDesigner extends HTMLElement {
     }
   }
 
-
   connectedCallback() {
     addCss(this.tagName, themeCSS + stylesCSS);
     this.classList.add('x', 'form-designer');
 
     this.innerHTML = html;
     this.editor = initGrapesJs('#gjs');
-    this.html && this.setHtml(this.html);
     this.editor.on('load', e => {
       this.editorLoaded = true;
-      if (this.forms) {
-        const iframe: any = this.querySelector('iframe');
-        const ctrlEl: any = iframe.contentWindow.document.querySelector('x-stepper-controller');
-        ctrlEl && (ctrlEl.forms = this.forms);
-      }
+      this.html && this.#setHtml(this.html);
+      this.forms && this.#setForms(this.forms);
     });
   }
 
@@ -57,17 +64,16 @@ export class FormDesigner extends HTMLElement {
     removeCss(this.tagName);
   }
 
-  runCommand(command: string, options: any) {
-    this.editor.runCommand(command, options); 
-  }
-  
-  on(eventName: string, eventListener: any) { // update, undo, redo, load
-    this.editor.on(eventName, eventListener);
+  #setHtml(val) {
+    this.editor?.setComponents(val);
   }
 
-  /* utility functions */
-  getHtml() { return this.editor.getHtml(); }
-  setStyle(css: string) { this.editor.setStyle(css); }
-  setHtml(html: string) { this.editor.setComponents(html); }
+  #setForms(forms) {
+    if (this.editorLoaded) {
+      const iframe: any = this.querySelector('iframe');
+      const ctrlEl: any = iframe?.contentWindow.document.querySelector('x-stepper-controller');
+      ctrlEl && (ctrlEl.forms = forms);
+    }
+  }
 
 }

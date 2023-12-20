@@ -1,9 +1,8 @@
 import { IForms } from '../../../lib/extended/stepper/types';
 
 export const DEFAULT_FORMS: IForms = {
-  form1: {
+  Name: {
     type: 'form',
-    title: 'Name',
     html: () => `
       <style>form.error-checked :invalid {outline: 1px solid red;}</style>
       First Name: <input name="first" required> <br>
@@ -18,23 +17,20 @@ export const DEFAULT_FORMS: IForms = {
       if (data.first !== data.last) {
         return ['first and last name must be the same'];
       }
-      return null;
+      return undefined;
     } 
   }, 
-  form2: {
+  Contact: {
     type: 'form',
-    title: 'Contact',
     skippable: true,
     html: () => `Optional: <br/>  Address: <input name="address" />`,
   }, 
-  form3: {
+  Review: {
     type: 'review',
-    title: 'Review',
-    html: () => `Optional: <br/>  Address: <input name="address" />`,
+    html: () => `Review page`,
   }, 
-  form4: {
+  Thankyou: {
     type: 'submit',
-    title: 'Thankyou',
-    html: () => `This is a review page.`,
+    html: () => `Thankyou`,
   }
 };

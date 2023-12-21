@@ -1,6 +1,6 @@
 {
   "name": "elements-x",
-  "version": "3.3.12",
+  "version": "3.3.13",
   "description": "collection of custom elements",
   "files": [
     "dist/lib"

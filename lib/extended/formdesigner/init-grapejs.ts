@@ -1,6 +1,6 @@
 import grapesjs, {Editor} from 'grapesjs';
 import { showSidePanel } from './custom-commands';
-import { componentBlocks, formBlocks, containerBlocks, formControlBlocks }  from './blocks';
+import { componentBlocks, formBlocks, containerBlocks, customBlocks }  from './blocks';
 import { componentTypes } from './components';
 import {
   topPanel, 
@@ -36,10 +36,10 @@ export function initGrapesJs(elId: string) {
     blockManager: {
       appendTo: '.blocks-container',
       blocks: [
-        ...formControlBlocks,
         ...containerBlocks,
         ...formBlocks,
         ...componentBlocks,
+        ...customBlocks,
       ]
     },
     selectorManager: {
@@ -78,6 +78,15 @@ export function initGrapesJs(elId: string) {
       ] as any
     }
   });
+
+  editor.BlockManager.getCategories().each((category, ndx) => {
+    (ndx > 0) && category.set('open', false);
+  });
   
+  editor.setStyle(`
+    x-stepper, .stepper.buttons {opacity: .5; pointer-events: none}
+    .x.stepper-controller .stepper.form {min-height: 240px; }
+  `);
+
   return editor;
 }

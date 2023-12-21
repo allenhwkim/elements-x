@@ -1,11 +1,11 @@
 import componentBlocks from './components';
 import containerBlocks from './containers';
 import formBlocks from './forms';
-import formControlBlocks from './form-controls';
+import customBlocks from './custom-elements';
 
 export {
   componentBlocks,
   containerBlocks,
   formBlocks,
-  formControlBlocks,
+  customBlocks,
 };

@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-table',
-  category: 'Bootstrap5 Containers',
+  category: 'Containers',
   label: 'Table', 
   content: `
     <table class="table table-striped table-hover">

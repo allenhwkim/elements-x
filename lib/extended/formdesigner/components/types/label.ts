@@ -5,7 +5,6 @@ export const labelType = {
   model: {
     defaults: {
       tagName: 'label',
-      components: 'Hello Label',
       traits: [
         'id',
         'title',

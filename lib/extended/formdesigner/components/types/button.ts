@@ -5,7 +5,6 @@ export const buttonType = {
     defaults: {
       tagName: 'button',
       attributes: { type: 'button' },
-      text: 'Button',
       traits: [
         {
           name: 'text',

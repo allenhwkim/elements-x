@@ -25,7 +25,24 @@ export class Table extends HTMLElement {
     return keys;
   }
 
+   
+  static get observedAttributes() {
+    return ['value'];
+  }
+
+  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (name === 'value') {
+      try {
+        this.value = JSON.parse(newValue);
+      } catch(e) {
+        console.error(e);
+        console.error('Invalid value');
+      }
+    }
+  }
+
   connectedCallback() {
+    this.classList.add('x', 'table');
     const keys = this.keys;
     const emptyObj = keys ? keys.reduce((acc, key) => (acc[key] = '', acc), {}) : '';
     const rows = (this.value?.length ? this.value : [emptyObj]);

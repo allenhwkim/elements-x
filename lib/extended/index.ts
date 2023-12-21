@@ -35,5 +35,5 @@ export {
   BarCode, Clock, Highlight, Json, 
   Monaco, QRCode, 
   Formflow, FormDesigner, Sidebar,
-  Stepper, StepperStorage,
+  Stepper, StepperController, StepperStorage,
 };

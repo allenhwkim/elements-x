@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-dropdown',
-  category: 'Bootstrap5 Components',
+  category: 'Components',
   label: 'Dropdown', 
   content: `
 <div class="btn-group">

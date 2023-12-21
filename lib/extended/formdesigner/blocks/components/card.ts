@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-card',
-  category: 'Bootstrap5 Components',
+  category: 'Components',
   label: 'Card', 
   attributes: {title: 'This is block title'},
   content: `

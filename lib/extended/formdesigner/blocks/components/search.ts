@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-search', // id is mandatory
-  category: 'Bootstrap5 Forms',
+  category: 'Form Controls',
   label: 'Search', // You can use HTML/SVG inside labels
   content: `
     <div class="input-group mb-3">

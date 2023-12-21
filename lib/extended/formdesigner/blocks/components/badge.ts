@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-badge',
-  category: 'Bootstrap5 Components',
+  category: 'Components',
   label: 'Badge', 
   content:`
 <span class="badge rounded-pill bg-primary">Primary</span>

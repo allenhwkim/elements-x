@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-modal',
-  category: 'Bootstrap5 Components',
+  category: 'Components',
   label: 'Modal', 
   content: `
 <!-- Button trigger modal -->

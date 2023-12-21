@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-image',
-  category: 'Bootstrap5 Containers',
+  category: 'Containers',
   label: 'Image', 
   content: `
 <img  width="200" class="img-fluid img-thumbnail" alt="my image"

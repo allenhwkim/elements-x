@@ -12,7 +12,7 @@ const className = Stepper;
 !customElements.get('x-stepper-controller') && customElements.define('x-stepper-controller', StepperController);
 
 const meta: Meta = { 
-  title: 'Extended/Form stepper',
+  title: 'Extended/stepper',
   render: (args) => {
     const wrapperEl = document.createElement('div');
     const ctrlEl: any = document.createElement('x-stepper-controller');

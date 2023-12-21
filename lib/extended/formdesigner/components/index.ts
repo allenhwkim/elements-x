@@ -6,8 +6,12 @@ import { labelType } from './types/label';
 import { optionType } from './types/option';
 import { selectType } from './types/select';
 import { textareaType } from './types/textarea';
-import { tooltipType } from './types/tooltip';
 import { formType } from './types/form';
+
+import { calendarType } from './types/custom-elements/calendar';
+import { dataTableType } from './types/custom-elements/data-table';
+import { mapType } from './types/custom-elements/map';
+import { maskedType } from './types/custom-elements/masked';
 
 export const componentTypes = (editor) => {
   editor.DomComponents.addType('button', buttonType);
@@ -18,6 +22,11 @@ export const componentTypes = (editor) => {
   editor.DomComponents.addType('option', optionType);
   editor.DomComponents.addType('select', selectType);
   editor.DomComponents.addType('textarea', textareaType);
-  editor.DomComponents.addType('tooltip', tooltipType);
-  editor.DomComponents.addType('form', formType(editor))
+  editor.DomComponents.addType('form', formType(editor));
+
+  editor.DomComponents.addType('calendar', calendarType);
+  editor.DomComponents.addType('data-table', dataTableType);
+  editor.DomComponents.addType('map', mapType);
+  editor.DomComponents.addType('masked', maskedType);
 };
+

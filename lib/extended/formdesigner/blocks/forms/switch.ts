@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-control-switch',
-  category: 'Bootstrap5 Forms',
+  category: 'Form Controls',
   label: 'switch',
   content:`
     <label class="form-check form-switch">

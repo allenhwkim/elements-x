@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-alert',
-  category: 'Bootstrap5 Components',
+  category: 'Components',
   label: 'Alert', 
   content:`
 

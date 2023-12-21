@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-control-floating-label',
-  category: 'Bootstrap5 Forms',
+  category: 'Form Controls',
   label: 'Floating Label',
   content: `
     <div class="form-floating mb-3">

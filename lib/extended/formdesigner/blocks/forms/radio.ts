@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-control-radio',
-  category: 'Bootstrap5 Forms',
+  category: 'Form Controls',
   label: 'Radio Button',
   content: `
     <label class="form-check form-check-inline">

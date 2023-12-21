@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-button-group',
-  category: 'Bootstrap5 Components',
+  category: 'Components',
   label: 'Button Group', 
   content: `
 <div class="btn-group" role="group" aria-label="Basic outlined example">

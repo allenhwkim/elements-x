@@ -1,6 +1,6 @@
   export default {
     id: 'bs5-3-col-container',
-    category: 'Bootstrap5 Containers',
+    category: 'Containers',
     label: '3-Col',
     content: `
     <div class="container">

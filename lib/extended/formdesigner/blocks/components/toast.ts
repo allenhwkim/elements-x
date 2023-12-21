@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-toast',
-  category: 'Bootstrap5 Components',
+  category: 'Components',
   label: 'Toast', 
   content: `
 <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>

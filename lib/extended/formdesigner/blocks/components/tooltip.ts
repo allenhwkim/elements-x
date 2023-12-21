@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-tooltip',
-  category: 'Bootstrap5 Components',
+  category: 'Components',
   label: 'Tooltip', 
   content: `
 <abbr class="tooltip-top" data-tooltip="HyperText Markup Language">HTML (top) </abbr>

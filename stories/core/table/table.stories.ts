@@ -13,15 +13,10 @@ const meta: Meta = {
     const custEl = document.createElement(elName) as any;
     (args.required) && custEl.setAttribute('required', '');
     if (args.value) {
-      try {
-        if (typeof args.value === 'string') {
-          const valFunc = new Function(`return ${args.value};`);
-          custEl.value = valFunc();
-        } else {
-          custEl.value = args.value;
-        }
-      } catch(e) {
-        console.error('Error, x-table, invalid value', e);
+      if (typeof args.value === 'string') {
+        custEl.setAttribute('value', args.value);
+      } else {
+        custEl.value = args.value;
       }
     }
     const msgEl = document.createElement('div');
@@ -58,16 +53,14 @@ export const Primary = {
 export const Object = {
   args: {
     required: true,
-    value: [
-      { key1: '', key2: '', key3: '' }
-    ]
+    value: JSON.stringify([ { key1: '', key2: '', key3: '' } ])
   }
 };
 
 export const StringsWithValue = {
   args: {
     required: true,
-    value: [ 'pre', 'filled', 'strings' ]
+    value: JSON.stringify([ 'pre', 'filled', 'string' ])
   }
 };
 

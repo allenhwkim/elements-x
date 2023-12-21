@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-accordion',
-  category: 'Bootstrap5 Components',
+  category: 'Components',
   label: 'Accordion', 
   content: `
 <div class="accordion" id="accordionExample">

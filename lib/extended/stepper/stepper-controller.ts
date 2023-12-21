@@ -164,34 +164,32 @@ export class StepperController extends HTMLElement {
     this.initButtonsEl();
   }
 
-  async initFormEl(): Promise<void> { // set innerHTML of <form> element
+  initFormEl() { // set innerHTML of <form> element
     const formEl = this.getFormEl();
     const html = this.currentForm.html;
-    if (formEl) {
-      if (typeof html === 'string' && html.match(/^http/)) {
-        window.fetch(html)
-          .then(resp => resp.text())
-          .then(resp => formEl.innerHTML = resp)
-          .catch(error => formEl.innerHTML = error)
-      } else if (typeof html === 'function') {
-        const userData = StepperStorage.getItem('stepper.userData');
-        formEl.innerHTML = html(userData);
-      } else {
-        formEl.innerHTML = html as string;
-      }
+    if (!formEl) {
+      console.error('<x-stepper-controller> initFormEl(), <form> is not found');
+      return;
+    }
 
-      const currentFormUserData = 
-        StepperStorage.getItem('stepper.userData')?.[this.currentFormId] || {};
-      for (var key in currentFormUserData) {
-        const el = formEl.elements[key as any] as HTMLInputElement;
-        const value = currentFormUserData[key];
-        if (el.type === 'checkbox') {
-          el.checked = ['on', el.value].includes(value);
-        } else if (el.type === 'radio') {
-          el.checked = value === el.value;
-        } else {
-          el.value = value;
-        }
+    const userData = StepperStorage.getItem('stepper.userData');
+    if (typeof html === 'function') {
+      formEl.innerHTML = html(userData);
+    } else {
+      formEl.innerHTML = html as string;
+    }
+
+    // set the values from userData
+    const currentFormUserData = userData?.[this.currentFormId] || {};
+    for (var key in currentFormUserData) {
+      const el = formEl.elements[key as any] as HTMLInputElement;
+      const value = currentFormUserData[key];
+      if (el.type === 'checkbox') {
+        el.checked = ['on', el.value].includes(value);
+      } else if (el.type === 'radio') {
+        el.checked = value === el.value;
+      } else {
+        el.value = value;
       }
     }
   }  

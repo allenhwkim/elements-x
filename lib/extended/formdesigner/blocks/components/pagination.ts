@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-pagination',
-  category: 'Bootstrap5 Components',
+  category: 'Components',
   label: 'Pagination', 
   content: `
 <nav aria-label="Page navigation example">

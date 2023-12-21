@@ -16,7 +16,6 @@ const meta: Meta = {
 
     const sidebarEl = document.createElement(elName);
     sidebarEl.addEventListener('select', (e: any) => {
-      console.log(e, e.detail);
       msgEl.innerHTML = 'x-sidebar select event: <br/>' + (e.detail?.innerText || e.detail);
     })
     sidebarEl.insertAdjacentHTML('beforeend', fixIndent(`

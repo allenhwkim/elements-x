@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-carousel',
-  category: 'Bootstrap5 Components',
+  category: 'Components',
   label: 'Carousel', 
   content: `
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">

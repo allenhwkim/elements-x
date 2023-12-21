@@ -3,7 +3,7 @@ import { IForms } from '../../../lib/extended/stepper/types';
 export const DEFAULT_FORMS: IForms = {
   Name: {
     type: 'form',
-    html: () => `
+    html: (userData) => `
       <style>form.error-checked :invalid {outline: 1px solid red;}</style>
       First Name: <input name="first" required> <br>
       Last Name: <input name="last" required>
@@ -23,14 +23,14 @@ export const DEFAULT_FORMS: IForms = {
   Contact: {
     type: 'form',
     skippable: true,
-    html: () => `Optional: <br/>  Address: <input name="address" />`,
+    html: (userData) => `Optional: <br/>  Address: <input name="address" />`,
   }, 
   Review: {
     type: 'review',
-    html: () => `Review page`,
+    html: (userData) => `Review: <pre>${JSON.stringify(userData, null, '  ')}</pre>`,
   }, 
   Thankyou: {
     type: 'submit',
-    html: () => `Thankyou`,
+    html: (userData) => `Thankyou`,
   }
 };

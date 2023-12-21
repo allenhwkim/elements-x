@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-control-select',
-  category: 'Bootstrap5 Forms',
+  category: 'Form Controls',
   label: 'Select',
   content: `
     <select class="form-select" aria-label="Default select example">

@@ -83,7 +83,7 @@ export class ComboBox extends HTMLElement {
     ulEl?.querySelector('.highlighted')?.classList.remove('highlighted');
 
     const selected = event.target.closest('li');
-    const value = selected.dataset?.value || selected.innerText;
+    const value = selected.dataset?.value || selected.getAttribute('value') || selected.innerText;
     inputEl.value = value;
     selected.classList.add('highlighted', 'selected');
     this.dispatchEvent(new CustomEvent('select', {bubbles: true, detail: value}));
@@ -96,7 +96,9 @@ export class ComboBox extends HTMLElement {
     const highlightedEl = listEl.querySelector('.highlighted:not(.hidden)')
 
     const nextHighlight = [...listEl.children].find((liEl) => {
-      return (liEl.dataset.value === value) || (liEl.innerText === value);
+      return (liEl.dataset.value === value) || 
+        (liEl.getAttribute('value') === value) ||
+        (liEl.innerText === value);
     })
 
     if (nextHighlight) {

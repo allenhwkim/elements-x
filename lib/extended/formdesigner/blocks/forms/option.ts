@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-control-option',
-  category: 'Bootstrap5 Forms',
+  category: 'Form Controls',
   label: 'Option',
   content: `
     <option value="val">Option</option>

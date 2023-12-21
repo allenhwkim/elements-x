@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-control-checkbox',
-  category: 'Bootstrap5 Forms',
+  category: 'Form Controls',
   label: 'Checkbox',
   content: `
     <label class="form-check">

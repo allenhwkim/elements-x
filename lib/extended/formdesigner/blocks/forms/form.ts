@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-form', // id is mandatory
-  category: 'Bootstrap5 Forms',
+  category: 'Form Controls',
   label: 'Form', // You can use HTML/SVG inside labels
   // attributes: { class:'gjs-block-section' },
   content: `

@@ -44,13 +44,13 @@ export class Monaco extends HTMLElement {
     const modelMarkers = window.monaco.editor.getModelMarkers({resource:uri})
     const errors = modelMarkers.map(el => `Line ${el.endLineNumber}: ${el.message}`).join('\n');
     if (errors.length) {
-      this.dispatchEvent( new CustomEvent('error', {detail: errors, bubbles: true}) );
+      this.dispatchEvent( new CustomEvent('monaco-error', {detail: errors, bubbles: true}) );
     }
 
     const editorValue = this.monacoEditor.getValue();
     if (this.value !== editorValue) {
       this.value = editorValue;
-      const customEvent = new CustomEvent('change', {detail: editorValue, bubbles: true});
+      const customEvent = new CustomEvent('monaco-change', {detail: editorValue, bubbles: true});
       this.dispatchEvent( customEvent );
       if (this.required) {
         this.value ? this.classList.remove('error', 'required') : this.classList.add('error', 'required');

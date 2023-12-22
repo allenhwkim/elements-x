@@ -62,7 +62,7 @@ export class Formflow extends HTMLElement {
   }
 
   fireEvent(detail: any) {
-    const customEvent = new CustomEvent('reactflow', { detail, bubbles: true});
+    const customEvent = new CustomEvent('formflow', { detail, bubbles: true});
     this.dispatchEvent( customEvent );
   }
 

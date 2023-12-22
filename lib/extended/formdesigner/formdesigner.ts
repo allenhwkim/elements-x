@@ -7,12 +7,18 @@ import * as stylesCssM from './styles.css?inline';
 
 import { initGrapesJs } from './init-grapejs';
 import { IForms } from '../stepper/types';
+import { STEPPER_FORMS } from './STEPPER_FORMS';
 
 const themeCSS = themeCssM.default;
 const stylesCSS = stylesCssM.default;
 
 export class FormDesigner extends HTMLElement {
-  _forms: IForms | undefined;
+  stepNames: string[] = Object.keys(STEPPER_FORMS); 
+  step: string = ''; // e.g. 'adderss'
+  editor: grapesjs.Editor = undefined as any;
+  editorLoaded = false;
+
+  _forms: IForms = STEPPER_FORMS;
   get forms() { return this._forms; }
   set forms(val) {
     this._forms = val;
@@ -25,11 +31,6 @@ export class FormDesigner extends HTMLElement {
     this._html = val;
     this.#setHtml(val);
   }
-
-  stepNames: string[] | undefined; // e.g. ['address', 'review', 'thankyou']
-  step: string = ''; // e.g. 'adderss'
-  editor: grapesjs.Editor = undefined as any;
-  editorLoaded = false;
 
   static get observedAttributes() {
     return ['step-names', 'step'];
@@ -64,11 +65,11 @@ export class FormDesigner extends HTMLElement {
     removeCss(this.tagName);
   }
 
-  #setHtml(val) {
+  #setHtml(val: string) {
     this.editor?.setComponents(val);
   }
 
-  #setForms(forms) {
+  #setForms(forms: IForms) {
     if (this.editorLoaded) {
       const iframe: any = this.querySelector('iframe');
       const ctrlEl: any = iframe?.contentWindow.document.querySelector('x-stepper-controller');

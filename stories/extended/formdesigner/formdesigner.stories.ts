@@ -1,8 +1,6 @@
 
 import type { Meta } from '@storybook/html';
 import { FormDesigner } from '../../../lib/extended/formdesigner/formdesigner';
-import DEFAULT_HTML from './DEFAULT_HTML.html?raw';
-import { DEFAULT_FORMS } from './DEFAULT_FORMS';
 
 const elName = 'x-formdesigner';
 const className = FormDesigner;
@@ -49,9 +47,6 @@ export default meta;
 
 export const Primary = { 
   args: {
-    html: DEFAULT_HTML,
-    forms: DEFAULT_FORMS,
-    stepNames: Object.keys(DEFAULT_FORMS),
     step: 'Name'
   }
 };

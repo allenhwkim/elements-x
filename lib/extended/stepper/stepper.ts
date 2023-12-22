@@ -40,11 +40,6 @@ export class Stepper extends HTMLElement {
     this.render();
   }
 
-  constructor() { 
-    super();
-
-  }
-
   connectedCallback() {
     addCss(this.tagName, css);
     this.classList.add('x', 'stepper');

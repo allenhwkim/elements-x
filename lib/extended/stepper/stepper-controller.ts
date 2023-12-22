@@ -1,9 +1,11 @@
 import { IForms, IForm, IUserData, ISubmitFunc } from './types';
 import { StepperStorage } from './stepper-storage';
 import { Stepper } from './stepper';
+import { DEFAULT_FORMS } from './DEFAULT_FORMS';
+import { DEFAULT_SUBMIT_FUNC } from './DEFAULT_SUBMIT_FUNC';
 
 export class StepperController extends HTMLElement {
-  stepNames: string[]; // ids of reactflow Node
+  stepNames: string[] = Object.keys(DEFAULT_FORMS); // ids of reactflow Node
   submitFunc: ISubmitFunc; // function used when submit clicked.
   currentForm: IForm = undefined as any;
   currentStepIndex: number = -1;
@@ -16,7 +18,7 @@ export class StepperController extends HTMLElement {
     this.currentStepIndex = this.stepNames.indexOf(val);
   }
 
-  _forms: IForms;
+  _forms: IForms = DEFAULT_FORMS;
   get forms() { return this._forms;}
   set forms(val: any) { 
     this._forms = val;
@@ -26,9 +28,7 @@ export class StepperController extends HTMLElement {
 
   constructor() {
     super();
-    this._forms = {};
-    this.stepNames = [];
-    this.submitFunc = (data) => Promise.resolve(true);
+    this.submitFunc = DEFAULT_SUBMIT_FUNC;
   }
 
   connectedCallback() {
@@ -38,7 +38,7 @@ export class StepperController extends HTMLElement {
     this.addEventListener('click', this.clickListener);
   }
 
-  getFormEl = () => this.querySelector('form.stepper.form') as HTMLFormElement;
+  getFormEl = () => this.querySelector('.stepper.form') as HTMLFormElement;
   getButtonsEl = () => this.querySelector('.stepper.buttons') as HTMLElement;
 
   getStatus(formId: string): 'complete' | 'incomplete' | 'disabled'  { 

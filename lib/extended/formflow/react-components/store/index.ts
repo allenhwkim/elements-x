@@ -23,7 +23,7 @@ function fireReactflowEvent(func, after, before) {
   // console.debug('func', func, JSON.stringify(after) === JSON.stringify(before));
   clearTimeout(timeout);
   timeout = setTimeout(() => {
-    const customEvent = new CustomEvent('reactflow', {
+    const customEvent = new CustomEvent('formflow', {
       bubbles: true,
       detail: {
         action: 'change',

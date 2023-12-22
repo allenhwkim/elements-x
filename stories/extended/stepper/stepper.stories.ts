@@ -1,8 +1,6 @@
 import type { Meta } from '@storybook/html';
 import { Stepper } from '../../../lib/extended/stepper/stepper';
 import { StepperController } from '../../../lib/extended/stepper/stepper-controller';
-import { DEFAULT_FORMS } from './DEFAULT_FORMS';
-import { DEFAULT_SUBMIT_FUNC } from './DEFAULT_SUBMIT_FUNC'; // Shares the same FormController
 import { fixIndent } from '../../../lib/util';
 
 const elName = 'x-stepper';
@@ -48,12 +46,12 @@ const meta: Meta = {
     forms: { 
       description: 'Form object to initialize stepper and form', 
       control: { type: 'object'},
-      table: { defaultValue: { summary:  DEFAULT_FORMS } },
+      // table: { defaultValue: { summary:  JSON.stringify(DEFAULT_FORMS) } },
     },
     submitFunc: { 
       description: 'Function to be called when submit button is clicked.', 
       control: { type: 'object'},
-      table: { defaultValue: { summary:  DEFAULT_SUBMIT_FUNC } },
+      // table: { defaultValue: { summary:  DEFAULT_SUBMIT_FUNC } },
     },
   },
 };
@@ -62,8 +60,6 @@ export default meta;
 
 export const Primary = { 
   args: { 
-    forms: DEFAULT_FORMS,
-    submitFunc : DEFAULT_SUBMIT_FUNC,  
   }
 }; 
 

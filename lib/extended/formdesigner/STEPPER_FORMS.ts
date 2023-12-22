@@ -1,6 +1,6 @@
-import { IForms } from '../../../lib/extended/stepper/types';
+import { IForms } from '../stepper/types';
 
-export const DEFAULT_FORMS: IForms = {
+export const STEPPER_FORMS: IForms = {
   Name: {
     type: 'form',
   }, 

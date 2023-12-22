@@ -36,7 +36,7 @@ export class Json extends HTMLElement {
 
   getNewDOM(el: HTMLElement, data: any, level=0) {
     const ul = document.createElement('ul');
-    const attrLevel = +(this.getAttribute('level') as string);
+    const attrLevel = +(this.getAttribute('level') as string) || 1;
     (level >= attrLevel) && (ul.classList.add('hidden'));
 
     if (typeof data === 'object') { // array is an object

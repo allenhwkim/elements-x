@@ -2,6 +2,7 @@ import grapesjs, {Editor} from 'grapesjs';
 import { showSidePanel } from './custom-commands';
 import { componentBlocks, formBlocks, containerBlocks, customBlocks }  from './blocks';
 import { componentTypes } from './components';
+import GRAPESJS_HTML from './GRAPESJS_HTML.html?raw';
 import {
   topPanel, 
   basicActionsPanel, 
@@ -82,6 +83,8 @@ export function initGrapesJs(elId: string) {
   editor.BlockManager.getCategories().each((category, ndx) => {
     (ndx > 0) && category.set('open', false);
   });
+
+  editor.setComponents(GRAPESJS_HTML);
   
   editor.setStyle(`
     x-stepper, .stepper.buttons {opacity: .5; pointer-events: none}

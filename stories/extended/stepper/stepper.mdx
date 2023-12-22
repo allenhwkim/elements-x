@@ -1,6 +1,8 @@
 import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
 
 import * as StepperStories from './stepper.stories';
+import { DEFAULT_FORMS } from '../../../lib/extended/stepper/DEFAULT_FORMS';
+import { DEFAULT_SUBMIT_FUNC } from '../../../lib/extended/stepper/DEFAULT_SUBMIT_FUNC'; // Shares the same FormController
 
 <Meta of={StepperStories} />
 
@@ -10,3 +12,9 @@ Form Stepper
 <Canvas of={StepperStories.Primary}/>
 
 <Controls />
+
+### Default forms
+<pre>{JSON.stringify(DEFAULT_FORMS, null, '  ')}</pre>
+
+### Default submit function
+<pre>{DEFAULT_SUBMIT_FUNC.toString()}</pre>

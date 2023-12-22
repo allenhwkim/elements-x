@@ -8,6 +8,7 @@ export default defineConfig(({mode}) => {
       // vite + react uses process.env, although vite says import.meta.env
       'process.env': process.env 
     },
+    assetsInclude: ['/sb-preview/runtime.js'],
     build: {
       emptyOutDir: false,
       lib: {

@@ -15,11 +15,12 @@
   },
   "scripts": {
     "start": "rm -rf node_modules/.cache/storybook && storybook dev -p 6006",
-    "build": "npm run build:sb && npm run build:lib && npm run build:lib:core && npm run build:lib:extended",
-    "build:lib": "npm run build:lib:index && npm run build:lib:core && npm run build:lib:extended && npm run build:lib:copy",
+    "build": "run-s build:sb build:lib",
+    "build:lib": "run-s build:lib:index build:lib:core build:lib:extended build:lib:copy build:lib:css",
     "build:lib:index": "DIR=index vite build --outDir dist/lib",
     "build:lib:core": "DIR=core vite build --outDir dist/lib",
     "build:lib:extended": "DIR=extended vite build --outDir dist/lib",
+    "build:lib:css": "./concat.js 'lib/**/*.css' dist/lib/style.css",
     "build:lib:copy": "cp lib/test.html dist/lib",
     "build:sb": "storybook build -o dist",
     "prepublishOnly": "npm run build"
@@ -51,9 +52,11 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "bootstrap": "^5.3.2",
     "css-loader": "^6.7.3",
+    "glob": "^10.3.10",
     "grapesjs": "^0.21.7",
     "html-to-image": "^1.11.11",
     "morphdom": "^2.7.0",
+    "npm-run-all": "^4.1.5",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -64,7 +67,11 @@
     "style-loader": "^3.3.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
-    "vite": "^5.0.7"
+    "vite": "^5.0.7",
+    "yargs": "^17.7.2"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "-": "^0.0.1"
+  }
 }

@@ -25,7 +25,7 @@ export class ComboBox extends HTMLElement {
       ulEl.innerHTML = '';
     }
     
-    const isDisabled = inputEl.readOnly || inputEl.disabled;
+    const isDisabled = inputEl?.readOnly || inputEl?.disabled;
     if (!inputEl) {
       this.textContent = 'error: requires <input>';
       return;

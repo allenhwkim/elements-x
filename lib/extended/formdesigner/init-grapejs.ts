@@ -55,6 +55,7 @@ export function initGrapesJs(elId: string) {
         'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js',
       ],
       styles: [
+        'https://unpkg.com/elements-x/dist/lib/style.css',
         'https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css',
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css'
     ],

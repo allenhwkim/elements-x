@@ -166,7 +166,7 @@ export class StepperController extends HTMLElement {
 
   initFormEl() { // set innerHTML of <form> element
     const formEl = this.getFormEl();
-    const html = this.currentForm.html;
+    const html = this.currentForm.html || '';
     if (!formEl) {
       console.error('<x-stepper-controller> initFormEl(), <form> is not found');
       return;
@@ -174,9 +174,9 @@ export class StepperController extends HTMLElement {
 
     const userData = StepperStorage.getItem('stepper.userData');
     if (typeof html === 'function') {
-      formEl.innerHTML = html(userData);
+      formEl.innerHTML = html(userData) || '';
     } else {
-      formEl.innerHTML = html as string;
+      formEl.innerHTML = html;
     }
 
     // set the values from userData

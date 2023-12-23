@@ -22,7 +22,7 @@ export const componentTypes = (editor) => {
   editor.DomComponents.addType('option', optionType);
   editor.DomComponents.addType('select', selectType);
   editor.DomComponents.addType('textarea', textareaType);
-  editor.DomComponents.addType('form', formType(editor));
+  editor.DomComponents.addType('form', formType);
 
   editor.DomComponents.addType('calendar', calendarType);
   editor.DomComponents.addType('data-table', dataTableType);

@@ -1,21 +1,30 @@
-export function formType(editor) {
-  const defaultType = editor.DomComponents.getType('default');
+export const formType = {
+  isComponent: el => el.tagName == 'FORM',
 
-  return {
-    model: defaultType.model.extend(
-      {
-        tagName: `form`
-      }, 
-      {
-        isComponent(el) {
-          if(el.tagName == 'FORM') {
-            return {type: 'form'}
-          }
-        },
-      }
-    ),
-    view: defaultType.view.extend({
-      tagName: 'div' //<-- in canvas div will be used
-    })
-  };
-}
+  model: {
+    defaults: {
+      tagName: 'form',
+      droppable: ':not(form)',
+      draggable: ':not(form)',
+      attributes: { method: 'get' },
+      traits: [{
+        type: 'select',
+        name: 'method',
+        options: [
+          {value: 'get', name: 'GET'},
+          {value: 'post', name: 'POST'},
+        ],
+      }, {
+        name: 'action',
+      }],
+    },
+  },
+
+  view: {
+    events: {
+      // The submit of the form might redirect the user from the editor so
+      // we should always prevent the default here.
+      submit: (e: Event) => e.preventDefault(),
+    } as any
+  },
+};

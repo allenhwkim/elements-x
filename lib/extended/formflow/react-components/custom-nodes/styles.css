@@ -1,8 +1,8 @@
-.react-flow__panel.react-flow__attribution a { background: #FFF; color: #333;}
 
 /* start/end node styles */
 .react-flow__node-start .container,
-.react-flow__node-end .container {
+.react-flow__node-end .container,
+.react-flow__node-submit .container {
   box-sizing: border-box;
   width: 200px;
   background: #CCC;
@@ -10,6 +10,26 @@
   padding: 12px;
   border-radius: 50px;
  }
+.react-flow__node-start.selected .container,
+.react-flow__node-end.selected .container,
+.react-flow__node-submit.selected .container {
+  border: 1px solid #CCC;
+  BACKGROUND: #EEE;
+ }
+
+
+ .react-flow__node-thankyou .container  {
+  box-sizing: border-box;
+  background-color: darkseagreen;
+  border: 1px solid #999;
+  border-radius: 10px;
+  width: 200px;
+  padding: 12px;
+  text-align: center;
+}
+.react-flow__node-thankyou.selected .container  {
+  background-color: lightgreen; 
+}
 
 /* custom node styles */
 .react-flow__node-custom .container  {

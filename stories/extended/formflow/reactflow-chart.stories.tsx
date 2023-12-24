@@ -2,7 +2,6 @@ import * as React from 'react';
 import { createRoot } from 'react-dom/client'
 import type { Meta } from '@storybook/html';
 import { ReactflowChart } from '../../../lib/extended/formflow/react-components/reactflow-chart/reactflow-chart';
-import { DEFAULT_CHART } from '../../../lib/extended/formflow/default-chart';
 
 const meta: Meta = { 
   title: 'Extended/Reactflow',
@@ -37,7 +36,4 @@ const meta: Meta = {
 
 export default meta;
 
-export const Primary = { args: {
-  nodes: DEFAULT_CHART.nodes,
-  edges: DEFAULT_CHART.edges,
-}};
+export const Primary = {};

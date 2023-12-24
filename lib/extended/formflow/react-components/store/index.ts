@@ -11,7 +11,7 @@ import { UndoRedo } from './undo-redo';
 import { addNodeAboveNode } from './add-node-above-node';
 import { addNodeBelowNode } from './add-node-below-node';
 import { addNodeBesideNode } from './add-node-beside-node';
-import { DEFAULT_CHART } from '../../default-chart';
+import { DEFAULT_CHART } from './DEFAULT_CHART';
 
 UndoRedo.addHistory(DEFAULT_CHART);
 

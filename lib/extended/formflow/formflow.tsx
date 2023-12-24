@@ -4,7 +4,6 @@ import { createRoot } from 'react-dom/client'
 import { Node, Edge, ReactFlowInstance, ReactFlowJsonObject } from 'reactflow';
 import { toPng } from 'html-to-image';
 import { ReactflowChart } from './react-components/reactflow-chart/reactflow-chart';
-import { DEFAULT_CHART } from './default-chart';
 import * as edgeCss from './react-components/custom-edges/styles.css?inline';
 import * as nodeCss from './react-components/custom-nodes/styles.css?inline';
 import * as chartCss from './react-components/reactflow-chart/styles.css?inline';
@@ -75,7 +74,7 @@ export class Formflow extends HTMLElement {
     this.externalCalls['updateEdgeData'](id, data);
   };
 
-  mount(nodes: Node[] = DEFAULT_CHART.nodes, edges: Edge[] = DEFAULT_CHART.edges) {
+  mount(nodes?: Node[], edges?: Edge[]) {
     const onNodeClick = (node: Node, nodes: Node[], edges: Edge[]) => {
       this.fireEvent({ action: 'selected', type: 'node', node, nodes, edges })
     };

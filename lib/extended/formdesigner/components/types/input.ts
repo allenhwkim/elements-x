@@ -4,16 +4,37 @@ export const inputType = {
   model: {
     defaults: {
       tagName: 'input',
-      attributes: { type: 'text', autocomplete: 'off' },
+      droppable: false,
+      highlightable: false,
+      attributes: { type: 'text' },
       traits: [
+        'id',
         'name',
+        'value',
         'placeholder',
-        'type',
         'autocomplete',
+        {
+          type: 'select',
+          name: 'type',
+          options: [
+            { value: 'text' },
+            { value: 'email' },
+            { value: 'password' },
+            { value: 'number' },
+            { value: 'color' },
+          ]
+        },
         {name: 'required', type: 'checkbox'},
         {name: 'disabled', type: 'checkbox'},
         {name: 'readonly', type: 'checkbox'},
       ],
+    },
+  },
+
+  extendFnView: ['updateAttributes'],
+  view: {
+    updateAttributes(this: any) {
+      this.el.setAttribute('autocomplete', 'off');
     },
   }
 };

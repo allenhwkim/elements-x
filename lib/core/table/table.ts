@@ -104,7 +104,7 @@ export class Table extends HTMLElement {
     if (keys) {
       keys.forEach(key => {
         const inputEl = document.createElement('input');
-        inputEl.className = `${key}`;
+        // inputEl.className = `${key}`;
         inputEl.setAttribute('data-key', key);
         inputEl.setAttribute('placeholder', key);
         value && (inputEl.value = value[key]);

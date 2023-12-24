@@ -4,19 +4,14 @@ export const buttonType = {
   model: {
     defaults: {
       tagName: 'button',
-      attributes: { type: 'button' },
+      attributes: { 
+        type: 'button' 
+      },
       traits: [
-        {
-          name: 'text',
-          changeProp: true,
-        }, {
-          type: 'select',
-          name: 'type',
-          options: [
-            { value: 'button' },
-            { value: 'submit' },
-            { value: 'reset' },
-          ]
+        { name: 'text', changeProp: true, },
+        { name: 'id', type: 'text', },
+        { name: 'name', type: 'text', },
+        { name: 'type', type: 'select', options: [ { value: 'button' }, { value: 'submit' }, { value: 'reset' } ]
       }]
     },
 

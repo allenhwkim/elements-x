@@ -7,16 +7,9 @@ export const formType = {
       droppable: ':not(form)',
       draggable: ':not(form)',
       attributes: { method: 'get' },
-      traits: [{
-        type: 'select',
-        name: 'method',
-        options: [
-          {value: 'get', name: 'GET'},
-          {value: 'post', name: 'POST'},
-        ],
-      }, {
-        name: 'action',
-      }],
+      traits: [
+        { name: 'method', type: 'select', options: [ 'get', 'post'], }, 
+        { name: 'action', type: 'text' }],
     },
   },
 

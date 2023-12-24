@@ -1,6 +1,4 @@
-import { optionType } from '../types/option';
-
-export const selectOptionsType ={
+export const selectOptionsTrait ={
   events:{
     keyup: 'onChange',
   },
@@ -15,7 +13,7 @@ export const selectOptionsType ={
       const optionStr = options[i];
       const option = optionStr.split('::');
       optComps.push({
-        type: optionType,
+        type: 'option',
         components: option[1] || option[0],
         attributes: { value: option[0] },
       });

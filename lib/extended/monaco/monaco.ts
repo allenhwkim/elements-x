@@ -1,6 +1,8 @@
 import { loadScript, waitFor, getReactProp, addCss, removeCss } from '../../util';
 import { getJsonSchemaProperties } from './get-json-schema-properties';
-const css = `.x.monaco { display: block;  min-height: 200px; }`;
+import * as cssM from './monaco.css?inline';
+
+const css = cssM.default;
 
 declare const window: any;
 

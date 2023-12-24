@@ -87,6 +87,7 @@ export function initGrapesJs(elId: string) {
 
   editor.setComponents(GRAPESJS_HTML);
   
+  // Disable interaction to stepper and buttonsd
   editor.setStyle(`
     x-stepper, .stepper.buttons {opacity: .5; pointer-events: none}
     .x.stepper-controller .stepper.form {min-height: 240px; }

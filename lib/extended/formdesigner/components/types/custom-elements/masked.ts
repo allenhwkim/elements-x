@@ -9,7 +9,7 @@ export const maskedType = {
         'id',
         'name',
         'title',
-        { name: 'mask', type: 'text' },
+        'mask'
       ],
     },
   }

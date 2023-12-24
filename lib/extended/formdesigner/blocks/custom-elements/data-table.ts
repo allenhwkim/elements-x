@@ -3,6 +3,6 @@ export default {
   category: 'Custom Elements',
   label: 'Data Table', 
   content: `
-    <x-table required="" value='[{"data":"", "table":""}]'></x-table>
+    <x-table required="" value='[{"foo":"", "bar":""}]'></x-table>
   `,
 };

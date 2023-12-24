@@ -6,7 +6,7 @@ These types are covered by default
 * `<tfoot>`
 * `<a>`
 * `<label>`
-* `<videl>`
+* `<video>`
 * `<image>`
 * `<script>`
 * `<svg>`

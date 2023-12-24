@@ -1,6 +1,7 @@
 import { addCss, loadScript, removeCss, waitFor } from '../../util';
+import * as cssM from './map.css?inline';
 
-const css = `.x.map { display: block; height: 300px; }`;
+const css = cssM.default;
 
 export class Map extends HTMLElement {
   static get observedAttributes() { return ['center', 'zoom']; }

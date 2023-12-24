@@ -1,29 +1,22 @@
 import buttonBlock from './button';
-import checkboxBlock from './checkbox';
-import colorBlock from './color';
-import fileBlock from './file';
 import flotingLabelBlock from './floating-label';
-import formBlock from './form';
-import optionBlock from './option';
-import passwordBlock from './password';
-import radioBlock from './radio';
-import rangeBlock from './range';
 import selectBlock from './select';
 import switchBlock from './switch';
 import textareaBlock from './textarea';
 
+import inputBlock from './input';
+import inputCheckboxBlock from './input-checkbox';
+import inputRadioBlock from './input-radio';
+import inputRangeBlock from './input-range';
+
 export default [
   buttonBlock,
-  checkboxBlock,
-  colorBlock,
-  fileBlock,
   flotingLabelBlock,
-  formBlock,
-  optionBlock,
-  passwordBlock,
-  radioBlock,
-  rangeBlock,
   selectBlock,
   switchBlock,
   textareaBlock,
+  inputBlock,
+  inputCheckboxBlock,
+  inputRadioBlock,
+  inputRangeBlock,
 ]

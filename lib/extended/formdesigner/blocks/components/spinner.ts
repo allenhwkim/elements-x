@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-spinner',
-  category: 'Components',
+  category: 'Bootstrap5 Components',
   label: 'spinner', 
   content: `
 <div class="spinner-border text-primary" role="status">

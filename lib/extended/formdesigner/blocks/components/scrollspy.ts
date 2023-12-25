@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-scrollspy',
-  category: 'Components',
+  category: 'Bootstrap5 Components',
   label: 'scrollspy', 
   content: `
   <div class="row">

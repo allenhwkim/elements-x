@@ -1,7 +1,7 @@
 export default {
   id: 'bs5-control-switch',
   category: 'Form Controls',
-  label: 'switch',
+  label: 'Switch',
   content: {
     type: 'label',
     tagName: 'label',

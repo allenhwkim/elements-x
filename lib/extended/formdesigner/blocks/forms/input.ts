@@ -1,7 +1,7 @@
 export default {
   id: 'bs5-control-input',
   category: 'Form Controls',
-  label: 'input',
+  label: 'Input',
   content: {
     type: 'label',
     tagName: 'label',

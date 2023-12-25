@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-modal',
-  category: 'Components',
+  category: 'Bootstrap5 Components',
   label: 'Modal', 
   content: `
 <!-- Button trigger modal -->
@@ -17,7 +17,7 @@ export default {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        Mobal body contents goes here
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

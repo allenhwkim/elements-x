@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-tabs',
-  category: 'Components',
+  category: 'Bootstrap5 Components',
   label: 'tabs', 
   content: `
 <div class="bd-example">

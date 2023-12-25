@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-offcanvas',
-  category: 'Components',
+  category: 'Bootstrap5 Components',
   label: 'Offcanvas', 
   content: `
 <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">

@@ -1,6 +1,6 @@
 export default {
   id: 'bs5-listGroup',
-  category: 'Components',
+  category: 'Bootstrap5 Components',
   label: 'List Group', 
   content: `
 <div class="list-group">

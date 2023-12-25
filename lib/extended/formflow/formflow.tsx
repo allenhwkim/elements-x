@@ -31,10 +31,10 @@ export class Formflow extends HTMLElement {
     setTimeout( () => this.root.unmount());
   }
 
-  setData(data: any) {
+  setData(data?: any) {
     setTimeout(() => { // to avoid warning, asynchornously unmount a root while React was already rendering.
       this.root?.unmount();
-      this.mount(data.nodes, data.edges);
+      this.mount(data?.nodes, data?.edges);
     })
   }
 

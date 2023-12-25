@@ -12,9 +12,9 @@ export const DEFAULT_CHART =  {
   ] as Node[],
   edges: [
     {id: 'start-country', source: 'start', target: 'country', type: 'custom'},
-    {id: 'country-postalcode', source: 'country', target: 'postalcode', type: 'custom'},
-    {id: 'country-zipcode', source: 'country', target: 'zipcode', type: 'custom'},
-    {id: 'country-error', source: 'country', target: 'error', type: 'custom'},
+    {id: 'country-postalcode', source: 'country', target: 'postalcode', type: 'custom', label: 'Candda?'},
+    {id: 'country-zipcode', source: 'country', target: 'zipcode', type: 'custom', label: 'USA?'},
+    {id: 'country-error', source: 'country', target: 'error', type: 'custom', label: 'Other'},
     {id: 'postalcode-submit', source: 'postalcode', target: 'submit', type: 'custom'},
     {id: 'zipcode-submit', source: 'zipcode', target: 'submit', type: 'custom'},
     {id: 'submit-thankyou', source: 'submit', target: 'thankyou', type: 'custom'},

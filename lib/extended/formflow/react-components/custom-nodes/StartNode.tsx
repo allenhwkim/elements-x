@@ -13,7 +13,7 @@ function StartNode({ data }: Node) {
 
   return (
     <div className="container">
-      start 
+      {data?.label || 'START'}
       <Handle type="source" position={Position.Bottom} />
       <span className="add-node-button bottom" onClick={onClick}>+</span>
     </div>

@@ -15,7 +15,7 @@ function SubmitNode({ id, data }: Node): React.ReactElement {
   return (
     <div className="container">
       <Handle type="target" position={Position.Top} />
-      SUBMIT 
+      {data?.label || 'SUBMIT'}
       <span className="add-node-button top" onClick={addNodeAboveThis}>+</span>
       <Handle type="source" position={Position.Bottom} />
     </div>

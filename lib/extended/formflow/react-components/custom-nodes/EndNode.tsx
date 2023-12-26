@@ -6,7 +6,7 @@ function EndNode({ data }: Node) {
   return (
     <div className="container">
       <Handle type="target" position={Position.Top} />
-      end
+      {data?.lable || 'END'}
     </div>
   );
 }

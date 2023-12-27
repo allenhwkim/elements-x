@@ -1,3 +1,5 @@
+import { ComponentModelDefinition } from "grapesjs";
+
 export const formType = {
   isComponent: el => el.tagName == 'FORM',
 
@@ -9,9 +11,10 @@ export const formType = {
       attributes: { method: 'get' },
       traits: [
         { name: 'method', type: 'select', options: [ 'get', 'post'], }, 
-        { name: 'action', type: 'text' }],
+        { name: 'action', type: 'text' },
+      ],
     },
-  },
+  } as Partial<ComponentModelDefinition>,
 
   view: {
     events: {

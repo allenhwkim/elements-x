@@ -21,14 +21,21 @@ import { calendarType } from './types/custom-elements/calendar';
 import { dataTableType } from './types/custom-elements/data-table';
 import { mapType } from './types/custom-elements/map';
 import { maskedType } from './types/custom-elements/masked';
+import { loadComboboxType } from './types/custom-elements/combobox';
+import { comboboxOptionsTrait } from './types/custom-elements/combobox-options';
+import { loadDropdownType } from './types/custom-elements/dropdown';
+import { Editor } from 'grapesjs';
 
 selectOptionsTrait
 
-export const componentTypes = (editor) => {
+export const componentTypes = (editor: Editor) => {
   editor.DomComponents.addType('calendar', calendarType);
-  editor.DomComponents.addType('data-table', dataTableType);
+  editor.DomComponents.addType('datatable', dataTableType);
   editor.DomComponents.addType('map', mapType);
   editor.DomComponents.addType('masked', maskedType);
+  editor.DomComponents.addType('combobox', loadComboboxType(editor));
+  editor.TraitManager.addType('combobox-options', comboboxOptionsTrait);
+  editor.DomComponents.addType('dropdown', loadDropdownType(editor));
 
   editor.DomComponents.addType('button', buttonType);
   editor.DomComponents.addType('label', labelType);

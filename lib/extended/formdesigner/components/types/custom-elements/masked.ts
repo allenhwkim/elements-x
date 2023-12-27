@@ -1,10 +1,10 @@
 export const maskedType = {
-  isComponent: (el) => {
-    return  el.classList?.contains('x') && el.classList?.contains('masked');
-  },
+  extend: 'text',
+  isComponent: el => el.tagName === 'X-MASKED',
   model: {
     defaults: {
       copyable: false,
+      attributes: { class: 'x masked' },
       traits: [
         'id',
         'name',

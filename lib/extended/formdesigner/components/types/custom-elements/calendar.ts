@@ -1,9 +1,10 @@
 export const calendarType = {
-  isComponent: (el) => el.classList?.contains('x') && el.classList?.contains('calendar'),
+  isComponent: (el) => el.tagName === 'X-CALENDAR',
 
   model: {
     defaults: {
       copyable: false,
+      attributes: { class: 'x calendar' },
       traits: [
         'id',
         'name',
@@ -17,7 +18,7 @@ export const calendarType = {
           [ 
             { text: 'Sunday', value: '0' }, 
             { text: 'Monday', value: '1' }, 
-            { text: 'Saturday', value: '7' }
+            { text: 'Saturday', value: '6' }
           ]
         },
         {name: 'required', type: 'checkbox'},

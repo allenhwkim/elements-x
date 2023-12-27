@@ -55,7 +55,7 @@ export class Dropdown extends HTMLElement {
     });
 
     setTimeout(() => {
-      if (!this.dataTargetEl.parentElement.isSameNode(this.parentElement)) {
+      if (!this.dataTargetEl.parentElement?.isSameNode(this.parentElement)) {
         console.error('[dropdown] dropdown element and position element must be in the same parent element');
       } else if (!this.isInPositionedEl(this)) {
         console.error('[dropdown] dropdown element must be in a positioned element');

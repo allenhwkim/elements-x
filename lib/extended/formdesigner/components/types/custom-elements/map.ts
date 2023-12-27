@@ -1,12 +1,12 @@
 export const mapType = {
-  isComponent: (el) => el.classList?.contains('x') && el.classList?.contains('map'),
+  extend: 'text',
+  isComponent: el => el.tagName === 'X-MAP',
 
   model: {
     defaults: {
-      copyable: false,
+      attributes: { class: 'x map' },
       traits: [
         'id',
-        'name',
         'title',
         { name: 'center', type: 'text' },
         { name: 'zoom', type: 'number' },

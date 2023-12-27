@@ -1,6 +1,6 @@
 export const loadRangeType = (editor) => ({
   extend: 'input',
-  isComponent: (el: HTMLInputElement) => el.tagName == 'INPUT' && el.type == 'range',
+  isComponent: el => el.tagName == 'INPUT' && el.type == 'range',
 
   model: {
     defaults: {

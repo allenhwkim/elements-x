@@ -6,50 +6,66 @@ const css = cssM.default;
 import { StepperController } from './stepper-controller';
 
 export class Stepper extends HTMLElement {
-  StepperController: StepperController = undefined as any;
+  stepperCtrl: StepperController = undefined as any;
 
   get forms() {
-    return this.StepperController?.forms;
+    return this.stepperCtrl?.forms;
   }
 
   set forms(arg) {
-    if (this.StepperController) {
-      this.StepperController.forms = arg;
-      this.StepperController.stepNames = Object.keys(arg);
-      this.StepperController.initForm();
+    if (this.stepperCtrl) {
+      this.stepperCtrl.forms = arg;
+      this.stepperCtrl.stepNames = Object.keys(arg);
+      this.stepperCtrl.initForm();
       this.render();
     }
   }
 
   _stepNames = [];
   get stepNames() {
-    return this.StepperController.stepNames;
+    return this.stepperCtrl.stepNames;
   }
 
   set stepNames(arg) {
-    this.StepperController.stepNames = Object.keys(arg);
-    this.StepperController.initForm();
+    this.stepperCtrl.stepNames = Object.keys(arg);
+    this.stepperCtrl.initForm();
     this.render();
+  }
+
+  static get observedAttributes() {
+    return ['step-names', 'step'];
+  }
+
+  async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
+    if (name === 'step-names') {
+      this.stepperCtrl.stepNames = newValue.split(',').map(el => el.trim());
+    } else if (name === 'step') {
+      this.stepperCtrl.initForm(newValue);
+    }
   }
 
   connectedCallback() {
     addCss(this.tagName, css);
     this.classList.add('x', 'stepper');
 
-    this.StepperController = this.closest('.x.stepper-controller') as StepperController;
-
-    if (this.forms) { // data-form attribute
-      this.StepperController.forms = this.forms;
-      this.StepperController.stepNames = Object.keys(this.forms);
+    this.stepperCtrl = this.closest('.x.stepper-controller') as StepperController;
+    if (!this.stepperCtrl) {
+      console.error('[ERROR] in .x.stepper, missing .x.stepper-controller. wrap it with <x-stepper-controller>');
+      return;
     }
 
-    this.StepperController.initForm();
+    if (this.forms) {
+      this.stepperCtrl.forms = this.forms;
+      this.stepperCtrl.stepNames = Object.keys(this.forms);
+    }
+
+    this.stepperCtrl.initForm();
     this.addEventListener('click', (event: UIEvent) => {
       const formLinkEl = (event.target as any).closest('.stepper-link');
       const formStepEl = (event.target as any).closest('.form-step');
       const visitable = !formStepEl.classList.contains('incomplete');
       const formName = formLinkEl.dataset?.name;
-      const submitted = this.StepperController.currentForm.type === 'submit';
+      const submitted = this.stepperCtrl.currentForm.type === 'submit';
       if (formName && visitable && !submitted) {
         const customEvent = new CustomEvent('stepper-goto', {bubbles: true, detail: formName}) as any;
         event.target?.dispatchEvent(customEvent);
@@ -67,7 +83,7 @@ export class Stepper extends HTMLElement {
     if (!this.forms) return `Error. missing forms`;
 
     this.innerHTML = '';
-    const formCtrl = this.StepperController;
+    const formCtrl = this.stepperCtrl;
     let html = ``;
     formCtrl.stepNames.forEach( (formId: string, index: number) => {
       const activeClass = formId === formCtrl.currentFormId ? ' active' : '';

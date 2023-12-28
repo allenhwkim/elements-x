@@ -37,13 +37,12 @@ export class FormDesigner extends HTMLElement {
   }
 
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
-    if (this.editorLoaded) {
-      const iframe: any = this.querySelector('iframe');
+    if (this.editorLoaded) { const iframe: any = this.querySelector('iframe');
       const ctrlEl: any = iframe.contentWindow.document.querySelector('x-stepper-controller');
       if (name === 'step-names') {
-        ctrlEl && (ctrlEl.stepNames = newValue.split(',').map(el => el.trim()));
+        ctrlEl && (ctrlEl.setAttribute('step-names', newValue.split(',').map(el => el.trim())));
       } else if (name === 'step') {
-        ctrlEl && await ctrlEl.initForm(newValue);
+        ctrlEl && await ctrlEl.setAttribute('step', newValue);
       }
     }
   }

@@ -24,6 +24,19 @@ export class StepperController extends HTMLElement {
     this.initForm('auto');
   }
 
+  static get observedAttributes() {
+    return ['step-names', 'step'];
+  }
+
+  async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
+    if (name === 'step-names') {
+      this.stepNames = newValue.split(',').map(el => el.trim());
+      this.initForm();
+    } else if (name === 'step') {
+      this.initForm(newValue);
+    }
+  }
+
   connectedCallback() {
     this.classList.add('x', 'stepper-controller');
     StepperStorage.baseEl = this;

@@ -37,6 +37,8 @@ const meta: Meta = {
 
     setTimeout(() => {
       args.forms && (stepperEl.forms = args.forms);
+      args.stepNames && stepperEl.setAttribute('step-names', args.stepNames);
+      args.step && stepperEl.setAttribute('step', args.step);
     });
     wrapperEl.append(ctrlEl);
     return wrapperEl;
@@ -45,7 +47,14 @@ const meta: Meta = {
     forms: { 
       description: 'Form object to initialize stepper and form', 
       control: { type: 'object'},
-      // table: { defaultValue: { summary:  JSON.stringify(DEFAULT_FORMS) } },
+    },
+    stepNames: {
+      description: 'Dynamic step names separated by comma(,), e.g., "Name, Review, Submit, Thankyou"',
+      control: { type: 'text'}
+    },
+    step: {
+      description: 'Current step name, e.g., "Review"',
+      control: { type: 'text'}
     }
   },
 };

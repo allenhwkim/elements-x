@@ -17,12 +17,14 @@ const meta: Meta = {
       msgEl.innerText = `'select' event: ${JSON.stringify(event.detail)}. Check console for details`
     });
 
-    args.forms && (custEl.forms = args.forms);
-    args.html && (custEl.html = args.html);
-    args.stepNames && custEl.setAttribute('step-names', args.stepNames);
-    args.step && custEl.setAttribute('step', args.step);
-
     containerEl.append(custEl, msgEl);
+
+    setTimeout(() => {
+      args.forms && (custEl.forms = args.forms);
+      args.html && (custEl.html = args.html);
+      args.stepNames && custEl.setAttribute('step-names', args.stepNames);
+      args.step && custEl.setAttribute('step', args.step);
+    }, 500);
     return containerEl;
   },
   argTypes: {
@@ -33,7 +35,7 @@ const meta: Meta = {
     },
     stepNames: { 
       description: 'array of step names for x-stepper',
-      control: { type: 'object' },
+      control: { type: 'text' },
     },
     step: {
       description: 'current step name',

@@ -20,7 +20,6 @@ function fireReactflowEvent(func, after, before) {
   const noChangesMade = JSON.stringify(after) === JSON.stringify(before);
   if (noChangesMade) return; 
 
-  // console.debug('func', func, JSON.stringify(after) === JSON.stringify(before));
   clearTimeout(timeout);
   timeout = setTimeout(() => {
     const customEvent = new CustomEvent('formflow', {

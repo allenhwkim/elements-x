@@ -1,12 +1,10 @@
-import { IForms, IForm, IUserData, ISubmitFunc } from './types';
+import { IForms, IForm, IUserData } from './types';
 import { StepperStorage } from './stepper-storage';
 import { Stepper } from './stepper';
 import { DEFAULT_FORMS } from './DEFAULT_FORMS';
-import { DEFAULT_SUBMIT_FUNC } from './DEFAULT_SUBMIT_FUNC';
 
 export class StepperController extends HTMLElement {
   stepNames: string[] = Object.keys(DEFAULT_FORMS); // ids of reactflow Node
-  submitFunc: ISubmitFunc; // function used when submit clicked.
   currentForm: IForm = undefined as any;
   currentStepIndex: number = -1;
 
@@ -24,11 +22,6 @@ export class StepperController extends HTMLElement {
     this._forms = val;
     this.stepNames = Object.keys(val);
     this.initForm('auto');
-  }
-
-  constructor() {
-    super();
-    this.submitFunc = DEFAULT_SUBMIT_FUNC;
   }
 
   connectedCallback() {
@@ -110,8 +103,7 @@ export class StepperController extends HTMLElement {
       } else if (buttonEl.classList.contains('stepper-review-btn')) {
         this.initForm('review'); 
       } else if (buttonEl.classList.contains('stepper-submit-btn')) {
-        await this.submitForm();
-        this.initForm('submit'); // submit and show thankyou message
+        this.initForm('submit'); // submit and go to the next step
       } else if (buttonEl.classList.contains('stepper-prev-btn')) {
         this.initForm('prev'); 
       } else if (buttonEl.classList.contains('stepper-next-btn')) { 
@@ -143,16 +135,18 @@ export class StepperController extends HTMLElement {
     let nextStepIndex = 0;
     if (target === 'auto') {
       nextStepIndex = Math.max(this.stepNames.findIndex(formName => this.getStatus(formName) !== 'complete'), 0);
-    } else if (['review', 'submit', 'prev', 'next'].includes(target)) {
-      if (target === 'review') {
-        nextStepIndex = this.stepNames.findIndex(formName => (this.forms[formName] as IForm)?.type === 'review');
-      } else if (target === 'submit') {
-        nextStepIndex = this.stepNames.findIndex(formName => (this.forms[formName] as IForm)?.type === 'submit');
-      } else if (target === 'prev') {
-        nextStepIndex = (this.currentStepIndex - 1) % this.stepNames.length;
-      } else if (target === 'next') {
-        nextStepIndex = (this.currentStepIndex + 1) % this.stepNames.length;
-      }
+    } else if (target === 'prev') {
+      nextStepIndex = (this.currentStepIndex - 1) % this.stepNames.length;
+    } else if (target === 'next') {
+      nextStepIndex = (this.currentStepIndex + 1) % this.stepNames.length;
+    } else if (target === 'review') {
+      nextStepIndex = this.stepNames.findIndex(formName => this.forms[formName].type === 'review');
+    } else if (target === 'submit') {
+      const formUserData: IUserData = StepperStorage.getItem('stepper.userData') || {};
+      StepperStorage.removeItem('stepper.userData');
+      const submitForm: any = Object.entries(this.forms).find(([_, form]:any) => form.type === 'submit' )?.[1];
+      const response = await submitForm.submitFunc(formUserData);
+      nextStepIndex = this.stepNames.indexOf(target);
     } else if (this.stepNames.indexOf(target)) {
       nextStepIndex = this.stepNames.indexOf(target);
     }
@@ -200,35 +194,25 @@ export class StepperController extends HTMLElement {
     const prevButtonEl = this.getButtonsEl().querySelector('.stepper-prev-btn') as HTMLButtonElement;
     const nextButtonEl = this.getButtonsEl().querySelector('.stepper-next-btn') as HTMLButtonElement;
 
-    if (prevButtonEl) {
-      prevButtonEl.disabled = !(this.currentStepIndex > 0) || (this.currentForm.type === 'submit');
+    if (prevButtonEl) { // Enabled when user can go back 
+      prevButtonEl.disabled = !(this.currentStepIndex > 0) || (this.currentForm.type === 'thankyou');
     }
 
-    if (nextButtonEl) {
+    if (nextButtonEl) { // Enabled when user can go next step, hidden when review step
       nextButtonEl.disabled = !(this.currentStepIndex !== this.stepNames.length - 1);
+      const isReviewStep = this.currentForm.type === 'review';
+      isReviewStep ? nextButtonEl.setAttribute('hidden', '') : nextButtonEl.removeAttribute('hidden');
     }
 
-    if (reviewButtonEl) { // do not set inline style here. Grapejs not handling well by setting it outside
-      const shouldShow = this.isReviewable() && (['review', 'submit'].indexOf(this.currentForm.type) === -1);
+    if (reviewButtonEl) { // Visible when reviewable
+      const shouldShow = this.isReviewable() && (['review', 'thankyou'].indexOf(this.currentForm.type) === -1);
       shouldShow ? reviewButtonEl.removeAttribute('hidden') : reviewButtonEl.setAttribute('hidden', '');
     }
 
-    if (submitButtonEl) {
-      const toShowSubmitBtn = this.currentForm.type === 'review';
-      if (toShowSubmitBtn) {
-        submitButtonEl.removeAttribute('hidden');
-        nextButtonEl.setAttribute('hidden', '');
-      } else {
-        submitButtonEl.setAttribute('hidden', '');
-        nextButtonEl.removeAttribute('hidden');
-      }
+    if (submitButtonEl) { // Visible when review step
+      const isReviewStep = this.currentForm.type === 'review';
+      isReviewStep? submitButtonEl.removeAttribute('hidden') : submitButtonEl.setAttribute('hidden', '');
     }
   }
 
-  async submitForm(): Promise<any> {
-    const formUserData: IUserData = StepperStorage.getItem('stepper.userData') || {};
-    const response = await this.submitFunc(formUserData);
-    StepperStorage.removeItem('stepper.userData');
-    return response;
-  }
 }

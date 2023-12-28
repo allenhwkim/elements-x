@@ -11,7 +11,6 @@ A step shows its status
 
 Inputs : 
  - forms
- - submitFunc
  - stepNames
 
 https://codesandbox.io/s/stepper-html-css-g5tqs8?file=/src/style2.scss

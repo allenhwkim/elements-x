@@ -1,3 +1,4 @@
+import { DEFAULT_SUBMIT_FUNC } from './DEFAULT_SUBMIT_FUNC';
 import { IForms } from './types';
 
 export const DEFAULT_FORMS: IForms = {
@@ -29,8 +30,12 @@ export const DEFAULT_FORMS: IForms = {
     type: 'review',
     html: (userData) => `Review: <pre>${JSON.stringify(userData, null, '  ')}</pre>`,
   }, 
-  Thankyou: {
+  Submit: {
     type: 'submit',
+    submitFunc: DEFAULT_SUBMIT_FUNC
+  },
+  Thankyou: {
+    type: 'thankyou',
     html: (userData) => `Thankyou`,
   }
 };

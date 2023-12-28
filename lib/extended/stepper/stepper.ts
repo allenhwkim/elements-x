@@ -4,7 +4,6 @@ import * as cssM from './stepper.css?inline';
 const css = cssM.default;
 
 import { StepperController } from './stepper-controller';
-import { ISubmitFunc } from './types';
 
 export class Stepper extends HTMLElement {
   StepperController: StepperController = undefined as any;
@@ -20,13 +19,6 @@ export class Stepper extends HTMLElement {
       this.StepperController.initForm();
       this.render();
     }
-  }
-
-  _submitFunc: ISubmitFunc = (data) => Promise.resolve('default submit func');
-  get submitFunc() { return this._submitFunc; }
-  set submitFunc(val) {
-    this._submitFunc = val;
-    this.StepperController.submitFunc = this.submitFunc;
   }
 
   _stepNames = [];
@@ -49,7 +41,6 @@ export class Stepper extends HTMLElement {
     if (this.forms) { // data-form attribute
       this.StepperController.forms = this.forms;
       this.StepperController.stepNames = Object.keys(this.forms);
-      this.StepperController.submitFunc = this.submitFunc;
     }
 
     this.StepperController.initForm();
@@ -73,9 +64,7 @@ export class Stepper extends HTMLElement {
   }
 
   getNewHtml() {
-    if (!(this.forms && this.submitFunc)) {
-      return `Error. missing forms and/or submit data`;
-    }
+    if (!this.forms) return `Error. missing forms`;
 
     this.innerHTML = '';
     const formCtrl = this.StepperController;

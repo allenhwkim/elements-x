@@ -37,7 +37,6 @@ const meta: Meta = {
 
     setTimeout(() => {
       args.forms && (stepperEl.forms = args.forms);
-      args.submitFunc && (stepperEl.submitFunc = args.submitFunc);
     });
     wrapperEl.append(ctrlEl);
     return wrapperEl;
@@ -47,12 +46,7 @@ const meta: Meta = {
       description: 'Form object to initialize stepper and form', 
       control: { type: 'object'},
       // table: { defaultValue: { summary:  JSON.stringify(DEFAULT_FORMS) } },
-    },
-    submitFunc: { 
-      description: 'Function to be called when submit button is clicked.', 
-      control: { type: 'object'},
-      // table: { defaultValue: { summary:  DEFAULT_SUBMIT_FUNC } },
-    },
+    }
   },
 };
 

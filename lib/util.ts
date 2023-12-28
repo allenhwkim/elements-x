@@ -31,10 +31,12 @@ export function loadScript(...urls) {
 
 export function waitFor(expr: string, timeout: number = 10000): Promise<any> {
   let waited = 0;
+  //@ts-ignore
+  const _this = this;
   return new Promise(function(resolve, reject) {
     const func = new Function(`return ${expr}`);
     function waitForCondition() {
-      if (func()) {
+      if (func.bind(_this)()) {
         resolve(true);
       } else if (waited > timeout) {
         reject(`could not resolve ${expr} in ${timeout}ms.`);

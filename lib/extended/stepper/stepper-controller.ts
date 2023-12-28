@@ -139,8 +139,6 @@ export class StepperController extends HTMLElement {
       nextStepIndex = (this.currentStepIndex - 1) % this.stepNames.length;
     } else if (target === 'next') {
       nextStepIndex = (this.currentStepIndex + 1) % this.stepNames.length;
-    } else if (target === 'review') {
-      nextStepIndex = this.stepNames.findIndex(formName => this.forms[formName].type === 'review');
     } else if (target === 'submit') {
       const formUserData: IUserData = StepperStorage.getItem('stepper.userData') || {};
       StepperStorage.removeItem('stepper.userData');
@@ -153,7 +151,7 @@ export class StepperController extends HTMLElement {
 
     this.currentFormId = this.stepNames[nextStepIndex];
 
-    (this.querySelector('x-stepper') as Stepper).render();
+    (this.querySelector('.x.stepper') as Stepper).render();
     this.initFormEl();
     this.initButtonsEl();
   }
@@ -167,11 +165,7 @@ export class StepperController extends HTMLElement {
     }
 
     const userData = StepperStorage.getItem('stepper.userData');
-    if (typeof html === 'function') {
-      formEl.innerHTML = html(userData) || '';
-    } else {
-      formEl.innerHTML = html;
-    }
+    formEl.innerHTML = typeof html === 'function' ? html(userData) : html;
 
     // set the values from userData
     const currentFormUserData = userData?.[this.currentFormId] || {};

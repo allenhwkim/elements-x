@@ -7,7 +7,7 @@ function fireEvent(key, data): void {
 
 export class StepperStorage {
   // static storage: any = (window as any).sessionStorage;
-  static storage: any = (window as any).localStorage;
+  static storage: any = (window as any).sessionStorage;
   static baseEl: any = (window as any).document;
 
   static getItem(key: string) {

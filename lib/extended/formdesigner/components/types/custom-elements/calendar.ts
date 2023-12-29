@@ -1,5 +1,5 @@
 export const calendarType = {
-  isComponent: (el) => el.tagName === 'X-CALENDAR',
+  isComponent: el => el.tagName === 'X-CALENDAR',
 
   model: {
     defaults: {

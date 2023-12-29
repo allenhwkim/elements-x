@@ -3,6 +3,9 @@ export default {
   category: 'Form Controls',
   label: 'Textarea',
   content: `
-    <textarea rows="6" class="form-control"></textarea>
+    <label class="d-block">
+      <span>Subject:</span>
+      <textarea data-gjs-type="textarea" rows="6" class="form-control" placeholder="Enter long text here"></textarea>
+    </label>
   `,
 };

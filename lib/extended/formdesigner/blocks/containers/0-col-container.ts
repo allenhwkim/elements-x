@@ -1,7 +1,7 @@
 export default {
   id: 'bs5-container',
   category: 'Containers',
-  label: 'Container', 
+  label: '0-column', 
   content: `
     <div class="container">
       Container

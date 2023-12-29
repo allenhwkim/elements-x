@@ -27,7 +27,7 @@ export class Table extends HTMLElement {
 
    
   static get observedAttributes() {
-    return ['value'];
+    return ['value', 'input-class'];
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -100,6 +100,7 @@ export class Table extends HTMLElement {
   addNewRow(rowEl, value?) { // HTMLElement, {foo: 1, bar: 2}
     const keys = this.keys;
     const nextRowEl = document.createElement('div');
+    const inputKlass = this.getAttribute('input-class');
     nextRowEl.className='table-row';
     if (keys) {
       keys.forEach(key => {
@@ -107,6 +108,7 @@ export class Table extends HTMLElement {
         // inputEl.className = `${key}`;
         inputEl.setAttribute('data-key', key);
         inputEl.setAttribute('placeholder', key);
+        inputKlass && inputEl.setAttribute('class', inputKlass);
         value && (inputEl.value = value[key]);
         nextRowEl.appendChild(inputEl);
       });

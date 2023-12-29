@@ -1,7 +1,7 @@
   export default {
     id: 'bs5-3-col-container',
     category: 'Containers',
-    label: '3-Col',
+    label: '3-columns',
     content: `
     <div class="container">
       <div class="row">

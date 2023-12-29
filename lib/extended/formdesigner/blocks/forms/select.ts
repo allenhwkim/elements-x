@@ -3,10 +3,13 @@ export default {
   category: 'Form Controls',
   label: 'Select',
   content: `
-    <select class="form-select" aria-label="Default select example">
-      <option selected>Set multiple to edit options</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>`
+    <label class="d-block">
+      <span>Subject:</span>
+      <select data-gjs-type="select" class="form-select">
+        <option selected>Select one</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </label>`
 };

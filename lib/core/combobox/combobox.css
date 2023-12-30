@@ -1,13 +1,13 @@
-.x.combobox {
+:is(.x.combobox, x-combobox) {
   display: inline-block;
   position: relative;
 }
 
-.x.combobox:focus-within ul {
+:is(.x.combobox, x-combobox):focus-within ul {
   display: block;
 }
 
-.x.combobox input {
+:is(.x.combobox, x-combobox) input {
   min-width: 200px;
   min-height: 32px;
   padding: 0 20px 0 4px;
@@ -20,11 +20,11 @@
   box-sizing: border-box;
 }
 
-.x.combobox input:read-only {
+:is(.x.combobox, x-combobox) input:read-only {
   pointer-events: none;
 }
 
-.x.combobox ul {
+:is(.x.combobox, x-combobox) ul {
   display: none;
   padding: 0;
   margin: 0;
@@ -39,23 +39,23 @@
   z-index: 1;
 }
 
-.x.combobox ul > :is(.highlighted, :hover) {
+:is(.x.combobox, x-combobox) ul > :is(.highlighted, :hover) {
   background: #529FFF;
   color: #FFF;
 }
-.x.combobox ul:empty {
+:is(.x.combobox, x-combobox) ul:empty {
   display: none;
 }
 
-.x.combobox ul > * {
+:is(.x.combobox, x-combobox) ul > * {
   line-height: 26px;
   padding: 0 2px;
 }
-.x.combobox ul > li.disabled {
+:is(.x.combobox, x-combobox) ul > li.disabled {
   opacity: .8;
   pointer-events: none;
 }
 
-.x.combobox ul > .selected:before {
+:is(.x.combobox, x-combobox) ul > .selected:before {
   content: '✓ ';
 }

@@ -11,7 +11,12 @@ const meta: Meta = {
   render: (args) => {
     const wrapperEl = document.createElement('div');
     const custEl = document.createElement(elName) as any;
-    (args.required) && custEl.setAttribute('required', '');
+    if (args.required) {
+      custEl.setAttribute('required', '');
+    } 
+    if (args.inputClass) {
+      custEl.setAttribute('input-class', args.inputClass);
+    }
     if (args.value) {
       if (typeof args.value === 'string') {
         custEl.setAttribute('value', args.value);
@@ -38,6 +43,10 @@ const meta: Meta = {
       description: `Required`, 
       control: { type: 'boolean' },
     },
+    inputClass: {
+      description: 'class names for input fields',
+      control: { type: 'text' }
+    }
   },
 };
 
@@ -46,13 +55,15 @@ export default meta;
 
 export const Primary = {
   args: {
-    required: true
+    required: true,
+    inputClass: 'form-control d-inline-block w-auto'
   }
 };
 
 export const Object = {
   args: {
     required: true,
+    inputClass: 'form-control d-inline-block w-auto',
     value: JSON.stringify([ { key1: '', key2: '', key3: '' } ])
   }
 };
@@ -60,6 +71,7 @@ export const Object = {
 export const StringsWithValue = {
   args: {
     required: true,
+    inputClass: 'form-control d-inline-block w-auto',
     value: JSON.stringify([ 'pre', 'filled', 'string' ])
   }
 };

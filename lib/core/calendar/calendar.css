@@ -1,50 +1,50 @@
-  .x.calendar {
+  :is(.x.calendar, x-calendar) {
     display: inline-block;
     border: 1px solid #ccc
   }
 
-  .x.calendar .header {
+  :is(.x.calendar, x-calendar) .header {
     display: flex;
     padding: 12px 8px;
     font-weight: bold;
     justify-content: center
   }
 
-  .x.calendar .header button {
+  :is(.x.calendar, x-calendar) .header button {
     background: rgba(0,0,0,0);
     border: none;
     box-shadow: none;
   }
 
-  .x.calendar .header button.prev:before {
+  :is(.x.calendar, x-calendar) .header button.prev:before {
     content: "◀"
   }
 
-  .x.calendar .header button.today:before {
+  :is(.x.calendar, x-calendar) .header button.today:before {
     content: "●"
   }
 
-  .x.calendar .header button.next:before {
+  :is(.x.calendar, x-calendar) .header button.next:before {
     content: "▶"
   }
 
-  .x.calendar .header .month-year {
+  :is(.x.calendar, x-calendar) .header .month-year {
     display: flex;
     flex: 1;
     align-items: center;
     position: relative
   }
 
-  .x.calendar .header .month-year .years {
+  :is(.x.calendar, x-calendar) .header .month-year .years {
     margin-left: 12px
   }
 
-  .x.calendar .week-days-container {
+  :is(.x.calendar, x-calendar) .week-days-container {
     display: flex;
     padding: 0 4px
   }
 
-  .x.calendar .week-days-container .weekday {
+  :is(.x.calendar, x-calendar) .week-days-container .weekday {
     background: #ccc;
     width: 14.2857142857%;
     text-align: center;
@@ -55,13 +55,13 @@
     text-overflow: ellipsis;
   }
 
-  .x.calendar .days-container {
+  :is(.x.calendar, x-calendar) .days-container {
     display: flex;
     flex-wrap: wrap;
     padding: 0 4px 12px 4px
   }
 
-  .x.calendar .days-container .date {
+  :is(.x.calendar, x-calendar) .days-container .date {
     line-height: 1.5em;
     box-sizing: border-box;
     width: 14.2857142857%;
@@ -70,11 +70,11 @@
     position: relative;
   }
 
-  .x.calendar .days-container .date[data-tooltip] {
+  :is(.x.calendar, x-calendar) .days-container .date[data-tooltip] {
     border-bottom: 1px dotted rgba(0,0,0,0)
   }
 
-  .x.calendar .days-container .date:has(.holiday):after {
+  :is(.x.calendar, x-calendar) .days-container .date:has(.holiday):after {
     content: attr(data-tooltip);
     position: absolute;
     color: #d13101;
@@ -86,7 +86,7 @@
     white-space: nowrap;
   }
 
-  .x.calendar .days-container .date button {
+  :is(.x.calendar, x-calendar) .days-container .date button {
     background: rgba(0,0,0,0);
     border: none;
     box-shadow: none;
@@ -95,37 +95,37 @@
     padding: 0;
   }
 
-  .x.calendar .days-container .date button:focus {
+  :is(.x.calendar, x-calendar) .days-container .date button:focus {
     background-color: unset;
     color: unset;
     box-shadow: #3751b5 0 0 0 2px;
     outline: none;
   }
 
-  .x.calendar .days-container .date button:disabled {
+  :is(.x.calendar, x-calendar) .days-container .date button:disabled {
     color: unset;
     opacity: .7
   }
 
-  .x.calendar .days-container .date button:not(.select).holiday {
+  :is(.x.calendar, x-calendar) .days-container .date button:not(.select).holiday {
     color: #d13101;
     font-weight: bold
   }
 
-  .x.calendar .days-container .date button .holiday:after {
+  :is(.x.calendar, x-calendar) .days-container .date button .holiday:after {
     position: absolute;
     content: attr(data-tooltip);
     font-size: small;
     color: #d13101
   }
 
-  .x.calendar .days-container .date button.today {
+  :is(.x.calendar, x-calendar) .days-container .date button.today {
     background-color: #eee;
     color: #333;
     border-radius: 50%
   }
 
-  .x.calendar .days-container .date button.select {
+  :is(.x.calendar, x-calendar) .days-container .date button.select {
     background-color: #d13101;
     color: #fff;
     border-radius: 50%

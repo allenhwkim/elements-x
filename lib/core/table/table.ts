@@ -31,7 +31,8 @@ export class Table extends HTMLElement {
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (name === 'value') {
+    if (name === 'input-class') {
+    } else if (name === 'value') {
       try {
         this.value = JSON.parse(newValue);
       } catch(e) {
@@ -114,6 +115,7 @@ export class Table extends HTMLElement {
       });
     } else {
       const inputEl = document.createElement('input');
+      inputKlass && inputEl.setAttribute('class', inputKlass);
       value && (inputEl.value = value);
       nextRowEl.appendChild(inputEl);
     }

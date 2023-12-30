@@ -1,8 +1,8 @@
-.x.dropdown {
+:is(.x.dropdown, x-dropdown) {
   display: none
 }
 
-.x.dropdown.visible {
+:is(.x.dropdown, x-dropdown).visible {
   display: block;
   position: absolute;
   border: 1px solid #ccc;
@@ -11,6 +11,6 @@
   z-index: 1
 }
 
-.x.dropdown.visible:focus {
+:is(.x.dropdown, x-dropdown).visible:focus {
   box-shadow: 8px 8px 16px #999 !important
 }

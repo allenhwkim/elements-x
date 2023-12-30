@@ -1,4 +1,4 @@
-.x.map { 
+:is(.x.map, x-map) { 
   display: block; 
   height: 300px; 
 }

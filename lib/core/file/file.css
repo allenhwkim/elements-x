@@ -1,4 +1,4 @@
-.x.file {
+:is(.x.file, x-file) {
   display: inline-block;
   background: #F5F5F5;
   padding: 16px;
@@ -6,19 +6,19 @@
   box-sizing: border-box;
 }
 
-.x.file label {
+:is(.x.file, x-file) label {
   cursor: pointer;
 }
 
-.x.file input {
+:is(.x.file, x-file) input {
   display: none;
 }
 
-.x.file > .list { /* file list */
+:is(.x.file, x-file) > .list { /* file list */
   color: #666;
 }
 
-.x.file > .list > * { /* file info */
+:is(.x.file, x-file) > .list > * { /* file info */
   display: flex;
   padding: 4px;
   position: relative;
@@ -26,26 +26,26 @@
   white-space: nowrap;
 }
 
-.x.file > .list > *:first-child {
+:is(.x.file, x-file) > .list > *:first-child {
   border-top: 1px solid #ccc;
 }
 
-.x.file > .list > *:not(:last-child) {
+:is(.x.file, x-file) > .list > *:not(:last-child) {
   border-bottom: 1px solid #ccc;
 }
 
-.x.file > .list > * :is(.name, .detail) {
+:is(.x.file, x-file) > .list > * :is(.name, .detail) {
   width: 50%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.x.file > .list > * .detail {
+:is(.x.file, x-file) > .list > * .detail {
   text-align: right;
 }
 
-.x.file > .list > * img {
+:is(.x.file, x-file) > .list > * img {
   width: auto;
   height: 1.5em;
   margin: 0 4px;

@@ -1,11 +1,11 @@
-.x.pagination {
+:is(.x.pagination, x-pagination) {
   display: block;
 }
-.x.pagination .navigation .prev {
+:is(.x.pagination, x-pagination) .navigation .prev {
   display: inline-block;
 }
 
-.x.pagination .page {
+:is(.x.pagination, x-pagination) .page {
   border: none;
   background: #FFF;
   min-width: 28px;
@@ -16,17 +16,17 @@
   color: inherit;
 }
 
-.x.pagination .page:disabled { color: #CCC; }
-.x.pagination .page.prev::before { content : '◀'; }
-.x.pagination .page.next::before { content : '▶'; }
-.x.pagination .page.first::before { content : '◀◀'; }
-.x.pagination .page.last::before { content : '▶▶'; }
+:is(.x.pagination, x-pagination) .page:disabled { color: #CCC; }
+:is(.x.pagination, x-pagination) .page.prev::before { content : '◀'; }
+:is(.x.pagination, x-pagination) .page.next::before { content : '▶'; }
+:is(.x.pagination, x-pagination) .page.first::before { content : '◀◀'; }
+:is(.x.pagination, x-pagination) .page.last::before { content : '▶▶'; }
 
-.x.pagination .pages {
+:is(.x.pagination, x-pagination) .pages {
   display: inline-block;
 }
 
-.x.pagination .pages > .page.selected {
+:is(.x.pagination, x-pagination) .pages > .page.selected {
   color: #FFF;
   background-color: #0B51C1;
   border-radius: 4px;

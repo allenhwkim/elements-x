@@ -1,4 +1,4 @@
-.x.monaco { 
+:is(.x.monaco, x-monaco) { 
   display: block;  
   min-height: 200px; 
 }

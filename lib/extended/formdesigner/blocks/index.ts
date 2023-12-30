@@ -1,11 +1,13 @@
-import componentBlocks from './components';
-import containerBlocks from './containers';
-import formBlocks from './forms';
-import customBlocks from './custom-elements';
+import boostrap5Components from './bootstrap5-components';
+import containers from './containers';
+import formControls from './form-controls';
+import customElements from './custom-elements';
+import headings from './headings';  
 
 export {
-  componentBlocks,
-  containerBlocks,
-  formBlocks,
-  customBlocks,
+  boostrap5Components,
+  containers,
+  formControls,
+  customElements,
+  headings,
 };

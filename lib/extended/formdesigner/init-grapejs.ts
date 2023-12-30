@@ -1,7 +1,7 @@
 import grapesjs, {Editor} from 'grapesjs';
 import { showSidePanel } from './custom-commands';
-import { componentBlocks, formBlocks, containerBlocks, customBlocks }  from './blocks';
-import { componentTypes } from './components';
+import { boostrap5Components, formControls, containers, customElements, headings }  from './blocks';
+import { componentTypes } from './types';
 import GRAPESJS_HTML from './GRAPESJS_HTML.html?raw';
 import {
   topPanel, 
@@ -37,10 +37,11 @@ export function initGrapesJs(elId: string) {
     blockManager: {
       appendTo: '.blocks-container',
       blocks: [
-        ...containerBlocks,
-        ...formBlocks,
-        ...componentBlocks,
-        ...customBlocks,
+        ...containers,
+        ...headings,
+        ...formControls,
+        ...boostrap5Components,
+        ...customElements,
       ]
     },
     selectorManager: {

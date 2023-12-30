@@ -1,34 +1,36 @@
-import { buttonType } from './types/button';
+import { buttonType } from './form-controls/button';
 
 // form control types
-import { textareaType } from './types/textarea';
-import { formType } from './types/form';
-import { labelType } from './types/label';
+import { textareaType } from './form-controls/textarea';
+import { formType } from './form-controls/form';
+import { labelType } from './form-controls/label';
 
 // <input> types
-import { inputType } from './types/input';
-import { loadCheckboxType } from './types/input-checkbox';
-import { loadRadioType } from './types/input-radio';
-import { loadRangeType } from './types/input-range';
+import { inputType } from './form-controls/input';
+import { loadCheckboxType } from './form-controls/input-checkbox';
+import { loadRadioType } from './form-controls/input-radio';
+import { loadRangeType } from './form-controls/input-range';
 
 // <select> types
-import { loadSelectType } from './types/select';
-import { selectOptionsTrait } from './types/select-options';
-import { optionType } from './types/option';
+import { loadSelectType } from './form-controls/select';
+import { selectOptionsTrait } from './form-controls/select-options';
+import { optionType } from './form-controls/option';
 
 // custom element types
-import { calendarType } from './types/custom-elements/calendar';
-import { dataTableType } from './types/custom-elements/data-table';
-import { mapType } from './types/custom-elements/map';
-import { maskedType } from './types/custom-elements/masked';
-import { loadComboboxType } from './types/custom-elements/combobox';
-import { comboboxOptionsTrait } from './types/custom-elements/combobox-options';
-import { loadDropdownType } from './types/custom-elements/dropdown';
+import { calendarType } from './custom-elements/calendar';
+import { dataTableType } from './custom-elements/data-table';
+import { mapType } from './custom-elements/map';
+import { maskedType } from './custom-elements/masked';
+import { loadComboboxType } from './custom-elements/combobox';
+import { comboboxOptionsTrait } from './custom-elements/combobox-options';
+import { loadDropdownType } from './custom-elements/dropdown';
 import { Editor } from 'grapesjs';
 
-selectOptionsTrait
+import { imageType } from './image';
 
 export const componentTypes = (editor: Editor) => {
+  editor.DomComponents.addType('image', imageType);
+
   editor.DomComponents.addType('calendar', calendarType);
   editor.DomComponents.addType('datatable', dataTableType);
   editor.DomComponents.addType('map', mapType);

@@ -5,8 +5,8 @@ const css = cssM.default;
 export class ComboBox extends HTMLElement {
   value: HTMLElement | undefined;
   required: boolean = false;
-  src;
-  srcTemplate = '';
+  src: undefined | ((key: string) => Promise<any>); 
+  srcTemplate: string = '';
 
   static get observedAttributes() { return ['selected', 'required']; }
 
@@ -31,8 +31,7 @@ export class ComboBox extends HTMLElement {
   init() { 
     const inputEl = this.querySelector('input') as any;
     const ulEl = this.querySelector('ul') as any;
-    const srcFunc = this.src;
-    if (srcFunc && ulEl) {
+    if (this.src && ulEl) {
       this.srcTemplate = ulEl.children[0]?.outerHTML;
       ulEl.innerHTML = '';
     }
@@ -58,13 +57,13 @@ export class ComboBox extends HTMLElement {
     });
 
     inputEl.addEventListener('keydown', (event: any) => {
-      const highlightedEl = this.querySelector('.highlighted:not(.hidden)');
       if (['ArrowDown', 'ArrowUp', 'Enter', 'Escape'].includes(event.key)) {
         if      (event.key === 'ArrowDown') { this.highlightNext( ulEl, 1); }
         else if (event.key === 'ArrowUp') { this.highlightNext( ulEl, -1); } 
         else if (event.key === 'Escape') { inputEl.blur(); }
         else if (event.key === 'Enter') { 
-          (this as any).selectHandler(event, inputEl, highlightedEl);
+          this.selectHandler(event); 
+          inputEl.blur();
         }
         event.preventDefault();
         event.stopPropagation();
@@ -72,8 +71,8 @@ export class ComboBox extends HTMLElement {
       }
     });
 
-    const inputListener = srcFunc ? 
-      debounce(() => srcFunc(inputEl.value).then((resp: any) => {
+    const inputListener = this.src ? 
+      debounce(() => (this.src as Function)(inputEl.value).then((resp: any) => {
         if (Array.isArray(resp)) {
           this.rewriteListEl(ulEl, resp, this.srcTemplate)
         } else {
@@ -85,26 +84,25 @@ export class ComboBox extends HTMLElement {
     // mousedown -> inputEl.blur(), hide dropdown -> input:focus, show dropdown, 
     // do not call selectHandler with click event, but only with mousedown
     if (ulEl) { // readonly or disabled does not have ulEl
-      ulEl.addEventListener('mousedown', (event) => { 
-        const highlightedEl = ulEl.querySelector(`.highlighted:not(.hidden)`);
-        (this as any).selectHandler(event, inputEl, highlightedEl)
-      });
+      ulEl.addEventListener('mousedown', (event) => this.selectHandler(event));
     }
   }
 
-  selectHandler(event, inputEl) {
+  selectHandler(event) {
     const ulEl = this.querySelector('ul');
+    const inputEl = this.querySelector('input') as any;
+    const highlightedEl = event.type === 'mousedown' ? 
+      event.target.closest('li') : this.querySelector('.highlighted:not(.hidden)') as any;
     ulEl?.querySelector('.selected')?.classList.remove('selected');
     ulEl?.querySelector('.highlighted')?.classList.remove('highlighted');
 
-    const selected = event.target.closest('li');
-    if (selected) {
-      const strValue = selected.dataset?.value || selected.getAttribute('value') || selected.innerText;
-      inputEl.value = selected.innerText;
-      this.value = selected;
-      selected.classList.add('highlighted', 'selected');
-      selected.toString = () => strValue;
-      this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: selected }));
+    if (highlightedEl) {
+      const strValue = highlightedEl.dataset?.value || highlightedEl.getAttribute('value') || highlightedEl.innerText;
+      inputEl.value = highlightedEl.innerText;
+      this.value = highlightedEl;
+      highlightedEl.classList.add('highlighted', 'selected');
+      highlightedEl.toString = () => strValue;
+      this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: highlightedEl }));
     }
   }
 

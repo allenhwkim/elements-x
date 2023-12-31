@@ -11,6 +11,9 @@ const meta: Meta = {
   title: 'Core/Combobox',
   render: (args) => {
     const el = document.createElement(elName) as any;
+    if (args.required) {
+      el.required = args.required;
+    }
     if (args.html) {
       el.insertAdjacentHTML('beforeend', args.html);
     }
@@ -23,7 +26,9 @@ const meta: Meta = {
     const divEl = document.createElement('div');
     const msgEl = document.createElement('div');
     divEl.append(el, msgEl);
-    divEl.addEventListener('select', (event: any) => msgEl.innerText = `'select' event: ${JSON.stringify(event.detail)}`)
+    divEl.addEventListener('select', (event: any) => {
+      msgEl.innerText = `'select' event: ${event.detail}`
+    })
     return divEl as any;
   },
   args: {},
@@ -43,15 +48,16 @@ export default meta;
 
 export const Primary = { 
   args: {
+    required: true,
     html: `
-      <input placeholder="Choose one value" autoComplete="off" value="Hello World" />
+      <input placeholder="Choose one value" autoComplete="off" />
       <ul>
         <li data-value="">Choose One</li>
         <li data-value="1">Hello</li>
-        <li>Hello World</li>
+        <li value="2">World</li>
         <li>Foo</li>
+        <li>Bar</li>
         <li class="disabled">Disabled</li>
-        <li>Foo Bar</li>
       </ul>
     `.trim()
 }};

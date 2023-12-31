@@ -3,17 +3,29 @@ import * as cssM from './combobox.css?inline';
 const css = cssM.default;
 
 export class ComboBox extends HTMLElement {
+  value: HTMLElement | undefined;
+  required: boolean = false;
   src;
   srcTemplate = '';
 
-  disConnnectedCallback() {
-    removeCss(this.tagName);
+  static get observedAttributes() { return ['selected', 'required']; }
+
+  async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
+    (name === 'required') && (this.required = newValue !== null);
+    if (name === "value") {
+      const ulEl = this.querySelector('ul') as any;
+      this.highlightValue(ulEl, newValue);
+    }
   }
 
   connectedCallback() { 
     addCss(this.tagName, css);
     this.classList.add('x', 'combobox');
     setTimeout(() => this.init())
+  }
+
+  disConnnectedCallback() {
+    removeCss(this.tagName);
   }
 
   init() { 
@@ -37,9 +49,12 @@ export class ComboBox extends HTMLElement {
     inputEl.addEventListener('focus', () => this.highlightValue(ulEl, inputEl.value))
 
     // remove highlighted part when input focused out to remove duplicated highlighting.
-    inputEl.addEventListener('blur', function(event) { 
+    inputEl.addEventListener('blur', event => { 
       const highlightedEl = ulEl.querySelector('.highlighted');
       highlightedEl?.classList.remove('highlighted');
+      if (this.required) {
+        this.classList[this.value ? 'remove': 'add']('error', 'required');
+      }
     });
 
     inputEl.addEventListener('keydown', (event: any) => {
@@ -83,10 +98,14 @@ export class ComboBox extends HTMLElement {
     ulEl?.querySelector('.highlighted')?.classList.remove('highlighted');
 
     const selected = event.target.closest('li');
-    const value = selected.dataset?.value || selected.getAttribute('value') || selected.innerText;
-    inputEl.value = value;
-    selected.classList.add('highlighted', 'selected');
-    this.dispatchEvent(new CustomEvent('select', {bubbles: true, detail: value}));
+    if (selected) {
+      const strValue = selected.dataset?.value || selected.getAttribute('value') || selected.innerText;
+      inputEl.value = selected.innerText;
+      this.value = selected;
+      selected.classList.add('highlighted', 'selected');
+      selected.toString = () => strValue;
+      this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: selected }));
+    }
   }
 
   /**

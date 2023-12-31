@@ -18,6 +18,7 @@
   background-position-y: 50%;
   border-radius: 4px;
   box-sizing: border-box;
+  text-overflow: ellipsis;
 }
 
 :is(.x.combobox, x-combobox) input:read-only {

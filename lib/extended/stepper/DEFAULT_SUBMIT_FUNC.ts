@@ -1,6 +1,6 @@
-import { ISubmitFunc, IUserData } from "./types";
+import { IUserData } from "./types";
 
-export const DEFAULT_SUBMIT_FUNC: ISubmitFunc = async function(userData: IUserData) {
+export const DEFAULT_SUBMIT_FUNC: (userData: any) =>  Promise<any> = async function(userData: IUserData) {
   const payload = typeof userData === 'string' ? userData : JSON.stringify(userData);
   fetch("https://httpbin.org/post", {
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },

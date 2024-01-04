@@ -1,7 +1,12 @@
+/* stepper-controller level */
 :is(.x.stepper-controller, x-stepper-controller) .stepper.form {
   min-height: 240px;
 }
+:is(.x.stepper-controller, x-stepper-controller) .stepper.form label:has(input[required]) :first-child:after {
+  content: ' *';
+}
 
+/* stepper level */
 :is(.x.stepper, x-stepper) {
   --fs-label-size: 32px;
   --fs-width: 100px;

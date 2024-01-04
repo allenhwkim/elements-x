@@ -1,15 +1,8 @@
 import grapesjs, {Editor} from 'grapesjs';
-import { showSidePanel } from './custom-commands';
+import { showSidePanel } from './commands';
 import { boostrap5Components, formControls, containers, customElements, headings }  from './blocks';
 import { componentTypes } from './types';
-import GRAPESJS_HTML from './GRAPESJS_HTML.html?raw';
-import {
-  topPanel, 
-  basicActionsPanel, 
-  devicesPanel,
-  rightSideSwitcher, 
-  layersPanel,
-} from './panels';
+import { topPanel, basicActionsPanel, devicesPanel, rightSideSwitcher, layersPanel } from './panels';
 
 const devices = [
   { name: 'Desktop', width: ''},// default size
@@ -81,18 +74,6 @@ export function initGrapesJs(elId: string) {
       ] as any
     }
   });
-
-  editor.BlockManager.getCategories().each((category, ndx) => {
-    (ndx > 0) && category.set('open', false);
-  });
-
-  editor.setComponents(GRAPESJS_HTML);
-  
-  // Disable interaction to stepper and buttonsd
-  editor.setStyle(`
-    x-stepper, .stepper.buttons {opacity: .5; pointer-events: none}
-    .x.stepper-controller .stepper.form {min-height: 240px; }
-  `);
 
   return editor;
 }

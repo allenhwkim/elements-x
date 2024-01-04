@@ -11,7 +11,6 @@ const meta: Meta = {
   title: 'Extended/FormDesigner',
   render: (args) => {
     const custEl = document.createElement(elName) as any;
-    args.useTemplate && custEl.setAttribute('use-template', args.useTemplate);
     args.editTemplate && custEl.setAttribute('edit-template', args.editTemplate);
 
     const containerEl = document.createElement('div');
@@ -44,10 +43,6 @@ const meta: Meta = {
       description: 'current step name',
       control: { type: 'text' },
     },
-    useTemplate: {
-      description: 'true or false, Default, true. To use template when init editor html',
-      control: { type: 'boolean' },
-    },
     editTemplate: {
       description: 'true or false, Default, false. Set true to update template',
       control: { type: 'boolean' },
@@ -61,7 +56,6 @@ export default meta;
 export const Primary = { 
   args: {
     step: 'Name',
-    useTemplate: true,
     editTemplate: false,
   }
 };

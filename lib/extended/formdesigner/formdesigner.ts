@@ -58,10 +58,7 @@ export class FormDesigner extends HTMLElement {
     addCss(this.tagName, themeCSS + stylesCSS);
     this.classList.add('x', 'form-designer');
 
-console.log(this.outerHTML);
-    const useTemplate = this.getAttribute('use-template') !== 'false'; // default true
     const editTemplate = this.getAttribute('edit-template') !== null;  // default false
-console.log({useTemplate, editTemplate}, this.getAttribute('edit-template'), this.getAttribute('use-template'));
 
     this.innerHTML = html;
     this.editor = initGrapesJs('#gjs');
@@ -73,7 +70,7 @@ console.log({useTemplate, editTemplate}, this.getAttribute('edit-template'), thi
     );
     this.editor.on('load', e => {
       this.editorLoaded = true;
-      this.template && useTemplate && this.#setHtml(this.template);
+      this.template && this.#setHtml(this.template);
       this.forms && this.#setForms(this.forms);
     });
   }

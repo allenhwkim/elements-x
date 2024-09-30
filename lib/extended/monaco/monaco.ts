@@ -31,7 +31,7 @@ export class Monaco extends HTMLElement {
       automaticLayout: true,
       minimap: { enabled: false },
     });
-    this.setValue(this.value);
+    this.setValue(this.value || '');
     (this.language === 'json' && this.schemas) && this.setSchemas();
 
     this.monacoEditor.onDidBlurEditorText(this.fireEvents.bind(this));

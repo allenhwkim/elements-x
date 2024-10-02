@@ -5,7 +5,7 @@ import { fixIndent } from '../../../lib/util';
 !customElements.get('x-stepper') && customElements.define('x-stepper', Stepper);
 
 const meta: Meta = { 
-  title: 'Extended/stepper',
+  title: 'Extended/Stepper',
   render: (args) => {
     const wrapperEl = document.createElement('div');
     wrapperEl.insertAdjacentHTML('beforeend', fixIndent(`

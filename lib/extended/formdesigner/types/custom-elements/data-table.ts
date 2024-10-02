@@ -4,7 +4,6 @@ export const dataTableType = {
   model: {
     defaults: {
       copyable: false,
-      attributes: { class: 'x table' },
       traits: [
         'id',
         'name',

@@ -9,7 +9,6 @@ export class Sidebar extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
-    this.classList.add('x', 'sidebar');
     this.documentKlickListener = this.documentClickHandler.bind(this);
 
     const closeBtn = this.querySelector(this.closeSelector);

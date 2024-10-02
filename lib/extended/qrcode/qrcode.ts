@@ -9,7 +9,6 @@ export class QRCode extends HTMLElement {
   }
 
   connectedCallback() {
-    this.classList.add('x', 'qrcode');
     loadScript('https://unpkg.com/qrcode@1.4.4/build/qrcode.min.js');
     this.#updateDOM();
   }

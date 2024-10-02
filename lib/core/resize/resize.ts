@@ -10,7 +10,6 @@ export class Resize extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
-    this.classList.add('x', 'resize');
     this.isHandle = 
       this.getAttribute('top') !== null || 
       this.getAttribute('bottom') !== null;

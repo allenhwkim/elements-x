@@ -22,7 +22,6 @@ export class Formflow extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
-    this.classList.add('x', 'formflow');
     this.mount(); // sets this.root and this.reactflowInstance
   }
   

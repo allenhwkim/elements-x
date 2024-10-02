@@ -1,4 +1,4 @@
-:is(.x.clock, x-clock) {
+x-clock {
   display: inline-block;
   /* position: relative; //This affects offsetX/Y. Don't */
   width: 160px;
@@ -8,10 +8,10 @@
 }
 
 
-:is(.x.clock, x-clock) .second-hand {
+x-clock .second-hand {
   display: none;
 }
 
-:is(.x.clock, x-clock)[run] .second-hand {
+x-clock[run] .second-hand {
   display: initial;
 }

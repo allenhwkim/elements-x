@@ -13,7 +13,6 @@ export class Json extends HTMLElement {
   }
 
   connectedCallback() {
-    this.classList.add('x', 'json');
     if (this.isConnected) {
       addCss(this.tagName, cssM.default);
       this.#data = this.data;

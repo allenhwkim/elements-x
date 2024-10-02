@@ -79,7 +79,6 @@ export class Calendar extends HTMLElement {
 
   connectedCallback() { 
     addCss(this.tagName, css);
-    this.classList.add('x', 'calendar');
     this.innerHTML = html;
     this.dateSelected = this.date;
     rebuildCalendar(this);

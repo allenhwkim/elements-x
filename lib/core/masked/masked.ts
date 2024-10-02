@@ -18,7 +18,6 @@ export class Masked extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
-    this.classList.add('x', 'masked');
 
     setTimeout(() => { // delaying for this.querySelector
       const inputEl = this.querySelector('input');

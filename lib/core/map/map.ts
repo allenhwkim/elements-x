@@ -14,7 +14,6 @@ export class Map extends HTMLElement {
   async connectedCallback() {
     loadScript('https://cdn.jsdelivr.net/npm/ol@v7.2.2/dist/ol.js', 'https://cdn.jsdelivr.net/npm/ol@v7.2.2/ol.css');
     addCss(this.tagName, css);
-    this.classList.add('x', 'map');
     await waitFor('window.ol');
     this.#map = new window['ol'].Map({ target: this });
     this.#map.addLayer(new window['ol'].layer.Tile({source: new window['ol'].source.OSM()}));

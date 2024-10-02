@@ -43,7 +43,6 @@ export class Table extends HTMLElement {
   }
 
   connectedCallback() {
-    this.classList.add('x', 'table');
     const keys = this.keys;
     const emptyObj = keys ? keys.reduce((acc, key) => (acc[key] = '', acc), {}) : '';
     const rows = (this.value?.length ? this.value : [emptyObj]);

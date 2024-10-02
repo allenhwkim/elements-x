@@ -4,7 +4,6 @@ export const maskedType = {
   model: {
     defaults: {
       copyable: false,
-      attributes: { class: 'x masked' },
       traits: [
         'id',
         'name',

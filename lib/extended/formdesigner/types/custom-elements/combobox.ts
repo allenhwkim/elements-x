@@ -6,7 +6,6 @@
         tagName: 'x-combobox',
         droppable: false,
         highlightable: false,
-        attributes: { class: 'x combobox' },
         components: [{
           type: 'ul',
           content: [

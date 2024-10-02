@@ -1,20 +1,20 @@
-:is(.x.masked, x-masked) {
+x-masked {
   display: inline-block;
 }
 
-:is(.x.masked, x-masked) {
+x-masked {
   position: relative; /* mask will be positioned absolutely */
   margin-bottom: 12px;
 }
 
-:is(.x.masked, x-masked) input {
+x-masked input {
   font-family: monospace;
   background: transparent;
   padding: 4px;
   border: 1px solid #CCC;
 }
 
-:is(.x.masked, x-masked) .mask {
+x-masked .mask {
   position: absolute;
   top: 0;
   left: 0;

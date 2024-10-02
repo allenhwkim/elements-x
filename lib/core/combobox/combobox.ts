@@ -20,7 +20,6 @@ export class ComboBox extends HTMLElement {
 
   connectedCallback() { 
     addCss(this.tagName, css);
-    this.classList.add('x', 'combobox');
     setTimeout(() => this.init())
   }
 

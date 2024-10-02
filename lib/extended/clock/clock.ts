@@ -37,7 +37,6 @@ export class Clock extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
-    this.classList.add('x', 'clock');
     this.innerHTML = html;
     this.#updateDOM();
   }

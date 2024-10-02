@@ -7,7 +7,6 @@ export const loadDropdownType = (editor: Editor) => ({
   model: {
     defaults: {
       copyable: false,
-      attributes: { class: 'x dropdown' },
       traits: [
         'id',
         'name',

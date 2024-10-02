@@ -54,7 +54,6 @@ export class BarCode extends HTMLElement {
   }
 
   async connectedCallback() {
-    this.classList.add('x', 'barcode');
     loadScript('https://unpkg.com/jsbarcode/dist/JsBarcode.all.min.js');
     await waitFor('window.JsBarcode');
     this.#updateDOM();

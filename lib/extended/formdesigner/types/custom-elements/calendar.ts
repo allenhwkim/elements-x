@@ -4,7 +4,6 @@ export const calendarType = {
   model: {
     defaults: {
       copyable: false,
-      attributes: { class: 'x calendar' },
       traits: [
         'id',
         'name',

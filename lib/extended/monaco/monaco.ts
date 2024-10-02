@@ -15,7 +15,6 @@ export class Monaco extends HTMLElement {
 
   async connectedCallback() {
     addCss(this.tagName, css);
-    this.classList.add('x', 'monaco');
 
     this.innerHTML = '';
     this.language = this.getAttribute('language') || this.dataset.language || 'javascript';

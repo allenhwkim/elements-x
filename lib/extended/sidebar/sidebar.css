@@ -1,4 +1,4 @@
-:is(.x.sidebar, x-sidebar) {
+x-sidebar {
   min-width: 200px;
   padding: 12px;
   background-color: #fff;
@@ -12,11 +12,11 @@
   box-shadow: 0 4px 10px 0 #333;
 }
 
-:is(.x.sidebar, x-sidebar).visible {
+x-sidebar.visible {
   left: 0;
 }
 
-:is(.x.sidebar, x-sidebar) .close {
+x-sidebar .close {
   border: none;
   position: absolute;
   right: 0;

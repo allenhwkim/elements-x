@@ -12,7 +12,6 @@ export class File extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
-    this.classList.add('x', 'file');
 
     this.addEventListener('dragover', this.dragoverHandler.bind(this));
     this.addEventListener('dragleave', this.dragleaveHandler.bind(this));

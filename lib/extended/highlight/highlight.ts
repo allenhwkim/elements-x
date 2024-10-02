@@ -15,7 +15,6 @@ export class Highlight extends HTMLElement {
   }
 
   connectedCallback() {
-    this.classList.add('x', 'highlight'); 
     const theme = this.getAttribute('theme') || 'github';
     loadScript(
       'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js',

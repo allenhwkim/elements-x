@@ -4,7 +4,6 @@ export const mapType = {
 
   model: {
     defaults: {
-      attributes: { class: 'x map' },
       traits: [
         'id',
         'title',

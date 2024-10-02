@@ -10,7 +10,6 @@ export class List extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
-    this.classList.add('x', 'list');
     this.addEventListener('keydown', e => this.keydownHandler(e));
     this.addEventListener('click', e => this.clickHandler(e));
     this.render();

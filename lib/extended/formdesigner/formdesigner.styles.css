@@ -10,14 +10,14 @@
   | +-----------+ +--------------------------+ |
   +--------------------------------------------+
 */
-:is(.x.form-designer, x-formdesigner) {
+x-formdesigner {
   position: relative;
   display: block;
   margin: 0 auto;
   height: 720px;
 }
 
-:is(.x.form-designer, x-formdesigner) :is(
+x-formdesigner :is(
   .gjs-category-title, 
   .gjs-layer-title, 
   .gjs-block-category 
@@ -31,14 +31,14 @@
 /**
  * panel__top
  */
-:is(.x.form-designer, x-formdesigner) .panel__top {
+ x-formdesigner .panel__top {
   display: flex;
   width: 100%;
   justify-content: flex-end;
   gap: 2rem;
 }
 
-:is(.x.form-designer, x-formdesigner) .panel__top > * {
+x-formdesigner .panel__top > * {
   position: initial; /* override position: absolute */
   padding: 0 4px; /* override padding: 5px */
 }
@@ -46,7 +46,7 @@
 /**
  * editor-row
  */
-:is(.x.form-designer, x-formdesigner) .editor-row {
+x-formdesigner .editor-row {
   display: flex;
   justify-content: flex-start;
   align-items: stretch;
@@ -61,14 +61,14 @@
 /**
  * editor-row side-bar
  */
-:is(.x.form-designer, x-formdesigner) .editor-row .side-bar {
+x-formdesigner .editor-row .side-bar {
   flex-basis: 230px;
   border-right: 2px solid #CCC;
   position: relative;
   overflow-y: auto;
 }
 
-:is(.x.form-designer, x-formdesigner) .editor-row .side-bar .gjs-block {
+x-formdesigner .editor-row .side-bar .gjs-block {
   min-height: auto;
   margin: 4px;
   padding: 6px 12px;
@@ -76,16 +76,16 @@
   white-space: nowrap;
 }
 
-:is(.x.form-designer, x-formdesigner) .editor-row .side-bar .gjs-block .gjs-block-label {
+x-formdesigner .editor-row .side-bar .gjs-block .gjs-block-label {
   font-size: 12px;
 }
 
-:is(.x.form-designer, x-formdesigner) .editor-row .side-bar .tabs.panel__switcher {
+x-formdesigner .editor-row .side-bar .tabs.panel__switcher {
   position: initial;
   display: flex;
 }
 
-:is(.x.form-designer, x-formdesigner) .editor-row .side-bar .tabs.panel__switcher .gjs-pn-buttons {
+x-formdesigner .editor-row .side-bar .tabs.panel__switcher .gjs-pn-buttons {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -94,10 +94,10 @@
 /**
  * editor-row editor-canvas (which has iframe)
  */
-:is(.x.form-designer, x-formdesigner) .editor-row .editor-canvas {
+x-formdesigner .editor-row .editor-canvas {
   flex-grow: 1;
 }
 
-:is(.x.form-designer, x-formdesigner) .editor-row .editor-canvas .gjs-cv-canvas {
+x-formdesigner .editor-row .editor-canvas .gjs-cv-canvas {
   width: 100%;
 }

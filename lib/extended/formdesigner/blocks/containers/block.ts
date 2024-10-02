@@ -3,7 +3,7 @@ export default {
   category: 'Containers',
   label: 'Block', 
   content: `
-    <div>
+    <div class="p-4 text-center">
       Block
     </div>
   `

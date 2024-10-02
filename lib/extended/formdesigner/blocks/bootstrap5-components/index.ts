@@ -3,7 +3,6 @@ import badgeBlock from './badge';
 import buttonGroupBlock from './button-group';
 import cardBlock from './card';
 import listGroupBlock from './list-group';
-import modalBlock from './modal';
 
 export default [
  alertBlock,
@@ -11,5 +10,4 @@ export default [
   buttonGroupBlock,
   cardBlock,
   listGroupBlock,
-  modalBlock,
 ];

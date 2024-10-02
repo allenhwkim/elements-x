@@ -7,8 +7,6 @@ import { Json } from './json/json';
 import { Monaco } from './monaco/monaco';
 import { QRCode } from './qrcode/qrcode';
 import { Stepper } from './stepper/stepper';
-import { StepperController } from './stepper/stepper-controller';
-import { StepperStorage } from './stepper/stepper-storage';
 import { Sidebar } from './sidebar/sidebar';
 
 if (window) {
@@ -26,8 +24,6 @@ if (window) {
       const elName = `x-${key.toLowerCase()}`;
       !customElements.get(elName) && customElements.define(elName, X[key]);
     }
-    !customElements.get('x-stepper-controller') &&
-      customElements.define('x-stepper-controller', StepperController);
   }
 }
 
@@ -35,5 +31,5 @@ export {
   BarCode, Clock, Highlight, Json, 
   Monaco, QRCode, 
   Formflow, FormDesigner, Sidebar,
-  Stepper, StepperController, StepperStorage,
+  Stepper
 };

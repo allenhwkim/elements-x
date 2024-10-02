@@ -1,7 +1,6 @@
 import { Canvas, Meta, Story, Controls } from '@storybook/blocks';
 
 import * as StepperStories from './stepper.stories';
-import { DEFAULT_FORMS } from '../../../lib/extended/stepper/DEFAULT_FORMS';
 
 <Meta of={StepperStories} />
 
@@ -9,9 +8,8 @@ import { DEFAULT_FORMS } from '../../../lib/extended/stepper/DEFAULT_FORMS';
 Form Stepper
 
 <Canvas of={StepperStories.Primary}/>
+<Controls of={StepperStories.Primary}/>
+<Canvas of={StepperStories.Secondary}/>
+<Controls of={StepperStories.Secondary}/>
 
-<Controls />
-
-### Default forms
-<pre>{JSON.stringify(DEFAULT_FORMS, null, '  ')}</pre>
 

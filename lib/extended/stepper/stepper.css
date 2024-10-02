@@ -1,108 +1,94 @@
-/* stepper-controller level */
-:is(.x.stepper-controller, x-stepper-controller) .stepper.form {
-  min-height: 240px;
-}
-:is(.x.stepper-controller, x-stepper-controller) .stepper.form label:has(input[required]) :first-child:after {
-  content: ' *';
+x-stepper ol.stepper {
+  --default-b: lightgrey; /* default step number background */
+  --default-c: black;     /* default step number color */
+  --active-b: purple;     /* active step number background */
+  --active-c: white;      /* active step numbver color */
+  --circle: 3.5em;          /* size of circle */
+  --b: 4px;                 /* connection line thickness */
+  
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  background: /* connection line between steps */
+    linear-gradient(var(--default-b) 0 0) no-repeat
+    50% calc((var(--circle) - var(--b))/2)/100% var(--b);
+  counter-reset: step;
+  margin: 20px;
+  padding: 0;
+  counter-reset: step;
+  overflow: hidden;
 }
 
-/* stepper level */
-:is(.x.stepper, x-stepper) {
-  --fs-label-size: 32px;
-  --fs-width: 100px;
-  display: flex;
-}
-
-:is(.x.stepper, x-stepper) .form-step {
-  flex: 1; /* stretch width */
-  display: flex;
-  justify-content: center;
+/*
+ * Each step has two section
+ * 1. step number with a circle (::before)
+ * 2. step name
+ . */
+x-stepper ol.stepper li {
+  display: grid;
+  place-items: center;
+  gap: 5px;
+  font-family: sans-serif;
   position: relative;
 }
-
-:is(.x.stepper, x-stepper) .form-step .stepper-link {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: center;
-  width: var(--fs-width);
-  cursor: pointer
-}
-
-:is(.x.stepper, x-stepper) .form-step .stepper-link .stepper-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--fs-label-size);
-  height: var(--fs-label-size);
-  font-size: 16px;
-  border: 1px solid;
+/* circle */
+x-stepper ol.stepper li::before {
+  content: counter(step) " ";
+  counter-increment: step;
+  cursor: pointer;
+  display: grid;
+  place-content: center;
+  aspect-ratio: 1;
+  height: var(--circle);
+  border: 5px solid #fff;
+  box-sizing: border-box;
+  background: var(--active-b);
+  color: var(--active-c);
   border-radius: 50%;
-  border-color: #b2b2b2;
-  color: #1a1a1a;
-  background-color: #fff;
+  font-family: monospace;
+  z-index: 1;
+}
+/* non active steps have different background and color */
+x-stepper ol.stepper li.active ~ li::before, 
+x-stepper ol.stepper:not(:has(li.active)) li::before {
+  background: var(--default-b);
+  color: var(--default-c);
+  cursor: initial;
+  pointer-events: none; 
 }
 
-:is(.x.stepper, x-stepper) .form-step.incomplete .stepper-link {
-  cursor: auto;
-}
-
-:is(.x.stepper, x-stepper) .form-step.active .stepper-link {
-  font-weight: 600;
-}
-
-:is(.x.stepper, x-stepper) 
-  .form-step:not(.disabled):is(.complete, .active, .skipped, .error) 
-  .connection-line 
-{
-  background-color: #90caf9;
-}
-
-:is(.x.stepper, x-stepper) 
- .form-step:not(.active).complete .stepper-link 
- .stepper-label:after 
-{
-  content: '✓';
+/* connection line before active step, which shows on the top of ol.stepper background */
+x-stepper ol.stepper li.active::after {
+  content: "";
   position: absolute;
-  background: inherit;
+  height: var(--b);
+  right: 100%;
+  top: calc((var(--circle) - var(--b))/2);
+  width: 100vw;
+  background: var(--active-b);
 }
 
-:is(.x.stepper, x-stepper)
-  .form-step:not(.disabled):is(.complete, .active, .skipped) 
-  .stepper-link .stepper-label 
-{
-  color: #FFF;
-  border-color: #1976d2;
-  background-color: #1976d2;
-}
 
-:is(.x.stepper, x-stepper) .form-step.disabled .stepper-link {
-  cursor: default;
-}
-
-:is(.x.stepper, x-stepper) .form-step:is(.error) .stepper-link .stepper-label {
-  color: #FFF;
-  border-color: #d27519;
-  background-color: #d27519;
-}
-
-:is(.x.stepper, x-stepper) .form-step .stepper-link .stepper-title {
-  text-align: center;
-  line-height: 20px;
-}
-
-:is(.x.stepper, x-stepper) .form-step .stepper-link .stepper-desc {
-  color: grey;
-  text-align: center;
-  width: 200px;
-  font-size: small;
-}
-
-:is(.x.stepper, x-stepper) .form-step .connection-line {
-  position: absolute;
-  width: calc(100% - var(--fs-label-size) - 8px);
-  background-color: #EEE;
-  height: 4px;
-  right: calc(50% + var(--fs-label-size) / 2 + 4px);
-  top: calc( var(--fs-label-size) / 2);
+@media (max-width: 600px) {
+  x-stepper ol.stepper {
+   display: grid;
+   gap: 20px;
+   background: 
+     linear-gradient(var(--default-b) 0 0) no-repeat
+     calc((var(--circle) - var(--b))/2) 50%/ var(--b) 100%;
+  }
+  x-stepper ol.stepper li {
+    display: flex;
+  }
+  x-stepper ol.stepper li.active::after {
+    content: "";
+    position: absolute;
+    width: var(--b);
+    bottom: 100%;
+    left: calc((var(--circle) - var(--b))/2);
+    top: auto;
+    right: auto;
+    height: 100vw;
+    background: var(--active-b);
+  }
 }

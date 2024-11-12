@@ -16,18 +16,21 @@ const meta: Meta = {
     args.dataUrl  && (el.setAttribute('data-url', args.dataUrl));
     args.dataPath && (el.setAttribute('data-path', args.dataPath));
     args.width    && (el.style.width = `${args.width}px`);
+    args.dataFunction && (el.dataFunction = getFunction(args.dataFunction))
+    args.dataList && (el.dataList = JSON.parse(args.dataList));
 
-    if (args.src) {
-      el.src = 
-        args.src.indexOf('function') !== -1 ? getFunction(args.src) : 
-        args.src;
-    }
     const divEl = document.createElement('div');
     const msgEl = document.createElement('div');
     divEl.append(el, msgEl);
     divEl.addEventListener('select', (event: any) => {
       msgEl.innerText = `'select' event: ${event.detail}`
     })
+    if (args.dataFunction || args.dataList) {
+      const preEl = document.createElement('pre');
+      preEl.style.padding = '1rem';
+      preEl.innerText = args.dataFunction || args.dataList;
+      divEl.append(preEl);
+    }
     return divEl as any;
   },
   args: {},
@@ -63,13 +66,13 @@ export const Primary = {
 
 export const Readonly = { 
   args: {
-    html: `<input placeholder="Readonly dropdown" readOnly />`
+    html: `<input placeholder="Readonly dropdown" value="Hello" readOnly />`
   }
 }
 
 export const Disabled = { 
   args: {
-    html: `<input placeholder="Disabled dropdown" disabled />`
+    html: `<input placeholder="Disabled dropdown" value="Hello" disabled />`
   }
 }
 
@@ -90,8 +93,9 @@ export const Countries = {
   args: {
     width: 800,
     html: `
-      <input placeholder="Search a country" />
+      <input placeholder="Search a country" autocomplete="false"/>
       <ul> <li data-value="[[code]]-[[name]]">[[name]]</li> </ul>
+      <p style="height:200px"></p>
     `.trim(), 
     dataUrl: '/countries.json',
     dataPath: 'countries'
@@ -104,9 +108,36 @@ export const Products = {
     html: `
       <input placeholder="Select a product" />
       <ul> <li data-value="[[id]]-[[title]]">[[brand]] - [[description]]</li> </ul>
+      <p style="height:200px"></p>
     `.trim(), 
     dataUrl: 'https://dummyjson.com/products/search?q=[[input]]',
     dataPath: 'products'
+  }
+}
+
+export const DataList1 = {
+  args: {
+    width: 800,
+    html: `
+      <input placeholder="Select one" />
+      <ul> <li data-value="[[key]]-[[value]]">[[value]]</li> </ul>
+    `.trim(), 
+    dataList: JSON.stringify({
+      1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five'
+    }, null, '  '),
+  }
+}
+
+export const DataList2 = {
+  args: {
+    width: 800,
+    html: `
+      <input placeholder="Select one" />
+      <ul> <li data-value="[[id]]-[[name]]">[[name]]</li> </ul>
+    `.trim(), 
+    dataList: JSON.stringify([
+      {id: 1, name:  'One'}, {id: 2, name:  'Two'}, {id: 3, name:  'Three'}, {id: 4, name:  'Four'}, {id: 5, name:  'Five'},
+    ], null, '  '),
   }
 }
 
@@ -119,13 +150,12 @@ export const CustomFunction = {
         <li data-value="[[id]]-[[title]]">[[brand]] - [[description]]</li>
       </ul>
     `.trim(), 
-    src: `
-      function srcFunc(search) {
-        return fetch('https://dummyjson.com/products/search?q='+search)
-          .then(res => res.json())
-          .then(res => res.products || [])
-      }
-    `.trim()
+    dataFunction: `
+function srcFunc(search) {
+  return fetch('https://dummyjson.com/products/search?q='+search)
+    .then(res => res.json())
+    .then(res => res.products || [])
+}`.trim()
   }
 
 }

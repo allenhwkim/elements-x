@@ -13,38 +13,37 @@ import * as Combobox from './combobox.stories';
 
 This is combobox with keyboard navigation and selection enabled.
 
-{/* <Canvas of={Combobox.Primary}/> */}
+<Canvas of={Combobox.Primary}/>
 
 <Controls />
 
 <h2 className="h6 sb-unstyled fw-light">STORIES</h2>
 
 ### Readonly
-{/* <Canvas of={Combobox.Readonly}/> */}
+<Canvas of={Combobox.Readonly}/>
 
 ### Disabled
-{/* <Canvas of={Combobox.Disabled}/> */}
+<Canvas of={Combobox.Disabled}/>
 
 ### Long list
-{/* <Canvas of={Combobox.LongList}/> */}
+<Canvas of={Combobox.LongList}/>
+
+### Data list 1
+<Canvas of={Combobox.DataList1}/>
+
+### Data list 2
+<Canvas of={Combobox.DataList2}/>
 
 ### Countries 
 `data-url="/countries.json" data-path="countries"`
-{/* <Canvas of={Combobox.Countries}/> */}
+<Canvas of={Combobox.Countries}/>
 
 ### Products 
 `data-url="https://dummyjson.com/products/search?q=[[input]]" data-path="products"`
 <Canvas of={Combobox.Products}/>
 
 ### Asynchronous - HTTP call with custom function
-{/* <Canvas of={Combobox.CustomFunction}/>
-```
-function srcFunc(search) {
-  return fetch('https://dummyjson.com/products/search?q='+search)
-    .then(res => res.json())
-    .then(res => res.products || [])
-}
-``` */}
+<Canvas of={Combobox.CustomFunction}/>
 
 ### Functionalities
 *  When attribute 'data-value' is given, it shows the value

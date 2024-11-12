@@ -30,6 +30,7 @@ x-stepper ol.stepper li {
   gap: 5px;
   font-family: sans-serif;
   position: relative;
+  background: #fff;
 }
 /* circle */
 x-stepper ol.stepper li::before {

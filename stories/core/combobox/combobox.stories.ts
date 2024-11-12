@@ -11,17 +11,16 @@ const meta: Meta = {
   title: 'Core/Combobox',
   render: (args) => {
     const el = document.createElement(elName) as any;
-    if (args.required) {
-      el.required = args.required;
-    }
-    if (args.html) {
-      el.insertAdjacentHTML('beforeend', args.html);
-    }
+    args.required && (el.required = args.required);
+    args.html     && (el.insertAdjacentHTML('beforeend', args.html));
+    args.dataUrl  && (el.setAttribute('data-url', args.dataUrl));
+    args.dataPath && (el.setAttribute('data-path', args.dataPath));
+    args.width    && (el.style.width = `${args.width}px`);
+
     if (args.src) {
-      el.src = getFunction(args.src);
-    }
-    if (args.width) {
-      el.style.width = `${args.width}px`;
+      el.src = 
+        args.src.indexOf('function') !== -1 ? getFunction(args.src) : 
+        args.src;
     }
     const divEl = document.createElement('div');
     const msgEl = document.createElement('div');
@@ -87,7 +86,31 @@ export const LongList = {
   }
 }
 
-export const Asynchronous = {
+export const Countries = {
+  args: {
+    width: 800,
+    html: `
+      <input placeholder="Search a country" />
+      <ul> <li data-value="[[code]]-[[name]]">[[name]]</li> </ul>
+    `.trim(), 
+    dataUrl: '/countries.json',
+    dataPath: 'countries'
+  }
+}
+
+export const Products = {
+  args: {
+    width: 800,
+    html: `
+      <input placeholder="Select a product" />
+      <ul> <li data-value="[[id]]-[[title]]">[[brand]] - [[description]]</li> </ul>
+    `.trim(), 
+    dataUrl: 'https://dummyjson.com/products/search?q=[[input]]',
+    dataPath: 'products'
+  }
+}
+
+export const CustomFunction = {
   args: {
     width: 800,
     html: `

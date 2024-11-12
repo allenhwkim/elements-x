@@ -2,11 +2,31 @@ import { addCss, removeCss, debounce, getReactProp } from '../../util';
 import * as cssM from './combobox.css?inline';
 const css = cssM.default;
 
+function isValidUrl(string) {
+  if (string.startsWith('/')) { // e.g. /countries.json
+    return true;
+  }
+
+  try {
+    const url = new URL(string);
+    return url.protocol?.startsWith('http');
+  } catch (e) {
+    return false;  
+  }
+}
+
 export class ComboBox extends HTMLElement {
   value: HTMLElement | undefined;
-  required: boolean = false;
-  src: undefined | ((key: string) => Promise<any>); 
-  srcTemplate: string = '';
+  required = false;
+
+  // dropdown source
+  list: any[] | undefined; // from an array
+  searchFunc: ((key: string) => Promise<any>) | undefined;  // from a custoin function
+  dataUrl = ''; // from 'data-url' attribute, a url
+  dynamicSearch = false;
+
+  dataPath= ''; // from 'data-path' attribute, to find data path from API response
+  listTemplate = ''; // to display dropdown
 
   static get observedAttributes() { return ['selected', 'required']; }
 
@@ -27,14 +47,22 @@ export class ComboBox extends HTMLElement {
     removeCss(this.tagName);
   }
 
-  init() { 
+  // properties  src={function} or src={array}
+
+  // url with [[input]]
+  // change the list by API response with list-path="products", default ""
+
+  // url without [[search]]
+  // filter the dropdown with the keyboard input
+  async init() { 
+    this.dataUrl = this.getAttribute('data-url') as string; // e.g. "https://dummyjson.com/products/search?q=[[input]]"
+    this.dataPath = this.getAttribute('data-path') as string; // e.g. "products.foo.bar"
+    this.dynamicSearch = this.dataUrl?.indexOf('[[input]]') > 0;
+
+    // initialize dropdown, ulEl
     const inputEl = this.querySelector('input') as any;
     const ulEl = this.querySelector('ul') as any;
-    if (this.src && ulEl) {
-      this.srcTemplate = ulEl.children[0]?.outerHTML;
-      ulEl.innerHTML = '';
-    }
-    
+
     const isDisabled = inputEl?.readOnly || inputEl?.disabled;
     if (!inputEl) {
       this.textContent = 'error: requires <input>';
@@ -44,6 +72,19 @@ export class ComboBox extends HTMLElement {
       return;
     }
 
+    if (this.dataUrl && (this.dataUrl as any||'').match(/^(http|\/)/)) {
+      this.listTemplate = ulEl.children[0]?.outerHTML;
+      ulEl.innerHTML = '';
+      if (this.dynamicSearch) { // build list when user enters input
+        this.rewriteListEl(ulEl, [], this.listTemplate)
+      } else { // build list now, then filter out when user enters input
+        const resp = await fetch(this.dataUrl as any)
+        const json = await resp.json();
+        const list = this.getListData(json);
+        this.rewriteListEl(ulEl, list, this.listTemplate);
+      }
+    }
+    
     inputEl.addEventListener('focus', () => this.highlightValue(ulEl, inputEl.value))
 
     // remove highlighted part when input focused out to remove duplicated highlighting.
@@ -70,20 +111,38 @@ export class ComboBox extends HTMLElement {
       }
     });
 
-    const inputListener = this.src ? 
-      debounce(() => (this.src as Function)(inputEl.value).then((resp: any) => {
-        if (Array.isArray(resp)) {
-          this.rewriteListEl(ulEl, resp, this.srcTemplate)
-        } else {
-          console.error('combobox, src response is not an array', resp);
-        }
-      }), 500) : () => this.highlightSearch(ulEl, inputEl.value);
+    // const inputListener = typeof this.searchFunc === 'function' ? 
+    //   debounce(() => (this.searchFunc as Function)(inputEl.value).then((resp: any) => {
+    //     if (Array.isArray(resp)) {
+    //       this.rewriteListEl(ulEl, resp, this.listTemplate)
+    //     } else {
+    //       console.error('combobox, searchFunc response is not an array', resp);
+    //     }
+    //   }), 500) : () => this.highlightSearch(ulEl, inputEl.value);
+
+    const inputListener = this.getInputListener();
     inputEl.addEventListener('input', inputListener);
 
     // mousedown -> inputEl.blur(), hide dropdown -> input:focus, show dropdown, 
     // do not call selectHandler with click event, but only with mousedown
     if (ulEl) { // readonly or disabled does not have ulEl
       ulEl.addEventListener('mousedown', (event) => this.selectHandler(event));
+    }
+  }
+
+  getInputListener() {
+    const inputEl = this.querySelector('input') as any;
+    const ulEl = this.querySelector('ul') as any;
+    if (this.dataUrl && this.dynamicSearch) {
+      return debounce( () => {
+        const url = this.dataUrl.replace('[[input]]', inputEl.value);
+        return fetch(url)
+          .then(resp => resp.json())
+          .then(resp => this.getListData(resp))
+          .then(list => this.rewriteListEl(ulEl, list, this.listTemplate));
+      }, 500);
+    } else {
+      return () => this.highlightSearch(ulEl, inputEl.value);
     }
   }
 
@@ -196,6 +255,16 @@ export class ComboBox extends HTMLElement {
       if (offsetBottom > scrollBottom) {
         container.scrollTop = offsetBottom - container.offsetHeight;
       }
+    }
+  }
+
+  getListData(obj) {
+    if (this.dataPath) {
+      const paths = this.dataPath.split('.');
+      const list = paths.reduce( (acc, path) => acc[path], obj);
+      return list;
+    } else {
+      return obj;
     }
   }
 }

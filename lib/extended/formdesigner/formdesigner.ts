@@ -3,13 +3,13 @@ import { addCss, removeCss } from '../../util';
 
 import html from './formdesigner.html?raw';
 import templateHtml from './formdesigner.template.html?raw';
-import * as themeCssM from './formdesigner.theme.css?inline';
-import * as stylesCssM from './formdesigner.styles.css?inline';
+// import * as themeCssM from './formdesigner.theme.css?inline';
+// import * as stylesCssM from './formdesigner.styles.css?inline';
 
 import { initGrapesJs } from './init-grapejs';
 
-const themeCSS = themeCssM.default;
-const stylesCSS = stylesCssM.default;
+// const themeCSS = themeCssM.default;
+// const stylesCSS = stylesCssM.default;
 
 export class FormDesigner extends HTMLElement {
   editor: grapesjs.Editor = undefined as any;
@@ -27,7 +27,7 @@ export class FormDesigner extends HTMLElement {
   }
 
   connectedCallback() {
-    addCss(this.tagName, themeCSS + stylesCSS);
+    // addCss(this.tagName, themeCSS + stylesCSS);
 
     this.innerHTML = html;
     this.editor = initGrapesJs('#gjs');

@@ -9,8 +9,7 @@ import button from '../components/button';
 import select from '../components/select';
 import option from '../components/option';
 
-export default function formsPlugin(editor: Editor) {
-  // load components by add types and block
+const formsPlugin: Plugin<PluginOptions> = (editor) => {
   form(editor);
   input(editor);
   label(editor);
@@ -21,3 +20,5 @@ export default function formsPlugin(editor: Editor) {
   option(editor);
   select(editor); // option first
 };
+
+export default formsPlugin;

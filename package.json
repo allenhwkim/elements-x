@@ -73,6 +73,7 @@
   "license": "MIT",
   "dependencies": {
     "-": "^0.0.1",
-    "grapesjs-blocks-basic": "^1.0.2"
+    "grapesjs-blocks-basic": "^1.0.2",
+    "grapesjs-plugin-header": "^1.0.2"
   }
 }

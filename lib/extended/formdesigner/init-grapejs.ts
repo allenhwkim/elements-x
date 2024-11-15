@@ -1,7 +1,8 @@
 import grapesjs, {Editor} from 'grapesjs';
 import grapesjsBlocksBasic from 'grapesjs-blocks-basic';
+import grapesjsPluginHeader from 'grapesjs-plugin-header';
 
-import { boostrap5Components, customElements, headings }  from './blocks';
+import { boostrap5Components, customElements }  from './blocks';
 import formsPlugin from './plugins/forms'
 
 export function initGrapesJs(elId: string) : Editor{
@@ -10,13 +11,11 @@ export function initGrapesJs(elId: string) : Editor{
     plugins: [
       grapesjsBlocksBasic,
       formsPlugin, // form, input, label, textarea, checkbox, radio, select, option
+      grapesjsPluginHeader
     ],
     storageManager: false,
     blockManager: {
       blocks: [
-        // ...headings,
-        // ...boostrap5Components,
-        // ...customElements,
       ]
     },
     canvas: {

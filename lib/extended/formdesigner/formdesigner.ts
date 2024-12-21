@@ -7,7 +7,15 @@ export class FormDesigner extends HTMLElement {
   editorLoaded = false;
 
   connectedCallback() {
-    this.innerHTML = html;
+    this.innerHTML = `
+      <link rel="stylesheet" href="//unpkg.com/grapesjs/dist/css/grapes.min.css" />
+      <style>
+      :root{
+        --gjs-left-width: 20%;
+      }
+      </style>
+      <div id="gjs"></div>
+    `;
     this.editor = initGrapesJs('#gjs');
   }
 }

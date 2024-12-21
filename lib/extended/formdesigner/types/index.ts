@@ -8,11 +8,7 @@ import { comboboxOptionsTrait } from './custom-elements/combobox-options';
 import { loadDropdownType } from './custom-elements/dropdown';
 import { Editor } from 'grapesjs';
 
-import { imageType } from './image';
-
 export const componentTypes = (editor: Editor) => {
-  editor.DomComponents.addType('image', imageType);
-
   editor.DomComponents.addType('calendar', calendarType);
   editor.DomComponents.addType('datatable', dataTableType);
   editor.DomComponents.addType('map', mapType);

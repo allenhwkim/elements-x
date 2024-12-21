@@ -2,23 +2,6 @@
 import { Editor } from "grapesjs";
 
 export default function(editor: Editor, options = {category: 'Forms'}) {
-  editor.Components.addType('textarea', {
-    extend: 'input',
-    isComponent: el => el.tagName == 'TEXTAREA',
-
-    model: {
-      defaults: {
-        tagName: 'textarea',
-        attributes: {},
-        traits: [
-          {name: 'name'},
-          {name: 'placeholder'},
-          {type: 'checkbox', name: 'required'},
-        ]
-      },
-    },
-  });
-
   editor.BlockManager.add('textarea', {
     ...options,
     label: 'Textarea',

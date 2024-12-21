@@ -74,6 +74,9 @@
   "dependencies": {
     "-": "^0.0.1",
     "grapesjs-blocks-basic": "^1.0.2",
-    "grapesjs-plugin-header": "^1.0.2"
+    "grapesjs-custom-code": "^1.0.2",
+    "grapesjs-parser-postcss": "^1.0.3",
+    "grapesjs-plugin-header": "^1.0.2",
+    "grapesjs-style-bg": "^2.0.2"
   }
 }

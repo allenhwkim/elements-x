@@ -2,17 +2,6 @@
 import { Editor } from "grapesjs";
 
 export default function(editor: Editor, options = {category: 'Forms'}) {
-  editor.Components.addType('radio', {
-    extend: 'checkbox',
-    isComponent: el => el.tagName == 'INPUT' && (el as HTMLInputElement).type == 'radio',
-
-    model: {
-      defaults: {
-        attributes: { type: 'radio' },
-      },
-    },
-  });
-
   editor.BlockManager.add('radio', {
     ...options,
     label: 'Radio',

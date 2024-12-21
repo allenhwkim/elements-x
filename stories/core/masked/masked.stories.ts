@@ -34,10 +34,10 @@ const meta: Meta = {
 
 export default meta;
 
-export const Primary = { args: { mask: 'yyyy-mm-dd', value: '202312'}};
-export const ZipCode = { args: { mask: '99999', value: '205' } };
+export const Primary = { args: { mask: 'yyyy-mm-dd', value: '2023-12-31'}};
+export const ZipCode = { args: { mask: '99999', value: '20500' } };
 export const ID = { args: { mask: '###-##-####'} };
 export const PhoneNumber = { args: { mask: '9 (999) 999-9999', value: 1} }
-export const PostalCode = { args: { mask: 'A9A 9A9', value: 'L7A'} }
-export const CreditCard = { args: { mask: '9999 9999 9999 9999', value: '4599'} }
+export const PostalCode = { args: { mask: 'A9A 9A9', value: ''} }
+export const CreditCard = { args: { mask: '9999 9999 9999 9999', value: ''} }
 export const HealthCard = { args: { mask: '____ ___ ___'} }

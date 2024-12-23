@@ -22,6 +22,7 @@ function createElement(args) {
   for (var key in args) {
     (key === 'date') && el.setAttribute('date', new Intl.DateTimeFormat(
       'fr-CA',{ month:'2-digit',day:'2-digit', year:'numeric'}).format(args.date));
+    (key === 'dateFormat') && el.setAttribute('date-format', args[key]);
     (key === 'weekFormat') && el.setAttribute('week-format', args[key]);
     (key === 'monthFormat') && el.setAttribute('month-format', args[key]);
     (key === 'locale') && el.setAttribute('locale', args[key]);
@@ -52,6 +53,11 @@ const meta: Meta = {
       default: 'The current date', 
       control: 'date',
       table: { defaultValue: { summary: 'today' } },
+    },
+    dateFormat: { 
+      description: 'Date format, e.g., yyyy-mm-dd, mm/dd/yyyy, www mmm ddd yyyy', 
+      control: { type: 'text' },
+      table: { defaultValue: { summary: 'yyyy-mm-dd' } },
     },
     monthFormat: { 
       description: 'Month display format, e.g., long(June), short(Jun), narrow(J)', 

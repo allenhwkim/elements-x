@@ -35,6 +35,10 @@ export function initGrapesJs(elId: string) : Editor{
       ],
     }
   });
+  editor.setStyle(`
+    x-calendar .week-days-container { max-width: 400px; }
+    x-calendar .days-container { max-width: 400px; }
+  `);
 
   return editor;
 }

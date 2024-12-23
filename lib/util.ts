@@ -1,3 +1,5 @@
+import { format } from "@storybook/blocks";
+
 export function addCss(tagName: string, css: string) {
   tagName = tagName.toLowerCase();
   if (!document.querySelector(`style[${tagName}]`)) {
@@ -91,12 +93,38 @@ export function hash(str: string) {
   return 'h' + hash.toString(36);
 }
 
+export function formatDate(date, format = 'yyyy-mm-dd') { // mm/dd/yyyy, www MMM DDD YYYY
+  const day = date.getDate();
+  const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const daySuffix = 
+    day > 3 && day < 21 ? 'th' :
+    day % 10 === 1 ? 'st': 
+    day % 10 === 2 ? 'nd': 
+    day % 10 === 3 ? 'rd':  'th';
+  const yyyy = date.getFullYear()
+  const mmm = months[date.getMonth()];
+  const mm = ('0' + (date.getMonth() + 1)).slice(-2)
+  const dd = ('0' + day).slice(-2);
+  const ddd = day + daySuffix;
+  const www = weekdays[date.getDay()];
+
+  return format
+    .replace('www', www).replace('www', www)
+    .replace('yyyy', yyyy).replace('YYYY', yyyy)
+    .replace('mmm', mmm).replace('MMM', mmm)
+    .replace('mm', mm).replace('MM', mm)
+    .replace('ddd', ddd).replace('DDD', ddd)
+    .replace('dd', dd).replace('DD', dd)
+}
+
 /**
  * returns a date without timezone consideration. Used to ignore timezone.
  * @param date Date type
  * @returns a date without timezone consideration
  */
-export function localDate(date, locale): Date {
+export function localDate(date, format): Date {
   if (!date) {
     const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
     date = new Date(Date.now() - tzoffset);
@@ -106,8 +134,8 @@ export function localDate(date, locale): Date {
   const str = date.toISOString().slice(0, -1).replace(/[^0-9]/g, '');
   const [year, month, day] = [str.substr(0,4), str.substr(4,2), str.substr(6,2)];
 
-  const localDate = new Date(+year, +month - 1, +day, 2, 0, 0);
-  localDate.toString = () => new Intl.DateTimeFormat(locale).format(localDate);
+  const localDate = new Date(+year, +month - 1, +day, 2, 0, 0); // disable summer time
+  localDate.toString = () => formatDate(localDate, format);
   return localDate;
 }
 

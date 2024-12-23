@@ -19,15 +19,16 @@ function today() {
 
 function clickHandler(this: any, e: any) {
   const date = this.calendarDate;
+  const dateFormat = this.dateFormat;
   if (e.target.id === 'prev-month') { // ◀ button
     this.calendarDate = (date.setDate(0), date);
   } else if (e.target.id === 'next-month') { // ▶ button
     this.calendarDate = (date.setMonth(date.getMonth() + 1), date);
   } else if (e.target.id === 'today') { // ● button
-    this.calendarDate = localDate(today(), navigator.language);
+    this.calendarDate = localDate(today(), dateFormat);
   } else if (e.target.id.match(/x-[0-9-]+$/)) { // date button
     const dateEl = e.target;
-    const date = localDate(dateEl.id.slice(2), navigator.language);
+    const date = localDate(dateEl.id.slice(2), dateFormat);
     const selectedEl = this.querySelector('.date .select');
     if (selectedEl?.isEqualNode(dateEl)) {
       dateEl.classList.remove('select');
@@ -39,7 +40,7 @@ function clickHandler(this: any, e: any) {
       dateEl.classList.add('select');
       this.dateSelected = date;
       this.classList.remove('error', 'required');
-      this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: localDate(date, this.locale)}));
+      this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: localDate(date, this.dateFormat)}));
     }
   }
 }
@@ -48,22 +49,23 @@ export class Calendar extends HTMLElement {
   static GET_DAY_INFO = date => null;
   static IS_SELECTABLE = date => true;
   static get observedAttributes() {
-    return ['date', 'month-format', 'week-format', 'locale', 'first-day-of-week', 'locale', 'required'];
+    return ['date', 'date-format', 'month-format', 'week-format', 'locale', 'first-day-of-week', 'locale', 'required'];
   }
 
   get value() {
-    return localDate(this.dateSelected, navigator.language);
+    return localDate(this.dateSelected, this.dateFormat);
   }
 
   dateSelected: Date | undefined;
   date: any = undefined; // start date of calendar
+  dateFormat = 'yyyy-mm-dd'; // www mmm ddd yyyy, mm/dd/yyyy
   weekFormat = 'long';  // long(Monday), short(Mon), narrow(M)
   monthFormat = 'long';  // long(June), short(Jun), narrow(J)
   locale = navigator.language; // en-US, ja, ko, zh-CN
   firstDayOfWeek = 0; // 0(Sunday), 1(Monday)
   required = false;
 
-  _calendarDate = localDate(today(), navigator.language);
+  _calendarDate = localDate(today(), this.dateFormat);
   set calendarDate(val) {
     this._calendarDate = val;
     this.#updateDOM();
@@ -90,9 +92,9 @@ export class Calendar extends HTMLElement {
     if (oldValue !== newValue) {
       if (name === 'date') {
         this.date = 
-          newValue.match(/^[0-9]+$/) ? localDate(new Date(+newValue), navigator.language):
-          typeof newValue === 'string' ? localDate(new Date(newValue), navigator.language): 
-          localDate(newValue, navigator.language);
+          newValue.match(/^[0-9]+$/) ? localDate(new Date(+newValue), this.dateFormat):
+          typeof newValue === 'string' ? localDate(new Date(newValue), this.dateFormat): 
+          localDate(newValue, this.dateFormat);
         this.calendarDate = this.date;
       } else if (name === 'required') {
         this.required = newValue !== null;

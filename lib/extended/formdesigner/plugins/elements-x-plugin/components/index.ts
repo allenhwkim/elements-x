@@ -1,5 +1,9 @@
-import calendar from './calendar';
+import inputDate from './input-date';
+import xCalendar from './x-calendar';
+import xDropdown from './x-dropdown';
 
 export default function(editor) {
-  calendar(editor);
+  inputDate(editor);
+  xDropdown(editor);
+  xCalendar(editor);
 }

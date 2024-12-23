@@ -1,5 +1,5 @@
-import calendar from './calendar';
+import inputDate from './input-date';
 
 export default function(editor) {
-  calendar(editor);
+  inputDate(editor);
 }

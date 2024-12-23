@@ -41,7 +41,8 @@
 
  x-calendar .week-days-container {
     display: flex;
-    padding: 0 4px
+    max-width: 400px;
+    padding: 0 4px;
   }
 
  x-calendar .week-days-container .weekday {
@@ -57,6 +58,7 @@
 
  x-calendar .days-container {
     display: flex;
+    max-width: 400px;
     flex-wrap: wrap;
     padding: 0 4px 12px 4px
   }

@@ -59,11 +59,6 @@ export class ComboBox extends HTMLElement {
       return;
     }
 
-    if (this.dataUrl || this.dataFunction || this.dataList) {
-      this.listTemplate = ulEl.firstElementChild.outerHTML;
-      ulEl.innerHTML = '';
-    }
-
     if (this.dataUrl && (this.dataUrl as any||'').match(/^(http|\/)/)) {
       const dynamicSearch = this.dataUrl?.indexOf('[[input]]') > 0; // replace dateUrl with key
       if (dynamicSearch) { // build list when user enters input
@@ -180,6 +175,12 @@ export class ComboBox extends HTMLElement {
    */
   rewriteListEl(rows: any[]) {
     if (!this.isConnected) return;
+
+    if (!this.listTemplate) {
+      const ulEl = this.querySelector('ul') as HTMLUListElement;
+      this.listTemplate = (ulEl.firstElementChild as any).outerHTML;
+      ulEl.innerHTML = '';
+    }
 
     if (rows && !Array.isArray(rows) && typeof rows === 'object') {
       rows = Object.entries(rows).map( ([key, value]) => ({key, value}));

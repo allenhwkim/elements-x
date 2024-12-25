@@ -1,5 +1,4 @@
 import { Editor } from "grapesjs";
-import components from ".";
 
 export default function(editor: Editor) {
   editor.Components.addType('input-date', {

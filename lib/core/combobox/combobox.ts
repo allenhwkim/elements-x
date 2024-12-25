@@ -7,19 +7,26 @@ export class ComboBox extends HTMLElement {
   required = false;
 
   // dropdown source
-  dataFunction: ((key: string) => Promise<any>) | undefined;  // from a custom function
-  dataList: any[] | undefined; // from an array
   dataUrl = ''; // from 'data-url' attribute, a url
-  dynamicSearch = false;
-
   dataPath= ''; // from 'data-path' attribute, to find data path from API response
-  listTemplate = ''; // to display dropdown
+
+  _dataFunction: ((key: string) => Promise<any>) | undefined;  // from a custom function
+  set dataFunction(val: any) { this._dataFunction = val; this.rewriteListEl(val); }
+  get dataFunction() { return this._dataFunction; }
+
+  _dataList: any[] | undefined; // from an array
+  set dataList(val: any) { this._dataList = val; this.rewriteListEl(val); }
+  get dataList() { return this._dataList; }
+
+  // e.g. <li data-value="[[key]]">[[key]]</li>
+  listTemplate = ''; // from first <li>, to display dropdown
 
   static get observedAttributes() { return ['selected', 'required']; }
 
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
-    (name === 'required') && (this.required = newValue !== null);
-    if (name === "value") {
+    if (name === 'required') {
+      this.required = newValue !== null;
+    } else if (name === "value") {
       const ulEl = this.querySelector('ul') as any;
       this.highlightValue(ulEl, newValue);
     }
@@ -38,10 +45,6 @@ export class ComboBox extends HTMLElement {
   async init() { 
     this.dataUrl = this.getAttribute('data-url') as string; // e.g. "https://dummyjson.com/products/search?q=[[input]]"
     this.dataPath = this.getAttribute('data-path') as string; // e.g. "products.foo.bar"
-    this.dynamicSearch = this.dataUrl?.indexOf('[[input]]') > 0;
-    if (this.dataList && !Array.isArray(this.dataList) && typeof this.dataList === 'object') {
-      this.dataList = Object.entries(this.dataList).map( ([key, value]) => ({key, value}));
-    }
 
     // initialize dropdown, ulEl
     const inputEl = this.querySelector('input') as any;
@@ -56,25 +59,25 @@ export class ComboBox extends HTMLElement {
       return;
     }
 
-    if (this.dataUrl && (this.dataUrl as any||'').match(/^(http|\/)/)) {
-      this.listTemplate = ulEl.children[0]?.outerHTML;
+    if (this.dataUrl || this.dataFunction || this.dataList) {
+      this.listTemplate = ulEl.firstElementChild.outerHTML;
       ulEl.innerHTML = '';
-      if (this.dynamicSearch) { // build list when user enters input
-        this.rewriteListEl(ulEl, [], this.listTemplate)
+    }
+
+    if (this.dataUrl && (this.dataUrl as any||'').match(/^(http|\/)/)) {
+      const dynamicSearch = this.dataUrl?.indexOf('[[input]]') > 0; // replace dateUrl with key
+      if (dynamicSearch) { // build list when user enters input
+        this.rewriteListEl([]); // show empty list at the begining
       } else { // build list now, then filter out when user enters input
         const resp = await fetch(this.dataUrl as any)
         const json = await resp.json();
         const list = this.getListData(json);
-        this.rewriteListEl(ulEl, list, this.listTemplate);
+        this.rewriteListEl(list);
       }
     } else if (this.dataFunction) {
-      this.listTemplate = ulEl.children[0]?.outerHTML;
-      ulEl.innerHTML = '';
-      this.rewriteListEl(ulEl, [], this.listTemplate)
+      this.rewriteListEl([])
     } else if (this.dataList) {
-      this.listTemplate = ulEl.children[0]?.outerHTML;
-      ulEl.innerHTML = '';
-      this.rewriteListEl(ulEl, this.dataList, this.listTemplate)
+      this.rewriteListEl(this.dataList)
     }
     
     inputEl.addEventListener('focus', () => this.highlightValue(ulEl, inputEl.value))
@@ -116,18 +119,19 @@ export class ComboBox extends HTMLElement {
   getInputListener() {
     const inputEl = this.querySelector('input') as any;
     const ulEl = this.querySelector('ul') as any;
-    if (this.dataUrl && this.dynamicSearch) {
+    const dynamicSearch = this.dataUrl?.indexOf('[[input]]') > 0; // replace dateUrl with key
+    if (this.dataUrl && dynamicSearch) {
       return debounce( () => {
         const url = this.dataUrl.replace('[[input]]', inputEl.value);
         return fetch(url)
           .then(resp => resp.json())
           .then(resp => this.getListData(resp))
-          .then(list => this.rewriteListEl(ulEl, list, this.listTemplate));
+          .then(list => this.rewriteListEl(list));
       }, 500);
     } else if (this.dataFunction) {
       return debounce(() => {
         return (this.dataFunction as Function)(inputEl.value)
-          .then(resp => this.rewriteListEl(ulEl, resp, this.listTemplate))
+          .then(resp => this.rewriteListEl(resp))
       }, 500);
     } else {
       return () => this.highlightSearch(ulEl, inputEl.value);
@@ -174,20 +178,27 @@ export class ComboBox extends HTMLElement {
   /**
    * Rebuild list from the given array
    */
-  rewriteListEl(listEl: any, rows: any[], template: string) {
-    const replExprs = template.match(/\[\[.*?\]\]/g) || [];
+  rewriteListEl(rows: any[]) {
+    if (!this.isConnected) return;
+
+    if (rows && !Array.isArray(rows) && typeof rows === 'object') {
+      rows = Object.entries(rows).map( ([key, value]) => ({key, value}));
+    }
+    const ulEl = this.querySelector('ul') as HTMLUListElement;
+
+    const replExprs = this.listTemplate.match(/\[\[.*?\]\]/g) || [];
     // rewrite list elements
-    listEl.innerHTML = '';
+    ulEl.innerHTML = '';
     rows.forEach( (row) => {
-      let html = template;
+      let html = this.listTemplate;
       replExprs.forEach( (expr) => {
         const key = expr.match(/\[\[(.*?)\]\]/)?.[1] as string;
         html = html.replace(expr, row[key]);
       });
-      listEl.insertAdjacentHTML('beforeend', html);
-      (listEl.lastElementChild).data = row;
+      ulEl.insertAdjacentHTML('beforeend', html);
+      (ulEl.lastElementChild as any).data = row;
     })
-    listEl.children[0]?.classList.add('highlighted');
+    ulEl.children[0]?.classList.add('highlighted');
   }
 
   /**

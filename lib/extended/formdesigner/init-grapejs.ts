@@ -13,13 +13,13 @@ export function initGrapesJs(elId: string) : Editor{
   const editor: Editor = grapesjs.init({
     container: elId,
     plugins: [
-      grapesjsBlocksBasic,
-      grapesjsPluginHeader,
       grapesjsParserPostCss,
       grapesjsStyleBg,
       formsPlugin, // form, input, label, textarea, checkbox, radio, select, optioon
-      htmlEditorPlugin, // alloow to edit html for text and image types
+      htmlEditorPlugin, // allow to edit html for text and image types
       elementsXPlugin, // x-calendar, x-combobox, x-dropdown, x-map, x-masked
+      grapesjsBlocksBasic,
+      grapesjsPluginHeader,
     ],
 
     storageManager: false,

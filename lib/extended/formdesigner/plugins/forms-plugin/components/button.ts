@@ -10,7 +10,10 @@ export default function(editor: Editor) {
     model: {
       defaults: {
         tagName: 'button',
-        attributes: { type: 'button' },
+        attributes: {
+          type: 'button',  
+          class: 'btn btn-primary',
+        },
         text: 'Send',
         traits: [
           {

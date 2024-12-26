@@ -3,12 +3,13 @@ import * as cssM from './combobox.css?inline';
 const css = cssM.default;
 
 export class ComboBox extends HTMLElement {
-  value: HTMLElement | undefined;
-  required = false;
+  inputEl!: HTMLInputElement;
+  ulEl!: HTMLUListElement;
 
-  // dropdown source
   dataUrl = ''; // from 'data-url' attribute, a url
-  dataPath= ''; // from 'data-path' attribute, to find data path from API response
+  dataPath = ''; // from 'data-path' attribute, to find data path from API response
+  selectExpr = ''; // from 'select-expr' attribute. what to select from list, e.g. '{{value}}'
+  displayExpr = ''; // from 'display-expr' attribute. what to show from list e.g. '{{id}}-{{value}}'
 
   _dataFunction: ((key: string) => Promise<any>) | undefined;  // from a custom function
   set dataFunction(val: any) { this._dataFunction = val; this.rewriteListEl(val); }
@@ -18,23 +19,37 @@ export class ComboBox extends HTMLElement {
   set dataList(val: any) { this._dataList = val; this.rewriteListEl(val); }
   get dataList() { return this._dataList; }
 
-  // e.g. <li data-value="[[key]]">[[key]]</li>
-  listTemplate = ''; // from first <li>, to display dropdown
-
-  static get observedAttributes() { return ['selected', 'required']; }
+  static get observedAttributes() { 
+    return [ 'select-expr', 'display-expr' ]; 
+  }
 
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
-    if (name === 'required') {
-      this.required = newValue !== null;
-    } else if (name === "value") {
-      const ulEl = this.querySelector('ul') as any;
-      this.highlightValue(ulEl, newValue);
+    if (name === 'select-expr') {
+      this.selectExpr = newValue;
+    } else if (name === 'display-expr') {
+      this.displayExpr = newValue;
     }
   }
 
   connectedCallback() { 
     addCss(this.tagName, css);
-    setTimeout(() => this.init())
+    setTimeout(() => {
+      this.dataUrl = this.getAttribute('data-url') as string; // e.g. "https://dummyjson.com/products/search?q={{q}}"
+      this.dataPath = this.getAttribute('data-path') as string; // e.g. "products.foo.bar"
+      this.inputEl = this.querySelector('input') as any;
+      this.ulEl = this.querySelector('ul') as any;
+
+      if (!this.inputEl) {
+        this.inputEl = document.createElement('input');
+        this.insertAdjacentElement('afterbegin', this.inputEl);
+      }
+      if (!this.ulEl) {
+        this.ulEl = document.createElement('ul');
+        this.appendChild(this.ulEl);
+      }
+
+      this.init();
+    })
   }
 
   disConnnectedCallback() {
@@ -43,24 +58,8 @@ export class ComboBox extends HTMLElement {
 
   // properties  src={function} or src={array}
   async init() { 
-    this.dataUrl = this.getAttribute('data-url') as string; // e.g. "https://dummyjson.com/products/search?q=[[input]]"
-    this.dataPath = this.getAttribute('data-path') as string; // e.g. "products.foo.bar"
-
-    // initialize dropdown, ulEl
-    const inputEl = this.querySelector('input') as any;
-    const ulEl = this.querySelector('ul') as any;
-
-    const isDisabled = inputEl?.readOnly || inputEl?.disabled;
-    if (!inputEl) {
-      this.textContent = 'error: requires <input>';
-      return;
-    } else if (!isDisabled && !ulEl) {
-      this.textContent = 'error: requires <ul>';
-      return;
-    }
-
     if (this.dataUrl && (this.dataUrl as any||'').match(/^(http|\/)/)) {
-      const dynamicSearch = this.dataUrl?.indexOf('[[input]]') > 0; // replace dateUrl with key
+      const dynamicSearch = this.dataUrl.indexOf('{{q}}') > 0; // replace dateUrl with key
       if (dynamicSearch) { // build list when user enters input
         this.rewriteListEl([]); // show empty list at the begining
       } else { // build list now, then filter out when user enters input
@@ -75,25 +74,22 @@ export class ComboBox extends HTMLElement {
       this.rewriteListEl(this.dataList)
     }
     
-    inputEl.addEventListener('focus', () => this.highlightValue(ulEl, inputEl.value))
+    this.inputEl.addEventListener('focus', () => this.highlightValue(this.inputEl.value))
 
     // remove highlighted part when input focused out to remove duplicated highlighting.
-    inputEl.addEventListener('blur', event => { 
-      const highlightedEl = ulEl.querySelector('.highlighted');
+    this.inputEl.addEventListener('blur', event => { 
+      const highlightedEl = this.ulEl.querySelector('.highlighted');
       highlightedEl?.classList.remove('highlighted');
-      if (this.required) {
-        this.classList[this.value ? 'remove': 'add']('error', 'required');
-      }
     });
 
-    inputEl.addEventListener('keydown', (event: any) => {
+    this.inputEl.addEventListener('keydown', (event: any) => {
       if (['ArrowDown', 'ArrowUp', 'Enter', 'Escape'].includes(event.key)) {
-        if      (event.key === 'ArrowDown') { this.highlightNext( ulEl, 1); }
-        else if (event.key === 'ArrowUp') { this.highlightNext( ulEl, -1); } 
-        else if (event.key === 'Escape') { inputEl.blur(); }
+        if      (event.key === 'ArrowDown') { this.highlightNext(1); }
+        else if (event.key === 'ArrowUp') { this.highlightNext(-1); } 
+        else if (event.key === 'Escape') { this.inputEl.blur(); }
         else if (event.key === 'Enter') { 
           this.selectHandler(event); 
-          inputEl.blur();
+          this.inputEl.blur();
         }
         event.preventDefault();
         event.stopPropagation();
@@ -101,23 +97,17 @@ export class ComboBox extends HTMLElement {
       }
     });
 
-    const inputListener = this.getInputListener();
-    inputEl.addEventListener('input', inputListener);
+    this.inputEl.addEventListener('input', this.getInputListener());
 
     // mousedown -> inputEl.blur(), hide dropdown -> input:focus, show dropdown, 
     // do not call selectHandler with click event, but only with mousedown
-    if (ulEl) { // readonly or disabled does not have ulEl
-      ulEl.addEventListener('mousedown', (event) => this.selectHandler(event));
-    }
+    this.ulEl.addEventListener('mousedown', (event) => this.selectHandler(event));
   }
 
   getInputListener() {
-    const inputEl = this.querySelector('input') as any;
-    const ulEl = this.querySelector('ul') as any;
-    const dynamicSearch = this.dataUrl?.indexOf('[[input]]') > 0; // replace dateUrl with key
-    if (this.dataUrl && dynamicSearch) {
+    if (this.dataUrl && this.dataUrl.indexOf('{{q}}') > 0) {
       return debounce( () => {
-        const url = this.dataUrl.replace('[[input]]', inputEl.value);
+        const url = this.dataUrl.replace('{{q}}', this.inputEl.value);
         return fetch(url)
           .then(resp => resp.json())
           .then(resp => this.getListData(resp))
@@ -125,39 +115,40 @@ export class ComboBox extends HTMLElement {
       }, 500);
     } else if (this.dataFunction) {
       return debounce(() => {
-        return (this.dataFunction as Function)(inputEl.value)
+        return (this.dataFunction as Function)(this.inputEl.value)
           .then(resp => this.rewriteListEl(resp))
       }, 500);
     } else {
-      return () => this.highlightSearch(ulEl, inputEl.value);
+      return () => this.highlightSearch(this.inputEl.value);
     }
   }
 
   selectHandler(event) {
-    const ulEl = this.querySelector('ul');
-    const inputEl = this.querySelector('input') as any;
     const highlightedEl = event.type === 'mousedown' ? 
       event.target.closest('li') : this.querySelector('.highlighted:not(.hidden)') as any;
-    ulEl?.querySelector('.selected')?.classList.remove('selected');
-    ulEl?.querySelector('.highlighted')?.classList.remove('highlighted');
+    this.ulEl.querySelector('.selected')?.classList.remove('selected');
+    this.ulEl.querySelector('.highlighted')?.classList.remove('highlighted');
 
     if (highlightedEl) {
-      const strValue = highlightedEl.dataset?.value || highlightedEl.getAttribute('value') || highlightedEl.innerText;
-      inputEl.value = highlightedEl.innerText;
-      this.value = highlightedEl;
       highlightedEl.classList.add('highlighted', 'selected');
-      highlightedEl.toString = () => strValue;
-      this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: highlightedEl }));
+      const strValue = highlightedEl.dataset?.value 
+        || highlightedEl.getAttribute('value') 
+        || highlightedEl.innerText;
+      this.inputEl.value = strValue;
+      const detail = highlightedEl.data || strValue;
+      this.dispatchEvent(new CustomEvent('select', { bubbles: true, detail }));
     }
   }
 
   /**
    * Find an element that has attribute 'value' is the same as the given value from the list element.
    */
-  highlightValue(listEl: any, value: string) {
-    const highlightedEl = listEl.querySelector('.highlighted:not(.hidden)')
+  highlightValue(value: any) {
+    if (!value) return ;
 
-    const nextHighlight = [...listEl.children].find((liEl) => {
+    const highlightedEl = this.ulEl.querySelector('.highlighted:not(.hidden)')
+
+    const nextHighlight = [...(this.ulEl.children ||[])].find((liEl: any) => {
       return (liEl.dataset.value === value) || 
         (liEl.getAttribute('value') === value) ||
         (liEl.innerText === value);
@@ -166,7 +157,8 @@ export class ComboBox extends HTMLElement {
     if (nextHighlight) {
       highlightedEl?.classList.remove('highlighted', 'selected');
       nextHighlight.classList.add('highlighted', 'selected');
-      this.scrollIfNeeded(listEl, nextHighlight);
+      this.scrollIfNeeded(this.ulEl as any, nextHighlight);
+      return nextHighlight;
     }
   }
 
@@ -176,30 +168,36 @@ export class ComboBox extends HTMLElement {
   rewriteListEl(rows: any[]) {
     if (!this.isConnected) return;
 
-    if (!this.listTemplate) {
-      const ulEl = this.querySelector('ul') as HTMLUListElement;
-      this.listTemplate = (ulEl.firstElementChild as any).outerHTML;
-      ulEl.innerHTML = '';
-    }
-
     if (rows && !Array.isArray(rows) && typeof rows === 'object') {
       rows = Object.entries(rows).map( ([key, value]) => ({key, value}));
     }
-    const ulEl = this.querySelector('ul') as HTMLUListElement;
-
-    const replExprs = this.listTemplate.match(/\[\[.*?\]\]/g) || [];
-    // rewrite list elements
-    ulEl.innerHTML = '';
-    rows.forEach( (row) => {
-      let html = this.listTemplate;
-      replExprs.forEach( (expr) => {
-        const key = expr.match(/\[\[(.*?)\]\]/)?.[1] as string;
-        html = html.replace(expr, row[key]);
+    
+    function getValueFromExpression(obj, expr) {
+      const exprs = expr.match(/{{.*?}}/g) || [];
+      let ret = expr;
+      exprs.forEach( (expr) => { // {{key}}
+        const key = expr.replace('{{','').replace('}}','');
+        ret = ret.replace(expr, obj[key]);
       });
-      ulEl.insertAdjacentHTML('beforeend', html);
-      (ulEl.lastElementChild as any).data = row;
+      console.log({obj, expr, exprs, ret})
+      return ret;
+    }
+
+    // rewrite list elements
+    this.ulEl.innerHTML = '';
+    rows.forEach( (row) => {
+      const liEl = document.createElement('li') as any;
+      const value = getValueFromExpression(row, this.selectExpr);
+      const text = getValueFromExpression(row, this.displayExpr);
+      liEl.setAttribute('data-value', value);
+      liEl.innerText =  text; 
+      liEl.data = row;
+      if (value === this.inputEl.value) {
+        liEl.classList.add('selected');
+      }
+      this.ulEl.appendChild(liEl);
     })
-    ulEl.children[0]?.classList.add('highlighted');
+    this.ulEl.children[0]?.classList.add('highlighted');
   }
 
   /**
@@ -207,8 +205,8 @@ export class ComboBox extends HTMLElement {
    * by removing highlighted class and adding hidden class.
    * It also add highted class to the first searched element.
    */
-  highlightSearch(listEl: any, search: string) {
-    const matches = [...listEl.children].filter((el) => {
+  highlightSearch(search: string) {
+    const matches = [...(this.ulEl.children ||[])].filter((el: any) => {
       const re = new RegExp(search.replace(/\\/g, '\\\\'), 'i');
       const match = el.innerText.match(re);
       el.classList.remove('highlighted');
@@ -224,7 +222,8 @@ export class ComboBox extends HTMLElement {
   /**
    * Find the current highlighted class, and move highting to the next element
    */
-  highlightNext(listEl: any, inc=1) {
+  highlightNext(inc=1) {
+    const listEl = this.ulEl as HTMLUListElement;
     const highlightedEl = listEl.querySelector('.highlighted:not(.hidden)');
     const notDisaledOrHidden = [...listEl.children].filter(liEl => {
       const notDisabled = !liEl.classList.contains('disabled');
@@ -246,7 +245,7 @@ export class ComboBox extends HTMLElement {
   /**
    * scroll to the given element within a container.
    */
-  scrollIfNeeded(container: HTMLElement, element: HTMLElement) {
+  scrollIfNeeded(container: HTMLElement, element: any) {
     if (element.offsetTop < container.scrollTop) {
       container.scrollTop = element.offsetTop;
     } else {

@@ -11,13 +11,14 @@ const meta: Meta = {
   title: 'Core/Combobox',
   render: (args) => {
     const el = document.createElement(elName) as any;
-    args.required && (el.required = args.required);
     args.html     && (el.insertAdjacentHTML('beforeend', args.html));
     args.dataUrl  && (el.setAttribute('data-url', args.dataUrl));
     args.dataPath && (el.setAttribute('data-path', args.dataPath));
     args.width    && (el.style.width = `${args.width}px`);
     args.dataFunction && (el.dataFunction = getFunction(args.dataFunction))
     args.dataList && (el.dataList = JSON.parse(args.dataList));
+    args.selectExpr && (el.setAttribute('select-expr', args.selectExpr));
+    args.displayExpr && (el.setAttribute('display-expr', args.displayExpr));
 
     const divEl = document.createElement('div');
     const msgEl = document.createElement('div');
@@ -39,8 +40,28 @@ const meta: Meta = {
       description: 'combobox html, with input and ul', 
       control: { type: 'text' },
     },
-    src: { 
-      description: 'A property function to generate dynamic dropdown list which returns list of objects', 
+    dataUrl: { 
+      description: 'Data source url. e.g. "https://dummyjson.com/products/search?q={{q}}"', 
+      control: { type: 'text' },
+    },
+    dataPath: {
+      description: 'List of dropdown data path from API response, e.g. "products"', 
+      control: { type: 'text' },
+    },
+    dataFunction: {
+      description: 'Data source function, e.g. "function srcFunc(search) { .... }"',
+      control: { type: 'text' },
+    },
+    dataList: {
+      description: 'Data source list, e.g. "{1:"Foo", 2:"Bar", 3:"Baz"}"',
+      control: { type: 'text' },
+    },
+    selectExpr: {
+      description: 'expression for selecting a list. e.g. "{{key}}"',
+      control: { type: 'text' },
+    },
+    displayExpr: {
+      description: 'expression for displaying a list. e.g. "{{name}}-{{title}}"',
       control: { type: 'text' },
     }
   },
@@ -50,9 +71,8 @@ export default meta;
 
 export const Primary = { 
   args: {
-    required: true,
     html: `
-      <input placeholder="Choose one value" autoComplete="off" />
+      <input placeholder="Choose one value" value="1" autoComplete="off" />
       <ul>
         <li data-value="">Choose One</li>
         <li data-value="1">Hello</li>
@@ -93,12 +113,12 @@ export const Countries = {
   args: {
     width: 800,
     html: `
-      <input placeholder="Search a country" autocomplete="false"/>
-      <ul> <li data-value="[[code]]-[[name]]">[[name]]</li> </ul>
-      <p style="height:200px"></p>
+      <input placeholder="Search a country" value="CA" autocomplete="false"/>
     `.trim(), 
     dataUrl: '/countries.json',
-    dataPath: 'countries'
+    dataPath: 'countries',
+    selectExpr: '{{code}}',
+    displayExpr: '{{code}}-{{name}}',
   }
 }
 
@@ -107,23 +127,34 @@ export const Products = {
     width: 800,
     html: `
       <input placeholder="Select a product" />
-      <ul> <li data-value="[[id]]-[[title]]">[[brand]] - [[description]]</li> </ul>
-      <p style="height:200px"></p>
     `.trim(), 
-    dataUrl: 'https://dummyjson.com/products/search?q=[[input]]',
-    dataPath: 'products'
+    dataUrl: 'https://dummyjson.com/products/search?q={{q}}',
+    dataPath: 'products',
+    selectExpr: '{{id}}',
+    displayExpr: '{{brand}} - {{description}}',
   }
 }
 
 export const DataList1 = {
   args: {
     width: 800,
-    html: `
-      <input placeholder="Select one" />
-      <ul> <li data-value="[[key]]-[[value]]">[[value]]</li> </ul>
-    `.trim(), 
+    html: `<input placeholder="Select province" value="ON" />`.trim(), 
+    selectExpr: '{{key}}',
+    displayExpr: '{{key}} - {{value}}',
     dataList: JSON.stringify({
-      1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five'
+      AB : 'Alberta',
+      BC : 'British Columbia',
+      MB : 'Manitoba',
+      NB : 'New Brunswick',
+      NL : 'Newfoundland and Labrador',
+      NS : 'Nova Scotia',
+      NT : 'Northwest Territories',
+      NU : 'Nunavut',
+      ON : 'Ontario',
+      PE : 'Prince Edward Island',
+      QC : 'Québec',
+      SK : 'Saskatchewan',
+      YT : 'Yukon'
     }, null, '  '),
   }
 }
@@ -131,31 +162,27 @@ export const DataList1 = {
 export const DataList2 = {
   args: {
     width: 800,
-    html: `
-      <input placeholder="Select one" />
-      <ul> <li data-value="[[id]]-[[name]]">[[name]]</li> </ul>
-    `.trim(), 
+    html: `<input placeholder="Select one" />`.trim(), 
     dataList: JSON.stringify([
       {id: 1, name:  'One'}, {id: 2, name:  'Two'}, {id: 3, name:  'Three'}, {id: 4, name:  'Four'}, {id: 5, name:  'Five'},
     ], null, '  '),
+    selectExpr: '{{id}}',
+    displayExpr: '{{id}} - {{name}}',
   }
 }
 
 export const CustomFunction = {
   args: {
     width: 800,
-    html: `
-      <input placeholder="Search a product" />
-      <ul>
-        <li data-value="[[id]]-[[title]]">[[brand]] - [[description]]</li>
-      </ul>
-    `.trim(), 
+    html: `<input placeholder="Search a product" />`.trim(), 
     dataFunction: `
 function srcFunc(search) {
   return fetch('https://dummyjson.com/products/search?q='+search)
     .then(res => res.json())
     .then(res => res.products || [])
-}`.trim()
+}`.trim(),
+    selectExpr: '{{id}}',
+    displayExpr: '{{brand}} - {{description}}',
   }
 
 }

@@ -12,21 +12,38 @@ export default function(editor: Editor) {
         attributes: {
           required: false,
           selected: 'ON',
+          'select-expr': '{{key}}',
+          'display-expr': '{{key}}-{{value}}',
         },
         traits: [
-          { type: 'button', text: 'Edit HTML', full: true, command: 'edit-html' },
-        { type: 'button', text: 'Edit JSON Data', full: true, command: 'edit-json-data' },
+          { 
+            type: 'button', 
+            name: 'edit HTML',
+            text: 'Edit HTML', 
+            full: true, 
+            command: 'edit-html' 
+          },
+          { 
+            type: 'button', 
+            name: 'edit province data',
+            text: 'Edit provinces data', 
+            full: true, 
+            command: (editor, trait) => {
+              editor.runCommand('edit-property', {property: 'dataList'});
+            }
+          },
         ], 
         components: `
-          <input id='province' name='province' placeholder='Select province' autocomplete='off' />
-          <ul id='province-dropdown'>
-            <li data-value='[[key]]'>[[value]]</li>
-          </ul>`
+          <input id="province" 
+            name="province" 
+            value="ON"
+            placeholder="Select province"
+          />`
       }
     },
     view: {
       onRender({model, el}) {
-        (el as any).dataList = {
+        (el as any).dataList ||= {
           AB : 'Alberta',
           BC : 'British Columbia',
           MB : 'Manitoba',

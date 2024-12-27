@@ -1,27 +1,27 @@
-import { Command, Component, Editor, ToolbarButtonProps } from 'grapesjs';
+import { Command, Editor } from 'grapesjs';
 
-const TYPES = ['text', 'image', 'header'];
+// const TYPES = ['text', 'image', 'header'];
 
-export default function htmlEditorPlugin(editor: Editor) {
-  editor.Commands.add('edit-html', editHtmlCommand);
+// export default function htmlEditorPlugin(editor: Editor) {
+//   editor.Commands.add('edit-html', editHtmlCommand);
 
-  TYPES.forEach(type => { // add toolbar for many types of components
-    const model = editor.Components.getType(type)?.model;
-    editor.Components.addType(type, {
-      model: {
-        initToolbar() {
-          model.prototype.initToolbar.apply(this);
-          const tb: Array<ToolbarButtonProps> = this.get('toolbar') as any;
-          !tb?.find(item => item.command === 'edit-html') &&
-            tb.push({ command: 'edit-html', label: '<i class="fa fa-file-code-o"></i>'})
-        }
-      }
-    });
-  })
-}
+//   TYPES.forEach(type => { // add toolbar for many types of components
+//     const model = editor.Components.getType(type)?.model;
+//     editor.Components.addType(type, {
+//       model: {
+//         initToolbar() {
+//           model.prototype.initToolbar.apply(this);
+//           const tb: Array<ToolbarButtonProps> = this.get('toolbar') as any;
+//           !tb?.find(item => item.command === 'edit-html') &&
+//             tb.push({ command: 'edit-html', label: '<i class="fa fa-file-code-o"></i>'})
+//         }
+//       }
+//     });
+//   })
+// }
 
-var editHtmlCommand : Command = {
-  run(editor:Editor) {
+export const editHtmlCommand : Command = {
+  run(editor:Editor, _sender, _options) {
     const codeViewer = editor.CodeManager
       .createViewer({codeName: 'htmlmixed', readOnly: 0});
     const htmlStr = editor.getSelected()?.toHTML();

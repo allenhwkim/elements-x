@@ -4,8 +4,7 @@ import grapesjsPluginHeader from 'grapesjs-plugin-header';
 import grapesjsParserPostCss from 'grapesjs-parser-postcss';
 import grapesjsStyleBg from 'grapesjs-style-bg';
 
-import formsPlugin from './plugins/forms-plugin';
-import htmlEditorPlugin from './plugins/html-editor-plugin/html-editor';
+import formsPlugin from './plugins/forms-plugin'; // <form>, <input> ... 
 import styleManager from './style-manager';
 import elementsXPlugin from './plugins/elements-x-plugin';
 
@@ -16,7 +15,6 @@ export function initGrapesJs(elId: string) : Editor{
       grapesjsParserPostCss,
       grapesjsStyleBg,
       formsPlugin, // form, input, label, textarea, checkbox, radio, select, optioon
-      htmlEditorPlugin, // allow to edit html for text and image types
       elementsXPlugin, // x-calendar, x-combobox, x-dropdown, x-map, x-masked
       grapesjsBlocksBasic,
       grapesjsPluginHeader,

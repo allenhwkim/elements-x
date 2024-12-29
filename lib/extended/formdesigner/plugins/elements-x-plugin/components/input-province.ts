@@ -18,19 +18,20 @@ export default function(editor: Editor) {
         traits: [
           { 
             type: 'button', 
-            name: 'edit HTML',
+            name: 'edit-html',
             text: 'Edit HTML', 
             full: true, 
-            command: 'edit-html' 
+            command: 'html-editor' 
           },
           { 
             type: 'button', 
-            name: 'edit province data',
-            text: 'Edit provinces data', 
+            name: 'edit-js',
+            text: 'Edit Javascript', 
             full: true, 
-            command: (editor, trait) => {
-              editor.runCommand('edit-property', {property: 'dataList'});
-            }
+            // command: (editor, trait) => {
+            //   editor.runCommand('edit-property', {property: 'dataList'});
+            // }
+            command: 'js-editor'
           },
         ], 
         components: `
@@ -42,8 +43,16 @@ export default function(editor: Editor) {
       }
     },
     view: {
-      onRender({model, el}) {
-        (el as any).dataList ||= {
+      // onRender({model, el}) { }
+    }
+  })
+
+  editor.on('component:create', model => {
+    if (model.get('type') === 'input-province') {
+      model.set('script', function(this) {
+        // Your script logic here
+        const el = this;
+        el.dataList ||= {
           AB : 'Alberta',
           BC : 'British Columbia',
           MB : 'Manitoba',
@@ -58,7 +67,7 @@ export default function(editor: Editor) {
           SK : 'Saskatchewan',
           YT : 'Yukon'
         }
-      }
+      });
     }
-  })
+  });
 }

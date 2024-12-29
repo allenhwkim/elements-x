@@ -179,7 +179,6 @@ export class ComboBox extends HTMLElement {
         const key = expr.replace('{{','').replace('}}','');
         ret = ret.replace(expr, obj[key]);
       });
-      console.log({obj, expr, exprs, ret})
       return ret;
     }
 

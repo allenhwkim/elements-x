@@ -13,7 +13,7 @@ export default function(editor: Editor) {
           class : 'position-relative',
         },
         traits: [
-          { type: 'button', text: 'Edit HTML', full: true, command: 'edit-html' },
+          { type: 'button', text: 'Edit HTML', full: true, command: 'html-editor' },
         ],
         components: [
           { type: 'input',  attributes: { placeholder: 'Select date' } },

@@ -21,7 +21,7 @@ export default function(editor: Editor) {
             type: 'button',
             text: 'Edit HTML',
             full: true,
-            command: 'edit-html'
+            command: 'html-editor'
           },
           { name: 'date'},
           { 

@@ -47,7 +47,6 @@ customElements.define('x-calendar', Calendar);
  * Masked (Input with mask)
  * Pagination 
  * Resize
- * SideBar
  * Table (array of inputs, or table-structured inputs)
 
 ## Extended elements
@@ -57,7 +56,11 @@ customElements.define('x-calendar', Calendar);
  * Json (Collapsible JSON viewer) 
  * Monaco (Code editor)
  * QRCode
+ * Sidebar
  * Stepper(form stepper)
  * Formflow (Form flow diagram with Reactflow)
  * Formdesigner (A page designer with GrapesJs)
 
+## Deployment
+  * When `main` branch is updated, it is built and deployed by [Netlify](https://app.netlify.com/sites/vigilant-lalande-2441c3/configuration/deploys#continuous-deployment) automatically.
+  * When deployed, it's published to https://elements-x.com

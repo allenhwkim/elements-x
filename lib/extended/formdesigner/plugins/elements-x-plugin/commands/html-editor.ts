@@ -1,4 +1,5 @@
 import { Command, Editor, ToolbarButtonProps } from 'grapesjs';
+import pretty from 'pretty';
 
 const TYPES = ['text', 'image', 'header'];
 
@@ -23,9 +24,22 @@ export default function htmlEditorPlugin(editor: Editor) {
 export const htmlEditorCommand : Command = {
   run(editor:Editor, _sender, _options) {
     const codeViewer = editor.CodeManager
-      .createViewer({codeName: 'htmlmixed', readOnly: 0});
+      .createViewer({
+        codeName: 'htmlmixed',
+        readOnly: 0,
+        theme: 'hopscotch',
+        autoBeautify: true,
+        autoCloseTags: true,
+        autoCloseBrackets: true,
+        lineWrapping: true,
+        styleActiveLine: true,
+        smartIndent: true,
+        indentWithTabs: true,
+        tabSize: 2, // Set the tab size
+        indentUnit: 2, // Set the indent unit
+      });
     const htmlStr = editor.getSelected()?.toHTML();
-    codeViewer.setContent(htmlStr);
+    codeViewer.setContent(pretty(htmlStr));
 
     const applyBtn = document.createElement('button');
     applyBtn.innerText = 'Apply';
@@ -36,8 +50,7 @@ export const htmlEditorCommand : Command = {
     });
 
     const modalContent = document.createElement('div');
-    modalContent.insertAdjacentElement('beforeend', codeViewer.getElement());
-    modalContent.insertAdjacentElement('beforeend', applyBtn);
+    modalContent.append(codeViewer.getElement(), applyBtn);
 
     const modal = editor.Modal.open({title: 'Edit HTML', content: modalContent});
     modal.getModel().once('change:open', () => editor.stopCommand(this.id as string));

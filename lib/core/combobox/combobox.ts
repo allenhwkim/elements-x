@@ -2,17 +2,29 @@ import { addCss, removeCss, debounce, getReactProp } from '../../util';
 import * as cssM from './combobox.css?inline';
 const css = cssM.default;
 
+/**
+ * build dropdown list with user input
+ * - dataUrl(/dataPath) with {{q}} 
+ * - dataFunction 
+ * 
+ * build dropdown list when init
+ * - dataUrl(/dataPath) without {{q}}
+ * - dataList
+ * 
+ * when attribute changes, it is initialized again
+ */
 export class ComboBox extends HTMLElement {
   inputEl!: HTMLInputElement;
   ulEl!: HTMLUListElement;
 
   dataUrl = ''; // from 'data-url' attribute, a url
-  dataPath = ''; // from 'data-path' attribute, to find data path from API response
+  dataPath = ''; // with dataUrl, from 'data-path' attribute, to find data path from API response
+
   selectExpr = ''; // from 'select-expr' attribute. what to select from list, e.g. '{{value}}'
   displayExpr = ''; // from 'display-expr' attribute. what to show from list e.g. '{{id}}-{{value}}'
 
   _dataFunction: ((key: string) => Promise<any>) | undefined;  // from a custom function
-  set dataFunction(val: any) { this._dataFunction = val; this.rewriteListEl(val); }
+  set dataFunction(val: any) { this._dataFunction = val; this.rewriteListEl([]); }
   get dataFunction() { return this._dataFunction; }
 
   _dataList: any[] | undefined; // from an array
@@ -20,22 +32,18 @@ export class ComboBox extends HTMLElement {
   get dataList() { return this._dataList; }
 
   static get observedAttributes() { 
-    return [ 'select-expr', 'display-expr' ]; 
+    return [ 'select-expr', 'display-expr', 'data-url', 'data-path' ]; 
   }
 
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
-    if (name === 'select-expr') {
-      this.selectExpr = newValue;
-    } else if (name === 'display-expr') {
-      this.displayExpr = newValue;
-    }
+    if (!this.isConnected) return;
+    console.log('attributeChangedCallback is called')
+    this.init();
   }
 
   connectedCallback() { 
     addCss(this.tagName, css);
     setTimeout(() => {
-      this.dataUrl = this.getAttribute('data-url') as string; // e.g. "https://dummyjson.com/products/search?q={{q}}"
-      this.dataPath = this.getAttribute('data-path') as string; // e.g. "products.foo.bar"
       this.inputEl = this.querySelector('input') as any;
       this.ulEl = this.querySelector('ul') as any;
 
@@ -45,7 +53,7 @@ export class ComboBox extends HTMLElement {
       }
       if (!this.ulEl) {
         this.ulEl = document.createElement('ul');
-        this.appendChild(this.ulEl);
+        this.inputEl.after(this.ulEl);
       }
 
       this.init();
@@ -58,6 +66,11 @@ export class ComboBox extends HTMLElement {
 
   // properties  src={function} or src={array}
   async init() { 
+    this.dataUrl = this.getAttribute('data-url') as string; // e.g. "https://dummyjson.com/products/search?q={{q}}"
+    this.dataPath = this.getAttribute('data-path') as string; // e.g. "products.foo.bar"
+    this.selectExpr = this.getAttribute('select-expr') as string; // e.g. '{{key}}'
+    this.displayExpr = this.getAttribute('display-expr') as string; // e.g. '{{key}}-{{value}}'
+
     if (this.dataUrl && (this.dataUrl as any||'').match(/^(http|\/)/)) {
       const dynamicSearch = this.dataUrl.indexOf('{{q}}') > 0; // replace dateUrl with key
       if (dynamicSearch) { // build list when user enters input
@@ -65,7 +78,7 @@ export class ComboBox extends HTMLElement {
       } else { // build list now, then filter out when user enters input
         const resp = await fetch(this.dataUrl as any)
         const json = await resp.json();
-        const list = this.getListData(json);
+        const list = this.#getListData(json, this.dataPath);
         this.rewriteListEl(list);
       }
     } else if (this.dataFunction) {
@@ -110,7 +123,7 @@ export class ComboBox extends HTMLElement {
         const url = this.dataUrl.replace('{{q}}', this.inputEl.value);
         return fetch(url)
           .then(resp => resp.json())
-          .then(resp => this.getListData(resp))
+          .then(resp => this.#getListData(resp, this.dataPath))
           .then(list => this.rewriteListEl(list));
       }, 500);
     } else if (this.dataFunction) {
@@ -162,9 +175,6 @@ export class ComboBox extends HTMLElement {
     }
   }
 
-  /**
-   * Rebuild list from the given array
-   */
   rewriteListEl(rows: any[]) {
     if (!this.isConnected) return;
 
@@ -256,13 +266,8 @@ export class ComboBox extends HTMLElement {
     }
   }
 
-  getListData(obj) {
-    if (this.dataPath) {
-      const paths = this.dataPath.split('.');
-      const list = paths.reduce( (acc, path) => acc[path], obj);
-      return list;
-    } else {
-      return obj;
-    }
+  // returns the list part from an object
+  #getListData(obj, pathStr) {
+    return pathStr?.split('.').reduce( (acc, path) => acc[path], obj) || obj;
   }
 }

@@ -16,6 +16,8 @@ export default function(editor: Editor) {
           'display-expr': '{{key}}-{{value}}',
         },
         traits: [
+          'select-expr',
+          'display-expr',
           { 
             type: 'button', 
             name: 'edit-html',

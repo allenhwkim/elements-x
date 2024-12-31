@@ -1,3 +1,4 @@
+import inputAddress from './input-address';
 import inputCountry from './input-country';
 import inputDate from './input-date';
 import inputProvince from './input-province';
@@ -8,4 +9,5 @@ export default function(editor) {
   inputProvince(editor);
   inputCountry(editor);
   inputState(editor);
+  inputAddress(editor);
 }

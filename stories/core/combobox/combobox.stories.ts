@@ -24,7 +24,7 @@ const meta: Meta = {
     const msgEl = document.createElement('div');
     divEl.append(el, msgEl);
     divEl.addEventListener('select', (event: any) => {
-      msgEl.innerText = `'select' event: ${event.detail}`
+      msgEl.innerText = `'select' event: ${JSON.stringify(event.detail)}`
     })
     if (args.dataFunction || args.dataList) {
       const preEl = document.createElement('pre');
@@ -139,9 +139,9 @@ export const Address = {
   args: {
     width: 800,
     html: `<input placeholder="Enter your address" class="w-100" />`.trim(), 
-    dataUrl: 'https://nominatim.openstreetmap.org/search?format=json&limit=10&q={{q}}',
-    selectExpr: '{{display_name}}',
-    displayExpr: '{{display_name}}',
+    dataUrl: 'https://ws1.postescanada-canadapost.ca/AddressComplete/Interactive/Find/v2.10/json3ex.ws?Key=BY16-DC53-PE57-KH95&SearchTerm={{q}}',
+    dataPath: 'Items',
+    displayExpr: '{{Text}} {{Description}}',
   }
 }
 

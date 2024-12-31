@@ -182,6 +182,8 @@ export class ComboBox extends HTMLElement {
     }
     
     function getValueFromExpression(obj, expr) {
+      if (!expr) return;
+
       const exprs = expr.match(/{{.*?}}/g) || [];
       let ret = expr;
       exprs.forEach( (expr) => { // {{key}}
@@ -197,12 +199,12 @@ export class ComboBox extends HTMLElement {
       const liEl = document.createElement('li') as any;
       const value = getValueFromExpression(row, this.selectExpr);
       const text = getValueFromExpression(row, this.displayExpr);
-      liEl.setAttribute('data-value', value);
+      if (value) {
+        liEl.setAttribute('data-value', value);
+        (value === this.inputEl.value) && liEl.classList.add('selected');
+      }
       liEl.innerText =  text; 
       liEl.data = row;
-      if (value === this.inputEl.value) {
-        liEl.classList.add('selected');
-      }
       this.ulEl.appendChild(liEl);
     })
     this.ulEl.children[0]?.classList.add('highlighted');

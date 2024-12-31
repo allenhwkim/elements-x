@@ -18,10 +18,10 @@ const meta: Meta = {
     const msgEl = document.createElement('div');
     divEl.insertAdjacentHTML('beforeend', fixIndent(`
       <x-file>
-        <label>
-          <input type="file" multiple>
-          <span>Select, copy/paste files, or drag/drop files here</span>
-        </label>
+        <div>
+          <input id="file" type="file" multiple>
+          <label for="file">Select, copy/paste files, or drag/drop files here</label>
+        </div>
         <div class="list"></div>
       </x-file>
     `));

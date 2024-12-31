@@ -6,12 +6,9 @@ export default function(editor: Editor) {
 
     model: {
       defaults: {
-        tagName: 'x-combox',
+        tagName: 'x-combobox',
         droppable: false,
         highlightable: false,
-        attributes: {},
-        traits: [],
-        components: [],
       }
     }
   })

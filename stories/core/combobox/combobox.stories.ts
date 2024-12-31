@@ -126,12 +126,22 @@ export const Products = {
   args: {
     width: 800,
     html: `
-      <input placeholder="Select a product" />
+      <input placeholder="Select a product" class="w-100"/>
     `.trim(), 
     dataUrl: 'https://dummyjson.com/products/search?q={{q}}',
     dataPath: 'products',
     selectExpr: '{{id}}',
     displayExpr: '{{brand}} - {{description}}',
+  }
+}
+
+export const Address = {
+  args: {
+    width: 800,
+    html: `<input placeholder="Enter your address" class="w-100" />`.trim(), 
+    dataUrl: 'https://nominatim.openstreetmap.org/search?format=json&limit=10&q={{q}}',
+    selectExpr: '{{display_name}}',
+    displayExpr: '{{display_name}}',
   }
 }
 

@@ -38,8 +38,12 @@ This is combobox with keyboard navigation and selection enabled.
 `data-url="/countries.json" data-path="countries"`
 <Canvas of={Combobox.Countries}/>
 
+### Address
+`data-url="https://nominatim.openstreetmap.org/search?format=json&limit=20&q={{q}}"`
+<Canvas of={Combobox.Address}/>
+
 ### Products 
-`data-url="https://dummyjson.com/products/search?q=[[input]]" data-path="products"`
+`data-url="https://dummyjson.com/products/search?q={{q}}" data-path="products"`
 <Canvas of={Combobox.Products}/>
 
 ### Asynchronous - HTTP call with custom function

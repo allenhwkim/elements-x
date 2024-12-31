@@ -37,7 +37,6 @@ export class ComboBox extends HTMLElement {
 
   async attributeChangedCallback(name:string, oldValue:string, newValue:string) {
     if (!this.isConnected) return;
-    console.log('attributeChangedCallback is called')
     this.init();
   }
 

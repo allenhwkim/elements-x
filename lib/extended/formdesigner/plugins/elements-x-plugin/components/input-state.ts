@@ -1,8 +1,8 @@
 import { Editor } from 'grapesjs';
 
 export default function(editor: Editor) {
-  editor.Components.addType('input-province', {
-    isComponent: el => el.tagName == 'X-COMBOBOX' && el.classList.contains('input-province'),
+  editor.Components.addType('input-state', {
+    isComponent: el => el.tagName === 'X-COMBOBOX' && el.classList.contains('input-state'),
 
     model: {
       defaults: {
@@ -12,6 +12,7 @@ export default function(editor: Editor) {
         traits: [
           'select-expr',
           'display-expr',
+          'data-url',
           { 
             type: 'button', 
             name: 'edit-html',
@@ -26,32 +27,15 @@ export default function(editor: Editor) {
             full: true, 
             command: 'js-editor'
           },
-        ],
+        ] 
       }
-    },
-    view: { /* onRender({model, el}) {} */ }
+    }
   })
 
   editor.on('component:create', model => {
-    if (model.get('type') === 'input-province') {
+    if (model.get('type') === 'input-state') {
       model.set('script', function(this) {
-        // Your script logic here
         const el = this;
-        el.dataList ||= {
-          AB : 'Alberta',
-          BC : 'British Columbia',
-          MB : 'Manitoba',
-          NB : 'New Brunswick',
-          NL : 'Newfoundland and Labrador',
-          NS : 'Nova Scotia',
-          NT : 'Northwest Territories',
-          NU : 'Nunavut',
-          ON : 'Ontario',
-          PE : 'Prince Edward Island',
-          QC : 'Québec',
-          SK : 'Saskatchewan',
-          YT : 'Yukon'
-        }
       });
     }
   });

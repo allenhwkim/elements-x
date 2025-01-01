@@ -7,7 +7,6 @@ export default function(editor: Editor, props: BlockProperties) {
         <text x="150" y="300" fill="#FFF" font-size="10em">ZIP</text>
         <text x="100" y="400" fill="#FFF" font-size="10em">CODE</text>
       </svg>`,
-    label: '',
     content: `
       <div class="custom d-inline-block">
         <label for="zip" class="form-label">Zip code:</label>

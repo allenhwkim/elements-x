@@ -10,7 +10,7 @@ import inputZipCode from './input-zip-code';
 import inputText from './input-text';
 
 const props: BlockProperties ={
-  label: 'Label', 
+  label: '', 
   content: '', 
   category: 'Inputs'
 };

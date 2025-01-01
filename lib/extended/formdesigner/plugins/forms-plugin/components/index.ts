@@ -1,5 +1,5 @@
 import form from './form';
-import input from './input';
+import input from '../../elements-x-plugin/components/input-text';
 import label from './label';
 import checkbox from './checkbox';
 import radio from './radio';

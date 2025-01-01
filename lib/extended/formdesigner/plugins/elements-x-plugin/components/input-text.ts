@@ -11,21 +11,25 @@ export default function(editor: Editor) {
         highlightable: false,
         attributes: { type: 'text' },
         traits: [
-          { name: 'name'},
-          { name: 'placeholder'},
+          'id',
+          'name',
+          'placeholder',
+          { type: 'checkbox', name: 'required' },
           {
             type: 'select',
             name: 'type',
             options: [
-              { value: 'text' },
+              { value: 'color' },
               { value: 'email' },
-              { value: 'password' },
               { value: 'number' },
+              { value: 'range' },
+              { value: 'search' },
+              { value: 'text' },
+              { value: 'url' },
             ]
           },
-          { type: 'checkbox', name: 'required' }
         ],
       }
     }
-  })
+  });
 }

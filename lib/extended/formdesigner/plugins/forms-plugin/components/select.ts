@@ -21,6 +21,13 @@ export default function(editor: Editor) {
             full: true, 
             command: 'html-editor' 
           },
+          { 
+            type: 'button', 
+            name: 'edit-js',
+            text: 'Edit Javascript', 
+            full: true, 
+            command: 'js-editor'
+          },
         ],
       },
     },

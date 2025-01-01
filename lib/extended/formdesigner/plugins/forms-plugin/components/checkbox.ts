@@ -15,6 +15,13 @@ export default function checkbox(editor: Editor) {
           {name: 'value'},
           {type: 'checkbox', name: 'required'},
           {type: 'checkbox', name: 'checked'},
+          { 
+            type: 'button', 
+            name: 'edit-js',
+            text: 'Edit Javascript', 
+            full: true, 
+            command: 'js-editor'
+          },
         ],
       },
     },

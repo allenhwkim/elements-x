@@ -19,7 +19,8 @@ export default function(editor: Editor) {
           {
             name: 'text',
             changeProp: true,
-          }, {
+          }, 
+          {
             type: 'select',
             name: 'type',
             options: [
@@ -27,7 +28,15 @@ export default function(editor: Editor) {
               { value: 'submit' },
               { value: 'reset' },
             ]
-        }]
+          },
+          { 
+            type: 'button', 
+            name: 'edit-js',
+            text: 'Edit Javascript', 
+            full: true, 
+            command: 'js-editor'
+          },
+        ]
       },
 
       init() {

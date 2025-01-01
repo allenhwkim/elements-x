@@ -11,7 +11,7 @@ export default function(editor: Editor, props: BlockProperties) {
       return `
         <div class="d-block custom">
           <label for="select-${id}">Subject:</label>
-          <select id="select-${id}" class="form-select">
+          <select id="select-${id}" name="select-${id}" class="form-select">
             <option>Select one</option>
             <option value="1">One</option>
             <option value="2">Two</option>

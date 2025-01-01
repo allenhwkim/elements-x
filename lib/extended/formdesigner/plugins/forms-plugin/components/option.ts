@@ -12,6 +12,11 @@ export default function option(editor: Editor) {
         droppable: false,
         draggable: false,
         highlightable: false,
+        traits: [
+          'value',
+          {type: 'checkbox', name: 'disabled'},
+          {type: 'checkbox', name: 'selected'},
+        ]
       },
     },
   });

@@ -16,6 +16,8 @@ export default function(editor: Editor) {
         },
         text: 'Send',
         traits: [
+          'id',
+          'name',
           {
             name: 'text',
             changeProp: true,

@@ -11,8 +11,9 @@ export default function(editor: Editor) {
         tagName: 'textarea',
         attributes: {},
         traits: [
-          {name: 'name'},
-          {name: 'placeholder'},
+          'id',
+          'name',
+          'placeholder',
           {type: 'checkbox', name: 'required'},
         ]
       },

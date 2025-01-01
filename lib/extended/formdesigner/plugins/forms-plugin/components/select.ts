@@ -12,7 +12,8 @@ export default function(editor: Editor) {
         droppable: false,
         highlightable: false,
         traits: [
-          { name: 'name'},
+          'id',
+          'name',
           { name: 'required', type: 'checkbox' },
           { 
             type: 'button', 

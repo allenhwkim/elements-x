@@ -11,7 +11,7 @@ export default function(editor: Editor, props: BlockProperties) {
       return `<button 
         id="btn-${id}" 
         class="btn btn-primary">
-        Button
+        Hello Button
       </button>`
     } as any
   });

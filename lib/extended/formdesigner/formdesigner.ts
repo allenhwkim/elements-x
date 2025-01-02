@@ -10,9 +10,8 @@ export class FormDesigner extends HTMLElement {
     this.innerHTML = `
       <link rel="stylesheet" href="//unpkg.com/grapesjs/dist/css/grapes.min.css" />
       <style>
-      :root{
-        --gjs-left-width: 20%;
-      }
+        :root{ --gjs-left-width: 20%; }
+        .gjs-block {width: 28%; min-height: initial;}
       </style>
       <div id="gjs"></div>
     `;

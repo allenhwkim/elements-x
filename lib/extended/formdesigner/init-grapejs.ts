@@ -12,6 +12,7 @@ export function initGrapesJs(elId: string) : Editor{
   const editor: Editor = grapesjs.init({
     container: elId,
     plugins: [
+      'grapesjs-plugin-grid',
       grapesjsParserPostCss,
       grapesjsStyleBg,
       formsPlugin, // form, input, label, textarea, checkbox, radio, select, optioon
@@ -19,6 +20,11 @@ export function initGrapesJs(elId: string) : Editor{
       grapesjsBlocksBasic,
       grapesjsPluginHeader,
     ],
+    pluginsOpts: {
+      'grapesjs-plugin-grid': {
+        imgDefault:'column-empty-state.svg',
+      }
+    },
 
     storageManager: false,
     styleManager,
@@ -29,7 +35,8 @@ export function initGrapesJs(elId: string) : Editor{
       ],
       styles: [
         'https://unpkg.com/elements-x/dist/lib/style.css',
-        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'
+        'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
+        '/grapesjs-plugin-grid.css'
       ],
     }
   });

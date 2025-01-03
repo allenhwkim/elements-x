@@ -53,10 +53,10 @@ const func = (() => (() => {
             console.log({action, index});
 
             if (['add-component', 'move-component', 'clone-component'].includes(action)) {
-              !function(t, e, ndx) {
-                console.log('..........1', action, {t, e, ndx});
+              !function(t, n, ndx) {
+                console.log('..........1', action, {t, n, ndx});
 
-                var a = e.models;
+                var a = n.models;
                 // var rOrg = o(o([], a.slice(n + 1), !0), a.slice(0, n).reverse(), !0);
                 var r = [...a.slice(ndx+1), ...a.slice(0,ndx).reverse()];
                 var i = !0;
@@ -261,24 +261,20 @@ const func = (() => (() => {
     
     function(editor) { // t
       editor.on('block:drag:stop', (function(component, block) { // t, n
-        if (component) {
-          var parentComponent = component.parent();
-          parentComponent && (
-            (null == component ? void 0 : component.get('type')) != 'grid-row' && 
-              (null == parentComponent ? void 0 : parentComponent.get('type')) == 'wrapper' && 
-                component.replaceWith({
-                    type: 'grid-row',
-                    components: [{
-                      type: 'grid-column',
-                      components: [component]
-                    }]
-                  }), 
-            (null == component ? void 0 : component.get('type')) == 'grid-column' && 
-              (null == parentComponent ? void 0 : parentComponent.get('type')) == 'wrapper' && 
-                component.replaceWith({
-                  type: 'grid-row',
-                  components: [component]
-                }))
+        const cmpType = component?.get?.('type');
+        const cmpParentType = component?.parent?.().get('type');
+        if (!cmpType || cmpParentType !== 'wrapper') return;
+
+        if (cmpType !== 'grid-row') {
+          component.replaceWith({
+            type: 'grid-row',
+            components: [{ type: 'grid-column', components: [component] }]
+          })
+        } else if (cmpType === 'grid-column') {
+          component.replaceWith({
+            type: 'grid-row',
+            components: [component]
+          });
         }
       }))
     }(t)

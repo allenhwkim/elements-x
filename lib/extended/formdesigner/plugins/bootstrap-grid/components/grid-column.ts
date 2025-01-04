@@ -1,10 +1,10 @@
-import { Editor } from 'grapesjs';
+import { CallbackOptions, Component, Editor, Position, ResizerOptions } from 'grapesjs';
 
 export default function(editor: Editor) {
   const components = editor.DomComponents;
   components.addType('grid-column', {
-    isComponent: function(t) {
-      return t.dataset && t.dataset.gjsType === 'grid-column'
+    isComponent: function(el: HTMLElement) {
+      return el.dataset && el.dataset.gjsType === 'grid-column'
     },
 
     model: {
@@ -15,102 +15,151 @@ export default function(editor: Editor) {
           'data-dm-category': 'layout'
         },
         draggable: '[data-gjs-type="grid-row"], [data-gjs-type="wrapper"]',
-        droppable: !0,
+        droppable: true,
         resizable: {
-          onEnd: function(n) {
-            var o: any = editor.getSelected();
-            o.set('startX', void 0);
-            o.set('prevX', void 0);
-            o.set('prevDirection', void 0);
-            o.set('prevDeltaX', void 0);
-            editor.Canvas.toggleFramesEvents(true);
+          onEnd: function() {
+            var component = editor.getSelected() as Component;
+            component.set('startX', undefined);
+            component.set('prevX', undefined);
+            component.set('prevDirection', undefined);
+            component.set('prevDeltaX', undefined);
+            editor.Canvas.toggleFramesEvents(true); //  enable event listeners on the canvas frames
           },
-          updateTarget: function(n, o, a) {
+          updateTarget: function(el: HTMLElement, _rect, opts: CallbackOptions) { // el(n), rect(o), a(opts)
             editor.UndoManager.stop();
-            var r = a.resizer,
-              i = r.currentPos,
-              l = r.handlerAttr,
-              s = i.x,
-              c: any = editor.getSelected(),
-              p = Number(c.get('startX'));
-            p || (p = s, c.set('startX', p));
-            var d = Number(c.get('prevX'));
-            d || (d = s, c.set('prevX', d));
-            var m, g = c.get('prevDirection');
-            (m = s > d ? 'right' : s < d ? 'left' : g) !== g && (p = d, c.set('startX', p), c.set('prevDeltaX', void 0));
-            var u = 'cr' === l ? 'right' : 'left',
-              h = Math.abs(s - p),
-              v = Number(c.get('prevDeltaX') || h),
-              S = c.parent(),
-              f = S.getEl().offsetWidth / 12,
-              y = Math.trunc(v / f),
-              E = Math.trunc(h / f),
-              P = 'right' === m && 'right' === u || 'left' === m && 'left' === u;
-            if (('right' === m && 'left' === u || 'left' === m && 'right' === u || P) && E !== y) {
-              var w = c.getNextColumnForChange(u, P),
-                b = S.components().models.reduce((function(t, e) {
-                  return t += e.getSpan()
+            const resizer = opts.resizer; // resizer(r)
+            const curPos = resizer.currentPos as Position; // curPos(i)
+            const handleAttr = resizer.handlerAttr; // attr(l)
+            const posX = curPos.x; // s
+            const selected = editor.getSelected() as Component; // c
+            // let startX = Number(selected.get('startX')); // p
+            // startX || (startX = posX, selected.set('startX', startX));
+            let startX = Number(selected.get('startX')); // p
+            if (!startX) {
+              startX = posX;
+              selected.set('startX', startX);
+            }
+
+            // var prevX = Number(selected.get('prevX')); // d
+            // prevX || (prevX = posX, selected.set('prevX', prevX));
+            let prevX = Number(selected.get('prevX')) || posX ; // d
+            if (!prevX) {
+              prevX = posX;
+              selected.set('prevX', prevX);
+            }
+
+            // (m = s > d ?  'right' : s < d ? 'left' : prevDirection) !== prevDirection && 
+            // (p = d, c.set('startX', p), c.set('prevDeltaX', void 0));
+            const prevDirection = selected.get('prevDirection'); // g
+            const newDirection = posX > prevX ? 'right' :  // m
+              posX < prevX ? 'left' : prevDirection;
+
+            console.log({prevDirection, newDirection});
+            if (prevDirection !== newDirection) {
+              startX = prevX;
+              selected.set('startX', startX);
+              selected.set('prevDeltaX', undefined);
+            }
+
+            const leftOrRight = 'cr' === handleAttr ? 'right' : 'left'; // u
+            const moveX = Math.abs(posX - startX); // h
+            const deltaX = Number(selected.get('prevDeltaX') || moveX); // v
+            const parent = selected.parent() as Component; // S(uppercase)
+            const offsetWidth = (parent.getEl() as HTMLElement).offsetWidth / 12; // f
+            const moveByWidthX = Math.trunc(deltaX / offsetWidth); // y
+            const deltaByWidthX = Math.trunc(moveX / offsetWidth); // E(uppercase)
+            const sameDirection = 
+              ('right' === newDirection && 'right' === leftOrRight) ||
+              ('left' === newDirection && 'left' === leftOrRight); // P(uppercase)
+
+            console.log({sameDirection, deltaByWidthX, moveByWidthX})
+            if (
+              (
+                ('right' === newDirection && 'left' === leftOrRight) ||
+                ('left' === newDirection && 'right' === leftOrRight) || 
+                sameDirection
+              ) && (deltaByWidthX !== moveByWidthX)
+            ) {
+              const nextCol = (selected as any).getNextColumnForChange(leftOrRight, sameDirection); // w
+              const totalSpan = parent.components().models.reduce((function(total, e: any) { // b
+                  return total += e.getSpan()
                 }), 0);
-              if (editor.UndoManager.start(), b < 12 && P || w) {
-                var T = c.getNextSpan(P);
-                c.setSizeClass(T)
+              if (editor.UndoManager.start(), (totalSpan < 12 && sameDirection) || nextCol) {
+                const nextSpan = (selected as any).getNextSpan(sameDirection); // T(uppercase)
+                (selected as any).setSizeClass(nextSpan)
               }
-              if (w && 12 === b) {
-                var C = w.getNextSpan(!P);
-                w.setSizeClass(C)
+              if (nextCol && 12 === totalSpan) {
+                const nextSpan2 = nextCol.getNextSpan(!sameDirection); // C
+                nextCol.setSizeClass(nextSpan2)
               }
             }
             editor.UndoManager.stop();
-            c.set('prevX', s);
-            c.set('prevDirection', m);
-            c.set('prevDeltaX', h);
+            selected.set('prevX', posX);
+            selected.set('prevDirection', newDirection);
+            selected.set('prevDeltaX', moveX);
           },
-          tl: 0,
-          tc: 0,
-          tr: 0,
-          cr: true,
-          br: 0,
-          bc: 0,
-          bl: 0,
-          cl: true 
+          tl: 0, // top-left
+          tc: 0, // top-center
+          tr: 0, // top-right
+          cl: true, // center-left
+          cr: true, // center-right
+          br: 0, // bottom-right
+          bc: 0, // bottom-center
+          bl: 0, // bottom-left
         },
       },
-      setSizeClass: function(t) {
-        var e = this.getClasses(),
-          n = e.findIndex((function(t) {
-            return t.startsWith('col-md-')
+
+      setSizeClass: function(colSize: number) { // t
+        const klasses = (this as Component).getClasses(); // e
+        const colMdNdx = klasses.findIndex((function(klass) { // n
+            return klass.startsWith('col-md-')
           }));
-        if (t > 0 && t <= 12) {
-          var o = "col-md-".concat(t);
-          n > -1 ? e[n] = o : e.push(o), this.setClass(e)
+        if (colSize > 0 && colSize <= 12) {
+          const newColMdKlass = `col-md-${colSize}`; // o
+          colMdNdx > -1 ? klasses[colMdNdx] = newColMdKlass : klasses.push(newColMdKlass); 
+          this.setClass(klasses);
         }
       },
-      getSpan: function() {
-        var regExp = new RegExp('^col-' + 'md' + '-\\d{1,2}$'),
-          e = this.getClasses().filter((function(e) {
-            return regExp.test(e)
-          }))[0];
-        if (e) {
-          var n = e.split('-')[2];
-          return Number(n)
+
+      getSpan: function(): number {
+        const colMdKlass = this.getClasses().find(el => el.startsWith('col-md-')); // e
+        if (colMdKlass) {
+          var colNum = colMdKlass.split('-')[2]; // n
+          return Number(colNum)
         }
-        return 12
+        return 12;
       },
-      getNextSpan: function(t) {
-        var e = this.getSpan(),
-          n = t ? e + 1 : e > 1 ? e - 1 : 1;
-        return n > 0 && n <= 12 ? n : e
+
+      getNextSpan: function(plus1: boolean): number{ // t
+        const curSpan = this.getSpan(); // e
+        const nextSpan = 
+          plus1 ? curSpan + 1 : 
+          curSpan > 1 ? curSpan - 1 : 
+          1; // n
+        const nextSpanValid = nextSpan > 0 && nextSpan <= 12;
+        return nextSpanValid ? nextSpan : curSpan;
       },
-      getNextColumnForChange: function(t, e) {
-        const n = this.index();
-        const o = 'right' === t ? n + 1 : n - 1;
-        const a = (this.parent() as any).components().models.length;
-        if (!(o < 0 || o >= a)) {
-          var r: any = this.parent()?.getChildAt(o);
-          if (r) {
-            const i = this.getSpan();
-            const l = r.getSpan();
-            return !e && i > 1 || e && l > 1 ? r : e ? r.getNextColumnForChange(t, e) : void 0;
+
+      getNextColumnForChange: function(
+        nextDirection: string,  // t
+        sameDirection: boolean // e
+      ): Component | undefined {
+        const thisNdx = this.index(); // n
+        const nextNdx = 'right' === nextDirection ? thisNdx + 1 : thisNdx - 1; // o
+        const lenSibling = (this.parent() as any).components().models.length; // a
+        const nxtNdxValid = !(nextNdx < 0 || nextNdx >= lenSibling);
+        console.log('getNextColumnForChange', {nxtNdxValid, lenSibling});
+        if (nxtNdxValid) {
+          const nextComp: any = this.parent()?.getChildAt(nextNdx) as Component; // r
+          if (nextComp) {
+            const thisCol: number = this.getSpan(); // i
+            const nextCol: number = (nextComp as any).getSpan(); // l
+            const cond1 = !sameDirection && thisCol > 1 || sameDirection && nextCol > 1;
+            console.log('getNextColumnForChange', {thisCol, nextCol, cond1});
+
+            return cond1 ? nextComp : 
+              sameDirection ? nextComp.getNextColumnForChange(nextDirection, sameDirection) : 
+              undefined;
           }
         }
       }
@@ -122,6 +171,7 @@ export default function(editor: Editor) {
     const cmpParentType = component?.parent?.().get('type');
     if (!cmpType || cmpParentType !== 'wrapper') return;
 
+    console.log('block:drag:stop', {cmpType, cmpParentType, component})
     if (cmpType !== 'grid-row') {
       component.replaceWith({
         type: 'grid-row',

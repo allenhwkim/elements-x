@@ -12,18 +12,18 @@ export default function(editor: Editor, props: BlockProperties) {
     content: function() {
       const id= Date.now() % 1000;
       return `
-<      <div class="form-check custom">
-        <input 
-          id="checkbox-${id}" 
-          name="checkbox-${id}" 
-          type="checkbox" 
-          class="form-check-input" />
-        <label 
-          for="checkbox-${id}" 
-          class="form-check-label">
-          Label
-        </label>
-      </div>`
+        <div class="form-check custom">
+          <input 
+            id="checkbox-${id}" 
+            name="checkbox-${id}" 
+            type="checkbox" 
+            class="form-check-input" />
+          <label 
+            for="checkbox-${id}" 
+            class="form-check-label">
+            Label
+          </label>
+        </div>`
     } as any
   });
 }

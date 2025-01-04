@@ -11,7 +11,9 @@ export default function(editor: Editor) {
       defaults: {
         name: 'Row',
         draggable: true,
-        droppable: '[data-gjs-type="grid-column"]',
+        // droppable: '[data-gjs-type="grid-column"]',
+        // Indicates if it's possible to drop other components inside.
+        droppable: comp => comp.get('type') === 'grid-column',
         attributes: {
           class: 'container'
         }

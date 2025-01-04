@@ -14,8 +14,10 @@ export default function(editor: Editor) {
         attributes: {
           'data-dm-category': 'layout'
         },
-        draggable: '[data-gjs-type="grid-row"], [data-gjs-type="wrapper"]',
-        droppable: true,
+        draggable: function(_this, dragTo: Component) { // draggable to
+          return ['wrapper', 'grid-row'].includes(dragTo.get('type')||'');
+        },
+        droppable: true, // Indicates if it's possible to drop other components inside.
         resizable: {
           onEnd: function() {
             var component = editor.getSelected() as Component;
@@ -148,6 +150,7 @@ export default function(editor: Editor) {
         const nextNdx = 'right' === nextDirection ? thisNdx + 1 : thisNdx - 1; // o
         const lenSibling = (this.parent() as any).components().models.length; // a
         const nxtNdxValid = !(nextNdx < 0 || nextNdx >= lenSibling);
+
         console.log('getNextColumnForChange', {nxtNdxValid, lenSibling});
         if (nxtNdxValid) {
           const nextComp: any = this.parent()?.getChildAt(nextNdx) as Component; // r
@@ -166,23 +169,16 @@ export default function(editor: Editor) {
     },
   });
 
-  editor.on('block:drag:stop', (function(component) { // t, n
+  // a block is dropped into a parent. e.g. grid-column dropped to a wrapper
+  editor.on('block:drag:stop', function(component) { // t, n
     const cmpType = component?.get?.('type');
-    const cmpParentType = component?.parent?.().get('type');
-    if (!cmpType || cmpParentType !== 'wrapper') return;
+    const parentType = component?.parent?.().get('type');
 
-    console.log('block:drag:stop', {cmpType, cmpParentType, component})
-    if (cmpType !== 'grid-row') {
-      component.replaceWith({
-        type: 'grid-row',
-        components: [{ type: 'grid-column', components: [component] }]
-      })
-    } else if (cmpType === 'grid-column') {
-      component.replaceWith({
-        type: 'grid-row',
-        components: [component]
-      });
+    // a grid-column dropped to a wrapper without grid-row, needs to wrap with a grid-row
+    if ( cmpType === 'grid-column' && parentType === 'wrapper') {
+      console.log('block:drag:stop', {cmpType, parentType, component});
+      component.replaceWith({ type: 'grid-row', components: [component] });
     }
-  }))
+  });
 
 }

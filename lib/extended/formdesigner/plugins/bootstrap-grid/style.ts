@@ -103,6 +103,10 @@ export default `
     min-height: 100px;
   }
 
+  [data-gjs-type='grid-row'] [data-gjs-type='grid-column']:only-child {
+    float: none;
+  }
+
   *[data-gjs-type='grid-column']:empty:before {
     background-image: url('column-empty-state.svg');
   }`;

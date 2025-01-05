@@ -1,4 +1,4 @@
-import { CallbackOptions, Component, Editor, Position, ResizerOptions } from 'grapesjs';
+import { Block, BlockProperties, CallbackOptions, Component, Editor, Position, ResizerOptions } from 'grapesjs';
 
 export default function(editor: Editor) {
   const components = editor.DomComponents;
@@ -12,13 +12,22 @@ export default function(editor: Editor) {
         tagName: 'div',
         name: 'Column',
         attributes: {
-          'data-dm-category': 'layout'
+          'data-dm-category': 'layout',
+          'class': 'col p-1'
         },
-        draggable: function(_this, dragTo: Component) { // draggable to
-          return ['wrapper', 'grid-row'].includes(dragTo.get('type')||'');
+        draggable: function(dragging, target: Component) { // draggable to
+          const parentType = dragging?.parent?.()?.get('type');
+          const targetType = target.get('type') as string;
+          console.log({parentType, targetType});
+          if (parentType === undefined) { // drag from block, only allows to 'wrapper' or 'grid-row'
+            return ['wrapper', 'grid-row'].includes(targetType);
+          } else if (parentType === 'grid-row') { // drag from 'grid-row'
+            return targetType === 'grid-row';
+          }
         },
         droppable: true, // Indicates if it's possible to drop other components inside.
         resizable: {
+
           onEnd: function() {
             var component = editor.getSelected() as Component;
             component.set('startX', undefined);
@@ -27,6 +36,7 @@ export default function(editor: Editor) {
             component.set('prevDeltaX', undefined);
             editor.Canvas.toggleFramesEvents(true); //  enable event listeners on the canvas frames
           },
+
           updateTarget: function(el: HTMLElement, _rect, opts: CallbackOptions) { // el(n), rect(o), a(opts)
             editor.UndoManager.stop();
             const resizer = opts.resizer; // resizer(r)
@@ -170,9 +180,9 @@ export default function(editor: Editor) {
   });
 
   // a block is dropped into a parent. e.g. grid-column dropped to a wrapper
-  editor.on('block:drag:stop', function(component) { // t, n
+  editor.on('block:drag:stop', function(component, block: Block) { // t, n
     const cmpType = component?.get?.('type');
-    const parentType = component?.parent?.().get('type');
+    const parentType = component?.parent?.()?.get('type');
 
     // a grid-column dropped to a wrapper without grid-row, needs to wrap with a grid-row
     if ( cmpType === 'grid-column' && parentType === 'wrapper') {

@@ -9,9 +9,9 @@ export default function(editor: Editor, props: BlockProperties) {
     content: {
       type: 'grid-row',
       components: [
-        { type: 'grid-column', attributes: { class: 'col col-md-4 p-1' } },
-        { type: 'grid-column', attributes: { class: 'col col-md-4 p-1' } },
-        { type: 'grid-column', attributes: { class: 'col col-md-4 p-1' }
+        { type: 'grid-column', attributes: { 'data-size': 'x4', class: 'col col-md-4 p-1' } },
+        { type: 'grid-column', attributes: { 'data-size': 'x4', class: 'col col-md-4 p-1' } },
+        { type: 'grid-column', attributes: { 'data-size': 'x4', class: 'col col-md-4 p-1' }
       }]
     }
   });

@@ -20,7 +20,7 @@ export default function(editor: Editor) {
 
       init: function() {
         editor.on('component:add', function(col: Component) {
-          // console.log('grid-row component:add', {col, el: col.view?.el});
+          console.log('grid-row component:add', {col, el: col.view?.el});
           const totalEls = col.parent()?.components().models.length || 0;
           (totalEls > 12) &&  col.remove();
         });
@@ -40,8 +40,12 @@ export default function(editor: Editor) {
             return ret.filter(el => el !== undefined) 
           }
 
-          // console.log('grid-row component:update:components', update, {action});
-          if (action === 'add-component' || action === 'clone-component') { // model (comp addded/cloned)
+          console.log('grid-row component:update:components', update, {action});
+          if (
+            action === 'add-component' || 
+            action === 'clone-component' || 
+            action === 'paste-component'
+          ) { // model (comp addded/cloned/pasted)
             const nonCol1s = neighbors(components.models, index).filter(el => el.getSpan() > 1);
 
             const neighborComp = nonCol1s[0];
@@ -52,7 +56,10 @@ export default function(editor: Editor) {
 
               neighborComp.setSizeClass(urSize);
               model.setSizeClass(mySize);
-              // console.log({neighborComp, neighborCompSize}, urSize, 'reduced by with', {model, mySize});
+              console.log({neighborComp, neighborCompSize}, urSize, 'reduced by with', {model, mySize});
+            } else {
+              console.log('adding to an empty block');
+              model.setSizeClass(12);
             }
           } else if (action === 'remove-component') { // model (to be removed)
             if (components.models.length >= 12) return;
@@ -68,7 +75,7 @@ export default function(editor: Editor) {
 
               neighborComp.setSizeClass(urSize);
               model.setSizeClass(mySize);
-              // console.log({neighborComp, orgSize: neighborCompSize}, urSize, 'combined with', {model, mySize});
+              console.log({neighborComp, orgSize: neighborCompSize}, urSize, 'combined with', {model, mySize});
             }
           }
         });

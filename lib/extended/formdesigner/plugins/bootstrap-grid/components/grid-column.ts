@@ -12,13 +12,12 @@ export default function(editor: Editor) {
         tagName: 'div',
         name: 'Column',
         attributes: {
-          'data-dm-category': 'layout',
           'class': 'col p-1'
         },
         draggable: function(dragging, target: Component) { // draggable to
           const parentType = dragging?.parent?.()?.get('type');
           const targetType = target.get('type') as string;
-          console.log({parentType, targetType});
+          // console.log({parentType, targetType});
           if (parentType === undefined) { // drag from block, only allows to 'wrapper' or 'grid-row'
             return ['wrapper', 'grid-row'].includes(targetType);
           } else if (parentType === 'grid-row') { // drag from 'grid-row'
@@ -129,7 +128,9 @@ export default function(editor: Editor) {
         if (colSize > 0 && colSize <= 12) {
           const newColMdKlass = `col-md-${colSize}`; // o
           colMdNdx > -1 ? klasses[colMdNdx] = newColMdKlass : klasses.push(newColMdKlass); 
+          console.log({klasses})
           this.setClass(klasses);
+          this.addAttributes({ 'data-size': `x${colSize}` });
         }
       },
 
@@ -187,7 +188,10 @@ export default function(editor: Editor) {
     // a grid-column dropped to a wrapper without grid-row, needs to wrap with a grid-row
     if ( cmpType === 'grid-column' && parentType === 'wrapper') {
       console.log('block:drag:stop', {cmpType, parentType, component});
-      component.replaceWith({ type: 'grid-row', components: [component] });
+      component.replaceWith({ type: 'grid-row', components: [{
+        type: 'grid-column',
+        attributes: { 'data-size' : 'x12', class: 'col p-1 col-md-12'}
+      }] });
     }
   });
 

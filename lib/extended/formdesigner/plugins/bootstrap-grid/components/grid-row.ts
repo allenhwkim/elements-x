@@ -20,7 +20,7 @@ export default function(editor: Editor) {
 
       init: function() {
         editor.on('component:add', function(col: Component) {
-          console.log('grid-row component:add', {col, el: col.view?.el});
+          // console.log('grid-row component:add', {col, el: col.view?.el});
           const totalEls = col.parent()?.components().models.length || 0;
           (totalEls > 12) &&  col.remove();
         });
@@ -40,74 +40,35 @@ export default function(editor: Editor) {
             return ret.filter(el => el !== undefined) 
           }
 
-          console.log('grid-row component:update:components', update, {action});
-          if (action === 'add-component') { // model (comp addded)
-            const nonCol1s = neighbors(components.models, index);
+          // console.log('grid-row component:update:components', update, {action});
+          if (action === 'add-component' || action === 'clone-component') { // model (comp addded/cloned)
+            const nonCol1s = neighbors(components.models, index).filter(el => el.getSpan() > 1);
+
             const neighborComp = nonCol1s[0];
-            const firstNonCol1Size = neighborComp.getSpan(); // e.g. 5
-            const urSize = Math.ceil(firstNonCol1Size / 2); // e.g. 3
-            const mySize = firstNonCol1Size - urSize; // e.g. 2
+            if (neighborComp) {
+              const neighborCompSize = neighborComp.getSpan(); // e.g. 5
+              const urSize = Math.ceil(neighborCompSize / 2); // e.g. 3
+              const mySize = neighborCompSize - urSize; // e.g. 2
 
-            neighborComp.setSizeClass(urSize);
-            model.setSizeClass(mySize);
-            console.log({firstNonCol1Size, neighborComp, urSize, model, mySize});
-          }
+              neighborComp.setSizeClass(urSize);
+              model.setSizeClass(mySize);
+              // console.log({neighborComp, neighborCompSize}, urSize, 'reduced by with', {model, mySize});
+            }
+          } else if (action === 'remove-component') { // model (to be removed)
+            if (components.models.length >= 12) return;
 
-          if (action === 'clone-component') { // model (comp cloned)
-            const nonCol1s = neighbors(components.models, index, 'left-first');
-            const mySize = model.getSpan(); // 6
-            const neighborComp = nonCol1s[0];
-            const myNewSize = Math.ceil(mySize / 2);
-            const urSize = mySize - myNewSize;
+            const allComps = (components.models as any).toSpliced(index, 0, model)
+            const neighborComps = neighbors(allComps, index);
 
-            neighborComp.setSizeClass(urSize);
-            model.setSizeClass(myNewSize);
-            console.log({mySize, neighborComp, urSize, model, myNewSize});
-          }
+            const neighborComp = neighborComps[0];
+            if (neighborComp) {
+              const neighborCompSize = neighborComp.getSpan(); // e.g. 3
+              const mySize = model.getSpan(); // 1
+              const urSize = Math.ceil(mySize + neighborCompSize); // e.g. 4
 
-          if (action === 'move-component') { // model (comp moved)
-            const nonCol1s = neighbors(components.models, index, 'left-first');
-            console.log({nonCol1s, model})
-          }
-          // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx TODO xxxxxxxxxxxxxxxxx
-          // if (['move-component', 'clone-component'].includes(action)) {
-          //   var models = components.models; // a
-          //   var arr = [ // exclude current
-          //     ...models.slice(index+1), // following first
-          //     ...models.slice(0, index).reverse() // preceding second
-          //   ];
-          //   var i = true;
-          //   var l = 0;
-
-          //   for (; i && l < arr.length;) {
-          //     const modelN: any = arr[l]; // s
-          //     const span: number = modelN.getSpan(); // c
-          //     if (1 !== span) {
-          //       console.log(action, modelN.view?.el, modelN.getSpan(), model.view?.el, model.getSpan());
-          //       var p = Math.ceil(span / 2);
-          //       modelN.setSizeClass(span - p);
-          //       model.setSizeClass(p); 
-          //       i = false;
-          //       console.log(action, modelN.view?.el, modelN.getSpan(), model.view?.el, model.getSpan());
-          //     }
-          //     l++;
-          //   }
-          // }
-
-          if (action === 'remove-component') {
-            const cmpLen = components.length; // a
-            if (cmpLen >= 12) return;
-
-            const r = index === cmpLen ? index - 1 : index;
-            if (index >= 0 && cmpLen > 0) {
-              const modelN: any = components.models[r]; // i
-              const spanN = modelN.getSpan(); // l
-              const spanC = model.getSpan(); // s
-              modelN.setSizeClass(spanC + spanN);
-            } else {
-              model.parent().append({
-                type: 'grid-column'
-              })
+              neighborComp.setSizeClass(urSize);
+              model.setSizeClass(mySize);
+              // console.log({neighborComp, orgSize: neighborCompSize}, urSize, 'combined with', {model, mySize});
             }
           }
         });

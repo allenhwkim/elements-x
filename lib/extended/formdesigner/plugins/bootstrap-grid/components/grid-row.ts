@@ -54,12 +54,12 @@ export default function(editor: Editor) {
               const urSize = Math.ceil(neighborCompSize / 2); // e.g. 3
               const mySize = neighborCompSize - urSize; // e.g. 2
 
-              neighborComp.setSizeClass(urSize);
-              model.setSizeClass(mySize);
+              neighborComp.setColMdClass(urSize);
+              model.setColMdClass(mySize);
               console.log({neighborComp, neighborCompSize}, urSize, 'reduced by with', {model, mySize});
             } else {
               console.log('adding to an empty block');
-              model.setSizeClass(12);
+              model.setColMdClass(12);
             }
           } else if (action === 'remove-component') { // model (to be removed)
             if (components.models.length >= 12) return;
@@ -73,8 +73,8 @@ export default function(editor: Editor) {
               const mySize = model.getSpan(); // 1
               const urSize = Math.ceil(mySize + neighborCompSize); // e.g. 4
 
-              neighborComp.setSizeClass(urSize);
-              model.setSizeClass(mySize);
+              neighborComp.setColMdClass(urSize);
+              model.setColMdClass(mySize);
               console.log({neighborComp, orgSize: neighborCompSize}, urSize, 'combined with', {model, mySize});
             }
           }

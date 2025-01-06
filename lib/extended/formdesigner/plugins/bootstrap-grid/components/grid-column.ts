@@ -14,17 +14,19 @@ export default function(editor: Editor) {
         draggable: function(dragging, target: Component) { // draggable to
           const parentType = dragging?.parent?.()?.get('type');
           const targetType = target.get('type') as string;
-          // console.log({parentType, targetType});
-          if (parentType === undefined) { // drag from block, only allows to 'wrapper' or 'grid-row'
+          // when dragging from block, parent is undefined, dropping allowed to 'wrapper' or 'grid-row'
+          if (parentType === undefined) { 
             return ['wrapper', 'grid-row'].includes(targetType);
-          } else if (parentType === 'grid-row') { // drag from 'grid-row'
+          }
+          // wnen dragging from 'grid-row', dropping allowed within it
+          else if (parentType === 'grid-row') { 
             return targetType === 'grid-row';
           }
         },
         droppable: true, // Indicates if it's possible to drop other components inside.
-        resizable: {
+        resizable: { // enable resize handle for left and right
 
-          onEnd: function() {
+          onEnd: function() { // reset startX, prevX, prevDirection, prevDeltaX when resize drag ends
             var component = editor.getSelected() as Component;
             component.set('startX', undefined);
             component.set('prevX', undefined);
@@ -39,85 +41,67 @@ export default function(editor: Editor) {
             const curPos = resizer.currentPos as Position; // curPos(i)
             const handleAttr = resizer.handlerAttr; // attr(l)
             const posX = curPos.x; // s
-            const selected = editor.getSelected() as Component; // c
-            // let startX = Number(selected.get('startX')); // p
-            // startX || (startX = posX, selected.set('startX', startX));
-            let startX = Number(selected.get('startX')); // p
-            if (!startX) {
-              startX = posX;
-              selected.set('startX', startX);
-            }
+            const component = editor.getSelected() as Component; // c
+            
+            const prevX = component.get('prevX') || posX;
+            component.set('prevX', prevX);
 
-            // var prevX = Number(selected.get('prevX')); // d
-            // prevX || (prevX = posX, selected.set('prevX', prevX));
-            let prevX = Number(selected.get('prevX')) || posX ; // d
-            if (!prevX) {
-              prevX = posX;
-              selected.set('prevX', prevX);
-            }
-
-            // (m = s > d ?  'right' : s < d ? 'left' : prevDirection) !== prevDirection && 
-            // (p = d, c.set('startX', p), c.set('prevDeltaX', void 0));
-            const prevDirection = selected.get('prevDirection'); // g
-            const newDirection = posX > prevX ? 'right' :  // m
+            const prevDirection = component.get('prevDirection'); // g
+            const dragDirection = posX > prevX ? 'right' :  // m
               posX < prevX ? 'left' : prevDirection;
 
-            console.log({prevDirection, newDirection});
-            if (prevDirection !== newDirection) {
-              startX = prevX;
-              selected.set('startX', startX);
-              selected.set('prevDeltaX', undefined);
+            const startX = prevDirection !== dragDirection ? 
+              prevX : (component.get('startX') || posX);
+            component.set('startX', startX);
+
+            if (prevDirection !== dragDirection) {
+              component.set('prevDeltaX', undefined);
             }
 
-            const leftOrRight = 'cr' === handleAttr ? 'right' : 'left'; // u
+            const handler = 'cr' === handleAttr ? 'right' : 'left'; // u
             const moveX = Math.abs(posX - startX); // h
-            const deltaX = Number(selected.get('prevDeltaX') || moveX); // v
-            const parent = selected.parent() as Component; // S(uppercase)
-            const offsetWidth = (parent.getEl() as HTMLElement).offsetWidth / 12; // f
-            const moveByWidthX = Math.trunc(deltaX / offsetWidth); // y
-            const deltaByWidthX = Math.trunc(moveX / offsetWidth); // E(uppercase)
-            const sameDirection = 
-              ('right' === newDirection && 'right' === leftOrRight) ||
-              ('left' === newDirection && 'left' === leftOrRight); // P(uppercase)
+            const deltaX = Number(component.get('prevDeltaX') || moveX); // v
+            const parent = component.parent() as Component; // S(uppercase)
 
-            console.log({sameDirection, deltaByWidthX, moveByWidthX})
-            if (
-              (
-                ('right' === newDirection && 'left' === leftOrRight) ||
-                ('left' === newDirection && 'right' === leftOrRight) || 
-                sameDirection
-              ) && (deltaByWidthX !== moveByWidthX)
-            ) {
-              const nextCol = (selected as any).getNextColumnForChange(leftOrRight, sameDirection); // w
-              const totalSpan = parent.components().models.reduce((function(total, e: any) { // b
-                  return total += e.getSpan()
-                }), 0);
-              if (editor.UndoManager.start(), (totalSpan < 12 && sameDirection) || nextCol) {
-                const nextSpan = (selected as any).getNextSpan(sameDirection); // T(uppercase)
-                (selected as any).setSizeClass(nextSpan)
-              }
-              if (nextCol && 12 === totalSpan) {
-                const nextSpan2 = nextCol.getNextSpan(!sameDirection); // C
-                nextCol.setSizeClass(nextSpan2)
+            const oneColSize = (parent.getEl() as HTMLElement).offsetWidth / 12; // f
+            const deltaByWidthX = Math.trunc(deltaX / oneColSize); 
+            const moveByWidthX = Math.trunc(moveX / oneColSize);
+            const increasing = // increase
+              (handler === 'right' && dragDirection === 'right') ||
+              (handler === 'left' && dragDirection === 'left');
+            const decreasing = // decreasing
+              (handler === 'left' && dragDirection === 'right') ||
+              (handler === 'right' && dragDirection === 'left');
+            
+            console.log(handler, 'handler going to', dragDirection, 
+              'deltaByWidthX', deltaByWidthX, 'moveByWidthX', moveByWidthX);
+            if ( (increasing || decreasing) && (deltaByWidthX !== moveByWidthX)) {
+              const draggingCol: any = component;
+              const matchingCol = draggingCol.getMatchingColumn(handler, increasing); // w
+              console.log('increasing', increasing, matchingCol?.view.el);
+              if (matchingCol) {
+                editor.UndoManager.start();
+                draggingCol.incColSizeBy(increasing ? 1: -1);
+                matchingCol.incColSizeBy(increasing ? -1 : 1);
               }
             }
             editor.UndoManager.stop();
-            selected.set('prevX', posX);
-            selected.set('prevDirection', newDirection);
-            selected.set('prevDeltaX', moveX);
+            component.set('prevX', posX);
+            component.set('prevDirection', dragDirection);
+            component.set('prevDeltaX', moveX);
           },
-          tl: 0, // top-left
-          tc: 0, // top-center
-          tr: 0, // top-right
           cl: true, // center-left
           cr: true, // center-right
-          br: 0, // bottom-right
-          bc: 0, // bottom-center
-          bl: 0, // bottom-left
+          tl: false, // top-left
+          tc: false, // top-center
+          tr: false, // top-right
+          br: false, // bottom-right
+          bc: false, // bottom-center
+          bl: false, // bottom-left
         },
       },
 
-      setSizeClass: function(colSize: number) { // t
+      setColMdClass: function(colSize: number) { // t
         const klasses = (this as Component).getClasses(); // e
         const colMdNdx = klasses.findIndex((function(klass) { // n
             return klass.startsWith('col-md-')
@@ -140,39 +124,28 @@ export default function(editor: Editor) {
         return 12;
       },
 
-      getNextSpan: function(plus1: boolean): number{ // t
-        const curSpan = this.getSpan(); // e
-        const nextSpan = 
-          plus1 ? curSpan + 1 : 
-          curSpan > 1 ? curSpan - 1 : 
-          1; // n
-        const nextSpanValid = nextSpan > 0 && nextSpan <= 12;
-        return nextSpanValid ? nextSpan : curSpan;
+      incColSizeBy: function(delta: number = 0) {
+        const colSize = this.getSpan();
+        const newSize = Math.min(Math.max( colSize + delta, 1), 12);
+        this.setColMdClass(newSize);
       },
 
-      getNextColumnForChange: function(
-        nextDirection: string,  // t
-        sameDirection: boolean // e
-      ): Component | undefined {
+      getMatchingColumn: function(handler: string, increasing: boolean): Component | undefined {
+        const siblings = this.parent()?.components().models || [];
         const thisNdx = this.index(); // n
-        const nextNdx = 'right' === nextDirection ? thisNdx + 1 : thisNdx - 1; // o
-        const lenSibling = (this.parent() as any).components().models.length; // a
-        const nxtNdxValid = !(nextNdx < 0 || nextNdx >= lenSibling);
+        const nextNdx = handler === 'right' ? thisNdx + 1 : thisNdx - 1; // o
+        const matchingCol: any = siblings[nextNdx]; // r
+        if (!matchingCol) return;
 
-        console.log('getNextColumnForChange', {nxtNdxValid, lenSibling});
-        if (nxtNdxValid) {
-          const nextComp: any = this.parent()?.getChildAt(nextNdx) as Component; // r
-          if (nextComp) {
-            const thisCol: number = this.getSpan(); // i
-            const nextCol: number = (nextComp as any).getSpan(); // l
-            const cond1 = !sameDirection && thisCol > 1 || sameDirection && nextCol > 1;
-            console.log('getNextColumnForChange', {thisCol, nextCol, cond1});
+        const myColSize: number = this.getSpan(); // i
+        const urColSize: number = (matchingCol as any).getSpan(); // l
+        // when increase, matching col must be bigger than 1 so that I increase and u decrease
+        const incresable = increasing && urColSize > 1; 
+        // when decrease, my col must be bigger than 1 so that I decrease and u increase
+        const decreasable = !increasing && myColSize > 1;
+        console.log('getMatchingColumn', {myColSize, urColSize, incresable, decreasable});
 
-            return cond1 ? nextComp : 
-              sameDirection ? nextComp.getNextColumnForChange(nextDirection, sameDirection) : 
-              undefined;
-          }
-        }
+        return (incresable || decreasable) ? matchingCol: undefined;
       }
     },
   });

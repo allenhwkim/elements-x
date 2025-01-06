@@ -1,4 +1,4 @@
-import { Block, BlockProperties, CallbackOptions, Component, Editor, Position, ResizerOptions } from 'grapesjs';
+import { Block, CallbackOptions, Component, Editor } from 'grapesjs';
 
 export default function(editor: Editor) {
   const components = editor.DomComponents;
@@ -26,69 +26,50 @@ export default function(editor: Editor) {
         droppable: true, // Indicates if it's possible to drop other components inside.
         resizable: { // enable resize handle for left and right
 
+          onStart: function(event: PointerEvent, _component) {
+            var component = editor.getSelected() as Component;
+            component.set('startX', event.x);
+          },
+
           onEnd: function() { // reset startX, prevX, prevDirection, prevDeltaX when resize drag ends
             var component = editor.getSelected() as Component;
             component.set('startX', undefined);
-            component.set('prevX', undefined);
-            component.set('prevDirection', undefined);
-            component.set('prevDeltaX', undefined);
             editor.Canvas.toggleFramesEvents(true); //  enable event listeners on the canvas frames
           },
 
           updateTarget: function(el: HTMLElement, _rect, opts: CallbackOptions) { // el(n), rect(o), a(opts)
             editor.UndoManager.stop();
-            const resizer = opts.resizer; // resizer(r)
-            const curPos = resizer.currentPos as Position; // curPos(i)
-            const handleAttr = resizer.handlerAttr; // attr(l)
-            const posX = curPos.x; // s
             const component = editor.getSelected() as Component; // c
-            
-            const prevX = component.get('prevX') || posX;
-            component.set('prevX', prevX);
-
-            const prevDirection = component.get('prevDirection'); // g
-            const dragDirection = posX > prevX ? 'right' :  // m
-              posX < prevX ? 'left' : prevDirection;
-
-            const startX = prevDirection !== dragDirection ? 
-              prevX : (component.get('startX') || posX);
-            component.set('startX', startX);
-
-            if (prevDirection !== dragDirection) {
-              component.set('prevDeltaX', undefined);
-            }
-
-            const handler = 'cr' === handleAttr ? 'right' : 'left'; // u
-            const moveX = Math.abs(posX - startX); // h
-            const deltaX = Number(component.get('prevDeltaX') || moveX); // v
             const parent = component.parent() as Component; // S(uppercase)
-
             const oneColSize = (parent.getEl() as HTMLElement).offsetWidth / 12; // f
-            const deltaByWidthX = Math.trunc(deltaX / oneColSize); 
-            const moveByWidthX = Math.trunc(moveX / oneColSize);
-            const increasing = // increase
-              (handler === 'right' && dragDirection === 'right') ||
-              (handler === 'left' && dragDirection === 'left');
-            const decreasing = // decreasing
-              (handler === 'left' && dragDirection === 'right') ||
-              (handler === 'right' && dragDirection === 'left');
+
+            const {currentPos, handlerAttr} = opts.resizer; // resizer(r)
+            const posX = currentPos?.x as number; // s
+            const startX = component.get('startX'); // startX changes when col size changes
             
-            console.log(handler, 'handler going to', dragDirection, 
-              'deltaByWidthX', deltaByWidthX, 'moveByWidthX', moveByWidthX);
-            if ( (increasing || decreasing) && (deltaByWidthX !== moveByWidthX)) {
+            const handler = 'cr' === handlerAttr ? 'right' : 'left'; // u
+            const moveDirection = posX > startX ? 'right' : 'left';
+            const increasing = handler === moveDirection; // e.g, right handler goes to right
+            const decreasing = handler !== moveDirection; // e.g, right handler goes to left
+            
+            const moveX = Math.abs(posX - startX);
+            const colSizeChange = Math.trunc(moveX / oneColSize);
+            // console.info(handler, 'handler going to', moveDirection);
+            
+            if ( (increasing || decreasing) && (colSizeChange > 0)) {
               const draggingCol: any = component;
               const matchingCol = draggingCol.getMatchingColumn(handler, increasing); // w
-              console.log('increasing', increasing, matchingCol?.view.el);
               if (matchingCol) {
                 editor.UndoManager.start();
                 draggingCol.incColSizeBy(increasing ? 1: -1);
                 matchingCol.incColSizeBy(increasing ? -1 : 1);
+                // change startX to the the position of increased column size
+                // so that next it can increase again by 1
+                const incSize = posX > startX ? oneColSize : -oneColSize;
+                component.set('startX', startX + incSize);
               }
             }
             editor.UndoManager.stop();
-            component.set('prevX', posX);
-            component.set('prevDirection', dragDirection);
-            component.set('prevDeltaX', moveX);
           },
           cl: true, // center-left
           cr: true, // center-right
@@ -109,7 +90,6 @@ export default function(editor: Editor) {
         if (colSize > 0 && colSize <= 12) {
           const newColMdKlass = `col-md-${colSize}`; // o
           colMdNdx > -1 ? klasses[colMdNdx] = newColMdKlass : klasses.push(newColMdKlass); 
-          console.log({klasses})
           this.setClass(klasses);
           this.addAttributes({ 'data-size': `x${colSize}` });
         }
@@ -139,11 +119,10 @@ export default function(editor: Editor) {
 
         const myColSize: number = this.getSpan(); // i
         const urColSize: number = (matchingCol as any).getSpan(); // l
-        // when increase, matching col must be bigger than 1 so that I increase and u decrease
+        // when increase, matching col must be bigger than 1 so that u can decrease
         const incresable = increasing && urColSize > 1; 
-        // when decrease, my col must be bigger than 1 so that I decrease and u increase
+        // when decrease, my col must be bigger than 1 so that I can decrease 
         const decreasable = !increasing && myColSize > 1;
-        console.log('getMatchingColumn', {myColSize, urColSize, incresable, decreasable});
 
         return (incresable || decreasable) ? matchingCol: undefined;
       }

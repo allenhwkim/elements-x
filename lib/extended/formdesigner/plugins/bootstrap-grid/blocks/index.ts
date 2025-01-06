@@ -5,6 +5,6 @@ import column66 from "./column-6-6";
 
 export default function(editor: Editor, props: BlockProperties) {
   gridColumn(editor, props);
-  column444(editor, props);
   column66(editor, props);
+  column444(editor, props);
 }

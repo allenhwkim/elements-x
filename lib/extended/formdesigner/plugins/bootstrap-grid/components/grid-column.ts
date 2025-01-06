@@ -11,9 +11,6 @@ export default function(editor: Editor) {
       defaults: {
         tagName: 'div',
         name: 'Column',
-        attributes: {
-          'class': 'col p-1'
-        },
         draggable: function(dragging, target: Component) { // draggable to
           const parentType = dragging?.parent?.()?.get('type');
           const targetType = target.get('type') as string;

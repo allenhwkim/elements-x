@@ -12,8 +12,8 @@ export default function(editor: Editor, props: BlockProperties) {
     content: {
       type: 'grid-row',
       components: [
-        { type: 'grid-column', attributes: { 'data-size': 'x6', class: 'col col-md-6 p-1' } }, 
-        { type: 'grid-column', attributes: { 'data-size': 'x6', class: 'col col-md-6 p-1' }
+        { type: 'grid-column', attributes: { 'data-size': 'x6', class: 'col col-md-6 p-2' } }, 
+        { type: 'grid-column', attributes: { 'data-size': 'x6', class: 'col col-md-6 p-2' }
       }]
     }
   });

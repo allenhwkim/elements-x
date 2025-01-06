@@ -13,7 +13,7 @@ const elementsXPlugin: Plugin<PluginOptions> = (editor: Editor) => {
   components(editor);
   blocks(editor, props);
 
-  editor.on('canvas:frame:load', () => {
+  editor.on('canvas:frame:load:body', () => {
     const head = editor.Canvas.getDocument().head;
     const style = document.createElement('style');
     style.innerHTML = css;

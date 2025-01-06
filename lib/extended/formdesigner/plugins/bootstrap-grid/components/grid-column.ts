@@ -139,7 +139,7 @@ export default function(editor: Editor) {
       console.log('block:drag:stop', {cmpType, parentType, component});
       component.replaceWith({ type: 'grid-row', components: [{
         type: 'grid-column',
-        attributes: { 'data-size' : 'x12', class: 'col p-1 col-md-12'}
+        attributes: { 'data-size' : 'x12', class: 'col p-2 col-md-12'}
       }] });
     }
   });

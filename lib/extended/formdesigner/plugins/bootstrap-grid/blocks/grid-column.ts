@@ -12,7 +12,7 @@ export default function(editor: Editor, props: BlockProperties) {
     content: {
       type: 'grid-column',
       attributes: {
-        'class': 'col p-1'
+        'class': 'col p-2'
       },
     }
   });

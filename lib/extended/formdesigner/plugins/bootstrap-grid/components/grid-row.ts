@@ -14,7 +14,7 @@ export default function(editor: Editor) {
         // Indicates if it's possible to drop other components inside.
         droppable: comp => comp.get('type') === 'grid-column',
         attributes: {
-          class: 'container'
+          class: 'row'
         }
       },
 

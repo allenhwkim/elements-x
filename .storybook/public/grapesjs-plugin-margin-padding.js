@@ -302,6 +302,7 @@ var marginEffect =document.createElement("div");
     })(editor, options);
 
     (function (editor) {
+      //component is deselected or when the core component style clear action runs.
       editor.on("component:deselected run:core:component-style-clear", function () {
         document.querySelector(".gjs-options")?.remove();
         document.querySelector(".padding_effect")?.remove();

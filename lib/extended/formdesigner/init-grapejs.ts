@@ -8,6 +8,7 @@ import formsPlugin from './plugins/forms-plugin'; // <form>, <input> ...
 import styleManager from './style-manager';
 import elementsXPlugin from './plugins/elements-x-plugin';
 import bootstrapGridPlugin from './plugins/bootstrap-grid';
+import bootstrapPadPlugin from './plugins/bootstrap-pad';
 
 export function initGrapesJs(elId: string) : Editor{
   const editor: Editor = grapesjs.init({
@@ -20,7 +21,7 @@ export function initGrapesJs(elId: string) : Editor{
       elementsXPlugin, // x-calendar, x-combobox, x-dropdown, x-map, x-masked
       grapesjsBlocksBasic,
       grapesjsPluginHeader,
-      'grapesjs-plugin-margin-padding',
+      bootstrapPadPlugin,
     ],
 
     storageManager: false,

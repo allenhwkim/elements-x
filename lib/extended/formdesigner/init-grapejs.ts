@@ -20,6 +20,7 @@ export function initGrapesJs(elId: string) : Editor{
       elementsXPlugin, // x-calendar, x-combobox, x-dropdown, x-map, x-masked
       grapesjsBlocksBasic,
       grapesjsPluginHeader,
+      'grapesjs-plugin-margin-padding',
     ],
 
     storageManager: false,
@@ -32,7 +33,6 @@ export function initGrapesJs(elId: string) : Editor{
       styles: [
         'https://unpkg.com/elements-x/dist/lib/style.css',
         'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
-        // '/grapesjs-plugin-grid.css'
       ],
     }
   });

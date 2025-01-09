@@ -7,21 +7,21 @@ import grapesjsStyleBg from 'grapesjs-style-bg';
 import formsPlugin from './plugins/forms-plugin'; // <form>, <input> ... 
 import styleManager from './style-manager';
 import elementsXPlugin from './plugins/elements-x-plugin';
-import bootstrapGridPlugin from './plugins/bootstrap-grid';
-import bootstrapPadPlugin from './plugins/bootstrap-pad';
+import bsRowColPlugin from './plugins/bs-row-col';
+import bsPadPlugin from './plugins/bs-pad';
 
 export function initGrapesJs(elId: string) : Editor{
   const editor: Editor = grapesjs.init({
     container: elId,
     plugins: [
-      bootstrapGridPlugin,
+      bsRowColPlugin,
+      bsPadPlugin,
       grapesjsParserPostCss,
       grapesjsStyleBg,
       formsPlugin, // form, input, label, textarea, checkbox, radio, select, optioon
       elementsXPlugin, // x-calendar, x-combobox, x-dropdown, x-map, x-masked
       grapesjsBlocksBasic,
       grapesjsPluginHeader,
-      bootstrapPadPlugin,
     ],
 
     storageManager: false,

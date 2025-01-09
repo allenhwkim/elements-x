@@ -17,8 +17,28 @@ export default function (editor: Editor) {
         // mousedown: set css prop name and value to change, and add mousemove/mouseup handler
         // mousemove: update padding style by its move
         // mouseup: remove  mousemove/up handler
-        el.addEventListener("mousedown", mouseDownHandler)
+        // el.addEventListener("mousedown", mouseDownHandler)
+        el.addEventListener("click", clickHandler)
       });
+    }
+
+    function clickHandler(event) { // .top .bottom .left .right
+      editor.Canvas.toggleFramesEvents(false);
+      // const pos = event.target.getAttribute('class').match(/\s(top|left|bottom|right)/)[1];
+      const pos = event.target.getAttribute('class');
+      const pos1 = {top:'t', bottom:'b', left: 's', right: 'e'}[pos];
+      const oldKlass = component.getClasses().find(el => el.startsWith(`p${pos1}-`)) || `p${pos}-0`;
+      // const oldKlassVal = component.getAttribute(oldKlass);
+      const oldPadVal = +oldKlass.split('-')[1];
+
+      const newPadVal = (oldPadVal + 1) % 6;
+      const newKlass = `p${pos1}-${newPadVal}`;
+      component.removeClass(oldKlass)
+      component.addClass(newKlass)
+      const compHeight = parseInt(window.getComputedStyle(component.getEl()).height, 10); 
+      console.log('...........', {pos, oldKlass, oldPadVal, newPadVal, newKlass, compHeight});
+      (document.querySelector('#gjs-tools') as any).style.height = compHeight + 'px';
+      editor.Canvas.toggleFramesEvents(true);
     }
 
     let staClientY: number;

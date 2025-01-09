@@ -2,9 +2,9 @@ import { Component, Components, Editor } from 'grapesjs';
 
 export default function(editor: Editor) {
   const components = editor.DomComponents;
-  components.addType('grid-row', {
+  components.addType('bs-row', {
     isComponent: function(el) {
-      return el.dataset && el.dataset.gjsType === 'grid-row';
+      return el.dataset && el.dataset.gjsType === 'bs-row';
     },
 
     model: {
@@ -12,7 +12,7 @@ export default function(editor: Editor) {
         name: 'Row',
         draggable: true,
         // Indicates if it's possible to drop other components inside.
-        droppable: comp => comp.get('type') === 'grid-column',
+        droppable: comp => comp.get('type') === 'bs-col',
         resizable : { tl: 0, tc: 0, tr: 0, cl: 0, cr: 0, bl: 0, br: 0, bc: 1 },
         attributes: {
           class: 'row p-1'
@@ -21,7 +21,7 @@ export default function(editor: Editor) {
 
       init: function() {
         editor.on('component:add', function(col: Component) {
-          console.log('grid-row component:add', {col, el: col.view?.el});
+          console.log('bs-row component:add', {col, el: col.view?.el});
           const totalEls = col.parent()?.components().models.length || 0;
           (totalEls > 12) &&  col.remove();
         });
@@ -41,7 +41,7 @@ export default function(editor: Editor) {
             return ret.filter(el => el !== undefined) 
           }
 
-          console.log('grid-row component:update:components', update, {action});
+          console.log('bs-row component:update:components', update, {action});
           if (
             action === 'add-component' || 
             action === 'clone-component' || 

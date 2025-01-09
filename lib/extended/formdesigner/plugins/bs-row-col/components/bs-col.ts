@@ -2,25 +2,26 @@ import { Block, CallbackOptions, Component, Editor } from 'grapesjs';
 
 export default function(editor: Editor) {
   const components = editor.DomComponents;
-  components.addType('grid-column', {
+  components.addType('bs-col', {
     isComponent: function(el: HTMLElement) {
-      return el.dataset && el.dataset.gjsType === 'grid-column'
+      return el.dataset && el.dataset.gjsType === 'bs-col'
     },
 
     model: {
       defaults: {
         tagName: 'div',
         name: 'Column',
+        editable: true,
         draggable: function(dragging, target: Component) { // draggable to
           const parentType = dragging?.parent?.()?.get('type');
           const targetType = target.get('type') as string;
-          // when dragging from block, parent is undefined, dropping allowed to 'wrapper' or 'grid-row'
-          if (parentType === undefined) { 
-            return ['wrapper', 'grid-row'].includes(targetType);
+          // dropping only allowed to 'wrapper' or 'bs-row'
+          if (parentType === undefined) { // when dragging from block, parent is undefined, 
+            return ['wrapper', 'bs-row'].includes(targetType);
           }
-          // wnen dragging from 'grid-row', dropping allowed within it
-          else if (parentType === 'grid-row') { 
-            return targetType === 'grid-row';
+          // wnen dragging from 'bs-row', dropping allowed within it
+          else if (parentType === 'bs-row') { 
+            return targetType === 'bs-row';
           }
         },
         droppable: true, // Indicates if it's possible to drop other components inside.
@@ -129,16 +130,16 @@ export default function(editor: Editor) {
     },
   });
 
-  // a block is dropped into a parent. e.g. grid-column dropped to a wrapper
+  // a block is dropped into a parent. e.g. bs-col dropped to a wrapper
   editor.on('block:drag:stop', function(component, block: Block) { // t, n
-    const cmpType = component?.get?.('type');
+    const compType = component?.get?.('type');
     const parentType = component?.parent?.()?.get('type');
 
-    // a grid-column dropped to a wrapper without grid-row, needs to wrap with a grid-row
-    if ( cmpType === 'grid-column' && parentType === 'wrapper') {
-      console.log('block:drag:stop', {cmpType, parentType, component});
-      component.replaceWith({ type: 'grid-row', components: [{
-        type: 'grid-column',
+    // a bs-col dropped to a wrapper without bs-row, needs to wrap with a bs-row
+    if ( compType === 'bs-col' && parentType === 'wrapper') {
+      console.log('block:drag:stop', {compType, parentType, component});
+      component.replaceWith({ type: 'bs-row', components: [{
+        type: 'bs-col',
         attributes: { 'data-size' : 'x12', class: 'col p-2 col-md-12'}
       }] });
     }

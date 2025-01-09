@@ -1,6 +1,5 @@
 import * as grapesjs from 'grapesjs';
-import html from './formdesigner.html?raw';
-import { initGrapesJs } from './init-grapejs';
+import { initGrapesJs } from './init-grapesjs';
 
 export class FormDesigner extends HTMLElement {
   editor: grapesjs.Editor = undefined as any;

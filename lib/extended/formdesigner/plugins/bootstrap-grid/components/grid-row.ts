@@ -13,8 +13,9 @@ export default function(editor: Editor) {
         draggable: true,
         // Indicates if it's possible to drop other components inside.
         droppable: comp => comp.get('type') === 'grid-column',
+        resizable : { tl: 0, tc: 0, tr: 0, cl: 0, cr: 0, bl: 0, br: 0, bc: 1 },
         attributes: {
-          class: 'row'
+          class: 'row p-1'
         }
       },
 

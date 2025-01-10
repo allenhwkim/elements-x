@@ -6,12 +6,7 @@ import button from './button';
 import select from './select';
 import { BlockProperties } from 'grapesjs';
 
-const props: BlockProperties = {
-  label: '',
-  content: '',
-  category: 'Form'
-}
-export default function(editor) {
+export default function(editor, props: BlockProperties) {
   form(editor, props);
   checkbox(editor, props);
   radio(editor, props);

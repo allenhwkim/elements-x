@@ -1,13 +1,13 @@
-import type { Editor, Plugin, PluginOptions } from 'grapesjs';
+import type { BlockProperties, Editor, Plugin, PluginOptions } from 'grapesjs';
 import components from './components';
 import blocks from './blocks';
 import css from './style';
 
-const elementsXPlugin: Plugin<PluginOptions> = (editor: Editor, options: PluginOptions) => {
+export default function(editor: Editor, options: PluginOptions){
   components(editor);
   blocks(
     editor, 
-    options.blockProps || { label: '', content: '', category: 'Inputs' }
+    options as BlockProperties,
   );
 
   editor.on('canvas:frame:load:body', () => {
@@ -17,5 +17,3 @@ const elementsXPlugin: Plugin<PluginOptions> = (editor: Editor, options: PluginO
     head.appendChild(style);
   });
 };
-
-export default elementsXPlugin;

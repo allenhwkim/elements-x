@@ -1,27 +1,40 @@
-import grapesjs, {Editor} from 'grapesjs';
-import grapesjsBlocksBasic from 'grapesjs-blocks-basic';
-import grapesjsPluginHeader from 'grapesjs-plugin-header';
+import grapesjs, {Editor, usePlugin} from 'grapesjs';
 import grapesjsParserPostCss from 'grapesjs-parser-postcss';
 import grapesjsStyleBg from 'grapesjs-style-bg';
 
 import formsPlugin from './plugins/forms-plugin'; // <form>, <input> ... 
 import styleManager from './style-manager';
 import elementsXPlugin from './plugins/elements-x-plugin';
-import bsRowColPlugin from './plugins/bs-row-col';
-import bsPadPlugin from './plugins/bs-pad';
+import bsBasicPlugin from './plugins/bootstrap-basic';
+import bsPadPlugin from './plugins/bootstrap-pad';
 
 export function initGrapesJs(elId: string) : Editor{
   const editor: Editor = grapesjs.init({
     container: elId,
     plugins: [
-      bsRowColPlugin,
-      bsPadPlugin,
+      // cleaner css, https://grapesjs.com/docs/guides/Custom-CSS-parser.html#plugins
       grapesjsParserPostCss,
+
+      // Style manger - background
       grapesjsStyleBg,
-      formsPlugin, // form, input, label, textarea, checkbox, radio, select, optioon
-      elementsXPlugin, // x-calendar, x-combobox, x-dropdown, x-map, x-masked
-      grapesjsBlocksBasic,
-      grapesjsPluginHeader,
+
+      // bootstrap grid, text, link, image
+      usePlugin(bsBasicPlugin, {category: 'Bootstrap5 Basic'}),
+
+      // bootstrap padding change by click
+      usePlugin(bsPadPlugin, {typesToApply: ['div', 'bs-row', 'bs-col', '']}),
+
+      // form, input, label, textarea, checkbox, radio, select, optioon
+      usePlugin(formsPlugin, {category: 'Form Control'}), 
+
+      // Text input, date input, province input, country input,
+      // date input, state input, address input, 
+      // phone input, postal code input, zip code input
+      usePlugin(elementsXPlugin, {
+        category: 'Form Inputs',
+        css: 'x-calendar .week-days-container { max-width: 400px; }'+
+          'x-calendar .days-container { max-width: 400px; }'
+      }),
     ],
 
     storageManager: false,

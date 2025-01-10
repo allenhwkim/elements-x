@@ -9,13 +9,7 @@ import inputState from './input-state';
 import inputZipCode from './input-zip-code';
 import inputText from './input-text';
 
-const props: BlockProperties ={
-  label: '', 
-  content: '', 
-  category: 'Inputs'
-};
-
-export default function(editor) {
+export default function(editor, props: BlockProperties) {
   inputText(editor, props);
   inputDate(editor, props);
   inputProvince(editor, props);

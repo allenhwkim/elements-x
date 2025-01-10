@@ -1,4 +1,4 @@
-import type { Component, Editor, PluginOptions } from 'grapesjs';
+import type { Editor, PluginOptions } from 'grapesjs';
 import css from './style';
 
 export default function(editor: Editor, options: PluginOptions) {
@@ -14,7 +14,7 @@ export default function(editor: Editor, options: PluginOptions) {
   });
 
   editor.on("component:selected", function (component) {
-    const compTypes = options?.types || ['div', 'bs-row', 'bs-col', ''];
+    const compTypes = options?.typesToApply;
     if (compTypes.includes(component.get("type"))) {
       const toolEl = document.createElement('div');
       toolEl.classList.add('bs-pad');

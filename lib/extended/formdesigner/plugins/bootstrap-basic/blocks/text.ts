@@ -1,7 +1,6 @@
 import { BlockProperties, Editor } from "grapesjs";
 
 export default function(editor: Editor, props: BlockProperties) {
-  console.log('.....props.label', {props})
   editor.BlockManager.add('text', {
     label: props.label || 'Text',
     category: props.category || 'Bootstrap5 Basic',

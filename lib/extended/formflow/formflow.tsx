@@ -92,6 +92,12 @@ export class Formflow extends HTMLElement {
       image.src = await this.getImage();
       (window as any).open('').document.write(image.outerHTML);
     }
+
+    const showData = async () => {
+      this.fireEvent({ action: 'data', event: this.getData() });
+      console.log(`formflow event "data" fired. Handle it. ` + 
+        `e.g, window.addEventListener('formflow', e => console.log(e.detail))`);
+    }
   
     this.root = createRoot(this);
     this.root.render(
@@ -103,6 +109,7 @@ export class Formflow extends HTMLElement {
           onEdgeClick={onEdgeClick}
           onInit={onInit}
           showImage={showImage}
+          showData={showData}
           externalCalls={this.externalCalls} /* to call a function from outside */
         />
       </StrictMode>

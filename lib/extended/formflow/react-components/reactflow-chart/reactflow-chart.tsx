@@ -17,6 +17,7 @@ export interface ReactflowChartProps {
   onNodeChange?: (change?: NodeChange[]) => void;
   onEdgeChange?: (change?: EdgeChange[]) => void;
   showImage?: any;
+  showData?: any;
   externalCalls?: { [key:string]: Function };
 }
 
@@ -64,6 +65,7 @@ export function ReactflowChart(props: ReactflowChartProps) {
         <ControlButton onClick={store.undo}>&#x27F2;</ControlButton>
         <ControlButton onClick={store.redo}>&#x27F3;</ControlButton>
         <ControlButton onClick={props.showImage}>&#x1F4F7;</ControlButton>
+        <ControlButton onClick={props.showData}>{'{..}'}</ControlButton>
       </Controls>
       <Background />
     </ReactFlow>

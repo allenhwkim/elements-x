@@ -26,6 +26,7 @@ export function ReactflowChart(props: ReactflowChartProps) {
 
   if (props.externalCalls) {
     props.externalCalls.updateNodeData = (id, data) => { store.updateNodeData(id, data); }
+    props.externalCalls.updateEdgeData = (id, data) => { store.updateEdgeData(id, data); }
   }
 
   React.useEffect( () => {

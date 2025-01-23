@@ -144,7 +144,7 @@ const useStore = create<TStoreState>((set, get) => ({
     const before = get();
     const newNodes = get().nodes.map((node) => {
       if (node.id === nodeId) {
-        node.data = Object.assign({}, node.data, data);
+        node.data = {...node.data, ...data};
       }
       return node;
     });
@@ -156,7 +156,7 @@ const useStore = create<TStoreState>((set, get) => ({
     const before = get();
     const newEdges = get().edges.map((edge) => {
       if (edge.id === edgeId) {
-        edge.data = Object.assign({}, edge.data || {}, data);
+        edge.data = {...edge.data, ...data};
       }
       return edge;
     });

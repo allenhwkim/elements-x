@@ -1,4 +1,5 @@
 import { Block, CallbackOptions, Component, Editor } from 'grapesjs';
+const DROP_ALLOWED_TO = ['wrapper', 'form'];
 
 export default function(editor: Editor) {
   const components = editor.DomComponents;
@@ -15,9 +16,8 @@ export default function(editor: Editor) {
         draggable: function(dragging, target: Component) { // draggable to
           const parentType = dragging?.parent?.()?.get('type');
           const targetType = target.get('type') as string;
-          // dropping only allowed to 'wrapper' or 'bs-row'
           if (parentType === undefined) { // when dragging from block, parent is undefined, 
-            return ['wrapper', 'bs-row'].includes(targetType);
+            return [...DROP_ALLOWED_TO, 'bs-row'].includes(targetType);
           }
           // wnen dragging from 'bs-row', dropping allowed within it
           else if (parentType === 'bs-row') { 
@@ -136,7 +136,7 @@ export default function(editor: Editor) {
     const parentType = component?.parent?.()?.get('type');
 
     // a bs-col dropped to a wrapper without bs-row, needs to wrap with a bs-row
-    if ( compType === 'bs-col' && parentType === 'wrapper') {
+    if ( compType === 'bs-col' && DROP_ALLOWED_TO.includes(parentType)) {
       console.log('block:drag:stop', {compType, parentType, component});
       component.replaceWith({ type: 'bs-row', components: [{
         type: 'bs-col',

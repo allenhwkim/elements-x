@@ -8,7 +8,7 @@ export default function(editor: Editor, props: BlockProperties) {
     content: `
       <x-stepper class="d-block container" steps="Step1, Step2, Step3"></x-stepper>
 
-      <form class="container">
+      <form class="container py-4">
 
         <div class="d-grid gap-3 d-md-flex justify-content-md-start mt-4">
           <button id="buttonBack" class="btn btn-outline-primary">Back</button>

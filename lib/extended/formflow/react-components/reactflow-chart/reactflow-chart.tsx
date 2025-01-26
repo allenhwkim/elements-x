@@ -1,6 +1,13 @@
 import * as React from 'react';
-import {KeyboardEvent, useState} from 'react';
-import ReactFlow, {Controls, ControlButton, Background, Edge, Node, ReactFlowInstance, OnNodesChange, NodeChange, EdgeChange} from 'reactflow';
+import {KeyboardEvent} from 'react';
+import ReactFlow, {
+  Controls, ControlButton, 
+  Background, 
+  Edge, Node, 
+  ReactFlowInstance, 
+  NodeChange, EdgeChange,
+  getIncomers, getOutgoers, getConnectedEdges
+} from 'reactflow';
 import 'reactflow/dist/style.css';
 import './styles.css';
 
@@ -23,6 +30,7 @@ export interface ReactflowChartProps {
 
 export function ReactflowChart(props: ReactflowChartProps) {
   const store = useStore();
+  const reactFlowRef: any = React.useRef();
 
   if (props.externalCalls) {
     props.externalCalls.updateNodeData = (id, data) => { store.updateNodeData(id, data); }
@@ -30,8 +38,8 @@ export function ReactflowChart(props: ReactflowChartProps) {
   }
 
   React.useEffect( () => {
-    if (props.nodes) store.updateNodes(props.nodes);
-    if (props.edges) store.updateEdges(props.edges);
+    const {nodes, edges} = props;
+    store.reset(nodes, edges);
   }, [props])
 
   const onKeyDown = (event : KeyboardEvent) => {
@@ -44,8 +52,43 @@ export function ReactflowChart(props: ReactflowChartProps) {
     if (key === 'Shift-Meta-z') store.redo();
   };
 
+  const onNodesDelete = (deletedNodes) => {
+    console.log('........onNodesDelete', deletedNodes);
+    reactFlowRef.current?.focus(); // focus on this, document keyboard event does not fire
+
+    // ............... TODO ....... here
+    // call store function to connect edges 
+
+    // const {nodes, edges} = store;
+    // deletedNodes.reduce((acc, node) => {
+    //   const incomers = getIncomers(node, nodes, edges);
+    //   const outgoers = getOutgoers(node, nodes, edges);
+    //   const connectedEdges = getConnectedEdges([node], edges);
+
+    //   const remainingEdges = acc.filter(
+    //     (edge) => !connectedEdges.includes(edge),
+    //   );
+
+    //   const createdEdges = incomers.flatMap(({ id: source }) =>
+    //     outgoers.map(({ id: target }) => ({
+    //       id: `${source}->${target}`,
+    //       source,
+    //       target,
+    //     })),
+    //   );
+
+    //   return [...remainingEdges, ...createdEdges];
+    // }, edges),
+  };
+
+  const onEdgesDelete = (edges) => {
+    console.log('........onEdgesDelete', edges);
+    reactFlowRef.current?.focus(); // focus on this, document keyboard event does not fire
+  };
+
   return (
     <ReactFlow 
+      ref={reactFlowRef}
       style={{minWidth: 300, minHeight: 400}}
       tabIndex={0}
       nodes={store.nodes}
@@ -56,6 +99,8 @@ export function ReactflowChart(props: ReactflowChartProps) {
       onNodesChange={store.updateNodesChange}
       onEdgesChange={store.updateEdgesChange}
       onEdgeUpdate={store.updateEdgeConnection}
+      onNodesDelete={onNodesDelete}
+      onEdgesDelete={onEdgesDelete}
       onConnect={store.onConnect}
       onNodeClick={(e, node) => props.onNodeClick?.(node, store.nodes, store.edges)}
       onEdgeClick={(e, edge) => props.onEdgeClick?.(edge, store.nodes, store.edges)}

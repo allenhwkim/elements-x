@@ -9,8 +9,13 @@ import * as nodeCss from './react-components/custom-nodes/styles.css?inline';
 import * as chartCss from './react-components/reactflow-chart/styles.css?inline';
 import * as reactflowCss from '../../../node_modules/reactflow/dist/style.css?inline';
 import { addCss, removeCss } from '../../util';
+import { DEFAULT_CHART } from './react-components/store/DEFAULT_CHART';
 
-const css = '' + reactflowCss.default + edgeCss.default + nodeCss.default + chartCss.default;
+const css = '' + 
+  reactflowCss.default + 
+  edgeCss.default + 
+  nodeCss.default + 
+  chartCss.default;
 
 export class Formflow extends HTMLElement {
   root: any;
@@ -22,7 +27,8 @@ export class Formflow extends HTMLElement {
 
   connectedCallback() {
     addCss(this.tagName, css);
-    this.mount(); // sets this.root and this.reactflowInstance
+    const {nodes, edges} = DEFAULT_CHART;
+    this.mount(nodes, edges); // sets this.root and this.reactflowInstance
   }
   
   disconnectedCallback() {

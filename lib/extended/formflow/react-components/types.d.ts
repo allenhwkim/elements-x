@@ -21,13 +21,11 @@ export type TAddNode = {
 export type TStoreState = {
   nodes: Node[];
   edges: Edge[];
-  nextNodeId: number,
 
-  updateNodes: (nodes: Node[]) => void;
+  reset: (nodes, edges) => void;
   updateNodesChange: OnNodesChange;
   updateNodeData: (nodeId: string, data: any) => void;
 
-  updateEdges: (edges: Edge[]) => void;
   updateEdgesChange: OnEdgesChange;
   updateEdgeConnection: OnEdgeUpdateFunc,
   updateEdgeLabel: (nodeId: string, label: string) => void;

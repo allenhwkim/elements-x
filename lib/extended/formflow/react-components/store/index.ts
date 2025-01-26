@@ -11,221 +11,173 @@ import { UndoRedo } from './undo-redo';
 import { addNodeAboveNode } from './add-node-above-node';
 import { addNodeBelowNode } from './add-node-below-node';
 import { addNodeBesideNode } from './add-node-beside-node';
-import { DEFAULT_CHART } from './DEFAULT_CHART';
 
-UndoRedo.addHistory(DEFAULT_CHART);
+function getNextNodeId(nodes: Node[]) {
+  const nextNodeNo = nodes.reduce( (max, node) => {
+    const matches = node.id.match(/[0-9]+$/) || [''];
+    return Math.max(max, +matches[0]);
+  }, 0);
+  return 'page' + (nextNodeNo + 1);
+}
 
 let timeout: any;
-function fireReactflowEvent(func, after, before) {
-  const noChangesMade = JSON.stringify(after) === JSON.stringify(before);
-  if (noChangesMade) return; 
-
+function fireFormflowEvent(state) {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
-    const customEvent = new CustomEvent('formflow', {
-      bubbles: true,
-      detail: {
-        action: 'change',
-        type: 'chart',
-        nodes: after.nodes,
-        edges: after.edges 
-      }
-    });
+    const {nodes, edges} = state;
+    const detail = { action: 'change', type: 'chart', nodes, edges };
+    const customEvent = new CustomEvent('formflow', { bubbles: true, detail});
     document.querySelector('div.react-flow')?.dispatchEvent(customEvent);
+    console.log('Firing formflow event', detail)
   }, 500);
 }
 
-// this is our useStore hook that we can use in our components to get parts of the store and call actions
 const useStore = create<TStoreState>((set, get) => ({
-  nodes: DEFAULT_CHART.nodes,
-  edges: DEFAULT_CHART.edges,
-  nextNodeId: 1,
+  nodes: [],
+  edges: [],
 
-  updateNodes: (nodes: Node[]) => {
-    const before = get();
-    const nextNodeId = nodes.reduce( (max, node) => {
-      const matches = node.id.match(/[0-9]+$/) || [''];
-      return Math.max(max, +matches[0]);
-    }, 0);
-    nodes = structuredClone(nodes);
-    set({nodes, nextNodeId});
-    fireReactflowEvent('updateNodes', get(), before);
-  },
-
-  updateEdges: (edges: Edge[]) => {
-    const before = get();
-    edges = structuredClone(edges);
-    set({edges});
+  reset(nodes, edges) {
+    set({nodes, edges});
     UndoRedo.reset({nodes: get().nodes, edges: get().edges});
-    fireReactflowEvent('updateEdges', get(), before);
   },
 
-  updateNodesChange: (changes: NodeChange[]) => {
-    const before = get();
-    set({
-      nodes: applyNodeChanges(changes, get().nodes),
-    });
-
-    if (changes.find(el => el.type === 'remove')) {
-      UndoRedo.addHistory({nodes: get().nodes, edges: get().edges});
+  updateNodesChange(changes: NodeChange[]) {
+    const positionMoved = changes.every((el:any) => el.position);
+    if (positionMoved) {
+      set(({nodes, edges}) => {
+        UndoRedo.add({nodes, edges});
+        return { nodes: applyNodeChanges(changes, nodes) };
+      });
     }
-    fireReactflowEvent('updateNodesChange', get(), before);
   },
 
-  updateEdgesChange: (changes: EdgeChange[]) => {
-    const before = get();
-    const edges = get().edges;
-    const connectionEdge: Edge[] = [];
-    const pattern = `${changes.length}-${changes[0]?.type}-${changes[1]?.type}`;
-    // When a node removed with 1 in edge and 1 out edge, add a connection ege
-    if (pattern === '2-remove-remove') {
-      const edge1 = edges.find(el => el.id === (changes[0] as any).id);
-      const edge2 = edges.find(el => el.id === (changes[1] as any).id);
-      if (edge1 && edge2 && edge1.target === edge2.source) {
-        connectionEdge.push({...edge1, ...{target: edge2.target}});
-      }
-    }
-    set({ edges: applyEdgeChanges(changes, edges).concat(connectionEdge) });
-
-    if (changes.find(el => el.type === 'remove')) {
-      UndoRedo.addHistory({nodes: get().nodes, edges: get().edges});
-    }
-    fireReactflowEvent('updateEdgesChange', get(), before);
-  },
+  updateEdgesChange(changes: EdgeChange[]) {},
 
   updateEdgeConnection: (oldEdge, newConnection) => {
-    const before = get();
+    console.log('store.updateEdgeConnection', {oldEdge, newConnection});
     // replace the updated edge id as the format of source-target
-    const newId = `${newConnection.source}-${newConnection.target}`
-    const edges = get().edges;
-    const oldEdgeNdx = edges.findIndex(el => el.id === oldEdge.id);
-    oldEdge.id = newId;
-    edges[oldEdgeNdx].id = newId;
+    set(({nodes, edges}) => {
+      UndoRedo.add({nodes, edges});
 
-    set({
-      edges: updateEdge(oldEdge, newConnection, edges)
+      const newId = `${newConnection.source}-${newConnection.target}`
+      const oldEdgeNdx = edges.findIndex(el => el.id === oldEdge.id);
+      oldEdge.id = newId;
+      edges[oldEdgeNdx].id = newId;
+
+      return { edges: updateEdge(oldEdge, newConnection, edges) };
     });
-    
-    UndoRedo.addHistory({nodes: get().nodes, edges: get().edges});
-    fireReactflowEvent('updateEdgeConnection', get(), before);
   },
 
   onConnect: (connection: Connection) => {
-    const before = get();
-    const existingEdges: any[] = get().edges;
-    const newEdge = {
-      id:  `${connection.source}-${connection.target}`,
-      type: 'custom',
-      source: connection.source, 
-      target: connection.target
-    }
-    const edges: Edge[] = [...existingEdges, newEdge];
-    set({edges: addEdge(connection, edges)});
+    console.log('store.onConnect', {connection});
+    set(({nodes, edges}) => {
+      UndoRedo.add({nodes, edges});
 
-    UndoRedo.addHistory({nodes: get().nodes, edges: get().edges});
-    fireReactflowEvent('onConnect', get(), before);
+      const existingEdges: any[] = edges;
+      const newEdge = {
+        id:  `${connection.source}-${connection.target}`,
+        type: 'custom',
+        source: connection.source, 
+        target: connection.target
+      }
+      const newEdges: Edge[] = [...existingEdges, newEdge];
+
+      return  {edges: addEdge(connection, newEdges)};
+    });
   },
 
   updateEdgeLabel: (edgeId: string, label: string) => {
-    const before = get();
-    set({
-      edges: get().edges.map((edge) => {
-        if (edge.id === edgeId) {
-          edge.label = label;
-        }
-
+    console.log('store.updateEdgeLabel', {edgeId, label});
+    set(({nodes, edges}) => {
+      UndoRedo.add({nodes, edges});
+      const newEdges = edges.map((edge) => {
+        (edge.id === edgeId) && (edge.label = label);
         return edge;
-      }),
-    });
-    fireReactflowEvent('updateEdgeLabel', get(), before);
+      });
+
+      return { edges: newEdges };
+  });
   },
 
   updateNodeData: (nodeId: string, data: any) => {
-    const before = get();
-    const newNodes = get().nodes.map((node) => {
-      if (node.id === nodeId) {
-        node.data = {...node.data, ...data};
-      }
-      return node;
+    console.log('store.updateNodeData', {nodeId, data});
+    set(({nodes, edges}) => {
+      UndoRedo.add({nodes, edges});
+
+      const newNodes = nodes.map((node) => {
+        (node.id === nodeId) && (node.data = {...node.data, ...data});
+        return node;
+      });
+
+      return {nodes: newNodes}
     });
-    set( {nodes: newNodes});
-    fireReactflowEvent('updateNodeData', get(), before);
   },
 
   updateEdgeData: (edgeId: string, data: any) => {
-    const before = get();
-    const newEdges = get().edges.map((edge) => {
-      if (edge.id === edgeId) {
-        edge.data = {...edge.data, ...data};
-      }
-      return edge;
+    console.log('store.updateEdgeData', {edgeId, data});
+    set(({nodes, edges}) => {
+      UndoRedo.add({nodes, edges});
+
+      const newEdges = edges.map((edge) => {
+        (edge.id === edgeId) && (edge.data = {...edge.data, ...data});
+        return edge;
+      });
+
+      return {edges: newEdges}
     });
-    set({edges: newEdges});
-    fireReactflowEvent('updateEdgeData', get(), before);
   },
 
   addNodeBeside: (nodeId: string, position: string = 'right') => {
-    const before = get();
-    set({nextNodeId: get().nextNodeId + 1});
-    const options: any = {
-      nodes: get().nodes,
-      edges: get().edges,
-      nodeId: 'page' + get().nextNodeId
-    }
-    const {nodes, edges} = addNodeBesideNode(nodeId, position, options);
-    set({nodes, edges});
+    set(({nodes, edges}) => {
+      UndoRedo.add({nodes, edges});
 
-    UndoRedo.addHistory({nodes: get().nodes, edges: get().edges});
-    fireReactflowEvent('addNodeBeside', get(), before);
+      const nextNodeId = getNextNodeId(nodes);
+      const options: any = {nodes, edges, nodeId: nextNodeId};
+      const newState = addNodeBesideNode(nodeId, position, options);
+      return newState; 
+    });
   },
 
   addNodeBelow: (nodeId: string) => {
-    const before = get();
-    set({nextNodeId: get().nextNodeId + 1});
-    const options: any = {
-      nodes: get().nodes,
-      edges: get().edges,
-      nodeId: 'page' + get().nextNodeId
-    }
-    const {nodes, edges} = addNodeBelowNode(nodeId, options);
-    set({nodes, edges});
+    set(({nodes, edges}) => {
+      UndoRedo.add({nodes, edges});
 
-    UndoRedo.addHistory({nodes: get().nodes, edges: get().edges});
-    fireReactflowEvent('addNodeBelow', get(), before);
+      const nextNodeId = getNextNodeId(nodes);
+      const options: any = {nodes, edges, nodeId: nextNodeId};
+      const newState = addNodeBelowNode(nodeId, options);
+
+      return newState;
+    });
   },
 
   addNodeAbove: (nodeId: string) => {
-    const before = get();
-    set({nextNodeId: get().nextNodeId + 1});
-    const options: any = {
-      nodes: get().nodes,
-      edges: get().edges,
-      nodeId: 'page' + get().nextNodeId
-    }
-    const {nodes, edges} = addNodeAboveNode(nodeId, options);
-    set({nodes, edges});
+    set(({nodes, edges}) => {
+      UndoRedo.add({nodes, edges});
 
-    UndoRedo.addHistory({nodes: get().nodes, edges: get().edges});
-    fireReactflowEvent('addNodeAbove', get(), before);
+      const nextNodeId = getNextNodeId(nodes);
+      const options: any = {nodes, edges, nodeId: nextNodeId};
+      const newState = addNodeAboveNode(nodeId, options);
+
+      return newState; 
+    });
+
   },
 
   undo: () => {
-    const before = get();
     const state = UndoRedo.undo();
-    if (state) {
-      set({nodes: state.nodes, edges: state.edges});
-    }
-    fireReactflowEvent('undo', get(), before);
+    state && set({nodes: state.nodes, edges: state.edges});
   },
 
   redo: () => {
-    const before = get();
     const state = UndoRedo.redo();
-    if (state) {
-      set({nodes: state.nodes, edges: state.edges});
-    }
-    fireReactflowEvent('redo', get(), before);
+    state && set({nodes: state.nodes, edges: state.edges});
   },
 }));
+
+// Subscribe to state changes
+useStore.subscribe( (newState, prevState) => {
+  const changed = JSON.stringify(newState) !== JSON.stringify(prevState);
+  changed && fireFormflowEvent(newState);
+});
 
 export default useStore;

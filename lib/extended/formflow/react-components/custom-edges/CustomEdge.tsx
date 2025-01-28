@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { /* getStraightPath, */ getBezierPath, EdgeProps, useReactFlow } from 'reactflow';
 import useStore from '../store';
-
 import './styles.css';
 
 const foreignObjectSize = 20;
@@ -17,7 +16,7 @@ export default function CustomEdge({
   style = {}, 
   label
 }: EdgeProps): React.ReactElement {
-  const store = useStore();
+  const store: any = useStore();
   
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX, sourceY, targetX, targetY,
@@ -25,6 +24,17 @@ export default function CustomEdge({
   });
 
   const markerId = `triangle-${Math.ceil(Math.random()*10^6)}`;
+
+  function updateEdgeLabel(edgeId: string, label: string) {
+    store.setState(({nodes, edges}) => {
+      const newEdges = edges.map((edge) => {
+        (edge.id === edgeId) && (edge.label = label);
+        return edge;
+      });
+
+      return { edges: newEdges };
+    });
+  }
 
   return (
     <>
@@ -57,10 +67,8 @@ export default function CustomEdge({
 
         <div className="nodrag label-input" contentEditable={true} 
           suppressContentEditableWarning={true}
-          onBlur={evt => store.updateEdgeLabel(id, evt.target.textContent || '')}
+          onBlur={evt => updateEdgeLabel(id, evt.target.textContent || '')}
         >{label}</div>
-
-        <div className="nodrag label-display">{label}</div> {/* to show ellipsis for long contents */}
 
       </foreignObject>
     </>

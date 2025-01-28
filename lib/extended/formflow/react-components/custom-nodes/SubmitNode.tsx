@@ -1,14 +1,25 @@
 import * as React from 'react';
-import { useRef } from 'react';
 import { Handle,  Node, Position, useReactFlow, getIncomers, getOutgoers } from 'reactflow';
 import useStore from '../store';
+import { addNodeAboveNode } from './add-node-above-node';
+import { getNextNodeId } from './get-next-node-id';
 
 function SubmitNode({ id, data }: Node): React.ReactElement {
-  const store = useStore();
+  const store: any = useStore();
   const {fitView} = useReactFlow();
 
+  function addNodeAbove(nodeId: string) {
+    store.setState(({nodes, edges}) => {
+      const nextNodeId = getNextNodeId(nodes);
+      const options: any = {nodes, edges, nodeId: nextNodeId};
+      const newState = addNodeAboveNode(nodeId, options);
+
+      return newState; 
+    });
+  }
+
   const addNodeAboveThis = () => {
-    store.addNodeAbove(id);
+    addNodeAbove(id);
     setTimeout(() => fitView({duration: 500}));
   }
 

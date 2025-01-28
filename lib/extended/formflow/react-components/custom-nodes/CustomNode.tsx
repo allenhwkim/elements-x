@@ -2,9 +2,13 @@ import * as React from 'react';
 import { useRef } from 'react';
 import { Handle,  Node, Position, useReactFlow, getIncomers, getOutgoers } from 'reactflow';
 import useStore from '../store';
+import { addNodeBesideNode } from './add-node-beside-node';
+import { addNodeBelowNode } from './add-node-below-node';
+import { addNodeAboveNode } from './add-node-above-node';
+import { getNextNodeId } from './get-next-node-id';
 
 function CustomNode({ id, data }: Node): React.ReactElement {
-  const store = useStore();
+  const store: any = useStore();
   const { fitView} = useReactFlow();
   const containerRef = useRef(null);
 
@@ -15,29 +19,48 @@ function CustomNode({ id, data }: Node): React.ReactElement {
     numOutgoers = getOutgoers(node, store.nodes, store.edges).length;
   }
 
-  const addNodeToLeft = () => {
-    store.addNodeBeside(id, 'left');
-    setTimeout(() => fitView({duration: 500}));
+  function addNodeBeside(position: string = 'right') {
+    store.setState(({nodes, edges}) => {
+      const nextNodeId = getNextNodeId(nodes);
+      const options: any = {nodes, edges, nodeId: nextNodeId};
+      const newState = addNodeBesideNode(id, position, options);
+      return newState; 
+    });
   }
 
-  const addNodeToRight = () => {
-    store.addNodeBeside(id, 'right');
-    setTimeout(() => fitView({duration: 500}));
+  function addNodeBelow() {
+    store.setState(({nodes, edges}) => {
+      const nextNodeId = getNextNodeId(nodes);
+      const options: any = {nodes, edges, nodeId: nextNodeId};
+      const newState = addNodeBelowNode(id, options);
+
+      return newState;
+    });
   }
 
-  const addNodeAboveThis = () => {
-    store.addNodeAbove(id);
-    setTimeout(() => fitView({duration: 500}));
-  }
+  function addNodeAbove() {
+    store.setState(({nodes, edges}) => {
+      const nextNodeId = getNextNodeId(nodes);
+      const options: any = {nodes, edges, nodeId: nextNodeId};
+      const newState = addNodeAboveNode(id, options);
 
-  const addNodeBelowThis = () => {
-    store.addNodeBelow(id);
-    setTimeout(() => fitView({duration: 500}));
+      return newState; 
+    });
   }
 
   const onLabelBlur = (event: React.ChangeEvent<any>) => {
-    store.updateNodeData(id, Object.assign(node.data, {label: event.target.textContent}));
+    store.setState(({nodes, edges}) => {
+      const newNodes = nodes.map((node) => {
+        if (node.id === id) {
+          node.data = {...node.data, ...{label: event.target.textContent}};
+        }
+        return node;
+      });
+
+      return {nodes: newNodes}
+    });
   }
+
 
   return (
     <div ref={containerRef}
@@ -51,10 +74,10 @@ function CustomNode({ id, data }: Node): React.ReactElement {
       >
         {data.label}
       </div>
-      <span className="add-node-button top" onClick={addNodeAboveThis}>+</span>
-      <span className="add-node-button right" onClick={addNodeToRight}>+</span>
-      <span className="add-node-button bottom" onClick={addNodeBelowThis}>+</span>
-      <span className="add-node-button left" onClick={addNodeToLeft}>+</span>
+      <span className="add-node-button top" onClick={() => addNodeAbove()}>+</span>
+      <span className="add-node-button right" onClick={() => addNodeBeside('right')}>+</span>
+      <span className="add-node-button bottom" onClick={() => addNodeBelow()}>+</span>
+      <span className="add-node-button left" onClick={() => addNodeBeside('left')}>+</span>
       <Handle type="source" position={Position.Bottom} />
     </div>
   );

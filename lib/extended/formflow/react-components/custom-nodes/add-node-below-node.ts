@@ -1,5 +1,4 @@
-import { Node, Edge, getIncomers, getOutgoers } from "reactflow";
-import { TAddNode, TAddNodeOptions} from '../types';
+import { Node, Edge,  getOutgoers } from "reactflow";
 
 const NODE_GAP_V = 120;
 
@@ -15,8 +14,8 @@ function getTargetNodes(targetNode: Node, nodes: Node[], edges:Edge[], acc: Node
 
 export function addNodeBelowNode(
   nodeId: string, 
-  options: TAddNodeOptions
-) : TAddNode {
+  options:{ nodes: Node[]; edges: Edge[]; nodeId: string; } 
+) : { nodes: Node[]; edges: Edge[] }  {
   const nodes = [...options.nodes];
   const edges = [...options.edges];
   const newNodeId = options.nodeId;

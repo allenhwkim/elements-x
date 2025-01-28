@@ -137,7 +137,7 @@ export default function(editor: Editor) {
 
     // a bs-col dropped to a wrapper without bs-row, needs to wrap with a bs-row
     if ( compType === 'bs-col' && DROP_ALLOWED_TO.includes(parentType)) {
-      console.log('block:drag:stop', {compType, parentType, component});
+      // console.log('block:drag:stop', {compType, parentType, component});
       component.replaceWith({ type: 'bs-row', components: [{
         type: 'bs-col',
         attributes: { 'data-size' : 'x12', class: 'col p-2 col-md-12'}

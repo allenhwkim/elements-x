@@ -1,5 +1,4 @@
 import { Node, Edge, getIncomers, getOutgoers } from "reactflow";
-import { TAddNode, TAddNodeOptions} from '../types';
 
 const NODE_GAP_H = 40;
 const NODE_WIDTH = 200;
@@ -7,8 +6,8 @@ const NODE_WIDTH = 200;
 export function addNodeBesideNode(
   nodeId: string,
   position: string = 'right',
-  options: TAddNodeOptions
-) : TAddNode {
+  options: { nodes: Node[]; edges: Edge[]; nodeId: string; } 
+) : { nodes: Node[]; edges: Edge[]; }  {
   const nodes = [...options.nodes];
   const edges = [...options.edges];
   const newNodeId = options.nodeId;

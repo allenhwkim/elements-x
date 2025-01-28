@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client'
-import { Node, Edge, ReactFlowInstance, ReactFlowJsonObject } from 'reactflow';
-import { toPng } from 'html-to-image';
+import { Node, Edge, ReactFlowJsonObject } from 'reactflow';
 import { ReactflowChart } from './react-components/reactflow-chart/reactflow-chart';
 import * as edgeCss from './react-components/custom-edges/styles.css?inline';
 import * as nodeCss from './react-components/custom-nodes/styles.css?inline';
 import * as chartCss from './react-components/reactflow-chart/styles.css?inline';
 import * as reactflowCss from '../../../node_modules/reactflow/dist/style.css?inline';
 import { addCss, removeCss } from '../../util';
-import { DEFAULT_CHART } from './react-components/store/DEFAULT_CHART';
+import { DEFAULT_CHART } from './DEFAULT_CHART';
 
 const css = '' + 
   reactflowCss.default + 
@@ -19,16 +18,11 @@ const css = '' +
 
 export class Formflow extends HTMLElement {
   root: any;
-  reactflowInstance!: ReactFlowInstance;
-
-  constructor() {
-    super(); 
-  }
 
   connectedCallback() {
     addCss(this.tagName, css);
     const {nodes, edges} = DEFAULT_CHART;
-    this.mount(nodes, edges); // sets this.root and this.reactflowInstance
+    this.mount(nodes, edges); // sets this.root
   }
   
   disconnectedCallback() {
@@ -43,35 +37,7 @@ export class Formflow extends HTMLElement {
     })
   }
 
-  getData(): ReactFlowJsonObject {
-    const data = this.reactflowInstance?.toObject()
-    return data;
-  }
-
-  async getImage(): Promise<string> {
-    const blobUrl = await toPng(
-      this.querySelector('.react-flow') as HTMLElement, 
-      {
-        filter: (node: HTMLElement) => !(
-          node.classList?.contains('react-flow__minimap') ||
-          node.classList?.contains('react-flow__controls')
-        )
-      }
-    );
-    return blobUrl;
-  };
-
-  getInstance(): ReactFlowInstance {
-    return this.reactflowInstance;
-  }
-
-  fireEvent(detail: any) {
-    const customEvent = new CustomEvent('formflow', { detail, bubbles: true});
-    this.dispatchEvent( customEvent );
-  }
-
   externalCalls = {}; // empty! because it's set inside react component
-
   updateNodeData(id: string, data: {[key:string]: any}) { 
     this.externalCalls['updateNodeData'](id, data);
   };
@@ -80,42 +46,12 @@ export class Formflow extends HTMLElement {
   };
 
   mount(nodes?: Node[], edges?: Edge[]) {
-    const onNodeClick = (node: Node, nodes: Node[], edges: Edge[]) => {
-      this.fireEvent({ action: 'selected', type: 'node', node, nodes, edges })
-    };
-  
-    const onEdgeClick =(edge: Edge, nodes: Node[], edges: Edge[]) => {
-      this.fireEvent({ action: 'selected', type: 'edge', edge, nodes, edges })
-    };
-  
-    const onInit = (event: ReactFlowInstance) => {
-      this.reactflowInstance = event;
-      this.fireEvent({ action: 'init', event })
-    }
-
-    const showImage = async () => {
-      var image = new Image();
-      image.src = await this.getImage();
-      (window as any).open('').document.write(image.outerHTML);
-    }
-
-    const showData = async () => {
-      this.fireEvent({ action: 'data', event: this.getData() });
-      console.log(`formflow event "data" fired. Handle it. ` + 
-        `e.g, window.addEventListener('formflow', e => console.log(e.detail))`);
-    }
-  
     this.root = createRoot(this);
     this.root.render(
       <StrictMode>
         <ReactflowChart
           nodes={nodes}
           edges={edges}
-          onNodeClick={onNodeClick}
-          onEdgeClick={onEdgeClick}
-          onInit={onInit}
-          showImage={showImage}
-          showData={showData}
           externalCalls={this.externalCalls} /* to call a function from outside */
         />
       </StrictMode>

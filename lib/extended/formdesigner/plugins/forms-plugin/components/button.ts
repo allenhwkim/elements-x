@@ -90,10 +90,10 @@ export default function(editor: Editor) {
         this.components(this.get('text'));
       },
       
-      __handleLookChange() {
-        const newClass = this.get('btn-look');
-        console.log('newClass', newClass);
-      }
+      // handle changes in the model’s state or attributes
+      // __handleLookChange() {
+      //   const newClass = this.get('btn-look');
+      // }
     },
 
     view: {

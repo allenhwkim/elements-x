@@ -66,7 +66,7 @@
     (function (editor, options) {
       editor.on("component:selected", function (component, options) {
         // if (options.includes(component.get("type"))) {
-        console.log('component type', component.get("type"));
+        // console.log('component type', component.get("type"));
         if (['row', 'cell', 'div', ''].includes(component.get("type"))) {
 var toolEl = document.createElement("div");
           toolEl.classList.add("gjs-options");

@@ -21,7 +21,7 @@ export default function(editor: Editor) {
 
       init: function() {
         editor.on('component:add', function(col: Component) {
-          console.log('bs-row component:add', {col, el: col.view?.el});
+          // console.log('bs-row component:add', {col, el: col.view?.el});
           const totalEls = col.parent()?.components().models.length || 0;
           (totalEls > 12) &&  col.remove();
         });
@@ -41,7 +41,7 @@ export default function(editor: Editor) {
             return ret.filter(el => el !== undefined) 
           }
 
-          console.log('bs-row component:update:components', update, {action});
+          // console.log('bs-row component:update:components', update, {action});
           if (
             action === 'add-component' || 
             action === 'clone-component' || 
@@ -57,9 +57,9 @@ export default function(editor: Editor) {
 
               neighborComp.setColMdClass(urSize);
               model.setColMdClass(mySize);
-              console.log({neighborComp, neighborCompSize}, urSize, 'reduced by with', {model, mySize});
+              // console.log({neighborComp, neighborCompSize}, urSize, 'reduced by with', {model, mySize});
             } else {
-              console.log('adding to an empty block');
+              // console.log('adding to an empty block');
               model.setColMdClass(12);
             }
           } else if (action === 'remove-component') { // model (to be removed)
@@ -76,7 +76,7 @@ export default function(editor: Editor) {
 
               neighborComp.setColMdClass(urSize);
               model.setColMdClass(mySize);
-              console.log({neighborComp, orgSize: neighborCompSize}, urSize, 'combined with', {model, mySize});
+              // console.log({neighborComp, orgSize: neighborCompSize}, urSize, 'combined with', {model, mySize});
             }
           }
         });

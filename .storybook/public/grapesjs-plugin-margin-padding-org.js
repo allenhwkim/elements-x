@@ -72,7 +72,7 @@
     (function (_0x582c20, _0x17ba9f) {
       _0x582c20.on("component:selected", function (_0x13aa28) {
         // if (_0x17ba9f.includes(_0x13aa28.get("type"))) {
-        console.log('component type', _0x13aa28.get("type"));
+        // console.log('component type', _0x13aa28.get("type"));
         if (['row', 'cell', ''].includes(_0x13aa28.get("type"))) {
           var _0x1a2a38;
           var _0x5e5c84 = document.getElementById("gjs-tools");

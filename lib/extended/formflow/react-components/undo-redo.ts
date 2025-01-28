@@ -12,20 +12,29 @@ export const UndoRedo = {
   setIndex(inc: number) {
     const [min, max] = [0, this.actions.length-1]; 
     this.actionNdx = this.actionNdx + inc;
-    (this.actionNdx < min) && (this.actionNdx = min);
-    (this.actionNdx > max) && (this.actionNdx = max);
+    if (this.actionNdx < min) {
+      this.actionNdx = min;
+    } else if (this.actionNdx > max) {
+      this.actionNdx = max;
+    } else {
+      return true;
+    }
   },
 
   undo() {
-    this.setIndex(-1);
-    const action = this.actions[this.actionNdx];
-    return action;
+    if (this.setIndex(-1)) {
+      const action = this.actions[this.actionNdx];
+      console.log('undo-redo undo', this.actions, this.actionNdx);
+      return action;
+    };
   },
 
   redo(){
-    this.setIndex(+1);
-    const action = this.actions[this.actionNdx];
-    return action;
+    if (this.setIndex(+1)) {
+      const action = this.actions[this.actionNdx];
+      console.log('undo-redo redo', this.actions, this.actionNdx);
+      return action;
+    }
   },
 
   debounceMs: 500, 
@@ -34,7 +43,8 @@ export const UndoRedo = {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
       this.actions = [...this.actions.slice(0, this.actionNdx+1), action];
-      this.actionNdx++;
+      this.setIndex(+1);
+      console.log('undo-redo add', this.actions, this.actionNdx);
     }, this.debounceMs) as any;
   }
 }

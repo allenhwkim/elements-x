@@ -6,7 +6,7 @@ export const DEFAULT_CHART =  {
     {id: 'postalcode', type: 'custom', data: {label: 'Postal Code'}, position: { x: 80, y: 200 }},
     {id: 'zipcode', type: 'custom', data: {label: 'Zip Code'}, position: { x: 300, y: 200 }},
     {id: 'error', type: 'custom', data: {label: 'Error'}, position: { x: 510, y: 200 }},
-    {id: 'review', type: 'custom', data: {label: 'Review'}, deletable: false, position: { x: 300, y: 320 }},
+    {id: 'review', type: 'custom', data: {label: 'Review'}, position: { x: 300, y: 320 }},
     {id: 'submit', type: 'submit', data: {label: 'SUBMIT'}, deletable: false, position: { x: 300, y: 420 }},
     {id: 'thankyou', type: 'thankyou', data: {label: 'THANKYOU'}, deletable: false, position: { x: 300, y: 500 }},
     {id: 'end', type: 'end', data: {label: 'END'}, deletable: false, position: { x: 450, y: 600 }},

@@ -1,6 +1,0 @@
-/* custom edge styles */
-
-.react-flow__edge-custom .label-input { 
-  display: inline-block;
-  font-size: smaller;
-}

@@ -1,35 +1,18 @@
 import { BarCode } from './barcode/barcode';
 import { Clock } from './clock/clock';
-import { Formflow } from './formflow/formflow';
-import { FormDesigner } from './formdesigner/formdesigner';
 import { Highlight } from './highlight/highlight';
 import { Json } from './json/json';
 import { Monaco } from './monaco/monaco';
 import { QRCode } from './qrcode/qrcode';
-import { Stepper } from './stepper/stepper';
-import { Sidebar } from './sidebar/sidebar';
 
 if (window) {
   // let users override code by not defining custom elements
-  if (!window['X']?.override) { 
-    const X = { 
-      BarCode, Clock, Highlight, Json, 
-      Monaco, QRCode, Stepper, Sidebar, 
-      Formflow, FormDesigner,
-    };
+  const X = { BarCode, Clock, Highlight, Json, Monaco, QRCode };
 
-    window['X'] = {...window['X'], ...X};
-
-    for (var key in X) {
-      const elName = `x-${key.toLowerCase()}`;
-      !customElements.get(elName) && customElements.define(elName, X[key]);
-    }
+  for (var key in X) {
+    const elName = `x-${key.toLowerCase()}`;
+    !customElements.get(elName) && customElements.define(elName, X[key]);
   }
 }
 
-export {
-  BarCode, Clock, Highlight, Json, 
-  Monaco, QRCode, 
-  Formflow, FormDesigner, Sidebar,
-  Stepper
-};
+export { BarCode, Clock, Highlight, Json, Monaco, QRCode };

@@ -20,14 +20,10 @@ if (window) {
     List, Map, Masked, Pagination, 
     Resize, Table
   };
-  (window as any).X = {...(window as any).X, ...X};
 
-  // let users override code by not defining custom elements
-  if (!(window as any).X?.override) {
-    for (var key in X) {
-      const elName = `x-${key.toLowerCase()}`;
-      !customElements.get(elName) && customElements.define(elName, X[key]);
-    }
+  for (var key in X) {
+    const elName = `x-${key.toLowerCase()}`;
+    !customElements.get(elName) && customElements.define(elName, X[key]);
   }
 }
 

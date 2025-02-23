@@ -50,10 +50,6 @@ import 'elements-x/dist/lib/extended.umd.js';
  * Json (Collapsible JSON viewer) 
  * Monaco (Code editor)
  * QRCode
- * Sidebar
- * Stepper(form stepper)
- * Formflow (Form flow diagram with Reactflow)
- * Formdesigner (A page designer with GrapesJs)
 
 ## Deployment
   * When `main` branch is updated, it is built and deployed by [Netlify](https://app.netlify.com/sites/vigilant-lalande-2441c3/configuration/deploys#continuous-deployment) automatically.

@@ -8,4 +8,4 @@ x-list li:has(> ul)::before { content: ' '; position: absolute; top: 18px; left:
 x-list li:has(> ul) sup { display: none; }
 x-list li:has(> ul[hidden]) sup { display: initial; opacity: .8; }
 x-list li:not(:has(> ul)) { list-style: none; position: relative;} 
-x-list .x-highlighted { background: #ccc; }
+x-list .highlighted { background: #ccc; }

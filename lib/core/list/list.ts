@@ -41,18 +41,18 @@ export class List extends HTMLElement {
 
   keydownHandler(event: any) {
     const highlightNextEl = (inc=1, siblingOnly=false) => {
-      const allEls = this.querySelectorAll(siblingOnly ? 'ul:has(.x-highlighted) > li:not(.disabled)': 'li:not(.disabled)');
+      const allEls = this.querySelectorAll(siblingOnly ? 'ul:has(.highlighted) > li:not(.disabled)': 'li:not(.disabled)');
       const visibles: any[] = [...allEls].filter((el:any) => el.offsetParent !== null);
-      const curIndex = visibles.indexOf(this.querySelector('.x-highlighted'));
+      const curIndex = visibles.indexOf(this.querySelector('.highlighted'));
       const nxtIndex = (visibles.length + curIndex + inc) % visibles.length;
 
-      visibles[curIndex]?.classList.remove('x-highlighted');
-      visibles[nxtIndex]?.classList.add('x-highlighted');
+      visibles[curIndex]?.classList.remove('highlighted');
+      visibles[nxtIndex]?.classList.add('highlighted');
     }
 
     if (['Enter', 'Space'].includes(event.code)) {
       this.toggleChildList(event.target.closest('li'));
-      const highlightedEl = this.querySelector('.x-highlighted');
+      const highlightedEl = this.querySelector('.highlighted');
       (event.code === 'Enter') && this.fireSelect(highlightedEl);
     } else if (event.code === 'ArrowUp') {
       highlightNextEl(-1);
@@ -83,24 +83,24 @@ export class List extends HTMLElement {
     if (ulEl) {
       const liEl = ulEl.querySelector('#'+ selected || 'unknown') as HTMLElement;
       if (!isMenuStyle && liEl) {
-        liEl.classList.add('x-highlighted');
+        liEl.classList.add('highlighted');
         let expandable = (liEl.parentElement as any).closest('ul');
         while(expandable && ulEl.contains(expandable)) { 
           expandable.removeAttribute('hidden');
           expandable = expandable.parentElement?.closest('ul');
         }
-        const highlightedEl = this.querySelector('.x-highlighted');
+        const highlightedEl = this.querySelector('.highlighted');
         this.fireSelect(highlightedEl);
       }
     }
   }
 
   highlightEl(el: any): HTMLLIElement | undefined {
-    this.querySelector('.x-highlighted')?.classList.remove('x-highlighted');
+    this.querySelector('.highlighted')?.classList.remove('highlighted');
     if (el.querySelector('ul')) {
       return undefined; 
     } else {
-      el.classList.add('x-highlighted');
+      el.classList.add('highlighted');
       return el;
     }
   }

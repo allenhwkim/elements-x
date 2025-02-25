@@ -44,12 +44,8 @@ import 'elements-x/dist/lib/extended.umd.js';
  * Table (array of inputs, or table-structured inputs)
 
 ## Extended elements
- * BarCode
  * Clock
- * Highlight (Code syntax prettifier)
  * Json (Collapsible JSON viewer) 
- * Monaco (Code editor)
- * QRCode
 
 ## Deployment
   * When `main` branch is updated, it is built and deployed by [Netlify](https://app.netlify.com/sites/vigilant-lalande-2441c3/configuration/deploys#continuous-deployment) automatically.
